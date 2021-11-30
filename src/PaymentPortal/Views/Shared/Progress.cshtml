@@ -1,0 +1,45 @@
+﻿@model Models.ProgressViewModel
+
+@{
+    ViewBag.Title = "Progress";
+}
+<nav role="navigation" class="nav--section">
+    <div class="grid"><!--
+    --><div class="grid__item one--whole"> 
+                      
+    <h1 class="delta">Progress</h1>
+
+        <ul class="nav nav--stacked">
+            @for (int n = 1; n <= Model.MaxSteps; n++)
+            {
+                <li>
+                    @if (n < Model.CurrentStep)
+                    {
+                        <text><span class="fa fa-check"></span> </text>
+                    }
+                    else if (n == Model.CurrentStep)
+                    {
+                        <text><span class="fa fa-arrow-circle-right"></span> </text>
+                    }
+                    else
+                    {
+                        <text><span class="fa fa-circle-o"></span></text>
+                    }
+                    @Model.StepNames[n - 1]
+                </li>
+
+            }
+        </ul>
+        </div><!--
+   --></div>
+</nav>
+<nav role="navigation" class="nav--section">
+    <div class="grid"><!--
+        --><div class="grid__item one--whole">
+            <h1 class="delta">Related</h1>
+            <ul class="nav nav--stacked palm-nav--bulleted lap-nav--bulleted">
+                <li><a href="https://www.barnsley.gov.uk/pay">Return to the BMBC Portal payments page</a></li>
+            </ul>
+        </div><!--
+    --></div>
+</nav>

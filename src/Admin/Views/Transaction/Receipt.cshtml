@@ -1,0 +1,130 @@
+﻿@using Microsoft.Ajax.Utilities
+@model Admin.Models.Transaction.DetailsViewModel
+@{
+    ViewBag.Title = "Transaction receipt";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<h1 class="ui vertical segment header">
+    <div style="float: right;">
+        <img src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo.Printable"])" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])" />
+    </div>
+    @Model.Transaction.PspReference
+    <div class="sub header">
+        Payment receipt
+    </div>
+</h1>
+
+@Html.HiddenFor(m => m.Transaction.PspReference)
+
+<div>
+    @if (TempData.ContainsKey("Message"))
+    {
+        var message = (Message)TempData["Message"];
+        <div class="ui @message.Type message" style="margin: -1rem 0 2rem">
+            <div class="header">
+                @message.Title
+            </div>
+            <p>@message.Text</p>
+        </div>
+    }
+</div>
+
+<div class="ui grid stackable">
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            <strong>Date</strong><br>@Model.Transaction.EntryDate
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            @if (!Model.Transaction.Town.IsNullOrWhiteSpace())
+            {
+                <strong>Address</strong><br />
+                @Model.Transaction.PremiseNumber<br />
+                @Model.Transaction.Street<br />
+                @Model.Transaction.Town<br />
+                @Model.Transaction.PostCode<br />
+            }
+        </div>
+    </div>
+    <div class="sixteen wide column">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th style="width: 10%; white-space:nowrap;">VAT Rate</th>
+                    <th style="width: 20%; white-space:nowrap;">Amount (£)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var vatTotals = new Dictionary<string, decimal>();
+                }
+                @foreach (var transactionLine in Model.Transaction.TransactionLines)
+                {
+                    <tr>
+                        <td>@(transactionLine.Fund != null ? transactionLine.Fund.FundName : "") - @transactionLine.AccountReference</td>
+                        <td style="text-align: right">@(transactionLine.VatRate * 100)%</td>
+                        <td style="text-align: right" class="@if (transactionLine.Amount < 0)
+                                                         {
+                                                             @Html.Raw("td--negative")
+                                                         }">
+                            £@Html.ToCurrency(transactionLine.Amount - transactionLine.VatAmount)
+
+                            @{
+                                var vatKey = (transactionLine.VatRate * 100).ToString();
+                                if (!vatTotals.ContainsKey(vatKey))
+                                {
+                                    vatTotals.Add(vatKey, 0);
+                                }
+                                vatTotals[vatKey] = vatTotals[vatKey] + (transactionLine.VatAmount ?? 0);
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="float: left; width: 40%">
+            <div class="ui vertical segment">
+                <strong>VAT Registered Address:</strong>
+                <br />
+                @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.AddressLine1"])
+                <br />
+                @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.AddressLine2"])
+                <br />
+                @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.AddressLine3"])
+                <br />
+                @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.PostCode"])
+                <br />
+                <strong>VAT Number:</strong>
+                @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatNumber"])
+            </div>
+        </div>
+        <table class="ui celled table" style="width: 40%; float: right;">
+            <tr>
+                <td><strong>Sub Total</strong></td>
+                <td style="text-align: right;">£@(Model.Transaction.Total - Model.Transaction.TotalVat)</td>
+            </tr>
+            @foreach (var vatRow in vatTotals)
+            {
+                <tr>
+                    <td><strong>VAT (@vatRow.Key%)</strong></td>
+                    <td style="text-align: right;">£@Html.ToCurrency(vatRow.Value)</td>
+                </tr>
+            }
+            <tr>
+                <td style="width: 50%;"><strong>Total</strong></td>
+                <td style="text-align: right;">£@Model.Transaction.Total</td>
+            </tr>
+        </table>
+    </div>
+</div>

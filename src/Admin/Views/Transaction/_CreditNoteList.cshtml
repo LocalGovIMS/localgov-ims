@@ -1,0 +1,28 @@
+﻿@model Admin.Models.Transaction.DetailsViewModel
+
+<h3>Credit Notes</h3>
+
+<table class="ui celled table striped ui-payments-table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Type</th>
+            <th style="width: 20%;">Account</th>
+            <th>Narrative</th>
+            <th style="width: 10%;">VAT (£)</th>
+            <th style="width: 1%; white-space:nowrap;">Amount (£)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Transaction.CreditNotes)
+        {
+            <tr>
+                <td>@(item.Fund != null ? string.Format("{0} ({1})", item.Fund.FundName, item.Fund.FundCode) : "")</td>
+                <td>@item.AccountReference</td>
+                <td>@item.Narrative @item.AppReference</td>
+                <td style="text-align: right">@Html.ToCurrency(item.VatAmount) (@item.VatCode)</td>
+                <td style="text-align: right">@Html.ToCurrency(Math.Abs(item.Amount ?? 0))</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,182 @@
+﻿@using BusinessLogic.Extensions
+@using BusinessLogic.Enums
+@using PagedList.Mvc
+@model Admin.Models.EReturn.ListViewModel
+@{
+    ViewBag.Title = "eReturns";
+}
+
+@section Header {
+    <h1 class="ui header">
+        eReturns
+
+        @if (User.IsInRole(Role.EReturnAuthoriser))
+        {
+            <a class="ui button green right floated approve" id="approve">
+                <i class="add outline icon"></i> Approve <span class="approve-button-value"></span>
+            </a>
+            <a class="ui button right floated clear-selected" id="clear">
+                <i class="undo icon"></i> Reset
+            </a>
+        }
+        @if (User.IsInRole(Role.EReturns))
+        {
+            @Html.ActionLink("Create eReturn", "Create", new { }, new { @class = "ui blue button right floated", @id = "CreateButton" })
+            <div class="sub header">
+                Cash, cheque and PDQ returns
+            </div>
+        }
+    </h1>
+}
+
+@section Messages {
+    <div>
+        @if (Model.Message != null)
+        {
+            <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
+                <div class="header">
+                    @Model.Message.Title
+                </div>
+                <p>@Model.Message.Text</p>
+            </div>
+        }
+    </div>
+}
+
+@Html.Partial("_SearchEReturns", Model.SearchCriteria)
+
+
+
+@if (Model.EReturns != null && Model.EReturns.Any())
+{
+    <table class="ui celled table striped table-fixed clickable selectable" id="ResultTable">
+        <thead>
+            <tr>
+                <th style="width: 5%"></th>
+                <th style="width: 15%">Date</th>
+                <th style="width: 10%">Status</th>
+                <th style="width: 15%">eReturn number</th>
+                <th style="width: 10%">Type</th>
+                <th style="width: 15%">Template</th>
+                <th style="width: 10%">Submitted by</th>
+                <th style="width: 10%">Approved by</th>
+                <th style="width: 10%">Amount (£)</th>
+                <th style="width: 10%"> </th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in Model.EReturns)
+            {
+                <tr>
+
+                    <td>
+                        @if (User.IsInRole(Role.EReturnAuthoriser) && item.EReturn.EReturnStatus.Id == 3)
+                        {
+                            <div class="inline field">
+                                <div class="ui checkbox" data-id="@item.EReturn.Id" data-value="@item.Amount" data-type="@item.EReturn.EReturnType.DisplayName" data-num="@item.EReturn.EReturnNo" data-template="@item.EReturn.Template.Name" data-submittedBy="@item.EReturn.SubmittedByUser.DisplayName">
+                                    <input type="checkbox" tabindex="0" value="@item.EReturn.Id">
+                                </div>
+                            </div>
+                        }
+                    </td>
+
+                    <td>@item.EReturn.CreatedAt</td>
+                    <td class="center"><span class="ui label--ereturn-@item.EReturn.EReturnStatus.Id label">@item.EReturn.EReturnStatus.DisplayName</span></td>
+                    <td>
+                        @item.EReturn.EReturnNo
+                    </td>
+                    <td>@item.EReturn.EReturnType.DisplayName</td>
+                    <td>@item.EReturn.Template.Name</td>
+
+                    @if (item.EReturn.SubmittedByUser != null && item.EReturn.SubmittedByUser.DisplayName != null)
+                    {
+                        <td>@item.EReturn.SubmittedByUser.DisplayName</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                    @if (item.EReturn.ApprovedByUser != null && item.EReturn.ApprovedByUser.DisplayName != null)
+                    {
+                        <td>@item.EReturn.ApprovedByUser.DisplayName</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+
+                    <td style="text-align: right">
+                        @item.Amount.ToTwoDecimalPlaces()
+                    </td>
+
+                    <td class="center">
+                        @if (item.EReturn.EReturnStatus.Id < 3)
+                        {
+                            @Html.ActionLink("Edit", "Approve", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                        }
+                        else if ((EReturnStatus)item.EReturn.EReturnStatus.Id == EReturnStatus.Submitted
+                          && User.IsInRole(Role.EReturnAuthoriser))
+                        {
+                            @Html.ActionLink("Edit", "Approve", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Details", "View", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                        }
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="10">
+
+
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.EReturns, page => Url.Action("Search", new
+                            {
+                                page = page,
+                                amount = Model.SearchCriteria.Amount,
+                                templateId = Model.SearchCriteria.TemplateId,
+                                reference = Model.SearchCriteria.Reference,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                                statusId = Model.SearchCriteria.StatusId,
+                                EReturnType = string.IsNullOrEmpty(Model.SearchCriteria.EReturnType.ToString()) ? Model.SearchCriteria.EReturnType.ToString() : ((int)Model.SearchCriteria.EReturnType).ToString()
+                            }))
+                        }
+                    </div>
+
+                </th>
+            </tr>
+
+        </tfoot>
+
+    </table>
+}
+else
+{
+
+    <div class="ui info message">
+        <div class="header">
+            We couldn't find any matching eReturns
+        </div>
+        <p>
+            Please try again with different search criteria
+        </p>
+    </div>
+}
+
+<div id="approval-details">
+    @Html.Partial("_Approve")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/ereturn")
+}

@@ -1,0 +1,139 @@
+﻿@model Admin.Models.Template.EditViewModel
+@{
+    ViewBag.Title = "Edit template";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        <div class="sub header">
+            Template details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "Template", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    <input type="hidden" id="row-count" value="@Model.TemplateRows == null ? 0 : Model.TemplateRows.Count" />
+
+    <div class="ui form">
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowCash)
+                @Html.LabelFor(m => m.AllowCash)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowCash)
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowCheque)
+                @Html.LabelFor(m => m.AllowCheque)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowCheque)
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowPdq)
+                @Html.LabelFor(m => m.AllowPdq)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowPdq)
+            </div>
+        </div>
+
+        <h2>Rows</h2>
+        <table class="ui table">
+            <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Reference override</th>
+                    <th>Description</th>
+                    <th>Description override</th>
+                    <th>VAT code</th>
+                    <th>VAT override</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="template-rows">
+                @if (Model.TemplateRows != null)
+                {
+                    for (int i = 0; i < Model.TemplateRows.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(m => m.TemplateRows[i].Id, new { @class = "js-id" })
+                                @Html.TextBoxFor(m => m.TemplateRows[i].Reference, new { @class = "js-reference trim-pasted-data" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.TemplateRows[i].ReferenceOverride, new { @class = "js-reference-override" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.TemplateRows[i].Description, new { @class = "js-description" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.TemplateRows[i].DescriptionOverride, new { @class = "js-description-override" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.TemplateRows[i].VatCode, new { @class = "js-vatcode" })
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.TemplateRows[i].VatOverride, new { @class = "js-vat-override" })
+                            </td>
+                            <td>
+                                <a data-id="@i" class="ui red button remove-row">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th><input id="reference" class="trim-pasted-data" /></th>
+                    <th><input id="reference_override" type="checkbox" value="true" /></th>
+                    <th><input id="description" /></th>
+                    <th><input id="description_override" type="checkbox" value="true" /></th>
+                    <th>
+                        <select id="vat_code">
+                            @foreach (var vatCode in Model.VatList)
+                            {
+                                <option value="@vatCode.VatCode">@vatCode.VatCode - @vatCode.Percentage</option>
+                            }
+                        </select>
+                    </th>
+                    <th><input id="vat_override" type="checkbox" value="true" /></th>
+                    <th><a id="add-row" class="ui button blue">Add</a></th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="field">
+            <input type="submit" value="Save" class="ui primary button" />
+            @Html.ActionLink("Back", "Back", "Template", null, new { @class = "ui button" })
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/template")
+}

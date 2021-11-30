@@ -1,0 +1,49 @@
+﻿@model Admin.Models.FundGroup.DetailsViewModel
+@{
+    ViewBag.Title = "Fund group";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.FundGroupName
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Fund group details
+        </div>
+    </h1>
+}
+
+@Html.HiddenFor(m => m.Id)
+
+<table class="ui celled table striped">
+    <thead>
+        <tr>
+            <th>
+                Funds
+            </th>
+        </tr>
+    </thead>
+
+    @if (Model.Funds != null && Model.Funds.Any())
+    {
+        foreach (var item in Model.Funds)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.FundCode)
+                    @Html.Label(string.Format("{0} {1}", item.Fund.FundName, item.Fund.Disabled ? "(Disabled)" : string.Empty))
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                None specified
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Back", "Back", "FundGroup", null, new { @class = "ui button" })

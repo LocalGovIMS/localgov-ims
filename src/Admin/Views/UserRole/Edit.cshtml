@@ -1,0 +1,63 @@
+﻿@model Admin.Models.UserRole.EditViewModel
+@{
+    ViewBag.Title = "Edit user roles";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        User roles
+        <div class="sub header">
+            Roles selection
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "UserRole", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.UserId)
+
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Roles
+                </th>
+            </tr>
+        </thead>
+
+        @if (Model.Roles != null && Model.Roles.Any())
+        {
+            // This is view logic, but it kind of stinks a bit.
+            // TODO - There must be a better way to creae a checkbox list.
+            // I also don't like the fact we're using tables.
+            var roles = Model.Roles.OrderBy(x => x.Text).ToList();
+            for (var i = 0; i < roles.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => roles[i].Id)
+                        @Html.HiddenFor(x => roles[i].Text)
+                        @Html.CheckBoxFor(x => roles[i].IsChecked)
+                        @Html.DisplayFor(x => roles[i].Text)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No available roles!
+                </td>
+            </tr>
+        }
+    </table>
+
+    <input type="submit" value="Save" class="ui button" />
+    @Html.ActionLink("Back", "Back", "UserRole", null, new { @class = "ui button" })
+
+}

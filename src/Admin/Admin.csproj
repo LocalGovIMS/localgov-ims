@@ -1,0 +1,1623 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1E73699C-4DEF-4E77-A96E-DA55C9A2FEDE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Admin</RootNamespace>
+    <AssemblyName>Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>true</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.5.0.9\lib\net461\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.ApplicationServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.11\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.log4net, Version=5.11.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.log4net.5.11.2\lib\net46\Unity.log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.11.1\lib\net45\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\AccountHolder\LookupCommand.cs" />
+    <Compile Include="Classes\Commands\BaseCommand.cs" />
+    <Compile Include="Classes\Commands\CommandResult.cs" />
+    <Compile Include="Classes\Commands\EReturn\AuthoriseCommand.cs" />
+    <Compile Include="Classes\Commands\EReturn\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\EReturn\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\EReturn\ApproverEditCommand.cs" />
+    <Compile Include="Classes\Commands\EReturn\SubmitCommand.cs" />
+    <Compile Include="Classes\Commands\EReturn\EditCommand.cs" />
+    <Compile Include="Classes\Commands\FundGroup\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\FundGroup\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\EditCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\EditCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\ChangeStatusCommand.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\EditCommand.cs" />
+    <Compile Include="Classes\Commands\SystemMessage\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\SystemMessage\EditCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\ProcessPaymentCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\SetAddressCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\CreatePaymentsCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\EmptyBasketCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\CheckAddressCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\RemoveCommand.cs" />
+    <Compile Include="Classes\Commands\Payment\AddCommand.cs" />
+    <Compile Include="Classes\Commands\Fund\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\Fund\EditCommand.cs" />
+    <Compile Include="Classes\Commands\Suspense\SaveNoteCommand.cs" />
+    <Compile Include="Classes\Commands\Suspense\JournalCommand.cs" />
+    <Compile Include="Classes\Commands\Vat\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\Vat\EditCommand.cs" />
+    <Compile Include="Classes\Commands\Role\EditCommand.cs" />
+    <Compile Include="Classes\Commands\Template\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\Template\EditCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\EmailReceiptCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\ValidateTransferItemCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\UndoTransferCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\TransferCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\RefundCommand.cs" />
+    <Compile Include="Classes\Commands\Transfer\TransferCommand.cs" />
+    <Compile Include="Classes\Commands\MethodOfPayment\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\MethodOfPayment\EditCommand.cs" />
+    <Compile Include="Classes\Commands\UserFundGroup\EditCommand.cs" />
+    <Compile Include="Classes\Commands\UserRole\EditCommand.cs" />
+    <Compile Include="Classes\Commands\UserTemplate\EditCommand.cs" />
+    <Compile Include="Classes\Commands\User\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\User\EditCommand.cs" />
+    <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\ListViewModelBuilder.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleConditionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleActionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\HomeControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleConditionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleActionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\SystemMessageControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\TemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\PaymentControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\RoleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\AccountHolderControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\EReturnControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\TransactionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\FundControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\SuspenseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\ValidationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\VatControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\UserFundGroupControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\UserTemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\UserRoleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\UserControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\FundGroupControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\MethodOfPaymentControllerDependencies.cs" />
+    <Compile Include="Classes\Models\ProcessPaymentCommandAgrs.cs" />
+    <Compile Include="Classes\Resolvers\UrlResolver.cs" />
+    <Compile Include="Classes\Security\Attributes\AuthorizeAttribute.cs" />
+    <Compile Include="Classes\Security\PaymentsAdminRoleProvider.cs" />
+    <Compile Include="Classes\Security\SecurityContext.cs" />
+    <Compile Include="Classes\ViewHelpers\EReturnTemplateRowReferenceEditorHelper.cs" />
+    <Compile Include="Classes\ViewHelpers\FormatHelper.cs" />
+    <Compile Include="Classes\ViewHelpers\BreadcrumbHelper.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\BaseViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Home\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Payment\IndexViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\JournalViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMessage\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMessage\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMessage\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Template\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Template\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\RefundViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\TransferViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transfer\TransferViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserFundGroup\BasicListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserFundGroup\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserRole\BasicListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserRole\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserTemplates\BasicListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserTemplates\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\DetailsViewModelBuilder.cs" />
+    <Compile Include="Controllers\AccountHolderController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleActionController.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleConditionController.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\FundGroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MethodOfPaymentController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SystemMessageController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
+    <Compile Include="Controllers\FundController.cs" />
+    <Compile Include="Controllers\SuspenseController.cs" />
+    <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="Controllers\VatController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserFundGroupController.cs" />
+    <Compile Include="Controllers\UserTemplateController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\Commands\IModelCommand.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IBaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IHomeControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IPaymentControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IRoleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IAccountHolderControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ISystemMessageControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ITemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IEReturnControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ITransactionControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ITransferControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IFundControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IValidationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IVatControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IUserFundGroupControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IUserTemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IUserRoleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IUserControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IFundGroupControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IMethodOfPaymentControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\TransferControllerDependencies.cs" />
+    <Compile Include="Interfaces\ModelBuilders\IModelBuilder.cs" />
+    <Compile Include="Interfaces\Resolvers\IUrlResolver.cs" />
+    <Compile Include="Models\AccountHolder\DetailsViewModel.cs" />
+    <Compile Include="Models\AccountHolder\ListViewModel.cs" />
+    <Compile Include="Models\AccountHolder\LookupViewModel.cs" />
+    <Compile Include="Models\AccountHolder\SearchViewModel.cs" />
+    <Compile Include="Models\Account\AccountViewModels.cs" />
+    <Compile Include="Models\EReturn\CreateViewModel.cs" />
+    <Compile Include="Models\EReturn\EditViewModel.cs" />
+    <Compile Include="Models\EReturn\ApproveViewModel.cs" />
+    <Compile Include="Models\EReturn\ListViewModel.cs" />
+    <Compile Include="Models\EReturn\SearchCriteria.cs" />
+    <Compile Include="Models\FundGroup\EditViewModel.cs" />
+    <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
+    <Compile Include="Models\Fund\ListViewModel.cs" />
+    <Compile Include="Models\Fund\SearchCriteria.cs" />
+    <Compile Include="Models\Home\DiagnosticsViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleAction\DetailsViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleAction\EditViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleAction\ListViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleAction\SearchCriteria.cs" />
+    <Compile Include="Models\ImportProcessingRuleCondition\EditViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleCondition\DetailsViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleCondition\ListViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRuleCondition\SearchCriteria.cs" />
+    <Compile Include="Models\ImportProcessingRule\DetailsViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRule\EditViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRule\ListViewModel.cs" />
+    <Compile Include="Models\ImportProcessingRule\SearchCriteria.cs" />
+    <Compile Include="Models\MethodOfPayment\DetailsViewModel.cs" />
+    <Compile Include="Models\MethodOfPayment\EditViewModel.cs" />
+    <Compile Include="Models\Payment\Cheques.cs" />
+    <Compile Include="Models\Payment\IndexViewModel.cs" />
+    <Compile Include="Models\Payment\Address.cs" />
+    <Compile Include="Models\Role\EditViewModel.cs" />
+    <Compile Include="Models\Role\DetailsViewModel.cs" />
+    <Compile Include="Models\Shared\BasicListViewModel.cs" />
+    <Compile Include="Models\Shared\Message.cs" />
+    <Compile Include="Models\Suspense\DetailsViewModel.cs" />
+    <Compile Include="Models\Suspense\SaveNoteViewModel.cs" />
+    <Compile Include="Models\Suspense\JournalViewModel.cs" />
+    <Compile Include="Models\Suspense\ListViewModel.cs" />
+    <Compile Include="Models\Suspense\SearchCriteria.cs" />
+    <Compile Include="Models\SystemMessage\DetailsViewModel.cs" />
+    <Compile Include="Models\SystemMessage\EditViewModel.cs" />
+    <Compile Include="Models\Template\EditViewModel.cs" />
+    <Compile Include="Models\Template\ListViewModel.cs" />
+    <Compile Include="Models\Transaction\DetailsViewModel.cs" />
+    <Compile Include="Models\Transaction\EmailReceiptViewModel.cs" />
+    <Compile Include="Models\Transaction\TransferViewModel.cs" />
+    <Compile Include="Models\Transaction\RefundItem.cs" />
+    <Compile Include="Models\Transaction\RefundViewModel.cs" />
+    <Compile Include="Models\Transaction\ListViewModel.cs" />
+    <Compile Include="Models\Transaction\SearchCriteria.cs" />
+    <Compile Include="Models\Transfer\TransferViewModel.cs" />
+    <Compile Include="Models\Fund\DetailsViewModel.cs" />
+    <Compile Include="Models\Fund\EditViewModel.cs" />
+    <Compile Include="Models\Vat\DetailsViewModel.cs" />
+    <Compile Include="Models\Vat\EditViewModel.cs" />
+    <Compile Include="Models\UserFundGroup\EditViewModel.cs" />
+    <Compile Include="Models\UserRole\EditViewModel.cs" />
+    <Compile Include="Models\UserTemplate\EditViewModel.cs" />
+    <Compile Include="Models\User\EditViewModel.cs" />
+    <Compile Include="Models\User\DetailsViewModel.cs" />
+    <Compile Include="Models\User\ListViewModel.cs" />
+    <Compile Include="Models\User\SearchCriteria.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\app.min.css" />
+    <Content Include="Content\app.css" />
+    <Content Include="Content\logo.png" />
+    <Content Include="Content\app-overrides.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\components\accordion.css" />
+    <Content Include="Content\components\accordion.js" />
+    <Content Include="Content\components\accordion.min.css" />
+    <Content Include="Content\components\accordion.min.js" />
+    <Content Include="Content\components\ad.css" />
+    <Content Include="Content\components\ad.min.css" />
+    <Content Include="Content\components\api.js" />
+    <Content Include="Content\components\api.min.js" />
+    <Content Include="Content\components\breadcrumb.css" />
+    <Content Include="Content\components\breadcrumb.min.css" />
+    <Content Include="Content\components\button.css" />
+    <Content Include="Content\components\button.min.css" />
+    <Content Include="Content\components\card.css" />
+    <Content Include="Content\components\card.min.css" />
+    <Content Include="Content\components\checkbox.css" />
+    <Content Include="Content\components\checkbox.js" />
+    <Content Include="Content\components\checkbox.min.css" />
+    <Content Include="Content\components\checkbox.min.js" />
+    <Content Include="Content\components\colorize.js" />
+    <Content Include="Content\components\colorize.min.js" />
+    <Content Include="Content\components\comment.css" />
+    <Content Include="Content\components\comment.min.css" />
+    <Content Include="Content\components\container.css" />
+    <Content Include="Content\components\container.min.css" />
+    <Content Include="Content\components\dimmer.css" />
+    <Content Include="Content\components\dimmer.js" />
+    <Content Include="Content\components\dimmer.min.css" />
+    <Content Include="Content\components\dimmer.min.js" />
+    <Content Include="Content\components\divider.css" />
+    <Content Include="Content\components\divider.min.css" />
+    <Content Include="Content\components\dropdown.css" />
+    <Content Include="Content\components\dropdown.js" />
+    <Content Include="Content\components\dropdown.min.css" />
+    <Content Include="Content\components\dropdown.min.js" />
+    <Content Include="Content\components\embed.css" />
+    <Content Include="Content\components\embed.js" />
+    <Content Include="Content\components\embed.min.css" />
+    <Content Include="Content\components\embed.min.js" />
+    <Content Include="Content\components\feed.css" />
+    <Content Include="Content\components\feed.min.css" />
+    <Content Include="Content\components\flag.css" />
+    <Content Include="Content\components\flag.min.css" />
+    <Content Include="Content\components\form.css" />
+    <Content Include="Content\components\form.js" />
+    <Content Include="Content\components\form.min.css" />
+    <Content Include="Content\components\form.min.js" />
+    <Content Include="Content\components\grid.css" />
+    <Content Include="Content\components\grid.min.css" />
+    <Content Include="Content\components\header.css" />
+    <Content Include="Content\components\header.min.css" />
+    <Content Include="Content\components\icon.css" />
+    <Content Include="Content\components\icon.min.css" />
+    <Content Include="Content\components\image.css" />
+    <Content Include="Content\components\image.min.css" />
+    <Content Include="Content\components\input.css" />
+    <Content Include="Content\components\input.min.css" />
+    <Content Include="Content\components\item.css" />
+    <Content Include="Content\components\item.min.css" />
+    <Content Include="Content\components\label.css" />
+    <Content Include="Content\components\label.min.css" />
+    <Content Include="Content\components\list.css" />
+    <Content Include="Content\components\list.min.css" />
+    <Content Include="Content\components\loader.css" />
+    <Content Include="Content\components\loader.min.css" />
+    <Content Include="Content\components\menu.css" />
+    <Content Include="Content\components\menu.min.css" />
+    <Content Include="Content\components\message.css" />
+    <Content Include="Content\components\message.min.css" />
+    <Content Include="Content\components\modal.css" />
+    <Content Include="Content\components\modal.js" />
+    <Content Include="Content\components\modal.min.css" />
+    <Content Include="Content\components\modal.min.js" />
+    <Content Include="Content\components\nag.css" />
+    <Content Include="Content\components\nag.js" />
+    <Content Include="Content\components\nag.min.css" />
+    <Content Include="Content\components\nag.min.js" />
+    <Content Include="Content\components\popup.css" />
+    <Content Include="Content\components\popup.js" />
+    <Content Include="Content\components\popup.min.css" />
+    <Content Include="Content\components\popup.min.js" />
+    <Content Include="Content\components\progress.css" />
+    <Content Include="Content\components\progress.js" />
+    <Content Include="Content\components\progress.min.css" />
+    <Content Include="Content\components\progress.min.js" />
+    <Content Include="Content\components\rail.css" />
+    <Content Include="Content\components\rail.min.css" />
+    <Content Include="Content\components\rating.css" />
+    <Content Include="Content\components\rating.js" />
+    <Content Include="Content\components\rating.min.css" />
+    <Content Include="Content\components\rating.min.js" />
+    <Content Include="Content\components\reset.css" />
+    <Content Include="Content\components\reset.min.css" />
+    <Content Include="Content\components\reveal.css" />
+    <Content Include="Content\components\reveal.min.css" />
+    <Content Include="Content\components\search.css" />
+    <Content Include="Content\components\search.js" />
+    <Content Include="Content\components\search.min.css" />
+    <Content Include="Content\components\search.min.js" />
+    <Content Include="Content\components\segment.css" />
+    <Content Include="Content\components\segment.min.css" />
+    <Content Include="Content\components\shape.css" />
+    <Content Include="Content\components\shape.js" />
+    <Content Include="Content\components\shape.min.css" />
+    <Content Include="Content\components\shape.min.js" />
+    <Content Include="Content\components\sidebar.css" />
+    <Content Include="Content\components\sidebar.js" />
+    <Content Include="Content\components\sidebar.min.css" />
+    <Content Include="Content\components\sidebar.min.js" />
+    <Content Include="Content\components\site.css" />
+    <Content Include="Content\components\site.js" />
+    <Content Include="Content\components\site.min.css" />
+    <Content Include="Content\components\site.min.js" />
+    <Content Include="Content\components\state.js" />
+    <Content Include="Content\components\state.min.js" />
+    <Content Include="Content\components\statistic.css" />
+    <Content Include="Content\components\statistic.min.css" />
+    <Content Include="Content\components\step.css" />
+    <Content Include="Content\components\step.min.css" />
+    <Content Include="Content\components\sticky.css" />
+    <Content Include="Content\components\sticky.js" />
+    <Content Include="Content\components\sticky.min.css" />
+    <Content Include="Content\components\sticky.min.js" />
+    <Content Include="Content\components\tab.css" />
+    <Content Include="Content\components\tab.js" />
+    <Content Include="Content\components\tab.min.css" />
+    <Content Include="Content\components\tab.min.js" />
+    <Content Include="Content\components\table.css" />
+    <Content Include="Content\components\table.min.css" />
+    <Content Include="Content\components\transition.css" />
+    <Content Include="Content\components\transition.js" />
+    <Content Include="Content\components\transition.min.css" />
+    <Content Include="Content\components\transition.min.js" />
+    <Content Include="Content\components\video.css" />
+    <Content Include="Content\components\video.js" />
+    <Content Include="Content\components\video.min.css" />
+    <Content Include="Content\components\video.min.js" />
+    <Content Include="Content\components\visibility.js" />
+    <Content Include="Content\components\visibility.min.js" />
+    <Content Include="Content\components\visit.js" />
+    <Content Include="Content\components\visit.min.js" />
+    <Content Include="Content\favicon.ico" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\help\payment\Payment_1_paymentpage.png" />
+    <Content Include="Content\help\payment\Payment_2_details.png" />
+    <Content Include="Content\help\payment\Payment_3_address.png" />
+    <Content Include="Content\help\payment\Payment_4_smartpay.png" />
+    <Content Include="Content\help\payment\Payment_5_confirm.png" />
+    <Content Include="Content\help\refunds\refund_1_transactionlist.png" />
+    <Content Include="Content\help\refunds\refund_2_transactiondetails.png" />
+    <Content Include="Content\help\refunds\refund_3_refundmodal.png" />
+    <Content Include="Content\help\refunds\refund_4_refundmodelcompleted.png" />
+    <Content Include="Content\help\refunds\refund_5_pendingrefund.png" />
+    <Content Include="Content\help\refunds\refund_6_completedrefund.png" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\semantic.css" />
+    <Content Include="Content\semantic.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\basic\assets\fonts\icons.svg" />
+    <Content Include="Content\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Content\themes\default\assets\images\flags.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\App\Core\payments-admin.core.js" />
+    <Content Include="Scripts\App\EReturn\0_shared.js" />
+    <Content Include="Scripts\App\EReturn\edit.js" />
+    <Content Include="Scripts\App\EReturn\approve.js" />
+    <Content Include="Scripts\App\EReturn\list.js" />
+    <Content Include="Scripts\App\Payment\index.js" />
+    <Content Include="Scripts\App\Shared\input-cleanse.js" />
+    <Content Include="Scripts\App\Shared\input-validation.js" />
+    <Content Include="Scripts\App\Suspense\credit.js" />
+    <Content Include="Scripts\App\Suspense\notes.js" />
+    <Content Include="Scripts\App\Suspense\journal.js" />
+    <Content Include="Scripts\App\Suspense\list.js" />
+    <Content Include="Scripts\App\Suspense\0_shared.js" />
+    <Content Include="Scripts\App\Template\edit.js" />
+    <Content Include="Scripts\App\Transaction\email-receipt.js" />
+    <Content Include="Scripts\App\Transaction\email-receipt.min.js">
+      <DependentUpon>email-receipt.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\App\Transaction\journal.js" />
+    <Content Include="Scripts\App\Transaction\details.js" />
+    <Content Include="Scripts\App\Transaction\list.js" />
+    <Content Include="Scripts\App\Transaction\refund.js" />
+    <Content Include="Scripts\App\Transaction\search.js" />
+    <Content Include="Scripts\App\Transfer\transfer.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="log4net.config" />
+    <None Include="bundleconfig.json" />
+    <Content Include="Content\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="Content\themes\default\assets\fonts\icons.woff" />
+    <Content Include="Content\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="Content\themes\default\assets\fonts\icons.otf" />
+    <Content Include="Content\themes\default\assets\fonts\icons.eot" />
+    <Content Include="Content\themes\basic\assets\fonts\icons.woff" />
+    <Content Include="Content\themes\basic\assets\fonts\icons.ttf" />
+    <Content Include="Content\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lodash.core.js" />
+    <Content Include="Scripts\lodash.core.min.js" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Scripts\lodash.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\semantic.js" />
+    <Content Include="Scripts\semantic.min.js" />
+    <Content Include="Content\semantic\dist\components\accordion.css" />
+    <Content Include="Content\semantic\dist\components\accordion.js" />
+    <Content Include="Content\semantic\dist\components\accordion.min.css" />
+    <Content Include="Content\semantic\dist\components\accordion.min.js" />
+    <Content Include="Content\semantic\dist\components\ad.css" />
+    <Content Include="Content\semantic\dist\components\ad.min.css" />
+    <Content Include="Content\semantic\dist\components\api.js" />
+    <Content Include="Content\semantic\dist\components\api.min.js" />
+    <Content Include="Content\semantic\dist\components\breadcrumb.css" />
+    <Content Include="Content\semantic\dist\components\breadcrumb.min.css" />
+    <Content Include="Content\semantic\dist\components\button.css" />
+    <Content Include="Content\semantic\dist\components\button.min.css" />
+    <Content Include="Content\semantic\dist\components\card.css" />
+    <Content Include="Content\semantic\dist\components\card.min.css" />
+    <Content Include="Content\semantic\dist\components\checkbox.css" />
+    <Content Include="Content\semantic\dist\components\checkbox.js" />
+    <Content Include="Content\semantic\dist\components\checkbox.min.css" />
+    <Content Include="Content\semantic\dist\components\checkbox.min.js" />
+    <Content Include="Content\semantic\dist\components\comment.css" />
+    <Content Include="Content\semantic\dist\components\comment.min.css" />
+    <Content Include="Content\semantic\dist\components\container.css" />
+    <Content Include="Content\semantic\dist\components\container.min.css" />
+    <Content Include="Content\semantic\dist\components\dimmer.css" />
+    <Content Include="Content\semantic\dist\components\dimmer.js" />
+    <Content Include="Content\semantic\dist\components\dimmer.min.css" />
+    <Content Include="Content\semantic\dist\components\dimmer.min.js" />
+    <Content Include="Content\semantic\dist\components\divider.css" />
+    <Content Include="Content\semantic\dist\components\divider.min.css" />
+    <Content Include="Content\semantic\dist\components\dropdown.css" />
+    <Content Include="Content\semantic\dist\components\dropdown.js" />
+    <Content Include="Content\semantic\dist\components\dropdown.min.css" />
+    <Content Include="Content\semantic\dist\components\dropdown.min.js" />
+    <Content Include="Content\semantic\dist\components\embed.css" />
+    <Content Include="Content\semantic\dist\components\embed.js" />
+    <Content Include="Content\semantic\dist\components\embed.min.css" />
+    <Content Include="Content\semantic\dist\components\embed.min.js" />
+    <Content Include="Content\semantic\dist\components\feed.css" />
+    <Content Include="Content\semantic\dist\components\feed.min.css" />
+    <Content Include="Content\semantic\dist\components\flag.css" />
+    <Content Include="Content\semantic\dist\components\flag.min.css" />
+    <Content Include="Content\semantic\dist\components\form.css" />
+    <Content Include="Content\semantic\dist\components\form.js" />
+    <Content Include="Content\semantic\dist\components\form.min.css" />
+    <Content Include="Content\semantic\dist\components\form.min.js" />
+    <Content Include="Content\semantic\dist\components\grid.css" />
+    <Content Include="Content\semantic\dist\components\grid.min.css" />
+    <Content Include="Content\semantic\dist\components\header.css" />
+    <Content Include="Content\semantic\dist\components\header.min.css" />
+    <Content Include="Content\semantic\dist\components\icon.css" />
+    <Content Include="Content\semantic\dist\components\icon.min.css" />
+    <Content Include="Content\semantic\dist\components\image.css" />
+    <Content Include="Content\semantic\dist\components\image.min.css" />
+    <Content Include="Content\semantic\dist\components\input.css" />
+    <Content Include="Content\semantic\dist\components\input.min.css" />
+    <Content Include="Content\semantic\dist\components\item.css" />
+    <Content Include="Content\semantic\dist\components\item.min.css" />
+    <Content Include="Content\semantic\dist\components\label.css" />
+    <Content Include="Content\semantic\dist\components\label.min.css" />
+    <Content Include="Content\semantic\dist\components\list.css" />
+    <Content Include="Content\semantic\dist\components\list.min.css" />
+    <Content Include="Content\semantic\dist\components\loader.css" />
+    <Content Include="Content\semantic\dist\components\loader.min.css" />
+    <Content Include="Content\semantic\dist\components\menu.css" />
+    <Content Include="Content\semantic\dist\components\menu.min.css" />
+    <Content Include="Content\semantic\dist\components\message.css" />
+    <Content Include="Content\semantic\dist\components\message.min.css" />
+    <Content Include="Content\semantic\dist\components\modal.css" />
+    <Content Include="Content\semantic\dist\components\modal.js" />
+    <Content Include="Content\semantic\dist\components\modal.min.css" />
+    <Content Include="Content\semantic\dist\components\modal.min.js" />
+    <Content Include="Content\semantic\dist\components\nag.css" />
+    <Content Include="Content\semantic\dist\components\nag.js" />
+    <Content Include="Content\semantic\dist\components\nag.min.css" />
+    <Content Include="Content\semantic\dist\components\nag.min.js" />
+    <Content Include="Content\semantic\dist\components\popup.css" />
+    <Content Include="Content\semantic\dist\components\popup.js" />
+    <Content Include="Content\semantic\dist\components\popup.min.css" />
+    <Content Include="Content\semantic\dist\components\popup.min.js" />
+    <Content Include="Content\semantic\dist\components\progress.css" />
+    <Content Include="Content\semantic\dist\components\progress.js" />
+    <Content Include="Content\semantic\dist\components\progress.min.css" />
+    <Content Include="Content\semantic\dist\components\progress.min.js" />
+    <Content Include="Content\semantic\dist\components\rail.css" />
+    <Content Include="Content\semantic\dist\components\rail.min.css" />
+    <Content Include="Content\semantic\dist\components\rating.css" />
+    <Content Include="Content\semantic\dist\components\rating.js" />
+    <Content Include="Content\semantic\dist\components\rating.min.css" />
+    <Content Include="Content\semantic\dist\components\rating.min.js" />
+    <Content Include="Content\semantic\dist\components\reset.css" />
+    <Content Include="Content\semantic\dist\components\reset.min.css" />
+    <Content Include="Content\semantic\dist\components\reveal.css" />
+    <Content Include="Content\semantic\dist\components\reveal.min.css" />
+    <Content Include="Content\semantic\dist\components\search.css" />
+    <Content Include="Content\semantic\dist\components\search.js" />
+    <Content Include="Content\semantic\dist\components\search.min.css" />
+    <Content Include="Content\semantic\dist\components\search.min.js" />
+    <Content Include="Content\semantic\dist\components\segment.css" />
+    <Content Include="Content\semantic\dist\components\segment.min.css" />
+    <Content Include="Content\semantic\dist\components\shape.css" />
+    <Content Include="Content\semantic\dist\components\shape.js" />
+    <Content Include="Content\semantic\dist\components\shape.min.css" />
+    <Content Include="Content\semantic\dist\components\shape.min.js" />
+    <Content Include="Content\semantic\dist\components\sidebar.css" />
+    <Content Include="Content\semantic\dist\components\sidebar.js" />
+    <Content Include="Content\semantic\dist\components\sidebar.min.css" />
+    <Content Include="Content\semantic\dist\components\sidebar.min.js" />
+    <Content Include="Content\semantic\dist\components\site.css" />
+    <Content Include="Content\semantic\dist\components\site.js" />
+    <Content Include="Content\semantic\dist\components\site.min.css" />
+    <Content Include="Content\semantic\dist\components\site.min.js" />
+    <Content Include="Content\semantic\dist\components\state.js" />
+    <Content Include="Content\semantic\dist\components\state.min.js" />
+    <Content Include="Content\semantic\dist\components\statistic.css" />
+    <Content Include="Content\semantic\dist\components\statistic.min.css" />
+    <Content Include="Content\semantic\dist\components\step.css" />
+    <Content Include="Content\semantic\dist\components\step.min.css" />
+    <Content Include="Content\semantic\dist\components\sticky.css" />
+    <Content Include="Content\semantic\dist\components\sticky.js" />
+    <Content Include="Content\semantic\dist\components\sticky.min.css" />
+    <Content Include="Content\semantic\dist\components\sticky.min.js" />
+    <Content Include="Content\semantic\dist\components\tab.css" />
+    <Content Include="Content\semantic\dist\components\tab.js" />
+    <Content Include="Content\semantic\dist\components\tab.min.css" />
+    <Content Include="Content\semantic\dist\components\tab.min.js" />
+    <Content Include="Content\semantic\dist\components\table.css" />
+    <Content Include="Content\semantic\dist\components\table.min.css" />
+    <Content Include="Content\semantic\dist\components\transition.css" />
+    <Content Include="Content\semantic\dist\components\transition.js" />
+    <Content Include="Content\semantic\dist\components\transition.min.css" />
+    <Content Include="Content\semantic\dist\components\transition.min.js" />
+    <Content Include="Content\semantic\dist\components\visibility.js" />
+    <Content Include="Content\semantic\dist\components\visibility.min.js" />
+    <Content Include="Content\semantic\dist\semantic.css" />
+    <Content Include="Content\semantic\dist\semantic.js" />
+    <Content Include="Content\semantic\dist\semantic.min.css" />
+    <Content Include="Content\semantic\dist\semantic.min.js" />
+    <Content Include="Content\semantic\dist\themes\basic\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\dist\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\dist\themes\default\assets\images\flags.png" />
+    <Content Include="Content\semantic\dist\themes\github\assets\fonts\octicons.svg" />
+    <Content Include="Content\semantic\dist\themes\material\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\gulpfile.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\api.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\colorize.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\form.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\state.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\visibility.js" />
+    <Content Include="Content\semantic\src\definitions\behaviors\visit.js" />
+    <Content Include="Content\semantic\src\definitions\globals\site.js" />
+    <Content Include="Content\semantic\src\definitions\modules\accordion.js" />
+    <Content Include="Content\semantic\src\definitions\modules\checkbox.js" />
+    <Content Include="Content\semantic\src\definitions\modules\dimmer.js" />
+    <Content Include="Content\semantic\src\definitions\modules\dropdown.js" />
+    <Content Include="Content\semantic\src\definitions\modules\embed.js" />
+    <Content Include="Content\semantic\src\definitions\modules\modal.js" />
+    <Content Include="Content\semantic\src\definitions\modules\nag.js" />
+    <Content Include="Content\semantic\src\definitions\modules\popup.js" />
+    <Content Include="Content\semantic\src\definitions\modules\progress.js" />
+    <Content Include="Content\semantic\src\definitions\modules\rating.js" />
+    <Content Include="Content\semantic\src\definitions\modules\search.js" />
+    <Content Include="Content\semantic\src\definitions\modules\shape.js" />
+    <Content Include="Content\semantic\src\definitions\modules\sidebar.js" />
+    <Content Include="Content\semantic\src\definitions\modules\sticky.js" />
+    <Content Include="Content\semantic\src\definitions\modules\tab.js" />
+    <Content Include="Content\semantic\src\definitions\modules\transition.js" />
+    <Content Include="Content\semantic\src\themes\basic\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\src\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\src\themes\default\assets\images\flags.png" />
+    <Content Include="Content\semantic\src\themes\github\assets\fonts\octicons.svg" />
+    <Content Include="Content\semantic\src\themes\material\assets\fonts\icons.svg" />
+    <Content Include="Content\semantic\tasks\admin\components\create.js" />
+    <Content Include="Content\semantic\tasks\admin\components\init.js" />
+    <Content Include="Content\semantic\tasks\admin\components\update.js" />
+    <Content Include="Content\semantic\tasks\admin\distributions\create.js" />
+    <Content Include="Content\semantic\tasks\admin\distributions\init.js" />
+    <Content Include="Content\semantic\tasks\admin\distributions\update.js" />
+    <Content Include="Content\semantic\tasks\admin\publish.js" />
+    <Content Include="Content\semantic\tasks\admin\register.js" />
+    <Content Include="Content\semantic\tasks\admin\release.js" />
+    <Content Include="Content\semantic\tasks\build.js" />
+    <Content Include="Content\semantic\tasks\build\assets.js" />
+    <Content Include="Content\semantic\tasks\build\css.js" />
+    <Content Include="Content\semantic\tasks\build\javascript.js" />
+    <Content Include="Content\semantic\tasks\check-install.js" />
+    <Content Include="Content\semantic\tasks\clean.js" />
+    <Content Include="Content\semantic\tasks\collections\admin.js" />
+    <Content Include="Content\semantic\tasks\collections\build.js" />
+    <Content Include="Content\semantic\tasks\collections\internal.js" />
+    <Content Include="Content\semantic\tasks\collections\rtl.js" />
+    <Content Include="Content\semantic\tasks\config\admin\github.js" />
+    <Content Include="Content\semantic\tasks\config\admin\oauth.example.js" />
+    <Content Include="Content\semantic\tasks\config\admin\release.js" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\component-package.js" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\css-package.js" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\less-package.js" />
+    <Content Include="Content\semantic\tasks\config\defaults.js" />
+    <Content Include="Content\semantic\tasks\config\docs.js" />
+    <Content Include="Content\semantic\tasks\config\npm\gulpfile.js" />
+    <Content Include="Content\semantic\tasks\config\project\config.js" />
+    <Content Include="Content\semantic\tasks\config\project\install.js" />
+    <Content Include="Content\semantic\tasks\config\project\release.js" />
+    <Content Include="Content\semantic\tasks\config\tasks.js" />
+    <Content Include="Content\semantic\tasks\config\user.js" />
+    <Content Include="Content\semantic\tasks\docs\build.js" />
+    <Content Include="Content\semantic\tasks\docs\metadata.js" />
+    <Content Include="Content\semantic\tasks\docs\serve.js" />
+    <Content Include="Content\semantic\tasks\install.js" />
+    <Content Include="Content\semantic\tasks\rtl\build.js" />
+    <Content Include="Content\semantic\tasks\rtl\watch.js" />
+    <Content Include="Content\semantic\tasks\version.js" />
+    <Content Include="Content\semantic\tasks\watch.js" />
+    <Content Include="Content\semantic\dist\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\dist\themes\basic\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\dist\themes\basic\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\dist\themes\default\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\dist\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\dist\themes\default\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\dist\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="Content\semantic\dist\themes\github\assets\fonts\octicons-local.ttf" />
+    <Content Include="Content\semantic\dist\themes\github\assets\fonts\octicons.ttf" />
+    <Content Include="Content\semantic\dist\themes\github\assets\fonts\octicons.woff" />
+    <Content Include="Content\semantic\dist\themes\material\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\dist\themes\material\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\dist\themes\material\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\dist\themes\material\assets\fonts\icons.woff2" />
+    <Content Include="Content\semantic\src\definitions\collections\breadcrumb.less" />
+    <Content Include="Content\semantic\src\definitions\collections\form.less" />
+    <Content Include="Content\semantic\src\definitions\collections\grid.less" />
+    <Content Include="Content\semantic\src\definitions\collections\menu.less" />
+    <Content Include="Content\semantic\src\definitions\collections\message.less" />
+    <Content Include="Content\semantic\src\definitions\collections\table.less" />
+    <Content Include="Content\semantic\src\definitions\elements\button.less" />
+    <Content Include="Content\semantic\src\definitions\elements\container.less" />
+    <Content Include="Content\semantic\src\definitions\elements\divider.less" />
+    <Content Include="Content\semantic\src\definitions\elements\flag.less" />
+    <Content Include="Content\semantic\src\definitions\elements\header.less" />
+    <Content Include="Content\semantic\src\definitions\elements\icon.less" />
+    <Content Include="Content\semantic\src\definitions\elements\image.less" />
+    <Content Include="Content\semantic\src\definitions\elements\input.less" />
+    <Content Include="Content\semantic\src\definitions\elements\label.less" />
+    <Content Include="Content\semantic\src\definitions\elements\list.less" />
+    <Content Include="Content\semantic\src\definitions\elements\loader.less" />
+    <Content Include="Content\semantic\src\definitions\elements\rail.less" />
+    <Content Include="Content\semantic\src\definitions\elements\reveal.less" />
+    <Content Include="Content\semantic\src\definitions\elements\segment.less" />
+    <Content Include="Content\semantic\src\definitions\elements\step.less" />
+    <Content Include="Content\semantic\src\definitions\globals\reset.less" />
+    <Content Include="Content\semantic\src\definitions\globals\site.less" />
+    <Content Include="Content\semantic\src\definitions\modules\accordion.less" />
+    <Content Include="Content\semantic\src\definitions\modules\checkbox.less" />
+    <Content Include="Content\semantic\src\definitions\modules\dimmer.less" />
+    <Content Include="Content\semantic\src\definitions\modules\dropdown.less" />
+    <Content Include="Content\semantic\src\definitions\modules\embed.less" />
+    <Content Include="Content\semantic\src\definitions\modules\modal.less" />
+    <Content Include="Content\semantic\src\definitions\modules\nag.less" />
+    <Content Include="Content\semantic\src\definitions\modules\popup.less" />
+    <Content Include="Content\semantic\src\definitions\modules\progress.less" />
+    <Content Include="Content\semantic\src\definitions\modules\rating.less" />
+    <Content Include="Content\semantic\src\definitions\modules\search.less" />
+    <Content Include="Content\semantic\src\definitions\modules\shape.less" />
+    <Content Include="Content\semantic\src\definitions\modules\sidebar.less" />
+    <Content Include="Content\semantic\src\definitions\modules\sticky.less" />
+    <Content Include="Content\semantic\src\definitions\modules\tab.less" />
+    <Content Include="Content\semantic\src\definitions\modules\transition.less" />
+    <Content Include="Content\semantic\src\definitions\views\ad.less" />
+    <Content Include="Content\semantic\src\definitions\views\card.less" />
+    <Content Include="Content\semantic\src\definitions\views\comment.less" />
+    <Content Include="Content\semantic\src\definitions\views\feed.less" />
+    <Content Include="Content\semantic\src\definitions\views\item.less" />
+    <Content Include="Content\semantic\src\definitions\views\statistic.less" />
+    <Content Include="Content\semantic\src\semantic.less" />
+    <Content Include="Content\semantic\src\site\collections\breadcrumb.overrides" />
+    <Content Include="Content\semantic\src\site\collections\breadcrumb.variables" />
+    <Content Include="Content\semantic\src\site\collections\form.overrides" />
+    <Content Include="Content\semantic\src\site\collections\form.variables" />
+    <Content Include="Content\semantic\src\site\collections\grid.overrides" />
+    <Content Include="Content\semantic\src\site\collections\grid.variables" />
+    <Content Include="Content\semantic\src\site\collections\menu.overrides" />
+    <Content Include="Content\semantic\src\site\collections\menu.variables" />
+    <Content Include="Content\semantic\src\site\collections\message.overrides" />
+    <Content Include="Content\semantic\src\site\collections\message.variables" />
+    <Content Include="Content\semantic\src\site\collections\table.overrides" />
+    <Content Include="Content\semantic\src\site\collections\table.variables" />
+    <Content Include="Content\semantic\src\site\elements\button.overrides" />
+    <Content Include="Content\semantic\src\site\elements\button.variables" />
+    <Content Include="Content\semantic\src\site\elements\container.overrides" />
+    <Content Include="Content\semantic\src\site\elements\container.variables" />
+    <Content Include="Content\semantic\src\site\elements\divider.overrides" />
+    <Content Include="Content\semantic\src\site\elements\divider.variables" />
+    <Content Include="Content\semantic\src\site\elements\flag.overrides" />
+    <Content Include="Content\semantic\src\site\elements\flag.variables" />
+    <Content Include="Content\semantic\src\site\elements\header.overrides" />
+    <Content Include="Content\semantic\src\site\elements\header.variables" />
+    <Content Include="Content\semantic\src\site\elements\icon.overrides" />
+    <Content Include="Content\semantic\src\site\elements\icon.variables" />
+    <Content Include="Content\semantic\src\site\elements\image.overrides" />
+    <Content Include="Content\semantic\src\site\elements\image.variables" />
+    <Content Include="Content\semantic\src\site\elements\input.overrides" />
+    <Content Include="Content\semantic\src\site\elements\input.variables" />
+    <Content Include="Content\semantic\src\site\elements\label.overrides" />
+    <Content Include="Content\semantic\src\site\elements\label.variables" />
+    <Content Include="Content\semantic\src\site\elements\list.overrides" />
+    <Content Include="Content\semantic\src\site\elements\list.variables" />
+    <Content Include="Content\semantic\src\site\elements\loader.overrides" />
+    <Content Include="Content\semantic\src\site\elements\loader.variables" />
+    <Content Include="Content\semantic\src\site\elements\rail.overrides" />
+    <Content Include="Content\semantic\src\site\elements\rail.variables" />
+    <Content Include="Content\semantic\src\site\elements\reveal.overrides" />
+    <Content Include="Content\semantic\src\site\elements\reveal.variables" />
+    <Content Include="Content\semantic\src\site\elements\segment.overrides" />
+    <Content Include="Content\semantic\src\site\elements\segment.variables" />
+    <Content Include="Content\semantic\src\site\elements\step.overrides" />
+    <Content Include="Content\semantic\src\site\elements\step.variables" />
+    <Content Include="Content\semantic\src\site\globals\reset.overrides" />
+    <Content Include="Content\semantic\src\site\globals\reset.variables" />
+    <Content Include="Content\semantic\src\site\globals\site.overrides" />
+    <Content Include="Content\semantic\src\site\globals\site.variables" />
+    <Content Include="Content\semantic\src\site\modules\accordion.overrides" />
+    <Content Include="Content\semantic\src\site\modules\accordion.variables" />
+    <Content Include="Content\semantic\src\site\modules\chatroom.overrides" />
+    <Content Include="Content\semantic\src\site\modules\chatroom.variables" />
+    <Content Include="Content\semantic\src\site\modules\checkbox.overrides" />
+    <Content Include="Content\semantic\src\site\modules\checkbox.variables" />
+    <Content Include="Content\semantic\src\site\modules\dimmer.overrides" />
+    <Content Include="Content\semantic\src\site\modules\dimmer.variables" />
+    <Content Include="Content\semantic\src\site\modules\dropdown.overrides" />
+    <Content Include="Content\semantic\src\site\modules\dropdown.variables" />
+    <Content Include="Content\semantic\src\site\modules\embed.overrides" />
+    <Content Include="Content\semantic\src\site\modules\embed.variables" />
+    <Content Include="Content\semantic\src\site\modules\modal.overrides" />
+    <Content Include="Content\semantic\src\site\modules\modal.variables" />
+    <Content Include="Content\semantic\src\site\modules\nag.overrides" />
+    <Content Include="Content\semantic\src\site\modules\nag.variables" />
+    <Content Include="Content\semantic\src\site\modules\popup.overrides" />
+    <Content Include="Content\semantic\src\site\modules\popup.variables" />
+    <Content Include="Content\semantic\src\site\modules\progress.overrides" />
+    <Content Include="Content\semantic\src\site\modules\progress.variables" />
+    <Content Include="Content\semantic\src\site\modules\rating.overrides" />
+    <Content Include="Content\semantic\src\site\modules\rating.variables" />
+    <Content Include="Content\semantic\src\site\modules\search.overrides" />
+    <Content Include="Content\semantic\src\site\modules\search.variables" />
+    <Content Include="Content\semantic\src\site\modules\shape.overrides" />
+    <Content Include="Content\semantic\src\site\modules\shape.variables" />
+    <Content Include="Content\semantic\src\site\modules\sidebar.overrides" />
+    <Content Include="Content\semantic\src\site\modules\sidebar.variables" />
+    <Content Include="Content\semantic\src\site\modules\sticky.overrides" />
+    <Content Include="Content\semantic\src\site\modules\sticky.variables" />
+    <Content Include="Content\semantic\src\site\modules\tab.overrides" />
+    <Content Include="Content\semantic\src\site\modules\tab.variables" />
+    <Content Include="Content\semantic\src\site\modules\transition.overrides" />
+    <Content Include="Content\semantic\src\site\modules\transition.variables" />
+    <Content Include="Content\semantic\src\site\views\ad.overrides" />
+    <Content Include="Content\semantic\src\site\views\ad.variables" />
+    <Content Include="Content\semantic\src\site\views\card.overrides" />
+    <Content Include="Content\semantic\src\site\views\card.variables" />
+    <Content Include="Content\semantic\src\site\views\comment.overrides" />
+    <Content Include="Content\semantic\src\site\views\comment.variables" />
+    <Content Include="Content\semantic\src\site\views\feed.overrides" />
+    <Content Include="Content\semantic\src\site\views\feed.variables" />
+    <Content Include="Content\semantic\src\site\views\item.overrides" />
+    <Content Include="Content\semantic\src\site\views\item.variables" />
+    <Content Include="Content\semantic\src\site\views\statistic.overrides" />
+    <Content Include="Content\semantic\src\site\views\statistic.variables" />
+    <Content Include="Content\semantic\src\theme.config" />
+    <Content Include="Content\semantic\src\theme.less" />
+    <Content Include="Content\semantic\src\themes\amazon\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\amazon\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\amazon\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\src\themes\basic\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\src\themes\basic\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\src\themes\basic\collections\table.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\collections\table.variables" />
+    <Content Include="Content\semantic\src\themes\basic\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\basic\elements\icon.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\elements\icon.variables" />
+    <Content Include="Content\semantic\src\themes\basic\elements\step.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\elements\step.variables" />
+    <Content Include="Content\semantic\src\themes\basic\globals\reset.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\globals\reset.variables" />
+    <Content Include="Content\semantic\src\themes\basic\modules\progress.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\modules\progress.variables" />
+    <Content Include="Content\semantic\src\themes\basic\views\card.overrides" />
+    <Content Include="Content\semantic\src\themes\basic\views\card.variables" />
+    <Content Include="Content\semantic\src\themes\bookish\elements\header.overrides" />
+    <Content Include="Content\semantic\src\themes\bookish\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\bootstrap3\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\bootstrap3\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\collections\form.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\collections\form.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\collections\menu.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\collections\menu.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\elements\header.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\modules\accordion.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\modules\accordion.variables" />
+    <Content Include="Content\semantic\src\themes\chubby\views\comment.overrides" />
+    <Content Include="Content\semantic\src\themes\chubby\views\comment.variables" />
+    <Content Include="Content\semantic\src\themes\classic\collections\table.overrides" />
+    <Content Include="Content\semantic\src\themes\classic\collections\table.variables" />
+    <Content Include="Content\semantic\src\themes\classic\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\classic\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\classic\elements\header.overrides" />
+    <Content Include="Content\semantic\src\themes\classic\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\classic\modules\progress.overrides" />
+    <Content Include="Content\semantic\src\themes\classic\modules\progress.variables" />
+    <Content Include="Content\semantic\src\themes\classic\views\card.overrides" />
+    <Content Include="Content\semantic\src\themes\classic\views\card.variables" />
+    <Content Include="Content\semantic\src\themes\colored\modules\checkbox.overrides" />
+    <Content Include="Content\semantic\src\themes\colored\modules\checkbox.variables" />
+    <Content Include="Content\semantic\src\themes\default\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\src\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\src\themes\default\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\src\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="Content\semantic\src\themes\default\collections\breadcrumb.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\breadcrumb.variables" />
+    <Content Include="Content\semantic\src\themes\default\collections\form.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\form.variables" />
+    <Content Include="Content\semantic\src\themes\default\collections\grid.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\grid.variables" />
+    <Content Include="Content\semantic\src\themes\default\collections\menu.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\menu.variables" />
+    <Content Include="Content\semantic\src\themes\default\collections\message.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\message.variables" />
+    <Content Include="Content\semantic\src\themes\default\collections\table.overrides" />
+    <Content Include="Content\semantic\src\themes\default\collections\table.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\container.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\container.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\divider.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\divider.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\flag.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\flag.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\header.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\icon.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\icon.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\image.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\image.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\input.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\input.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\label.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\label.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\list.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\list.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\loader.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\loader.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\rail.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\rail.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\reveal.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\reveal.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\segment.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\segment.variables" />
+    <Content Include="Content\semantic\src\themes\default\elements\step.overrides" />
+    <Content Include="Content\semantic\src\themes\default\elements\step.variables" />
+    <Content Include="Content\semantic\src\themes\default\globals\reset.overrides" />
+    <Content Include="Content\semantic\src\themes\default\globals\reset.variables" />
+    <Content Include="Content\semantic\src\themes\default\globals\site.overrides" />
+    <Content Include="Content\semantic\src\themes\default\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\accordion.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\accordion.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\chatroom.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\chatroom.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\checkbox.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\checkbox.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\dimmer.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\dimmer.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\dropdown.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\dropdown.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\embed.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\embed.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\modal.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\modal.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\nag.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\nag.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\popup.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\popup.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\progress.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\progress.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\rating.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\rating.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\search.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\search.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\shape.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\shape.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\sidebar.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\sidebar.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\sticky.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\sticky.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\tab.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\tab.variables" />
+    <Content Include="Content\semantic\src\themes\default\modules\transition.overrides" />
+    <Content Include="Content\semantic\src\themes\default\modules\transition.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\ad.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\ad.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\card.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\card.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\comment.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\comment.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\feed.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\feed.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\item.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\item.variables" />
+    <Content Include="Content\semantic\src\themes\default\views\statistic.overrides" />
+    <Content Include="Content\semantic\src\themes\default\views\statistic.variables" />
+    <Content Include="Content\semantic\src\themes\duo\elements\loader.overrides" />
+    <Content Include="Content\semantic\src\themes\duo\elements\loader.variables" />
+    <Content Include="Content\semantic\src\themes\fixed-width\collections\grid.overrides" />
+    <Content Include="Content\semantic\src\themes\fixed-width\collections\grid.variables" />
+    <Content Include="Content\semantic\src\themes\fixed-width\modules\modal.overrides" />
+    <Content Include="Content\semantic\src\themes\fixed-width\modules\modal.variables" />
+    <Content Include="Content\semantic\src\themes\flat\collections\form.overrides" />
+    <Content Include="Content\semantic\src\themes\flat\collections\form.variables" />
+    <Content Include="Content\semantic\src\themes\flat\globals\site.overrides" />
+    <Content Include="Content\semantic\src\themes\flat\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\github\assets\fonts\octicons-local.ttf" />
+    <Content Include="Content\semantic\src\themes\github\assets\fonts\octicons.ttf" />
+    <Content Include="Content\semantic\src\themes\github\assets\fonts\octicons.woff" />
+    <Content Include="Content\semantic\src\themes\github\collections\breadcrumb.variables" />
+    <Content Include="Content\semantic\src\themes\github\collections\form.overrides" />
+    <Content Include="Content\semantic\src\themes\github\collections\form.variables" />
+    <Content Include="Content\semantic\src\themes\github\collections\grid.variables" />
+    <Content Include="Content\semantic\src\themes\github\collections\menu.overrides" />
+    <Content Include="Content\semantic\src\themes\github\collections\menu.variables" />
+    <Content Include="Content\semantic\src\themes\github\collections\message.overrides" />
+    <Content Include="Content\semantic\src\themes\github\collections\message.variables" />
+    <Content Include="Content\semantic\src\themes\github\collections\table.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\icon.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\icon.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\image.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\input.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\input.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\label.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\label.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\segment.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\segment.variables" />
+    <Content Include="Content\semantic\src\themes\github\elements\step.overrides" />
+    <Content Include="Content\semantic\src\themes\github\elements\step.variables" />
+    <Content Include="Content\semantic\src\themes\github\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\github\modules\dropdown.overrides" />
+    <Content Include="Content\semantic\src\themes\github\modules\dropdown.variables" />
+    <Content Include="Content\semantic\src\themes\github\modules\popup.variables" />
+    <Content Include="Content\semantic\src\themes\gmail\collections\message.overrides" />
+    <Content Include="Content\semantic\src\themes\gmail\collections\message.variables" />
+    <Content Include="Content\semantic\src\themes\instagram\views\card.overrides" />
+    <Content Include="Content\semantic\src\themes\instagram\views\card.variables" />
+    <Content Include="Content\semantic\src\themes\material\assets\fonts\icons.eot" />
+    <Content Include="Content\semantic\src\themes\material\assets\fonts\icons.ttf" />
+    <Content Include="Content\semantic\src\themes\material\assets\fonts\icons.woff" />
+    <Content Include="Content\semantic\src\themes\material\assets\fonts\icons.woff2" />
+    <Content Include="Content\semantic\src\themes\material\collections\menu.overrides" />
+    <Content Include="Content\semantic\src\themes\material\collections\menu.variables" />
+    <Content Include="Content\semantic\src\themes\material\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\material\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\material\elements\header.overrides" />
+    <Content Include="Content\semantic\src\themes\material\elements\header.variables" />
+    <Content Include="Content\semantic\src\themes\material\elements\icon.overrides" />
+    <Content Include="Content\semantic\src\themes\material\elements\icon.variables" />
+    <Content Include="Content\semantic\src\themes\material\globals\site.overrides" />
+    <Content Include="Content\semantic\src\themes\material\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\material\modules\dropdown.overrides" />
+    <Content Include="Content\semantic\src\themes\material\modules\dropdown.variables" />
+    <Content Include="Content\semantic\src\themes\material\modules\modal.overrides" />
+    <Content Include="Content\semantic\src\themes\material\modules\modal.variables" />
+    <Content Include="Content\semantic\src\themes\pulsar\elements\loader.overrides" />
+    <Content Include="Content\semantic\src\themes\pulsar\elements\loader.variables" />
+    <Content Include="Content\semantic\src\themes\raised\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\raised\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\resetcss\globals\reset.overrides" />
+    <Content Include="Content\semantic\src\themes\resetcss\globals\reset.variables" />
+    <Content Include="Content\semantic\src\themes\round\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\round\elements\button.variables" />
+    <Content Include="Content\semantic\src\themes\rtl\globals\site.overrides" />
+    <Content Include="Content\semantic\src\themes\rtl\globals\site.variables" />
+    <Content Include="Content\semantic\src\themes\striped\modules\progress.overrides" />
+    <Content Include="Content\semantic\src\themes\striped\modules\progress.variables" />
+    <Content Include="Content\semantic\src\themes\timeline\views\feed.overrides" />
+    <Content Include="Content\semantic\src\themes\timeline\views\feed.variables" />
+    <Content Include="Content\semantic\src\themes\twitter\elements\button.overrides" />
+    <Content Include="Content\semantic\src\themes\twitter\elements\button.variables" />
+    <Content Include="Content\semantic\tasks\collections\README.md" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\bower.json" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\composer.json" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\package.json" />
+    <Content Include="Content\semantic\tasks\config\admin\templates\README.md" />
+    <Content Include="Content\semantic\tasks\README.md" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Transaction\List.cshtml" />
+    <Content Include="Views\Transaction\Details.cshtml" />
+    <Content Include="Views\Transaction\_SearchTransaction.cshtml" />
+    <Content Include="Views\Transaction\_Refund.cshtml" />
+    <Content Include="Views\FundGroup\List.cshtml" />
+    <Content Include="Views\Role\List.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\UserRole\Edit.cshtml" />
+    <Content Include="Views\UserFundGroup\Edit.cshtml" />
+    <Content Include="Views\FundGroup\Details.cshtml" />
+    <Content Include="Views\FundGroup\Edit.cshtml" />
+    <Content Include="Views\FundGroup\Create.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Shared\_BasicList.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Shared\_MainMenu.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Transaction\_Transfer.cshtml" />
+    <Content Include="Views\Transaction\_Activity.cshtml" />
+    <Content Include="Views\Transaction\_RefundList.cshtml" />
+    <Content Include="Views\Home\Unauthorised.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Transaction\_TransferList.cshtml" />
+    <Content Include="Views\Transaction\_PaymentsList.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\Address.cshtml" />
+    <Content Include="Views\AccountHolder\List.cshtml" />
+    <Content Include="Views\AccountHolder\_Search.cshtml" />
+    <Content Include="Views\AccountHolder\Details.cshtml" />
+    <Content Include="Views\Transaction\_EmailReceipt.cshtml" />
+    <Content Include="Views\Transaction\Receipt.cshtml" />
+    <Content Include="Views\Shared\_PrintLayout.cshtml" />
+    <Content Include="Views\Transaction\_PaymentsListPrint.cshtml" />
+    <Content Include="Views\Transfer\Index.cshtml" />
+    <Content Include="Views\Template\List.cshtml" />
+    <Content Include="Views\Template\Create.cshtml" />
+    <Content Include="Views\Template\Edit.cshtml" />
+    <Content Include="Views\Home\AccountDisabled.cshtml" />
+    <Content Include="Views\EReturn\List.cshtml" />
+    <Content Include="Views\EReturn\Create.cshtml" />
+    <Content Include="Views\EReturn\Edit.cshtml" />
+    <Content Include="Views\EReturn\_SearchEReturns.cshtml" />
+    <Content Include="Views\MethodOfPayment\Create.cshtml" />
+    <Content Include="Views\MethodOfPayment\Details.cshtml" />
+    <Content Include="Views\MethodOfPayment\Edit.cshtml" />
+    <Content Include="Views\MethodOfPayment\List.cshtml" />
+    <Content Include="Views\User\_SearchUser.cshtml" />
+    <Content Include="Views\Payment\Cheque.cshtml" />
+    <Content Include="Views\UserTemplate\Edit.cshtml" />
+    <Content Include="Views\Vat\Details.cshtml" />
+    <Content Include="Views\Vat\Edit.cshtml" />
+    <Content Include="Views\Vat\List.cshtml" />
+    <Content Include="Views\Vat\Create.cshtml" />
+    <Content Include="Views\Fund\_Search.cshtml" />
+    <Content Include="Views\Fund\Create.cshtml" />
+    <Content Include="Views\Fund\Details.cshtml" />
+    <Content Include="Views\Fund\Edit.cshtml" />
+    <Content Include="Views\Fund\List.cshtml" />
+    <Content Include="Views\Suspense\List.cshtml" />
+    <Content Include="Views\Suspense\_Search.cshtml" />
+    <Content Include="Views\Suspense\_Journal.cshtml" />
+    <Content Include="Views\Suspense\Details.cshtml" />
+    <Content Include="Views\Suspense\_AllocatedList.cshtml" />
+    <Content Include="Views\Suspense\_CreditNote.cshtml" />
+    <Content Include="Views\Transaction\_CreditNoteList.cshtml" />
+    <Content Include="Views\EReturn\Details.cshtml" />
+    <Content Include="Views\EReturn\_Approve.cshtml" />
+    <Content Include="Views\EReturn\Approve.cshtml" />
+    <Content Include="Views\EReturn\_Header.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Suspense\_Notes.cshtml" />
+    <Content Include="Views\SystemMessage\Create.cshtml" />
+    <Content Include="Views\SystemMessage\Edit.cshtml" />
+    <Content Include="Views\SystemMessage\List.cshtml" />
+    <Content Include="Views\Shared\_Message.cshtml" />
+    <Content Include="Views\Home\_SystemMessage.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\ImportProcessingRule\_Search.cshtml" />
+    <Content Include="Views\ImportProcessingRule\Create.cshtml" />
+    <Content Include="Views\ImportProcessingRule\Details.cshtml" />
+    <Content Include="Views\ImportProcessingRule\Edit.cshtml" />
+    <Content Include="Views\ImportProcessingRule\List.cshtml" />
+    <Content Include="Views\ImportProcessingRuleCondition\_List.cshtml" />
+    <Content Include="Views\ImportProcessingRuleAction\_List.cshtml" />
+    <Content Include="Views\ImportProcessingRuleCondition\_EditList.cshtml" />
+    <Content Include="Views\ImportProcessingRuleAction\_EditList.cshtml" />
+    <Content Include="Views\ImportProcessingRuleCondition\Create.cshtml" />
+    <Content Include="Views\ImportProcessingRuleCondition\Edit.cshtml" />
+    <Content Include="Views\ImportProcessingRuleAction\Edit.cshtml" />
+    <Content Include="Views\ImportProcessingRuleAction\Create.cshtml" />
+    <Content Include="Web.Development.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Live.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Base.config" />
+    <None Include="Web.Local.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.UITest.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{c12a7783-201a-41d3-88ad-e68c3ed135bd}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{f96878fb-5da3-4a0a-a2be-655c475647f1}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{1fbe03f4-8fbc-44ef-bd58-a8f6dcd8f64e}</Project>
+      <Name>Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Local|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Live|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UITest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53794</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53794/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="BeforeBuild">
+    <TransformXml Source="Web.Base.config" Transform="Web.$(Configuration).config" Destination="Web.config" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

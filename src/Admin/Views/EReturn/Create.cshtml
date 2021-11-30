@@ -1,0 +1,106 @@
+﻿@model Admin.Models.EReturn.CreateViewModel
+@{
+    ViewBag.Title = "Create eReturn";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create eReturn
+        <div class="sub header">
+            New eReturn settings
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "EReturn", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="eight wide field">
+            @Html.LabelFor(m => m.TemplateId)
+            @if (Model.Templates.Items.Count > 1)
+            {
+                <div class="ui search selection dropdown templates-dropdown">
+                    @Html.HiddenFor(x => x.TemplateId, new { size = 4 })
+                    <i class="dropdown icon"></i>
+                    <div class="default text no-overflow">Select template</div>
+                    <div class="menu">
+                        @foreach (var item in Model.Templates.Items)
+                        {
+                            var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                            <div class="item" data-value="@item.Value" @dataAttributes>
+                                @item.Text
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="@Html.NameFor(x => x.TemplateId)" id="@Html.IdFor(x => x.TemplateId)" value="@Model.Templates.Items.First().Value" />
+                <div>@Model.Templates.Items.First().Text</div>
+            }
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.TemplateId)
+            </div>
+        </div>
+
+        <div class="eight wide field">
+            @Html.LabelFor(m => m.TypeId)
+            <div class="ui search selection dropdown types-dropdown">
+                @Html.HiddenFor(x => x.TypeId, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select type</div>
+                <div class="menu">
+                    @foreach (var item in Model.Types.Items)
+                    {
+                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                        <div class="item" data-value="@item.Value" @dataAttributes>
+                            @item.Text
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.TypeId)
+            </div>
+        </div>
+
+
+        <div class="field">
+            <input type="submit" value="Save" class="ui primary button" />
+            @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "ui button" })
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".templates-dropdown").dropdown({
+                onChange: function (value, text, choice) {
+                    var allowCash = ($(choice).data("cash") === "True");
+                    var allowCheque = ($(choice).data("cheque") === "True");
+                    var allowPDQ = ($(choice).data("pdq") === "True");
+
+                    $(".types-dropdown .item").addClass("disabled");
+
+                    if (allowCash) $(".types-dropdown .item:contains('Cash')").removeClass("disabled");
+                    if (allowCheque) $(".types-dropdown .item:contains('Cheque')").removeClass("disabled");
+                    if (allowPDQ) $(".types-dropdown .item:contains('PDQ')").removeClass("disabled");
+
+                }
+            });
+
+            $(".types-dropdown").dropdown();
+
+        });
+    </script>
+}

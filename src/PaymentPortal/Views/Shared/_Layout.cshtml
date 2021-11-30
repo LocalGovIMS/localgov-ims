@@ -1,0 +1,60 @@
+﻿@{
+    HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+    HttpContext.Current.Response.Cache.SetValidUntilExpires(false);
+    HttpContext.Current.Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+    HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+    HttpContext.Current.Response.Cache.SetNoStore();
+}
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>@(ViewBag.Title ?? ViewBag.FormTitle) - @(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])</title>
+    @Styles.Render("~/Content/css")
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css" media="only screen">
+
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/GoogleAnalytics")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" language="javascript">
+        rootUrl = "@Context.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~")";
+    </script>
+</head>
+
+<body class="body--transactional" cz-shortcut-listen="true">
+    <header role="banner">
+        <div class="container container--screen ">
+            <div class="masthead container--float">
+                <div class="logo masthead__logo">
+                    <h1 class="logo__heading">
+                        <a class="logo__link">
+                            @(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])
+                        </a>
+                    </h1>
+                </div>
+                <p class="masthead__strapline">
+                    @(System.Configuration.ConfigurationManager.AppSettings["Layout.Strapline"])
+                </p>
+            </div>
+        </div>
+    </header>
+    <div class="">
+        <main class="container container--application container--application--primary">
+            <div class="container container--page">
+                <div class="container container--float">
+                    <div class="container--title">
+                        <h1>@ViewBag.FormTitle</h1>
+                    </div>
+                </div>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

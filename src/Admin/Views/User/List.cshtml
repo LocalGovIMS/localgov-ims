@@ -1,0 +1,68 @@
+﻿@model Admin.Models.User.ListViewModel
+@{
+    ViewBag.Title = "Users";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Users
+        @Html.ActionLink("Create user", "Create", new { }, new { @class = "ui blue button right floated" })
+
+        <div class="sub header">
+            User management
+        </div>
+    </h1>
+}
+
+@Html.Partial("_SearchUser", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    User name
+                </th>
+                <th>
+                    Display name
+                </th>
+                <th>
+                    Account status
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.DisplayName)
+                </td>
+                <td>
+                    @Html.Label(item.Disabled ? "Disabled" : "Active")
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.UserId }, new { @class = "ui button" })
+                    @if (@User.Identity.Name != @item.UserName || User.IsInRole(Role.SystemAdmin))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "ui button" })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+else
+{
+    <div class="ui info message">
+        There are no users in the system
+    </div>
+}
+

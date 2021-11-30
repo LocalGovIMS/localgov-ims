@@ -1,0 +1,39 @@
+﻿@model Admin.Models.ImportProcessingRuleCondition.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    var groupCount = 0;
+    foreach (var group in Model.Items.Select(x => x.Group).Distinct().OrderBy(x => x))
+    {
+        groupCount++;
+
+        if (groupCount > 1)
+        {
+            <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">OR</div>
+        }
+        <div class="ui tertiary inverted blue compact segment" style="padding:1em;">
+            @{ var conditionCount = 0; }
+            @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
+            {
+                conditionCount++;
+                if (conditionCount > 1)
+                {
+                    if (!string.IsNullOrEmpty(condition.LogicalOperator))
+                    {
+                        <span class="logical-operator" style="font-weight:bold; margin: 0 1em">@condition.LogicalOperator.ToUpper()</span>
+                    }
+                }
+                <span class="condition ui label blue">
+                    @condition.DisplaySummary()
+                </span>
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="ui info message">
+        There are no conditions specified
+    </div>
+}
+

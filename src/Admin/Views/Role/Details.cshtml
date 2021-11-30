@@ -1,0 +1,32 @@
+﻿@model Admin.Models.Role.DetailsViewModel
+@{
+    ViewBag.Title = "Role";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.DisplayName
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Role details
+        </div>
+    </h1>
+}
+
+@Html.HiddenFor(m => m.Id)
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.DisplayFor(m => m.DisplayName)
+    </div>
+
+    @Html.ActionLink("Back", "Back", "Role", null, new { @class = "ui button" })
+
+</div>

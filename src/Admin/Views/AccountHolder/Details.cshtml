@@ -1,0 +1,91 @@
+﻿@model Admin.Models.AccountHolder.DetailsViewModel
+@{
+    ViewBag.Title = "Account holder details";
+}
+
+@section Header {
+    <h1 class="ui vertical segment header">
+        @Model.AccountHolder.AccountReference
+        <div class="sub header">
+            Account holder details
+        </div>
+    </h1>
+}
+
+@Html.HiddenFor(m => m.AccountHolder.AccountReference)
+
+<div>
+    @if (TempData.ContainsKey("Message"))
+    {
+        var message = (Message) TempData["Message"];
+        <div class="ui @message.Type message" style="margin: -1rem 0 2rem">
+            <div class="header">
+                @message.Title
+            </div>
+            <p>@message.Text</p>
+        </div>
+    }
+</div>
+
+<div class="ui grid stackable">
+    <div class="eight wide column">
+        <div class="ui vertical segment">
+            <strong>Account Number</strong><br>@Model.AccountHolder.AccountReference
+        </div>
+        <div class="ui vertical segment">
+            <strong>Title</strong><br>@Model.AccountHolder.Title
+        </div>
+        <div class="ui vertical segment">
+            <strong>Forename</strong><br>@Model.AccountHolder.Forename
+        </div>
+        <div class="ui vertical segment">
+            <strong>Surname</strong><br>@Model.AccountHolder.Surname
+        </div>
+        <div class="ui vertical segment">
+            <strong>Address</strong><br>
+            @string.Format("{0} {1} {2} {3}",
+                Model.AccountHolder.AddressLine1,
+                Model.AccountHolder.AddressLine2,
+                Model.AccountHolder.AddressLine3,
+                Model.AccountHolder.AddressLine4)
+        </div>
+        <div class="ui vertical segment">
+            <strong>Post Code</strong><br>@Model.AccountHolder.Postcode
+        </div>
+        <div class="ui vertical segment">
+            <strong>Standard Stop Message</strong><br>@Model.AccountHolder.StopMessageReference
+        </div>
+    </div>
+    <div class="eight wide column">
+        <div class="ui vertical segment">
+            &nbsp;
+        </div>
+        <div class="ui vertical segment">
+            <strong>Account Type</strong><br>@Model.AccountHolder.Fund.FundName
+        </div>
+        <div class="ui vertical segment">
+            <strong>Period Debt</strong><br>@Html.ToCurrency(Model.AccountHolder.PeriodDebit)
+        </div>
+        <div class="ui vertical segment">
+            <strong>Current Balance</strong><br>@Html.ToCurrency(Model.AccountHolder.CurrentBalance)
+        </div>
+        <div class="ui vertical segment">
+            &nbsp;
+        </div>
+        <div class="ui vertical segment">
+            <strong>User Defined Information</strong><br>
+            @string.Format("{0} {1} {2}",
+                Model.AccountHolder.UserField1,
+                Model.AccountHolder.UserField2,
+                Model.AccountHolder.UserField3)
+        </div>
+        <div class="ui vertical segment">
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+@Html.ActionLink("Back", "Back", new { @class="button button--link" })
+<a href="@Url.Action("SelectAccountReference", "Payment", new { id = Model.AccountHolder.AccountReference })" class="ui icon green button">
+    <i class="ui check square icon" aria-hidden="true"></i> Select account
+</a>

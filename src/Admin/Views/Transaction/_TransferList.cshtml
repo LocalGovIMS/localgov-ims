@@ -1,0 +1,62 @@
+﻿@model Admin.Models.Transaction.DetailsViewModel
+
+@if (!Model.IsRefund)
+{
+    <h3>Journals</h3>
+
+    if ((Model.Transaction.Transfers == null || !Model.Transaction.Transfers.Any()))
+    {
+        <div class="ui message">
+            <div class="header">
+                No journals found
+            </div>
+            <p>
+                There are no journals found against this transaction.
+            </p>
+        </div>
+    }
+    else
+    {
+        <table class="ui celled table striped">
+            <thead>
+            <tr>
+                <th style="width: 20%;">Details</th>
+                <th style="width: 25%;">From</th>
+                <th style="width: 25%;">To</th>
+                <th style="width: 20%;">Narrative</th>
+                <th style="width: 10%;">Amount (£)</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @if (Model.Transaction.Transfers != null && Model.Transaction.FormattedTransfers.Any())
+            {
+                foreach (var transfer in Model.Transaction.FormattedTransfers)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(transfer.PspReference, "Details", new { id = transfer.PspReference })
+                            <br />
+                            @transfer.EntryDate
+                            <br />
+                            @(transfer.User != null ? transfer.User.DisplayName : transfer.UserCode.ToString())
+                        </td>
+                        <td>
+                            @(transfer.Debit.FundCode != null ? string.Format("{0} ({1})", transfer.Debit.Fund.FundName, transfer.Debit.FundCode) : "")
+                            <br />
+                            @transfer.Debit.AccountReference
+                        </td>
+                        <td>
+                            @(transfer.Credit.FundCode != null ? string.Format("{0} ({1})", transfer.Credit.Fund.FundName, transfer.Credit.FundCode) : "")
+                            <br />
+                            @transfer.Credit.AccountReference
+                        </td>
+                        <td>@transfer.Narrative</td>
+                        <td style="text-align: right">@Html.ToCurrency(transfer.Amount)</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    }
+}

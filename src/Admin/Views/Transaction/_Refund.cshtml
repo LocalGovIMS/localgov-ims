@@ -1,0 +1,93 @@
+﻿@model Admin.Models.Transaction.RefundViewModel
+
+@if (User.IsInRole(Role.TransactionRefund))
+{
+    <div id="refund-dialog" class="ui modal">
+
+        <div class="header">
+            Create refund
+        </div>
+
+        <div class="content ui basic segment">
+            @using (Html.BeginForm("Refund", "Transaction", new { }, FormMethod.Post, new { id = "refund-form" }))
+            {
+                <div class="ui info message">
+                    <div class="header">
+                        Remember
+                    </div>
+                    <p>You can only have one refund in progress per transaction, additional refunds to this transaction will be blocked until this one completes</p>
+                </div>
+
+                <table class="ui celled table striped">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Account</th>
+                            <th>Narrative</th>
+                            <th>Original amount (£)</th>
+                            <th>Remaining amount (£)</th>
+                            <th>Refund amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.RefundItems.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model.RefundItems[i].Transaction.Fund.FundName</td>
+                                <td>@Model.RefundItems[i].Transaction.AccountReference</td>
+                                <td>@Model.RefundItems[i].Transaction.Narrative</td>
+                                <td style="text-align: right">@Html.ToCurrency(Model.RefundItems[i].Transaction.Amount)</td>
+                                <td style="text-align: right">@Html.ToCurrency(Model.RefundItems[i].RemainingAmount)</td>
+                                <td style="text-align: center;">
+                                    @Html.HiddenFor(m => Model.RefundItems[i].Transaction.TransactionReference)
+                                    @if (Model.RefundItems[i].RemainingAmount > 0)
+                                    {
+
+                                        <div class="ui labeled input">
+                                            @if (User.IsInRole(Role.TransactionPartialRefund)) // todo: add role check for partial refund - make sure to check this in controller too.
+                                            {
+                                                <label for="amount" class="ui label">£</label>
+
+                                                @Html.TextBoxFor(x => x.RefundItems[i].RefundAmount, new { @class = "monetary-amount" })
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="@Html.NameFor(x => x.RefundItems[i].RefundAmount)" value="@Model.RefundItems[i].RemainingAmount" />
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span>Unavailable</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="ui form">
+                    <div class="field">
+                        <label>Reason for refund</label>
+                        @Html.TextAreaFor(x => x.RefundReason, new { rows = "3", cols = "60" })
+                        @Html.ValidationMessageFor(x => x.RefundReason)
+                    </div>
+                </div>
+
+                @Html.HiddenFor(x => x.Reference)
+
+                <div></div>
+            }
+        </div>
+
+        <div class="actions">
+            <div class="ui black deny button">
+                Cancel
+            </div>
+            <button type="submit" class="ui positive right labeled icon button" id="refund-submit">
+                Submit refund
+                <i class="checkmark icon"></i>
+            </button>
+        </div>
+    </div>
+}

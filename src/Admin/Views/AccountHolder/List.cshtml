@@ -1,0 +1,98 @@
+﻿@using PagedList.Mvc
+@using BusinessLogic.Extensions
+
+@model Admin.Models.AccountHolder.ListViewModel
+@{
+    ViewBag.Title = "Account holders";
+}
+
+@section Header { 
+    <h1 class="ui header">
+        Account holders
+        <div class="sub header">
+            Find an account holder
+            @if (!string.IsNullOrEmpty(Model.FundName))
+            {
+                <span>within fund '@Model.FundName'</span>
+            }
+        </div>
+    </h1>
+}
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+        <tr>
+            <th>Account reference</th>
+            <th>Account name</th>
+            <th>Address</th>
+            <th>Balance (£)</th>
+            <th style="width: 280px;"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.AccountReference</td>
+                <td>@item.FullNameAndTitle()</td>
+                <td>@item.Address()</td>                
+                <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0)
+                                                        {
+                                                            @Html.Raw("td--negative")
+                                                        }">
+                    @Html.ToCurrency(item.CurrentBalance)
+                </td>
+                <td style="text-align: center;">
+                    <a href="@Url.Action("Details", new { id = item.AccountReference })" class="ui icon blue button">
+                        <i class="ui info icon" aria-hidden="true"></i> Details
+                    </a>
+                    <a href="@Url.Action("SelectAccountReference", "Payment", new { id = item.AccountReference })" class="ui icon green button">
+                        <i class="ui check square icon" aria-hidden="true"></i> Select account
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="5">
+                <div class="ui pagination menu">
+                    @if (Model.Pages > 1)
+                    {
+                        @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                        {
+                            page = page,
+                            FundCode = Model.SearchCriteria.FundCode,
+                            AccountReference = Model.SearchCriteria.AccountReference,
+                            HouseNumberName = Model.SearchCriteria.HouseNumberName,
+                            PostCode = Model.SearchCriteria.PostCode,
+                            Street = Model.SearchCriteria.Street,
+                            Surname = Model.SearchCriteria.Surname,
+                        }))
+                    }
+                </div>                        
+
+            </th>
+        </tr>
+
+        </tfoot>
+
+    </table>
+   
+}
+else
+{
+    <div class="ui info message">        
+        <div class="header">
+            We couldn't find any matching account holders
+        </div>
+        <p>
+           Please try again with different search criteria
+        </p>
+    </div>
+}

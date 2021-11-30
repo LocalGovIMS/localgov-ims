@@ -1,0 +1,107 @@
+﻿@model Admin.Models.Fund.DetailsViewModel
+@{
+    ViewBag.Title = "Fund";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.DisplayName
+        @Html.ActionLink("Edit fund", "Edit", new { id = Model.FundCode }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Fund details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    @Html.HiddenFor(m => m.FundCode)
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.FundCode)
+        @Html.DisplayFor(m => m.FundCode)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.DisplayFor(m => m.DisplayName)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.AccessLevel)
+        @Html.DisplayFor(m => m.AccessLevel)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.ValidationReference)
+        @Html.DisplayFor(m => m.ValidationReference)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.VatCode)
+        @Html.DisplayFor(m => m.VatCode)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.MaximumAmount)
+        @Html.DisplayFor(m => m.MaximumAmount)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Narrative)
+        @Html.DisplayFor(m => m.Narrative)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.ExportToFund)
+        @Html.DisplayFor(m => m.ExportToFund)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.ExportToLedger)
+        @Html.DisplayFor(m => m.ExportToLedger)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.FundExportFormat)
+        @Html.DisplayFor(m => m.FundExportFormat)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.UseGLCode)
+        @Html.DisplayFor(m => m.UseGLCode)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.GLCode)
+        @Html.DisplayFor(m => m.GLCode)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.OverPayAccount)
+        @Html.DisplayFor(m => m.OverPayAccount)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.AccountExist)
+        @Html.DisplayFor(m => m.AccountExist)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.AquireAddress)
+        @Html.DisplayFor(m => m.AquireAddress)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.VatOverride)
+        @Html.DisplayFor(m => m.VatOverride)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.IsDisabled)
+        @Html.DisplayFor(m => m.Status)
+    </div>
+
+    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
+
+</div>

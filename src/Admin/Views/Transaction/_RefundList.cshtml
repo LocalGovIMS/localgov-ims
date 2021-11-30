@@ -1,0 +1,106 @@
+﻿@model Admin.Models.Transaction.DetailsViewModel
+
+@if (!Model.IsRefund)
+{
+    <h3>Refunds</h3>
+
+    if ((Model.Transaction.ProcessedRefunds == null || !Model.Transaction.ProcessedRefunds.Any())
+         && (Model.Transaction.PendingRefunds == null || !Model.Transaction.PendingRefunds.Any()))
+    {
+        <div class="ui message">
+            <div class="header">
+                No refunds found
+            </div>
+            <p>
+                There are no refunds found against this transaction.
+                @if (User.IsInRole(Role.TransactionRefund))
+                {
+                    <a href="#" class="refund">Start a refund</a>
+                }
+            </p>
+        </div>
+    }
+    else
+    {
+        <table class="ui celled table striped">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Time</th>
+                    <th style="width: 10%;">User</th>
+                    <th style="width: 20%;">Type</th>
+                    <th style="width: 20%;">Account</th>
+                    <th>Narrative</th>
+                    <th style="width: 15%;">Amount (£)</th>
+                    <th style="width: 10%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.Transaction.ProcessedRefunds != null && Model.Transaction.ProcessedRefunds.Any())
+                {
+                    foreach (var transaction in Model.Transaction.ProcessedRefunds)
+                    {
+                        <tr class="positive">
+                            <td>@transaction.TransactionDate</td>
+                            <td>@(transaction.User != null ? transaction.User.DisplayName : transaction.UserCode.ToString())</td>
+                            <td>@(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")</td>
+                            <td>@transaction.AccountReference</td>
+                            <td>@transaction.Narrative</td>
+                            <td style="text-align: right" class="@if (transaction.Amount < 0)
+                                                          {
+                                                              @Html.Raw("td--negative")
+                                                          }">
+                                @Html.ToCurrency(transaction.Amount)
+                            </td>
+                            <td style="text-align: center;"><i class="checkmark icon"></i> Complete</td>
+                        </tr>
+                    }
+                }
+
+                @if (Model.Transaction.FailedRefunds != null && Model.Transaction.FailedRefunds.Any())
+                {
+                    foreach (var transaction in Model.Transaction.FailedRefunds)
+                    {
+                        <tr class="error">
+                            <td>@transaction.EntryDate</td>
+                            <td>@(transaction.User != null ? transaction.User.DisplayName : transaction.UserCode.ToString())</td>
+                            <td>@(transaction.Fund != null ? transaction.Fund.FundName : "")</td>
+                            <td>@transaction.AccountReference</td>
+                            <td>@transaction.Narrative</td>
+                            <td style="text-align: right" class="@if (transaction.Amount < 0)
+                                                          {
+                                                              @Html.Raw("td--negative")
+                                                          }">
+                                @Html.ToCurrency(transaction.Amount)
+                            </td>
+                            <td style="text-align: center;"><i class="exclamation icon"></i> Failed</td>
+                        </tr>
+                    }
+                }
+
+                @if (Model.Transaction.PendingRefunds != null && Model.Transaction.PendingRefunds.Any())
+                {
+                    foreach (var transaction in Model.Transaction.PendingRefunds)
+                    {
+                        <tr class="warning">
+                            <td>@transaction.EntryDate</td>
+                            <td>@(transaction.User != null ? transaction.User.DisplayName : transaction.UserCode.ToString())</td>
+                            <td>@(transaction.Fund != null ? transaction.Fund.FundName : "")</td>
+                            <td>@transaction.AccountReference</td>
+                            <td>@transaction.Narrative</td>
+                            <td style="text-align: right" class="@if (transaction.Amount < 0)
+                                                          {
+                                                              @Html.Raw("td--negative")
+                                                          }">
+                                @Html.ToCurrency(transaction.Amount)
+                            </td>
+                            <td style="text-align: center;"><i class="hourglass half icon"></i> Pending</td>
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    }
+}

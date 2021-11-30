@@ -1,0 +1,129 @@
+﻿@model Admin.Models.Transaction.TransferViewModel
+
+@if (User.IsInRole(Role.TransactionJournal))
+{
+    <div id="transfer-dialog" class="ui modal">
+
+        <div class="header">
+            Create journal
+        </div>
+
+            <div class="ui info message" style="margin: 1rem;">
+                <p>There is <strong>£<span id="amount-available-to-transfer">0</span></strong> available to journal</p>
+            </div>
+
+            <div class="ui error message transfer-message" style="margin: 1rem; display:none;">
+                <div class="header transfer-message-header">Unable to add the journal</div>
+                <p class="header transfer-message-text"></p>
+            </div>
+
+            <div class="content ui">
+
+                <div class="ui form">
+                    <div class="fields">
+
+                        <div class="ui four wide field">
+                            <label>Fund</label>
+                            <div class="ui fluid search selection dropdown js-fund">
+                                @Html.Hidden("TransferItem_FundCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 200px;">Select type</div>
+                                <div class="menu">
+                                    <div class="item" data-value="">
+                                        None
+                                    </div>
+                                    @foreach (var item in Model.Funds.Items)
+                                    {
+                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+                                        <div class="item" data-value="@item.Value" @dataAttributes>
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="ui four wide field">
+                            <label>Reference</label>
+                            @Html.TextBoxFor(m => m.TransferItem.AccountReference, new { @placeholder = "Account reference", @maxlength = 16 })
+                            @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
+                        </div>
+
+                        <div class="ui four wide field">
+                            <label>VAT code</label>
+                            <div class="ui fluid search selection dropdown js-vat">
+                                @Html.Hidden("TransferItem_VatCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT</div>
+                                <div class="menu">
+                                    <div class="item" data-value="">
+                                        VAT code
+                                    </div>
+                                    @foreach (var item in Model.VatCodes.Items)
+                                    {
+                                        <div class="item" data-value="@item.Value">
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui four wide field">
+                            <label>Amount</label>
+                            <div class="ui labeled input">
+                                <label class="ui label" for="amount">£</label>
+                                @Html.TextBoxFor(m => m.TransferItem.Amount, null, new { @placeholder = "0.00", @class = "monetary-amount" })
+                                @Html.ValidationMessageFor(x => x.TransferItem.Amount)
+                            </div>
+                        </div>
+
+                        <div class="ui four wide field">
+                            <label>Narrative</label>
+                            <div class="ui input">                                
+                                @Html.TextBoxFor(m => m.TransferItem.Narrative)
+                                @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
+                            </div>
+                        </div>
+
+                        <div class="ui two wide field">
+                            <label>&nbsp;</label>
+                            <button class="ui right blue button add-transfer">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table id="transfer-table" class="ui celled table striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Fund</th>
+
+                            <th style="width: 10%;">Account</th>
+                            <th>Name</th>
+                            <th>Balance</th>
+                            <th style="width: 10%;">VAT</th>
+                            <th style="width: 15%;">Amount (£)</th>
+                            <th style="width: 10%;">Narrative</th>
+                            <th style="width: 8%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="transfer-table-body"></tbody>
+                </table>
+
+            </div>
+
+            <div class="actions">
+                <div class="ui black deny button cancel-transfer">
+                    Cancel
+                </div>
+
+                <button type="submit" class="ui positive right labeled icon button submit-transfer">
+                    Submit journal
+                    <i class="checkmark icon"></i>
+                </button>
+            </div>
+    </div>
+}

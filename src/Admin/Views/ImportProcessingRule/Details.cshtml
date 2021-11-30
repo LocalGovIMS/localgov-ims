@@ -1,0 +1,48 @@
+﻿@model Admin.Models.ImportProcessingRule.DetailsViewModel
+@{
+    ViewBag.Title = "Import processing rule";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        @Html.ActionLink("Edit import processing rule", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Import processing rule details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="ui vertical segment">
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Description)
+            @Html.DisplayFor(m => m.Description)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Status)
+            @Html.DisplayFor(m => m.Status)
+        </div>
+    </div>
+
+    <div class="ui vertical segment">
+        <h3>
+            Conditions
+        </h3>
+        @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleCondition", new { id = Model.Id })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3>
+            Actions
+        </h3>
+        @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
+    </div>
+    <br />
+    @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+
+</div>

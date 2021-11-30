@@ -1,0 +1,145 @@
+﻿@using PagedList.Mvc
+@using System.Linq
+@model Admin.Models.Suspense.ListViewModel
+@{
+    ViewBag.Title = "Suspense";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Suspense
+        <div class="sub header">
+            Unallocated suspense transactions
+        </div>
+    </h1>
+}
+
+<div class="page-actions page-actions--fix">
+    @if (User.IsInRole(Role.Finance))
+    {
+        <a class="ui button blue right floated journal" id="journal">
+            <i class="exchange outline icon"></i> Journal <span class="journal-button-value"></span>
+        </a>
+        <a class="ui button green right floated credit-notes" id="credit-notes">
+            <i class="add outline icon"></i> Credit notes <span class="credit-button-value"></span>
+        </a>
+    }
+    <a class="ui button right floated clear-selected" id="clear">
+        <i class="undo icon"></i> Reset
+    </a>
+</div>
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    @*TODO: Remove Inline styling.
+        I don't like this inline styling - need sortng with CSS really.
+        It's here to mimik the Transction Search, whose results are shown in a table, rather than a div, and the table provides a margin *@
+    <div class="ui form" style="margin-top:1em;">
+        <table class="ui celled table striped table-fixed">
+            <thead>
+                <tr>
+                    <th style="width: 5%"></th>
+                    <th style="width: 15%">Date</th>
+                    <th>Narrative</th>
+                    <th>Notes</th>
+                    <th>Account Number</th>
+                    <th style="width: 15%">Amount (£)</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead> 
+            <tbody>
+
+
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @if (User.IsInRole(Role.Finance) && item.AmountRemaining > 0)
+                            {
+                                <div class="inline field">
+                                    <div class="ui checkbox" data-id="@item.Item.Id" data-value="@item.AmountRemaining">
+                                        <input type="checkbox" tabindex="0" value="@item.Item.Id">
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                        <td>@item.Item.CreatedAt</td>
+                        <td>@item.Item.Narrative</td>
+                        <td><pre>@Html.ToMaxLength(item.Item.Notes, 50)</pre></td>
+                        <td>@item.Item.AccountNumber</td>
+                        <td style="text-align: right">
+                            @Html.ToCurrency(item.Item.Amount)
+                        </td>
+                        <td style="text-align: center;">
+                            <a class="ui icon tiny button" href="@Url.Action("Details", new {id = item.Item.Id})" title="Details">
+                                <i class="info icon"></i>
+                            </a>
+                            @if (User.IsInRole(Role.Finance))
+                            {
+                                <a class="ui icon tiny button note" href="#" data-id="@item.Item.Id" data-note="@item.Item.Notes" title="Notes">
+                                    <i class="pencil icon"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui pagination menu">
+                            @if (Model.Pages > 1)
+                            {
+                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                                {
+                                    page = page,
+                                    amount = Model.SearchCriteria.Amount,
+                                    transactionDateFrom = Model.SearchCriteria.TransactionDateFrom,
+                                    transactionDateTo = Model.SearchCriteria.TransactionDateTo,
+                                    accountNumber = Model.SearchCriteria.AccountNumber,
+                                    narrative = Model.SearchCriteria.Narrative,
+                                    includeAllocated = Model.SearchCriteria.IncludeAllocated
+                                }))
+                            }
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <div class="ui info message">
+        <div class="header">
+            We couldn't find any matching suspense items
+        </div>
+        <p>
+            Please try again with different search criteria
+        </p>
+    </div>
+}
+
+
+@if (User.IsInRole(Role.Finance))
+{
+    <div id="transfer-details">
+        @Html.Action("_Journal")
+    </div>
+
+    <div id="credit-details">
+        @Html.Action("_CreditNote")
+    </div>
+
+    <div id="notes">
+        @{ Html.RenderPartial("_Notes"); }
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/suspense")
+}

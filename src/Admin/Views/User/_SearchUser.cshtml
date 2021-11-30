@@ -1,0 +1,27 @@
+﻿@model Admin.Models.User.SearchCriteria
+
+@using (Html.BeginForm("Search", "User", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="three fields">
+                <div class="field">
+                    <label>User name</label>
+                    @Html.TextBoxFor(m => m.UserName, new { size = 50, placeholder = "Username" })
+                </div>
+                <div class="field">
+                    <label>Display name</label>
+                    @Html.TextBoxFor(m => m.DisplayName, new { size = 50, placeholder = "Display name" })
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

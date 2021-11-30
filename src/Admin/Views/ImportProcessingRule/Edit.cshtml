@@ -1,0 +1,66 @@
+﻿@model Admin.Models.ImportProcessingRule.EditViewModel
+@{
+    ViewBag.Title = "Edit import processing rule";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        @Html.ActionLink(Model.IsDisabled ? "Enable" : "Disable", "ChangeStatus", "ImportProcessingRule", new { id = Model.Id, isDisabled = !Model.IsDisabled }, new { @class = "ui button right floated " + (Model.IsDisabled ? "green" : "red") })
+        <div class="sub header">
+            Import processing rule details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "ImportProcessingRule", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.IsDisabled)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+
+        <div class="ui vertical segment">
+            <h3 style="padding-bottom:10px;">
+                Rules
+                @Html.ActionLink("Add a rule", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Id }, new { @class = "ui blue button right floated" })
+            </h3>
+            @Html.Action("_EditListForImportProcessingRule", "ImportProcessingRuleCondition", new { id = Model.Id })
+        </div>
+
+        <div class="ui vertical segment">
+            <h3 style="padding-bottom:10px;">
+                Actions
+                @Html.ActionLink("Add an action", "Create", "ImportProcessingRuleAction", new { importProcessingRuleId = Model.Id }, new { @class = "ui blue button right floated" })
+            </h3>
+            @Html.Action("_EditListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
+
+        </div>
+
+    </div>
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+
+}

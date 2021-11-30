@@ -1,0 +1,31 @@
+﻿@model Admin.Models.Shared.BasicListViewModel
+
+<table class="ui celled table striped">
+    <thead>
+        <tr>
+            <th>
+                @Model.ColumnTitle
+            </th>
+        </tr>
+    </thead>
+
+    @if (Model.Items != null && Model.Items.Any())
+    {
+        foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                No items to show
+            </td>
+        </tr>
+    }
+</table>

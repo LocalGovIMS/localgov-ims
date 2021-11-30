@@ -1,0 +1,38 @@
+﻿@model Admin.Models.Transaction.EmailReceiptViewModel
+
+<div id="email-receipt-dialog" class="ui modal">
+
+    <div class="header">
+        Email receipt
+    </div>
+
+    <div class="ui error message email-receipt-message" style="margin: 1rem; display:none;">
+        <div class="header email-receipt-message-header">Unable send the e-mail</div>
+        <p class="header email-receipt-message-text"></p>
+    </div>
+
+    <div class="content ui">
+
+        <div class="ui form">
+            <div class="fields">
+                <div class="ui five wide field">
+                    @Html.LabelFor(m => m.EmailAddress)
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @placeholder = "Email address", @maxlength = 250 })
+                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+        <div class="ui black deny button cancel-email">
+            Cancel
+        </div>
+        <button class="ui right blue button send-email">
+            Send
+        </button>
+    </div>
+
+</div>
+

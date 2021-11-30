@@ -1,0 +1,61 @@
+﻿@model IList<Admin.Models.Vat.DetailsViewModel>
+@{
+    ViewBag.Title = "VAT";
+}
+
+@section Header {
+    <h1 class="ui header">
+        VAT Codes
+        @Html.ActionLink("Create VAT code", "Create", new { }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            VAT codes within the system
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Code)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Percentage)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Status)
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Percentage)
+                </td>
+                <td>
+                    @Html.Label(item.IsDisabled ? "Disabled" : "Active")
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="panels">
+        There are no users in the system!
+    </div>
+}

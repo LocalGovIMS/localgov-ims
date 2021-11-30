@@ -1,0 +1,60 @@
+﻿@model Admin.Models.Payment.Cheques
+
+@{
+    ViewBag.Title = "Cheque";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Payment
+        <div class="sub header">
+            Add Cheque Details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Cheque", "Payment", FormMethod.Post))
+{
+    <div class="ui form">
+        <div class="ten wide column">
+            <h4 class="ui header">Cheque details</h4>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { maxlength = "100" })
+            </div>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.ChequeNumber)
+                @Html.TextBoxFor(m => m.ChequeNumber, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ChequeNumber)
+            </div>
+            <div class="two wide field">
+
+                @Html.LabelFor(m => m.SortCode)
+                @Html.TextBoxFor(m => m.SortCode, new { maxlength = "8" })
+
+
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.SortCode)
+            </div>
+            <div class="four wide field">
+
+                @Html.LabelFor(m => m.BankAccountNo)
+                @Html.TextBoxFor(m => m.BankAccountNo, new { maxlength = "50" })
+
+
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.BankAccountNo)
+            </div>
+            <div style="margin-top: 0.5rem;">
+                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "ui button" })
+                <button value="SaveAddress" name="action" type="submit" class="ui primary button">Next</button>
+            </div>
+        </div>
+    </div>
+}

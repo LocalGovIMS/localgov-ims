@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59C44EB9-EC12-4D61-828D-23E9D83873D0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLogic.UnitTests</RootNamespace>
+    <AssemblyName>BusinessLogic.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Payments.Admin Setup\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UITest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UITest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=6.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.6.2.0\lib\net47\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.8\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.8\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.16.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.16.1\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Cryptography\MD5CryptographyServiceTests.cs" />
+    <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
+    <Compile Include="Classes\Formatters\AccountReference\FormatTests.cs" />
+    <Compile Include="Classes\RefundStatusTests.cs" />
+    <Compile Include="Classes\RefundRequestTests.cs" />
+    <Compile Include="Classes\Smtp\NotificationEmailTests.cs" />
+    <Compile Include="Classes\Strategies\SuspenseJournalAllocationStrategyTests.cs" />
+    <Compile Include="Classes\Strategies\TransactionVatStrategyTests.cs" />
+    <Compile Include="Classes\Strategies\ApproveEReturnsStrategyTests.cs" />
+    <Compile Include="Enums\LogicalOperationTypeTests.cs" />
+    <Compile Include="Enums\FieldTypeTests.cs" />
+    <Compile Include="Extensions\AccountHolder\AddressTests.cs" />
+    <Compile Include="Extensions\AccountHolder\FullNameAndTitleTests.cs" />
+    <Compile Include="Extensions\Fund\IsAnEReturnDefaultFundTests.cs" />
+    <Compile Include="Extensions\Fund\IsASuspenseJournalFundTests.cs" />
+    <Compile Include="Extensions\Fund\IsACreditNoteEnabledFundTests.cs" />
+    <Compile Include="Extensions\ImportProcessingRuleCondition\DisplaySummaryTests.cs" />
+    <Compile Include="Extensions\ImportProcessingRuleAction\DisplaySummaryTests.cs" />
+    <Compile Include="Extensions\ImportProcessingRuleExtensionsTests.cs" />
+    <Compile Include="Extensions\List\IsNullOrEmptyTests.cs" />
+    <Compile Include="Extensions\Mop\GetMopMetaDataValueTests.cs" />
+    <Compile Include="Extensions\Mop\TextColourTests.cs" />
+    <Compile Include="Extensions\Mop\IsAJournalReallocationTests.cs" />
+    <Compile Include="Extensions\Mop\IsACardSelfServicePaymentTests.cs" />
+    <Compile Include="Extensions\Mop\IsACardAtpPaymentTests.cs" />
+    <Compile Include="Extensions\Mop\IsACardViaStaffPaymentTests.cs" />
+    <Compile Include="Extensions\Mop\IsAChequePaymentTests.cs" />
+    <Compile Include="Extensions\Mop\BackgroundColourTests.cs" />
+    <Compile Include="Extensions\Mop\IsARefundablePaymentTests.cs" />
+    <Compile Include="Extensions\Mop\IsATransferInTests.cs" />
+    <Compile Include="Extensions\Mop\IsATransferOutTests.cs" />
+    <Compile Include="Extensions\Mop\IsAJournalTests.cs" />
+    <Compile Include="Extensions\Mop\IsAnEReturnChequePaymentTests.cs" />
+    <Compile Include="Extensions\Mop\IsACashPaymentTests.cs" />
+    <Compile Include="Extensions\Vat\IsASuspenseJournalVatCodeTests.cs" />
+    <Compile Include="Helpers\PermissionTestHelper.cs" />
+    <Compile Include="Classes\Smtp\VatReceiptEmailTests.cs" />
+    <Compile Include="ImportProcessing\Operations\DecimalOperatorTests.cs" />
+    <Compile Include="ImportProcessing\Operations\TextOperatorTests.cs" />
+    <Compile Include="ImportProcessing\RuleEngine\ProcessTests.cs" />
+    <Compile Include="ImportProcessing\RuleEngine\TestData.cs" />
+    <Compile Include="Models\EReturnWrapperTests.cs" />
+    <Compile Include="Models\JournalTransactionTests.cs" />
+    <Compile Include="Models\Transaction\CreatedByTests.cs" />
+    <Compile Include="Models\Transaction\PayeeNameTests.cs" />
+    <Compile Include="Models\Transaction\PostCodeTests.cs" />
+    <Compile Include="Models\Transaction\AmountAvailableToTransferOrRefundTests.cs" />
+    <Compile Include="Models\Transaction\ReceiptIssuedTests.cs" />
+    <Compile Include="Models\Transaction\TownTests.cs" />
+    <Compile Include="Models\Transaction\StreetTests.cs" />
+    <Compile Include="Models\Transaction\PremiseNumberTests.cs" />
+    <Compile Include="Models\Transaction\MopNameTests.cs" />
+    <Compile Include="Models\Transaction\ConstructorTests.cs" />
+    <Compile Include="Models\Transaction\AuthorisatonCodeTests.cs" />
+    <Compile Include="Models\Transaction\LastUpdatedDateTests.cs" />
+    <Compile Include="Models\Transaction\EntryDateTests.cs" />
+    <Compile Include="Models\Transaction\TestBase.cs" />
+    <Compile Include="Models\Transaction\PspReferenceTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\UserStoreTests.cs" />
+    <Compile Include="Services\AccountHolder\BaseAccountHolderTest.cs" />
+    <Compile Include="Services\AccountHolder\CheckAccountReferenceNumberStringString.cs" />
+    <Compile Include="Services\AccountHolder\UpdateAccountHolderTests.cs" />
+    <Compile Include="Services\AccountHolder\SearchTests.cs" />
+    <Compile Include="Services\AccountHolder\GetByAccountReferenceStringTests.cs" />
+    <Compile Include="Services\AccountHolder\GetByAccountReferenceStringStringTests.cs" />
+    <Compile Include="Services\AccountHolder\CreateAccountHolderTests.cs" />
+    <Compile Include="Services\AccountHolder\GetAccountValidationTests.cs" />
+    <Compile Include="Services\EReturn\BaseTest.cs" />
+    <Compile Include="Services\EReturn\ApproveTests.cs" />
+    <Compile Include="Services\EReturn\SubmitTests.cs" />
+    <Compile Include="Services\EReturn\UpdateTests.cs" />
+    <Compile Include="Services\EReturn\CreateTests.cs" />
+    <Compile Include="Services\EReturn\SearchTests.cs" />
+    <Compile Include="Services\EReturn\GetEReturnTests.cs" />
+    <Compile Include="Services\FundGroup\BaseFundGroupTest.cs" />
+    <Compile Include="Services\FundGroup\RemoveTests.cs" />
+    <Compile Include="Services\FundGroup\CreateTests.cs" />
+    <Compile Include="Services\FundGroup\GetFundGroupTests.cs" />
+    <Compile Include="Services\FundGroup\GetAllFundGroupsTests.cs" />
+    <Compile Include="Services\FundGroup\UpdateTests.cs" />
+    <Compile Include="Services\Fund\BaseFundTest.cs" />
+    <Compile Include="Services\Fund\CreateTests.cs" />
+    <Compile Include="Services\Fund\GetByFundCodeTests.cs" />
+    <Compile Include="Services\Fund\GetAllFundsTests.cs" />
+    <Compile Include="Services\Fund\SearchTests.cs" />
+    <Compile Include="Services\Fund\UpdateTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\BaseImportProcessingRuleTest.cs" />
+    <Compile Include="Services\ImportProcessingRule\CreateTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\GetAllActiveTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\GetTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\SearchTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\UpdateTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleOperator\BaseImportProcessingRuleOperatorTest.cs" />
+    <Compile Include="Services\ImportProcessingRuleOperator\GetTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleField\BaseImportProcessingRuleFieldTest.cs" />
+    <Compile Include="Services\ImportProcessingRuleField\GetTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\BaseImportProcessingRuleConditionTest.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\CreateTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\DeleteTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\GetTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\SearchTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleCondition\UpdateTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\BaseImportProcessingRuleActionTest.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\CreateTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\GetTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\SearchTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\DeleteTests.cs" />
+    <Compile Include="Services\ImportProcessingRuleAction\UpdateTests.cs" />
+    <Compile Include="Services\MethodOfPayment\BaseTest.cs" />
+    <Compile Include="Services\EReturn\DeleteTests.cs" />
+    <Compile Include="Services\MethodOfPayment\GetAllMopsTests.cs" />
+    <Compile Include="Services\MethodOfPayment\GetMopTests.cs" />
+    <Compile Include="Services\MethodOfPayment\CreateTests.cs" />
+    <Compile Include="Services\MethodOfPayment\UpdateTests.cs" />
+    <Compile Include="Services\Notification\BaseNotificationTest.cs" />
+    <Compile Include="Services\Notification\ProcessNotificationTests.cs" />
+    <Compile Include="Services\Notification\SaveNotificationTests.cs" />
+    <Compile Include="Services\Payment\BasePaymentTest.cs" />
+    <Compile Include="Services\Payment\ProcessPaymentsTests.cs" />
+    <Compile Include="Services\Payment\ProcessPaymentTests.cs" />
+    <Compile Include="Services\Payment\CreateHppPaymentTests.cs" />
+    <Compile Include="Services\Payment\CreateHppPaymentsTests.cs" />
+    <Compile Include="Services\Refund\BaseRefundTest.cs" />
+    <Compile Include="Services\Refund\RefundTransactionsTests.cs" />
+    <Compile Include="Services\Role\BaseRoleTest.cs" />
+    <Compile Include="Services\Role\GetRoleTests.cs" />
+    <Compile Include="Services\Role\GetAllRolesTests.cs" />
+    <Compile Include="Services\Role\UpdateTests.cs" />
+    <Compile Include="Services\Template\BaseTest.cs" />
+    <Compile Include="Services\Template\CreateTests.cs" />
+    <Compile Include="Services\Template\GetAllTemplatesTests.cs" />
+    <Compile Include="Services\Template\GetTemplateTests.cs" />
+    <Compile Include="Services\Template\UpdateTests.cs" />
+    <Compile Include="Services\TransactionJournal\BaseTransactionJournalTest.cs" />
+    <Compile Include="Services\TransactionJournal\CreateJournalTests.cs" />
+    <Compile Include="Services\TransactionJournal\TransferTests.cs" />
+    <Compile Include="Services\TransactionJournal\UndoTransferTests.cs" />
+    <Compile Include="Services\TransactionTransfer\BaseTransactionTransferTest.cs" />
+    <Compile Include="Services\TransactionTransfer\TransferTests.cs" />
+    <Compile Include="Services\Transaction\AuthoriseTransactionByNotificationTests.cs" />
+    <Compile Include="Services\Transaction\AuthoriseRefundByNotificationTests.cs" />
+    <Compile Include="Services\Transaction\BaseTransactionTest.cs" />
+    <Compile Include="Services\Transaction\GetAmountForPendingTransactionByReferenceTests.cs" />
+    <Compile Include="Services\Transaction\GetTransactionByPspReferenceTests.cs" />
+    <Compile Include="Services\Transaction\AuthorisePendingTransactionByInternalReferenceTests.cs" />
+    <Compile Include="Services\Transaction\SavePendingTransactionTests.cs" />
+    <Compile Include="Services\Transaction\SavePendingTransactionsTests.cs" />
+    <Compile Include="Services\Transaction\SearchTransactionsTests.cs" />
+    <Compile Include="Services\Transaction\ReceiptIssuedTests.cs" />
+    <Compile Include="Services\Transaction\MarkRefundsAsProcessedTests.cs" />
+    <Compile Include="Services\Transaction\MarkNotificationAsProcessedTests.cs" />
+    <Compile Include="Services\Transaction\GetUnprocessedNotificationsTests.cs" />
+    <Compile Include="Services\Transaction\GetTransfersTests.cs" />
+    <Compile Include="Services\Transaction\GetProcessedRefundsTests.cs" />
+    <Compile Include="Services\Transaction\GetPendingRefundsTests.cs" />
+    <Compile Include="Services\Transaction\GetTransactionTests.cs" />
+    <Compile Include="Services\Transaction\GetTransactionsByInternalReferenceTests.cs" />
+    <Compile Include="Services\Transaction\SuspendPendingTransactionTests.cs" />
+    <Compile Include="Services\Transaction\FailPendingTransactionTests.cs" />
+    <Compile Include="Services\Transaction\SaveNotificationTests.cs" />
+    <Compile Include="Services\Transaction\GetTransactionByAppReferenceTests.cs" />
+    <Compile Include="Services\Transaction\GetPendingTransactionsByInternalReferenceTests.cs" />
+    <Compile Include="Services\Base\GetNextReferenceIdTests.cs" />
+    <Compile Include="Services\UserFundGroup\BaseUserFundGroupTest.cs" />
+    <Compile Include="Services\UserFundGroup\GetUserFundGroupsIntTests.cs" />
+    <Compile Include="Services\UserFundGroup\UpdateTests.cs" />
+    <Compile Include="Services\UserRole\BaseUserRoleTest.cs" />
+    <Compile Include="Services\UserRole\GetUserRolesStringTests.cs" />
+    <Compile Include="Services\UserRole\GetUserRolesIntTests.cs" />
+    <Compile Include="Services\UserRole\UpdateTests.cs" />
+    <Compile Include="Services\User\BaseUserTest.cs" />
+    <Compile Include="Services\User\DoesUserAccountNeedDisablingTests.cs" />
+    <Compile Include="Services\User\IsUserDisabledTests.cs" />
+    <Compile Include="Services\User\GetUserStringTests.cs" />
+    <Compile Include="Services\User\GetUserIntTests.cs" />
+    <Compile Include="Services\User\GetAllUsersTests.cs" />
+    <Compile Include="Services\User\CreateTests.cs" />
+    <Compile Include="Services\User\DisableUserTests.cs" />
+    <Compile Include="Services\User\RecordLoginTests.cs" />
+    <Compile Include="Services\User\UpdateTests.cs" />
+    <Compile Include="Services\Vat\BaseVatTest.cs" />
+    <Compile Include="Services\Vat\GetByFundCodeTests.cs" />
+    <Compile Include="Services\Vat\GetByVatCodeTests.cs" />
+    <Compile Include="Services\Vat\GetAllCodesTests.cs" />
+    <Compile Include="Validators\AccountReference\BaseAccountReferenceValidatorTest.cs" />
+    <Compile Include="Validators\AccountReference\ValidateReferenceTest.cs" />
+    <Compile Include="Validators\Basket\BaseBasket.cs" />
+    <Compile Include="Validators\Basket\Validate.cs" />
+    <Compile Include="Validators\RollbackTransactionJournal\RollbackTransactionJournalTests.cs" />
+    <Compile Include="Validators\TemplateReference\TemplateReferenceValidatorTests.cs" />
+    <Compile Include="Validators\TransactionJournal\TransactionJournalTests.cs" />
+    <Compile Include="Validators\TransactionTransfer\TransactionTransferTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{c12a7783-201a-41d3-88ad-e68c3ed135bd}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets')" />
+</Project>

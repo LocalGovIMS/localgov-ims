@@ -1,0 +1,49 @@
+﻿@model Admin.Models.ImportProcessingRuleAction.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        @{ var actionCount = 0;}
+        @foreach (var action in Model.Items)
+        {
+            actionCount++;
+            <tr>
+                <td style="width:5%;">
+                    <span>@(actionCount == 1 ? "SET" : "AND")</span>
+                </td>
+                <td>
+                    <div class="ui label teal">
+                        @action.DisplaySummary()
+                    </div>
+                </td>
+                <td style="width:35%;">
+                    @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleAction", new { id = action.Id }, new { @class = "ui button" })
+                    @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleAction", new { id = action.Id, importProcessingRuleId = action.ImportProcessingRuleId }, new { @class = "ui button delete-action" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no actions specified
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".delete-action").on("click",
+            function (e) {
+                if (window.confirm("Are you sure you want to delete this action?")) {
+
+                } else {
+                    e.preventDefault();
+                    e.stopPropogation();
+                    return false;
+                }
+            });
+
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿@model Admin.Models.UserFundGroup.EditViewModel
+@{
+    ViewBag.Title = "Edit user fund groups";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        User fund groups
+        <div class="sub header">
+            Fund group selection
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "UserFundGroup", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.UserId)
+
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Roles
+                </th>
+            </tr>
+        </thead>
+
+        @if (Model.FundGroups != null && Model.FundGroups.Any())
+        {
+            // This is view logic, but it kind of stinks a bit.
+            // TODO - There must be a better way to creae a checkbox list.
+            // I also don't like the fact we're using tables.
+            var fundGroups = Model.FundGroups.OrderBy(x => x.Text).ToList();
+            for (var i = 0; i < fundGroups.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => fundGroups[i].Id)
+                        @Html.HiddenFor(x => fundGroups[i].Text)
+                        @Html.CheckBoxFor(x => fundGroups[i].IsChecked)
+                        @Html.DisplayFor(x => fundGroups[i].Text)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No available fund groups!
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <input type="submit" value="Save" class="ui button" />
+    @Html.ActionLink("Back", "Back", "UserRole", null, new { @class = "ui button" })
+
+}

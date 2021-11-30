@@ -1,0 +1,67 @@
+﻿@model Admin.Models.MethodOfPayment.EditViewModel
+@{
+    ViewBag.Title = "Edit MOP";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        <div class="sub header">
+            Method of Payment details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "MethodOfPayment", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Code)
+            @Html.EditorFor(m => m.Code)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Code)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MaximumAmount)
+            @Html.EditorFor(m => m.MaximumAmount)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.MaximumAmount)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MinimumAmount)
+            @Html.EditorFor(m => m.MinimumAmount)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.MinimumAmount)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.IsDisabled)
+            @Html.EditorFor(m => m.IsDisabled)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.IsDisabled)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
+
+    </div>
+}

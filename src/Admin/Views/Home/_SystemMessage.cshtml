@@ -1,0 +1,17 @@
+﻿@model IList<Admin.Models.SystemMessage.DetailsViewModel>
+
+<div style="margin: 1rem 1rem;">
+
+@foreach (var systemMessage in Model)
+{    
+    <div class="ui icon large @systemMessage.Severity.ToLower() message">
+        <i class="info icon"></i>
+        <div class="content">
+            <div class="header">
+                System @systemMessage.Severity message
+            </div>
+            <p>@systemMessage.Message</p>
+        </div>
+    </div>    
+}
+</div>

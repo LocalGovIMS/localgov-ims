@@ -1,0 +1,73 @@
+﻿@model Admin.Models.ImportProcessingRuleAction.EditViewModel
+@{
+    ViewBag.Title = "Create import processing rule action";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create import processing rule action
+        <div class="sub header">
+            Import processing rule action details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "ImportProcessingRuleAction", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ImportProcessingRuleId)
+
+    <div class="ui form">
+        <div class="fields">
+
+            <div class="inline field">
+                <label>Set</label>
+                <div class="ui search selection dropdown fields-dropdown">
+                    @Html.HiddenFor(x => x.ImportProcessingRuleFieldId, new { size = 4 })
+                    <i class="dropdown icon"></i>
+                    <div class="default text no-overflow">Select field</div>
+                    <div class="menu">
+                        @foreach (var item in Model.Fields.Items)
+                        {
+                            var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                            <div class="item" data-value="@item.Value" @dataAttributes>
+                                @item.Text
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ImportProcessingRuleFieldId)
+                </div>
+            </div>
+
+            <div class="inline field">
+                <label>to</label>
+                @Html.EditorFor(m => m.Value)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Value)
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.fields-dropdown').dropdown();
+
+        });
+    </script>
+
+}

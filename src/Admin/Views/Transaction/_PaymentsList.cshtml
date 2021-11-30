@@ -1,0 +1,49 @@
+﻿@model Admin.Models.Transaction.DetailsViewModel
+
+<h3>Payments</h3>
+
+<table class="ui celled table striped ui-payments-table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Type</th>
+            <th style="width: 20%;">Account</th>
+            <th>Narrative</th>
+            <th style="width: 10%;">VAT (£)</th>
+            <th style="width: 1%; white-space:nowrap;">Amount (£)</th>
+            <th ></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var transactionLine in Model.Transaction.TransactionLines)
+        {
+            <tr>
+                <td>@(transactionLine.Fund != null ? string.Format("{0} ({1})", transactionLine.Fund.FundName, transactionLine.Fund.FundCode) : "")</td>
+                <td>@transactionLine.AccountReference</td>
+                <td>@transactionLine.Narrative @transactionLine.AppReference</td>
+                <td style="text-align: right">@Html.ToCurrency(transactionLine.VatAmount) (@transactionLine.VatCode)</td>
+                <td style="text-align: right" class="@if (transactionLine.Amount < 0)
+                                                 {
+                                                     @Html.Raw("td--negative")
+                                                 }">
+                    @Html.ToCurrency(transactionLine.Amount)
+                </td>
+                <td style="width: 1%; white-space:nowrap;">
+                    @if (User.IsInRole(Role.TransactionJournal)
+                        && Model.IsRefund == false
+                        && Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference) > 0)
+                    {
+                        <a href="#" class="ui button right floated transfer"
+                           data-id="@transactionLine.TransactionReference"
+                           data-amount="@transactionLine.Amount"
+                           data-amount-available-to-transfer="@Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference)">
+                            <i class="exchange icon"></i> Journal
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>

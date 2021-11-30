@@ -1,0 +1,68 @@
+﻿@model IList<Admin.Models.SystemMessage.DetailsViewModel>
+@{
+    ViewBag.Title = "System messages";    
+}
+
+@section Header {
+    <h1 class="ui header">
+        System messages
+        @Html.ActionLink("Create message", "Create", new { }, new { @class = "ui blue button right floated" })
+
+        <div class="sub header">
+            System messages and alerts
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().StartDate)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().EndDate)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Severity)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Message)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.SeverityDisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Message)
+                </td>
+                <td>      
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+else
+{
+    <div class="ui info message">
+        There are no messages in the system
+    </div>
+}
+

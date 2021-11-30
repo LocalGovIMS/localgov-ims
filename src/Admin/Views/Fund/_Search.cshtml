@@ -1,0 +1,27 @@
+﻿@model Admin.Models.Fund.SearchCriteria
+
+@using (Html.BeginForm("Search", "Fund", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label>Code</label>
+                    @Html.TextBoxFor(m => m.FundCode, new { size = 50, placeholder = "Fund code" })
+                </div>
+                <div class="field">
+                    <label>Name</label>
+                    @Html.TextBoxFor(m => m.FundName, new { size = 50, placeholder = "Fund name" })
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

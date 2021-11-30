@@ -1,0 +1,47 @@
+﻿<div class="menu">
+    <div class="ui left fixed inverted vertical menu">
+        <div class="item" style="min-height: 1px;">
+            <img src="@Url.Content(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo"])" style="min-height: 1px; height: 34px; width: 125px;">
+            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #ccc; text-align: center;">
+                Income Management
+            </div>
+        </div>
+        @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Dashboard))
+        {
+            <a id="menu__home" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")" href="@Url.Action("Index", "Home")"><i class="home icon"></i> Dashboard</a>
+        }
+        @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.TransactionList))
+        {
+            <a id="menu__transactions" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Transaction" ? "active" : "")" href="@Url.Action("List", "Transaction")"><i class="list layout icon"></i> Transactions</a>
+        }
+        @if (User.IsInRole(Role.Transfer))
+        {
+            <a id="menu__transfer" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Transfer" ? "active" : "")" href="@Url.Action("Index", "Transfer")"><i class="exchange icon"></i> Transfer</a>
+        }
+        @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Payments) || User.IsInRole(Role.ChequeProcess) || User.IsInRole(Role.PostPayment))
+        {
+            <a id="menu__payment" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Payment" ? "active" : "")" href="@Url.Action("Index", "Payment")"><i class="shop icon"></i> Payment</a>
+        }
+        @if (User.IsInRole(Role.EReturns) || User.IsInRole(Role.EReturnAuthoriser))
+        {
+            <a id="menu__ereturns" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "EReturn" ? "active" : "")" href="@Url.Action("List", "EReturn")"><i class="money icon"></i> eReturns</a>
+        }
+        @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.Reporting))
+        {
+            <a id="menu__suspense" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Suspense" ? "active" : "")" href="@Url.Action("List", "Suspense")"><i class="flag icon"></i> Suspense</a>
+        }
+        @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ServiceDesk))
+        {
+            <a id="menu__users" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" href="@Url.Action("List", "User")"><i class="users icon"></i> Users</a>
+        }
+        @if (User.IsInRole(Role.SystemAdmin))
+        {
+            <a id="menu__settings" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Settings" ? "active" : "")" href="@Url.Action("Index", "Settings")"><i class="settings icon"></i> Settings</a>
+        }
+        <a id="menu__help" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")"><i class="help icon"></i> Help</a>
+    </div>
+    <div class="version">
+        Build date<br/>
+        <span>@File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</span>
+    </div>
+</div>

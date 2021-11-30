@@ -1,0 +1,66 @@
+﻿@model Admin.Models.ImportProcessingRuleCondition.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    var groupCount = 0;
+    foreach (var group in Model.Items.Select(x => x.Group).Distinct().OrderBy(x => x))
+    {
+        groupCount++;
+        if (groupCount > 1)
+        {
+            <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">OR</div>
+        }
+        <table class="ui celled table blue">
+            @{ var conditionCount = 0; }
+            @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
+            {
+                conditionCount++;
+
+                <tr>
+                    <td style="width:5%;">
+                        @if (conditionCount > 1)
+                        {
+                            <span>@(string.IsNullOrEmpty(condition.LogicalOperator) ? string.Empty : condition.LogicalOperator.ToUpper())</span>
+                        }
+                        else
+                        {
+                            <span>WHERE</span>
+                        }
+                        </td>
+                        <td><span class="condition ui label blue">@condition.DisplaySummary()</span></td>
+                        <td style="width:35%;">
+                            @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleCondition", new { id = condition.Id }, new { @class = "ui button" })
+                            @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleCondition", new { id = condition.Id, importProcessingRuleId = condition.ImportProcessingRuleId }, new { @class = "ui button delete-condition" })
+                            @if (conditionCount == Model.Items.Where(x => x.Group == group).Count())
+                            {
+                                @Html.ActionLink("Add another condition", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Items.First().ImportProcessingRuleId, group = group }, new { @class = "ui button" })
+                            }
+                        </td>
+                    </tr>
+                }
+        </table>
+    }
+}
+else
+{
+    <div class="ui info message">
+        There are no conditions specified
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".delete-condition").on("click",
+            function (e) {
+                if (window.confirm("Are you sure you want to delete this condition?")) {
+
+                } else {
+                    e.preventDefault();
+                    e.stopPropogation();
+                    return false;
+                }
+            });
+
+    });
+</script>

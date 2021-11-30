@@ -1,0 +1,236 @@
+﻿@model Admin.Models.Payment.IndexViewModel
+@{
+    ViewBag.Title = "Payment";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Payment
+        <div class="sub header">
+            Create a payment
+        </div>
+    </h1>
+}
+
+<div>
+    @if (Model.Message != null)
+    {
+        <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
+            <div class="header">
+                @Model.Message.Title
+            </div>
+            <p>@Model.Message.Text</p>
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm("Create", "Payment", FormMethod.Post))
+{
+    <div class="ui grid">
+        <div class="ten wide column">
+            <div class="ui form">
+                <h4 class="ui header">Payment details</h4>
+                <div class="eight wide field">
+                    @Html.LabelFor(m => m.FundCode)
+                    <div class="ui search selection dropdown funds-dropdown">
+                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                        <i class="dropdown icon"></i>
+                        <div class="default text no-overflow">Select type</div>
+                        <div class="menu">
+                            @foreach (var item in Model.Funds.Items)
+                            {
+                                var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                                <div class="item" data-value="@item.Value" @dataAttributes>
+                                    @item.Text
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundCode)
+                </div>
+
+                @if (User.IsInRole(Role.PostPayment))
+                {
+                    if (Model.MopCodes.Items != null && Model.MopCodes.Items.Count > 1)
+                    {
+                        <div class="eight wide field">
+                            @Html.LabelFor(m => m.MopCode)
+                            <div class="ui search selection dropdown mop-dropdown">
+                                @Html.HiddenFor(x => x.MopCode, new { size = 4 })
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow">Select type</div>
+                                <div class="menu">
+                                    @foreach (var item in Model.MopCodes.Items)
+                                    {
+                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                                        <div class="item" data-value="@item.Value" @dataAttributes>
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__element--error">
+                            @Html.ValidationMessageFor(m => m.MopCode)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="eight wide field">
+                            @Html.LabelFor(m => m.MopCode)
+                            <div class="ui input ">
+                                @Html.Label(Model.MopCodes.Items.FirstOrDefault().Text)
+                                @{
+                                    var dataAttributes = Model.MopCodes.Items.FirstOrDefault().DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+                                }
+                                <input type="hidden" id="MopCode" name="MopCode" value="@Model.MopCodes.Items.FirstOrDefault().Value" @dataAttributes />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
+                    //this is just for good measure, as it should always be populated...
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.MopCode)
+                    </div>
+                }
+
+
+
+                    <div class="seven wide field">
+                        @Html.LabelFor(m => m.AccountReference)
+                        <div class="ui input account-reference-wrapper">
+                            @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Account reference", @maxlength = 30 })
+                            @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "ui blue right button account-reference-search", @style = "display:none;" })
+                        </div>
+                        <div id="AccountName"></div>
+                        <div id="AccountBalance"></div>
+                    </div>
+                <div class="form__element--error">
+                    <div class="account-reference-validator">
+
+                    </div>
+                    @Html.ValidationMessageFor(m => m.AccountReference)
+                </div>
+                <div class="eight wide field vat-option">
+                    @Html.LabelFor(m => m.VatCode)
+                    <div class="ui search selection dropdown vat-dropdown">
+                        @Html.HiddenFor(x => x.VatCode, new { size = 4 })
+                        <i class="dropdown icon"></i>
+                        <div class="default text no-overflow">Select code</div>
+                        <div class="menu">
+                            @foreach (var item in Model.VatCodes.Items)
+                            {
+                                <div class="item" data-value="@item.Value">
+                                    @item.Text
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.VatCode)
+                    </div>
+                </div>
+                <div class="seven wide field">
+                    @Html.LabelFor(m => m.Narrative, new { @class = "optional" })
+                    <div class="ui input">
+                        @Html.TextAreaFor(m => m.Narrative, new { @placeholder = "", @rows = "3", @cols = "60", @maxlength = 100 })
+                    </div>
+                </div>
+                <div class="three wide field">
+                    @Html.LabelFor(m => m.Amount)
+                    <div class="ui labeled input">
+                        <div class="ui label">
+                            £
+                        </div>
+                        @Html.TextBoxFor(m => m.Amount, new { @placeholder = "0.00", @class = "monetary-amount" })
+                    </div>
+                </div>
+                <div class="form__element--error">
+                    <div class="amount-validator">
+
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Amount)
+                </div>
+
+                <div class="six wide field">
+                    <button value="Card" name="action" type="submit" class="ui green button add-to-basket">Add to basket</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="six wide column">
+            <h4 class="ui header">Basket</h4>
+
+            @if (Model.Basket.Count <= 0)
+            {
+                <div class="message message--info">Your basket is empty</div>
+            }
+            else
+            {
+                for (int i = Model.Basket.Count - 1; i >= 0; i--) // show items in reverse order
+                {
+                    <div class="basket__item">
+                        <div class="basket__action">@Html.ActionLink("Delete", "RemoveItem", new { accountReference = Model.Basket.Items[@i].AccountReference }, new { @class = "ui red button" })</div>
+                        <div class="basket__amount">
+                            @Model.Basket.Items[@i].Amount.ToString("c")
+                        </div>
+                        <div class="basket__fund">@Model.Basket.Items[@i].FundName</div>
+                        @if (User.IsInRole(Role.PostPayment))
+                        {
+                            <div class="basket__mop" data-mop="@Model.Basket.Items[@i].MopCode">@Model.Basket.Items[@i].MopName</div>
+                        }
+                        <div class="basket__account">@Model.Basket.Items[@i].AccountReference</div>
+                        <div class="basket__narrative">@Model.Basket.Items[@i].Narrative</div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="page-actions page-actions--fix">
+        @if (Model.Basket.Count > 0)
+        {
+            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Payments))
+            {
+                @Html.ActionLink(string.Format("Pay {0}", Model.Basket.TotalAmount.ToString("c")), "Pay", null, new { @class = "ui primary button" })
+            }
+            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ChequeProcess))
+            {
+                @Html.ActionLink(string.Format("Cheque {0}", Model.Basket.TotalAmount.ToString("c")), "Cheque", null, new { @class = "ui primary button" })
+            }
+            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.PostPayment))
+            {
+                @Html.ActionLink(string.Format("Post {0}", Model.Basket.TotalAmount.ToString("c")), "PostPayment", null, new { @class = "post-payment ui primary button" })
+            }
+            @Html.ActionLink("Empty basket", "EmptyBasket", null, new { @class = "ui red button" })
+        }
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/payment")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            paymentsAdmin.pages.payment.index.searchAction = '@Url.Action("AccountHolderSearch")';
+            paymentsAdmin.pages.payment.index.searchEnabledFundCodes = JSON.parse('@Html.Raw(Model.SearchEnabledFundCodes)');
+
+            showHideSearchButton($('#FundCode').val());
+            showHideVatOptions();
+
+        });
+    </script>
+
+}

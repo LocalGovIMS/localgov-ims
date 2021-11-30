@@ -1,0 +1,89 @@
+﻿@model Admin.Models.User.EditViewModel
+@{
+    ViewBag.Title = "Edit user";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.UserName
+        <div class="sub header">
+            User details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post))
+{
+    <div class="ui form">
+        @Html.HiddenFor(m => m.UserId)
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.UserName)
+            @Html.EditorFor(m => m.UserName)
+        </div>
+
+        <div class="six wide field">
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.DisplayName)
+            @Html.EditorFor(m => m.DisplayName)
+        </div>
+
+        <div class="four wide field">
+            @Html.ValidationMessageFor(m => m.DisplayName)
+        </div>
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.OfficeCode)
+            <div class="ui search selection dropdown mop-dropdown">
+                @Html.HiddenFor(x => x.OfficeCode)
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select type</div>
+                <div class="menu">
+                    @foreach (var item in Model.Offices.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="eight wide field">
+            @Html.ValidationMessageFor(m => m.OfficeCode)
+        </div>
+
+        <div class="eight wide field">
+            @Html.LabelFor(m => m.LastLogin)
+            @Html.DisplayFor(m => m.LastLogin)
+        </div>
+
+        <div class="two wide field">
+            @Html.LabelFor(m => m.ExpiryDays)
+            @Html.EditorFor(m => m.ExpiryDays)
+        </div>
+
+        <div class="form__element--error">
+            @Html.ValidationMessageFor(m => m.ExpiryDays)
+        </div>
+
+        <div class="eight wide field">
+            @Html.LabelFor(m => m.Disabled)
+            @Html.EditorFor(m => m.Disabled)
+        </div>
+
+        <div class="form__element--error">
+            @Html.ValidationMessageFor(m => m.Disabled)
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
+
+    </div>
+}
+
+<script type="text/javascript">
+    $(".ui.dropdown").dropdown();
+</script>

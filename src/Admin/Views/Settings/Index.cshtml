@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Settings";
+}
+
+@section Header {
+    <div class="ui header">
+        <h1>Settings</h1>
+        <div class="sub header">
+            Settings maintenance
+        </div>
+    </div>
+    
+}
+
+<div class="ui grid stackable">
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "MethodOfPayment")">
+                <div class="content">
+                    <div class="header">MOP Codes</div>
+                    <div class="description">
+                        <p>Manage MOP codes</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "FundGroup")">
+                <div class="content">
+                    <div class="header">Fund Groups</div>
+                    <div class="description">
+                        <p>Manage fund groups</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "Role")">
+                <div class="content">
+                    <div class="header">Roles</div>
+                    <div class="description">
+                        <p>Manage system roles</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "Template")">
+                <div class="content">
+                    <div class="header">Templates</div>
+                    <div class="description">
+                        <p>Manage eReturn templates</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "Vat")">
+                <div class="content">
+                    <div class="header">Vat Codes</div>
+                    <div class="description">
+                        <p>Manage VAT codes</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "Fund")">
+                <div class="content">
+                    <div class="header">Fund Codes</div>
+                    <div class="description">
+                        <p>Manage fund codes</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "SystemMessage")">
+                <div class="content">
+                    <div class="header">System Messages</div>
+                    <div class="description">
+                        <p>Manage system messages</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "ImportProcessingRule")">
+                <div class="content">
+                    <div class="header">Import Processing Rules</div>
+                    <div class="description">
+                        <p>Manage import processing rules</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+<h2 class="ui dividing header">
+    Maintainance tasks
+    <div class="sub header">
+        Execute system maintainance tasks manually
+    </div>
+</h2>
+
+<div class="ui grid stackable">
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">Unprocessed notifications</div>
+                    <div class="description">
+                        <p>Run the process notifications script against any notifications that have been received but failed to process</p>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui one buttons">
+                        <a href="@Url.Action("ProcessNotifications")" class="ui basic green button">Process notifications</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

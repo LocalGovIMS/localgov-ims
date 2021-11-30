@@ -1,0 +1,71 @@
+﻿@model Admin.Models.SystemMessage.EditViewModel
+@{
+    ViewBag.Title = "Create system message";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create system message
+        <div class="sub header">
+            System message details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "SystemMessage", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.Message)
+            @Html.TextAreaFor(m => m.Message)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Message)
+            </div>
+        </div>
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.Severity)
+            <div class="ui search selection dropdown funds-dropdown">
+                @Html.HiddenFor(x => x.Severity, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select type</div>
+                <div class="menu">
+                    @foreach (var item in Model.SeverityList.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Severity)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.StartDate)
+            @Html.TextBoxFor(m => m.StartDate)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.StartDate)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.EndDate)
+            @Html.TextBoxFor(m => m.EndDate)
+
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.EndDate)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "SystemMessage", null, new { @class = "ui button" })
+    </div>
+}
+
+<script>
+    $('.ui.dropdown').dropdown();
+</script>

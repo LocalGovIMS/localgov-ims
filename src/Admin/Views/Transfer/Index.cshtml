@@ -1,0 +1,233 @@
+﻿@using Microsoft.Ajax.Utilities
+@model Admin.Models.Transfer.TransferViewModel
+@{
+    ViewBag.Title = "Transfer";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Transfer
+        <div class="sub header">
+            Move money between funds and accounts
+        </div>
+    </h1>
+}
+
+
+
+<div class="content ui" style="margin-top: 3rem;">
+
+
+    <div class="ui form">
+        
+        <div class="ui error message source-message" style="margin: 1rem 0; display:none;">
+            <div class="header source-message-header">Unable to add the journal</div>
+            <p class="header source-message-text"></p>
+        </div>
+
+        <div class="ui raised segment">
+            <h4 class="ui header minimal">Source Transactions</h4>
+            <table id="source-table" class="ui celled table striped">
+                <thead>
+                <tr>
+                    <th style="width: 8%;">Fund</th>
+                    <th>Account</th>
+                    <th>Name</th>
+                    <th>Outstanding balance (£)</th>
+                    <th style="width: 7%">VAT code</th>
+                    <th style="width: 25%;">Amount (£)</th>
+                    <th style="width: 1%;"></th>
+                </tr>
+                </thead>
+                <tbody id="source-table-body"></tbody>
+                <tfoot>
+                <tr>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui fluid search selection dropdown sourceItem">
+                                @Html.Hidden("SourceItem_FundCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 160px;">Select type</div>
+                                <div class="menu">                                    
+                                    @foreach (var item in Model.Funds.Items)
+                                    {
+                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+                                        <div class="item" data-value="@item.Value" @dataAttributes>
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+
+                    <th colspan="3">
+                        <div class="ui fluid field">
+                            <div class="ui input">
+                                @Html.TextBoxFor(m => m.SourceItem.AccountReference, new {@placeholder = "Account reference", @maxlength = 32})
+                                @Html.ValidationMessageFor(x => x.SourceItem.AccountReference)
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui fluid search selection dropdown sourceVat">
+                                @Html.Hidden("SourceItem_VatCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 100px;">Select type</div>
+                                <div class="menu">
+                                    @foreach (var item in Model.VatCodes.Items)
+                                    {
+                                        <div class="item" data-value="@item.Value">
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui labeled input">
+                                <label class="ui label" for="amount">£</label>
+                                @Html.TextBoxFor(m => m.SourceItem.Amount, null, new {@placeholder = "0.00", @class = "monetary-amount"})
+                                @Html.ValidationMessageFor(x => x.SourceItem.Amount)
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <button class="ui right blue button add-source">
+                                Add
+                            </button>
+                        </div>
+                    </th>
+                </tr>
+
+                </tfoot>
+            </table>
+        </div>
+
+        <div style="text-align: center; font-size: 3rem; color: #2185d0">
+            <i class="large long arrow down icon"></i>
+        </div>
+
+        <div class="ui info message remaining-balance hidden">
+            <div class="header">
+                Remaining balance
+            </div>
+            <p>
+                You still have <strong id="amount-available-to-transfer">£0.00</strong> left to allocate
+            </p>
+        </div>
+
+        <div class="ui error message transfer-message" style="margin: 1rem 0; display: none;">
+            <div class="header transfer-message-header">Unable to add the journal</div>
+            <p class="header transfer-message-text"></p>
+        </div>
+        <div class="ui raised segment">
+            <h4 class="ui header minimal">Target Transactions</h4>
+            <table id="transfer-table" class="ui celled table striped">
+                <thead>
+                <tr>
+                    <th style="width: 8%;">Fund</th>
+                    <th>Account</th>
+                    <th>Name</th>
+                    <th>Outstanding balance (£)</th>
+                    <th style="width: 7%">VAT code</th>
+                    <th style="width: 25%;">Amount (£)</th>
+                    <th style="width: 10%;">Narrative</th>
+                    <th style="width: 1%;"></th>
+                </tr>
+                </thead>
+                <tbody id="transfer-table-body"></tbody>
+                <tfoot>
+                <tr>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui fluid search selection dropdown targetItem">
+                                @Html.Hidden("TransferItem_FundCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 160px;">Select type</div>
+                                <div class="menu">                                    
+                                    @foreach (var item in Model.Funds.Items)
+                                    {
+                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+                                        <div class="item" data-value="@item.Value" @dataAttributes>
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+
+                    <th colspan="3">
+                        <div class="ui fluid field">
+                            <div class="ui input">
+                                @Html.TextBoxFor(m => m.TransferItem.AccountReference, new {@placeholder = "Account reference", @maxlength = 32})
+                                @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui fluid search selection dropdown targetVat">
+                                @Html.Hidden("TransferItem_VatCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 100px;">Select type</div>
+                                <div class="menu">
+                                    @foreach (var item in Model.VatCodes.Items)
+                                    {
+                                        <div class="item" data-value="@item.Value">
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui labeled input">
+                                <label class="ui label" for="amount">£</label>
+                                @Html.TextBoxFor(m => m.TransferItem.Amount, null, new {@placeholder = "0.00", @class = "monetary-amount"})
+                                @Html.ValidationMessageFor(x => x.TransferItem.Amount)
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <div class="ui input">
+                                @Html.TextBoxFor(m => m.TransferItem.Narrative)
+                                @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid field">
+                            <button class="ui right blue button add-transfer">
+                                Add
+                            </button>
+                        </div>
+                    </th>
+                </tr>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="actions" style="text-align: center; margin-top: 1rem;">
+        <button type="submit" class="ui positive large labeled icon button submit-transfer">
+            Complete transfer
+            <i class="exchange icon"></i>
+        </button>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/transfer")
+}

@@ -1,0 +1,52 @@
+﻿@model Admin.Models.ImportProcessingRule.EditViewModel
+@{
+    ViewBag.Title = "Create import processing rule";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create import processing rule
+        <div class="sub header">
+            Import processing rule details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "ImportProcessingRule", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.IsDisabled)
+            @Html.EditorFor(m => m.IsDisabled)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.IsDisabled)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+
+    </div>
+
+}

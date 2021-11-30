@@ -1,0 +1,63 @@
+﻿@model Admin.Models.UserTemplate.EditViewModel
+@{
+    ViewBag.Title = "Edit user templates";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        User templates
+        <div class="sub header">
+            Template selection
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "UserTemplate", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.UserId)
+
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Templates
+                </th>
+            </tr>
+        </thead>
+
+        @if (Model.Items != null && Model.Items.Any())
+        {
+            // This is view logic, but it kind of stinks a bit.
+            // TODO - There must be a better way to creae a checkbox list.
+            // I also don't like the fact we're using tables.
+            var items = Model.Items.OrderBy(x => x.Text).ToList();
+            for (var i = 0; i < items.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => items[i].Id)
+                        @Html.HiddenFor(x => items[i].Text)
+                        @Html.CheckBoxFor(x => items[i].IsChecked)
+                        @Html.DisplayFor(x => items[i].Text)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No available templates!
+                </td>
+            </tr>
+        }
+    </table>
+
+    <input type="submit" value="Save" class="ui button" />
+    @Html.ActionLink("Back", "Back", "UserTemplate", null, new { @class = "ui button" })
+
+}

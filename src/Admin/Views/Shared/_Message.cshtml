@@ -1,0 +1,13 @@
+﻿@model Admin.Models.Shared.Message
+
+@if (Model != null)
+{
+    <div>
+        <div class="ui @Model.Type message" style="margin: -1rem 0 2rem">
+            <div class="header">
+                @Model.Title
+            </div>
+            <p>@Model.Text</p>
+        </div>
+    </div>
+}

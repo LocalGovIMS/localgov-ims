@@ -1,0 +1,88 @@
+﻿@model Admin.Models.Payment.Address
+@{
+    ViewBag.Title = "Address";    
+}
+
+@section Header {
+    <h1 class="ui header">
+        Payment
+        <div class="sub header">
+            Add billing address
+        </div>
+    </h1>
+}
+
+    <div>
+        @if (Model.Message != null)
+    {
+        <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
+            <div class="header">
+                @Model.Message.Title
+            </div>
+            <p>@Model.Message.Text</p>
+        </div>
+}
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.CallRecordingMsg))
+    {
+        <div class="message message--warn message--flash">
+            <strong>@ViewBag.CallRecordingMsg</strong>
+        </div>
+}
+    </div>
+
+@using (Html.BeginForm("Address", "Payment", FormMethod.Post))
+{
+    <div class="ui form">
+        <div class="ten wide column">
+            <h4 class="ui header">Billing address</h4>
+            <div class="three wide field">
+                @Html.LabelFor(m => m.PayeeName)
+                @Html.TextBoxFor(m => m.PayeeName, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.PayeeName)
+            </div>
+            <div class="three wide field">
+                @Html.LabelFor(m => m.HouseNumberOrName)
+                @Html.TextBoxFor(m => m.HouseNumberOrName, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.HouseNumberOrName)
+            </div>
+            <div class="six wide field">
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(m => m.Street, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Street)
+            </div>
+            <div class=" four wide field">
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class=" two wide field">                
+                @Html.LabelFor(m => m.PostCode)
+                @Html.TextBoxFor(m => m.PostCode, new { maxlength = "10" })                                
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.PostCode)
+            </div>
+
+            <div style="margin-top: 0.5rem;">
+                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "ui button" })
+                <button value="SaveAddress" name="action" type="submit" class="ui primary button">Next</button>
+            </div>
+        </div>
+    </div>
+}
+
+       
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/payment")
+}

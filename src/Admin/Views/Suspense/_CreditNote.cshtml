@@ -1,0 +1,115 @@
+﻿@model Admin.Models.Suspense.JournalViewModel
+
+@if (User.IsInRole(Role.Finance))
+{
+    <div id="credit-dialog" class="ui modal">
+
+        <div class="header">
+            Credit notes
+        </div>
+
+            <div class="ui info message" style="margin: 1rem;">
+                <p>You have <strong>£<span id="amount-credit">0</span></strong> worth of credit notes added</p>
+            </div>
+
+            <div class="ui error message credit-message" style="margin: 1rem; display:none;">
+                <div class="header credit-message-header">Unable to add the credit</div>
+                <p class="header credit-message-text"></p>
+            </div>
+
+            <div class="content ui">
+
+                <div class="ui form">
+                    <div class="fields">
+
+                        <div class="ui six wide field">
+                            <label>Fund</label>
+                            <div class="ui fluid search selection dropdown js-credit-fund">
+                                @Html.Hidden("CreditNote_FundCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 200px;">Select type</div>
+                                <div class="menu">
+                                    <div class="item" data-value="">
+                                        Fund
+                                    </div>
+                                    @foreach (var item in Model.CreditNoteFunds.Items)
+                                    {
+                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+                                        <div class="item" data-value="@item.Value" @dataAttributes>
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui six wide field">
+                            <label>Account reference</label>
+                            @Html.TextBoxFor(m => m.CreditNote.AccountReference, new { @placeholder = "Account reference", @maxlength = 16 })
+                            @Html.ValidationMessageFor(x => x.CreditNote.AccountReference)
+                        </div>
+
+                        <div class="ui four wide field">
+                            <label>VAT code</label>
+                            <div class="ui fluid search selection dropdown js-credit-vat">
+                                @Html.Hidden("CreditNote_VatCode")
+                                <i class="dropdown icon"></i>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT</div>
+                                <div class="menu">
+                                    <div class="item" data-value="">
+                                        VAT code
+                                    </div>
+                                    @foreach (var item in Model.VatCodes.Items)
+                                    {
+                                        <div class="item" data-value="@item.Value">
+                                            @item.Text
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui four wide field">
+                            <label>Amount</label>
+                            <div class="ui labeled input">
+                                <label class="ui label" for="amount">£</label>
+                                @Html.TextBoxFor(m => m.CreditNote.Amount, null, new { @placeholder = "0.00", @class = "monetary-amount" })
+                                @Html.ValidationMessageFor(x => x.CreditNote.Amount)
+                            </div>
+                        </div>
+
+                        <div class="ui two wide field">
+                            <label>&nbsp;</label>
+                            <button class="ui right blue button add-credit">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table id="credit-table" class="ui celled table striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Fund</th>                            
+                            <th>Account</th>
+                            <th style="width: 10%;">VAT</th>
+                            <th style="width: 15%;">Amount (£)</th>
+                            <th style="width: 10%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="credit-table-body"></tbody>
+                </table>
+
+            </div>
+
+            <div class="actions">
+                <div class="ui black deny button cancel-credit">
+                    Cancel
+                </div>
+
+                <button type="submit" class="ui positive right labeled icon button submit-credit">
+                    Save credit notes
+                    <i class="checkmark icon"></i>
+                </button>
+            </div>
+    </div>
+}

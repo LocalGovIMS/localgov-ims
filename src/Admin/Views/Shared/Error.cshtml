@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Unauthorised";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Error - Income Management</title>
+    <link rel="icon" href="~/content/favicon.ico" />
+    <link href="~/Content/semantic.min.css" rel="stylesheet" />
+    <link href="~/Content/app.css" rel="stylesheet" />
+</head>
+
+<body cz-shortcut-listen="true">
+
+    <div class="menu">
+        <div class="ui left fixed inverted vertical menu">
+            <div class="item" style="min-height: 1px;">
+                <img src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo"])" style="min-height: 1px; height: 34px; width: 125px;">
+                <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #ccc; text-align: center;">
+                    Income Management
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main" style="margin-left: 11rem;">
+        <div class="nav" style="background-color: #fff; color: #333; box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem; padding: 1rem;">
+            <div>Error</div>
+        </div>
+        <div class="ui vertical segment" style="padding: 0 2rem; padding-bottom: 0; margin:2rem 0">
+            <div>
+                <main>
+                    <div>
+                        <h1>System error</h1>
+                        <div class="ui icon error message">
+                            <i class="frown icon"></i>
+                            <div class="content">
+                                <div class="header">
+                                    We're sorry - an error has occurred
+                                </div>
+                                Please retry the action you were trying to perform. If the error persists please contact your system administrator.
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

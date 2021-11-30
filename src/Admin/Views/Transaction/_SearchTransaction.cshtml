@@ -1,0 +1,126 @@
+﻿@model Admin.Models.Transaction.SearchCriteria
+
+@using (Html.BeginForm("Search", "Transaction", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="ui error message source-message" style="margin: 1rem 0; display:none;">
+                <div class="header source-message-header">Search invalid</div>
+                <p class="header source-message-text"></p>
+            </div>
+            <div class="four fields">
+                <div class="field">
+                    <label>Fund</label>
+                    <div class="ui fluid search selection dropdown">
+                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                        <i class="dropdown icon"></i>
+                        <div class="default text no-overflow" style="width: 100px;">Select fund</div>
+                        <div class="menu">
+                            <div class="item" data-value="">
+                                None
+                            </div>
+                            @foreach (var item in Model.Funds.Items)
+                            {
+                                <div class="item" data-value="@item.Value">
+                                    @item.Text
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>MOP</label>
+                    <div class="ui fluid search selection dropdown">
+                        @Html.HiddenFor(x => x.MopCode, new { size = 4 })
+                        <i class="dropdown icon"></i>
+                        <div class="default text no-overflow" style="width: 100px;">Select MOP</div>
+                        <div class="menu">
+                            <div class="item" data-value="">
+                                None
+                            </div>
+                            @foreach (var item in Model.Mops.Items)
+                            {
+                                <div class="item" data-value="@item.Value">
+                                    @item.Text
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Start</label>
+                    <div class="ui input left icon" style="min-width: 160px;">
+                        <i class="calendar icon"></i>
+                        @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
+                    </div>
+                </div>
+                <div class="field">
+                    <label>End</label>
+                    <div class="ui input left icon" style="min-width: 160px;">
+                        <i class="calendar icon"></i>
+                        @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
+                    </div>
+                </div>
+            </div>
+            <div class="six fields">
+                <div class="field">
+                    <label>Account</label>
+                    @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Account" })
+                    @Html.CheckBoxFor(m => m.WildSearchAccountReference)
+                </div>
+                <div class="field">
+                    <label>Receipt</label>
+                    @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Receipt" })
+                </div>
+                <div class="field">
+                    <label>Amount</label>
+                    @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Amount", @class = "monetary-amount" })
+                </div>
+
+                @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.SystemAdmin))
+                {
+                    <div class="field">
+                        <label>Internal reference</label>
+                        @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Internal reference" })
+                    </div>
+                    <div class="field">
+                        <label>User</label>
+                        <div class="ui fluid search selection dropdown">
+
+                            @Html.HiddenFor(x => x.UserId, new { size = 4 })
+                            <i class="dropdown icon"></i>
+                            <div class="default text no-overflow" style="width: 100px;">Select user</div>
+                            <div class="menu">
+                                <div class="item" data-value="">
+                                    None
+                                </div>
+                                @foreach (var item in Model.Users.Items)
+                                {
+                                    <div class="item" data-value="@item.Value">
+                                        @item.Text
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Narrative</label>
+                        @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Narrative" })
+                    </div>
+
+                }
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button floated right search" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/transaction")
+}

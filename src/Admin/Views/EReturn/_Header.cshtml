@@ -1,0 +1,33 @@
+﻿<div class="ui grid stackable">
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            <strong>Date</strong><br><span class="ui-date">@Model.EReturn.EReturn.CreatedAt</span>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(@Model.PspReference))
+    {
+        <div class="three wide column">
+            <div class="ui vertical segment">
+                <strong>PSP Reference</strong><br><span class="ui-date">@Model.PspReference</span>
+            </div>
+        </div>
+    }
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            <strong>Template</strong><br><span class="ui-vat-amount">@Model.EReturn.EReturn.Template.Name</span>
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment"><strong>Status</strong><br><span>@Model.EReturn.EReturn.EReturnStatus.DisplayName</span></div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            <strong>Created by</strong><br>@Model.EReturn.EReturn.CreatedByUser.DisplayName
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            <strong>Approved by</strong><br><span class="ui-auth-code">@(Model.EReturn.EReturn.ApprovedByUser != null ? Model.EReturn.EReturn.ApprovedByUser.DisplayName : "n/a")</span>
+        </div>
+    </div>
+</div>

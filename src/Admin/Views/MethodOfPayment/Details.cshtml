@@ -1,0 +1,45 @@
+﻿@model Admin.Models.MethodOfPayment.DetailsViewModel
+@{
+    ViewBag.Title = "MOP";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Method of Payment details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Code)
+        @Html.DisplayFor(m => m.Code)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.MaximumAmount)
+        @Html.DisplayFor(m => m.MaximumAmount)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.MinimumAmount)
+        @Html.DisplayFor(m => m.MinimumAmount)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.IsDisabled)
+        @Html.DisplayFor(m => m.Status)
+    </div>
+
+    @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
+
+</div>

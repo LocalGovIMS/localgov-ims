@@ -1,0 +1,141 @@
+﻿@using Microsoft.Ajax.Utilities
+@model Admin.Models.Transaction.DetailsViewModel
+@{
+    ViewBag.Title = "Transaction";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+
+@section Header {
+    <h1 class="ui header">
+        <span class="ui-psp-reference">@Model.Transaction.PspReference</span>
+        @if (!string.IsNullOrEmpty(Model.Transaction.ParentPspReference))
+        {
+            @Html.ActionLink("Parent", "Details", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
+        }
+
+        @if (Model.Transaction.SuspenseId.HasValue)
+        {
+            @Html.ActionLink("Suspense", "Details","Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
+        }
+
+        @if (User.IsInRole(Role.TransactionRefund) && Model.IsRefund == false)
+        {
+            if (Model.Transaction.RefundEnabled)
+            {
+                <a href="#" class="ui red button right floated refund" id="refund">
+                    <i class="reply icon"></i> Refund
+                </a>
+            }
+            else
+            {
+                <div class="ui disabled red button right floated" data-tooltip="A refund is already in progress" data-position="left center">
+                    <i class="reply icon"></i> Refund
+                </div>
+            }
+        }
+        <a href="#" class="ui button blue right floated email-receipt" id="email-receipt">
+            <i class="mail outline icon"></i> Email receipt
+        </a>
+        <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="ui button purple right floated print-receipt" id="print-receipt">
+            <i class="print outline icon"></i> Print receipt
+        </a>
+        <div class="sub header">
+            Transaction details
+        </div>
+    </h1>
+}
+
+@Html.HiddenFor(m => m.Transaction.PspReference)
+
+    <div class="ui grid stackable">
+        <div class="three wide column">
+            <div class="ui vertical segment">
+                <strong>Date</strong><br><span class="ui-date">@Model.Transaction.EntryDate</span>
+            </div>
+            <div class="ui vertical segment">
+                <strong>Created by</strong><br>@Model.Transaction.CreatedBy
+            </div>
+        </div>
+
+        <div class="three wide column">
+            <div class="ui vertical segment"><strong>Total</strong><br><span class="ui-total-amount">&pound;@Model.Transaction.Total</span></div>
+            <div class="ui vertical segment">
+                <strong>Auth code</strong><br><span class="ui-auth-code">@(Model.Transaction.AuthorisationCode ?? "Unknown")</span>
+            </div>
+        </div>
+        <div class="three wide column">
+            <div class="ui vertical segment">
+                <strong>VAT</strong><br><span class="ui-vat-amount">&pound;@Model.Transaction.TotalVat</span>
+            </div>
+            <div class="ui vertical segment">
+                <strong>Method of payment</strong><br><span class="ui-mop">@Model.Transaction.MopName</span>
+            </div>
+        </div>
+        <div class="three wide column">
+            <div class="ui vertical segment">
+                <strong>PSP reference</strong><br><span class="ui-psp-ref">@Model.Transaction.PspReference</span>
+            </div>
+            <div class="ui vertical segment">
+                <strong>Internal reference</strong><br><span class="ui-internal-ref">@Model.Transaction.InternalReference</span>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui vertical segment">
+                <strong>Address</strong><br />
+                @if(!string.IsNullOrEmpty(Model.Transaction.PayeeName))
+                {
+                    @Model.Transaction.PayeeName<br />
+                }
+                @if (Model.Transaction.Town.IsNullOrWhiteSpace())
+                {
+                    <div>No address specified</div>
+                }
+                else
+                {
+                    @Model.Transaction.PremiseNumber<br />
+                    @Model.Transaction.Street<br />
+                    @Model.Transaction.Town<br />
+                    @Model.Transaction.PostCode<br />
+                }
+            </div>
+        </div>
+    </div>
+
+
+@{ Html.RenderPartial("_PaymentsList", Model); }
+
+@if (Model.Transaction.CreditNotes.Any()) { Html.RenderPartial("_CreditNoteList", Model); }
+@if (Model.Transaction.ProcessedRefunds.Any() || Model.Transaction.PendingRefunds.Any() || Model.Transaction.FailedRefunds.Any()) { Html.RenderPartial("_RefundList", Model); }
+@if (Model.Transaction.Transfers.Any()) { Html.RenderPartial("_TransferList", Model); }
+
+@{ Html.RenderPartial("_EmailReceipt", new Admin.Models.Transaction.EmailReceiptViewModel()); }
+
+@Html.Action("_Activity")
+
+@if (User.IsInRole(Role.TransactionRefund) && Model.Transaction.RefundEnabled)
+{
+    Html.RenderPartial("_Refund", Model.Refund);
+}
+
+@if (User.IsInRole(Role.TransactionJournal))
+{
+    <div id="transfer-details">
+        @Html.Action("_Transfer", new { id = Model.Transaction.PspReference })
+    </div>
+}
+
+@Html.ActionLink("Back", "Back", "Transaction", null, new { @class = "ui button" })
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/transaction")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            transcationDetails.mainPspReference = '@Model.Transaction.PspReference';
+        });
+    </script>
+}

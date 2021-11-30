@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "Scripts/App/Transaction/email-receipt.min.js",
+    "inputFiles": [
+      "Scripts/App/Transaction/email-receipt.js"
+    ]
+  }
+]

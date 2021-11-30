@@ -1,0 +1,35 @@
+﻿@model Admin.Models.Vat.DetailsViewModel
+@{
+    ViewBag.Title = "VAT";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Code
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            VAT details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Code)
+        @Html.DisplayFor(m => m.Code)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Percentage)
+        @Html.DisplayFor(m => m.Percentage)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.IsDisabled)
+        @Html.DisplayFor(m => m.Status)
+    </div>
+
+    @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
+
+</div>

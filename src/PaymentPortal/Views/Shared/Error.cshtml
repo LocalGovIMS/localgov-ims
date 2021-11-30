@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.FormTitle = "Error";
+}
+
+<div class="panels">
+    <div class="grid grid--gutters">
+        <div class="container container--page">
+            <div class="grid__section">
+                <div class="grid__row">
+                    <div class="grid__column grid__column--12">
+                        <div class="panel">
+                            <fieldset>
+                                <legend>Error</legend>
+
+                                <p>@ViewBag.ExMessage</p>
+
+                                <div class="row form-navigation">
+                                    <div class="row">
+                                        <div>
+                                            <a href="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Website"])" class="button button--default button--forward">Finish</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

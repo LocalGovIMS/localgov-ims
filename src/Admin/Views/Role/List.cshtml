@@ -1,0 +1,53 @@
+﻿@model IList<Admin.Models.Role.DetailsViewModel>
+@{
+    ViewBag.Title = "Roles";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Roles
+        <div class="sub header">
+            Role maintenance
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>                
+                <th>
+                    Name
+                </th>
+                <th>
+                    Display name
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.DisplayName)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })  
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="panels">
+        There are no roles in the system
+    </div>
+}

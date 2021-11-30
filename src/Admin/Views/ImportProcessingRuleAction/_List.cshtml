@@ -1,0 +1,22 @@
+﻿@model Admin.Models.ImportProcessingRuleAction.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <div class="ui tertiary inverted compact segment teal">
+        @foreach (var action in Model.Items)
+        {
+        <div class="field">
+            <div class="ui label teal">
+                @action.DisplaySummary()
+            </div>
+        </div>
+        }
+    </div>
+}
+else
+{
+    <div class="ui info message">
+        There are no actions specified
+    </div>
+}
+

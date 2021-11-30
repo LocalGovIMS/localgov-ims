@@ -1,0 +1,61 @@
+﻿@model Admin.Models.Suspense.DetailsViewModel
+
+@{
+    ViewBag.Title = "Suspense";
+}
+
+
+@section Messages {
+    <div>
+        @if (TempData.ContainsKey("Message"))
+        {
+            var message = (Message)TempData["Message"];
+            <div class="ui @message.Type message" style="margin: -1rem 0 2rem">
+                <div class="header">
+                    @message.Title
+                </div>
+                <p>@message.Text</p>
+            </div>
+        }
+    </div>
+}
+
+
+@section Header {
+    <h1 class="ui header">
+        <span class="ui-psp-reference">@Model.AccountNumber</span>
+
+        <div class="sub header">
+            Suspense  details
+        </div>
+    </h1>
+}
+
+@Html.HiddenFor(m => m.AccountNumber)
+
+<div class="ui grid stackable">
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            <strong>Date</strong><br><span class="ui-date"> @Model.CreatedAt.ToShortDateString()</span>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment"><strong>Amount</strong><br><span class="ui-total-amount">&pound;@Html.ToCurrency(Model.Amount)</span></div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            <strong>Narrative</strong><br><span class="ui-vat-amount">@Model.Narrative</span>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            <strong>Notes</strong><br><pre class="ui-vat-amount">@Model.Notes</pre>
+        </div>
+    </div>
+</div>
+
+
+@{ Html.RenderPartial("_AllocatedList", Model); }
+
+
+@Html.ActionLink("Back", "Back", "Suspense", null, new { @class = "ui button" })

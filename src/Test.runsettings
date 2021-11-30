@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+
+  <!-- Parameters used by tests at run time -->
+  <TestRunParameters>
+    <Parameter name="webUrl" value="http://localhost:53837/" />
+    <Parameter name="adminUrl" value="http://localhost:53794/" />
+	<Parameter name="adminUsername" value="tester1@test.com" />
+	<Parameter name="adminPassword" value="Password#1" />
+  </TestRunParameters>
+ 
+</RunSettings>

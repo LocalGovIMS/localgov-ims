@@ -1,0 +1,64 @@
+﻿@model Admin.Models.Template.EditViewModel
+@{
+    ViewBag.Title = "Create template";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create template
+        <div class="sub header">
+            Template details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "Template", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="ui form">
+
+        <div class="six wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowCash)
+                @Html.LabelFor(m => m.AllowCash)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowCash)
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowCheque)
+                @Html.LabelFor(m => m.AllowCheque)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowCheque)
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.EditorFor(m => m.AllowPdq)
+                @Html.LabelFor(m => m.AllowPdq)
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AllowPdq)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "Template", null, new { @class = "ui button" })
+
+    </div>
+
+}

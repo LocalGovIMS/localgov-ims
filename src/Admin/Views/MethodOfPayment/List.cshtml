@@ -1,0 +1,76 @@
+﻿@model IList<Admin.Models.MethodOfPayment.DetailsViewModel>
+@{
+    ViewBag.Title = "MOPs";    
+}
+
+@section Header {
+    <h1 class="ui header">
+        Methods of Payment
+        @Html.ActionLink("Create MOP", "Create", new { }, new { @class = "ui blue button right floated" })
+
+        <div class="sub header">
+            Method of payment management
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Code)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().MaximumAmount)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().MinimumAmount)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().IsDisabled)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.MaximumAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.MinimumAmount)
+                </td>
+                <td>
+                    @Html.Label(item.IsDisabled ? "Disabled" : "Active")
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })  
+                    
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+else
+{
+    <div class="ui info message">
+        There are no Method of Payment in the system
+    </div>
+}
+

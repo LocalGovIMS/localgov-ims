@@ -1,0 +1,53 @@
+﻿@model Admin.Models.Vat.EditViewModel
+@{
+    ViewBag.Title = "Create VAT code";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create VAT code
+        <div class="sub header">
+            VAT code details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "Vat", FormMethod.Post))
+{
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Code)
+            @Html.EditorFor(m => m.Code)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Code)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Percentage)
+            @Html.EditorFor(m => m.Percentage)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Percentage)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.IsDisabled)
+            @Html.EditorFor(m => m.IsDisabled)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.IsDisabled)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
+
+    </div>
+
+}

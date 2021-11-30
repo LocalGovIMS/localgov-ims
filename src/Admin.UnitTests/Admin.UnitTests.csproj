@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F3C5906A-DAFD-49A0-A71E-AB0E3E8AF9CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Admin.UnitTests</RootNamespace>
+    <AssemblyName>Admin.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Local|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Local\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Development\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Live|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Live\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UITest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UITest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=6.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.6.2.0\lib\net47\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.8\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.2.2.8\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.16.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.16.1\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Commands\FundGroup\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\FundGroup\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\FundGroup\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Fund\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Fund\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleAction\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRuleCondition\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\ChangeStatusCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\ImportProcessingRule\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\MethodOfPayment\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\MethodOfPayment\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\CreatePaymentsCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\RemoveCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\SetAddressCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\EmptyBasketCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\CheckAddressCommandTests.cs" />
+    <Compile Include="Classes\Commands\Payment\AddCommandTests.cs" />
+    <Compile Include="Classes\Commands\Role\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\Suspense\JournalCommandTests.cs" />
+    <Compile Include="Classes\Commands\Suspense\SaveNoteCommandTests.cs" />
+    <Compile Include="Classes\Commands\Template\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Template\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\EmailReceiptCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\RefundCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\ValidateTransferItemCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\UndoTransferCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\TransferCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transfer\TransferCommandTests.cs" />
+    <Compile Include="Classes\Commands\UserFundGroup\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\UserRole\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\User\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\User\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\CreateViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\CreateViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleCondition\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleActionControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleConditionControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\ImportProcessingRuleControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\FundControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\HomeControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\EReturnControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\SuspenseControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\UserTemplateControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\VatControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\MethodOfPaymentControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\TransferControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\UserRoleControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\UserFundGroupControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\UserControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\TransactionControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\TemplateControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\RoleControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\PaymentControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\FundGroupControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\AccountHolderControllerDependenciesTests.cs" />
+    <Compile Include="Classes\Security\PaymentsAdminRoleProviderTests.cs" />
+    <Compile Include="Classes\Security\SecurityContextTests.cs" />
+    <Compile Include="Classes\ViewHelpers\FormatHelper.cs" />
+    <Compile Include="Classes\ViewHelpers\BreadcrumbHelperTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturn\CreateViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\CreateViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\FundGroup\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Fund\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPayment\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Payment\IndexViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Role\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Suspense\JournalViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\RefundViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\TransferViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transaction\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Transfer\TransferViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserFundGroup\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserFundGroup\BasicListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserTemplate\BasicListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserTemplate\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserRole\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserRole\BasicListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\User\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Vat\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\AccountHolder\ConstructorTests.cs" />
+    <Compile Include="Controllers\AccountHolder\Details\Get.cs" />
+    <Compile Include="Controllers\AccountHolder\List\Get.cs" />
+    <Compile Include="Controllers\AccountHolder\Search\Get.cs" />
+    <Compile Include="Controllers\AccountHolder\Search\Post.cs" />
+    <Compile Include="Controllers\FundGroup\Create\Get.cs" />
+    <Compile Include="Controllers\FundGroup\Create\Post.cs" />
+    <Compile Include="Controllers\FundGroup\Delete\Get.cs" />
+    <Compile Include="Controllers\FundGroup\Delete\Post.cs" />
+    <Compile Include="Controllers\FundGroup\Details\Get.cs" />
+    <Compile Include="Controllers\FundGroup\Edit\Get.cs" />
+    <Compile Include="Controllers\FundGroup\Edit\Post.cs" />
+    <Compile Include="Controllers\FundGroup\List\Get.cs" />
+    <Compile Include="Controllers\Fund\ConstructorTests.cs" />
+    <Compile Include="Controllers\Fund\Create\Get.cs" />
+    <Compile Include="Controllers\Fund\Create\Post.cs" />
+    <Compile Include="Controllers\Fund\Details\Get.cs" />
+    <Compile Include="Controllers\Fund\Edit\Get.cs" />
+    <Compile Include="Controllers\Fund\Edit\Post.cs" />
+    <Compile Include="Controllers\Fund\List\Get.cs" />
+    <Compile Include="Controllers\Home\Index\Get.cs" />
+    <Compile Include="Controllers\Home\Unauthorised\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\ConstructorTests.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\Create\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\Create\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\Delete\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\Edit\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\Edit\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\ConstructorTests.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\Create\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\Create\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\Delete\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\Edit\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\Edit\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\ChangeStatus\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\ConstructorTests.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\Create\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\Create\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\Details\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\Edit\Get.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\Edit\Post.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\List\Get.cs" />
+    <Compile Include="Controllers\MethodOfPayment\ConstructorTests.cs" />
+    <Compile Include="Controllers\MethodOfPayment\Create\Get.cs" />
+    <Compile Include="Controllers\MethodOfPayment\Create\Post.cs" />
+    <Compile Include="Controllers\MethodOfPayment\Details\Get.cs" />
+    <Compile Include="Controllers\MethodOfPayment\Edit\Get.cs" />
+    <Compile Include="Controllers\MethodOfPayment\Edit\Post.cs" />
+    <Compile Include="Controllers\FundGroup\ConstructorTests.cs" />
+    <Compile Include="Controllers\MethodOfPayment\List\Get.cs" />
+    <Compile Include="Controllers\Payment\AccountHolderSearch\Get.cs" />
+    <Compile Include="Controllers\Payment\Address\Get.cs" />
+    <Compile Include="Controllers\Payment\Address\Post.cs" />
+    <Compile Include="Controllers\Payment\CancelPayment\Get.cs" />
+    <Compile Include="Controllers\Payment\Cancel\Get.cs" />
+    <Compile Include="Controllers\Payment\Cheques\Get.cs" />
+    <Compile Include="Controllers\Payment\Cheques\Post.cs" />
+    <Compile Include="Controllers\Payment\ConstructorTests.cs" />
+    <Compile Include="Controllers\Payment\Create\Get.cs" />
+    <Compile Include="Controllers\Payment\Create\Post.cs" />
+    <Compile Include="Controllers\Payment\EmptyBasket\Get.cs" />
+    <Compile Include="Controllers\Index\Get.cs" />
+    <Compile Include="Controllers\Payment\Fail\Get.cs" />
+    <Compile Include="Controllers\Payment\Pay\Get.cs" />
+    <Compile Include="Controllers\Payment\Remove\Get.cs" />
+    <Compile Include="Controllers\Payment\SelectAccountReference\Get.cs" />
+    <Compile Include="Controllers\Payment\Success\Get.cs" />
+    <Compile Include="Controllers\Role\ConstructorTests.cs" />
+    <Compile Include="Controllers\Role\Details\Get.cs" />
+    <Compile Include="Controllers\Role\Edit\Get.cs" />
+    <Compile Include="Controllers\Role\Edit\Post.cs" />
+    <Compile Include="Controllers\Role\List\Get.cs" />
+    <Compile Include="Controllers\Suspense\ConstructorTests.cs" />
+    <Compile Include="Controllers\Suspense\CreditNote\Get.cs" />
+    <Compile Include="Controllers\Suspense\Details\Get.cs" />
+    <Compile Include="Controllers\Suspense\Journal\Get.cs" />
+    <Compile Include="Controllers\Suspense\List\Get.cs" />
+    <Compile Include="Controllers\Suspense\Search\Get.cs" />
+    <Compile Include="Controllers\Suspense\SubmitTransfers\Post.cs" />
+    <Compile Include="Controllers\Template\Create\Get.cs" />
+    <Compile Include="Controllers\Template\Create\Post.cs" />
+    <Compile Include="Controllers\Template\Edit\Get.cs" />
+    <Compile Include="Controllers\Template\Edit\Post.cs" />
+    <Compile Include="Controllers\Template\List\Get.cs" />
+    <Compile Include="Controllers\Template\ConstructorTests.cs" />
+    <Compile Include="Controllers\Transaction\Activity\Get.cs" />
+    <Compile Include="Controllers\Transaction\ConstructorTests.cs" />
+    <Compile Include="Controllers\Transaction\EmailReceipt\Post.cs" />
+    <Compile Include="Controllers\Transaction\Receipt\Get.cs" />
+    <Compile Include="Controllers\Transaction\Refund\Get.cs" />
+    <Compile Include="Controllers\Transaction\Refund\Post.cs" />
+    <Compile Include="Controllers\Transaction\Search\Get.cs" />
+    <Compile Include="Controllers\Transaction\SubmitTransfers\Post.cs" />
+    <Compile Include="Controllers\Transaction\Transfer\Get.cs" />
+    <Compile Include="Controllers\Transaction\Details\Get.cs" />
+    <Compile Include="Controllers\Transaction\List\Get.cs" />
+    <Compile Include="Controllers\Transaction\UndoTransfer\Get.cs" />
+    <Compile Include="Controllers\Transaction\ValidateTransferItem\Post.cs" />
+    <Compile Include="Controllers\Transfer\ConstructorTests.cs" />
+    <Compile Include="Controllers\Transfer\Index\Get.cs" />
+    <Compile Include="Controllers\Transfer\SubmitTransfers\Post.cs" />
+    <Compile Include="Controllers\Transfer\ValidateTransferItem\Post.cs" />
+    <Compile Include="Controllers\UserFundGroup\Edit\Get.cs" />
+    <Compile Include="Controllers\UserFundGroup\Edit\Post.cs" />
+    <Compile Include="Controllers\UserFundGroup\List\Get.cs" />
+    <Compile Include="Controllers\UserRole\ConstructorTests.cs" />
+    <Compile Include="Controllers\UserFundGroup\ConstructorTests.cs" />
+    <Compile Include="Controllers\UserRole\Edit\Get.cs" />
+    <Compile Include="Controllers\UserRole\Edit\Post.cs" />
+    <Compile Include="Controllers\UserRole\List\Get.cs" />
+    <Compile Include="Controllers\User\ConstructorTests.cs" />
+    <Compile Include="Controllers\User\Create\Get.cs" />
+    <Compile Include="Controllers\User\Create\Post.cs" />
+    <Compile Include="Controllers\User\Details\Get.cs" />
+    <Compile Include="Controllers\User\Edit\Get.cs" />
+    <Compile Include="Controllers\User\Edit\Post.cs" />
+    <Compile Include="Controllers\User\List\Get.cs" />
+    <Compile Include="Controllers\Vat\ConstructorTests.cs" />
+    <Compile Include="Controllers\Vat\Create\Get.cs" />
+    <Compile Include="Controllers\Vat\Create\Post.cs" />
+    <Compile Include="Controllers\Vat\Details\Get.cs" />
+    <Compile Include="Controllers\Vat\Edit\Get.cs" />
+    <Compile Include="Controllers\Vat\Edit\Post.cs" />
+    <Compile Include="Controllers\Vat\List\Get.cs" />
+    <Compile Include="Helpers\MoqHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Admin\Admin.csproj">
+      <Project>{1e73699c-4def-4e77-a96e-da55c9a2fede}</Project>
+      <Name>Admin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{C12A7783-201A-41D3-88AD-E68C3ED135BD}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{1fbe03f4-8fbc-44ef-bd58-a8f6dcd8f64e}</Project>
+      <Name>Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.8\build\net45\MSTest.TestAdapter.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

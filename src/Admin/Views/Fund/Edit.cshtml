@@ -1,0 +1,187 @@
+﻿@model Admin.Models.Fund.EditViewModel
+@{
+    ViewBag.Title = "Edit fund";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.DisplayName
+        <div class="sub header">
+            Fund details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "Fund", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.FundCode)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.FundName)
+            @Html.EditorFor(m => m.FundName)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.FundName)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.DisplayName)
+            @Html.EditorFor(m => m.DisplayName)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.DisplayName)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.AccessLevel)
+            @Html.EditorFor(m => m.AccessLevel)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AccessLevel)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ValidationReference)
+            @Html.EditorFor(m => m.ValidationReference)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ValidationReference)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.VatCode)
+            <div class="ui selection dropdown vat-dropdown">
+                @Html.HiddenFor(x => x.VatCode, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select type</div>
+                <div class="menu">
+                    @foreach (var item in Model.VatCodes.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.VatCode)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MaximumAmount)
+            @Html.EditorFor(m => m.MaximumAmount)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.MaximumAmount)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Narrative)
+            @Html.EditorFor(m => m.Narrative)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Narrative)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ExportToFund)
+            @Html.EditorFor(m => m.ExportToFund)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ExportToFund)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ExportToLedger)
+            @Html.EditorFor(m => m.ExportToLedger)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ExportToLedger)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.FundExportFormat)
+            @Html.EditorFor(m => m.FundExportFormat)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.FundExportFormat)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.UseGLCode)
+            @Html.EditorFor(m => m.UseGLCode)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.UseGLCode)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.GLCode)
+            @Html.EditorFor(m => m.GLCode)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.GLCode)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.OverPayAccount)
+            @Html.EditorFor(m => m.OverPayAccount)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.OverPayAccount)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.AccountExist)
+            @Html.EditorFor(m => m.AccountExist)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AccountExist)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.AquireAddress)
+            @Html.EditorFor(m => m.AquireAddress)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AquireAddress)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.VatOverride)
+            @Html.EditorFor(m => m.VatOverride)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.VatOverride)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.IsDisabled)
+            @Html.CheckBoxFor(m => m.IsDisabled)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.IsDisabled)
+            </div>
+        </div>
+        
+    </div>
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.vat-dropdown').dropdown();
+        });
+    </script>
+}

@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Help";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Help and support
+    </h1>
+}
+
+<div class="ui styled fluid accordion">
+    <div class="title">
+        <i class="dropdown icon"></i>
+        How do I process a refund?
+    </div>
+    <div class="content">
+        <div class="transition hidden">
+            <div class="ui info message">
+                <div class="header">
+                    Before you can refund
+                </div>
+                <ul class="list">
+                    <li>You can only process refunds for payments processed via BarclayCard SmartPay</li>
+                    <li>Your account must be enabled to process refunds</li>
+                </ul>
+            </div>
+
+            <ol>
+                <li>
+                    <p>Find the transaction you wish to refund on the transactions screen by searching for it, then click on the blue <strong>receipt number</strong> for that transaction to show the details screen</p>
+                    <img class="ui large image" src="~/Content/help/refunds/refund_1_transactionlist.png" />
+                </li>
+                <li>
+                    <p>Check that the refund you wish to action has not already been done, in the screenshot below a refund for £1.00 has already been actioned but in this case we will action another refund by clicking the red <strong>refund button</strong> in the top right of the screen</p>
+                    <img class="ui large image" src="~/Content/help/refunds/refund_2_transactiondetails.png" />
+                </li>
+                <li>
+                    <p>Every item in the transaction will be shown with the remaining about that can be refunded, if you have partial refund permissions you can specify the amount (in pounds) to refund, otherwise you will see a checkbox enabling you to refund the remaining amount</p>
+                    <img class="ui large image" src="~/Content/help/refunds/refund_3_refundmodal.png" />
+                </li>
+                <li>
+                    <p>When you have completed the screen you must enter a reason for the refund, double check your entries and when you are satisfied click the green <strong>submit refund</strong> button</p> and wait for the screen to reload
+                    <img class="ui large image" src="~/Content/help/refunds/refund_4_refundmodelcompleted.png" />
+                </li>
+                <li>
+                    <p>You should then see a success message indicating we've started the refund and a new entry under the refunds header should be present showing a pending status</p>
+                    <img class="ui large image" src="~/Content/help/refunds/refund_5_pendingrefund.png" />
+                </li>
+                <li>
+                    <p>When SmartPay confirm they are processing the refund it's complete and the customer should receive a refund to their payment card in a few days.</p>
+                    <img class="ui large image" src="~/Content/help/refunds/refund_6_completedrefund.png" />
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="title">
+        <i class="dropdown icon"></i>
+        What if my refund fails?
+    </div>
+    <div class="content">
+        <div class="transition hidden">
+            <div class="ui info message">
+                <div class="header">
+                    Before you can refund
+                </div>
+                <ul class="list">
+                    <li>You can only process refunds for payments processed via BarclayCard SmartPay</li>
+                    <li>Your account must be enabled to process refunds</li>
+                </ul>
+            </div>
+            <div>
+                Should your refund fail, please contact your system administrator.
+            </div>
+
+        </div>
+    </div>
+
+    <div class="title">
+        <i class="dropdown icon"></i>
+        How do I take a payment?
+    </div>
+    <div class="content">
+        <div class="transition hidden">
+            <div class="ui info message">
+                <div class="header">
+                    Before you can take a payment
+                </div>
+                <ul class="list">
+                    <li>You can only process payments if your account has been enabled to process payments</li>
+                    <li>Only debit and credit card payments can be taken for customers not present. If the customer is present the payment must be taken through a PQD device (card reader)</li>
+                </ul>
+            </div>
+
+            <ol>
+                <li>
+                    <p>On the Payment page, select a fund type by either using the drop down to select a line or type the start of the fund type name or enter the fund type number.  Enter a reference and narrative if required along with an amount, click Add to basket and the details will be added to the basket on the right.</p>
+                    <img class="ui large image" src="~/Content/help/payment/Payment_1_paymentpage.png" />
+                </li>
+                <li>
+                    <p>You can now either add another payment item to the basket by repeating the process above or click the blue Pay button to take you to the next screen. The basket can be cleared out by either clicking the red Empty Basket button or by clicking the red Delete button at the side of each item in the basket.</p>
+                    <img class="ui large image" src="~/Content/help/payment/Payment_2_details.png" />
+                </li>
+                <li>
+                    <p>After clicking the blue Pay button you will be asked for an address. If an account reference has been entered eg Council Tax or Rent account then the address will be pre-populated with the details from the first account entered. Click Save Billing Address to progress to the card payment screen.</p>
+                    <img class="ui large image" src="~/Content/help/payment/Payment_3_address.png" />
+                </li>
+                <li>
+                    <p>Enter the card details provided by the customer, the billing address will have been propulated from the address capture screen but can be amended. Click Pay to take the payment. If the payment fails you will be re-directed back to the payment screen where you can click the blue Pay button again and try the card details again.</p>
+                    <img class="ui large image" src="~/Content/help/payment/Payment_4_smartpay.png" />
+                </li>
+                <li>
+                    <p>Once the payment is successful you will be shown the detail screen. The payment reference number is in the top right hand corner. To send a receipt to the customer click the Email receipt button, enter their email address and click send.</p>
+                    <img class="ui large image" src="~/Content/help/payment/Payment_5_confirm.png" />
+                </li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="title">
+        <i class="dropdown icon"></i>
+        How do I process a journal?
+    </div>
+    <div class="content">
+        <div class="transition visible">
+            <ol>
+                <li>
+                    <p>Find the transaction you would like to journal and open the transaction details screen</p>
+                </li>
+                <li>
+                    <p>If the transaction is able to be journalled, there will be a <strong class="ui button"><i class="exchange icon"></i> Journal</strong> button alongside the payment rows</p>
+                </li>
+                <li>
+                    <p>Press the <strong class="ui button"><i class="exchange icon"></i> Journal</strong> button to start the journal process</p>
+                </li>
+                <li>
+                    <p>Enter the details of each new transaction you want to create from the selected transaction and press  <strong class="ui primary button">Add</strong></p>
+                </li>
+                <li>
+                    <p>
+                        When you are ready to journal the transaction press <button type="submit" class="ui positive right labeled icon button ">
+                            Submit journal
+                            <i class="checkmark icon"></i>
+                        </button> to complete the journal
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="title">
+        <i class="dropdown icon"></i>
+        How do I process a transfer?
+    </div>
+    <div class="content">
+        <div class="transition visible">
+
+            <div class="ui info message">
+                <div class="header">
+                    Before you can transfer
+                </div>
+                You can only process transfers if your account has been enabled to process transfers
+            </div>
+
+            <ol class="instructions">
+                <li>
+                    <p>Select <a id="menu__transfer" class="item " style="background-color: #1b1c1d; color: #fff; padding: 0.5rem;">Transfer &nbsp;&nbsp;&nbsp; <i class="exchange icon"></i></a> from the main menu</p>
+                </li>
+
+                <li>
+                    <p>You can add one or multiple source transactions (where the money will debited from) by completing the fields in the source transaction area and pressing  <strong class="ui primary button">Add</strong></p>
+                </li>
+
+                <li>
+                    <p>You can add one or multiple target transactions (where the money will credited to) by completing the fields in the target transaction area and pressing  <strong class="ui primary button">Add</strong></p>
+                </li>
+
+                <li>
+                    <p>
+                        <strong>Before you will be allowed to complete the transfer you must:</strong>
+                        <ul>
+                            <li>
+                                Make sure the total source amount is allocated
+                            </li>
+                            <li>
+                                If you have multiple source transactions, must have the same amount of target transactions with matching source and target amounts
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+
+                <li>
+                    <p>
+                        When you are ready to complete the transfer press <button class="ui positive large labeled icon button submit-transfer">
+                            Complete transfer
+                            <i class="exchange icon"></i>
+                        </button>
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+
+</div>
+
+<h2 class="ui header">Troubleshooting</h2>
+
+<div class="ui styled fluid accordion">
+    <div class="title">
+        <i class="dropdown icon"></i>
+        Why am I seeing an unauthorised message?
+    </div>
+    <div class="content">
+        <p class="transition hidden">You don't have permission to access that section of Income Management. If you believe you should have access please ask your system administrator.</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        Why can't I find a transaction?
+    </div>
+    <div class="content">
+        <p class="transition visible">You will only see transactions that belong to account types you have permission to see. If you believe you aren't able to see a fund group you should be able to see please contact your system administrator.</p>
+    </div>
+</div>
+
+<script>
+    // todo: move to bundle
+    $('.ui.accordion')
+        .accordion();
+</script>
