@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm("Search", "AccountHolder", FormMethod.Get))
 {
-    @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+    @Html.HiddenFor(x => x.IsAPaymentSearch)
 
     <div class="ui segment">
         <div class="ui form">
@@ -11,6 +11,38 @@
                     <label>Account reference</label>
                     @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Account reference" })
                 </div>
+                <div class="field">
+                    <label>Surname</label>
+                    @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Surname" })
+                </div>
+                <div class="field">
+                    @if (!Model.IsAPaymentSearch)
+                    {
+                        <label>Fund</label>
+                        <div class="ui fluid search selection dropdown fund">
+                            @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                            <i class="dropdown icon"></i>
+                            <div class="default text no-overflow" style="width: 100px;">Select fund</div>
+                            <div class="menu">
+                                <div class="item" data-value="">
+                                    None
+                                </div>
+                                @foreach (var item in Model.Funds.Items)
+                                {
+                                    <div class="item" data-value="@item.Value">
+                                        @item.Text
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                    }
+                </div>
+            </div>
+            <div class="four fields">
                 <div class="field">
                     <label>Postcode</label>
                     @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Postcode" })
@@ -21,11 +53,7 @@
                 </div>
                 <div class="field">
                     <label>Street</label>
-                    @Html.TextBoxFor(m => m.PostCode, new { size = 30, placeholder = "Street" })
-                </div>
-                <div class="field">
-                    <label>Surname</label>
-                    @Html.TextBoxFor(m => m.PostCode, new { size = 30, placeholder = "Surname" })
+                    @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Street" })
                 </div>
                 <div class="field">
                     <label>&nbsp;</label>

@@ -6,10 +6,22 @@
     ViewBag.Title = "Account holders";
 }
 
-@section Header { 
+@section Header {
     <h1 class="ui header">
         Account holders
         @Html.ActionLink("Create account holder", "Create", new { }, new { @class = "ui blue button right floated" })
+        @{
+            var queryString = string.Empty;
+
+            if (Model.SearchCriteria.IsAPaymentSearch)
+            {
+                queryString = "?IsAPaymentSearch=True&FundCode=" + Model.SearchCriteria.FundCode;
+            }
+
+            <a href="@Url.Action("Search", "AccountHolder")@queryString" class="ui button right floated" id="reset">
+                <i class="undo icon"></i> Reset search
+            </a>
+        }
         <div class="sub header">
             Find an account holder
             @if (!string.IsNullOrEmpty(Model.FundName))
@@ -26,76 +38,88 @@
 {
     <table class="ui celled table striped">
         <thead>
-        <tr>
-            <th>Account reference</th>
-            <th>Account name</th>
-            <th>Address</th>
-            <th>Balance (£)</th>
-            <th style="width: 280px;"></th>
-        </tr>
+            <tr>
+                <th>Account reference</th>
+                <th>Account name</th>
+                <th>Address</th>
+                <th>Balance (£)</th>
+                <th style="width: 280px;"></th>
+            </tr>
         </thead>
         <tbody>
 
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.AccountReference</td>
-                <td>@item.FullNameAndTitle()</td>
-                <td>@item.Address()</td>                
-                <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0)
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.AccountReference</td>
+                    <td>@item.FullNameAndTitle()</td>
+                    <td>@item.Address()</td>
+                    <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0)
                                                         {
                                                             @Html.Raw("td--negative")
                                                         }">
-                    @Html.ToCurrency(item.CurrentBalance)
-                </td>
-                <td style="text-align: center;">
+                        @Html.ToCurrency(item.CurrentBalance)
+                    </td>
+                    <td style="text-align: center;">
 
-                    @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "ui button" })
-                    @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "ui button" })
+                        @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "ui button" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "ui button" })
 
-                    @if (Model.SearchCriteria.IsAPaymentSearch)
-                    {
-                        @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = item.AccountReference }, new { @class = "ui green button" })
-                    }
-                </td>
-            </tr>
-        }
+                        @if (Model.SearchCriteria.IsAPaymentSearch)
+                        {
+                            @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = item.AccountReference }, new { @class = "ui green button" })
+                        }
+                    </td>
+                </tr>
+            }
         </tbody>
         <tfoot>
-        <tr>
-            <th colspan="5">
-                <div class="ui pagination menu">
-                    @if (Model.Pages > 1)
-                    {
-                        @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+            <tr>
+                <th colspan="5">
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
                         {
-                            page = page,
-                            FundCode = Model.SearchCriteria.FundCode,
-                            AccountReference = Model.SearchCriteria.AccountReference,
-                            HouseNumberName = Model.SearchCriteria.HouseNumberName,
-                            PostCode = Model.SearchCriteria.PostCode,
-                            Street = Model.SearchCriteria.Street,
-                            Surname = Model.SearchCriteria.Surname,
-                        }))
-                    }
-                </div>                        
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                            {
+                                page = page,
+                                FundCode = Model.SearchCriteria.FundCode,
+                                AccountReference = Model.SearchCriteria.AccountReference,
+                                HouseNumberName = Model.SearchCriteria.HouseNumberName,
+                                PostCode = Model.SearchCriteria.PostCode,
+                                Street = Model.SearchCriteria.Street,
+                                Surname = Model.SearchCriteria.Surname,
+                            }))
+                        }
+                    </div>
 
-            </th>
-        </tr>
+                </th>
+            </tr>
 
         </tfoot>
 
     </table>
-   
+
 }
 else
 {
-    <div class="ui info message">        
+    <div class="ui info message">
         <div class="header">
             We couldn't find any matching account holders
         </div>
         <p>
-           Please try again with different search criteria
+            Please try again with different search criteria
         </p>
     </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown({
+            match: 'both'
+        });
+
+        $(document).ready(function () {
+            console.log($('#FundCode').val());
+        });
+    </script>
 }

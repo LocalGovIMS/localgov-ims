@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.AccountHolder
 {
@@ -22,5 +23,7 @@ namespace Admin.Models.AccountHolder
         public bool IsAPaymentSearch { get; set; }
 
         public int Page { get; set; }
+
+        public SelectList Funds { get; set; }
     }
 }

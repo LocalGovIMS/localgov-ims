@@ -1,10 +1,12 @@
 ﻿using Admin.Models.AccountHolder;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models.AccountHolder;
 using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.AccountHolder
 {
@@ -27,10 +29,15 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
         {
             var searchResult = _accountHolderService.Search(new BusinessLogic.Models.AccountHolder.SearchCriteria());
 
+            var searchCriteria = new Admin.Models.AccountHolder.SearchCriteria
+            {
+                Funds = GetFundsList()
+            };
+
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = new Admin.Models.AccountHolder.SearchCriteria(),
+                SearchCriteria = searchCriteria,
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
@@ -48,10 +55,12 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
                 Street = criteria.Street,
                 Surname = criteria.Surname,
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
-                PageSize = 20
+                PageSize = 20,
             };
 
             var searchResult = _accountHolderService.Search(searchCriteria);
+
+            criteria.Funds = GetFundsList();
 
             return new ListViewModel()
             {
@@ -83,6 +92,23 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             }
 
             return fundName;
+        }
+
+        private SelectList GetFundsList()
+        {
+            var selectListItems = new List<SelectListItem>();
+            var items = _fundService.GetAllFunds(true).OrderBy(x => x.FundName);
+
+            foreach (var item in items)
+            {
+                selectListItems.Add(new SelectListItem()
+                {
+                    Value = item.FundCode,
+                    Text = string.Format("{0} {1}", item.FundName, item.Disabled ? "(Disabled)" : string.Empty)
+                });
+            }
+
+            return new SelectList(selectListItems, true);
         }
     }
 }
