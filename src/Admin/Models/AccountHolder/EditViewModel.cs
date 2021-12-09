@@ -1,18 +1,17 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.AccountHolder
 {
-    public class DetailsViewModel
+    public class EditViewModel
     {
         [DisplayName("Account reference")]
+        [Required(ErrorMessage = "Account reference is required")]
         public string AccountReference { get; set; }
 
         [DisplayName("Fund code")]
         public string FundCode { get; set; }
-
-        [DisplayName("Fund name")]
-        public string FundName { get; set; }
 
         [DisplayName("Current balance")]
         public decimal? CurrentBalance { get; set; }
@@ -29,9 +28,6 @@ namespace Admin.Models.AccountHolder
 
         public string Surname { get; set; }
 
-        [DisplayName("Name")]
-        public string FullNameAndTitle { get; set; }
-
         [DisplayName("Address line 1")]
         public string AddressLine1 { get; set; }
 
@@ -47,30 +43,23 @@ namespace Admin.Models.AccountHolder
         [DisplayName("Postcode")]
         public string Postcode { get; set; }
 
-        [DisplayName("Address")]
-        public string Address { get; set; }
-
         [DisplayName("Record type")]
         public string RecordType { get; set; }
 
-        [DisplayName("User defined information")]
+        [DisplayName("User field 1")]
         public string UserField1 { get; set; }
 
-        [DisplayName("User defined information")]
+        [DisplayName("User field 2")]
         public string UserField2 { get; set; }
 
-        [DisplayName("User defined information")]
+        [DisplayName("User field 3")]
         public string UserField3 { get; set; }
 
         [DisplayName("Stop message")]
         public string StopMessageReference { get; set; }
+        
+        public SelectList Funds { get; set; }
 
-        [DisplayName("Stop message")]
-        public string StopMessage { get; set; }
-
-        [DisplayName("Last updated")]
-        public DateTime? LastUpdated { get; set; }
-
-        public bool ShowSelect { get; set; }
+        public SelectList StopMessages { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Admin.Controllers;
+﻿using Admin.Classes.ViewModelBuilders.AccountHolder;
+using Admin.Controllers;
 using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
 using log4net;
@@ -19,8 +20,11 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Search
         private readonly Type _controller = typeof(AccountHolderController);
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, string>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, string>>();
+        private readonly Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>>();
+        private readonly Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>>();
         private readonly Mock<IModelCommand<Models.AccountHolder.LookupViewModel>> _mockLookupAccountHolderCommand = new Mock<IModelCommand<Models.AccountHolder.LookupViewModel>>();
+        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
+        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
 
         private MethodInfo GetMethod()
         {
@@ -32,24 +36,32 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Search
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchViewModel>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.AccountHolder.SearchViewModel>())).Returns(new Models.AccountHolder.ListViewModel());
+            var listViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>>();
+            listViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.AccountHolder.SearchCriteria>())).Returns(new Models.AccountHolder.ListViewModel());
 
             var dependencies = new AccountHolderControllerDependencies(
                 _mockLogger.Object,
                 listViewModelBuilder.Object,
                 _mockDetailsViewModelBuilder.Object,
-                _mockLookupAccountHolderCommand.Object);
+                _mockEditViewModelBuilder.Object,
+                _mockLookupAccountHolderCommand.Object,
+                _mockCreateCommand.Object,
+                _mockEditCommand.Object);
 
             var controller = new AccountHolderController(dependencies);
 
-            return controller.Search(new Models.AccountHolder.SearchViewModel());
+            var controllerContext = new Mock<ControllerContext>();
+            controllerContext.SetupGet(p => p.HttpContext.Session["AccountHolderController::IsAPaymentSearch"]).Returns(false);
+
+            controller.ControllerContext = controllerContext.Object;
+
+            return controller.Search(new Models.AccountHolder.SearchCriteria());
         }
 
         [TestMethod]
         public void HasCorrectNumberOfCustomAttributes()
         {
-            Assert.AreEqual(1, GetMethod().CustomAttributes.Count());
+            Assert.AreEqual(3, GetMethod().CustomAttributes.Count());
         }
 
         [TestMethod]

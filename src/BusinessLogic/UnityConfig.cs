@@ -43,6 +43,7 @@ namespace BusinessLogic
                 .RegisterType<IRefundService, RefundService>()
                 .RegisterType<IRoleService, RoleService>()
                 .RegisterType<ISuspenseService, SuspenseService>()
+                .RegisterType<IStopMessageService, StopMessageService>()
                 .RegisterType<ISystemMessageService, SystemMessageService>()
                 .RegisterType<ITemplateService, TemplateService>()
                 .RegisterType<ITemplateRowService, TemplateRowService>()
@@ -62,6 +63,7 @@ namespace BusinessLogic
                 .RegisterType<IEmailServiceDependencies, EmailServiceDependencies>()
                 .RegisterType<IEmailFactory, EmailFactory>()
 
+                .RegisterType<IAccountHolderStopMessageValidator, AccountHolderStopMessageValidator>()
                 .RegisterType<IAccountReferenceValidator, AccountReferenceValidator>()
                 .RegisterType<IBasketValidator, BasketValidator>()
                 .RegisterType<IEReturnDescriptionValidator, EReturnDescriptionValidator>()

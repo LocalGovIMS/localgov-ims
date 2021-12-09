@@ -8,7 +8,7 @@ namespace Admin.Models.AccountHolder
         public int Count { get; set; }
         public int Pages { get; set; }
         public int Page { get; set; }
-        public SearchViewModel SearchCriteria { get; set; }
+        public SearchCriteria SearchCriteria { get; set; }
         public string FundName { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Admin.Interfaces.Commands;
+﻿using Admin.Classes.ViewModelBuilders.AccountHolder;
+using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
 using Admin.Models.AccountHolder;
 using FluentAssertions;
@@ -17,9 +18,12 @@ namespace Admin.UnitTests.Controllers
     {
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchViewModel>> _mockListViewModelBuider = new Mock<IModelBuilder<ListViewModel, SearchViewModel>>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, string>> _mockDetailsViewModelBuider = new Mock<IModelBuilder<DetailsViewModel, string>>();
+        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuider = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
+        private readonly Mock<IModelBuilder<DetailsViewModel, DetailsViewModelBuilderArgs>> _mockDetailsViewModelBuider = new Mock<IModelBuilder<DetailsViewModel, DetailsViewModelBuilderArgs>>();
+        private readonly Mock<IModelBuilder<EditViewModel, string>> _mockEditViewModelBuider = new Mock<IModelBuilder<EditViewModel, string>>();
         private readonly Mock<IModelCommand<LookupViewModel>> _mockLookupViewModelCommand = new Mock<IModelCommand<LookupViewModel>>();
+        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
+        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
 
         [TestMethod]
         public void ThrowsCorrectExceptionTypeWhenListViewModelBuiderIsNull()
@@ -30,7 +34,10 @@ namespace Admin.UnitTests.Controllers
                     _mockLogger.Object,
                     null,
                     _mockDetailsViewModelBuider.Object,
-                    _mockLookupViewModelCommand.Object);
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
 
             }
             catch (Exception e)
@@ -45,10 +52,13 @@ namespace Admin.UnitTests.Controllers
             try
             {
                 var dependencies = new DependenciesClass(
-                   _mockLogger.Object,
-                   null,
-                   _mockDetailsViewModelBuider.Object,
-                    _mockLookupViewModelCommand.Object);
+                    _mockLogger.Object,
+                    null,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
             }
             catch (ArgumentNullException exception)
             {
@@ -62,10 +72,13 @@ namespace Admin.UnitTests.Controllers
             try
             {
                 var dependencies = new DependenciesClass(
-                   _mockLogger.Object,
-                   _mockListViewModelBuider.Object,
-                   null,
-                    _mockLookupViewModelCommand.Object);
+                    _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    null,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
 
             }
             catch (Exception e)
@@ -81,13 +94,180 @@ namespace Admin.UnitTests.Controllers
             {
                 var dependencies = new DependenciesClass(
                    _mockLogger.Object,
-                   _mockListViewModelBuider.Object,
-                   null,
-                    _mockLookupViewModelCommand.Object);
+                    _mockListViewModelBuider.Object,
+                    null,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
             }
             catch (ArgumentNullException exception)
             {
                 exception.Message.Should().Be("Value cannot be null.\r\nParameter name: detailsViewModelBuilder");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenEditViewModelBuiderIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                    _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    null,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionDescriptionTypeWhenEditViewModelBuiderIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                   _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    null,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: editViewModelBuilder");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenLookupCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                    _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    null,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionDescriptionTypeWhenLookupCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                   _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    null,
+                    _mockCreateCommand.Object,
+                    _mockEditCommand.Object);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: lookupAccountHolderCommand");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenCreateCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                    _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    null,
+                    _mockEditCommand.Object);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionDescriptionTypeWhenCreateCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                   _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    null,
+                    _mockEditCommand.Object);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: createCommand");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenEditCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                    _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    null);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionDescriptionTypeWhenEditCommandIsNull()
+        {
+            try
+            {
+                var dependencies = new DependenciesClass(
+                   _mockLogger.Object,
+                    _mockListViewModelBuider.Object,
+                    _mockDetailsViewModelBuider.Object,
+                    _mockEditViewModelBuider.Object,
+                    _mockLookupViewModelCommand.Object,
+                    _mockCreateCommand.Object,
+                    null);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: editCommand");
             }
         }
 
@@ -98,7 +278,10 @@ namespace Admin.UnitTests.Controllers
                 _mockLogger.Object,
                 _mockListViewModelBuider.Object,
                 _mockDetailsViewModelBuider.Object,
-                _mockLookupViewModelCommand.Object);
+                _mockEditViewModelBuider.Object,
+                _mockLookupViewModelCommand.Object,
+                _mockCreateCommand.Object,
+                _mockEditCommand.Object);
 
             Assert.IsNotNull(dependencies.ListViewModelBuilder);
             Assert.IsNotNull(dependencies.DetailsViewModelBuilder);

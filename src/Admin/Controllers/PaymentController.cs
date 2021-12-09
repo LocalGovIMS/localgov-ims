@@ -264,7 +264,7 @@ namespace Admin.Controllers
 
             Session[PaymentModelSessionKey] = model;
 
-            return RedirectToAction("Search", "AccountHolder", new { fundCode = fundCode, accountReference = accountReference });
+            return RedirectToAction("Search", "AccountHolder", new { fundCode = fundCode, accountReference = accountReference, isAPaymentSearch = true });
         }
     }
 }

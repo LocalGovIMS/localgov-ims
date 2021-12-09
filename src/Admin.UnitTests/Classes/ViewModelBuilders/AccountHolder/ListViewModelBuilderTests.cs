@@ -54,9 +54,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         }
 
 
-        private Admin.Models.AccountHolder.SearchViewModel GetSearchCriteriaPopulated()
+        private Admin.Models.AccountHolder.SearchCriteria GetSearchCriteriaPopulated()
         {
-            return new Admin.Models.AccountHolder.SearchViewModel()
+            return new Admin.Models.AccountHolder.SearchCriteria()
             {
                 AccountReference = "775326912",
                 FundCode = "23",
@@ -90,7 +90,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 mockFundService.Object);
 
             // Act
-            var result = viewModelBuilder.Build(new Admin.Models.AccountHolder.SearchViewModel()
+            var result = viewModelBuilder.Build(new Admin.Models.AccountHolder.SearchCriteria()
             {
                 AccountReference = "775326912",
                 FundCode = "23",

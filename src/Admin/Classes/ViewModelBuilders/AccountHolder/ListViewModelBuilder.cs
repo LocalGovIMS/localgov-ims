@@ -8,7 +8,7 @@ using System;
 
 namespace Admin.Classes.ViewModelBuilders.AccountHolder
 {
-    public class ListViewModelBuilder : BaseViewModelBuilder<ListViewModel, SearchViewModel>
+    public class ListViewModelBuilder : BaseViewModelBuilder<ListViewModel, Admin.Models.AccountHolder.SearchCriteria>
     {
         private readonly IAccountHolderService _accountHolderService;
         private readonly IFundService _fundService;
@@ -25,21 +25,21 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
 
         protected override ListViewModel OnBuild()
         {
-            var searchResult = _accountHolderService.Search(new SearchCriteria());
+            var searchResult = _accountHolderService.Search(new BusinessLogic.Models.AccountHolder.SearchCriteria());
 
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = new SearchViewModel(),
+                SearchCriteria = new Admin.Models.AccountHolder.SearchCriteria(),
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
             };
         }
 
-        protected override ListViewModel OnBuild(SearchViewModel criteria)
+        protected override ListViewModel OnBuild(Admin.Models.AccountHolder.SearchCriteria criteria)
         {
-            var searchCriteria = new SearchCriteria()
+            var searchCriteria = new BusinessLogic.Models.AccountHolder.SearchCriteria()
             {
                 AccountReference = criteria.AccountReference,
                 HouseNumberName = criteria.HouseNumberName,

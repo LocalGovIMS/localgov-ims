@@ -9,6 +9,7 @@
 @section Header { 
     <h1 class="ui header">
         Account holders
+        @Html.ActionLink("Create account holder", "Create", new { }, new { @class = "ui blue button right floated" })
         <div class="sub header">
             Find an account holder
             @if (!string.IsNullOrEmpty(Model.FundName))
@@ -48,12 +49,14 @@
                     @Html.ToCurrency(item.CurrentBalance)
                 </td>
                 <td style="text-align: center;">
-                    <a href="@Url.Action("Details", new { id = item.AccountReference })" class="ui icon blue button">
-                        <i class="ui info icon" aria-hidden="true"></i> Details
-                    </a>
-                    <a href="@Url.Action("SelectAccountReference", "Payment", new { id = item.AccountReference })" class="ui icon green button">
-                        <i class="ui check square icon" aria-hidden="true"></i> Select account
-                    </a>
+
+                    @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "ui button" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "ui button" })
+
+                    @if (Model.SearchCriteria.IsAPaymentSearch)
+                    {
+                        @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = item.AccountReference }, new { @class = "ui green button" })
+                    }
                 </td>
             </tr>
         }
