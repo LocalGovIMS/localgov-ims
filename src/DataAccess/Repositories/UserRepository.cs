@@ -84,10 +84,6 @@ namespace DataAccess.Repositories
             item.DisplayName = entity.DisplayName;
             item.OfficeCode = entity.OfficeCode;
             item.LastEnabledAt = entity.LastEnabledAt;
-
-            // We need this, because when a user account is locked, if we didn't do this, the system would lock them again straight away.
-            // Might be nice to generate a more clear mechanism for this, as currently if we make any change to an enabled account we'll loose the last login date
-            if (entity.Disabled == false) item.LastLogin = null;
         }
 
         public void RecordLogin(string userName)
