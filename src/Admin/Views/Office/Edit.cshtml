@@ -1,0 +1,44 @@
+﻿@model Admin.Models.Office.EditViewModel
+@{
+    ViewBag.Title = "Edit Office";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Code
+        <div class="sub header">
+            Office details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "Office", FormMethod.Post))
+{
+
+    <div class="ui form">
+
+        @Html.HiddenFor(m => m.Code)
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Code)
+            @Html.DisplayFor(m => m.Code)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "Office", null, new { @class = "ui button" })
+
+    </div>
+
+}

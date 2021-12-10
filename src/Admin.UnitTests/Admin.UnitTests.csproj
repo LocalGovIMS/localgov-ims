@@ -188,6 +188,8 @@
     <Compile Include="Classes\Commands\UserRole\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\User\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\User\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\Office\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Office\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilderTests.cs" />
@@ -202,6 +204,9 @@
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
     <Compile Include="Controllers\AccountHolder\Edit\Get.cs" />
     <Compile Include="Controllers\AccountHolder\Edit\Post.cs" />
     <Compile Include="Controllers\AccountHolder\Create\Get.cs" />
@@ -389,6 +394,13 @@
     <Compile Include="Controllers\User\Edit\Get.cs" />
     <Compile Include="Controllers\User\Edit\Post.cs" />
     <Compile Include="Controllers\User\List\Get.cs" />
+    <Compile Include="Controllers\Office\ConstructorTests.cs" />
+    <Compile Include="Controllers\Office\Create\Get.cs" />
+    <Compile Include="Controllers\Office\Create\Post.cs" />
+    <Compile Include="Controllers\Office\Details\Get.cs" />
+    <Compile Include="Controllers\Office\Edit\Get.cs" />
+    <Compile Include="Controllers\Office\Edit\Post.cs" />
+    <Compile Include="Controllers\Office\List\Get.cs" />
     <Compile Include="Controllers\Vat\ConstructorTests.cs" />
     <Compile Include="Controllers\Vat\Create\Get.cs" />
     <Compile Include="Controllers\Vat\Create\Post.cs" />

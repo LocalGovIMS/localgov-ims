@@ -202,10 +202,12 @@
     <Compile Include="Services\MethodOfPayment\GetAllMopsTests.cs" />
     <Compile Include="Services\MethodOfPayment\GetMopTests.cs" />
     <Compile Include="Services\MethodOfPayment\CreateTests.cs" />
+    <Compile Include="Services\Office\UpdateTests.cs" />
     <Compile Include="Services\MethodOfPayment\UpdateTests.cs" />
     <Compile Include="Services\Notification\BaseNotificationTest.cs" />
     <Compile Include="Services\Notification\ProcessNotificationTests.cs" />
     <Compile Include="Services\Notification\SaveNotificationTests.cs" />
+    <Compile Include="Services\Office\CreateTests.cs" />
     <Compile Include="Services\Payment\BasePaymentTest.cs" />
     <Compile Include="Services\Payment\ProcessPaymentsTests.cs" />
     <Compile Include="Services\Payment\ProcessPaymentTests.cs" />
@@ -269,6 +271,9 @@
     <Compile Include="Services\User\DisableUserTests.cs" />
     <Compile Include="Services\User\RecordLoginTests.cs" />
     <Compile Include="Services\User\UpdateTests.cs" />
+    <Compile Include="Services\Office\BaseTest.cs" />
+    <Compile Include="Services\Office\GetAll.cs" />
+    <Compile Include="Services\Office\GetTests.cs" />
     <Compile Include="Services\Vat\BaseVatTest.cs" />
     <Compile Include="Services\Vat\GetByFundCodeTests.cs" />
     <Compile Include="Services\Vat\GetByVatCodeTests.cs" />

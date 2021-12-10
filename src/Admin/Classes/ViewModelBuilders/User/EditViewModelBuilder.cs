@@ -27,7 +27,7 @@ namespace Admin.Classes.ViewModelBuilders.User
             var model = new EditViewModel();
 
             model.ExpiryDays = DefaultExpiryDays();
-            model.Offices = GetOfficeList(_officeService.GetOffices());
+            model.Offices = GetOfficeList(_officeService.GetAll());
 
             return model;
         }
@@ -46,19 +46,19 @@ namespace Admin.Classes.ViewModelBuilders.User
             model.Disabled = data.Disabled;
             model.DisplayName = data.DisplayName;
             model.OfficeCode = data.OfficeCode;
-            model.Offices = GetOfficeList(_officeService.GetOffices());
+            model.Offices = GetOfficeList(_officeService.GetAll());
 
             return model;
         }
 
         protected override EditViewModel OnRebuild(EditViewModel model)
         {
-            model.Offices = GetOfficeList(_officeService.GetOffices());
+            model.Offices = GetOfficeList(_officeService.GetAll());
 
             return base.OnRebuild(model);
         }
 
-        private SelectList GetOfficeList(List<Office> offices)
+        private SelectList GetOfficeList(List<BusinessLogic.Entities.Office> offices)
         {
             var officeSelectListItems = new List<SelectListItem>();
 
