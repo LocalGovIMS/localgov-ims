@@ -1,0 +1,30 @@
+﻿@model Admin.Models.Office.DetailsViewModel
+@{
+    ViewBag.Title = "Office";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Code
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Office details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Code)
+        @Html.DisplayFor(m => m.Code)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </div>
+
+    @Html.ActionLink("Back", "Back", "Office", null, new { @class = "ui button" })
+
+</div>

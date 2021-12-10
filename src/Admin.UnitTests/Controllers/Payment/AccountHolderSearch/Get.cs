@@ -61,7 +61,7 @@ namespace Admin.UnitTests.Controllers.Payment.AccountHolderSearch
             var result = GetResult() as RedirectToRouteResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.RouteValues["action"], "Search");
+            Assert.AreEqual(result.RouteValues["action"], "PaymentSearch");
         }
     }
 }

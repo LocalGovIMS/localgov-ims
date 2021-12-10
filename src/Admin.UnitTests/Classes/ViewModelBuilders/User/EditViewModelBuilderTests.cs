@@ -57,7 +57,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
                 Disabled = false,
                 OfficeCode = "SP"
             });
-            mockOfficeService.Setup(x => x.GetOffices()).Returns(new List<Office>());
+            mockOfficeService.Setup(x => x.GetAll()).Returns(new List<BusinessLogic.Entities.Office>());
 
             var editViewModelBuilder = new Admin.Classes.ViewModelBuilders.User.EditViewModelBuilder(
                 _mockLogger.Object,

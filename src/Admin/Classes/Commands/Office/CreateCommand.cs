@@ -4,11 +4,11 @@ using log4net;
 
 namespace Admin.Classes.Commands.Office
 {
-    public class EditCommand : BaseCommand<EditViewModel>
+    public class CreateCommand : BaseCommand<EditViewModel>
     {
         private readonly IOfficeService _officeService;
 
-        public EditCommand(ILog log
+        public CreateCommand(ILog log
             , IOfficeService officeService)
             : base(log)
         {
@@ -17,13 +17,13 @@ namespace Admin.Classes.Commands.Office
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var item = new BusinessLogic.Entities.Office
+            var item = new BusinessLogic.Entities.Office()
             {
                 OfficeCode = model.Code,
-                Name= model.Name
+                Name = model.Name
             };
 
-            var result = _officeService.Update(item);
+            var result = _officeService.Create(item);
 
             return new CommandResult(result);
         }

@@ -1,0 +1,54 @@
+﻿@model IList<Admin.Models.Office.DetailsViewModel>
+@{
+    ViewBag.Title = "Office";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Offices
+        @Html.ActionLink("Create Office", "Create", new { }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Offices within the system
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Code)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="panels">
+        There are no offices in the system!
+    </div>
+}

@@ -199,6 +199,12 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.Vat.EditViewModel>, Commands.Vat.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.Vat.EditViewModel>, Commands.Vat.EditCommand>("Edit")
 
+                .RegisterType<IModelBuilder<ViewModels.Office.DetailsViewModel, string>, ViewModelBuilders.Office.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.Office.EditViewModel, string>, ViewModelBuilders.Office.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<IList<ViewModels.Office.DetailsViewModel>, string>, ViewModelBuilders.Office.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.Office.EditViewModel>, Commands.Office.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.Office.EditViewModel>, Commands.Office.EditCommand>("Edit")
+
                 .RegisterType<IModelBuilder<ViewModels.ImportProcessingRule.DetailsViewModel, int>, ViewModelBuilders.ImportProcessingRule.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.ImportProcessingRule.EditViewModel, int>, ViewModelBuilders.ImportProcessingRule.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.ImportProcessingRule.ListViewModel, ViewModels.ImportProcessingRule.SearchCriteria>, ViewModelBuilders.ImportProcessingRule.ListViewModelBuilder>()
@@ -248,7 +254,8 @@ namespace Admin
                 .RegisterType<IValidationControllerDependencies, ValidationControllerDependencies>()
                 .RegisterType<IImportProcessingRuleControllerDependencies, ImportProcessingRuleControllerDependencies>()
                 .RegisterType<IImportProcessingRuleConditionControllerDependencies, ImportProcessingRuleConditionControllerDependencies>()
-                .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>();
+                .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>()
+                .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>();
 
         }
 

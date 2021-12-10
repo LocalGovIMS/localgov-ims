@@ -53,6 +53,53 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             });
         }
 
+        private void SetupFundService(Mock<IFundService> service)
+        {
+            service.Setup(x => x.GetAllFunds()).Returns(
+                new List<BusinessLogic.Entities.Fund>()
+                {
+                    {
+                        new BusinessLogic.Entities.Fund()
+                        {
+                            FundCode = "F1",
+                            FundName = "Fund1"
+                        }
+                    },
+                    {
+                        new BusinessLogic.Entities.Fund()
+                        {
+                            FundCode = "F2",
+                            FundName = "Fund2"
+                        }
+                    }
+                }
+            );
+
+            service.Setup(x => x.GetAllFunds(It.IsAny<bool>())).Returns(
+                new List<BusinessLogic.Entities.Fund>()
+                {
+                    {
+                        new BusinessLogic.Entities.Fund()
+                        {
+                            FundCode = "F1",
+                            FundName = "Fund1"
+                        }
+                    },
+                    {
+                        new BusinessLogic.Entities.Fund()
+                        {
+                            FundCode = "F2",
+                            FundName = "Fund2"
+                        }
+                    }
+                }
+            );
+
+            service.Setup(x => x.GetByFundCode(It.IsAny<string>())).Returns(new BusinessLogic.Entities.Fund()
+            {
+                FundName = "Test Fund"
+            });
+        }
 
         private Admin.Models.AccountHolder.SearchCriteria GetSearchCriteriaPopulated()
         {
@@ -68,21 +115,15 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             };
         }
 
-
         [TestMethod]
         public void OnBuildWithParamsPageIs0ReturnsViewModel()
         {
             // Arrange
             Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
             Mock<IFundService> mockFundService = new Mock<IFundService>();
-
-
-            mockFundService.Setup(x => x.GetByFundCode(It.IsAny<string>())).Returns(new BusinessLogic.Entities.Fund()
-            {
-                FundName = "Test Fund"
-            });
-
+            
             SetupAccountHolderService(acountHolderService);
+            SetupFundService(mockFundService);
 
             var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
                 _mockLogger.Object,
@@ -106,8 +147,6 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Assert.IsInstanceOfType(result, typeof(Admin.Models.AccountHolder.ListViewModel));
         }
 
-
-
         [TestMethod]
         public void OnBuildWithParamsPageIs1ReturnsViewModel()
         {
@@ -115,13 +154,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
             Mock<IFundService> mockFundService = new Mock<IFundService>();
 
-
-            mockFundService.Setup(x => x.GetByFundCode(It.IsAny<string>())).Returns(new BusinessLogic.Entities.Fund()
-            {
-                FundName = "Test Fund"
-            });
-
             SetupAccountHolderService(acountHolderService);
+            SetupFundService(mockFundService);
 
             var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
                 _mockLogger.Object,
@@ -142,6 +176,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
 
             SetupAccountHolderService(acountHolderService);
+            SetupFundService(_mockFundService);
 
             var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
                 _mockLogger.Object,

@@ -235,6 +235,8 @@
     <Compile Include="Classes\Commands\Fund\EditCommand.cs" />
     <Compile Include="Classes\Commands\Suspense\SaveNoteCommand.cs" />
     <Compile Include="Classes\Commands\Suspense\JournalCommand.cs" />
+    <Compile Include="Classes\Commands\Office\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\Office\EditCommand.cs" />
     <Compile Include="Classes\Commands\Vat\CreateCommand.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommand.cs" />
     <Compile Include="Classes\Commands\Role\EditCommand.cs" />
@@ -266,6 +268,9 @@
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleConditionControllerDependencies.cs" />
@@ -275,6 +280,7 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleConditionControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleActionControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IOfficeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SystemMessageControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\TemplateControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\PaymentControllerDependencies.cs" />
@@ -285,6 +291,7 @@
     <Compile Include="Controllers\Dependencies\FundControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ValidationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\OfficeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\VatControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\UserFundGroupControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\UserTemplateControllerDependencies.cs" />
@@ -367,6 +374,7 @@
     <Compile Include="Controllers\FundController.cs" />
     <Compile Include="Controllers\SuspenseController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\VatController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserFundGroupController.cs" />
@@ -455,6 +463,8 @@
     <Compile Include="Models\Transfer\TransferViewModel.cs" />
     <Compile Include="Models\Fund\DetailsViewModel.cs" />
     <Compile Include="Models\Fund\EditViewModel.cs" />
+    <Compile Include="Models\Office\DetailsViewModel.cs" />
+    <Compile Include="Models\Office\EditViewModel.cs" />
     <Compile Include="Models\Vat\DetailsViewModel.cs" />
     <Compile Include="Models\Vat\EditViewModel.cs" />
     <Compile Include="Models\UserFundGroup\EditViewModel.cs" />
@@ -1490,6 +1500,10 @@
     <Content Include="Web.Base.config" />
     <Content Include="Views\AccountHolder\Edit.cshtml" />
     <Content Include="Views\AccountHolder\Create.cshtml" />
+    <Content Include="Views\Office\Create.cshtml" />
+    <Content Include="Views\Office\Details.cshtml" />
+    <Content Include="Views\Office\Edit.cshtml" />
+    <Content Include="Views\Office\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
