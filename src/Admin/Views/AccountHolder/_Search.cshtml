@@ -1,6 +1,6 @@
 ﻿@model Admin.Models.AccountHolder.SearchCriteria
 
-@using (Html.BeginForm("Search", "AccountHolder", FormMethod.Get))
+@using (Html.BeginForm(Model.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder", FormMethod.Get))
 {
     @Html.HiddenFor(x => x.IsAPaymentSearch)
 

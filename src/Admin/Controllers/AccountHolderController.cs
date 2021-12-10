@@ -16,7 +16,7 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Account Holders")]
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Account Holders")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)] // TODO: What should this be, a new role?
         [HttpGet]
         public ActionResult List()
@@ -24,10 +24,30 @@ namespace Admin.Controllers
             return RedirectToAction("Search");
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Account Holders")]
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Account Holders")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)] // TODO: What should this be, a new role?
         [AcceptVerbs("GET", "POST")]
         public ActionResult Search(SearchCriteria criteria)
+        {
+            Session[IsAPaymentSearchSessionKey] = criteria.IsAPaymentSearch;
+
+            var model = Dependencies.ListViewModelBuilder.Build(criteria);
+
+            return View("List", model);
+        }
+
+        [NavigatablePageActionFilter(OnlyComparePath = true, DisplayText = "Account Holders")]
+        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)] // TODO: What should this be, a new role?
+        [HttpGet]
+        public ActionResult PaymentList()
+        {
+            return RedirectToAction("PaymentSearch");
+        }
+
+        [NavigatablePageActionFilter(OnlyComparePath = true, DisplayText = "Account Holders")]
+        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)] // TODO: What should this be, a new role?
+        [AcceptVerbs("GET", "POST")]
+        public ActionResult PaymentSearch(SearchCriteria criteria)
         {
             Session[IsAPaymentSearchSessionKey] = criteria.IsAPaymentSearch;
 

@@ -18,7 +18,7 @@
                 queryString = "?IsAPaymentSearch=True&FundCode=" + Model.SearchCriteria.FundCode;
             }
 
-            <a href="@Url.Action("Search", "AccountHolder")@queryString" class="ui button right floated" id="reset">
+            <a href="@Url.Action(Model.SearchCriteria.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder")@queryString" class="ui button right floated" id="reset">
                 <i class="undo icon"></i> Reset search
             </a>
         }
