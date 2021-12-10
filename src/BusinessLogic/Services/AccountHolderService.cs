@@ -5,6 +5,7 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
+using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models.AccountHolder;
 using BusinessLogic.Models.Shared;
 using log4net;
@@ -14,12 +15,15 @@ namespace BusinessLogic.Services
 {
     public class AccountHolderService : BaseService, IAccountHolderService
     {
+        private readonly IAccountHolderStopMessageValidator _accountHolderStopMessageValidator;
 
         public AccountHolderService(ILog logger
             , IUnitOfWork unitOfWork
-            , ISecurityContext securityContext)
+            , ISecurityContext securityContext
+            , IAccountHolderStopMessageValidator accountHolderStopMessageValidator)
             : base(logger, unitOfWork, securityContext)
         {
+            _accountHolderStopMessageValidator = accountHolderStopMessageValidator;
         }
 
         public AccountValidation GetAccountValidation(string validationReference)
@@ -39,6 +43,10 @@ namespace BusinessLogic.Services
         {
             try
             {
+                var validateStopMessageResult = _accountHolderStopMessageValidator.Validate(accountHolder);
+                if (!validateStopMessageResult.Success) 
+                    return validateStopMessageResult;
+
                 UnitOfWork.AccountHolders.Add(accountHolder);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
@@ -55,6 +63,10 @@ namespace BusinessLogic.Services
         {
             try
             {
+                var validateStopMessageResult = _accountHolderStopMessageValidator.Validate(accountHolder);
+                if (!validateStopMessageResult.Success) 
+                    return validateStopMessageResult;
+
                 var existingRecord = UnitOfWork.AccountHolders.GetByAccountReference(accountHolder.AccountReference);
 
                 if (existingRecord == null)

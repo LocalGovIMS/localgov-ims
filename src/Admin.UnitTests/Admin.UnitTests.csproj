@@ -148,6 +148,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Commands\AccountHolder\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\AccountHolder\LookupCommandTests.cs" />
+    <Compile Include="Classes\Commands\AccountHolder\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\CreateCommandTests.cs" />
@@ -187,6 +190,7 @@
     <Compile Include="Classes\Commands\User\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\CreateViewModelBuilderTests.cs" />
@@ -198,6 +202,10 @@
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRule\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\AccountHolder\Edit\Get.cs" />
+    <Compile Include="Controllers\AccountHolder\Edit\Post.cs" />
+    <Compile Include="Controllers\AccountHolder\Create\Get.cs" />
+    <Compile Include="Controllers\AccountHolder\Create\Post.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleActionControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleConditionControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleControllerDependenciesTests.cs" />

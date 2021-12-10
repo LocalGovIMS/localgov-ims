@@ -91,9 +91,12 @@ namespace Admin
         {
             container
 
-                .RegisterType<IModelBuilder<ViewModels.AccountHolder.ListViewModel, ViewModels.AccountHolder.SearchViewModel>, ViewModelBuilders.AccountHolder.ListViewModelBuilder>()
-                .RegisterType<IModelBuilder<ViewModels.AccountHolder.DetailsViewModel, string>, ViewModelBuilders.AccountHolder.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.AccountHolder.ListViewModel, ViewModels.AccountHolder.SearchCriteria>, ViewModelBuilders.AccountHolder.ListViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.AccountHolder.DetailsViewModel, ViewModelBuilders.AccountHolder.DetailsViewModelBuilderArgs>, ViewModelBuilders.AccountHolder.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.AccountHolder.EditViewModel, string>, ViewModelBuilders.AccountHolder.EditViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.AccountHolder.LookupViewModel>, Commands.AccountHolder.LookupCommand>("Lookup")
+                .RegisterType<IModelCommand<ViewModels.AccountHolder.EditViewModel>, Commands.AccountHolder.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.AccountHolder.EditViewModel>, Commands.AccountHolder.EditCommand>("Edit")
 
                 .RegisterType<IModelBuilder<ViewModels.FundGroup.DetailsViewModel, int>, ViewModelBuilders.FundGroup.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.FundGroup.EditViewModel, int>, ViewModelBuilders.FundGroup.CreateViewModelBuilder>("Create")

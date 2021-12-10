@@ -18,34 +18,27 @@ namespace Admin.Classes.Commands.AccountHolder
 
         protected override CommandResult OnExecute(LookupViewModel model)
         {
-            try
-            {
-                var result = new CommandResult(true);
-                var accountHolder = _accountHolderService.GetByAccountReference(model.AccountReference, model.FundCode);
+            var result = new CommandResult(true);
+            var accountHolder = _accountHolderService.GetByAccountReference(model.AccountReference, model.FundCode);
 
-                if (accountHolder != null)
-                {
-                    result.Data = new
-                    {
-                        name = accountHolder.Forename + " " + accountHolder.Surname,
-                        outstandingBalance = accountHolder.CurrentBalance
-                    };
-                }
-                else
-                {
-                    result.Data = new
-                    {
-                        name = string.Empty,
-                        outstandingBalance = 0
-                    };
-                }
-
-                return result;
-            }
-            catch (Exception e)
+            if (accountHolder != null)
             {
-                return new CommandResult(false, e.Message);
+                result.Data = new
+                {
+                    name = accountHolder.Forename + " " + accountHolder.Surname,
+                    outstandingBalance = accountHolder.CurrentBalance
+                };
             }
+            else
+            {
+                result.Data = new
+                {
+                    name = string.Empty,
+                    outstandingBalance = 0
+                };
+            }
+
+            return result;   
         }
     }
 }

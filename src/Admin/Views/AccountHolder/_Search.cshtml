@@ -1,54 +1,66 @@
-﻿@model Admin.Models.AccountHolder.SearchViewModel
+﻿@model Admin.Models.AccountHolder.SearchCriteria
 
-@using (Html.BeginForm("Search", "AccountHolder", FormMethod.Get))
+@using (Html.BeginForm(Model.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder", FormMethod.Get))
 {
-    @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+    @Html.HiddenFor(x => x.IsAPaymentSearch)
 
-    <div class="ui small text stackable six item menu">
-        <div class="item">
-            <div class="ui labeled icon blue input">
-                <label class="ui blue label">@Html.DisplayNameFor(m => m.AccountReference)</label>                            
-                    @Html.TextBoxFor(m => m.AccountReference)                
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label>Account reference</label>
+                    @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Account reference" })
+                </div>
+                <div class="field">
+                    <label>Surname</label>
+                    @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Surname" })
+                </div>
+                <div class="field">
+                    @if (!Model.IsAPaymentSearch)
+                    {
+                        <label>Fund</label>
+                        <div class="ui fluid search selection dropdown fund">
+                            @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                            <i class="dropdown icon"></i>
+                            <div class="default text no-overflow" style="width: 100px;">Select fund</div>
+                            <div class="menu">
+                                <div class="item" data-value="">
+                                    None
+                                </div>
+                                @foreach (var item in Model.Funds.Items)
+                                {
+                                    <div class="item" data-value="@item.Value">
+                                        @item.Text
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                    }
+                </div>
             </div>
-        </div>
-
-        
-        <div class="item">
-            <div class="ui labeled input">
-                <label class="ui blue label">@Html.DisplayNameFor(m => m.PostCode)</label>                        
-                @Html.TextBoxFor(m => m.PostCode)
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="ui labeled input">
-                <label class="ui blue label">@Html.DisplayNameFor(m => m.HouseNumberName)</label>                
-                @Html.TextBoxFor(m => m.HouseNumberName)
-            </div>
-        </div>
-        
-        <div class="item">
-            <div class="ui labeled input">
-                <label class="ui blue label">@Html.DisplayNameFor(m => m.Street)</label>                
-                @Html.TextBoxFor(m => m.Street)
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="ui labeled input">
-                <label class="ui blue label">@Html.DisplayNameFor(m => m.Surname)</label>
-                @Html.TextBoxFor(m => m.Surname)
-            </div>
-        </div>
-
-
-        <div class="item">
-            <button class="ui icon black button" tabindex="0" type="submit">
-                <i class="search icon"></i>
-            </button>
-            &nbsp;
-            <div class="ui icon black button reset" tabindex="1" onclick="location.href='@Url.Action("Back", "AccountHolder")'">
-                <i class="remove circle icon reset"></i>
+            <div class="four fields">
+                <div class="field">
+                    <label>Postcode</label>
+                    @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Postcode" })
+                </div>
+                <div class="field">
+                    <label>House Number/Name</label>
+                    @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "House Number/Name" })
+                </div>
+                <div class="field">
+                    <label>Street</label>
+                    @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Street" })
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -26,6 +26,10 @@
         {
             <a id="menu__ereturns" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "EReturn" ? "active" : "")" href="@Url.Action("List", "EReturn")"><i class="money icon"></i> eReturns</a>
         }
+        @if (User.IsInRole(Role.Finance))
+        {
+            <a id="menu__account_holders" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "AccountHolder" ? "active" : "")" href="@Url.Action("List", "AccountHolder")"><i class="briefcase icon"></i> Accounts</a>
+        }
         @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.Reporting))
         {
             <a id="menu__suspense" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Suspense" ? "active" : "")" href="@Url.Action("List", "Suspense")"><i class="flag icon"></i> Suspense</a>

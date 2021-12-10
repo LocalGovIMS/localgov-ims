@@ -244,6 +244,7 @@
     <Compile Include="Interfaces\Services\IImportProcessingRuleActionService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleOperatorService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleFieldService.cs" />
+    <Compile Include="Interfaces\Services\IStopMessageService.cs" />
     <Compile Include="Interfaces\Services\ISystemMessageService.cs" />
     <Compile Include="Interfaces\Services\IOfficeService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseService.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Interfaces\Strategies\IApproveEReturnsStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IJournalAllocationStrategy.cs" />
     <Compile Include="Interfaces\Strategies\ITransactionVatStrategy.cs" />
+    <Compile Include="Interfaces\Validators\IAccountHolderStopMessageValidator.cs" />
     <Compile Include="Interfaces\Validators\IEReturnDescriptionValidator.cs" />
     <Compile Include="Interfaces\Validators\ITemplateRowValidator.cs" />
     <Compile Include="Interfaces\Validators\IEReturnReferenceValidator.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="Services\SuspenseService.cs" />
     <Compile Include="Services\EReturnService.cs" />
     <Compile Include="Services\EReturnTypeService.cs" />
+    <Compile Include="Services\StopMessageService.cs" />
     <Compile Include="Services\SystemMessageService.cs" />
     <Compile Include="Services\TemplateRowService.cs" />
     <Compile Include="Services\TransferService.cs" />
@@ -365,6 +368,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="Services\VatService.cs" />
+    <Compile Include="Validators\AccountHolderCreationValidator.cs" />
     <Compile Include="Validators\EReturnDescriptionValidator.cs" />
     <Compile Include="Validators\TemplateReferenceValidator.cs" />
     <Compile Include="Validators\BasketValidator.cs" />

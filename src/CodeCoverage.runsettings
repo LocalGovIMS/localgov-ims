@@ -51,10 +51,10 @@ Included items must then not match any entries in the exclude list to remain inc
                 <Function>.*::__GetTestMethodInfo.*</Function>
                 <Function>^Microsoft::VisualStudio::CppCodeCoverageFramework::.*</Function>
                 <Function>^Microsoft::VisualStudio::CppUnitTestFramework::.*</Function>
-                <Function>^LocalGovIms\.Payments\.Admin\.UnitTests.*</Function>
-				<Function>^LocalGovIms\.Payments\.Web\.UnitTests.*</Function>
-                <Function>^LocalGovIms\.Payments\.BusinessLogic\.UnitTests.*</Function>
-
+                <Function>^Admin\.UnitTests.*</Function>
+				<Function>^Web\.UnitTests.*</Function>
+                <Function>^BusinessLogic\.UnitTests.*</Function>
+				<Function>^Admin\.UITests.*</Function>
               </Exclude>
             </Functions>
 

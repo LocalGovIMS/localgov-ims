@@ -200,6 +200,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\AccountHolder\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\AccountHolder\EditCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\LookupCommand.cs" />
     <Compile Include="Classes\Commands\BaseCommand.cs" />
     <Compile Include="Classes\Commands\CommandResult.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="Classes\Commands\User\CreateCommand.cs" />
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\CreateViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\EditViewModelBuilder.cs" />
@@ -397,9 +400,10 @@
     <Compile Include="Interfaces\ModelBuilders\IModelBuilder.cs" />
     <Compile Include="Interfaces\Resolvers\IUrlResolver.cs" />
     <Compile Include="Models\AccountHolder\DetailsViewModel.cs" />
+    <Compile Include="Models\AccountHolder\EditViewModel.cs" />
     <Compile Include="Models\AccountHolder\ListViewModel.cs" />
     <Compile Include="Models\AccountHolder\LookupViewModel.cs" />
-    <Compile Include="Models\AccountHolder\SearchViewModel.cs" />
+    <Compile Include="Models\AccountHolder\SearchCriteria.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\EReturn\CreateViewModel.cs" />
     <Compile Include="Models\EReturn\EditViewModel.cs" />
@@ -681,6 +685,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\App\AccountHolder\edit.js" />
     <Content Include="Scripts\App\Core\payments-admin.core.js" />
     <Content Include="Scripts\App\EReturn\0_shared.js" />
     <Content Include="Scripts\App\EReturn\edit.js" />
@@ -1483,6 +1488,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Base.config" />
+    <Content Include="Views\AccountHolder\Edit.cshtml" />
+    <Content Include="Views\AccountHolder\Create.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

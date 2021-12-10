@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.AccountHolder
 {
-    public class SearchViewModel
+    public class SearchCriteria
     {
-        [Display(Name = "Ref")]
+        [Display(Name = "Account reference")]
         public string AccountReference { get; set; }
 
         [Display(Name = "House No")]
@@ -19,6 +20,10 @@ namespace Admin.Models.AccountHolder
 
         public string FundCode { get; set; }
 
+        public bool IsAPaymentSearch { get; set; }
+
         public int Page { get; set; }
+
+        public SelectList Funds { get; set; }
     }
 }
