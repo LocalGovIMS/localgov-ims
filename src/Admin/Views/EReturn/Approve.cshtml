@@ -63,137 +63,136 @@
                 </thead>
                 <tbody id="template-rows">
                     @if (Model.Transactions.Any())
-                {
-                    for (int i = 0; i < Model.Transactions.Count; i++)
                     {
-                        @Html.HiddenFor(m => m.Transactions[i].Id)
-                        @Html.HiddenFor(m => m.Transactions[i].TemplateRowId)
-                        <tr>
-                            <td>
-                                @Model.Transactions[i].Reference
-                            </td>
-                            <td>
-                                @Model.Transactions[i].Description
-                                @Html.HiddenFor(m => m.Transactions[i].Description)
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(m => m.Transactions[i].Amount, "{0:F2}", new { @class = "transaction-value", @maxlength = "18" })
-                            </td>
-                            <td>
-                                @Model.Transactions[i].VatCode
-                            </td>
-                        </tr>
-                }
-            }
+                        for (int i = 0; i < Model.Transactions.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.Transactions[i].Id)
+                            @Html.HiddenFor(m => m.Transactions[i].TemplateRowId)
+                            <tr>
+                                <td>
+                                    @Model.Transactions[i].Reference
+                                </td>
+                                <td>
+                                    @Model.Transactions[i].Description
+                                    @Html.HiddenFor(m => m.Transactions[i].Description)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.Transactions[i].Amount, "{0:F2}", new { @class = "transaction-value", @maxlength = "18" })
+                                </td>
+                                <td>
+                                    @Model.Transactions[i].VatCode
+                                </td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>
 
         @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash)
-    {
-        @Html.HiddenFor(m => m.Cash.Id)
-        <div class="ui tab" data-tab="analysis-tab">
-            <table class="ui table">
-                <thead>
-                    <tr>
-                        <th>Denomination</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Bag number</td>
-                        <td>@Html.DisplayFor(m => m.Cash.BagNumber)</td>
-                    </tr>
-                    <tr>
-                        <td>£50</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "50", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£20</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "20", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£10</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "10", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£5</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "5", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£2</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "2", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£1</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "1", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>50p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.50", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>20p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.20", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>10p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.10", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>5p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.05", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>2p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.02", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>1p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.01", @maxlength = "18" })</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-}
+        {
+            @Html.HiddenFor(m => m.Cash.Id)
+            <div class="ui tab" data-tab="analysis-tab">
+                <table class="ui table">
+                    <thead>
+                        <tr>
+                            <th>Denomination</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bag number</td>
+                            <td>@Html.DisplayFor(m => m.Cash.BagNumber)</td>
+                        </tr>
+                        <tr>
+                            <td>£50</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "50", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£20</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "20", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£10</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "10", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£5</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "5", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£2</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "2", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£1</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "1", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>50p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.50", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>20p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.20", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>10p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.10", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>5p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.05", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>2p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.02", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>1p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.01", @maxlength = "18" })</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
 
         @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cheque)
-    {
-        <div class="ui tab" data-tab="analysis-tab">
-            <table class="ui table">
-                <thead>
-                    <tr>
-                        <th>Name on cheque</th>
-                        <th>Value</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="cheque-rows">
-                    @for (int i = 0; i < Model.Cheques.Count; i++)
-                {
-                    <tr>
-                        <td>@Html.TextBoxFor(m => m.Cheques[i].Name, new { @maxlength = "25" })</td>
-                        <td>@Html.TextBoxFor(m => m.Cheques[i].Amount, "{0:F2}", new { @class = "analysis-value monetary-amount", @maxlength = "18" })</td>
-                        <td>
-                            <a class="ui red icon button remove-cheque" data-remove="@i">
-                                <i class="ui delete icon"></i>
-                            </a>
-                        </td>
-                    </tr>
-            }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3">
-                            <a id="add-row" class="ui button blue add-cheque">Add row</a>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-}
-
+        {
+            <div class="ui tab" data-tab="analysis-tab">
+                <table class="ui table">
+                    <thead>
+                        <tr>
+                            <th>Name on cheque</th>
+                            <th>Value</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cheque-rows">
+                        @for (int i = 0; i < Model.Cheques.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.TextBoxFor(m => m.Cheques[i].Name, new { @maxlength = "25" })</td>
+                                <td>@Html.TextBoxFor(m => m.Cheques[i].Amount, "{0:F2}", new { @class = "analysis-value monetary-amount", @maxlength = "18" })</td>
+                                <td>
+                                    <a class="ui red icon button remove-cheque" data-remove="@i">
+                                        <i class="ui delete icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">
+                                <a id="add-row" class="ui button blue add-cheque">Add row</a>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        }
 
         <div class="page-actions--footer">
             <div class="field">
@@ -204,10 +203,10 @@
 
     <div class="page-actions">
         <button type="submit" value="Approve" name="action" class="ui right floated primary labeled icon button submit-button"><i class="ui save icon"></i> Save</button>
-        @*@if ((EReturnStatus)Model.EReturn.EReturn.StatusId != EReturnStatus.Deleted)
-            {*@
-        @Html.ActionLink("Delete", "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
-        @*}*@
+        @if (User.IsInRole(Role.EReturnDelete))
+        {
+            @Html.ActionLink("Delete", "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
+        }
     </div>
 
 }

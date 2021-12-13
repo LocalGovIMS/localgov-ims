@@ -227,17 +227,16 @@
     <div class="page-actions">
         <button type="submit" id="submitprint" value="Submit" name="action" class="ui right floated positive labeled icon button print submit-button"><i class="ui thumbs up icon"></i> Print & Submit</button>
         <button type="submit" value="Edit" name="action" class="ui right floated primary labeled icon button save-button"><i class="ui save icon"></i>Save draft</button>
-        @*@if ((EReturnStatus)Model.EReturn.EReturn.StatusId != EReturnStatus.Deleted)
-            {*@
-         
-        @{ var deleteLinkText = 
-                ((EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.New 
-                || (EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.InProgress)
-                ? "Void"
-                : "Delete"; }
-        @Html.ActionLink(deleteLinkText, "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
+        @if (User.IsInRole(Role.EReturnDelete))
+        {
+            var deleteLinkText =
+                 ((EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.New
+                 || (EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.InProgress)
+                 ? "Void"
+                 : "Delete";
 
-        @*}*@
+            @Html.ActionLink(deleteLinkText, "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
+        }
     </div>
 
 }
