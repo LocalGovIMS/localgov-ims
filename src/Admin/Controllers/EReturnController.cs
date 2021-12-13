@@ -160,7 +160,7 @@ namespace Admin.Controllers
             return RedirectToAction("Edit", new { id = ((EReturn)result.Data).Id });
         }
 
-        [Classes.Security.Attributes.Authorize(Roles = Role.EReturns + "," + Role.EReturnAuthoriser)]
+        [Classes.Security.Attributes.Authorize(Roles = Role.EReturnDelete)]
         [HttpGet]
         public ActionResult Delete(int id)
         {

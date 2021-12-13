@@ -46,7 +46,8 @@ USING (SELECT *
 			(@User1Id, 17),
 			(@User1Id, 18),
 			(@User1Id, 19),
-			(@User1Id, 20)) 
+			(@User1Id, 20),
+			(@User1Id, 21)) 
 	AS S ([UserId], [RoleId])) AS [Source]
 ON [Target].[UserId] = [Source].[UserId] 
 	AND [Target].[RoleId] = [Source].[RoleId] 
@@ -89,7 +90,8 @@ USING (SELECT *
 			(@User2Id, 17),
 			(@User2Id, 18),
 			(@User2Id, 19),
-			(@User2Id, 20)) 
+			(@User2Id, 20),
+			(@User2Id, 21)) 
 	AS S ([UserId], [RoleId])) AS [Source]
 ON [Target].[UserId] = [Source].[UserId] 
 	AND [Target].[RoleId] = [Source].[RoleId] 

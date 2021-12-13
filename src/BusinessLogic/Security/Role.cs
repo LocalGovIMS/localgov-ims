@@ -17,11 +17,12 @@
         public const string ServiceDesk = "ServiceDesk";
         public const string ChequeProcess = "ChequeProcess";
         public const string Finance = "Finance";
-        public const string EReturnAuthoriser = "EReturnAuthoriser";
         public const string PostPayment = "PostPayment";
-        public const string EReturns = "EReturns";
         public const string Transfer = "Transfer";
         public const string Reporting = "Reporting";
+        public const string EReturns = "EReturns";
+        public const string EReturnAuthoriser = "EReturnAuthoriser";
+        public const string EReturnDelete = "EReturn.Delete";
 
         // System roles
         public const string NotificationCreate = "Notification.Create";

@@ -308,8 +308,7 @@ namespace BusinessLogic.Services
 
         public IResult Delete(int id)
         {
-            if (!SecurityContext.IsInRole(Security.Role.EReturns)
-                 && !SecurityContext.IsInRole(Security.Role.EReturnAuthoriser))
+            if (!SecurityContext.IsInRole(Security.Role.EReturnDelete))
                 return new Result("You do not have permission to perform the requested action");
 
             EReturn item = null;

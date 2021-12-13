@@ -29,7 +29,8 @@ USING (SELECT *
 			('PostPayment', 'Post Payment'),
 			('EReturns', 'EReturns'),
 			('Transfer', 'Transfer'),
-			('Reporting', 'Reporting')) 
+			('Reporting', 'Reporting'),
+			('EReturn.Delete', 'eReturn - Delete')) 
 	AS S ([Name], [DisplayName])) AS [Source]
 ON [Target].[Name] = [Source].[Name] 
 WHEN NOT MATCHED BY TARGET THEN

@@ -189,7 +189,7 @@ namespace BusinessLogic.UnitTests.Services.EReturn
         public void CheckPermissions()
         {
             // Arrange
-            var roles = new List<string>() { BusinessLogic.Security.Role.EReturns, BusinessLogic.Security.Role.EReturnAuthoriser };
+            var roles = new List<string>() { BusinessLogic.Security.Role.EReturnDelete };
             SetupUnitOfWork(EReturnStatus.Authorised);
             var service = GetService();
 
