@@ -1,0 +1,25 @@
+﻿@model Admin.Models.MethodOfPaymentMetadata.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.Value
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There is no metadata specified
+    </div>
+}
+

@@ -212,6 +212,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnChequeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IMethodOfPaymentMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IImportProcessingRuleActionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IImportProcessingRuleConditionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IImportProcessingRuleRepository.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
+    <Compile Include="Interfaces\Services\IMethodOfPaymentMetadataService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleConditionService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleActionService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleOperatorService.cs" />
@@ -267,10 +269,12 @@
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
     <Compile Include="Models\Fund\SearchCriteria.cs" />
+    <Compile Include="Models\MehodOfPaymentMetadata\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRuleAction\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRuleConditionGroup\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRuleCondition\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRule\SearchCriteria.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MethodOfPayment\SearchCriteria.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Shared\SearchResult.cs" />
@@ -283,6 +287,7 @@
     <Compile Include="Models\User\SearchCriteria.cs" />
     <Compile Include="Services\EReturnStatusService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleService.cs" />
+    <Compile Include="Services\MethodOfPaymentMetadataService.cs" />
     <Compile Include="Services\ImportProcessingRuleConditionService.cs" />
     <Compile Include="Services\ImportProcessingRuleActionService.cs" />
     <Compile Include="Services\ImportProcessingRuleOperatorService.cs" />

@@ -20,45 +20,60 @@
 {
     <div class="ui form">
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Code)
-            @Html.EditorFor(m => m.Code)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Code)
+        <div class="ui vertical segment">
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.Code)
+                @Html.EditorFor(m => m.Code)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Code)
+                </div>
             </div>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.Name)
+                @Html.EditorFor(m => m.Name)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.MaximumAmount)
+                @Html.EditorFor(m => m.MaximumAmount)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MaximumAmount)
+                </div>
+            </div>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.MinimumAmount)
+                @Html.EditorFor(m => m.MinimumAmount)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MinimumAmount)
+                </div>
+            </div>
+
+            <div class="four wide field">
+                @Html.LabelFor(m => m.IsDisabled)
+                @Html.EditorFor(m => m.IsDisabled)
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsDisabled)
+                </div>
+            </div>
+
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Name)
-            </div>
+        <div class="ui vertical segment">
+            <h3 style="padding-bottom:10px;">
+                Metadata
+                @Html.ActionLink("Add metadata", "Create", "MethodOfPaymentMetadata", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+            </h3>
+            @Html.Action("_EditListForMethodOfPayment", "MethodOfPaymentMetadata", new { id = Model.Code })
+
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaximumAmount)
-            @Html.EditorFor(m => m.MaximumAmount)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MaximumAmount)
-            </div>
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MinimumAmount)
-            @Html.EditorFor(m => m.MinimumAmount)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MinimumAmount)
-            </div>
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsDisabled)
-            @Html.EditorFor(m => m.IsDisabled)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
-            </div>
-        </div>
+        <br />
 
         <input type="submit" value="Save" class="ui primary button" />
         @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })

@@ -31,7 +31,7 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPayment
                 Name = data.MopName,
                 MaximumAmount = data.MaximumAmount,
                 MinimumAmount = data.MinimumAmount,
-                IsDisabled = data.Disabled
+                IsDisabled = data.Disabled,
             };
         }
     }
