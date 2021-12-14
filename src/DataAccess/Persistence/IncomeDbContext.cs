@@ -33,6 +33,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<FundGroupFund> FundGroupFunds { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
         public virtual DbSet<Mop> MOPs { get; set; }
+        public virtual DbSet<MopMetaData> MopMetadatas { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<Role> ImsRoles { get; set; }
         public virtual DbSet<Suspense> Suspenses { get; set; }

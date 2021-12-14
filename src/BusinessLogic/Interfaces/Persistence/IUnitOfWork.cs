@@ -18,6 +18,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IFundGroupRepository FundGroups { get; }
         IFundGroupFundRepository FundGroupFunds { get; }
         IMethodOfPaymentRepository Mops { get; }
+        IMethodOfPaymentMetadataRepository MopMetadatas { get; }
         IOfficeRepository Offices { get; }
         IPendingTransactionRepository PendingTransactions { get; }
         IRoleRepository Roles { get; }

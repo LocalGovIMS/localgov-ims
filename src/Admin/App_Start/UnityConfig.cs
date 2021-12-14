@@ -131,6 +131,14 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.MethodOfPayment.EditViewModel>, Commands.MethodOfPayment.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.MethodOfPayment.EditViewModel>, Commands.MethodOfPayment.EditCommand>("Edit")
 
+                .RegisterType<IModelBuilder<ViewModels.MethodOfPaymentMetadata.DetailsViewModel, int>, ViewModelBuilders.MethodOfPaymentMetadata.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.MethodOfPaymentMetadata.EditViewModel, ViewModelBuilders.MethodOfPaymentMetadata.CreateViewModelBuilderArgs>, ViewModelBuilders.MethodOfPaymentMetadata.CreateViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.MethodOfPaymentMetadata.EditViewModel, int>, ViewModelBuilders.MethodOfPaymentMetadata.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.MethodOfPaymentMetadata.ListViewModel, ViewModels.MethodOfPaymentMetadata.SearchCriteria>, ViewModelBuilders.MethodOfPaymentMetadata.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.MethodOfPaymentMetadata.EditViewModel>, Commands.MethodOfPaymentMetadata.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.MethodOfPaymentMetadata.EditViewModel>, Commands.MethodOfPaymentMetadata.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.MethodOfPaymentMetadata.DeleteCommand>("MethodOfPaymentMetadata.Command.Delete")
+
                 .RegisterType<IModelBuilder<ViewModels.Payment.IndexViewModel, ViewModels.Payment.IndexViewModel>, ViewModelBuilders.Payment.IndexViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.Payment.IndexViewModel>, Commands.Payment.AddCommand>("Add")
                 .RegisterType<IModelCommand<string>, Commands.Payment.RemoveCommand>("Remove")
@@ -238,6 +246,7 @@ namespace Admin
                 .RegisterType<IFundGroupControllerDependencies, FundGroupControllerDependencies>()
                 .RegisterType<IEReturnControllerDependencies, EReturnControllerDependencies>()
                 .RegisterType<IMethodOfPaymentControllerDependencies, MethodOfPaymentControllerDependencies>()
+                .RegisterType<IMethodOfPaymentMetadataControllerDependencies, MethodOfPaymentMetadataControllerDependencies>()
                 .RegisterType<IPaymentControllerDependencies, PaymentControllerDependencies>()
                 .RegisterType<IRoleControllerDependencies, RoleControllerDependencies>()
                 .RegisterType<ISuspenseControllerDependencies, SuspenseControllerDependencies>()

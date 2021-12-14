@@ -15,30 +15,41 @@
 
 <div class="ui form">
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Code)
-        @Html.DisplayFor(m => m.Code)
+    <div class="ui vertical segment">
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Code)
+            @Html.DisplayFor(m => m.Code)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.DisplayFor(m => m.Name)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MaximumAmount)
+            @Html.DisplayFor(m => m.MaximumAmount)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MinimumAmount)
+            @Html.DisplayFor(m => m.MinimumAmount)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.IsDisabled)
+            @Html.DisplayFor(m => m.Status)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Name)
-        @Html.DisplayFor(m => m.Name)
+    <div class="ui vertical segment">
+        <h3>
+            Metadata
+        </h3>
+        @Html.Action("_ListForMethodOfPayment", "MethodOfPaymentMetadata", new { id = Model.Code })
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.MaximumAmount)
-        @Html.DisplayFor(m => m.MaximumAmount)
-    </div>
-
-    <div class="four wide field">
-        @Html.LabelFor(m => m.MinimumAmount)
-        @Html.DisplayFor(m => m.MinimumAmount)
-    </div>
-
-    <div class="four wide field">
-        @Html.LabelFor(m => m.IsDisabled)
-        @Html.DisplayFor(m => m.Status)
-    </div>
+    <br />
 
     @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
 

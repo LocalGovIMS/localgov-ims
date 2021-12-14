@@ -213,6 +213,9 @@
     <Compile Include="Classes\Commands\EReturn\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\CreateCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\MethodOfPaymentMetadata\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\MethodOfPaymentMetadata\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\MethodOfPaymentMetadata\EditCommand.cs" />
     <Compile Include="Classes\Commands\ImportProcessingRuleAction\CreateCommand.cs" />
     <Compile Include="Classes\Commands\ImportProcessingRuleAction\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\ImportProcessingRuleAction\EditCommand.cs" />
@@ -257,6 +260,10 @@
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPaymentMetadata\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPaymentMetadata\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPaymentMetadata\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MethodOfPaymentMetadata\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\CreateViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleAction\EditViewModelBuilder.cs" />
@@ -273,6 +280,8 @@
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IMethodOfPaymentMetadataControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\MethodOfPaymentMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleConditionControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleActionControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleControllerDependencies.cs" />
@@ -357,6 +366,7 @@
     <Compile Include="Controllers\AccountHolderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadataController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleActionController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleConditionController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleController.cs" />
@@ -423,6 +433,10 @@
     <Compile Include="Models\Fund\ListViewModel.cs" />
     <Compile Include="Models\Fund\SearchCriteria.cs" />
     <Compile Include="Models\Home\DiagnosticsViewModel.cs" />
+    <Compile Include="Models\MethodOfPaymentMetadata\DetailsViewModel.cs" />
+    <Compile Include="Models\MethodOfPaymentMetadata\EditViewModel.cs" />
+    <Compile Include="Models\MethodOfPaymentMetadata\ListViewModel.cs" />
+    <Compile Include="Models\MethodOfPaymentMetadata\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRuleAction\DetailsViewModel.cs" />
     <Compile Include="Models\ImportProcessingRuleAction\EditViewModel.cs" />
     <Compile Include="Models\ImportProcessingRuleAction\ListViewModel.cs" />
@@ -442,6 +456,7 @@
     <Compile Include="Models\Payment\Address.cs" />
     <Compile Include="Models\Role\EditViewModel.cs" />
     <Compile Include="Models\Role\DetailsViewModel.cs" />
+    <Compile Include="Models\Shared\MetadataViewModel.cs" />
     <Compile Include="Models\Shared\BasicListViewModel.cs" />
     <Compile Include="Models\Shared\Message.cs" />
     <Compile Include="Models\Suspense\DetailsViewModel.cs" />
@@ -1504,6 +1519,10 @@
     <Content Include="Views\Office\Details.cshtml" />
     <Content Include="Views\Office\Edit.cshtml" />
     <Content Include="Views\Office\List.cshtml" />
+    <Content Include="Views\MethodOfPaymentMetadata\_EditList.cshtml" />
+    <Content Include="Views\MethodOfPaymentMetadata\_List.cshtml" />
+    <Content Include="Views\MethodOfPaymentMetadata\Create.cshtml" />
+    <Content Include="Views\MethodOfPaymentMetadata\Edit.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

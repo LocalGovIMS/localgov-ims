@@ -39,6 +39,7 @@ namespace BusinessLogic
                 .RegisterType<INotificationService, NotificationService>()
                 .RegisterType<IOfficeService, OfficeService>()
                 .RegisterType<IMethodOfPaymentService, MethodOfPaymentService>()
+                .RegisterType<IMethodOfPaymentMetadataService, MethodOfPaymentMetadataService>()
                 .RegisterType<IPaymentService, PaymentService>()
                 .RegisterType<IRefundService, RefundService>()
                 .RegisterType<IRoleService, RoleService>()
