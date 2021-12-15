@@ -44,9 +44,20 @@
             </div>
         </div>
 
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            Metadata
+            @Html.ActionLink("Add metadata", "Create", "VatMetadata", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_EditListForVat", "VatMetadata", new { id = Model.Code })
 
     </div>
+
+    <br />
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
 
 }

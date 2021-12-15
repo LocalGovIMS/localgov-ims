@@ -215,6 +215,14 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.Vat.EditViewModel>, Commands.Vat.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.Vat.EditViewModel>, Commands.Vat.EditCommand>("Edit")
 
+                .RegisterType<IModelBuilder<ViewModels.VatMetadata.DetailsViewModel, int>, ViewModelBuilders.VatMetadata.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.VatMetadata.EditViewModel, ViewModelBuilders.VatMetadata.CreateViewModelBuilderArgs>, ViewModelBuilders.VatMetadata.CreateViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.VatMetadata.EditViewModel, int>, ViewModelBuilders.VatMetadata.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.VatMetadata.ListViewModel, ViewModels.VatMetadata.SearchCriteria>, ViewModelBuilders.VatMetadata.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.VatMetadata.EditViewModel>, Commands.VatMetadata.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.VatMetadata.EditViewModel>, Commands.VatMetadata.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.VatMetadata.DeleteCommand>("VatMetadata.Command.Delete")
+
                 .RegisterType<IModelBuilder<ViewModels.Office.DetailsViewModel, string>, ViewModelBuilders.Office.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Office.EditViewModel, string>, ViewModelBuilders.Office.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<IList<ViewModels.Office.DetailsViewModel>, string>, ViewModelBuilders.Office.ListViewModelBuilder>()
@@ -267,6 +275,7 @@ namespace Admin
                 .RegisterType<IUserRoleControllerDependencies, UserRoleControllerDependencies>()
                 .RegisterType<IUserTemplateControllerDependencies, UserTemplateControllerDependencies>()
                 .RegisterType<IVatControllerDependencies, VatControllerDependencies>()
+                .RegisterType<IVatMetadataControllerDependencies, VatMetadataControllerDependencies>()
                 .RegisterType<IFundControllerDependencies, FundControllerDependencies>()
                 .RegisterType<IFundMetadataControllerDependencies, FundMetadataControllerDependencies>()
                 .RegisterType<IValidationControllerDependencies, ValidationControllerDependencies>()

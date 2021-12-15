@@ -36,6 +36,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IUserTemplateRepository UserTemplates { get; }
         IUserPostPaymentMopCodeRepository UserPostPaymentMopCodes { get; }
         IVatRepository Vats { get; }
+        IVatMetadataRepository VatMetadatas { get; }
         IPaymentIntegrationRepository PaymentIntegrations { get; }
         IImportProcessingRuleRepository ImportProcessingRules { get; }
         IImportProcessingRuleConditionRepository ImportProcessingRuleConditions { get; }

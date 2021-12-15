@@ -30,6 +30,15 @@
         @Html.DisplayFor(m => m.Status)
     </div>
 
+    <div class="ui vertical segment">
+        <h3>
+            Metadata
+        </h3>
+        @Html.Action("_ListForVat", "VatMetadata", new { id = Model.Code })
+    </div>
+
+    <br />
+
     @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
 
 </div>

@@ -51,6 +51,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<User> ImsUsers { get; set; }
         public virtual DbSet<UserTemplate> ImsUserTemplates { get; set; }
         public virtual DbSet<Vat> VATs { get; set; }
+        public virtual DbSet<VatMetaData> VatMetadatas { get; set; }
         public virtual DbSet<ScheduleLog> ScheduleLogs { get; set; }
         public virtual DbSet<StopMessage> Stop_Message { get; set; }
         public virtual DbSet<TransactionStatus> TransactionStatus { get; set; }

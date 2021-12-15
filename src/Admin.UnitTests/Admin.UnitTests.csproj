@@ -154,6 +154,9 @@
     <Compile Include="Classes\Commands\FundGroup\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\VatMetadata\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\VatMetadata\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\VatMetadata\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Fund\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Fund\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundMetadata\CreateCommandTests.cs" />
@@ -199,6 +202,10 @@
     <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\VatMetadata\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\VatMetadata\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMetadata\CreateViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMetadata\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMetadata\EditViewModelBuilderTests.cs" />
@@ -225,6 +232,7 @@
     <Compile Include="Controllers\AccountHolder\Edit\Post.cs" />
     <Compile Include="Controllers\AccountHolder\Create\Get.cs" />
     <Compile Include="Controllers\AccountHolder\Create\Post.cs" />
+    <Compile Include="Controllers\Dependencies\VatMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\MethodOfPaymentMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleActionControllerDependenciesTests.cs" />
@@ -302,6 +310,14 @@
     <Compile Include="Controllers\FundGroup\Edit\Get.cs" />
     <Compile Include="Controllers\FundGroup\Edit\Post.cs" />
     <Compile Include="Controllers\FundGroup\List\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />
+    <Compile Include="Controllers\VatMetadata\Create\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\Create\Post.cs" />
+    <Compile Include="Controllers\VatMetadata\Delete\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\Edit\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\Edit\Post.cs" />
+    <Compile Include="Controllers\VatMetadata\ListForImportProcessingRule\Get.cs" />
     <Compile Include="Controllers\Fund\ConstructorTests.cs" />
     <Compile Include="Controllers\Fund\Create\Get.cs" />
     <Compile Include="Controllers\Fund\Create\Post.cs" />

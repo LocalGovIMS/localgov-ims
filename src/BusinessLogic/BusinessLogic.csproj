@@ -212,6 +212,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnChequeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IVatMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMethodOfPaymentMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IImportProcessingRuleActionRepository.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
+    <Compile Include="Interfaces\Services\IVatMetadataService.cs" />
     <Compile Include="Interfaces\Services\IFundMetadataService.cs" />
     <Compile Include="Interfaces\Services\IMethodOfPaymentMetadataService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleConditionService.cs" />
@@ -270,6 +272,7 @@
     <Compile Include="Models\BaseSearchCriteria.cs" />
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
+    <Compile Include="Models\VatMetadata\SearchCriteria.cs" />
     <Compile Include="Models\Fund\SearchCriteria.cs" />
     <Compile Include="Models\FundMetadata\SearchCriteria.cs" />
     <Compile Include="Models\MehodOfPaymentMetadata\SearchCriteria.cs" />
@@ -290,6 +293,7 @@
     <Compile Include="Models\User\SearchCriteria.cs" />
     <Compile Include="Services\EReturnStatusService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleService.cs" />
+    <Compile Include="Services\VatMetadataService.cs" />
     <Compile Include="Services\FundMetadataService.cs" />
     <Compile Include="Services\MethodOfPaymentMetadataService.cs" />
     <Compile Include="Services\ImportProcessingRuleConditionService.cs" />

@@ -59,6 +59,7 @@ namespace BusinessLogic
                 .RegisterType<IUserPostPaymentMopCodeService, UserPostPaymentMopCodeService>()
                 .RegisterType<IValidationService, ValidationService>()
                 .RegisterType<IVatService, VatService>()
+                .RegisterType<IVatMetadataService, VatMetadataService>()
                 .RegisterType<ICryptographyService, MD5CryptographyService>()
 
                 .RegisterType<IEmailService, EmailService>()

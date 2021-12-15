@@ -169,6 +169,13 @@
     <Compile Include="Services\FundGroup\GetFundGroupTests.cs" />
     <Compile Include="Services\FundGroup\GetAllFundGroupsTests.cs" />
     <Compile Include="Services\FundGroup\UpdateTests.cs" />
+    <Compile Include="Services\VatMetadata\BaseVatMetadataTest.cs" />
+    <Compile Include="Services\VatMetadata\CreateTests.cs" />
+    <Compile Include="Services\VatMetadata\DeleteTests.cs" />
+    <Compile Include="Services\VatMetadata\GetMetadataTests.cs" />
+    <Compile Include="Services\VatMetadata\GetTests.cs" />
+    <Compile Include="Services\VatMetadata\SearchTests.cs" />
+    <Compile Include="Services\VatMetadata\UpdateTests.cs" />
     <Compile Include="Services\Fund\BaseFundTest.cs" />
     <Compile Include="Services\Fund\CreateTests.cs" />
     <Compile Include="Services\Fund\GetByFundCodeTests.cs" />

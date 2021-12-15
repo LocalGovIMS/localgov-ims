@@ -1,0 +1,45 @@
+﻿@model Admin.Models.VatMetadata.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.Value
+                </td>
+                <td style="width:20%;">
+                    @Html.ActionLink("Edit", "Edit", "VatMetadata", new { id = item.Id }, new { @class = "ui button" })
+                    @Html.ActionLink("Delete", "Delete", "VatMetadata", new { id = item.Id, mopCode = item.ParentCode }, new { @class = "ui button delete-action" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There is no metadata specified
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".delete-action").on("click",
+            function (e) {
+                if (window.confirm("Are you sure you want to delete this piece of metadata?")) {
+
+                } else {
+                    e.preventDefault();
+                    e.stopPropogation();
+                    return false;
+                }
+            });
+
+    });
+</script>
