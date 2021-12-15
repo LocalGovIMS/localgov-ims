@@ -30,6 +30,7 @@ namespace DataAccess.Persistence
         public IEReturnStatusRepository EReturnStatuses { get; private set; }
         public IEReturnTypeRepository EReturnTypes { get; private set; }
         public IFundRepository Funds { get; private set; }
+        public IFundMetadataRepository FundMetadatas { get; private set; }
         public IFundGroupRepository FundGroups { get; private set; }
         public IFundGroupFundRepository FundGroupFunds { get; private set; }
         public IMethodOfPaymentRepository Mops { get; private set; }
@@ -71,6 +72,7 @@ namespace DataAccess.Persistence
             IEReturnStatusRepository eReturnStatusRepository,
             IEReturnTypeRepository eReturnTypeRepository,
             IFundRepository fundRepository,
+            IFundMetadataRepository fundMetadataRepository,
             IFundGroupRepository fundGroupRepository,
             IFundGroupFundRepository fundGroupFundRepository,
             IMethodOfPaymentRepository mopRepository,
@@ -113,6 +115,7 @@ namespace DataAccess.Persistence
             EReturnStatuses = eReturnStatusRepository;
             EReturnTypes = eReturnTypeRepository;
             Funds = fundRepository;
+            FundMetadatas = fundMetadataRepository;
             FundGroups = fundGroupRepository;
             FundGroupFunds = fundGroupFundRepository;
             Mops = mopRepository;

@@ -26,6 +26,7 @@ namespace DataAccess
                 .RegisterType<IFundGroupFundRepository, FundGroupFundRepository>()
                 .RegisterType<IFundGroupRepository, FundGroupRepository>()
                 .RegisterType<IFundRepository, FundRepository>()
+                .RegisterType<IFundMetadataRepository, FundMetadataRepository>()
                 .RegisterType<IMethodOfPaymentRepository, MethofOfPaymentRepository>()
                 .RegisterType<IMethodOfPaymentMetadataRepository, MethodOfPaymentMetadataRepository>()
                 .RegisterType<IOfficeRepository, OfficeRepository>()

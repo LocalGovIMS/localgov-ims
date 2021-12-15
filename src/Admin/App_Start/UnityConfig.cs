@@ -123,6 +123,14 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.Fund.EditViewModel>, Commands.Fund.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.Fund.EditViewModel>, Commands.Fund.EditCommand>("Edit")
 
+                .RegisterType<IModelBuilder<ViewModels.FundMetadata.DetailsViewModel, int>, ViewModelBuilders.FundMetadata.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMetadata.EditViewModel, ViewModelBuilders.FundMetadata.CreateViewModelBuilderArgs>, ViewModelBuilders.FundMetadata.CreateViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMetadata.EditViewModel, int>, ViewModelBuilders.FundMetadata.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMetadata.ListViewModel, ViewModels.FundMetadata.SearchCriteria>, ViewModelBuilders.FundMetadata.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.FundMetadata.EditViewModel>, Commands.FundMetadata.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.FundMetadata.EditViewModel>, Commands.FundMetadata.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.FundMetadata.DeleteCommand>("FundMetadata.Command.Delete")
+
                 .RegisterType<IModelBuilder<IList<ViewModels.SystemMessage.DetailsViewModel>, string>, ViewModelBuilders.Home.ListViewModelBuilder>()
 
                 .RegisterType<IModelBuilder<ViewModels.MethodOfPayment.DetailsViewModel, string>, ViewModelBuilders.MethodOfPayment.DetailsViewModelBuilder>()
@@ -260,6 +268,7 @@ namespace Admin
                 .RegisterType<IUserTemplateControllerDependencies, UserTemplateControllerDependencies>()
                 .RegisterType<IVatControllerDependencies, VatControllerDependencies>()
                 .RegisterType<IFundControllerDependencies, FundControllerDependencies>()
+                .RegisterType<IFundMetadataControllerDependencies, FundMetadataControllerDependencies>()
                 .RegisterType<IValidationControllerDependencies, ValidationControllerDependencies>()
                 .RegisterType<IImportProcessingRuleControllerDependencies, ImportProcessingRuleControllerDependencies>()
                 .RegisterType<IImportProcessingRuleConditionControllerDependencies, ImportProcessingRuleConditionControllerDependencies>()

@@ -102,6 +102,15 @@
         @Html.DisplayFor(m => m.Status)
     </div>
 
+    <div class="ui vertical segment">
+        <h3>
+            Metadata
+        </h3>
+        @Html.Action("_ListForFund", "FundMetadata", new { id = Model.FundCode })
+    </div>
+
+    <br />
+
     @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
 
 </div>
