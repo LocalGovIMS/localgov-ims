@@ -1,0 +1,70 @@
+﻿@model Admin.Models.VatMetadata.EditViewModel
+@{
+    ViewBag.Title = "Create vat metadata";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create vat metadata
+        <div class="sub header">
+            Vat metadata details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "VatMetadata", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.VatCode)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Key)
+            <div class="ui search selection dropdown keys-dropdown">
+                @Html.HiddenFor(x => x.Key, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select key</div>
+                <div class="menu">
+                    @foreach (var item in Model.Keys.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Key)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Value)
+            @Html.EditorFor(m => m.Value)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Value)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "VatMetadata", null, new { @class = "ui button" })
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.keys-dropdown').dropdown();
+
+        });
+    </script>
+
+}

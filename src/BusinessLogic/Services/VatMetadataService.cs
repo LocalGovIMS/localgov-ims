@@ -5,7 +5,7 @@ using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models;
-using BusinessLogic.Models.FundMetadata;
+using BusinessLogic.Models.VatMetadata;
 using BusinessLogic.Models.Shared;
 using log4net;
 using System;
@@ -14,22 +14,22 @@ using System.Linq;
 
 namespace BusinessLogic.Services
 {
-    public class FundMetadataService : BaseService, IFundMetadataService
+    public class VatMetadataService : BaseService, IVatMetadataService
     {
-        public FundMetadataService(ILog logger
+        public VatMetadataService(ILog logger
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext)
             : base(logger, unitOfWork, securityContext)
         {
         }
 
-        public SearchResult<FundMetaData> Search(SearchCriteria criteria)
+        public SearchResult<VatMetaData> Search(SearchCriteria criteria)
         {
             try
             {
-                var items = UnitOfWork.FundMetadatas.Search(criteria, out int itemsCount).ToList();
+                var items = UnitOfWork.VatMetadatas.Search(criteria, out int itemsCount).ToList();
 
-                return new SearchResult<FundMetaData>()
+                return new SearchResult<VatMetaData>()
                 {
                     Count = itemsCount,
                     Items = items,
@@ -44,11 +44,11 @@ namespace BusinessLogic.Services
             }
         }
 
-        public FundMetaData Get(int id)
+        public VatMetaData Get(int id)
         {
             try
             {
-                return UnitOfWork.FundMetadatas.Get(id);
+                return UnitOfWork.VatMetadatas.Get(id);
             }
             catch (Exception e)
             {
@@ -57,14 +57,14 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Create(FundMetaData item)
+        public IResult Create(VatMetaData item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
 
             try
             {
-                UnitOfWork.FundMetadatas.Add(item);
+                UnitOfWork.VatMetadatas.Add(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -72,18 +72,18 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to create the Fund Metadata record");
+                return new Result("Unable to create the VAT Metadata record");
             }
         }
 
-        public IResult Update(FundMetaData item)
+        public IResult Update(VatMetaData item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
 
             try
             {
-                UnitOfWork.FundMetadatas.Update(item);
+                UnitOfWork.VatMetadatas.Update(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -91,7 +91,7 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to update this Fund Metadata record");
+                return new Result("Unable to update this VAT Metadata record");
             }
         }
 
@@ -102,9 +102,9 @@ namespace BusinessLogic.Services
 
             try
             {
-                var item = UnitOfWork.FundMetadatas.Get(id);
+                var item = UnitOfWork.VatMetadatas.Get(id);
 
-                UnitOfWork.FundMetadatas.Remove(item);
+                UnitOfWork.VatMetadatas.Remove(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -112,7 +112,7 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to delete this Fund Metadata record");
+                return new Result("Unable to delete this VAT Metadata record");
             }
         }
 
@@ -120,12 +120,7 @@ namespace BusinessLogic.Services
         {
             return new List<Metadata>()
             {
-                new Metadata() { Key = "IsACreditNoteEnabledFund", Description = "Is A Credit Note Enabled Fund" },
-                new Metadata() { Key = "IsAnEReturnDefaultFund", Description = "Is An EReturn Default Fund" },
-                new Metadata() { Key = "IsASuspenseJournalFund", Description = "Is A Suspense Journal Fund" },
-                new Metadata() { Key = "IsABasketFund", Description = "Is A Basket Fund" },
-                new Metadata() { Key = "Basket.ReferenceFieldLabel", Description = "Basket Reference Field Label" },
-                new Metadata() { Key = "Basket.ReferenceFieldMessage", Description = "Basket Reference Field Message" }
+                new Metadata() { Key = "IsASuspenseJournalVatCode", Description = "Is A Suspense Journal Vat Code" }
             };
         }
     }

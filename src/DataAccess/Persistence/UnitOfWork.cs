@@ -51,6 +51,7 @@ namespace DataAccess.Persistence
         public IUserTemplateRepository UserTemplates { get; private set; }
         public IUserPostPaymentMopCodeRepository UserPostPaymentMopCodes { get; private set; }
         public IVatRepository Vats { get; private set; }
+        public IVatMetadataRepository VatMetadatas { get; private set; }
         public IPaymentIntegrationRepository PaymentIntegrations { get; private set; }
         public IImportProcessingRuleRepository ImportProcessingRules { get; private set; }
         public IImportProcessingRuleConditionRepository ImportProcessingRuleConditions { get; private set; }
@@ -93,6 +94,7 @@ namespace DataAccess.Persistence
             IUserTemplateRepository userTemplateRepository,
             IUserPostPaymentMopCodeRepository userPostPaymentMopCodeRepository,
             IVatRepository vatRepository,
+            IVatMetadataRepository VatMetadataRepository,
             IPaymentIntegrationRepository paymentIntegrationRepository,
             IImportProcessingRuleRepository importProcessingRuleRepository,
             IImportProcessingRuleConditionRepository importProcessingRuleConditionRepository,
@@ -136,6 +138,7 @@ namespace DataAccess.Persistence
             UserTemplates = userTemplateRepository;
             UserPostPaymentMopCodes = userPostPaymentMopCodeRepository;
             Vats = vatRepository;
+            VatMetadatas = VatMetadataRepository;
             PaymentIntegrations = paymentIntegrationRepository;
             ImportProcessingRules = importProcessingRuleRepository;
             ImportProcessingRuleConditions = importProcessingRuleConditionRepository;

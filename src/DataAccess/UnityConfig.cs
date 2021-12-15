@@ -45,6 +45,7 @@ namespace DataAccess
                 .RegisterType<IUserPostPaymentMopCodeRepository, UserPostPaymentMopCodeRepository>()
                 .RegisterType<IUserTemplateRepository, UserTemplateRepository>()
                 .RegisterType<IVatRepository, VatRepository>()
+                .RegisterType<IVatMetadataRepository, VatMetadataRepository>()
                 .RegisterType<IRepository<EmailLog>, Repository<EmailLog>>()
                 .RegisterType<IPaymentIntegrationRepository, PaymentIntegrationRepository>()
                 .RegisterType<IImportProcessingRuleRepository, ImportProcessingRuleRepository>()
