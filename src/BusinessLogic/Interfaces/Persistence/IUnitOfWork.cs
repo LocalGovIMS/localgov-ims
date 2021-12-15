@@ -15,6 +15,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IEReturnStatusRepository EReturnStatuses { get; }
         IEReturnTypeRepository EReturnTypes { get; }
         IFundRepository Funds { get; }
+        IFundMetadataRepository FundMetadatas { get; }
         IFundGroupRepository FundGroups { get; }
         IFundGroupFundRepository FundGroupFunds { get; }
         IMethodOfPaymentRepository Mops { get; }

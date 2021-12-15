@@ -170,8 +170,19 @@
                 @Html.ValidationMessageFor(m => m.IsDisabled)
             </div>
         </div>
-        
+
     </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            Metadata
+            @Html.ActionLink("Add metadata", "Create", "FundMetadata", new { id = Model.FundCode }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_EditListForFund", "FundMetadata", new { id = Model.FundCode })
+
+    </div>
+
+    <br />
 
     <input type="submit" value="Save" class="ui primary button" />
     @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })

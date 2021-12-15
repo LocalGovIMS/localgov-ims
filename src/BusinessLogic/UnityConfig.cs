@@ -30,6 +30,7 @@ namespace BusinessLogic
                 .RegisterType<IEReturnTypeService, EReturnTypeService>()
                 .RegisterType<IFundGroupService, FundGroupService>()
                 .RegisterType<IFundService, FundService>()
+                .RegisterType<IFundMetadataService, FundMetadataService>()
                 .RegisterType<IImportProcessingRuleService, ImportProcessingRuleService>()
                 .RegisterType<IImportProcessingRuleConditionService, ImportProcessingRuleConditionService>()
                 .RegisterType<IImportProcessingRuleActionService, ImportProcessingRuleActionService>()

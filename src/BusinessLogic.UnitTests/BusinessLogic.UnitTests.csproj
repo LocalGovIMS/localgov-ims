@@ -175,7 +175,14 @@
     <Compile Include="Services\Fund\GetAllFundsTests.cs" />
     <Compile Include="Services\Fund\SearchTests.cs" />
     <Compile Include="Services\Fund\UpdateTests.cs" />
-    <Compile Include="Services\MethodOfPaymentMetadata\BaseImportProcessingRuleActionTest.cs" />
+    <Compile Include="Services\FundMetadata\BaseFundMetadataTest.cs" />
+    <Compile Include="Services\FundMetadata\CreateTests.cs" />
+    <Compile Include="Services\FundMetadata\DeleteTests.cs" />
+    <Compile Include="Services\FundMetadata\GetMetadataTests.cs" />
+    <Compile Include="Services\FundMetadata\GetTests.cs" />
+    <Compile Include="Services\FundMetadata\SearchTests.cs" />
+    <Compile Include="Services\FundMetadata\UpdateTests.cs" />
+    <Compile Include="Services\MethodOfPaymentMetadata\BaseMethodOfPaymentMetadataTest.cs" />
     <Compile Include="Services\MethodOfPaymentMetadata\CreateTests.cs" />
     <Compile Include="Services\MethodOfPaymentMetadata\DeleteTests.cs" />
     <Compile Include="Services\MethodOfPaymentMetadata\GetMetadataTests.cs" />
