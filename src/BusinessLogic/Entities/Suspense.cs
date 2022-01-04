@@ -9,6 +9,7 @@ namespace BusinessLogic.Entities
         public Suspense()
         {
             SuspenseProcessedTransactions = new HashSet<SuspenseProcessedTransaction>();
+            SuspenseNotes = new HashSet<SuspenseNote>();
         }
 
         public int Id { get; set; }
@@ -37,5 +38,7 @@ namespace BusinessLogic.Entities
         public string Notes { get; set; }
 
         public virtual ICollection<SuspenseProcessedTransaction> SuspenseProcessedTransactions { get; set; }
+
+        public virtual ICollection<SuspenseNote> SuspenseNotes { get; set; }
     }
 }

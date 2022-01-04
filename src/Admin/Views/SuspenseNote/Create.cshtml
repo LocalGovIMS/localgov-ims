@@ -1,0 +1,39 @@
+﻿@model Admin.Models.SuspenseNote.EditViewModel
+@{
+    ViewBag.Title = "Create suspense note";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create suspense note
+        <div class="sub header">
+            Suspense note details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "SuspenseNote", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.SuspenseId)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Note)
+            @Html.TextAreaFor(m => m.Note, new { @rows = 5 })
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Note)
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="ui primary button" />
+            @Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "ui button" })
+        </div>
+
+    </div>
+}

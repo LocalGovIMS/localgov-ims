@@ -45,6 +45,7 @@ namespace BusinessLogic
                 .RegisterType<IRefundService, RefundService>()
                 .RegisterType<IRoleService, RoleService>()
                 .RegisterType<ISuspenseService, SuspenseService>()
+                .RegisterType<ISuspenseNoteService, SuspenseNoteService>()
                 .RegisterType<IStopMessageService, StopMessageService>()
                 .RegisterType<ISystemMessageService, SystemMessageService>()
                 .RegisterType<ITemplateService, TemplateService>()

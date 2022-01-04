@@ -22,6 +22,16 @@ namespace BusinessLogic.Models.Suspense
             }
         }
 
+        public Entities.SuspenseNote LatestNote
+        {
+            get
+            {
+                return Item.SuspenseNotes?
+                    .OrderByDescending(x => x.CreatedAt)
+                    .FirstOrDefault();
+            }
+        }
+
         public SuspenseWrapper(Entities.Suspense item)
         {
             Item = item;

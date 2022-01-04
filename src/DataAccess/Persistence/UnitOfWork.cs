@@ -41,6 +41,7 @@ namespace DataAccess.Persistence
         public IStopMessageRepository StopMessages { get; private set; }
         public ISystemMessageRepository SystemMessages { get; private set; }
         public ISuspenseRepository Suspenses { get; private set; }
+        public IRepository<SuspenseNote> SuspenseNotes { get; private set; }
         public ITemplateRepository Templates { get; private set; }
         public ITemplateRowRepository TemplateRows { get; private set; }
         public ITransactionRepository Transactions { get; private set; }
@@ -84,6 +85,7 @@ namespace DataAccess.Persistence
             IStopMessageRepository stopMessageRepository,
             ISystemMessageRepository systemMessageRepository,
             ISuspenseRepository suspenseRepository,
+            IRepository<SuspenseNote> suspenseNoteRepository,
             ITemplateRepository templateRepository,
             ITemplateRowRepository templateRowRepository,
             ITransactionRepository transactionRepository,
@@ -127,6 +129,7 @@ namespace DataAccess.Persistence
             Roles = roleRepository;
             StopMessages = stopMessageRepository;
             Suspenses = suspenseRepository;
+            SuspenseNotes = suspenseNoteRepository;
             SystemMessages = systemMessageRepository;
             Templates = templateRepository;
             TemplateRows = templateRowRepository;

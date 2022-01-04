@@ -154,6 +154,7 @@
     <Compile Include="Classes\Commands\FundGroup\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\EditCommandTests.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\EditViewModelBuilderTests.cs" />
@@ -232,6 +234,7 @@
     <Compile Include="Controllers\AccountHolder\Edit\Post.cs" />
     <Compile Include="Controllers\AccountHolder\Create\Get.cs" />
     <Compile Include="Controllers\AccountHolder\Create\Post.cs" />
+    <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\MethodOfPaymentMetadataControllerDependenciesTests.cs" />
@@ -310,6 +313,10 @@
     <Compile Include="Controllers\FundGroup\Edit\Get.cs" />
     <Compile Include="Controllers\FundGroup\Edit\Post.cs" />
     <Compile Include="Controllers\FundGroup\List\Get.cs" />
+    <Compile Include="Controllers\SuspenseNote\ConstructorTests.cs" />
+    <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
+    <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
+    <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
     <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Post.cs" />

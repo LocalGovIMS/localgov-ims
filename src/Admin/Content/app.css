@@ -398,3 +398,7 @@ pre {
         margin: 0 0 0 -525px;
     }
 }
+
+.ui.feed > .event > .content .summary > .list-date {
+    margin: 0;
+}

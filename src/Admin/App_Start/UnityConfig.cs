@@ -167,6 +167,9 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.Suspense.JournalViewModel>, Commands.Suspense.JournalCommand>()
                 .RegisterType<IModelCommand<ViewModels.Suspense.SaveNoteViewModel>, Commands.Suspense.SaveNoteCommand>()
 
+                .RegisterType<IModelBuilder<ViewModels.SuspenseNote.ListViewModel, int>, ViewModelBuilders.SuspenseNote.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.SuspenseNote.EditViewModel>, Commands.SuspenseNote.CreateCommand>()
+
                 .RegisterType<IModelBuilder<ViewModels.SystemMessage.DetailsViewModel, int>, ViewModelBuilders.SystemMessage.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.SystemMessage.EditViewModel, int>, ViewModelBuilders.SystemMessage.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<IList<ViewModels.SystemMessage.DetailsViewModel>, int>, ViewModelBuilders.SystemMessage.ListViewModelBuilder>()
@@ -266,6 +269,7 @@ namespace Admin
                 .RegisterType<IPaymentControllerDependencies, PaymentControllerDependencies>()
                 .RegisterType<IRoleControllerDependencies, RoleControllerDependencies>()
                 .RegisterType<ISuspenseControllerDependencies, SuspenseControllerDependencies>()
+                .RegisterType<ISuspenseNoteControllerDependencies, SuspenseNoteControllerDependencies>()
                 .RegisterType<ISystemMessageControllerDependencies, SystemMessageControllerDependencies>()
                 .RegisterType<ITemplateControllerDependencies, TemplateControllerDependencies>()
                 .RegisterType<ITransactionControllerDependencies, TransactionControllerDependencies>()

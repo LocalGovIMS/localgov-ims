@@ -38,6 +38,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<Role> ImsRoles { get; set; }
         public virtual DbSet<Suspense> Suspenses { get; set; }
+        public virtual DbSet<SuspenseNote> SuspenseNotes { get; set; }
         public virtual DbSet<SuspenseProcessedTransaction> SuspenseProcessedTransactions { get; set; }
         public virtual DbSet<SystemMessage> SystemMessages { get; set; }
         public virtual DbSet<TemplateRow> TemplateRows { get; set; }
@@ -198,6 +199,11 @@ namespace DataAccess.Persistence
                 .WithRequired(e => e.Suspense)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Suspense>()
+                .HasMany(e => e.SuspenseNotes)
+                .WithRequired(e => e.Suspense)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Template>()
                 .HasMany(e => e.EReturns)
                 .WithRequired(e => e.Template)
@@ -256,6 +262,12 @@ namespace DataAccess.Persistence
                 .HasMany(e => e.PendingTransactions)
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.UserCode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.SuspenseNotes)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()

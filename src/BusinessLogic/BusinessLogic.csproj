@@ -152,6 +152,7 @@
     <Compile Include="Entities\ImportProcessingRuleAction.cs" />
     <Compile Include="Entities\ImportProcessingRule.cs" />
     <Compile Include="Entities\PaymentIntegration.cs" />
+    <Compile Include="Entities\SuspenseNote.cs" />
     <Compile Include="Entities\VatMetaData.cs" />
     <Compile Include="Entities\MopMetaData.cs" />
     <Compile Include="Entities\Mop.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
+    <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
     <Compile Include="Interfaces\Services\IVatMetadataService.cs" />
     <Compile Include="Interfaces\Services\IFundMetadataService.cs" />
     <Compile Include="Interfaces\Services\IMethodOfPaymentMetadataService.cs" />
@@ -293,6 +295,7 @@
     <Compile Include="Models\User\SearchCriteria.cs" />
     <Compile Include="Services\EReturnStatusService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleService.cs" />
+    <Compile Include="Services\SuspenseNoteService.cs" />
     <Compile Include="Services\VatMetadataService.cs" />
     <Compile Include="Services\FundMetadataService.cs" />
     <Compile Include="Services\MethodOfPaymentMetadataService.cs" />

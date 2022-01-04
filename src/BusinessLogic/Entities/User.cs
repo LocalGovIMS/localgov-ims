@@ -13,6 +13,7 @@ namespace BusinessLogic.Entities
             SubmittedEReturns = new HashSet<EReturn>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
+            SuspenseNotes = new HashSet<SuspenseNote>();
             SuspenseProcessedTransactions = new HashSet<SuspenseProcessedTransaction>();
             UserFundGroups = new HashSet<UserFundGroup>();
             UserPostPaymentMopCodes = new HashSet<UserPostPaymentMopCode>();
@@ -53,6 +54,8 @@ namespace BusinessLogic.Entities
         public virtual ICollection<PendingTransaction> PendingTransactions { get; set; }
 
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
+
+        public virtual ICollection<SuspenseNote> SuspenseNotes { get; set; }
 
         public virtual ICollection<SuspenseProcessedTransaction> SuspenseProcessedTransactions { get; set; }
 
