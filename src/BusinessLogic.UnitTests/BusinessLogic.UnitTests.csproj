@@ -169,6 +169,9 @@
     <Compile Include="Services\FundGroup\GetFundGroupTests.cs" />
     <Compile Include="Services\FundGroup\GetAllFundGroupsTests.cs" />
     <Compile Include="Services\FundGroup\UpdateTests.cs" />
+    <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
+    <Compile Include="Services\SuspenseNote\CreateTests.cs" />
+    <Compile Include="Services\SuspenseNote\GetTests.cs" />
     <Compile Include="Services\VatMetadata\BaseVatMetadataTest.cs" />
     <Compile Include="Services\VatMetadata\CreateTests.cs" />
     <Compile Include="Services\VatMetadata\DeleteTests.cs" />

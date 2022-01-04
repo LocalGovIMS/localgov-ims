@@ -200,6 +200,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\SuspenseNote\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\EditCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\LookupCommand.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Classes\Commands\User\CreateCommand.cs" />
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilder.cs" />
@@ -294,6 +296,8 @@
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IVatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IFundMetadataControllerDependencies.cs" />
@@ -384,6 +388,7 @@
     <Compile Include="Controllers\AccountHolderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\SuspenseNoteController.cs" />
     <Compile Include="Controllers\VatMetadataController.cs" />
     <Compile Include="Controllers\FundMetadataController.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadataController.cs" />
@@ -450,6 +455,8 @@
     <Compile Include="Models\EReturn\SearchCriteria.cs" />
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
+    <Compile Include="Models\SuspenseNote\EditViewModel.cs" />
+    <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\VatMetadata\DetailsViewModel.cs" />
     <Compile Include="Models\VatMetadata\EditViewModel.cs" />
     <Compile Include="Models\VatMetadata\ListViewModel.cs" />
@@ -748,7 +755,6 @@
     <Content Include="Scripts\App\Shared\input-cleanse.js" />
     <Content Include="Scripts\App\Shared\input-validation.js" />
     <Content Include="Scripts\App\Suspense\credit.js" />
-    <Content Include="Scripts\App\Suspense\notes.js" />
     <Content Include="Scripts\App\Suspense\journal.js" />
     <Content Include="Scripts\App\Suspense\list.js" />
     <Content Include="Scripts\App\Suspense\0_shared.js" />
@@ -1499,7 +1505,6 @@
     <Content Include="Views\EReturn\Approve.cshtml" />
     <Content Include="Views\EReturn\_Header.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Suspense\_Notes.cshtml" />
     <Content Include="Views\SystemMessage\Create.cshtml" />
     <Content Include="Views\SystemMessage\Edit.cshtml" />
     <Content Include="Views\SystemMessage\List.cshtml" />
@@ -1559,6 +1564,9 @@
     <Content Include="Views\VatMetadata\_List.cshtml" />
     <Content Include="Views\VatMetadata\Create.cshtml" />
     <Content Include="Views\VatMetadata\Edit.cshtml" />
+    <Content Include="Views\SuspenseNote\Create.cshtml" />
+    <Content Include="Views\SuspenseNote\List.cshtml" />
+    <Content Include="Views\SuspenseNote\_List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

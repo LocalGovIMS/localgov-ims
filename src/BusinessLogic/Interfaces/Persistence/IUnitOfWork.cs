@@ -26,6 +26,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IStopMessageRepository StopMessages { get; }
         ISystemMessageRepository SystemMessages { get; }
         ISuspenseRepository Suspenses { get; }
+        IRepository<SuspenseNote> SuspenseNotes { get; }
         ITemplateRepository Templates { get; }
         ITemplateRowRepository TemplateRows { get; }
         ITransactionRepository Transactions { get; }

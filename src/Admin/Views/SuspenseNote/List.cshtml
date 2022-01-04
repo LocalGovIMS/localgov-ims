@@ -1,0 +1,51 @@
+﻿@model Admin.Models.SuspenseNote.ListViewModel
+@{
+    ViewBag.Title = "Suspense notes";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Suspense notes
+        @Html.ActionLink("Create note", "Create", new { id = Model.SuspenseId }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            All notes
+        </div>
+    </h1>
+}
+
+@if (Model.Items != null && Model.Items.Count > 0)
+{
+    <div class="ui feed">
+
+        @foreach (var item in Model.Items.OrderByDescending(x => x.CreatedAt))
+        {
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                        @item.CreatedByUser.DisplayName added a note on
+                        <div class="date">
+                            @item.CreatedAt
+                        </div>
+                    </div>
+                    <div class="extra text">
+                        @item.Note
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="ui info message">
+        <div class="header">
+            No notes
+        </div>
+        <p>
+            There are no notes for this suspense item
+        </p>
+    </div>
+}
+
+@Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "ui button" })

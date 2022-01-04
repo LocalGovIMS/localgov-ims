@@ -75,7 +75,9 @@ namespace DataAccess.Repositories
                 .ThenByDescending(x => x.Amount - (x.SuspenseProcessedTransactions.Any() == false ? 0 : x.SuspenseProcessedTransactions.Sum(y => y.Amount)))
                 .Skip((criteria.Page - 1) * criteria.PageSize)
                 .Take(criteria.PageSize)
-                .Include(x => x.SuspenseProcessedTransactions);
+                .Include(x => x.SuspenseProcessedTransactions)
+                .Include(x => x.SuspenseNotes)
+                .Include(x => x.SuspenseNotes.Select(y => y.CreatedByUser));
 
             return data.ToList();
         }

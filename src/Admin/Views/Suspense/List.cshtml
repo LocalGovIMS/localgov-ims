@@ -44,8 +44,8 @@
                     <th style="width: 5%"></th>
                     <th style="width: 15%">Date</th>
                     <th>Narrative</th>
-                    <th>Notes</th>
-                    <th>Account Number</th>
+                    <th>Latest note</th>
+                    <th>Account number</th>
                     <th style="width: 15%">Amount (£)</th>
                     <th style="width: 10%"></th>
                 </tr>
@@ -68,7 +68,23 @@
                         </td>
                         <td>@item.Item.CreatedAt</td>
                         <td>@item.Item.Narrative</td>
-                        <td><pre>@Html.ToMaxLength(item.Item.Notes, 50)</pre></td>
+                        <td>
+                            @if (item.LatestNote != null)
+                            {
+                                <div class="ui feed">
+                                    <div class="event">
+                                        <div class="content">
+                                            <div class="summary">
+                                                @item.LatestNote.CreatedByUser.DisplayName added a note on <div class="date list-date">@item.LatestNote.CreatedAt</div>
+                                            </div>
+                                            <div class="extra text">
+                                                @item.LatestNote.Note
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
                         <td>@item.Item.AccountNumber</td>
                         <td style="text-align: right">
                             @Html.ToCurrency(item.Item.Amount)
@@ -79,7 +95,7 @@
                             </a>
                             @if (User.IsInRole(Role.Finance))
                             {
-                                <a class="ui icon tiny button note" href="#" data-id="@item.Item.Id" data-note="@item.Item.Notes" title="Notes">
+                                <a class="ui icon tiny button" href="@Url.Action("List", "SuspenseNote", new {id = item.Item.Id})" title="Notes">
                                     <i class="pencil icon"></i>
                                 </a>
                             }
@@ -133,10 +149,6 @@ else
 
     <div id="credit-details">
         @Html.Action("_CreditNote")
-    </div>
-
-    <div id="notes">
-        @{ Html.RenderPartial("_Notes"); }
     </div>
 }
 

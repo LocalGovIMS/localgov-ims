@@ -133,6 +133,10 @@
     <Compile Include="Migrations\202111291133363_Added_ApplicationLog_table.designer.cs">
       <DependentUpon>202111291133363_Added_ApplicationLog_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112170953175_Added_SuspenseNote_entity.cs" />
+    <Compile Include="Migrations\202112170953175_Added_SuspenseNote_entity.designer.cs">
+      <DependentUpon>202112170953175_Added_SuspenseNote_entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111291133363_Added_ApplicationLog_table.resx">
       <DependentUpon>202111291133363_Added_ApplicationLog_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112170953175_Added_SuspenseNote_entity.resx">
+      <DependentUpon>202112170953175_Added_SuspenseNote_entity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

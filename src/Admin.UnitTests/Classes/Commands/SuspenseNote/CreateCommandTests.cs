@@ -4,24 +4,25 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
-using Command = Admin.Classes.Commands.Vat.CreateCommand;
+using Command = Admin.Classes.Commands.SuspenseNote.CreateCommand;
 using CommandResult = Admin.Classes.Commands.CommandResult;
-using ViewModel = Admin.Models.Vat.EditViewModel;
+using ViewModel = Admin.Models.SuspenseNote.EditViewModel;
 
-namespace Admin.UnitTests.Classes.Commands.Vat
+namespace Admin.UnitTests.Classes.Commands.SuspenseNote
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class CreateCommandTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
+        private readonly Mock<ISuspenseNoteService> _mockSuspenseNoteService = new Mock<ISuspenseNoteService>();
 
         private ViewModel GenerateViewModel()
         {
             return new ViewModel()
             {
-                Code = "V1"
+                Note = "A note",
+                SuspenseId = 1
             };
         }
 
@@ -31,7 +32,7 @@ namespace Admin.UnitTests.Classes.Commands.Vat
             // Arrange
             var command = new Command(
                 _mockLogger.Object,
-                _mockVatService.Object);
+                _mockSuspenseNoteService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());
@@ -45,12 +46,12 @@ namespace Admin.UnitTests.Classes.Commands.Vat
         public void OnExecuteReturnsCommandResultFromResult()
         {
             // Arrange
-            _mockVatService.Setup(x => x.Create(It.IsAny<BusinessLogic.Entities.Vat>()))
+            _mockSuspenseNoteService.Setup(x => x.Create(It.IsAny<BusinessLogic.Entities.SuspenseNote>()))
                 .Returns(new Result());
 
             var command = new Command(
                 _mockLogger.Object,
-                _mockVatService.Object);
+                _mockSuspenseNoteService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());
