@@ -371,16 +371,12 @@ pre {
 .ui.dimmer {
     background-color: rgba(0, 0, 0, 0.35) !important;
 }
-.ui.header.minimal {
-    text-transform: uppercase;
-    color: #999;
-    font-size: 0.8rem;
-}
+
 .instructions li {
     margin-bottom: 1rem;
 }
-.sub { font-size: 0.8rem; color: #888; }
 
+.sub { font-size: 0.8rem; color: #888; }
 
 .system-message {
     background-color: #fff;

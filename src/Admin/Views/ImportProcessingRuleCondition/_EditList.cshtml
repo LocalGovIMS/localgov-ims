@@ -8,7 +8,7 @@
         groupCount++;
         if (groupCount > 1)
         {
-            <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">OR</div>
+            <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">Or</div>
         }
         <table class="ui celled table blue">
             @{ var conditionCount = 0; }
@@ -20,11 +20,11 @@
                     <td style="width:5%;">
                         @if (conditionCount > 1)
                         {
-                            <span>@(string.IsNullOrEmpty(condition.LogicalOperator) ? string.Empty : condition.LogicalOperator.ToUpper())</span>
+                            <span>@(string.IsNullOrEmpty(condition.LogicalOperator) ? string.Empty : condition.LogicalOperator.ToSentenceCase())</span>
                         }
                         else
                         {
-                            <span>WHERE</span>
+                            <span>Where</span>
                         }
                         </td>
                         <td><span class="condition ui label blue">@condition.DisplaySummary()</span></td>
