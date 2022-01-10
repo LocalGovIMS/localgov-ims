@@ -33,5 +33,6 @@ namespace BusinessLogic.Interfaces.Services
         IResult ReceiptIssued(string pspReference);
         ProcessedTransaction GetTransactionByAppReference(string appReference);
         IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction);
+        IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChanges);
     }
 }

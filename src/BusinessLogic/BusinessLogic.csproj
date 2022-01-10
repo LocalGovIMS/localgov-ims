@@ -83,6 +83,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Abstractions, Version=16.0.0.0, Culture=neutral, PublicKeyToken=96bf224d23c43e59, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.16.0.1\lib\net461\System.IO.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -146,12 +149,14 @@
     <Compile Include="Entities\FundGroup.cs" />
     <Compile Include="Entities\FundGroupFund.cs" />
     <Compile Include="Entities\FundMetaData.cs" />
+    <Compile Include="Entities\ImportRow.cs" />
     <Compile Include="Entities\ImportProcessingRuleOperator.cs" />
     <Compile Include="Entities\ImportProcessingRuleField.cs" />
     <Compile Include="Entities\ImportProcessingRuleCondition.cs" />
     <Compile Include="Entities\ImportProcessingRuleAction.cs" />
     <Compile Include="Entities\ImportProcessingRule.cs" />
     <Compile Include="Entities\PaymentIntegration.cs" />
+    <Compile Include="Entities\Import.cs" />
     <Compile Include="Entities\SuspenseNote.cs" />
     <Compile Include="Entities\VatMetaData.cs" />
     <Compile Include="Entities\MopMetaData.cs" />
@@ -199,9 +204,15 @@
     <Compile Include="Extensions\MopExtensions.cs" />
     <Compile Include="Extensions\ProcessedTransactionExtensions.cs" />
     <Compile Include="ImportProcessing\Enums\OperationType.cs" />
+    <Compile Include="ImportProcessing\Interfaces\IImportProcessor.cs" />
+    <Compile Include="ImportProcessing\ImportProcessor.cs" />
+    <Compile Include="ImportProcessing\FileImporter.cs" />
+    <Compile Include="ImportProcessing\Interfaces\IFileImporter.cs" />
     <Compile Include="ImportProcessing\Interfaces\IOperations.cs" />
     <Compile Include="ImportProcessing\Interfaces\IRuleEngine.cs" />
+    <Compile Include="ImportProcessing\Interfaces\IProcessedTransactionModelBuilder.cs" />
     <Compile Include="ImportProcessing\Operations.cs" />
+    <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder.cs" />
     <Compile Include="ImportProcessing\RuleEngine.cs" />
     <Compile Include="Interfaces\Formatters\IAccountReferenceFormatter.cs" />
     <Compile Include="Interfaces\Persistence\IUnitOfWork.cs" />
@@ -213,6 +224,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnChequeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IImportRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVatMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMethodOfPaymentMetadataRepository.cs" />
@@ -244,6 +256,7 @@
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
+    <Compile Include="Interfaces\Services\IImportService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
     <Compile Include="Interfaces\Services\IVatMetadataService.cs" />
     <Compile Include="Interfaces\Services\IFundMetadataService.cs" />
@@ -274,6 +287,9 @@
     <Compile Include="Models\BaseSearchCriteria.cs" />
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
+    <Compile Include="Models\ProcessedTransactionModel.cs" />
+    <Compile Include="Models\Import\ProcessResult.cs" />
+    <Compile Include="Models\Import\LoadFromFileResult.cs" />
     <Compile Include="Models\VatMetadata\SearchCriteria.cs" />
     <Compile Include="Models\Fund\SearchCriteria.cs" />
     <Compile Include="Models\FundMetadata\SearchCriteria.cs" />
@@ -295,6 +311,7 @@
     <Compile Include="Models\User\SearchCriteria.cs" />
     <Compile Include="Services\EReturnStatusService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleService.cs" />
+    <Compile Include="Services\ImportService.cs" />
     <Compile Include="Services\SuspenseNoteService.cs" />
     <Compile Include="Services\VatMetadataService.cs" />
     <Compile Include="Services\FundMetadataService.cs" />

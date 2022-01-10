@@ -1,5 +1,6 @@
 using BusinessLogic.Authentication.Identity;
 using BusinessLogic.Entities;
+using log4net;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
@@ -8,14 +9,15 @@ namespace DataAccess.Persistence
 {
     public partial class IncomeDbContext : IdentityDbContext<PaymentsUser>
     {
-        public IncomeDbContext()
+        public IncomeDbContext(ILog log)
             : base("name=IncomeDb")
         {
+            if(log != null) log.Info(Guid.NewGuid());
         }
 
         public static IncomeDbContext Create()
         {
-            return new IncomeDbContext();
+            return new IncomeDbContext(null);
         }
 
         public virtual DbSet<AccountHolder> AccountHolders { get; set; }
@@ -62,6 +64,9 @@ namespace DataAccess.Persistence
         public virtual DbSet<ImportProcessingRuleAction> ImportProcessingRuleActions { get; set; }
         public virtual DbSet<ImportProcessingRuleField> ImportProcessingRuleFields { get; set; }
         public virtual DbSet<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; set; }
+
+        public virtual DbSet<Import> Imports { get; set; }
+        public virtual DbSet<ImportRow> ImportRows { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -296,6 +301,12 @@ namespace DataAccess.Persistence
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Imports)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Vat>()
                 .HasMany(e => e.TemplateRows)
                 .WithRequired(e => e.VAT)
@@ -335,6 +346,11 @@ namespace DataAccess.Persistence
                 .HasMany(e => e.Conditions)
                 .WithRequired(e => e.Operator)
                 .HasForeignKey(e => e.ImportProcessingRuleOperatorId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Import>()
+                .HasMany(e => e.Rows)
+                .WithRequired(e => e.Import)
                 .WillCascadeOnDelete(false);
         }
 

@@ -27,6 +27,11 @@ namespace BusinessLogic.Classes.Result
             Errors.Add(error);
         }
 
+        public void AddErrors(IList<string> errors)
+        {
+            errors.ToList().ForEach(x => Errors.Add(x));
+        }
+
         public void SetData(object data)
         {
             Data = data;

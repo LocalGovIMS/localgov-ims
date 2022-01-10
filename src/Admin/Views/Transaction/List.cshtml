@@ -1,15 +1,23 @@
 ﻿@using PagedList.Mvc
 @using BusinessLogic.Extensions
 @model Admin.Models.Transaction.ListViewModel
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
 @{
     ViewBag.Title = "Transactions";
 }
 
-@section Header { 
+@section Header {
     <h1 class="ui header">
         Transactions
         <a href="@Url.Action("Search", "Transaction")" class="ui button right floated" id="reset">
             <i class="undo icon"></i> Reset search
+        </a>
+        <a href="@Url.Action("Index", "Import")" class="ui button right floated" id="upload">
+            <i class="upload icon"></i> Import
         </a>
         <div class="sub header">
             Payments and refunds
@@ -17,7 +25,7 @@
 
     </h1>
 }
-          
+
 @Html.Partial("_SearchTransaction", Model.SearchCriteria)
 
 @if (Model.Transactions != null && Model.Transactions.Any())
@@ -35,47 +43,48 @@
             </tr>
         </thead>
         <tbody>
-        
-        @foreach (var transaction in Model.Transactions)
-        {
-        <tr>
-            <td>@transaction.EntryDate</td>
-            <td style="text-align: center;">
-                <span class="ui tiny label mop"
-                      title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
-                      style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">
-                    @(transaction.Mop != null ? transaction.Mop.MopCode : "")
-                </span>
-            </td>
-            <td>
-                @if (User.IsInRole(Role.TransactionDetails))
-                {
-                    <a href="@Url.Action("Details", new {id = transaction.PspReference})">@transaction.PspReference</a>
-                }
-                else
-                {
-                    @transaction.PspReference
-                }
-                @if (transaction.PspReference != transaction.InternalReference)
-                {
-                    <div class="sub">@transaction.InternalReference</div>
-                }
-            </td>
-            <td>@(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")
-                <div class="sub">@transaction.CardHolderPremiseNumber @transaction.CardHolderStreet @transaction.CardHolderTown @transaction.CardHolderPostCode</div>
-                </td>
-            <td>@transaction.AccountReference</td>
 
-            <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
-            <td style="text-align: right" class="@if (transaction.Amount < 0)
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.EntryDate</td>
+                    <td style="text-align: center;">
+                        <span class="ui tiny label mop"
+                              title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
+                              style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">
+                            @(transaction.Mop != null ? transaction.Mop.MopCode : "")
+                        </span>
+                    </td>
+                    <td>
+                        @if (User.IsInRole(Role.TransactionDetails))
+                        {
+                            <a href="@Url.Action("Details", new {id = transaction.PspReference})">@transaction.PspReference</a>
+                        }
+                        else
+                        {
+                            @transaction.PspReference
+                        }
+                        @if (transaction.PspReference != transaction.InternalReference)
+                        {
+                            <div class="sub">@transaction.InternalReference</div>
+                        }
+                    </td>
+                    <td>
+                        @(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")
+                        <div class="sub">@transaction.CardHolderPremiseNumber @transaction.CardHolderStreet @transaction.CardHolderTown @transaction.CardHolderPostCode</div>
+                    </td>
+                    <td>@transaction.AccountReference</td>
+
+                    <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
+                    <td style="text-align: right" class="@if (transaction.Amount < 0)
                                             {
                                                 @Html.Raw("td--negative")
                                             }">
-                @Html.ToCurrency(transaction.Amount)
-            </td>
-        </tr>
-        }
-        
+                        @Html.ToCurrency(transaction.Amount)
+                    </td>
+                </tr>
+            }
+
         </tbody>
         <tfoot>
             <tr>
@@ -108,25 +117,25 @@
 }
 else
 {
-<div class="ui info message">
-    <div class="header">
-        We couldn't find any matching transactions
+    <div class="ui info message">
+        <div class="header">
+            We couldn't find any matching transactions
+        </div>
+        <p>
+            Please try again with different search criteria
+        </p>
     </div>
-    <p>
-        Please try again with different search criteria
-    </p>
-</div>         
 }
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('tr').click(function() {
+        $('tr').click(function () {
             var href = $(this).find("a").attr("href");
-            if(href) {
+            if (href) {
                 window.location = href;
             }
-        });        
+        });
 
     });
 </script>

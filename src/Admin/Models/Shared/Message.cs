@@ -32,7 +32,7 @@ namespace Admin.Models.Shared
         {
             Type = Properties.Resources.DefaultMessageTypeError;
             Title = Properties.Resources.DefaultMessageTitleError;
-            Text = string.Join(",", message);
+            Text = string.Join(", ", message);
         }
 
         public ErrorMessage(string message, string title)

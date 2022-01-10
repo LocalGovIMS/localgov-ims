@@ -16,6 +16,7 @@ namespace BusinessLogic.Models.Transactions
         public string Narrative { get; set; }
         public string InternalReference { get; set; }
         public bool WildSearchAccountReference { get; set; }
+        public string BatchReference { get; set; }
 
         public SearchCriteria() : base()
         {

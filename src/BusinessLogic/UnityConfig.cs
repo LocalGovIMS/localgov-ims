@@ -31,6 +31,7 @@ namespace BusinessLogic
                 .RegisterType<IFundGroupService, FundGroupService>()
                 .RegisterType<IFundService, FundService>()
                 .RegisterType<IFundMetadataService, FundMetadataService>()
+                .RegisterType<IImportService, ImportService>()
                 .RegisterType<IImportProcessingRuleService, ImportProcessingRuleService>()
                 .RegisterType<IImportProcessingRuleConditionService, ImportProcessingRuleConditionService>()
                 .RegisterType<IImportProcessingRuleActionService, ImportProcessingRuleActionService>()
@@ -87,6 +88,9 @@ namespace BusinessLogic
 
                 .RegisterType<IRuleEngine, RuleEngine>()
                 .RegisterType<IOperations, Operations>()
+                .RegisterType<IFileImporter, FileImporter>()
+                .RegisterType<IImportProcessor, ImportProcessor>()
+                .RegisterType<IProcessedTransactionModelBuilder, ProcessedTransactionModelBuilder>()
                 ;
         }
     }

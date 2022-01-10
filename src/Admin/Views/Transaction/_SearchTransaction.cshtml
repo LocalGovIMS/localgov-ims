@@ -3,6 +3,8 @@
 @using (Html.BeginForm("Search", "Transaction", FormMethod.Get))
 {
 
+    @Html.HiddenFor(x => x.BatchReference)
+
     <div class="ui segment">
         <div class="ui form">
             <div class="ui error message source-message" style="margin: 1rem 0; display:none;">

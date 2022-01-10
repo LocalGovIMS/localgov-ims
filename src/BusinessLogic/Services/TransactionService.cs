@@ -777,6 +777,11 @@ namespace BusinessLogic.Services
 
         public IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction)
         {
+            return CreateProcessedTransaction(processedTransaction, true);
+        }
+
+        public IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChanges)
+        {
             if (!SecurityContext.IsInRole(Security.Role.TransactionCreate)) return null;
 
             try
@@ -785,7 +790,11 @@ namespace BusinessLogic.Services
                 processedTransaction.InternalReference = processedTransaction.TransactionReference;
 
                 UnitOfWork.Transactions.Add(processedTransaction);
-                UnitOfWork.Complete(SecurityContext.UserId);
+
+                if (saveChanges)
+                {
+                    UnitOfWork.Complete(SecurityContext.UserId);
+                }
 
                 return new Result() { Data = processedTransaction };
             }

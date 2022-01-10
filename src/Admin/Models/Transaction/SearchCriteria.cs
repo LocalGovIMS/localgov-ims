@@ -33,6 +33,8 @@ namespace Admin.Models.Transaction
 
         public DateTime? StartDate { get; set; }
 
+        public string BatchReference { get; set; }
+
         public int Page { get; set; }
 
         public SelectList Funds { get; set; }

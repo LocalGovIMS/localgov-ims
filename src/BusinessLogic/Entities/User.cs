@@ -19,6 +19,7 @@ namespace BusinessLogic.Entities
             UserPostPaymentMopCodes = new HashSet<UserPostPaymentMopCode>();
             UserRoles = new HashSet<UserRole>();
             UserTemplates = new HashSet<UserTemplate>();
+            Imports = new HashSet<Import>();
         }
 
         public int UserId { get; set; }
@@ -66,5 +67,8 @@ namespace BusinessLogic.Entities
         public virtual ICollection<UserRole> UserRoles { get; set; }
 
         public virtual ICollection<UserTemplate> UserTemplates { get; set; }
+        
+        public virtual ICollection<Import> Imports { get; set; }
+
     }
 }
