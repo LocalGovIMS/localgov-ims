@@ -75,7 +75,8 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
                 UserId = criteria.UserId,
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
                 PageSize = 20,
-                WildSearchAccountReference = criteria.WildSearchAccountReference
+                WildSearchAccountReference = criteria.WildSearchAccountReference,
+                BatchReference = criteria.BatchReference
             };
 
             var searchResult = _transactionService.SearchTransactions(searchCriteria);

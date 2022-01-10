@@ -171,6 +171,11 @@ namespace DataAccess.Repositories
                 transactions = transactions.Where(x => x.EntryDate < endDate);
             }
 
+            if (!string.IsNullOrWhiteSpace(criteria.BatchReference))
+            {
+                transactions = transactions.Where(x => x.BatchReference == criteria.BatchReference);
+            }
+
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;
 

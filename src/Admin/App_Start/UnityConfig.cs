@@ -17,6 +17,7 @@ using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO.Abstractions;
 using System.Web;
 using System.Web.Mvc;
 using Unity;
@@ -254,6 +255,9 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleAction.EditViewModel>, Commands.ImportProcessingRuleAction.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleAction.EditViewModel>, Commands.ImportProcessingRuleAction.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleAction.DeleteCommand>("ImportProcessingRuleAction.Command.Delete")
+
+                .RegisterType<IModelCommand<Commands.Import.SaveImportFileCommandArgs>, Commands.Import.SaveImportFileCommand>()
+                .RegisterType<IModelCommand<string>, Commands.Import.ProcessImportCommand>("Import.Command.ProcessImport")
                 ;
         }
 
@@ -286,13 +290,15 @@ namespace Admin
                 .RegisterType<IImportProcessingRuleControllerDependencies, ImportProcessingRuleControllerDependencies>()
                 .RegisterType<IImportProcessingRuleConditionControllerDependencies, ImportProcessingRuleConditionControllerDependencies>()
                 .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>()
-                .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>();
+                .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
+                .RegisterType<IImportControllerDependencies, ImportControllerDependencies>();
 
         }
 
         private static void RegisterOther(IUnityContainer container)
         {
             container.RegisterType<IUrlResolver, UrlResolver>();
+            container.RegisterType<IFileSystem, FileSystem>();
         }
     }
 }

@@ -114,6 +114,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Abstractions, Version=16.0.0.0, Culture=neutral, PublicKeyToken=96bf224d23c43e59, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.16.0.1\lib\net461\System.IO.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -200,6 +203,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\Import\ProcessImportCommand.cs" />
+    <Compile Include="Classes\Commands\Import\SaveImportFileCommand.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\EditCommand.cs" />
@@ -296,7 +301,9 @@
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\ImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IVatMetadataControllerDependencies.cs" />
@@ -388,6 +395,7 @@
     <Compile Include="Controllers\AccountHolderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
     <Compile Include="Controllers\VatMetadataController.cs" />
     <Compile Include="Controllers\FundMetadataController.cs" />
@@ -455,6 +463,7 @@
     <Compile Include="Models\EReturn\SearchCriteria.cs" />
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
+    <Compile Include="Models\Import\ConfirmViewModel.cs" />
     <Compile Include="Models\SuspenseNote\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\VatMetadata\DetailsViewModel.cs" />
@@ -1567,6 +1576,8 @@
     <Content Include="Views\SuspenseNote\Create.cshtml" />
     <Content Include="Views\SuspenseNote\List.cshtml" />
     <Content Include="Views\SuspenseNote\_List.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Import\Confirm.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

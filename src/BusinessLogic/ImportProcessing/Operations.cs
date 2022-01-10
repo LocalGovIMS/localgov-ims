@@ -7,11 +7,11 @@ namespace BusinessLogic.ImportProcessing
     {
         public IDictionary<OperationType, Func<OperationArgs, bool>> TextOperators => new Dictionary<OperationType, Func<OperationArgs, bool>>()
         {
-            { OperationType.Contain, (args) => { return ((string)args.FieldValue ?? string.Empty).Contains((string)args.Value ?? string.Empty); } },
-            { OperationType.NotContain, (args) => { return !((string)args.FieldValue ?? string.Empty).Contains((string)args.Value ?? string.Empty); } },
-            { OperationType.StartWith, (args) => { return ((string)args.FieldValue ?? string.Empty).StartsWith((string)args.Value ?? string.Empty); } },
-            { OperationType.EndWith, (args) => { return ((string)args.FieldValue ?? string.Empty).EndsWith((string)args.Value ?? string.Empty); } },
-            { OperationType.Equal, (args) => { return ((string)args.FieldValue ?? string.Empty).Equals((string)args.Value ?? string.Empty); } }
+            { OperationType.Contain, (args) => { return (Convert.ToString(args.FieldValue) ?? string.Empty).Contains(Convert.ToString(args.Value) ?? string.Empty); } },
+            { OperationType.NotContain, (args) => { return !(Convert.ToString(args.FieldValue) ?? string.Empty).Contains(Convert.ToString(args.Value) ?? string.Empty); } },
+            { OperationType.StartWith, (args) => { return (Convert.ToString(args.FieldValue) ?? string.Empty).StartsWith(Convert.ToString(args.Value) ?? string.Empty); } },
+            { OperationType.EndWith, (args) => { return (Convert.ToString(args.FieldValue) ?? string.Empty).EndsWith(Convert.ToString(args.Value) ?? string.Empty); } },
+            { OperationType.Equal, (args) => { return (Convert.ToString(args.FieldValue) ?? string.Empty).Equals(Convert.ToString(args.Value) ?? string.Empty); } }
         };
 
         public IDictionary<OperationType, Func<OperationArgs, bool>> DecimalOperators => new Dictionary<OperationType, Func<OperationArgs, bool>>()

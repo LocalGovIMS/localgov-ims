@@ -1,0 +1,36 @@
+﻿@model Admin.Models.Import.ConfirmViewModel
+
+@{
+    ViewBag.Title = "Import File Confirmation";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Import File Confirmation
+        <div class="sub header">
+            Import this file?
+        </div>
+    </h1>
+}
+@using (Html.BeginForm("Confirm", "Import", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.BatchReference)
+    @Html.HiddenFor(m => m.RowCount)
+
+    <div class="ui form">
+        <div class="ui vertical segment">
+
+            <div class="four wide field">
+                Import file containing @Model.RowCount rows?
+            </div>
+
+            <input type="submit" value="Yes" class="ui primary button" />
+            @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
+        </div>
+    </div>
+
+}

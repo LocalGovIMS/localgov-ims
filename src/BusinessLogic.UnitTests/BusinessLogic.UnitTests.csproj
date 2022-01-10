@@ -76,6 +76,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Abstractions, Version=16.0.0.0, Culture=neutral, PublicKeyToken=96bf224d23c43e59, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Abstractions.16.0.1\lib\net461\System.IO.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
@@ -125,8 +128,15 @@
     <Compile Include="Extensions\Vat\IsASuspenseJournalVatCodeTests.cs" />
     <Compile Include="Helpers\PermissionTestHelper.cs" />
     <Compile Include="Classes\Smtp\VatReceiptEmailTests.cs" />
+    <Compile Include="ImportProcessing\FileImporter\ImportFileTests.cs" />
+    <Compile Include="ImportProcessing\FileImporter\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\FileImporter\TestBase.cs" />
+    <Compile Include="ImportProcessing\ImportProcessor\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\ImportProcessor\ProcessTests.cs" />
+    <Compile Include="ImportProcessing\ImportProcessor\TestBase.cs" />
     <Compile Include="ImportProcessing\Operations\DecimalOperatorTests.cs" />
     <Compile Include="ImportProcessing\Operations\TextOperatorTests.cs" />
+    <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder\BuildFromCsvTests.cs" />
     <Compile Include="ImportProcessing\RuleEngine\ProcessTests.cs" />
     <Compile Include="ImportProcessing\RuleEngine\TestData.cs" />
     <Compile Include="Models\EReturnWrapperTests.cs" />
@@ -169,6 +179,9 @@
     <Compile Include="Services\FundGroup\GetFundGroupTests.cs" />
     <Compile Include="Services\FundGroup\GetAllFundGroupsTests.cs" />
     <Compile Include="Services\FundGroup\UpdateTests.cs" />
+    <Compile Include="Services\Import\BaseImportTest.cs" />
+    <Compile Include="Services\Import\ProcessTests.cs" />
+    <Compile Include="Services\Import\LoadFromFileTests.cs" />
     <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
     <Compile Include="Services\SuspenseNote\CreateTests.cs" />
     <Compile Include="Services\SuspenseNote\GetTests.cs" />
