@@ -13,7 +13,7 @@ namespace Admin.Models.User
         [Required(ErrorMessage = "User name is required")]
         public string UserName { get; set; }
 
-        [DisplayName("Last login")]
+        [DisplayName("Last login date and time")]
         public DateTime? LastLogin { get; set; }
 
         [DisplayName("Expiry days")]
