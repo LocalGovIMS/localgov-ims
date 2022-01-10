@@ -11,7 +11,7 @@ using System.Web.Mvc;
 using Controller = Admin.Controllers.ValidationController;
 using Dependencies = Admin.Controllers.ValidationControllerDependencies;
 
-namespace Admin.UnitTests.Controllers.Transaction.ValidateTransferItem
+namespace Admin.UnitTests.Controllers.Validation.ValidateTransferItem
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

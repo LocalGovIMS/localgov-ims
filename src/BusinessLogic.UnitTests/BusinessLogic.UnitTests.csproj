@@ -112,6 +112,7 @@
     <Compile Include="Extensions\ImportProcessingRuleExtensionsTests.cs" />
     <Compile Include="Extensions\List\IsNullOrEmptyTests.cs" />
     <Compile Include="Extensions\Mop\GetMopMetaDataValueTests.cs" />
+    <Compile Include="Extensions\ProcessedTransactions\ToExportStringTests.cs" />
     <Compile Include="Extensions\Mop\TextColourTests.cs" />
     <Compile Include="Extensions\Mop\IsAJournalReallocationTests.cs" />
     <Compile Include="Extensions\Mop\IsACardSelfServicePaymentTests.cs" />

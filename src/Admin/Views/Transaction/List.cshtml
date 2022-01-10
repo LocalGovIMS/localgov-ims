@@ -19,6 +19,9 @@
         <a href="@Url.Action("Index", "Import")" class="ui button right floated" id="upload">
             <i class="upload icon"></i> Import
         </a>
+        <a class="ui button right floated" id="export" onclick="SubmitMyForm()">
+            <i class="download icon"></i> Export
+        </a>
         <div class="sub header">
             Payments and refunds
         </div>
@@ -138,6 +141,16 @@ else
         });
 
     });
+
+    function SubmitMyForm() {
+        console.log('In SubmitMyForm')
+
+        var form = document.getElementById("search-form");
+
+        form.action = "/Transaction/Export";
+        form.submit();
+        form.action = "/Transaction/Search";
+    }
 </script>
 
 @section Scripts {

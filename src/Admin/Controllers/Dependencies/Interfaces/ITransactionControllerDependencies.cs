@@ -1,4 +1,5 @@
-﻿using Admin.Interfaces.Commands;
+﻿using Admin.Classes.Commands.Transaction;
+using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
 using Admin.Models.Transaction;
 using DetailsViewModel = Admin.Models.Transaction.DetailsViewModel;
@@ -19,6 +20,7 @@ namespace Admin.Controllers
         IModelCommand<string> UndoTransferCommand { get; }
         IModelCommand<RefundViewModel> RefundCommand { get; }
         IModelCommand<EmailReceiptViewModel> EmailReceiptCommand { get; }
+        IModelCommand<CreateCsvFileForExportCommandArgs> CreateCsvFileForExportCommand { get; }
         #endregion
     }
 }

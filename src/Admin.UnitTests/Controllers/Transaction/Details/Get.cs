@@ -1,10 +1,6 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using Admin.Models.Transaction;
-using log4net;
+﻿using Admin.Models.Transaction;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -12,28 +8,21 @@ using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 using Controller = Admin.Controllers.TransactionController;
-using Dependencies = Admin.Controllers.TransactionControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.Transaction.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelBuilder<TransferViewModel, string>> _mockTransferViewModelBuilder = new Mock<IModelBuilder<TransferViewModel, string>>();
-        private readonly Mock<IModelBuilder<RefundViewModel, string>> _mockRefundViewModelBuilder = new Mock<IModelBuilder<RefundViewModel, string>>();
-        private readonly Mock<IModelCommand<TransferViewModel>> _mockTransferCommand = new Mock<IModelCommand<TransferViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockUndoTransferCommand = new Mock<IModelCommand<string>>();
-        private readonly Mock<IModelCommand<RefundViewModel>> _mockRefundCommand = new Mock<IModelCommand<RefundViewModel>>();
-        private readonly Mock<IModelCommand<EmailReceiptViewModel>> _mockEmailReceiptCommand = new Mock<IModelCommand<EmailReceiptViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
+            return typeof(Controller).GetMethods()
                 .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
                 .Where(x => x.Name == "Details")
                 .FirstOrDefault();
@@ -41,7 +30,6 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
 
         private ActionResult GetResult(bool includeTransaction)
         {
-
             var processedTransactions = new List<BusinessLogic.Entities.ProcessedTransaction>()
             {
                 {
@@ -79,8 +67,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
 
             var transfers = new List<BusinessLogic.Entities.ProcessedTransaction>();
 
-            var detailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, string>>();
-            detailsViewModelBuilder.Setup(x => x.Build(
+            MockDetailsViewModelBuilder.Setup(x => x.Build(
                 It.IsAny<string>()))
                 .Returns(new DetailsViewModel()
                 {
@@ -96,20 +83,9 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
                 }
                 );
 
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                _mockListViewModelBuilder.Object,
-                detailsViewModelBuilder.Object,
-                _mockTransferViewModelBuilder.Object,
-                _mockRefundViewModelBuilder.Object,
-                _mockTransferCommand.Object,
-                _mockUndoTransferCommand.Object,
-                _mockRefundCommand.Object,
-                _mockEmailReceiptCommand.Object);
+            
 
-            var controller = new Controller(dependencies);
-
-            return controller.Details("test");
+            return Controller.Details("test");
         }
 
         [TestMethod]

@@ -1,4 +1,5 @@
-﻿using Admin.Interfaces.Commands;
+﻿using Admin.Classes.Commands.Transaction;
+using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
 using Admin.Models.Transaction;
 using log4net;
@@ -18,6 +19,7 @@ namespace Admin.Controllers
             , [Dependency("UndoTransfer")] IModelCommand<string> undoTransferCommand
             , IModelCommand<RefundViewModel> refundCommand
             , IModelCommand<EmailReceiptViewModel> emailReceiptCommand
+            , IModelCommand<CreateCsvFileForExportCommandArgs> createCsvFileForExportCommand
             )
             : base(log)
         {
@@ -30,6 +32,7 @@ namespace Admin.Controllers
             UndoTransferCommand = undoTransferCommand ?? throw new ArgumentNullException("undoTransferCommand");
             RefundCommand = refundCommand ?? throw new ArgumentNullException("refundCommand");
             EmailReceiptCommand = emailReceiptCommand ?? throw new ArgumentNullException("emailReceiptCommand");
+            CreateCsvFileForExportCommand = createCsvFileForExportCommand ?? throw new ArgumentNullException("createCsvFileForExportCommand");
         }
 
         public IModelBuilder<DetailsViewModel, string> DetailsViewModelBuilder { get; set; }
@@ -41,5 +44,6 @@ namespace Admin.Controllers
         public IModelCommand<string> UndoTransferCommand { get; private set; }
         public IModelCommand<RefundViewModel> RefundCommand { get; private set; }
         public IModelCommand<EmailReceiptViewModel> EmailReceiptCommand { get; private set; }
+        public IModelCommand<CreateCsvFileForExportCommandArgs> CreateCsvFileForExportCommand { get; private set; }
     }
 }
