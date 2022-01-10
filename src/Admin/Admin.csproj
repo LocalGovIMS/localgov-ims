@@ -219,6 +219,7 @@
     <Compile Include="Classes\Commands\EReturn\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\CreateCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExport.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommand.cs" />
     <Compile Include="Classes\Commands\VatMetadata\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\VatMetadata\EditCommand.cs" />
@@ -258,7 +259,7 @@
     <Compile Include="Classes\Commands\Template\CreateCommand.cs" />
     <Compile Include="Classes\Commands\Template\EditCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\EmailReceiptCommand.cs" />
-    <Compile Include="Classes\Commands\Transaction\ValidateTransferItemCommand.cs" />
+    <Compile Include="Classes\Commands\Validation\ValidateTransferItemCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\UndoTransferCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\TransferCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\RefundCommand.cs" />

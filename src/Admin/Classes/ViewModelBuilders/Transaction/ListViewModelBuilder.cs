@@ -74,7 +74,7 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
                 StartDate = criteria.StartDate,
                 UserId = criteria.UserId,
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
-                PageSize = 20,
+                PageSize = criteria.PageSize,
                 WildSearchAccountReference = criteria.WildSearchAccountReference,
                 BatchReference = criteria.BatchReference
             };

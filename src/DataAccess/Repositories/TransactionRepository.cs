@@ -192,6 +192,7 @@ namespace DataAccess.Repositories
             var returnVal = transactions.Select(x =>
                new
                {
+                   TransactionReference = x.TransactionReference,
                    AccountReference = x.AccountReference,
                    InternalReference = x.InternalReference,
                    Amount = x.Amount,
@@ -205,6 +206,12 @@ namespace DataAccess.Repositories
                    CardHolderStreet = x.CardHolderStreet,
                    CardHolderTown = x.CardHolderTown,
                    CardHolderPostCode = x.CardHolderPostCode,
+                   OfficeCode = x.OfficeCode,
+                   TransactionDate = x.TransactionDate,
+                   UserCode = x.UserCode,
+                   VatCode = x.VatCode,
+                   VatRate = x.VatRate,
+                   VatAmount = x.VatAmount
                }).ToList();
 
             var funds = IncomeDbContext.Funds.ToList();
@@ -213,9 +220,12 @@ namespace DataAccess.Repositories
             return returnVal.Select(x =>
                 new ProcessedTransaction
                 {
+                    TransactionReference = x.TransactionReference,
                     AccountReference = x.AccountReference ?? string.Empty,
                     Amount = x.Amount,
+                    FundCode = x.FundCode,
                     Fund = x.FundCode == null ? null : funds.FirstOrDefault(y => y.FundCode == x.FundCode),
+                    MopCode = x.MopCode,
                     Mop = x.MopCode == null ? null : mops.FirstOrDefault(y => y.MopCode == x.MopCode),
                     Narrative = x.Narrative,
                     PspReference = x.PspReference,
@@ -226,6 +236,12 @@ namespace DataAccess.Repositories
                     CardHolderStreet = x.CardHolderStreet,
                     CardHolderTown = x.CardHolderTown,
                     CardHolderPostCode = x.CardHolderPostCode,
+                    OfficeCode = x.OfficeCode,
+                    TransactionDate = x.TransactionDate,
+                    UserCode = x.UserCode,
+                    VatCode = x.VatCode,
+                    VatRate = x.VatRate,
+                    VatAmount = x.VatAmount
                 }).ToList();
         }
 

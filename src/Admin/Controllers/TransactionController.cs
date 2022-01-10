@@ -1,6 +1,11 @@
-﻿using Admin.Models.Shared;
+﻿using Admin.Classes.Commands.Transaction;
+using Admin.Models.Shared;
 using Admin.Models.Transaction;
 using BusinessLogic.Security;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 
@@ -126,6 +131,36 @@ namespace Admin.Controllers
             }
 
             return Json(new { ok = result.Success });
+        }
+
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Export")]
+        [Classes.Security.Attributes.Authorize(Roles = Role.TransactionList)]
+        [HttpGet]
+        public ActionResult Export(SearchCriteria criteria)
+        {
+            try
+            {
+                criteria.Page = 1;
+                criteria.PageSize = 1000;
+
+                var model = Dependencies.ListViewModelBuilder.Build(criteria);
+
+                var file = Dependencies.CreateCsvFileForExportCommand.Execute(new CreateCsvFileForExportCommandArgs()
+                {
+                    Transactions = model.Transactions.ToList()
+                });
+
+                return (FileContentResult)file.Data;
+            }
+            catch(Exception ex)
+            {
+                Dependencies.Log.Error(ex);
+
+                TempData["Message"] = new ErrorMessage("Unable to export the selected data");
+
+                return RedirectToAction("Search", criteria);
+            }
+            
         }
     }
 }

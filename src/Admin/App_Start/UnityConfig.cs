@@ -189,11 +189,13 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.Transaction.TransferViewModel>, Commands.Transaction.TransferCommand>()
                 .RegisterType<IModelCommand<string>, Commands.Transaction.UndoTransferCommand>("UndoTransfer")
                 .RegisterType<IModelCommand<ViewModels.Transaction.RefundViewModel>, Commands.Transaction.RefundCommand>()
-                .RegisterType<IModelCommand<TransferItem>, Commands.Transaction.ValidateTransferItemCommand>()
                 .RegisterType<IModelCommand<ViewModels.Transaction.EmailReceiptViewModel>, Commands.Transaction.EmailReceiptCommand>()
+                .RegisterType<IModelCommand<Commands.Transaction.CreateCsvFileForExportCommandArgs>, Commands.Transaction.CreateCsvFileForExportCommand>()
 
                 .RegisterType<IModelBuilder<ViewModels.Transfer.TransferViewModel, string>, ViewModelBuilders.Transfer.TransferViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.Transfer.TransferViewModel>, Commands.Transfer.TransferCommand>()
+
+                .RegisterType<IModelCommand<TransferItem>, Commands.Validation.ValidateTransferItemCommand>()
 
                 .RegisterType<IModelBuilder<ViewModels.User.DetailsViewModel, int>, ViewModelBuilders.User.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.User.EditViewModel, int>, ViewModelBuilders.User.EditViewModelBuilder>()

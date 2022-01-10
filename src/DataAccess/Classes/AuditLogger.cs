@@ -46,21 +46,19 @@ namespace DataAccess.Classes
             { typeof(ImportProcessingRuleField).ToString(), 31 },
             { typeof(ImportProcessingRuleOperator).ToString(), 32 },
             { typeof(PaymentIntegration).ToString(), 33 },
-            { typeof(Role).ToString(), 34 },
-            { typeof(ScheduleLog).ToString(), 35 },
-            { typeof(TransactionStatus).ToString(), 36 },
-            { typeof(UserPostPaymentMopCode).ToString(), 37 },
-            { typeof(SuspenseNote).ToString(), 38 },
-            { typeof(FundMetaData).ToString(), 39 },
-            { typeof(MopMetaData).ToString(), 40 },
-            { typeof(VatMetaData).ToString(), 41 },
-            { typeof(Office).ToString(), 42 },
-            { typeof(AccountHolder).ToString(), 43 },
-            { typeof(AccountValidation).ToString(), 44 },
-            { typeof(AccountValidationWeighting).ToString(), 45 },
-            { typeof(EReturnStatus).ToString(), 46 },
-            { typeof(EReturnType).ToString(), 47 },
-            { typeof(EReturnType).ToString(), 48 }
+            { typeof(ScheduleLog).ToString(), 34 },
+            { typeof(TransactionStatus).ToString(), 35 },
+            { typeof(UserPostPaymentMopCode).ToString(), 36 },
+            { typeof(SuspenseNote).ToString(), 37 },
+            { typeof(FundMetaData).ToString(), 38 },
+            { typeof(MopMetaData).ToString(), 39 },
+            { typeof(VatMetaData).ToString(), 40 },
+            { typeof(Office).ToString(), 41 },
+            { typeof(AccountHolder).ToString(), 42 },
+            { typeof(AccountValidation).ToString(), 43 },
+            { typeof(AccountValidationWeighting).ToString(), 44 },
+            { typeof(EReturnStatus).ToString(), 45 },
+            { typeof(EReturnType).ToString(), 46 }
         };
 
         private readonly Dictionary<string, Func<object, string>> _idMapping = new Dictionary<string, Func<object, string>>() {
@@ -96,7 +94,6 @@ namespace DataAccess.Classes
             { typeof(ImportProcessingRuleField).ToString(), (item) => { return ((ImportProcessingRuleField)item).Id.ToString(); } },
             { typeof(ImportProcessingRuleOperator).ToString(), (item) => { return ((ImportProcessingRuleOperator)item).Id.ToString(); } },
             { typeof(PaymentIntegration).ToString(), (item) => { return ((PaymentIntegration)item).Id.ToString(); } },
-            { typeof(Role).ToString(), (item) => { return ((Role)item).RoleId.ToString(); } },
             { typeof(ScheduleLog).ToString(), (item) => { return ((ScheduleLog)item).Id.ToString(); } },
             { typeof(TransactionStatus).ToString(), (item) => { return ((TransactionStatus)item).Id.ToString(); } },
             { typeof(UserPostPaymentMopCode).ToString(), (item) => { return ((UserPostPaymentMopCode)item).Id.ToString(); } },
@@ -109,7 +106,6 @@ namespace DataAccess.Classes
             { typeof(AccountValidation).ToString(), (item) => { return ((AccountValidation)item).ValidationReference.ToString(); } },
             { typeof(AccountValidationWeighting).ToString(), (item) => { return ((AccountValidationWeighting)item).Id.ToString(); } },
             { typeof(EReturnStatus).ToString(), (item) => { return ((EReturnStatus)item).Id.ToString(); } },
-            { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } },
             { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } }
         };
 

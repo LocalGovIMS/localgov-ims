@@ -42,5 +42,7 @@ namespace Admin.Models.Transaction
         public SelectList Users { get; set; }
 
         public bool WildSearchAccountReference { get; set; }
+
+        public int PageSize { get; set; } = 20;
     }
 }

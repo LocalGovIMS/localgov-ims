@@ -5,7 +5,7 @@ using log4net;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Admin.Classes.Commands.Transaction
+namespace Admin.Classes.Commands.Validation
 {
     public class ValidateTransferItemCommand : BaseCommand<TransferItem>
     {

@@ -113,6 +113,9 @@
     <Reference Include="Moq, Version=4.16.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.16.1\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -160,6 +163,7 @@
     <Compile Include="Classes\Commands\Import\ProcessImportCommandTests.cs" />
     <Compile Include="Classes\Commands\Import\SaveImportFileCommandTests.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExportCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\EditCommandTests.cs" />
@@ -195,7 +199,7 @@
     <Compile Include="Classes\Commands\Template\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\EmailReceiptCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\RefundCommandTests.cs" />
-    <Compile Include="Classes\Commands\Transaction\ValidateTransferItemCommandTests.cs" />
+    <Compile Include="Classes\Commands\Validation\ValidateTransferItemCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\UndoTransferCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\TransferCommandTests.cs" />
     <Compile Include="Classes\Commands\Transfer\TransferCommandTests.cs" />
@@ -327,6 +331,9 @@
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
     <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\Transaction\Export\Get.cs" />
+    <Compile Include="Controllers\Transaction\TestBase.cs" />
+    <Compile Include="Controllers\Validation\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Post.cs" />
@@ -439,7 +446,7 @@
     <Compile Include="Controllers\Transaction\Details\Get.cs" />
     <Compile Include="Controllers\Transaction\List\Get.cs" />
     <Compile Include="Controllers\Transaction\UndoTransfer\Get.cs" />
-    <Compile Include="Controllers\Transaction\ValidateTransferItem\Post.cs" />
+    <Compile Include="Controllers\Validation\ValidateTransferItem\Post.cs" />
     <Compile Include="Controllers\Transfer\ConstructorTests.cs" />
     <Compile Include="Controllers\Transfer\Index\Get.cs" />
     <Compile Include="Controllers\Transfer\SubmitTransfers\Post.cs" />

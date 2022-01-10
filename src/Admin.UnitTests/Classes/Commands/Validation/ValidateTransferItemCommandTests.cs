@@ -5,11 +5,11 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
-using Command = Admin.Classes.Commands.Transaction.ValidateTransferItemCommand;
+using Command = Admin.Classes.Commands.Validation.ValidateTransferItemCommand;
 using CommandResult = Admin.Classes.Commands.CommandResult;
 using Model = BusinessLogic.Models.TransferItem;
 
-namespace Admin.UnitTests.Classes.Commands.Transaction
+namespace Admin.UnitTests.Classes.Commands.Validation
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
