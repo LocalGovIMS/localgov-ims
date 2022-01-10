@@ -11,7 +11,7 @@ namespace Admin.Models.User
         [DisplayName("User name")]
         public string UserName { get; set; }
 
-        [DisplayName("Last login")]
+        [DisplayName("Last login date and time")]
         public DateTime? LastLogin { get; set; }
 
         [DisplayName("Expiry days")]
