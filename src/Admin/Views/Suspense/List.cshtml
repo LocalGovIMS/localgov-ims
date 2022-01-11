@@ -19,10 +19,10 @@
     @if (User.IsInRole(Role.Finance))
     {
         <a class="ui button blue right floated journal" id="journal">
-            <i class="exchange outline icon"></i> Journal <span class="journal-button-value"></span>
+            <i class="exchange outline icon"></i> Create journal <span class="journal-button-value"></span>
         </a>
         <a class="ui button green right floated credit-notes" id="credit-notes">
-            <i class="add outline icon"></i> Credit notes <span class="credit-button-value"></span>
+            <i class="add outline icon"></i> Add credit notes <span class="credit-button-value"></span>
         </a>
     }
     <a href="@Url.Action("Search", "Suspense")" class="ui button right floated" id="reset">
@@ -46,8 +46,8 @@
                     <th>Narrative</th>
                     <th>Latest note</th>
                     <th>Account number</th>
-                    <th style="width: 15%">Amount (£)</th>
-                    <th style="width: 10%"></th>
+                    <th style="width: 10%">Amount (£)</th>
+                    <th style="width: 20%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -90,14 +90,10 @@
                             @Html.ToCurrency(item.Item.Amount)
                         </td>
                         <td style="text-align: center;">
-                            <a class="ui icon tiny button" href="@Url.Action("Details", new {id = item.Item.Id})" title="Details">
-                                <i class="info icon"></i>
-                            </a>
+                            @Html.ActionLink("View details", "Details", "Suspense", new { id = item.Item.Id }, new { @class = "ui button" })
                             @if (User.IsInRole(Role.Finance))
                             {
-                                <a class="ui icon tiny button" href="@Url.Action("List", "SuspenseNote", new {id = item.Item.Id})" title="Notes">
-                                    <i class="pencil icon"></i>
-                                </a>
+                                @Html.ActionLink("View notes", "List", "SuspenseNote", new { id = item.Item.Id }, new { @class = "ui button" })
                             }
                         </td>
                     </tr>
