@@ -14,12 +14,12 @@
         <span class="ui-psp-reference">@Model.Transaction.PspReference</span>
         @if (!string.IsNullOrEmpty(Model.Transaction.ParentPspReference))
         {
-            @Html.ActionLink("Parent", "Details", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
+            @Html.ActionLink("View parent", "Details", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
         }
 
         @if (Model.Transaction.SuspenseId.HasValue)
         {
-            @Html.ActionLink("Suspense", "Details","Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
+            @Html.ActionLink("View suspense", "Details","Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
         }
 
         @if (User.IsInRole(Role.TransactionRefund) && Model.IsRefund == false)
