@@ -26,7 +26,7 @@
         </div>
 
         <div class="ui raised segment">
-            <h4 class="ui header">Source Transactions</h4>
+            <h4 class="ui header">Source transactions</h4>
             <table id="source-table" class="ui celled table striped">
                 <thead>
                 <tr>
@@ -47,7 +47,7 @@
                             <div class="ui fluid search selection dropdown sourceItem">
                                 @Html.Hidden("SourceItem_FundCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 160px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 160px;">Select fund type</div>
                                 <div class="menu">                                    
                                     @foreach (var item in Model.Funds.Items)
                                     {
@@ -64,7 +64,7 @@
                     <th colspan="3">
                         <div class="ui fluid field">
                             <div class="ui input">
-                                @Html.TextBoxFor(m => m.SourceItem.AccountReference, new {@placeholder = "Account reference", @maxlength = 32})
+                                @Html.TextBoxFor(m => m.SourceItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
                                 @Html.ValidationMessageFor(x => x.SourceItem.AccountReference)
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <div class="ui fluid search selection dropdown sourceVat">
                                 @Html.Hidden("SourceItem_VatCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
                                 <div class="menu">
                                     @foreach (var item in Model.VatCodes.Items)
                                     {
@@ -126,7 +126,7 @@
             <p class="header transfer-message-text"></p>
         </div>
         <div class="ui raised segment">
-            <h4 class="ui header">Target Transactions</h4>
+            <h4 class="ui header">Target transactions</h4>
             <table id="transfer-table" class="ui celled table striped">
                 <thead>
                 <tr>
@@ -148,7 +148,7 @@
                             <div class="ui fluid search selection dropdown targetItem">
                                 @Html.Hidden("TransferItem_FundCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 160px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 160px;">Select fund type</div>
                                 <div class="menu">                                    
                                     @foreach (var item in Model.Funds.Items)
                                     {
@@ -165,7 +165,7 @@
                     <th colspan="3">
                         <div class="ui fluid field">
                             <div class="ui input">
-                                @Html.TextBoxFor(m => m.TransferItem.AccountReference, new {@placeholder = "Account reference", @maxlength = 32})
+                                @Html.TextBoxFor(m => m.TransferItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
                                 @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                             <div class="ui fluid search selection dropdown targetVat">
                                 @Html.Hidden("TransferItem_VatCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
                                 <div class="menu">
                                     @foreach (var item in Model.VatCodes.Items)
                                     {
@@ -199,7 +199,7 @@
                     <th>
                         <div class="ui fluid field">
                             <div class="ui input">
-                                @Html.TextBoxFor(m => m.TransferItem.Narrative)
+                                @Html.TextBoxFor(m => m.TransferItem.Narrative, null, new { @placeholder = "Enter narrative" })
                                 @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
                             </div>
                         </div>

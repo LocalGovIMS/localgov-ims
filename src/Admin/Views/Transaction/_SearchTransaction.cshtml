@@ -13,11 +13,11 @@
             </div>
             <div class="four fields">
                 <div class="field">
-                    <label>Fund</label>
+                    <label>Fund type</label>
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                         <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select fund</div>
+                        <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
                         <div class="menu">
                             <div class="item" data-value="">
                                 None
@@ -32,11 +32,11 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>MOP</label>
+                    <label>MOP code</label>
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.MopCode, new { size = 4 })
                         <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select MOP</div>
+                        <div class="default text no-overflow" style="width: 100px;">Select MOP code</div>
                         <div class="menu">
                             <div class="item" data-value="">
                                 None
@@ -67,24 +67,24 @@
             </div>
             <div class="six fields">
                 <div class="field">
-                    <label>Account</label>
-                    @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Account" })
+                    <label>Account reference</label>
+                    @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Enter account reference" })
                     @Html.CheckBoxFor(m => m.WildSearchAccountReference)
                 </div>
                 <div class="field">
-                    <label>Receipt</label>
-                    @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Receipt" })
+                    <label>Receipt number</label>
+                    @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Enter receipt number" })
                 </div>
                 <div class="field">
                     <label>Amount</label>
-                    @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Amount", @class = "monetary-amount" })
+                    @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Enter amount", @class = "monetary-amount" })
                 </div>
 
                 @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.SystemAdmin))
                 {
                     <div class="field">
                         <label>Internal reference</label>
-                        @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Internal reference" })
+                        @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Enter internal reference" })
                     </div>
                     <div class="field">
                         <label>User</label>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="field">
                         <label>Narrative</label>
-                        @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Narrative" })
+                        @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Enter narrative" })
                     </div>
 
                 }

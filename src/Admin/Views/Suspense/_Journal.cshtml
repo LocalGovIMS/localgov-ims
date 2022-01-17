@@ -23,11 +23,11 @@
                 <div class="fields">
 
                     <div class="ui four wide field">
-                        <label>Fund</label>
+                        <label>Fund type</label>
                         <div class="ui fluid search selection dropdown js-fund">
                             @Html.Hidden("JournalItem_FundCode")
                             <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select type</div>
+                            <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
                             <div class="menu">
                                 <div class="item" data-value="">
                                     Fund
@@ -48,7 +48,7 @@
                         <div class="ui fluid search selection dropdown js-mop">
                             @Html.Hidden("JournalItem_MopCode", Model.DefaultJournalReallocationMopCode)
                             <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select MOP</div>
+                            <div class="default text no-overflow" style="width: 100px;">Select MOP code</div>
                             <div class="menu">
                                 <div class="item" data-value="">
                                     MOP code
@@ -65,7 +65,7 @@
 
                     <div class="ui four wide field">
                         <label>Account reference</label>
-                        @Html.TextBoxFor(m => m.JournalItem.AccountReference, new { @placeholder = "Account reference", @maxlength = 16 })
+                        @Html.TextBoxFor(m => m.JournalItem.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 16 })
                         @Html.ValidationMessageFor(x => x.JournalItem.AccountReference)
                     </div>
 
@@ -74,7 +74,7 @@
                         <div class="ui fluid search selection dropdown js-vat">
                             @Html.Hidden("JournalItem_VatCode")
                             <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select VAT</div>
+                            <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
                             <div class="menu">
                                 <div class="item" data-value="">
                                     VAT code
@@ -101,7 +101,7 @@
                     <div class="ui four wide field">
                         <label>Narrative</label>
                         <div class="ui input">
-                            @Html.TextBoxFor(m => m.JournalItem.Narrative)
+                            @Html.TextBoxFor(m => m.JournalItem.Narrative, null, new { @placeholder = "Enter narrative" })
                             @Html.ValidationMessageFor(x => x.JournalItem.Narrative)
                         </div>
                     </div>

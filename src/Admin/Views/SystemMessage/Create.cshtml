@@ -29,7 +29,7 @@
             <div class="ui search selection dropdown funds-dropdown">
                 @Html.HiddenFor(x => x.Severity, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select type</div>
+                <div class="default text no-overflow">Select severity</div>
                 <div class="menu">
                     @foreach (var item in Model.SeverityList.Items)
                     {

@@ -23,11 +23,11 @@
                     <div class="fields">
 
                         <div class="ui six wide field">
-                            <label>Fund</label>
+                            <label>Fund type</label>
                             <div class="ui fluid search selection dropdown js-credit-fund">
                                 @Html.Hidden("CreditNote_FundCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 200px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 200px;">Select fund type</div>
                                 <div class="menu">
                                     <div class="item" data-value="">
                                         Fund
@@ -45,7 +45,7 @@
 
                         <div class="ui six wide field">
                             <label>Account reference</label>
-                            @Html.TextBoxFor(m => m.CreditNote.AccountReference, new { @placeholder = "Account reference", @maxlength = 16 })
+                            @Html.TextBoxFor(m => m.CreditNote.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 16 })
                             @Html.ValidationMessageFor(x => x.CreditNote.AccountReference)
                         </div>
 
@@ -54,7 +54,7 @@
                             <div class="ui fluid search selection dropdown js-credit-vat">
                                 @Html.Hidden("CreditNote_VatCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select VAT</div>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
                                 <div class="menu">
                                     <div class="item" data-value="">
                                         VAT code

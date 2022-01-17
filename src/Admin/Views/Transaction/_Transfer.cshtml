@@ -23,11 +23,11 @@
                     <div class="fields">
 
                         <div class="ui four wide field">
-                            <label>Fund</label>
+                            <label>Fund type</label>
                             <div class="ui fluid search selection dropdown js-fund">
                                 @Html.Hidden("TransferItem_FundCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 200px;">Select type</div>
+                                <div class="default text no-overflow" style="width: 200px;">Select fund type</div>
                                 <div class="menu">
                                     <div class="item" data-value="">
                                         None
@@ -46,8 +46,8 @@
 
 
                         <div class="ui four wide field">
-                            <label>Reference</label>
-                            @Html.TextBoxFor(m => m.TransferItem.AccountReference, new { @placeholder = "Account reference", @maxlength = 16 })
+                            <label>Account Reference</label>
+                            @Html.TextBoxFor(m => m.TransferItem.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 16 })
                             @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
                         </div>
 
@@ -56,7 +56,7 @@
                             <div class="ui fluid search selection dropdown js-vat">
                                 @Html.Hidden("TransferItem_VatCode")
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select VAT</div>
+                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
                                 <div class="menu">
                                     <div class="item" data-value="">
                                         VAT code
@@ -82,8 +82,8 @@
 
                         <div class="ui four wide field">
                             <label>Narrative</label>
-                            <div class="ui input">                                
-                                @Html.TextBoxFor(m => m.TransferItem.Narrative)
+                            <div class="ui input">
+                                @Html.TextBoxFor(m => m.TransferItem.Narrative, null, new { @placeholder = "Enter narrative" })
                                 @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
                             </div>
                         </div>
@@ -100,7 +100,6 @@
                     <thead>
                         <tr>
                             <th style="width: 10%;">Fund</th>
-
                             <th style="width: 10%;">Account</th>
                             <th>Name</th>
                             <th>Balance</th>
