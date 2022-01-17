@@ -9,11 +9,11 @@
             <div class="four fields">
                 <div class="field">
                     <label>Account reference</label>
-                    @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Account reference" })
+                    @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Enter account reference" })
                 </div>
                 <div class="field">
                     <label>Surname</label>
-                    @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Surname" })
+                    @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Enter surname" })
                 </div>
                 <div class="field">
                     @if (!Model.IsAPaymentSearch)
@@ -45,15 +45,15 @@
             <div class="four fields">
                 <div class="field">
                     <label>Postcode</label>
-                    @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Postcode" })
+                    @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Enter postcode" })
                 </div>
                 <div class="field">
                     <label>House Number/Name</label>
-                    @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "House Number/Name" })
+                    @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "Enter house number/name" })
                 </div>
                 <div class="field">
                     <label>Street</label>
-                    @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Street" })
+                    @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Enter street" })
                 </div>
                 <div class="field">
                     <label>&nbsp;</label>

@@ -92,7 +92,7 @@
             <div class="ui selection dropdown fund-dropdown">
                 @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select type</div>
+                <div class="default text no-overflow">Select fund type</div>
                 <div class="menu">
                     @foreach (var item in Model.Funds.Items)
                     {
@@ -112,7 +112,7 @@
             <div class="ui selection dropdown stop-message-dropdown">
                 @Html.HiddenFor(x => x.StopMessageReference, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select type</div>
+                <div class="default text no-overflow">Select stop message type</div>
                 <div class="menu">
                     @foreach (var item in Model.StopMessages.Items)
                     {

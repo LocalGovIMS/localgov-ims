@@ -65,7 +65,7 @@
             <div class="ui selection dropdown vat-dropdown">
                 @Html.HiddenFor(x => x.VatCode, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select type</div>
+                <div class="default text no-overflow">Select VAT code</div>
                 <div class="menu">
                     @foreach (var item in Model.VatCodes.Items)
                     {

@@ -35,7 +35,7 @@
                     <div class="ui search selection dropdown funds-dropdown">
                         @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                         <i class="dropdown icon"></i>
-                        <div class="default text no-overflow">Select type</div>
+                        <div class="default text no-overflow">Select fund type</div>
                         <div class="menu">
                             @foreach (var item in Model.Funds.Items)
                             {
@@ -62,7 +62,7 @@
                             <div class="ui search selection dropdown mop-dropdown">
                                 @Html.HiddenFor(x => x.MopCode, new { size = 4 })
                                 <i class="dropdown icon"></i>
-                                <div class="default text no-overflow">Select type</div>
+                                <div class="default text no-overflow">Select MOP code</div>
                                 <div class="menu">
                                     @foreach (var item in Model.MopCodes.Items)
                                     {
@@ -107,7 +107,7 @@
                     <div class="seven wide field">
                         @Html.LabelFor(m => m.AccountReference)
                         <div class="ui input account-reference-wrapper">
-                            @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Account reference", @maxlength = 30 })
+                            @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 30 })
                             @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "ui blue right button account-reference-search", @style = "display:none;" })
                         </div>
                         <div id="AccountName"></div>
@@ -124,7 +124,7 @@
                     <div class="ui search selection dropdown vat-dropdown">
                         @Html.HiddenFor(x => x.VatCode, new { size = 4 })
                         <i class="dropdown icon"></i>
-                        <div class="default text no-overflow">Select code</div>
+                        <div class="default text no-overflow">Select VAT code</div>
                         <div class="menu">
                             @foreach (var item in Model.VatCodes.Items)
                             {
