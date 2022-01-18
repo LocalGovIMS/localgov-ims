@@ -93,7 +93,6 @@
   <ItemGroup>
     <Compile Include="Classes\Cryptography\MD5CryptographyServiceTests.cs" />
     <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
-    <Compile Include="Classes\Formatters\AccountReference\FormatTests.cs" />
     <Compile Include="Classes\RefundStatusTests.cs" />
     <Compile Include="Classes\RefundRequestTests.cs" />
     <Compile Include="Classes\Smtp\NotificationEmailTests.cs" />
