@@ -119,7 +119,6 @@
   <ItemGroup>
     <Compile Include="Authentication\Identity\PaymentsUser.cs" />
     <Compile Include="Classes\Dependencies\EmailServiceDependencies.cs" />
-    <Compile Include="Classes\Formatters\AccountReferenceFormatter.cs" />
     <Compile Include="Classes\Result\Result.cs" />
     <Compile Include="Classes\Smtp\EmailFactory.cs" />
     <Compile Include="Classes\Smtp\Emails\BaseEmail.cs" />
@@ -214,7 +213,6 @@
     <Compile Include="ImportProcessing\Operations.cs" />
     <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder.cs" />
     <Compile Include="ImportProcessing\RuleEngine.cs" />
-    <Compile Include="Interfaces\Formatters\IAccountReferenceFormatter.cs" />
     <Compile Include="Interfaces\Persistence\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Repositories\IAccountHolderRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAccountValidationRepository.cs" />

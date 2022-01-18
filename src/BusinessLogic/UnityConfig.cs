@@ -1,11 +1,9 @@
 ﻿using BusinessLogic.Classes.Cryptography;
 using BusinessLogic.Classes.Dependencies;
-using BusinessLogic.Classes.Formatters;
 using BusinessLogic.Classes.Smtp;
 using BusinessLogic.Classes.Strategies;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Dependencies;
-using BusinessLogic.Interfaces.Formatters;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Services.Cryptography;
 using BusinessLogic.Interfaces.Smtp;
@@ -77,8 +75,6 @@ namespace BusinessLogic
                 .RegisterType<ITransactionJournalValidator, TransactionJournalValidator>()
                 .RegisterType<ITransactionTransferValidator, TransactionTransferValidator>()
                 .RegisterType<IRollbackTransactionJournalValidator, RollbackTransactionJournalValidator>()
-
-                .RegisterType<IAccountReferenceFormatter, AccountReferenceFormatter>()
 
                 .RegisterType<ITransactionVatStrategy, TransactionVatStrategy>()
                 .RegisterType<IJournalAllocationStrategy, SuspenseJournalAllocationStrategy>()
