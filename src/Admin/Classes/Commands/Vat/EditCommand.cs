@@ -1,29 +1,30 @@
-﻿using Admin.Models.Office;
+﻿using Admin.Models.Vat;
 using BusinessLogic.Interfaces.Services;
 using log4net;
 
-namespace Admin.Classes.Commands.Office
+namespace Admin.Classes.Commands.Vat
 {
     public class EditCommand : BaseCommand<EditViewModel>
     {
-        private readonly IOfficeService _officeService;
+        private readonly IVatService _vatService;
 
         public EditCommand(ILog log
-            , IOfficeService officeService)
+            , IVatService vatService)
             : base(log)
         {
-            _officeService = officeService;
+            _vatService = vatService;
         }
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var item = new BusinessLogic.Entities.Office
+            var item = new BusinessLogic.Entities.Vat
             {
-                OfficeCode = model.Code,
-                Name= model.Name
+                VatCode = model.Code,
+                Percentage = model.Percentage,
+                Disabled = model.IsDisabled
             };
 
-            var result = _officeService.Update(item);
+            var result = _vatService.Update(item);
 
             return new CommandResult(result);
         }
