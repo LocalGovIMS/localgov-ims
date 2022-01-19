@@ -115,7 +115,7 @@ namespace Admin.Controllers
             if (result.Success)
             {
                 model = Dependencies.EditViewModelBuilder.Build(model.EReturn.EReturn.Id);
-                model.Message = new SuccessMessage("Your changes have been saved", "Save Successful");
+                model.Message = new SuccessMessage("Your changes have been saved", "Save successful");
                 return View(model);
             }
             else
