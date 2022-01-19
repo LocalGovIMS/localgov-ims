@@ -115,7 +115,7 @@
                     <td class="center">
                         @if (item.EReturn.EReturnStatus.Id < 3)
                         {
-                            @Html.ActionLink("Edit", "Approve", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.EReturn.Id }, new { @class = "ui button" })
                         }
                         else if ((EReturnStatus)item.EReturn.EReturnStatus.Id == EReturnStatus.Submitted
                           && User.IsInRole(Role.EReturnAuthoriser))
