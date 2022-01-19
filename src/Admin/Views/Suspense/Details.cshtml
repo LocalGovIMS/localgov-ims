@@ -24,7 +24,7 @@
 @section Header {
     <h1 class="ui header">
         <span class="ui-psp-reference">@Model.AccountNumber</span>
-        @Html.ActionLink("Create note", "Create", new { id = Model.SuspenseId }, new { @class = "ui blue button right floated" })
+        @Html.ActionLink("Create note", "Create", "SuspenseNote", new { id = Model.SuspenseId }, new { @class = "ui blue button right floated" })
         <div class="sub header">
             Suspense  details
         </div>
