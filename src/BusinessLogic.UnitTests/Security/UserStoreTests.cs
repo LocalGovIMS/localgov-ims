@@ -68,7 +68,7 @@ namespace BusinessLogic.UnitTests.Security
         public void CanGetUserRoles()
         {
             // Arrange
-            _mockUserRoleRepository.Setup(x => x.GetUserRoles(It.IsAny<string>()))
+            _mockUserRoleRepository.Setup(x => x.GetUserRoles(It.IsAny<string>(), It.IsAny<bool>()))
                 .Returns(new List<string>()
                 {
                     "Role1", "Role2"

@@ -43,7 +43,7 @@ namespace BusinessLogic.Services
 
             try
             {
-                return UnitOfWork.UserRoles.GetUserRoles(userName);
+                return UnitOfWork.UserRoles.GetUserRoles(userName, true);
             }
             catch (Exception e)
             {
