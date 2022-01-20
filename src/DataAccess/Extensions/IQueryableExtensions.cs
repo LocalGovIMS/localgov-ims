@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -24,6 +25,13 @@ namespace DataAccess.Extensions
             }
 
             return query;
+        }
+
+        public static IQueryable<T> AsNoTracking<T>(this IQueryable<T> source, bool track) where T : class
+        {
+            return track
+                ? source
+                : source.AsNoTracking();
         }
     }
 }

@@ -30,10 +30,13 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public List<string> GetUserRoles(string userName)
+        public List<string> GetUserRoles(string userName, bool track = true)
         {
-            var userRoles = IncomeDbContext.ImsUserRoles
+            var userRoles = new List<UserRole>();
+
+            userRoles = IncomeDbContext.ImsUserRoles
                 .AsQueryable()
+                .AsNoTracking(track)
                 .Include(x => x.Role)
                 .Include(x => x.User)
                 .Where(x => x.User.UserName == @userName)
@@ -41,7 +44,6 @@ namespace DataAccess.Repositories
                 .ToList();
 
             userRoles.ForEach(x => x.User = null);
-            //userRoles.ForEach(x => x.Role.UserRoles = null);
 
             return userRoles.Select(x => x.Role.Name).ToList();
         }

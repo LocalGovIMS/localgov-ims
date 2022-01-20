@@ -12,7 +12,7 @@ namespace BusinessLogic.UnitTests.Services.UserRole
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserRoles.GetUserRoles(It.IsAny<string>()))
+            MockUnitOfWork.Setup(x => x.UserRoles.GetUserRoles(It.IsAny<string>(), It.IsAny<bool>()))
                 .Returns(new List<string>());
         }
 
