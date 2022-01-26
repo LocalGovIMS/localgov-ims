@@ -141,6 +141,10 @@
     <Compile Include="Migrations\202201051323598_Added_Import_entities.designer.cs">
       <DependentUpon>202201051323598_Added_Import_entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201261102016_Increased_length_of_PspReference_field.cs" />
+    <Compile Include="Migrations\202201261102016_Increased_length_of_PspReference_field.designer.cs">
+      <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -231,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201051323598_Added_Import_entities.resx">
       <DependentUpon>202201051323598_Added_Import_entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201261102016_Increased_length_of_PspReference_field.resx">
+      <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
