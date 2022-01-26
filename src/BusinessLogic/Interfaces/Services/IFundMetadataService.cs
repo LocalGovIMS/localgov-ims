@@ -11,6 +11,7 @@ namespace BusinessLogic.Interfaces.Services
     {
         IResult Create(FundMetaData item);
         FundMetaData Get(int id);
+        FundMetaData Get(string fundCode, string key);
         SearchResult<FundMetaData> Search(SearchCriteria criteria);
         IResult Update(FundMetaData item);
         IResult Delete(int id);
