@@ -1,6 +1,5 @@
 using BusinessLogic.Authentication.Identity;
 using BusinessLogic.Entities;
-using log4net;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
@@ -9,15 +8,14 @@ namespace DataAccess.Persistence
 {
     public partial class IncomeDbContext : IdentityDbContext<PaymentsUser>
     {
-        public IncomeDbContext(ILog log)
+        public IncomeDbContext()
             : base("name=IncomeDb")
         {
-            if(log != null) log.Info(Guid.NewGuid());
         }
 
         public static IncomeDbContext Create()
         {
-            return new IncomeDbContext(null);
+            return new IncomeDbContext();
         }
 
         public virtual DbSet<AccountHolder> AccountHolders { get; set; }

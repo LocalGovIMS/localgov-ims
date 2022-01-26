@@ -22,7 +22,7 @@ namespace BusinessLogic.Entities
         [StringLength(36)]
         public string InternalReference { get; set; }
 
-        [StringLength(16)]
+        [StringLength(30)]
         public string PspReference { get; set; }
 
         [StringLength(2)]
