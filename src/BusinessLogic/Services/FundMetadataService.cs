@@ -57,6 +57,19 @@ namespace BusinessLogic.Services
             }
         }
 
+        public FundMetaData Get(string fundCode, string key)
+        {
+            try
+            {
+                return UnitOfWork.FundMetadatas.Get(fundCode, key);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return null;
+            }
+        }
+
         public IResult Create(FundMetaData item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)

@@ -50,6 +50,17 @@ namespace DataAccess.Repositories
             return item;
         }
 
+        public FundMetaData Get(string fundCode, string key)
+        {
+            var item = IncomeDbContext.FundMetadatas
+                .AsQueryable()
+                .Where(x => x.FundCode == fundCode && x.Key == key)
+                .ApplyFilters(Filters)
+                .FirstOrDefault();
+
+            return item;
+        }
+
         public void Update(FundMetaData entity)
         {
             var item = IncomeDbContext.FundMetadatas

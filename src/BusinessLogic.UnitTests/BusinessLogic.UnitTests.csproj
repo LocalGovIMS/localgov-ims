@@ -179,6 +179,7 @@
     <Compile Include="Services\FundGroup\GetFundGroupTests.cs" />
     <Compile Include="Services\FundGroup\GetAllFundGroupsTests.cs" />
     <Compile Include="Services\FundGroup\UpdateTests.cs" />
+    <Compile Include="Services\FundMetadata\GetStringFundCodeStringKeyTests.cs" />
     <Compile Include="Services\Import\BaseImportTest.cs" />
     <Compile Include="Services\Import\ProcessTests.cs" />
     <Compile Include="Services\Import\LoadFromFileTests.cs" />
