@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Web.Http;
 
@@ -20,6 +21,9 @@ namespace Api.Controllers.AccountHolders
         }
 
         [HttpPost]
+        [SwaggerResponse(System.Net.HttpStatusCode.Created, "Created", typeof(AccountHolderModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
+        [SwaggerResponseRemoveDefaults]
         public IHttpActionResult Post([FromBody] AccountHolderModel model)
         {
             try
@@ -45,6 +49,9 @@ namespace Api.Controllers.AccountHolders
 
         [HttpGet]
         [Route("api/AccountHolders/{reference}", Name = "AccountHoldersGet")]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(AccountHolderModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(string reference)
         {
             try
@@ -65,6 +72,8 @@ namespace Api.Controllers.AccountHolders
         }
 
         [HttpPatch]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(AccountHolderModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Patch([FromBody] AccountHolderModel model)
         {
             try

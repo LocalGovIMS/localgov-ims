@@ -3,7 +3,9 @@ using BusinessLogic.Extensions;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -26,6 +28,9 @@ namespace Api.Controllers.ProcessedTransactions
         }
 
         [HttpPost]
+        [SwaggerResponse(System.Net.HttpStatusCode.Created, "Created", typeof(ProcessedTransactionModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
+        [SwaggerResponseRemoveDefaults]
         public IHttpActionResult Post([FromBody] ProcessedTransactionModel model)
         {
             try
@@ -55,6 +60,9 @@ namespace Api.Controllers.ProcessedTransactions
 
         [HttpGet]
         [Route("api/ProcessedTransactions/{reference}", Name = "ProcessedTransactionsGet")]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(ProcessedTransactionModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(string reference)
         {
             try
@@ -75,6 +83,9 @@ namespace Api.Controllers.ProcessedTransactions
         }
 
         [HttpGet]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<ProcessedTransactionModel>))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get([FromUri] SearchCriteriaModel searchCriteriaModel)
         {
             try
@@ -84,7 +95,7 @@ namespace Api.Controllers.ProcessedTransactions
                 if (result.Items.IsNullOrEmpty())
                     return NotFound();
 
-                return Ok(result.Items.Select(x => new ProcessedTransactionModel(x)));
+                return Ok(result.Items.Select(x => new ProcessedTransactionModel(x)).ToList());
             }
             catch (Exception ex)
             {

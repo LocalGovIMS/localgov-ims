@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Net;
 using System.Web.Http;
@@ -20,6 +21,10 @@ namespace Api.Controllers.Notification
         }
 
         [HttpPost]
+        [SwaggerResponse(HttpStatusCode.Accepted, "Accepted", null)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error", null)]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request", null)]
+        [SwaggerResponseRemoveDefaults]
         public IHttpActionResult Post([FromBody] NotificationModel model)
         {
             try

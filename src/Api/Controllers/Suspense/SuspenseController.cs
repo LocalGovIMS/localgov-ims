@@ -1,7 +1,9 @@
 ﻿using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -21,6 +23,9 @@ namespace Api.Controllers.Suspense
         }
 
         [HttpPost]
+        [SwaggerResponse(System.Net.HttpStatusCode.Created, "Created", typeof(SuspenseModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
+        [SwaggerResponseRemoveDefaults]
         public IHttpActionResult Post([FromBody] SuspenseModel model)
         {
             try
@@ -46,6 +51,9 @@ namespace Api.Controllers.Suspense
 
         [HttpGet]
         [Route("api/Suspense/{id}", Name = "SuspenseGet")]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(SuspenseModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(int id)
         {
             try
@@ -66,6 +74,9 @@ namespace Api.Controllers.Suspense
         }
 
         [HttpGet]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<SuspenseModel>))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get([FromUri] SearchCriteriaModel searchCriteriaModel)
         {
             try
@@ -75,7 +86,7 @@ namespace Api.Controllers.Suspense
                 if (result.Items.IsNullOrEmpty())
                     return NotFound();
 
-                return Ok(result.Items.Select(x => new SuspenseModel(x.Item)));
+                return Ok(result.Items.Select(x => new SuspenseModel(x.Item)).ToList());
             }
             catch (Exception ex)
             {
