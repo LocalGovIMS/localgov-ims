@@ -2,7 +2,9 @@
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -25,6 +27,9 @@ namespace Api.Controllers.PendingTransactions
         }
 
         [HttpPost]
+        [SwaggerResponse(System.Net.HttpStatusCode.Created, "Created", typeof(List<PendingTransactionModel>))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
+        [SwaggerResponseRemoveDefaults] 
         public IHttpActionResult Post([FromBody] PendingTransactionModel model)
         {
             try
@@ -37,7 +42,7 @@ namespace Api.Controllers.PendingTransactions
                 {
                     var data = _transactionService.GetPendingTransactionsByInternalReference(response.PaymentId);
 
-                    return CreatedAtRoute("PendingTransactionsGet", new { reference = response.PaymentId }, data.Select(x => new PendingTransactionModel(x)));
+                    return CreatedAtRoute("PendingTransactionsGet", new { reference = response.PaymentId }, data.Select(x => new PendingTransactionModel(x)).ToList());
                 }
 
                 return BadRequest(response.ErrorMessage);
@@ -52,6 +57,9 @@ namespace Api.Controllers.PendingTransactions
 
         [HttpGet]
         [Route("api/PendingTransactions/{reference}", Name = "PendingTransactionsGet")]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<PendingTransactionModel>))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(string reference)
         {
             try
@@ -61,7 +69,7 @@ namespace Api.Controllers.PendingTransactions
                 if (result.IsNullOrEmpty())
                     return NotFound();
 
-                return Ok(result.Select(x => new PendingTransactionModel(x)));
+                return Ok(result.Select(x => new PendingTransactionModel(x)).ToList());
             }
             catch (Exception ex)
             {
@@ -73,6 +81,8 @@ namespace Api.Controllers.PendingTransactions
 
         [HttpPost]
         [Route("api/PendingTransaction/{reference}/Authorise")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Ok", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
         public IHttpActionResult Authorise([FromUri] string reference, [FromBody] AuthoriseModel model)
         {
             try
@@ -94,6 +104,8 @@ namespace Api.Controllers.PendingTransactions
 
         [HttpPost]
         [Route("api/PendingTransaction/{reference}/ProcessPayment")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Ok", typeof(ProcessPaymentResponse))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult ProcessPayment([FromUri] string reference, [FromBody] ProcessPaymentModel model)
         {
             try

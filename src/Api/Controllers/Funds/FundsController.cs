@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using log4net;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Web.Http;
 
@@ -20,6 +21,9 @@ namespace Api.Controllers.Funds
 
         [HttpGet]
         [Route("api/Funds/{fundCode}", Name = "FundsGet")]
+        [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(FundModel))]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(string fundCode)
         {
             try
