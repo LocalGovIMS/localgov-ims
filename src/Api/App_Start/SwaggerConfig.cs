@@ -1,4 +1,5 @@
 using Api;
+using Api.OperationFilters;
 using Swashbuckle.Application;
 using System.Web.Http;
 using WebActivatorEx;
@@ -157,6 +158,8 @@ namespace Api
                         // to execute the operation
                         //
                         //c.OperationFilter<AssignOAuth2SecurityRequirements>();
+
+                        c.OperationFilter<IgnorePrefixParamsNameBeforeDotOperationFilter>();
 
                         // Post-modify the entire Swagger document by wiring up one or more Document filters.
                         // This gives full control to modify the final SwaggerDocument. You should have a good understanding of
