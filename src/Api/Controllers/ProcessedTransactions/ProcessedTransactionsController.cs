@@ -86,6 +86,7 @@ namespace Api.Controllers.ProcessedTransactions
         [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<ProcessedTransactionModel>))]
         [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
+        [SwaggerOperation(operationId: "ProcessedTransactions_Search")]
         public IHttpActionResult Get([FromUri(Name = "")] SearchCriteriaModel searchCriteriaModel)
         {
             try

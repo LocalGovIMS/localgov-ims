@@ -128,12 +128,13 @@ namespace Api
                         // Swagger docs and UI. However, if you have multiple types in your API with the same class name, you'll
                         // need to opt out of this behavior to avoid Schema Id conflicts.
                         //
-                        c.UseFullTypeNameInSchemaIds();
+                        //c.UseFullTypeNameInSchemaIds();
 
                         // Alternatively, you can provide your own custom strategy for inferring SchemaId's for
                         // describing "complex" types in your API.
                         //
                         //c.SchemaId(t => t.FullName.Contains('`') ? t.FullName.Substring(0, t.FullName.IndexOf('`')) : t.FullName);
+                        c.SchemaId(t => t.FullName.Contains("SearchCriteria") ? t.Namespace.Substring(t.Namespace.LastIndexOf('.') + 1) + t.Name : t.Name);
 
                         // Set this flag to omit schema property descriptions for any type properties decorated with the
                         // Obsolete attribute

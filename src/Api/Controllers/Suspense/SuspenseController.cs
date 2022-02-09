@@ -77,6 +77,7 @@ namespace Api.Controllers.Suspense
         [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<SuspenseModel>))]
         [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
+        [SwaggerOperation(operationId: "Suspense_Search")]
         public IHttpActionResult Get([FromUri] SearchCriteriaModel searchCriteriaModel)
         {
             try
