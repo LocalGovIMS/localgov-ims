@@ -26,6 +26,7 @@ namespace Api.Controllers.MethodOfPayments
         [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(List<MethodOfPaymentModel>))]
         [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
+        [SwaggerOperation(operationId: "MethodOfPayments_Search")]
         public IHttpActionResult Get([FromUri] SearchCriteriaModel searchCriteriaModel)
         {
             try
