@@ -13,7 +13,6 @@
             FundCode = source.FundCode;
             Key = source.Key;
             Value = source.Value;
-            
         }
     }
 }

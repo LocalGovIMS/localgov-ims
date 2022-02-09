@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Entities;
-using BusinessLogic.Interfaces.Services;
+﻿using BusinessLogic.Interfaces.Services;
 using log4net;
 using Swashbuckle.Swagger.Annotations;
 using System;
@@ -23,7 +22,7 @@ namespace Api.Controllers.FundMetadata
         [HttpGet]
         [Route("api/FundMetadata/{key}/{fundCode}/", Name = "FundMetadataGet")]
         [SwaggerResponse(System.Net.HttpStatusCode.NotFound, "Not found", null)]
-        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(FundMetaData))]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "OK", typeof(FundMetadataModel))]
         [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
         public IHttpActionResult Get(string fundCode, string key)
         {
