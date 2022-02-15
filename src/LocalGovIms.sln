@@ -22,10 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		CodeCoverage.runsettings = CodeCoverage.runsettings
-		..\creating-an-api-client-from-an-openapi-specification.md = ..\creating-an-api-client-from-an-openapi-specification.md
-		..\creating-an-api-client.md = ..\creating-an-api-client.md
-		..\generating-an-openapi-spec-for-the-localgov-ims-api.md = ..\generating-an-openapi-spec-for-the-localgov-ims-api.md
-		..\packaging-your-api-client.md = ..\packaging-your-api-client.md
 		..\README.md = ..\README.md
 		Test.runsettings = Test.runsettings
 	EndProjectSection
@@ -53,6 +49,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentPortal", "PaymentPortal\PaymentPortal.csproj", "{3A0CF571-B221-4FE4-A3AE-6B042C40F268}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.UnitTests", "Admin.UnitTests\Admin.UnitTests.csproj", "{F3C5906A-DAFD-49A0-A71E-AB0E3E8AF9CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6CD1B341-B920-4DA9-8DCD-70DD88BD946C}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\creating-an-api-client-from-an-openapi-specification.md = ..\docs\creating-an-api-client-from-an-openapi-specification.md
+		..\docs\creating-an-api-client.md = ..\docs\creating-an-api-client.md
+		..\docs\generating-an-openapi-spec-for-the-localgov-ims-api.md = ..\docs\generating-an-openapi-spec-for-the-localgov-ims-api.md
+		..\docs\packaging-your-api-client.md = ..\docs\packaging-your-api-client.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -235,6 +239,7 @@ Global
 		{48C5FB3D-F59B-479B-8A77-93244E4A40BC} = {B33AF519-D00B-487D-8FC1-BABB76516AF1}
 		{3A0CF571-B221-4FE4-A3AE-6B042C40F268} = {B33AF519-D00B-487D-8FC1-BABB76516AF1}
 		{F3C5906A-DAFD-49A0-A71E-AB0E3E8AF9CE} = {A049304D-AC03-4E92-B557-2606DC9156AE}
+		{6CD1B341-B920-4DA9-8DCD-70DD88BD946C} = {D708A8BA-BFB2-4FBD-8136-815F349DF016}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C84D9009-F9BE-444B-B4B7-087ACACE9EEF}
