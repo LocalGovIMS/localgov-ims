@@ -35,7 +35,7 @@ This guide explains how to setup a Windows PC ready for API client generation
 
 # Next steps
 
-Read about how to [create an API client](creating-an-api-client-from-an-openapi-specification) from an OpenAPI specification
+Read about how to [create an API client](creating-an-api-client-from-an-openapi-specification.md) from an OpenAPI specification
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 

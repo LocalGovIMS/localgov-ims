@@ -23,7 +23,7 @@ This guide explains how to setup a Windows PC ready for API client generation
 
 # Client creation prerequisites 
 
-1. You will need to [create the OpenAPI spec](generating-an-openapi-spec-for-the-localgov-ims-api) for the API you're creating a client for
+1. You will need to [create the OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api.md) for the API you're creating a client for
 2. Not required, but creating a repository for the client code at this stage will help if you wish to create a NuGet package for you client at a later stage
 
 # Creating a client
@@ -40,11 +40,11 @@ This guide explains how to setup a Windows PC ready for API client generation
 
 # Next steps
 
-Read about how to [package your API client](packaging-your-api-client) as a NuGet package
+Read about how to [package your API client](packaging-your-api-client.md) as a NuGet package
 
 # Previsou steps
 
-Read about how to [create an OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api) for your API
+Read about how to [create an OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api.md) for your API
 
 
 # Contribute
