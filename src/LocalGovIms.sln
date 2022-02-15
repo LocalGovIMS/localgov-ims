@@ -22,6 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		CodeCoverage.runsettings = CodeCoverage.runsettings
+		..\creating-an-api-client-from-an-openapi-specification.md = ..\creating-an-api-client-from-an-openapi-specification.md
+		..\creating-an-api-client.md = ..\creating-an-api-client.md
+		..\generating-an-openapi-spec-for-the-localgov-ims-api.md = ..\generating-an-openapi-spec-for-the-localgov-ims-api.md
+		..\packaging-your-api-client.md = ..\packaging-your-api-client.md
+		..\README.md = ..\README.md
 		Test.runsettings = Test.runsettings
 	EndProjectSection
 EndProject
