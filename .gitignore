@@ -239,7 +239,8 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
-Web.config
+**/[Ww]eb.config
+!**/Views/[Ww]eb.config
 *.Local.config
 
 # Including strong name files can present a security risk
