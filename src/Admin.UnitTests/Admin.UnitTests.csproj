@@ -162,6 +162,8 @@
     <Compile Include="Classes\Commands\FundGroup\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Import\ProcessImportCommandTests.cs" />
     <Compile Include="Classes\Commands\Import\SaveImportFileCommandTests.cs" />
+    <Compile Include="Classes\Commands\PaymentIntegration\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\PaymentIntegration\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExportCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommandTests.cs" />
@@ -212,6 +214,9 @@
     <Compile Include="Classes\Commands\Vat\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommandTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilderTests.cs" />
@@ -327,6 +332,13 @@
     <Compile Include="Controllers\Import\Confirm\Get.cs" />
     <Compile Include="Controllers\Import\Confirm\Post.cs" />
     <Compile Include="Controllers\Import\Index\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
+    <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\Create\Post.cs" />
+    <Compile Include="Controllers\PaymentIntegration\Details\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\Edit\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\Edit\Post.cs" />
+    <Compile Include="Controllers\PaymentIntegration\List\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\ConstructorTests.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />

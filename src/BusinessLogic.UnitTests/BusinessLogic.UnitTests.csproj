@@ -183,6 +183,11 @@
     <Compile Include="Services\Import\BaseImportTest.cs" />
     <Compile Include="Services\Import\ProcessTests.cs" />
     <Compile Include="Services\Import\LoadFromFileTests.cs" />
+    <Compile Include="Services\PaymentIntegration\BaseTest.cs" />
+    <Compile Include="Services\PaymentIntegration\CreateTests.cs" />
+    <Compile Include="Services\PaymentIntegration\GetAllTests.cs" />
+    <Compile Include="Services\PaymentIntegration\GetTests.cs" />
+    <Compile Include="Services\PaymentIntegration\UpdateTests.cs" />
     <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
     <Compile Include="Services\SuspenseNote\CreateTests.cs" />
     <Compile Include="Services\SuspenseNote\GetTests.cs" />

@@ -205,6 +205,8 @@
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
     <Compile Include="Classes\Commands\Import\ProcessImportCommand.cs" />
     <Compile Include="Classes\Commands\Import\SaveImportFileCommand.cs" />
+    <Compile Include="Classes\Commands\PaymentIntegration\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\PaymentIntegration\EditCommand.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\EditCommand.cs" />
@@ -272,6 +274,9 @@
     <Compile Include="Classes\Commands\User\CreateCommand.cs" />
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilder.cs" />
@@ -303,8 +308,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\PaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IVatMetadataControllerDependencies.cs" />
@@ -396,6 +403,7 @@
     <Compile Include="Controllers\AccountHolderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\PaymentIntegrationController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
     <Compile Include="Controllers\VatMetadataController.cs" />
@@ -465,6 +473,8 @@
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
     <Compile Include="Models\Import\ConfirmViewModel.cs" />
+    <Compile Include="Models\PaymentIntegration\DetailsViewModel.cs" />
+    <Compile Include="Models\PaymentIntegration\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\VatMetadata\DetailsViewModel.cs" />
@@ -1579,6 +1589,10 @@
     <Content Include="Views\SuspenseNote\_List.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\Import\Confirm.cshtml" />
+    <Content Include="Views\PaymentIntegration\Create.cshtml" />
+    <Content Include="Views\PaymentIntegration\Details.cshtml" />
+    <Content Include="Views\PaymentIntegration\Edit.cshtml" />
+    <Content Include="Views\PaymentIntegration\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
