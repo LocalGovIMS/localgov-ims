@@ -1,0 +1,43 @@
+﻿@model Admin.Models.PaymentIntegration.EditViewModel
+@{
+    ViewBag.Title = "Create payment integration";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create payment integration
+        <div class="sub header">
+            Payment integration details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "PaymentIntegration", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.BaseUri)
+            @Html.EditorFor(m => m.BaseUri)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.BaseUri)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "ui button" })
+
+    </div>
+}

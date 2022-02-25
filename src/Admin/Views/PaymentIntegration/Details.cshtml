@@ -1,0 +1,34 @@
+﻿@model Admin.Models.PaymentIntegration.DetailsViewModel
+@{
+    ViewBag.Title = "Payment integration";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Payment integration details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="ui vertical segment">
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.DisplayFor(m => m.Name)
+        </div>
+
+        <div class="eight wide field">
+            @Html.LabelFor(m => m.BaseUri)
+            @Html.DisplayFor(m => m.BaseUri)
+        </div>
+    </div>
+
+    <br />
+
+    @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "ui button" })
+
+</div>

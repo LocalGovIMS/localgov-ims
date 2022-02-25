@@ -1,0 +1,64 @@
+﻿@model IList<Admin.Models.PaymentIntegration.DetailsViewModel>
+@{
+    ViewBag.Title = "Payment integrations";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Payment integrations
+        @Html.ActionLink("Create payment integration", "Create", new { }, new { @class = "ui blue button right floated" })
+
+        <div class="sub header">
+            Payment integration management
+        </div>
+    </h1>
+}
+
+@if (Model != null)
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Id)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.LabelFor(m => Model.FirstOrDefault().BaseUri)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.BaseUri)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+else
+{
+    <div class="ui info message">
+        There are no Payment Integrations in the system
+    </div>
+}
+

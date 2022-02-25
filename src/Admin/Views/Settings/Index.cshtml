@@ -140,6 +140,19 @@
         </div>
     }
 
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "PaymentIntegration")">
+                <div class="content">
+                    <div class="header">Payment Integrations</div>
+                    <div class="description">
+                        <p>Payment integrations</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
 </div>
 
 <h2 class="ui dividing header">

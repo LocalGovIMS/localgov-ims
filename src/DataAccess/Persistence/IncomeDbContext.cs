@@ -56,7 +56,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<ScheduleLog> ScheduleLogs { get; set; }
         public virtual DbSet<StopMessage> Stop_Message { get; set; }
         public virtual DbSet<TransactionStatus> TransactionStatus { get; set; }
-        public virtual DbSet<PaymentIntegration> PaymentServiceProviders { get; set; }
+        public virtual DbSet<PaymentIntegration> PaymentIntegrations { get; set; }
         public virtual DbSet<ImportProcessingRule> ImportProcessingRules { get; set; }
         public virtual DbSet<ImportProcessingRuleCondition> ImportProcessingRuleConditions { get; set; }
         public virtual DbSet<ImportProcessingRuleAction> ImportProcessingRuleActions { get; set; }
