@@ -196,6 +196,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ImportProcessingRuleExtensions.cs" />
     <Compile Include="Extensions\ImportProcessingRuleActionExtensions.cs" />
+    <Compile Include="Extensions\PendingTransactionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ImportProcessingRuleConditionExtensions.cs" />

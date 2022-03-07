@@ -110,15 +110,7 @@ namespace Api.Controllers.PendingTransactions
         {
             try
             {
-                var paymentResult = new PaymentResult
-                {
-                    MerchantReference = model.MerchantReference,
-                    AuthResult = model.AuthResult,
-                    PaymentMethod = model.PaymentMethod,
-                    PspReference = model.PspReference
-                };
-
-                var response = _paymentService.ProcessPayment(paymentResult);
+                var response = _paymentService.ProcessPayment(model.ToPaymentResult());
 
                 if (response.Success)
                     return Ok(response);

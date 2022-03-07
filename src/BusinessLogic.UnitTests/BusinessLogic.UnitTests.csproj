@@ -111,6 +111,11 @@
     <Compile Include="Extensions\ImportProcessingRuleExtensionsTests.cs" />
     <Compile Include="Extensions\List\IsNullOrEmptyTests.cs" />
     <Compile Include="Extensions\Mop\GetMopMetaDataValueTests.cs" />
+    <Compile Include="Extensions\Mop\IncursAFeeTests.cs" />
+    <Compile Include="Extensions\Mop\IsABusinessFeeTests.cs" />
+    <Compile Include="Extensions\Mop\IsARechargeFeeTests.cs" />
+    <Compile Include="Extensions\Mop\IsACardPaymentFeeTests.cs" />
+    <Compile Include="Extensions\PendingTransactions\ToFeeTransactionTests.cs" />
     <Compile Include="Extensions\ProcessedTransactions\ToExportStringTests.cs" />
     <Compile Include="Extensions\Mop\TextColourTests.cs" />
     <Compile Include="Extensions\Mop\IsAJournalReallocationTests.cs" />

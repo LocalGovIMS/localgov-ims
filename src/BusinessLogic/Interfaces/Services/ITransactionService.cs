@@ -3,6 +3,7 @@ using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Models;
 using BusinessLogic.Models.Shared;
 using BusinessLogic.Models.Transactions;
+using BusinessLogic.Services;
 using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Services
@@ -34,5 +35,6 @@ namespace BusinessLogic.Interfaces.Services
         ProcessedTransaction GetTransactionByAppReference(string appReference);
         IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction);
         IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChanges);
+        IResult CreateProcessedTransaction(CreateProcessedTransactionArgs args);
     }
 }
