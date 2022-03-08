@@ -78,7 +78,8 @@ namespace BusinessLogic.Services
 
             if (!SecurityContext.IsInRole(Security.Role.Payments)) return null;
 
-            var transaction = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference).First();
+            var transactions = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference);
+            var transaction = transactions.First();
 
             var response = new ProcessPaymentResponse();
 
@@ -121,12 +122,44 @@ namespace BusinessLogic.Services
 
             response.IsLegacy = transaction.Legacy ?? false;
 
+            // Process Fee
+            ProcessFee(paymentResult, transactions);
+
             return response;
+        }
+
+        private void ProcessFee(PaymentResult paymentResult, List<PendingTransaction> transactions)
+        {
+            var transaction = transactions.First();
+
+            var mop = UnitOfWork.Mops.GetMop(transaction.MopCode);
+
+            if (!mop.IncursAFee()) return;
+
+            var feeTransaction = transactions.ToFeeTransaction(paymentResult.PspReference, paymentResult.Fee, GetCardPaymentFeeMopCode());
+
+            if (mop.IsARechargeFee())
+            {
+                feeTransaction.AccountReference = transaction.AccountReference;
+                feeTransaction.FundCode = transaction.FundCode;
+            }
+            else if (mop.IsABusinessFee())
+            {
+                feeTransaction.AccountReference = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeAccountReference);
+                feeTransaction.FundCode = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeFundCode);
+            }
+
+            _transactionService.CreateProcessedTransaction(new CreateProcessedTransactionArgs() { ProcessedTransaction = feeTransaction, GenerateNewReference = false });
         }
 
         private string GetCardSelfServiceMopCode()
         {
             return UnitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsACardSelfServicePayment()).MopCode;
+        }
+
+        private string GetCardPaymentFeeMopCode()
+        {
+            return UnitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsACardPaymentFee()).MopCode;
         }
 
         public ProcessPaymentResponse ProcessPayments(List<PaymentDetails> payments, PaymentTypeEnum type)

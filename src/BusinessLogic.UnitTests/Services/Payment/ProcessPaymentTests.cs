@@ -33,6 +33,26 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         }
                     }
                 });
+
+            MockUnitOfWork.Setup(x => x.Mops.GetMop(It.IsAny<string>()))
+                .Returns(new Mop()
+                    {
+                        MopCode = "90",
+                        MetaData = new List<MopMetaData>()
+                        {
+                            new MopMetaData()
+                            {
+                                Key = MopMetaDataKeys.IsACardSelfServicePayment,
+                                Value = "True"
+                            },
+                            new MopMetaData()
+                            {
+                                Key = MopMetaDataKeys.IncursAFee,
+                                Value = "False"
+                            }
+                        }
+                    }
+                );
         }
 
         private void SetupSecurityContext(bool result)
