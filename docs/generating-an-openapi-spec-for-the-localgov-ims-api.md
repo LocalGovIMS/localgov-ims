@@ -27,11 +27,8 @@ This guide explains how to setup a Windows PC ready for API client generation
 1. Open NSwagStudio
 2. Load the [Nsawg project file](src\Api\LocalGovImsApi.nsawg)
 3. Click the 'Generate Outputs' button
-4. Copy the JSON output
-5. Goto the [Swagger Editor](https://editor.swagger.io/) site
-	* Click into the left had pane, press ctr-A (to select all), ctrl-V (to paste)
-    * When the popup asks 'Would you like to convert your JSON to YAML', choose 'OK' 
-6. Save the YAML file to your PC
+4. Copy the JSON output 
+6. Save the JSON to a new .json file on your PC
 
 # Next steps
 
