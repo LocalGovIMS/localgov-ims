@@ -1,5 +1,6 @@
 ﻿using Admin.Models.Transaction;
 using BusinessLogic.Entities;
+using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models.Shared;
 using log4net;
@@ -66,12 +67,12 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
                 AppReference = criteria.AppReference,
                 InternalReference = criteria.InternalReference,
                 Amount = criteria.Amount,
-                EndDate = criteria.EndDate,
                 FundCodes = criteria.FundCode == null ? null : new[] { criteria.FundCode },
                 MopCodes = criteria.MopCode == null ? null : new[] { criteria.MopCode },
                 Narrative = criteria.Narrative,
                 ReceiptNumber = criteria.ReceiptNumber,
                 StartDate = criteria.StartDate,
+                EndDate = criteria.EndDate?.ToEndOfDay(),
                 UserId = criteria.UserId,
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
                 PageSize = criteria.PageSize,
