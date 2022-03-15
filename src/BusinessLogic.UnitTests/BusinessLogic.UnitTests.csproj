@@ -103,6 +103,7 @@
     <Compile Include="Enums\FieldTypeTests.cs" />
     <Compile Include="Extensions\AccountHolder\AddressTests.cs" />
     <Compile Include="Extensions\AccountHolder\FullNameAndTitleTests.cs" />
+    <Compile Include="Extensions\DateTime\ToEndOfDayTests.cs" />
     <Compile Include="Extensions\Fund\IsAnEReturnDefaultFundTests.cs" />
     <Compile Include="Extensions\Fund\IsASuspenseJournalFundTests.cs" />
     <Compile Include="Extensions\Fund\IsACreditNoteEnabledFundTests.cs" />

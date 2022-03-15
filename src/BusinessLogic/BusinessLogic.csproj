@@ -191,6 +191,7 @@
     <Compile Include="Enums\MopMetaDataKeys.cs" />
     <Compile Include="Enums\TransactionStatus.cs" />
     <Compile Include="Extensions\AccountHolderExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FundMetaDataExtensions.cs" />
     <Compile Include="Extensions\FundExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
