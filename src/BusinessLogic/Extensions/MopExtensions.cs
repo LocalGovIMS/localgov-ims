@@ -72,9 +72,9 @@ namespace BusinessLogic.Extensions
             return IsA(item, MopMetaDataKeys.IsARechargeFee);
         }
 
-        public static bool IsABusinessFee(this Mop item)
+        public static bool IsACentralChargeFee(this Mop item)
         {
-            return IsA(item, MopMetaDataKeys.IsABusinessFee);
+            return IsA(item, MopMetaDataKeys.IsACentralChargeFee);
         }
 
         private static bool IsA(this Mop item, string key)
