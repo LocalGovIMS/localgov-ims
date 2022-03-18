@@ -140,11 +140,13 @@ namespace BusinessLogic.Services
 
         private void ProcessFee(PaymentResult paymentResult, List<PendingTransaction> transactions)
         {
+            if (paymentResult.Fee == 0) return;
+
             var transaction = transactions.First();
 
             var mop = UnitOfWork.Mops.GetMop(transaction.MopCode);
 
-            if (!mop.IncursAFee()) return;
+            if (!mop.IncursAFee()) return; // TODO: Should we notify someone this has happened, as fee data does exist, but the MOP is telling us not to store it
 
             var feeTransaction = transactions.ToFeeTransaction(paymentResult.PspReference, paymentResult.Fee, GetCardPaymentFeeMopCode());
 
