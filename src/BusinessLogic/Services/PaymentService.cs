@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Classes;
+using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
+using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Services.Cryptography;
@@ -122,10 +124,18 @@ namespace BusinessLogic.Services
 
             response.IsLegacy = transaction.Legacy ?? false;
 
-            // Process Fee
             ProcessFee(paymentResult, transactions);
 
             return response;
+        }
+
+        public IResult ProcessFee(PaymentResult paymentResult)
+        {
+            var transactions = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference);
+
+            ProcessFee(paymentResult, transactions);
+
+            return new Result();
         }
 
         private void ProcessFee(PaymentResult paymentResult, List<PendingTransaction> transactions)
