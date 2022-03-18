@@ -18,7 +18,7 @@
         public const string TextColour = "TextColour";
         public const string IncursAFee = "IncursAFee";
         public const string IsARechargeFee = "IsARechargeFee";
-        public const string IsABusinessFee = "IsABusinessFee";
+        public const string IsACentralChargeFee = "IsACentralChargeFee";
         public const string FeeAccountReference = "FeeAccountReference";
         public const string FeeFundCode = "FeeFundCode";
     }

@@ -113,7 +113,7 @@
     <Compile Include="Extensions\List\IsNullOrEmptyTests.cs" />
     <Compile Include="Extensions\Mop\GetMopMetaDataValueTests.cs" />
     <Compile Include="Extensions\Mop\IncursAFeeTests.cs" />
-    <Compile Include="Extensions\Mop\IsABusinessFeeTests.cs" />
+    <Compile Include="Extensions\Mop\IsACentralChargeFeeTests.cs" />
     <Compile Include="Extensions\Mop\IsARechargeFeeTests.cs" />
     <Compile Include="Extensions\Mop\IsACardPaymentFeeTests.cs" />
     <Compile Include="Extensions\PendingTransactions\ToFeeTransactionTests.cs" />

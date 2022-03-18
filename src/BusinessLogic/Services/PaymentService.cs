@@ -155,7 +155,7 @@ namespace BusinessLogic.Services
                 feeTransaction.AccountReference = transaction.AccountReference;
                 feeTransaction.FundCode = transaction.FundCode;
             }
-            else if (mop.IsABusinessFee())
+            else if (mop.IsACentralChargeFee())
             {
                 feeTransaction.AccountReference = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeAccountReference);
                 feeTransaction.FundCode = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeFundCode);
