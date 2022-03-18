@@ -124,5 +124,28 @@ namespace Api.Controllers.PendingTransactions
                 return BadRequest();
             }
         }
+
+        [HttpPost]
+        [Route("api/ProcessedTransactions/{reference}/ProcessFee")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Ok", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", null)]
+        public IHttpActionResult ProcessFee([FromUri] string reference, [FromBody] ProcessFeeModel model)
+        {
+            try
+            {
+                var response = _paymentService.ProcessFee(model.ToPaymentResult());
+
+                if (response.Success)
+                    return Ok();
+
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+
+                return BadRequest();
+            }
+        }
     }
 }
