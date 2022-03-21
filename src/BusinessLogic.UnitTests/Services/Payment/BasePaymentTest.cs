@@ -2,6 +2,7 @@
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Services.Cryptography;
+using BusinessLogic.Interfaces.Validators;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -20,6 +21,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
         protected readonly Mock<ITransactionService> MockTransactionService = new Mock<ITransactionService>();
         protected readonly Mock<ICryptographyService> MockCryptographyService = new Mock<ICryptographyService>();
         protected readonly Mock<IFundService> MockFundService = new Mock<IFundService>();
+        protected readonly Mock<ITransactionFeeValidator> MockTransactionFeeValidator = new Mock<ITransactionFeeValidator>();
 
         protected Service GetService()
         {
@@ -29,7 +31,8 @@ namespace BusinessLogic.UnitTests.Services.Payment
                 MockSecurityContext.Object,
                 MockTransactionService.Object,
                 MockCryptographyService.Object,
-                MockFundService.Object);
+                MockFundService.Object,
+                MockTransactionFeeValidator.Object);
 
             return service;
         }

@@ -73,6 +73,7 @@ namespace BusinessLogic
                 .RegisterType<IEReturnDescriptionValidator, EReturnDescriptionValidator>()
                 .RegisterType<IEReturnReferenceValidator, EReturnReferenceValidator>()
                 .RegisterType<ITemplateRowValidator, TemplateRowValidator>()
+                .RegisterType<ITransactionFeeValidator, TransactionFeeValidator>()
                 .RegisterType<ITransactionJournalValidator, TransactionJournalValidator>()
                 .RegisterType<ITransactionTransferValidator, TransactionTransferValidator>()
                 .RegisterType<IRollbackTransactionJournalValidator, RollbackTransactionJournalValidator>()

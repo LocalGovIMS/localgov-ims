@@ -1,7 +1,10 @@
 ﻿using BusinessLogic.Classes;
+using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
+using BusinessLogic.Models;
 using BusinessLogic.Services;
+using BusinessLogic.Validators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -82,13 +85,22 @@ namespace BusinessLogic.UnitTests.Services.Payment
                 .Returns(new List<PendingTransaction>() { pendingTransaction });
 
             MockTransactionService.Setup(x =>
-                x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()));
+                x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Response() { Success = true });
 
             MockTransactionService.Setup(x =>
-                x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+                x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Result());
 
             MockTransactionService.Setup(x =>
-                x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+                x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Result());
+        }
+
+        private void SetupValidator()
+        {
+            MockTransactionFeeValidator.Setup(x => x.Validate(It.IsAny<TransactionFeeValidatorArgs>()))
+                .Returns(new Result());
         }
 
         [TestMethod]
@@ -302,6 +314,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             {
                 SuccessUrl = "http://www.test.com/success"
             });
+            SetupValidator();
             var service = GetService();
 
             // Act
