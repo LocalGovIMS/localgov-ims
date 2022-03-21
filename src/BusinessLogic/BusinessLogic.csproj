@@ -405,10 +405,12 @@
     <Compile Include="Services\VatService.cs" />
     <Compile Include="Validators\AccountHolderCreationValidator.cs" />
     <Compile Include="Validators\EReturnDescriptionValidator.cs" />
+    <Compile Include="Interfaces\Validators\ITransactionFeeValidator.cs" />
     <Compile Include="Validators\TemplateReferenceValidator.cs" />
     <Compile Include="Validators\BasketValidator.cs" />
     <Compile Include="Validators\AccountReferenceValidator.cs" />
     <Compile Include="Validators\RollbackTransactionJournalValidator.cs" />
+    <Compile Include="Validators\TransactionFeeValidator.cs" />
     <Compile Include="Validators\TransactionJournalValidator.cs" />
     <Compile Include="Validators\EReturnReferenceValidator.cs" />
     <Compile Include="Validators\TransactionTransferValidator.cs" />

@@ -138,7 +138,7 @@ namespace Api.Controllers.PendingTransactions
                 if (response.Success)
                     return Ok();
 
-                return BadRequest();
+                return BadRequest(response.Error);
             }
             catch (Exception ex)
             {

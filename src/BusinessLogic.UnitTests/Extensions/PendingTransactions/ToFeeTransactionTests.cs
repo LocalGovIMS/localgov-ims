@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Extensions;
+﻿using BusinessLogic.Classes;
+using BusinessLogic.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -18,10 +19,18 @@ namespace BusinessLogic.UnitTests.Extensions.ProcessedTransaction
             // Arrange
             var pendingTransactions = GetPendingTransactions();
             var pendingTransaction = pendingTransactions.First();
-            var decimalFee = Convert.ToDecimal(fee);
+            var paymentResult = new PaymentResult()
+            {
+                PspReference = pspReference,
+                Fee = Convert.ToDecimal(fee)
+            };
+            var mop = new Entities.Mop()
+            {
+
+            };
 
             // Act
-            var result = pendingTransactions.ToFeeTransaction(pspReference, decimalFee, mopCode);
+            var result = pendingTransactions.ToFeeTransaction(paymentResult, mop, mopCode);
 
             // Assert
             result.TransactionReference.Should().Be($"{pendingTransaction.InternalReference}_{pendingTransactions.Count + 1}");
@@ -33,7 +42,7 @@ namespace BusinessLogic.UnitTests.Extensions.ProcessedTransaction
             result.UserCode.Should().Be(pendingTransaction.UserCode);
             result.FundCode.Should().Be(pendingTransaction.FundCode);
             result.MopCode.Should().Be(mopCode);
-            result.Amount.Should().Be(decimalFee);
+            result.Amount.Should().Be(Convert.ToDecimal(fee));
             result.VatCode.Should().Be(pendingTransaction.VatCode);
             result.VatAmount.Should().Be(0);
             result.VatRate.Should().Be(0);
