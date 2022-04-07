@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Services.Cryptography;
+using BusinessLogic.Interfaces.Validators;
 
 namespace PaymentPortal.Controllers
 {
@@ -7,9 +8,9 @@ namespace PaymentPortal.Controllers
     {
         IPaymentService PaymentService { get; }
         IFundService FundService { get; }
-        IValidationService ValidationService { get; }
         IEmailService EmailService { get; }
         ITransactionService TransactionService { get; }
         ICryptographyService CryptographyService { get; }
+        IPaymentValidationHandler PaymentValidationHandler { get; }
     }
 }

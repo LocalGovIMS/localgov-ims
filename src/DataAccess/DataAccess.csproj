@@ -145,13 +145,16 @@
     <Compile Include="Migrations\202201261102016_Increased_length_of_PspReference_field.designer.cs">
       <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs" />
+    <Compile Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.designer.cs">
+      <DependentUpon>202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountHolderRepository.cs" />
-    <Compile Include="Repositories\AccountValidationRepository.cs" />
-    <Compile Include="Repositories\AccountValidationWeightingRepository.cs" />
+    <Compile Include="Repositories\AccountReferenceValidatorRepository.cs" />
     <Compile Include="Repositories\ActivityLogRepository.cs" />
     <Compile Include="Repositories\EReturnChequeRepository.cs" />
     <Compile Include="Repositories\EReturnStatusRepository.cs" />
@@ -238,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201261102016_Increased_length_of_PspReference_field.resx">
       <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.resx">
+      <DependentUpon>202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

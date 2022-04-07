@@ -53,10 +53,22 @@
         </div>
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.ValidationReference)
-            @Html.EditorFor(m => m.ValidationReference)
+            @Html.LabelFor(m => m.AccountReferenceValidatorId)
+            <div class="ui selection dropdown account-reference-validator-dropdown">
+                @Html.HiddenFor(x => x.AccountReferenceValidatorId, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select account refernce validator code</div>
+                <div class="menu">
+                    @foreach (var item in Model.AccountReferenceValidators.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.ValidationReference)
+                @Html.ValidationMessageFor(m => m.AccountReferenceValidators)
             </div>
         </div>
 
@@ -186,6 +198,7 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.account-reference-validator-dropdown').dropdown();
             $('.vat-dropdown').dropdown();
         });
     </script>

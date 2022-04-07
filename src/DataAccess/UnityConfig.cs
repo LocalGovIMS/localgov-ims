@@ -15,8 +15,7 @@ namespace DataAccess
         {
             container
                 .RegisterType<IAccountHolderRepository, AccountHolderRepository>()
-                .RegisterType<IAccountValidationRepository, AccountValidationRepository>()
-                .RegisterType<IAccountValidationWeightingRepository, AccountValidationWeightingRepository>()
+                .RegisterType<IAccountReferenceValidatorRepository, AccountReferenceValidatorRepository>()
                 .RegisterType<IActivityLogRepository, ActivityLogRepository>()
                 .RegisterType<IEReturnRepository, EReturnRepository>()
                 .RegisterType<IEReturnCashRepository, EReturnCashRepository>()

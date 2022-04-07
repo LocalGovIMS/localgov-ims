@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Classes;
 using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
+using BusinessLogic.Validators.Payment;
 using Microsoft.Ajax.Utilities;
 using PaymentPortal.Classes;
 using PaymentPortal.Models;
@@ -11,6 +12,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Web.Mvc;
+using PaymentValidationException = PaymentPortal.Classes.PaymentValidationException;
 
 namespace PaymentPortal.Controllers
 {
@@ -112,11 +114,6 @@ namespace PaymentPortal.Controllers
 
                 var response = Dependencies.PaymentService.CreateHppPayments(paymentDetailsList);
 
-                // HIGH: Review reason we add this to temp data - it was picked up in the smartpay controller,
-                // but why wasn't this info just read from the pending transaction?
-                //
-                //TempData.AddOrUpdate("BillingAddress", model.PaymentAddressDetails?.GetBillingAddress());
-
                 return Redirect(response.ResponseUrl);
             }
             catch (Exception e)
@@ -167,9 +164,6 @@ namespace PaymentPortal.Controllers
                 legacyPaymentRequest.Populate();
 
                 var response = Dependencies.PaymentService.CreateHppPayments(legacyPaymentRequest.PaymentDetails);
-
-                // HIGH: Review reason we add this to temp data - it was picked up in the smartpay controller, but why wasn't this info just read from the pending transaction?
-                //TempData.AddOrUpdate("BillingAddress", legacyPaymentRequest.GetBillingAddress());
 
                 return Redirect(response.ResponseUrl);
             }
@@ -325,15 +319,19 @@ namespace PaymentPortal.Controllers
                 if (!ModelState.IsValid)
                     return;
 
-                var referenceValidator = Dependencies.ValidationService.ValidateReference(model.PaymentReference, model.PaymentType, model.Amount, AccountReferenceValidationSource.Payments);
-                if (!referenceValidator.Success)
+                var paymentValidationHandler = Dependencies.PaymentValidationHandler.Validate(new PaymentValidationArgs()
                 {
-                    var errorMessage = "Please enter a valid payment reference";
-
-                    if (!referenceValidator.Error.IsNullOrWhiteSpace())
-                    {
-                        errorMessage = referenceValidator.Error;
-                    }
+                    Reference = model.PaymentReference,
+                    FundCode = model.PaymentType,
+                    Amount = model.Amount,
+                    Source = AccountReferenceValidationSource.Payments
+                });
+                
+                if (!paymentValidationHandler.Success)
+                {
+                    var errorMessage = paymentValidationHandler.Error.IsNullOrWhiteSpace()
+                        ? "Please enter a valid payment reference"
+                        : paymentValidationHandler.Error;
 
                     ModelState.AddModelError("PaymentReference", errorMessage);
                 }
@@ -341,6 +339,7 @@ namespace PaymentPortal.Controllers
             catch (Exception ex)
             {
                 Dependencies.Log.Error(ex);
+
                 throw new PaymentValidationException("An error occurred whilst validating the payment details", ex);
             }
         }

@@ -13,8 +13,11 @@ namespace Admin.Models.Fund
         [DisplayName("Access level")]
         public string AccessLevel { get; set; }
 
-        [DisplayName("Validation reference")]
-        public string ValidationReference { get; set; }
+        [DisplayName("Account reference validator")]
+        public int? AccountReferenceValidatorId { get; set; }
+
+        [DisplayName("Account reference validator")]
+        public string AccountReferenceValidatorName { get; set; }
 
         [DisplayName("VAT code")]
         public string VatCode { get; set; }

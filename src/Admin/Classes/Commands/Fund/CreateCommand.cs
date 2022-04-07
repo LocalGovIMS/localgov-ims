@@ -33,7 +33,7 @@ namespace Admin.Classes.Commands.Fund
                 NarrativeFlag = model.Narrative,
                 OverPayAccount = model.OverPayAccount,
                 UseGeneralLedgerCode = model.UseGLCode,
-                ValidationReference = model.ValidationReference,
+                AccountReferenceValidatorId = model.AccountReferenceValidatorId,
                 VatCode = model.VatCode,
                 VatOverride = model.VatOverride,
                 Disabled = model.IsDisabled

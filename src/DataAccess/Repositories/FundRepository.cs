@@ -41,6 +41,7 @@ namespace DataAccess.Repositories
             return IncomeDbContext.Funds
                 .Include(x => x.MetaData)
                 .Include(s => s.Vat)
+                .Include(s => s.AccountReferenceValidator)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.FundCode == fundCode);
         }
@@ -99,7 +100,7 @@ namespace DataAccess.Repositories
             item.OverPayAccount = entity.OverPayAccount;
             item.StopMessages = entity.StopMessages;
             item.UseGeneralLedgerCode = entity.UseGeneralLedgerCode;
-            item.ValidationReference = entity.ValidationReference;
+            item.AccountReferenceValidatorId = entity.AccountReferenceValidatorId;
             item.VatOverride = entity.VatOverride;
             item.VatCode = entity.VatCode;
             item.Disabled = entity.Disabled;

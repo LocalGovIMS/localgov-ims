@@ -26,8 +26,7 @@ namespace BusinessLogic.Entities
         [StringLength(2)]
         public string AccessLevel { get; set; }
 
-        [StringLength(3)]
-        public string ValidationReference { get; set; }
+        public int? AccountReferenceValidatorId { get; set; }
 
         [StringLength(2)]
         public string VatCode { get; set; }
@@ -76,5 +75,7 @@ namespace BusinessLogic.Entities
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
 
         public virtual ICollection<FundMetaData> MetaData { get; set; }
+
+        public virtual AccountReferenceValidator AccountReferenceValidator { get; set; }
     }
 }
