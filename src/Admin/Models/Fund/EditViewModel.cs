@@ -18,9 +18,8 @@ namespace Admin.Models.Fund
         [Required(ErrorMessage = "Access level is required")]
         public string AccessLevel { get; set; }
 
-        [DisplayName("Validation reference")]
-        [Required(ErrorMessage = "Validation reference is required")]
-        public string ValidationReference { get; set; }
+        [DisplayName("Account reference validator")]
+        public int? AccountReferenceValidatorId { get; set; }
 
         [DisplayName("VAT code")]
         [Required(ErrorMessage = "VAT code is required")]
@@ -68,5 +67,6 @@ namespace Admin.Models.Fund
         public bool IsDisabled { get; set; }
 
         public SelectList VatCodes { get; set; }
+        public SelectList AccountReferenceValidators { get; set; }
     }
 }

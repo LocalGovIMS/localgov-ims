@@ -55,10 +55,9 @@ namespace DataAccess.Classes
             { typeof(VatMetaData).ToString(), 40 },
             { typeof(Office).ToString(), 41 },
             { typeof(AccountHolder).ToString(), 42 },
-            { typeof(AccountValidation).ToString(), 43 },
-            { typeof(AccountValidationWeighting).ToString(), 44 },
-            { typeof(EReturnStatus).ToString(), 45 },
-            { typeof(EReturnType).ToString(), 46 }
+            { typeof(AccountReferenceValidator).ToString(), 43 },
+            { typeof(EReturnStatus).ToString(), 44 },
+            { typeof(EReturnType).ToString(), 45 }
         };
 
         private readonly Dictionary<string, Func<object, string>> _idMapping = new Dictionary<string, Func<object, string>>() {
@@ -103,8 +102,8 @@ namespace DataAccess.Classes
             { typeof(VatMetaData).ToString(), (item) => { return ((VatMetaData)item).Id.ToString(); } },
             { typeof(Office).ToString(), (item) => { return ((Office)item).OfficeCode.ToString(); } },
             { typeof(AccountHolder).ToString(), (item) => { return ((AccountHolder)item).AccountReference.ToString(); } },
-            { typeof(AccountValidation).ToString(), (item) => { return ((AccountValidation)item).ValidationReference.ToString(); } },
-            { typeof(AccountValidationWeighting).ToString(), (item) => { return ((AccountValidationWeighting)item).Id.ToString(); } },
+            { typeof(AccountReferenceValidator).ToString(), (item) => { return ((AccountReferenceValidator)item).Id.ToString(); } },
+            { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } },
             { typeof(EReturnStatus).ToString(), (item) => { return ((EReturnStatus)item).Id.ToString(); } },
             { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } }
         };

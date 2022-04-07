@@ -38,6 +38,11 @@ namespace BusinessLogic.Extensions
             existingAccountHolder.UserField3 = newAccountHolder.UserField3;
             existingAccountHolder.StopMessageReference = newAccountHolder.StopMessageReference;
         }
+
+        public static bool IsOnStop(this AccountHolder accountHolder)
+        {
+            return string.IsNullOrWhiteSpace(accountHolder.StopMessageReference) == false;
+        }
     }
 }
 

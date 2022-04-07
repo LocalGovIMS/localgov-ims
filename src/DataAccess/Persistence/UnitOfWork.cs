@@ -21,8 +21,7 @@ namespace DataAccess.Persistence
         #region Repositories
 
         public IAccountHolderRepository AccountHolders { get; private set; }
-        public IAccountValidationRepository AccountValidations { get; private set; }
-        public IAccountValidationWeightingRepository AccountValidationWeightings { get; private set; }
+        public IAccountReferenceValidatorRepository AccountReferenceValidators { get; private set; }
         public IActivityLogRepository ActivityLogs { get; private set; }
         public IEReturnRepository EReturns { get; private set; }
         public IEReturnCashRepository EReturnCashes { get; private set; }
@@ -66,8 +65,7 @@ namespace DataAccess.Persistence
         public UnitOfWork(IncomeDbContext context,
             ISecurityContext securityContext,
             IAccountHolderRepository accountHolderRepository,
-            IAccountValidationRepository accountValidationRepository,
-            IAccountValidationWeightingRepository accountValidationWeightingRepository,
+            IAccountReferenceValidatorRepository accountReferenceValidatorRepository,
             IActivityLogRepository activityLogRepository,
             IEReturnRepository eReturnRepository,
             IEReturnCashRepository eReturnCashesRepository,
@@ -112,8 +110,7 @@ namespace DataAccess.Persistence
             _securityContext = securityContext;
 
             AccountHolders = accountHolderRepository;
-            AccountValidations = accountValidationRepository;
-            AccountValidationWeightings = accountValidationWeightingRepository;
+            AccountReferenceValidators = accountReferenceValidatorRepository;
             ActivityLogs = activityLogRepository;
             EReturns = eReturnRepository;
             EReturnCashes = eReturnCashesRepository;

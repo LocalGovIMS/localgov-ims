@@ -6,8 +6,7 @@ namespace BusinessLogic.Interfaces.Persistence
     public interface IUnitOfWork
     {
         IAccountHolderRepository AccountHolders { get; }
-        IAccountValidationRepository AccountValidations { get; }
-        IAccountValidationWeightingRepository AccountValidationWeightings { get; }
+        IAccountReferenceValidatorRepository AccountReferenceValidators { get; }
         IActivityLogRepository ActivityLogs { get; }
         IEReturnRepository EReturns { get; }
         IEReturnCashRepository EReturnCashes { get; }

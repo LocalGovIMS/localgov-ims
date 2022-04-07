@@ -19,8 +19,7 @@ namespace DataAccess.Persistence
         }
 
         public virtual DbSet<AccountHolder> AccountHolders { get; set; }
-        public virtual DbSet<AccountValidation> AccountValidations { get; set; }
-        public virtual DbSet<AccountValidationWeighting> Account_Validation_Weightings { get; set; }
+        public virtual DbSet<AccountReferenceValidator> AccountReferenceValidators { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
         public virtual DbSet<EmailLog> EmailLogs { get; set; }
@@ -111,9 +110,9 @@ namespace DataAccess.Persistence
                 .WithMany(c => c.AccountHolders)
                 .HasForeignKey(p => new { p.StopMessageReference, p.FundCode });
 
-            modelBuilder.Entity<AccountValidation>()
-                .HasMany(e => e.AccountValidationWeightings)
-                .WithRequired(e => e.AccountValidation)
+            modelBuilder.Entity<AccountReferenceValidator>()
+                .HasOptional(c => c.CheckDigitConfiguration)
+                .WithMany(a => a.AccountReferenceValidators)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<EReturn>()
@@ -168,6 +167,11 @@ namespace DataAccess.Persistence
                 .HasMany(e => e.AccountHolders)
                 .WithOptional(e => e.Fund) // HIGH: This satisfies the existing schema - but should it be WithRequired? The column is never empty in the DB
                 .HasForeignKey(e => e.FundCode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Fund>()
+                .HasOptional(e => e.AccountReferenceValidator)
+                .WithMany(f => f.Funds)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Mop>()

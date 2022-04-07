@@ -2,6 +2,7 @@
 using BusinessLogic.Classes.Dependencies;
 using BusinessLogic.Classes.Smtp;
 using BusinessLogic.Classes.Strategies;
+using BusinessLogic.Enums;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Dependencies;
 using BusinessLogic.Interfaces.Services;
@@ -11,6 +12,8 @@ using BusinessLogic.Interfaces.Strategies;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Services;
 using BusinessLogic.Validators;
+using BusinessLogic.Validators.Payment;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Unity;
 
@@ -58,17 +61,16 @@ namespace BusinessLogic
                 .RegisterType<IUserService, UserService>()
                 .RegisterType<IUserTemplateService, UserTemplateService>()
                 .RegisterType<IUserPostPaymentMopCodeService, UserPostPaymentMopCodeService>()
-                .RegisterType<IValidationService, ValidationService>()
                 .RegisterType<IVatService, VatService>()
                 .RegisterType<IVatMetadataService, VatMetadataService>()
                 .RegisterType<ICryptographyService, MD5CryptographyService>()
+                .RegisterType<IAccountReferenceValidatorService, AccountReferenceValidatorService>()
 
                 .RegisterType<IEmailService, EmailService>()
                 .RegisterType<IEmailServiceDependencies, EmailServiceDependencies>()
                 .RegisterType<IEmailFactory, EmailFactory>()
 
                 .RegisterType<IAccountHolderStopMessageValidator, AccountHolderStopMessageValidator>()
-                .RegisterType<IAccountReferenceValidator, AccountReferenceValidator>()
                 .RegisterType<IBasketValidator, BasketValidator>()
                 .RegisterType<IEReturnDescriptionValidator, EReturnDescriptionValidator>()
                 .RegisterType<IEReturnReferenceValidator, EReturnReferenceValidator>()
@@ -89,7 +91,23 @@ namespace BusinessLogic
                 .RegisterType<IFileImporter, FileImporter>()
                 .RegisterType<IImportProcessor, ImportProcessor>()
                 .RegisterType<IProcessedTransactionModelBuilder, ProcessedTransactionModelBuilder>()
-                ;
+
+                .RegisterType<IPaymentValidationHandler, PaymentValidationHandler>()
+
+                .RegisterType<IValidator<PaymentValidationArgs>, AmountValidator>(nameof(AmountValidator))
+                .RegisterType<IValidator<PaymentValidationArgs>, ReferenceLengthValidator>(nameof(ReferenceLengthValidator))
+                .RegisterType<IValidator<PaymentValidationArgs>, CharacterTypeValidator>(nameof(CharacterTypeValidator))
+                .RegisterType<IValidator<PaymentValidationArgs>, AccountExistsValidator>(nameof(AccountExistsValidator))
+                .RegisterType<IValidator<PaymentValidationArgs>, InputMaskValidator>(nameof(InputMaskValidator))
+                .RegisterType<IValidator<PaymentValidationArgs>, RegexValidator>(nameof(RegexValidator))
+
+                .RegisterFactory<Func<string, IValidator<PaymentValidationArgs>>>(c => new Func<string, IValidator<PaymentValidationArgs>>(name => c.Resolve<IValidator<PaymentValidationArgs>>(name)))
+
+                .RegisterType<ICheckDigitStrategy, WeightedSumStrategy>(CheckDigitType.WeightedSum.ToString())
+                .RegisterType<ICheckDigitStrategy, DynixLibraryStrategy>(CheckDigitType.DynixLibrary.ToString())
+
+                .RegisterFactory<Func<CheckDigitType, ICheckDigitStrategy>>(c => new Func<CheckDigitType, ICheckDigitStrategy>(type => c.Resolve<ICheckDigitStrategy>(type.ToString())))
+            ;
         }
     }
 }
