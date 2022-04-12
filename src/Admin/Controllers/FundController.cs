@@ -54,7 +54,16 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Edit(EditViewModel model)
         {
-            return BaseEdit(model, Dependencies.EditCommand);
+            if (!ModelState.IsValid)
+            {
+                Dependencies.EditViewModelBuilder.Rebuild(model);
+
+                return View(model);
+            }
+
+            Dependencies.EditCommand.Execute(model);
+
+            return RedirectToAction("Back");
         }
 
         [NavigatablePageActionFilter(DisplayText = "Create Fund Code")]
@@ -70,7 +79,16 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Create(EditViewModel model)
         {
-            return BaseCreate(model, Dependencies.CreateCommand);
+            if (!ModelState.IsValid)
+            {
+                Dependencies.EditViewModelBuilder.Rebuild(model);
+
+                return View(model);
+            }
+
+            Dependencies.CreateCommand.Execute(model);
+
+            return RedirectToAction("Back");
         }
     }
 }

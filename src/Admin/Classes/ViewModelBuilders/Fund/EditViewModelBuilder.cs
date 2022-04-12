@@ -3,6 +3,7 @@ using BusinessLogic.Interfaces.Services;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.Fund
@@ -89,7 +90,8 @@ namespace Admin.Classes.ViewModelBuilders.Fund
         private SelectList GetAccountReferenceValidators()
         {
             var selectListItems = new List<SelectListItem>();
-            var items = _accountReferenceValidatorService.GetAll();
+            var items = _accountReferenceValidatorService.GetAll()
+                .OrderBy(x => x.Name);
 
             foreach (var item in items)
             {

@@ -8,16 +8,19 @@ namespace Admin.Models.Fund
     {
         [DisplayName("Fund code")]
         [Required(ErrorMessage = "Fund code is required")]
+        [StringLength(2, ErrorMessage = "Fund code cannot be longer than 2 characters")]
         public string FundCode { get; set; }
 
         [DisplayName("Name")]
         [Required(ErrorMessage = "Name is required")]
+        [StringLength(50, ErrorMessage = "Fund name cannot be longer than 50 characters")]
         public string FundName { get; set; }
 
         [DisplayName("Access level")]
         [Required(ErrorMessage = "Access level is required")]
+        [StringLength(2, ErrorMessage = "Access level cannot be longer than 2 characters")]
         public string AccessLevel { get; set; }
-
+        
         [DisplayName("Account reference validator")]
         public int? AccountReferenceValidatorId { get; set; }
 
@@ -39,6 +42,7 @@ namespace Admin.Models.Fund
 
         [DisplayName("Export to format")]
         [Required(ErrorMessage = "Export to format is required")]
+        [StringLength(10, ErrorMessage = "Export to format cannot be longer than 10 characters")]
         public string FundExportFormat { get; set; }
 
         [DisplayName("Use GL code")]
@@ -46,6 +50,7 @@ namespace Admin.Models.Fund
 
         [DisplayName("GL code")]
         [Required(ErrorMessage = "GL code is required")]
+        [StringLength(20, ErrorMessage = "GL code cannot be longer than 20 characters")]
         public string GLCode { get; set; }
 
         [DisplayName("Overpay account")]
@@ -58,6 +63,7 @@ namespace Admin.Models.Fund
         public bool AquireAddress { get; set; }
 
         [DisplayName("Display name")]
+        [StringLength(50, ErrorMessage = "Display name cannot be longer than 50 characters")]
         public string DisplayName { get; set; }
 
         [DisplayName("Allow VAT override")]
