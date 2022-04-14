@@ -60,7 +60,7 @@ namespace Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Message = new ErrorMessage("There are errors in the data you've submitted", "Error");
+                model.Message = new ErrorMessage("There are errors in the data you've submitted");
                 return View(Dependencies.EditViewModelBuilder.Rebuild(model));
             }
 
@@ -68,7 +68,7 @@ namespace Admin.Controllers
 
             model.Message = result.Success
                 ? new SuccessMessage("Your changes were saved", "Template updated")
-                : model.Message = new ErrorMessage(result.Messages.First(), "Error");
+                : model.Message = new ErrorMessage(result.Messages.First());
 
             model = Dependencies.EditViewModelBuilder.Rebuild(model);
 
