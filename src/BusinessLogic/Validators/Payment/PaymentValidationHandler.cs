@@ -42,6 +42,9 @@ namespace BusinessLogic.Validators.Payment
             {
                 LoadData(args);
 
+                if (_accountReferenceValidator == null) 
+                    return new Result();
+
                 UpdateArgs(args);
 
                 CreateValidationChain();
@@ -81,9 +84,6 @@ namespace BusinessLogic.Validators.Payment
         private void GetAccountReferenceValidator(string fundCode)
         {
             _accountReferenceValidator = _accountReferenceValidatorService.GetByFundCode(fundCode);
-
-            if (_accountReferenceValidator == null)
-                throw new PaymentValidationException(string.Format("AccountReferenceValidator is null for fund: {0}", fundCode));
         }
 
         private void UpdateArgs(PaymentValidationArgs args)
