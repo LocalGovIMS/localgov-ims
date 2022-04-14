@@ -1,7 +1,7 @@
-﻿using BusinessLogic.Enums;
-using BusinessLogic.Interfaces.Security;
+﻿using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
+using BusinessLogic.Validators.Payment;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
         private readonly Mock<IMethodOfPaymentService> _mockMopService = new Mock<IMethodOfPaymentService>();
-        private readonly Mock<IAccountReferenceValidator> _mockAccountReferenceValidator = new Mock<IAccountReferenceValidator>();
+        private readonly Mock<IPaymentValidationHandler> _mockPaymentValidationHandler = new Mock<IPaymentValidationHandler>();
         private readonly Mock<ISecurityContext> _mockSecurityContext = new Mock<ISecurityContext>();
 
         private void SetupFundService(Mock<IFundService> service, string vatCode)
@@ -34,13 +34,9 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                 });
         }
 
-        private void SetupAccountReferenceValidator(Mock<IAccountReferenceValidator> item, bool isValid)
+        private void SetupAccountReferenceValidator(Mock<IPaymentValidationHandler> item, bool isValid)
         {
-            item.Setup(x => x.ValidateReference(
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<decimal>(),
-                It.IsAny<AccountReferenceValidationSource>()))
+            item.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(isValid ? new BusinessLogic.Classes.Result.Result() : new BusinessLogic.Classes.Result.Result("test"));
         }
 
@@ -84,13 +80,13 @@ namespace Admin.UnitTests.Classes.Commands.Payment
         {
             // Arrange
             SetupFundService(_mockFundService, "VC1");
-            SetupAccountReferenceValidator(_mockAccountReferenceValidator, true);
+            SetupAccountReferenceValidator(_mockPaymentValidationHandler, true);
 
             var command = new Command(
                 _mockLogger.Object,
                 _mockFundService.Object,
                 _mockMopService.Object,
-                _mockAccountReferenceValidator.Object,
+                _mockPaymentValidationHandler.Object,
                 _mockSecurityContext.Object);
 
             // Act
@@ -106,13 +102,13 @@ namespace Admin.UnitTests.Classes.Commands.Payment
         {
             // Arrange
             SetupFundService(_mockFundService, "VC1");
-            SetupAccountReferenceValidator(_mockAccountReferenceValidator, true);
+            SetupAccountReferenceValidator(_mockPaymentValidationHandler, true);
 
             var command = new Command(
                 _mockLogger.Object,
                 _mockFundService.Object,
                 _mockMopService.Object,
-                _mockAccountReferenceValidator.Object,
+                _mockPaymentValidationHandler.Object,
                 _mockSecurityContext.Object);
 
             var model = GenerateViewModel();
@@ -132,13 +128,13 @@ namespace Admin.UnitTests.Classes.Commands.Payment
         {
             // Arrange
             SetupFundService(_mockFundService, "VC1");
-            SetupAccountReferenceValidator(_mockAccountReferenceValidator, true);
+            SetupAccountReferenceValidator(_mockPaymentValidationHandler, true);
 
             var command = new Command(
                 _mockLogger.Object,
                 _mockFundService.Object,
                 _mockMopService.Object,
-                _mockAccountReferenceValidator.Object,
+                _mockPaymentValidationHandler.Object,
                 _mockSecurityContext.Object);
 
             var model = GenerateViewModel();
@@ -158,13 +154,13 @@ namespace Admin.UnitTests.Classes.Commands.Payment
         {
             // Arrange
             SetupFundService(_mockFundService, "VC1");
-            SetupAccountReferenceValidator(_mockAccountReferenceValidator, false);
+            SetupAccountReferenceValidator(_mockPaymentValidationHandler, false);
 
             var command = new Command(
                 _mockLogger.Object,
                 _mockFundService.Object,
                 _mockMopService.Object,
-                _mockAccountReferenceValidator.Object,
+                _mockPaymentValidationHandler.Object,
                 _mockSecurityContext.Object);
 
             // Act

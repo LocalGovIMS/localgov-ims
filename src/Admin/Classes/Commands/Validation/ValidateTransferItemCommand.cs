@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Enums;
-using BusinessLogic.Interfaces.Validators;
+﻿using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models;
 using log4net;
 using System.Collections.Generic;
@@ -9,13 +8,13 @@ namespace Admin.Classes.Commands.Validation
 {
     public class ValidateTransferItemCommand : BaseCommand<TransferItem>
     {
-        private readonly IAccountReferenceValidator _accountReferenceValidator;
+        private readonly IPaymentValidationHandler _paymentValidationHandler;
 
         public ValidateTransferItemCommand(ILog log
-            , IAccountReferenceValidator accountReferenceValidator)
+            , IPaymentValidationHandler paymentValidationHandler)
             : base(log)
         {
-            _accountReferenceValidator = accountReferenceValidator;
+            _paymentValidationHandler = paymentValidationHandler;
         }
 
         protected override CommandResult OnExecute(TransferItem model)
@@ -42,11 +41,12 @@ namespace Admin.Classes.Commands.Validation
                 return new CommandResult(false, errors);
             }
 
-            var result = _accountReferenceValidator.ValidateReference(
-                model.AccountReference,
-                model.FundCode,
-                model.Amount,
-                AccountReferenceValidationSource.Payments);
+            var result = _paymentValidationHandler.Validate(new BusinessLogic.Validators.Payment.PaymentValidationArgs()
+            {
+                Reference = model.AccountReference,
+                FundCode = model.FundCode,
+                Amount = model.Amount,
+            });
 
             return new CommandResult(result.Success, result.Error);
         }

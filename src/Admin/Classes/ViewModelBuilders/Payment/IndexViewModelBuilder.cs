@@ -85,10 +85,11 @@ namespace Admin.Classes.ViewModelBuilders.Payment
 
             foreach (var fund in funds)
             {
-                var dataAttributes = new List<ValuePair>();
-
-                dataAttributes.Add(new ValuePair() { Key = "vat-override", Value = fund.VatOverride.ToString() });
-                dataAttributes.Add(new ValuePair() { Key = "vat-default-code", Value = fund.VatCode });
+                var dataAttributes = new List<ValuePair>
+                {
+                    new ValuePair() { Key = "vat-override", Value = fund.VatOverride.ToString() },
+                    new ValuePair() { Key = "vat-default-code", Value = fund.VatCode }
+                };
 
                 fundSelectListItems.Add(new SelectListItem()
                 {
@@ -104,14 +105,16 @@ namespace Admin.Classes.ViewModelBuilders.Payment
         private SelectList GetMopCodeList(IOrderedEnumerable<UserPostPaymentMopCode> mopCodes)
         {
             var selectListItems = new List<SelectListItem>();
-            var dataAttributes = new List<ValuePair>();
 
             if (mopCodes.Any())
             {
                 foreach (var item in mopCodes)
                 {
-                    dataAttributes.Add(new ValuePair() { Key = "mop-minimum-amount", Value = item.Mop.MinimumAmount.ToString() });
-                    dataAttributes.Add(new ValuePair() { Key = "mop-maximum-amount", Value = item.Mop.MaximumAmount.ToString() });
+                    var dataAttributes = new List<ValuePair>
+                    {
+                        new ValuePair() { Key = "mop-minimum-amount", Value = item.Mop.MinimumAmount.ToString() },
+                        new ValuePair() { Key = "mop-maximum-amount", Value = item.Mop.MaximumAmount.ToString() }
+                    };
 
                     selectListItems.Add(new SelectListItem()
                     {
@@ -125,8 +128,11 @@ namespace Admin.Classes.ViewModelBuilders.Payment
             {
                 var mop = _userPostPaymentMopCodeService.GetDefaultUserPostPaymentMopCode();
 
-                dataAttributes.Add(new ValuePair() { Key = "mop-minimum-amount", Value = mop.MinimumAmount.ToString() });
-                dataAttributes.Add(new ValuePair() { Key = "mop-maximum-amount", Value = mop.MaximumAmount.ToString() });
+                var dataAttributes = new List<ValuePair>
+                {
+                    new ValuePair() { Key = "mop-minimum-amount", Value = mop.MinimumAmount.ToString() },
+                    new ValuePair() { Key = "mop-maximum-amount", Value = mop.MaximumAmount.ToString() }
+                };
 
                 selectListItems.Add(new SelectListItem()
                 {

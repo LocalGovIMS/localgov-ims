@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models;
+using BusinessLogic.Validators.Payment;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -13,11 +13,11 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
     [TestClass]
     public class TransactionJournalTests
     {
-        private Mock<IAccountReferenceValidator> _mockAccountReferenceValidator = new Mock<IAccountReferenceValidator>();
+        private Mock<IPaymentValidationHandler> _mockPaymentValidationHandler = new Mock<IPaymentValidationHandler>();
 
         private BusinessLogic.Validators.TransactionJournalValidator GetValidator()
         {
-            return new BusinessLogic.Validators.TransactionJournalValidator(_mockAccountReferenceValidator.Object);
+            return new BusinessLogic.Validators.TransactionJournalValidator(_mockPaymentValidationHandler.Object);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 }
             };
             string errorMsg = "MOCK ERROR";
-            _mockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            _mockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result(errorMsg));
 
             string transactionReference = "1234";
@@ -94,7 +94,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 }
             };
 
-            _mockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            _mockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             string transactionReference = "1234";
@@ -132,7 +132,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 }
             };
 
-            _mockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            _mockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             string transactionReference = "1234";
@@ -166,7 +166,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 }
             };
 
-            _mockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            _mockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             var validator = GetValidator();

@@ -15,7 +15,7 @@ namespace BusinessLogic.UnitTests.Validators.Basket
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
         protected readonly Mock<IFundService> MockFundService = new Mock<IFundService>();
         protected readonly Mock<IAccountHolderService> MockAccountHolderService = new Mock<IAccountHolderService>();
-        protected readonly Mock<IAccountReferenceValidator> MockAccountReferenceValidator = new Mock<IAccountReferenceValidator>();
+        protected readonly Mock<IPaymentValidationHandler> MockPaymentValidationHandler = new Mock<IPaymentValidationHandler>();
         protected readonly Mock<ISecurityContext> MockSecurityContextValidator = new Mock<ISecurityContext>();
 
 
@@ -25,7 +25,7 @@ namespace BusinessLogic.UnitTests.Validators.Basket
                 MockLogger.Object,
                 MockFundService.Object,
                 MockAccountHolderService.Object,
-                MockAccountReferenceValidator.Object,
+                MockPaymentValidationHandler.Object,
                 MockSecurityContextValidator.Object);
 
             return validator;
