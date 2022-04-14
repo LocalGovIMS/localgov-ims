@@ -52,7 +52,7 @@ namespace Admin.Controllers
 
             if (model == null)
             {
-                TempData["message"] = new ErrorMessage("Unable to approve the selected eReturn", "Error");
+                TempData["message"] = new ErrorMessage("Unable to approve the selected eReturn");
                 return RedirectToAction("Search");
             }
 
@@ -79,7 +79,7 @@ namespace Admin.Controllers
                 return RedirectToAction("Back");
             }
 
-            model.Message = new ErrorMessage(result.Messages, "Save Failed");
+            model.Message = new ErrorMessage(result.Messages, "Save failed");
             return View(Dependencies.EditViewModelBuilder.Rebuild(model));
         }
 
@@ -92,7 +92,7 @@ namespace Admin.Controllers
 
             if (model == null)
             {
-                TempData["message"] = new ErrorMessage("Unable to edit the selected eReturn", "Error");
+                TempData["message"] = new ErrorMessage("Unable to edit the selected eReturn");
                 return RedirectToAction("Search");
             }
 
@@ -120,7 +120,7 @@ namespace Admin.Controllers
             }
             else
             {
-                model.Message = new ErrorMessage(result.Messages, "Save Failed");
+                model.Message = new ErrorMessage(result.Messages, "Save failed");
                 return View(Dependencies.EditViewModelBuilder.Rebuild(model));
             }
         }
