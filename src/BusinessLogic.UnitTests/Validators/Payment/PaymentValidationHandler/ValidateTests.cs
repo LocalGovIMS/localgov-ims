@@ -77,8 +77,7 @@ namespace BusinessLogic.UnitTests.Validators.Payment.PaymentValidationHandler
             var result = _handler.Validate(GetArgs());
 
             // Assert
-            result.Success.Should().BeFalse();
-            result.Error.Should().Be($"AccountReferenceValidator is null for fund: { GetArgs().FundCode }");
+            result.Success.Should().BeTrue();
         }
 
         [TestMethod]
