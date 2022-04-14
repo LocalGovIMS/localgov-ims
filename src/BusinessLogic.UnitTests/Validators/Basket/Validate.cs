@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Enums;
+using BusinessLogic.Validators.Payment;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -70,9 +71,8 @@ namespace BusinessLogic.UnitTests.Validators.Basket
                 }
             };
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>())).Returns(
-                new Result());
-
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
+                .Returns(new Result());
 
             var basketValidator = GetBasket();
             var result = basketValidator.Validate(basket);
@@ -109,9 +109,8 @@ namespace BusinessLogic.UnitTests.Validators.Basket
                 }
             };
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>())).Returns(
-                new Result());
-
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
+                .Returns(new Result());
 
             var basketValidator = GetBasket();
             var result = basketValidator.Validate(basket);
@@ -137,10 +136,10 @@ namespace BusinessLogic.UnitTests.Validators.Basket
                     }
                 }
             };
-            string errorMsg = "Test error message";
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>())).Returns(
-                new Result(errorMsg));
 
+            string errorMsg = "Test error message";
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
+                .Returns(new Result(errorMsg));
 
             var basketValidator = GetBasket();
             var result = basketValidator.Validate(basket);

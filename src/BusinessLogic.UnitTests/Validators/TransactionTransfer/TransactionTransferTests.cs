@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Validators;
+using BusinessLogic.Validators.Payment;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -14,10 +14,10 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
     [ExcludeFromCodeCoverage]
     public class TransactionTransferTests
     {
-        Mock<IAccountReferenceValidator> MockAccountReferenceValidator = new Mock<IAccountReferenceValidator>();
+        Mock<IPaymentValidationHandler> MockPaymentValidationHandler = new Mock<IPaymentValidationHandler>();
         private BusinessLogic.Validators.TransactionTransferValidator GetValidator()
         {
-            return new BusinessLogic.Validators.TransactionTransferValidator(MockAccountReferenceValidator.Object);
+            return new BusinessLogic.Validators.TransactionTransferValidator(MockPaymentValidationHandler.Object);
         }
 
         private BusinessLogic.Models.TransferItem SetupTranserItem(decimal amount)
@@ -89,7 +89,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
             List<BusinessLogic.Models.TransferItem> transferItems = SetupTransferItems(10);
 
             string errorMsg = "Mock error Message";
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result(errorMsg));
 
             var validator = GetValidator();
@@ -108,7 +108,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
 
             List<BusinessLogic.Models.TransferItem> transferItems = SetupTransferItems(10);
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             var validator = GetValidator();
@@ -127,7 +127,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
 
             List<BusinessLogic.Models.TransferItem> transferItems = SetupTransferItems(10);
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             var validator = GetValidator();
@@ -147,7 +147,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
 
             List<BusinessLogic.Models.TransferItem> transferItems = SetupTransferItems(100);
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             var validator = GetValidator();
@@ -166,7 +166,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
 
             List<BusinessLogic.Models.TransferItem> transferItems = SetupTransferItems(10);
 
-            MockAccountReferenceValidator.Setup(x => x.ValidateReference(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<AccountReferenceValidationSource>()))
+            MockPaymentValidationHandler.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new Result());
 
             var validator = GetValidator();
@@ -176,6 +176,5 @@ namespace BusinessLogic.UnitTests.Validators.TransactionTransfer
             result.Success.Should().BeTrue();
             result.Should().BeOfType(expectedType: typeof(Result));
         }
-
     }
 }

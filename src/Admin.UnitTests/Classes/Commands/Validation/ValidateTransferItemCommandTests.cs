@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
+using BusinessLogic.Validators.Payment;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -17,15 +18,11 @@ namespace Admin.UnitTests.Classes.Commands.Validation
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ITransactionJournalService> _mockTransactionJournalService = new Mock<ITransactionJournalService>();
-        private readonly Mock<IAccountReferenceValidator> _mockAccountReferenceValidator = new Mock<IAccountReferenceValidator>();
+        private readonly Mock<IPaymentValidationHandler> _mockAccountReferenceValidator = new Mock<IPaymentValidationHandler>();
 
-        private void SetupAccountReferenceValidator(Mock<IAccountReferenceValidator> item)
+        private void SetupAccountReferenceValidator(Mock<IPaymentValidationHandler> item)
         {
-            item.Setup(x => x.ValidateReference(
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<decimal>(),
-                It.IsAny<AccountReferenceValidationSource>()))
+            item.Setup(x => x.Validate(It.IsAny<PaymentValidationArgs>()))
                 .Returns(new BusinessLogic.Classes.Result.Result());
         }
 

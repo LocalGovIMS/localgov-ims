@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models;
@@ -10,11 +9,11 @@ namespace BusinessLogic.Validators
 {
     public class TransactionJournalValidator : ITransactionJournalValidator
     {
-        private IAccountReferenceValidator _accountReferenceValidator;
+        private IPaymentValidationHandler _paymentValidationHandler;
 
-        public TransactionJournalValidator(IAccountReferenceValidator accountReferenceValidator)
+        public TransactionJournalValidator(IPaymentValidationHandler paymentValidationHandler)
         {
-            _accountReferenceValidator = accountReferenceValidator;
+            _paymentValidationHandler = paymentValidationHandler;
         }
 
         public IResult Validate(
@@ -43,7 +42,12 @@ namespace BusinessLogic.Validators
 
         private IResult ValidateAccountReference(TransferItem item)
         {
-            return _accountReferenceValidator.ValidateReference(item.AccountReference, item.FundCode, item.Amount, AccountReferenceValidationSource.Payments);
+            return _paymentValidationHandler.Validate(new Payment.PaymentValidationArgs()
+            {
+                Reference = item.AccountReference,
+                FundCode = item.FundCode,
+                Amount = item.Amount
+            });
         }
 
         private IResult ValidateAmount(TransferItem item)

@@ -381,7 +381,6 @@
     <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Interfaces\Services\IVatService.cs" />
     <Compile Include="Interfaces\Validators\IBasketValidator.cs" />
-    <Compile Include="Interfaces\Validators\IAccountReferenceValidator.cs" />
     <Compile Include="Interfaces\Validators\IRollbackTransactionJournalValidator.cs" />
     <Compile Include="Interfaces\Validators\ITransactionJournalValidator.cs" />
     <Compile Include="Models\Payments\Basket.cs" />
