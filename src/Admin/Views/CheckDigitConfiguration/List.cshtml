@@ -1,0 +1,70 @@
+﻿@using PagedList.Mvc
+@model Admin.Models.CheckDigitConfiguration.ListViewModel
+@{
+    ViewBag.Title = "Check digit configurations";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Check digit configurations
+        @Html.ActionLink("Create check digit configuration", "Create", new { }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Check digit configuration management
+        </div>
+    </h1>
+}
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4">
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                        {
+                            page = page,
+                            name = Model.SearchCriteria.Name
+                        }))
+                        }
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no check digit configurations in the system
+    </div>
+}
+

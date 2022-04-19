@@ -266,6 +266,14 @@ namespace Admin
                 .RegisterType<IModelBuilder<IList<ViewModels.PaymentIntegration.DetailsViewModel>, int>, ViewModelBuilders.PaymentIntegration.ListViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.PaymentIntegration.EditViewModel>, Commands.PaymentIntegration.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.PaymentIntegration.EditViewModel>, Commands.PaymentIntegration.EditCommand>("Edit")
+
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.DetailsViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.EditViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.EditViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.EditViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.ListViewModel, ViewModels.CheckDigitConfiguration.SearchCriteria>, ViewModelBuilders.CheckDigitConfiguration.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.CheckDigitConfiguration.DeleteCommand>("CheckDigitConfiguration.Command.Delete")
                 ;
         }
 

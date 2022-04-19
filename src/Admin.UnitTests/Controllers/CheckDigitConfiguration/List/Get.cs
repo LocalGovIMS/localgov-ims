@@ -11,19 +11,21 @@ using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 
-namespace Admin.UnitTests.Controllers.Fund.List
+namespace Admin.UnitTests.Controllers.CheckDigitConfiguration.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class Get
     {
-        private readonly Type _controller = typeof(FundController);
+        private readonly Type _controller = typeof(CheckDigitConfigurationController);
 
-        private readonly Mock<IModelBuilder<Models.Fund.DetailsViewModel, string>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.Fund.DetailsViewModel, string>>();
-        private readonly Mock<IModelBuilder<Models.Fund.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.Fund.EditViewModel, string>>();
-        private readonly Mock<IModelCommand<Models.Fund.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.Fund.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>>();
+        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.DetailsViewModel, int>>();
+        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.EditViewModel, int>>();
+        private readonly Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>>();
+        private readonly Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>>();
+        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
 
         private MethodInfo GetMethod()
         {
@@ -34,18 +36,19 @@ namespace Admin.UnitTests.Controllers.Fund.List
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.Fund.ListViewModel, Models.Fund.SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build()).Returns(new Models.Fund.ListViewModel());
+            var listViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>>();
+            listViewModelBuilder.Setup(x => x.Build()).Returns(new Models.CheckDigitConfiguration.ListViewModel());
 
-            var dependencies = new FundControllerDependencies(
+            var dependencies = new CheckDigitConfigurationControllerDependencies(
                 _mockLogger.Object
                 , _mockDetailsViewModelBuilder.Object
                 , _mockEditViewModelBuilder.Object
                 , listViewModelBuilder.Object
                 , _mockCreateCommand.Object
-                , _mockEditCommand.Object);
+                , _mockEditCommand.Object
+                , _mockDeleteCommand.Object);
 
-            var controller = new FundController(dependencies);
+            var controller = new CheckDigitConfigurationController(dependencies);
 
             return controller.List();
         }
@@ -69,7 +72,7 @@ namespace Admin.UnitTests.Controllers.Fund.List
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Fund Codes", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Check Digit Configurations", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]
@@ -111,7 +114,7 @@ namespace Admin.UnitTests.Controllers.Fund.List
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(Models.Fund.ListViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(Models.CheckDigitConfiguration.ListViewModel));
         }
     }
 }

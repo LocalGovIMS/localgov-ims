@@ -8,6 +8,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IAccountHolderRepository AccountHolders { get; }
         IAccountReferenceValidatorRepository AccountReferenceValidators { get; }
         IActivityLogRepository ActivityLogs { get; }
+        ICheckDigitConfigurationRepository CheckDigitConfigurations { get; }
         IEReturnRepository EReturns { get; }
         IEReturnCashRepository EReturnCashes { get; }
         IEReturnChequeRepository EReturnCheques { get; }

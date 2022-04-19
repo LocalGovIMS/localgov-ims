@@ -1,0 +1,23 @@
+﻿@model Admin.Models.CheckDigitConfiguration.SearchCriteria
+
+@using (Html.BeginForm("Search", "CheckDigitConfiguration", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label>Name</label>
+                    @Html.TextBoxFor(m => m.Name, new { size = 50, placeholder = "Enter name" })
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

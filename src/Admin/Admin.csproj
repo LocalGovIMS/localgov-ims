@@ -203,6 +203,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\CheckDigitConfiguration\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\CheckDigitConfiguration\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommand.cs" />
     <Compile Include="Classes\Commands\Import\ProcessImportCommand.cs" />
     <Compile Include="Classes\Commands\Import\SaveImportFileCommand.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\CreateCommand.cs" />
@@ -274,6 +277,9 @@
     <Compile Include="Classes\Commands\User\CreateCommand.cs" />
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
@@ -307,6 +313,8 @@
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\CheckDigitConfigurationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ICheckDigitConfigurationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
@@ -403,6 +411,7 @@
     <Compile Include="Controllers\AccountHolderController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
+    <Compile Include="Controllers\CheckDigitConfigurationController.cs" />
     <Compile Include="Controllers\PaymentIntegrationController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
@@ -465,11 +474,15 @@
     <Compile Include="Models\AccountHolder\LookupViewModel.cs" />
     <Compile Include="Models\AccountHolder\SearchCriteria.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
+    <Compile Include="Models\CheckDigitConfiguration\ListViewModel.cs" />
+    <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
     <Compile Include="Models\EReturn\CreateViewModel.cs" />
     <Compile Include="Models\EReturn\EditViewModel.cs" />
     <Compile Include="Models\EReturn\ApproveViewModel.cs" />
     <Compile Include="Models\EReturn\ListViewModel.cs" />
     <Compile Include="Models\EReturn\SearchCriteria.cs" />
+    <Compile Include="Models\CheckDigitConfiguration\DetailsViewModel.cs" />
+    <Compile Include="Models\CheckDigitConfiguration\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
     <Compile Include="Models\Import\ConfirmViewModel.cs" />
@@ -1593,6 +1606,12 @@
     <Content Include="Views\PaymentIntegration\Details.cshtml" />
     <Content Include="Views\PaymentIntegration\Edit.cshtml" />
     <Content Include="Views\PaymentIntegration\List.cshtml" />
+    <Content Include="Views\CheckDigitConfiguration\_Search.cshtml" />
+    <Content Include="Views\CheckDigitConfiguration\Create.cshtml" />
+    <Content Include="Views\CheckDigitConfiguration\Details.cshtml" />
+    <Content Include="Views\CheckDigitConfiguration\Edit.cshtml" />
+    <Content Include="Views\CheckDigitConfiguration\List.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
