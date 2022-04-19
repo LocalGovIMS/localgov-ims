@@ -19,6 +19,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         private readonly Mock<ITemplateService> _mockTemplateService = new Mock<ITemplateService>();
         private readonly Mock<IUserTemplateService> _mockUserTemplateService = new Mock<IUserTemplateService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserService.Object,
+                _mockTemplateService.Object,
+                _mockUserTemplateService.Object);
+        }
+
         private void SetupUserService(Mock<IUserService> service)
         {
             service.Setup(x => x.GetUser(It.IsAny<int>())).Returns(new BusinessLogic.Entities.User()
@@ -76,19 +88,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockTemplateService.Object,
-                _mockUserTemplateService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -98,14 +104,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             SetupTemplateService(_mockTemplateService);
             SetupUserTemplateService(_mockUserTemplateService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockTemplateService.Object,
-                _mockUserTemplateService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(2);
+            var result = _viewModelBuilder.Build(2);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -118,14 +118,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             SetupTemplateService(_mockTemplateService);
             SetupUserTemplateService(_mockUserTemplateService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockTemplateService.Object,
-                _mockUserTemplateService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -138,14 +132,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             SetupUserService(_mockUserService);
             SetupTemplateService(_mockTemplateService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockTemplateService.Object,
-                _mockUserTemplateService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

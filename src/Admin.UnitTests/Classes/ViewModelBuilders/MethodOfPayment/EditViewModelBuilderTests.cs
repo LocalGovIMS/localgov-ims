@@ -6,15 +6,23 @@ using Moq;
 using ViewModel = Admin.Models.MethodOfPayment.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.MethodOfPayment.EditViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPayment
-
 {
     [TestClass]
     public class EditViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentService> _mockMopService = new Mock<IMethodOfPaymentService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockMopService.Object);
+        }
 
         private void SetupMopService(Mock<IMethodOfPaymentService> service)
         {
@@ -29,17 +37,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPayment
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -47,12 +51,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPayment
             // Arrange
             SetupMopService(_mockMopService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("M1");
+            var result = _viewModelBuilder.Build("M1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -62,12 +62,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPayment
         public void OnBuildWithParamReturnsViewModelIfDataIsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build("M1");
+            var result = _viewModelBuilder.Build("M1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

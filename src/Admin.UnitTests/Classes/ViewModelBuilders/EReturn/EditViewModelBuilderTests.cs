@@ -14,10 +14,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
     [TestClass]
     public class EditViewModelBuilderTests
     {
-
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IEReturnService> _mockEReturnService = new Mock<IEReturnService>();
         private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockEReturnService.Object,
+                _mockVatService.Object);
+        }
 
         private void SetupEReturnService(Mock<IEReturnService> service, EReturnStatus status, EReturnType type)
         {
@@ -74,19 +84,26 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
                 }));
         }
 
+        private void SetupVatService(Mock<IVatService> service)
+        {
+            service.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
+            {
+                new BusinessLogic.Entities.Vat()
+                {
+                    VatCode = "TEST",
+                    Percentage= 20
+                }
+            });
+        }
+
         [TestMethod]
         public void OnBuildReturnsNull()
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.New, EReturnType.Cash);
 
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                _mockVatService.Object);
-
             // Act
-            var result = viewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             //Assert
             result.Should().BeNull();
@@ -97,25 +114,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.New, EReturnType.Cash);
-
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-
-            mockVatService.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
-            {
-                new BusinessLogic.Entities.Vat()
-                {
-                    VatCode = "TEST",
-                    Percentage= 20
-                }
-            });
-
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                mockVatService.Object);
+            SetupVatService(_mockVatService);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
@@ -126,13 +128,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
 
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                _mockVatService.Object);
-
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
@@ -143,25 +140,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.Submitted, EReturnType.Cash);
-
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-
-            mockVatService.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
-            {
-                new BusinessLogic.Entities.Vat()
-                {
-                    VatCode = "TEST",
-                    Percentage= 20
-                }
-            });
-
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                mockVatService.Object);
+            SetupVatService(_mockVatService);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
@@ -172,25 +154,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.Submitted, EReturnType.Cash);
-
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-
-            mockVatService.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
-            {
-                new BusinessLogic.Entities.Vat()
-                {
-                    VatCode = "TEST",
-                    Percentage= 20
-                }
-            });
-
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                mockVatService.Object);
+            SetupVatService(_mockVatService);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
@@ -202,25 +169,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.InProgress, EReturnType.Cash);
-
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-
-            mockVatService.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
-            {
-                new BusinessLogic.Entities.Vat()
-                {
-                    VatCode = "TEST",
-                    Percentage= 20
-                }
-            });
-
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                mockVatService.Object);
+            SetupVatService(_mockVatService);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
@@ -232,25 +184,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             // Arrange
             SetupEReturnService(_mockEReturnService, EReturnStatus.InProgress, EReturnType.Cheque);
-
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-
-            mockVatService.Setup(x => x.GetAllCodes()).Returns(new List<BusinessLogic.Entities.Vat>()
-            {
-                new BusinessLogic.Entities.Vat()
-                {
-                    VatCode = "TEST",
-                    Percentage= 20
-                }
-            });
-
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockEReturnService.Object,
-                mockVatService.Object);
+            SetupVatService(_mockVatService);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeOfType<ViewModel>();

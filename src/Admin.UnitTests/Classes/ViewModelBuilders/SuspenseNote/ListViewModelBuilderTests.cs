@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.SuspenseNote
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ISuspenseNoteService> _mockSuspenseNoteService = new Mock<ISuspenseNoteService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockSuspenseNoteService.Object);
+        }
+
         private void SetupSuspenseNoteService(Mock<ISuspenseNoteService> service)
         {
             service.Setup(x => x.GetAll(It.IsAny<int>()))
@@ -33,12 +43,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.SuspenseNote
             // Arrange
             SetupSuspenseNoteService(_mockSuspenseNoteService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockSuspenseNoteService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -51,12 +57,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.SuspenseNote
             // Arrange
             SetupSuspenseNoteService(_mockSuspenseNoteService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockSuspenseNoteService.Object);
-
             // Act
-            var result = viewModelBuidler.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

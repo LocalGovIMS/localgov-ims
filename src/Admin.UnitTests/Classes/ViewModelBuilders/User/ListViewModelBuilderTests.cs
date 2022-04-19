@@ -16,6 +16,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserService.Object);
+        }
+
         private void SetupUserService(Mock<IUserService> service, int page)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.User.SearchCriteria>())).Returns(new SearchResult<BusinessLogic.Entities.User>()
@@ -40,17 +50,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
             // Arrange
             SetupUserService(_mockUserService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -58,12 +63,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
             // Arrange
             SetupUserService(_mockUserService, 0);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object);
-
             // Act
-            var result = viewModelBuidler.Build(new Admin.Models.User.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.User.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -75,12 +76,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
             // Arrange
             SetupUserService(_mockUserService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object);
-
             // Act
-            var result = viewModelBuidler.Build(new Admin.Models.User.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.User.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

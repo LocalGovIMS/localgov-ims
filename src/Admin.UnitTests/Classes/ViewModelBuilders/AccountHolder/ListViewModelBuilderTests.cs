@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using ViewModel = Admin.Models.AccountHolder.ListViewModel;
+using ViewModelBuilder = Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder;
 
 namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
 {
@@ -16,6 +18,17 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IAccountHolderService> _mockAccountHolderService = new Mock<IAccountHolderService>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+               _mockLogger.Object,
+               _mockAccountHolderService.Object,
+               _mockFundService.Object);
+        }
 
         private void SetupAccountHolderService(Mock<IAccountHolderService> service)
         {
@@ -119,112 +132,47 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         public void OnBuildWithParamsPageIs0ReturnsViewModel()
         {
             // Arrange
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-            Mock<IFundService> mockFundService = new Mock<IFundService>();
+            SetupAccountHolderService(_mockAccountHolderService);
+            SetupFundService(_mockFundService);
             
-            SetupAccountHolderService(acountHolderService);
-            SetupFundService(mockFundService);
-
-            var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object,
-                mockFundService.Object);
+            var searchCriteria = GetSearchCriteriaPopulated();
+            searchCriteria.Page = 0;
 
             // Act
-            var result = viewModelBuilder.Build(new Admin.Models.AccountHolder.SearchCriteria()
-            {
-                AccountReference = "775326912",
-                FundCode = "23",
-                HouseNumberName = "1",
-                Page = 0,
-                PostCode = "S73 0PS",
-                Street = "SCHOOL STREET",
-                Surname = "HARTLEY"
-            });
+            var result = _viewModelBuilder.Build(searchCriteria);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Admin.Models.AccountHolder.ListViewModel));
+            Assert.IsInstanceOfType(result, typeof(ViewModel));
         }
 
         [TestMethod]
         public void OnBuildWithParamsPageIs1ReturnsViewModel()
         {
             // Arrange
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-            Mock<IFundService> mockFundService = new Mock<IFundService>();
-
-            SetupAccountHolderService(acountHolderService);
-            SetupFundService(mockFundService);
-
-            var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object,
-                mockFundService.Object);
+            SetupAccountHolderService(_mockAccountHolderService);
+            SetupFundService(_mockFundService);
 
             // Act
-            var result = viewModelBuilder.Build(GetSearchCriteriaPopulated());
+            var result = _viewModelBuilder.Build(GetSearchCriteriaPopulated());
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Admin.Models.AccountHolder.ListViewModel));
+            Assert.IsInstanceOfType(result, typeof(ViewModel));
         }
 
         [TestMethod]
         public void OnBuildReturnsViewModel()
         {
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-            SetupAccountHolderService(acountHolderService);
+            // Arrange
+            SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
 
-            var viewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.ListViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object,
-                _mockFundService.Object);
-
             // Act
-            var result = viewModelBuilder.Build();
-            result.Should().BeOfType(typeof(Admin.Models.AccountHolder.ListViewModel)).And.Subject.Should().NotBeNull();
+            var result = _viewModelBuilder.Build();
+
+            // Assert
+            result.Should().BeOfType(typeof(ViewModel)).And.Subject.Should().NotBeNull();
         }
-
-        //[TestMethod]
-        //public void OnBuildReturnsViewModelWithAccountHolder()
-        //{
-        //    // Arrange
-        //    Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-        //    SetupAccountHolderService(acountHolderService);
-
-        //    var detailsViewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.DetailsViewModelBuilder(
-        //        _mockLogger.Object,
-        //        acountHolderService.Object);
-
-        //    // Act
-        //    var result = detailsViewModelBuilder.Build("123");
-
-        //    // Assert
-        //    Assert.IsNotNull(result);
-        //    Assert.IsNotNull(((Admin.Models.AccountHolder.DetailsViewModel)result).AccountHolder);
-        //}
-
-        //[TestMethod]
-        //public void OnBuildReturnsNull()
-        //{
-        //    // Arrange
-        //    Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-        //    SetupAccountHolderService(acountHolderService);
-
-        //    var detailsViewModelBuilder = new Admin.Classes.ViewModelBuilders.AccountHolder.DetailsViewModelBuilder(
-        //        _mockLogger.Object,
-        //        acountHolderService.Object);
-
-        //    // Act
-        //    var result = detailsViewModelBuilder.Build();
-
-        //    // Assert
-        //    Assert.IsNull(result);
-        //}
     }
 }

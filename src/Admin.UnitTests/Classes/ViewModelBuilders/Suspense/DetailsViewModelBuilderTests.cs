@@ -15,10 +15,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ISuspenseService> _mockSuspenseService = new Mock<ISuspenseService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockSuspenseService.Object);
+        }
+
         private void SetupSuspenseService(Mock<ISuspenseService> service)
         {
-            service.Setup(x => x.GetSuspense(It.IsAny<int>())).Returns(new SuspenseWrapper(
-                new BusinessLogic.Entities.Suspense()
+            service.Setup(x => x.GetSuspense(It.IsAny<int>()))
+                .Returns(new SuspenseWrapper(new BusinessLogic.Entities.Suspense()
                 {
                     Id = 1
                 }
@@ -29,17 +39,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var listViewModelBuilder = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockSuspenseService.Object);
 
             // Act
-            var result = listViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -47,11 +53,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
             // Arrange
             SetupSuspenseService(_mockSuspenseService);
 
-            var listViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockSuspenseService.Object);
-
-            var result = listViewModelBuilder.Build(1);
+            // Act
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

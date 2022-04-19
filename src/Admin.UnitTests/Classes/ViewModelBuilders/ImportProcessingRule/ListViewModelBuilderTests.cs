@@ -16,6 +16,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IImportProcessingRuleService> _mockImportProcessingRuleService = new Mock<IImportProcessingRuleService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockImportProcessingRuleService.Object);
+        }
+
         private void SetupService(Mock<IImportProcessingRuleService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.ImportProcessingRule.SearchCriteria>())).Returns(
@@ -40,12 +50,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
             // Arrange
             SetupService(_mockImportProcessingRuleService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType<ViewModel>();
@@ -58,12 +64,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
             // Arrange
             SetupService(_mockImportProcessingRuleService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(new Models.ImportProcessingRule.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.ImportProcessingRule.SearchCriteria());
 
             // Assert
             result.Should().BeOfType<ViewModel>();

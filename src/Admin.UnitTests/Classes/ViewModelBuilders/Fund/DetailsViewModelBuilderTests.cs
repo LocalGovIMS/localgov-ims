@@ -14,6 +14,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundService.Object);
+        }
+
         private void SetupFundService(Mock<IFundService> service)
         {
             service.Setup(x => x.GetByFundCode(It.IsAny<string>())).Returns(
@@ -27,17 +37,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockFundService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -45,11 +51,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             // Arrange
             SetupFundService(_mockFundService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object);
-
-            var result = viewModelBuidler.Build("Ref");
+            // Act
+            var result = _viewModelBuilder.Build("Ref");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using ViewModel = Admin.Models.AccountHolder.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.AccountHolder.EditViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
-
 {
     [TestClass]
     public class EditViewModelBuilderTests
@@ -18,6 +16,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         private readonly Mock<IAccountHolderService> _mockAccountHolderService = new Mock<IAccountHolderService>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
         private readonly Mock<IStopMessageService> _mockStopMessageService = new Mock<IStopMessageService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+               _mockLogger.Object,
+               _mockAccountHolderService.Object,
+               _mockFundService.Object,
+               _mockStopMessageService.Object);
+        }
 
         private void SetupAccountHolderService(Mock<IAccountHolderService> service)
         {
@@ -62,14 +72,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -83,14 +87,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -105,14 +103,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -126,15 +118,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -148,15 +133,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -170,15 +148,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -193,15 +164,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             SetupFundService(_mockFundService);
             SetupStopMessageService(_mockStopMessageService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockAccountHolderService.Object,
-                _mockFundService.Object,
-                _mockStopMessageService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
