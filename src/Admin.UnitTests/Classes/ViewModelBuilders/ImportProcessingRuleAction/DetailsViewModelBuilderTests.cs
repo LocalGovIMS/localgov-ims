@@ -14,6 +14,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleAction
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IImportProcessingRuleActionService> _mockImportProcessingRuleActionService = new Mock<IImportProcessingRuleActionService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockImportProcessingRuleActionService.Object);
+        }
+
         private void SetupService(Mock<IImportProcessingRuleActionService> service)
         {
             service.Setup(x => x.Get(It.IsAny<int>())).Returns(
@@ -34,12 +44,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleAction
         public void Build_without_an_Id_returns_null()
         {
             // Arrange
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockImportProcessingRuleActionService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -51,11 +58,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleAction
             // Arrange
             SetupService(_mockImportProcessingRuleActionService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleActionService.Object);
-
-            var result = viewModelBuidler.Build(1);
+            // Act
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -67,11 +71,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleAction
             // Arrange
             SetupService(_mockImportProcessingRuleActionService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleActionService.Object);
-
-            var result = viewModelBuidler.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.FieldName.Should().Be("Test display name");

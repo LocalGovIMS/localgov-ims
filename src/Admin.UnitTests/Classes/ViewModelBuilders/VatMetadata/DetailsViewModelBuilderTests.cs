@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IVatMetadataService> _mockVatMetadataService = new Mock<IVatMetadataService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockVatMetadataService.Object);
+        }
+
         private void SetupService(Mock<IVatMetadataService> service)
         {
             service.Setup(x => x.Get(It.IsAny<int>())).Returns(
@@ -41,12 +51,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         public void Build_without_an_Id_returns_null()
         {
             // Arrange
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockVatMetadataService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -58,11 +65,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
             // Arrange
             SetupService(_mockVatMetadataService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockVatMetadataService.Object);
-
-            var result = viewModelBuidler.Build(1);
+            // Act
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

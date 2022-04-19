@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using ViewModel = Admin.Models.Fund.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.Fund.EditViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
-
 {
     [TestClass]
     public class EditViewModelBuilderTests
@@ -18,6 +16,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
         private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
         private readonly Mock<IAccountReferenceValidatorService> _mockAccountReferenceValidatorService = new Mock<IAccountReferenceValidatorService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundService.Object,
+                _mockVatService.Object,
+                _mockAccountReferenceValidatorService.Object);
+        }
 
         private void SetupFundService(Mock<IFundService> service)
         {
@@ -61,19 +71,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -83,15 +87,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             SetupVatService(_mockVatService);
             SetupAccountReferenceValidatorService(_mockAccountReferenceValidatorService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -103,14 +100,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             // Arrange
             SetupVatService(_mockVatService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("F1");
+            var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -124,15 +115,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             SetupVatService(_mockVatService);
             SetupAccountReferenceValidatorService(_mockAccountReferenceValidatorService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -146,15 +130,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             SetupVatService(_mockVatService);
             SetupAccountReferenceValidatorService(_mockAccountReferenceValidatorService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -169,15 +146,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             SetupVatService(_mockVatService);
             SetupAccountReferenceValidatorService(_mockAccountReferenceValidatorService);
 
-            // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object,
-                _mockVatService.Object,
-                _mockAccountReferenceValidatorService.Object);
-
             // Act
-            var result = editViewModelBuilder.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

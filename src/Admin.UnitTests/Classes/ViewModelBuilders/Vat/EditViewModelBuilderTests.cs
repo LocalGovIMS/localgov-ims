@@ -16,6 +16,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Vat
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockVatService.Object);
+        }
+
         private void SetupMopService(Mock<IVatService> service)
         {
             service.Setup(x => x.GetByVatCode(It.IsAny<string>())).Returns(
@@ -29,17 +39,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Vat
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockVatService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -47,12 +53,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Vat
             // Arrange
             SetupMopService(_mockVatService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockVatService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build("V1");
+            var result = _viewModelBuilder.Build("V1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -62,12 +64,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Vat
         public void OnBuildWithParamReturnsViewModelIfDataIsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockVatService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build("V1");
+            var result = _viewModelBuilder.Build("V1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

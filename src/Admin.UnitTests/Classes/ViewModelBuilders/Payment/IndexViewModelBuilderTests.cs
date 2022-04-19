@@ -4,6 +4,8 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using ViewModel = Admin.Models.Payment.IndexViewModel;
+using ViewModelBuilder = Admin.Classes.ViewModelBuilders.Payment.IndexViewModelBuilder;
 
 namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
 {
@@ -11,7 +13,23 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
     public class IndexViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
+        private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
+        private readonly Mock<IUserPostPaymentMopCodeService> _mockUserPostPaymentMopCodeService = new Mock<IUserPostPaymentMopCodeService>();
         private readonly Mock<ISecurityContext> _mockSecurityContext = new Mock<ISecurityContext>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundService.Object,
+                _mockVatService.Object,
+                _mockUserPostPaymentMopCodeService.Object,
+                _mockSecurityContext.Object);
+        }
 
         private void SetupFundService(Mock<IFundService> mockFundService)
         {
@@ -58,45 +76,30 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
         [TestMethod]
         public void PaymentsIndexViewModelBuilderOnBuildReturnsModel()
         {
-            Mock<IFundService> mockFundService = new Mock<IFundService>();
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-            Mock<IUserPostPaymentMopCodeService> mockUserPostPaymentMopCodeService = new Mock<IUserPostPaymentMopCodeService>();
+            // Arrange
+            SetupFundService(_mockFundService);
+            SetupVatSerivce(_mockVatService);
+            SetupUserPostPaymentMopCodeSerivce(_mockUserPostPaymentMopCodeService);
 
-            SetupFundService(mockFundService);
-            SetupVatSerivce(mockVatService);
-            SetupUserPostPaymentMopCodeSerivce(mockUserPostPaymentMopCodeService);
+            // Act
+            var result = _viewModelBuilder.Build();
 
-            var indexViewModelBuilder = new Admin.Classes.ViewModelBuilders.Payment.IndexViewModelBuilder(
-                _mockLogger.Object,
-                mockFundService.Object,
-                mockVatService.Object,
-                mockUserPostPaymentMopCodeService.Object,
-                _mockSecurityContext.Object);
-
-            var result = indexViewModelBuilder.Build();
+            // Assert
             result.VatCodes.ToSelectList().Count.Should().Be(1);
         }
 
         [TestMethod]
         public void PaymentsIndexViewModelBuilderOnBuildPopulatesModel()
         {
-            Mock<IFundService> mockFundService = new Mock<IFundService>();
-            Mock<IVatService> mockVatService = new Mock<IVatService>();
-            Mock<IUserPostPaymentMopCodeService> mockUserPostPaymentMopCodeService = new Mock<IUserPostPaymentMopCodeService>();
+            // Arrange
+            SetupFundService(_mockFundService);
+            SetupVatSerivce(_mockVatService);
+            SetupUserPostPaymentMopCodeSerivce(_mockUserPostPaymentMopCodeService);
 
-            SetupFundService(mockFundService);
-            SetupVatSerivce(mockVatService);
-            SetupUserPostPaymentMopCodeSerivce(mockUserPostPaymentMopCodeService);
+            // Act
+            var result = _viewModelBuilder.Build(new ViewModel());
 
-            var indexViewModelBuilder = new Admin.Classes.ViewModelBuilders.Payment.IndexViewModelBuilder(
-                _mockLogger.Object,
-                mockFundService.Object,
-                mockVatService.Object,
-                mockUserPostPaymentMopCodeService.Object,
-                _mockSecurityContext.Object);
-
-            var result = indexViewModelBuilder.Build(new Admin.Models.Payment.IndexViewModel());
-
+            // Assert
             result.VatCodes.ToSelectList().Count.Should().Be(1);
         }
     }

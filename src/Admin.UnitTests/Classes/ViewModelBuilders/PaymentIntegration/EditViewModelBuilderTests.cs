@@ -6,15 +6,23 @@ using Moq;
 using ViewModel = Admin.Models.PaymentIntegration.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.PaymentIntegration.EditViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
-
 {
     [TestClass]
     public class EditViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IPaymentIntegrationService> _mockMopService = new Mock<IPaymentIntegrationService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockMopService.Object);
+        }
 
         private void SetupMopService(Mock<IPaymentIntegrationService> service)
         {
@@ -29,12 +37,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -47,12 +52,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
             // Arrange
             SetupMopService(_mockMopService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -62,12 +63,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
         public void OnBuildWithParamReturnsViewModelIfDataIsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

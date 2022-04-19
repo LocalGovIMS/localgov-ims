@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserFundGroupService> _mockUserFundGroupService = new Mock<IUserFundGroupService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserFundGroupService.Object);
+        }
+
         private void SetupUserFundGroupService(Mock<IUserFundGroupService> service)
         {
             service.Setup(x => x.GetUserFundGroups(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserFundGroup>()
@@ -44,17 +54,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var listViewModelBuilder = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockUserFundGroupService.Object);
 
             // Act
-            var result = listViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -62,11 +68,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
             // Arrange
             SetupUserFundGroupService(_mockUserFundGroupService);
 
-            var listViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserFundGroupService.Object);
-
-            var result = listViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

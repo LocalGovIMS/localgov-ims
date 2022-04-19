@@ -19,6 +19,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
         private readonly Mock<IRoleService> _mockRoleService = new Mock<IRoleService>();
         private readonly Mock<IUserRoleService> _mockUserRoleService = new Mock<IUserRoleService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserService.Object,
+                _mockRoleService.Object,
+                _mockUserRoleService.Object);
+        }
+
         private void SetupUserService(Mock<IUserService> service)
         {
             service.Setup(x => x.GetUser(It.IsAny<int>())).Returns(new BusinessLogic.Entities.User()
@@ -86,19 +98,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockRoleService.Object,
-                _mockUserRoleService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -108,14 +114,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
             SetupRoleService(_mockRoleService);
             SetupUserRoleService(_mockUserRoleService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockRoleService.Object,
-                _mockUserRoleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(2);
+            var result = _viewModelBuilder.Build(2);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -128,14 +128,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
             SetupRoleService(_mockRoleService);
             SetupUserRoleService(_mockUserRoleService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockRoleService.Object,
-                _mockUserRoleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -148,14 +142,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
             SetupUserService(_mockUserService);
             SetupRoleService(_mockRoleService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockRoleService.Object,
-                _mockUserRoleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

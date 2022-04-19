@@ -16,6 +16,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundService.Object);
+        }
+
         private void SetupFundService(Mock<IFundService> service, int page)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.Fund.SearchCriteria>())).Returns(new SearchResult<BusinessLogic.Entities.Fund>()
@@ -40,17 +50,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             // Arrange
             SetupFundService(_mockFundService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -58,12 +63,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             // Arrange
             SetupFundService(_mockFundService, 0);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object);
-
             // Act
-            var result = viewModelBuidler.Build(new Admin.Models.Fund.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Fund.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -75,12 +76,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Fund
             // Arrange
             SetupFundService(_mockFundService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundService.Object);
-
             // Act
-            var result = viewModelBuidler.Build(new Admin.Models.Fund.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Fund.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

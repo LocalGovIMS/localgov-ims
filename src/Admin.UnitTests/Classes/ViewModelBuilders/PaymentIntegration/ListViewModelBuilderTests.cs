@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IPaymentIntegrationService> _mockMopService = new Mock<IPaymentIntegrationService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockMopService.Object);
+        }
+
         private void SetupMopService(Mock<IPaymentIntegrationService> service)
         {
             service.Setup(x => x.GetAll()).Returns(
@@ -36,12 +46,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
             // Arrange
             SetupMopService(_mockMopService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType<List<ViewModel>>();
@@ -51,12 +57,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
         public void OnBuildWithNoDataReturnsNull()
         {
             // Arrange          
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -66,12 +69,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.PaymentIntegration
         public void OnBuildWithParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMopService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeNull();

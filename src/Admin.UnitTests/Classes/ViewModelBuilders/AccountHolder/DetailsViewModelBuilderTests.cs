@@ -5,6 +5,8 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
+using ViewModel = Admin.Models.AccountHolder.DetailsViewModel;
+using ViewModelBuilder = Admin.Classes.ViewModelBuilders.AccountHolder.DetailsViewModelBuilder;
 
 namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
 {
@@ -13,6 +15,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
     public class DetailsViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        private readonly Mock<IAccountHolderService> _mockAccountHolderService = new Mock<IAccountHolderService>();
+
         private readonly BusinessLogic.Entities.AccountHolder _accountHolder = new BusinessLogic.Entities.AccountHolder()
             {
                 AccountReference = "123",
@@ -44,7 +48,17 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 UserField2 = string.Empty,
                 UserField3 = string.Empty
             };
-        
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+               _mockLogger.Object,
+               _mockAccountHolderService.Object);
+        }
+
         private void SetupAccountHolderService(Mock<IAccountHolderService> service)
         {
             service.Setup(x => x.GetByAccountReference(It.IsAny<string>()))
@@ -55,40 +69,28 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         public void OnBuildReturnsViewModel()
         {
             // Arrange
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-            SetupAccountHolderService(acountHolderService);
-
-            var detailsViewModelBuilder = new DetailsViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object);
+            SetupAccountHolderService(_mockAccountHolderService);
 
             // Act
-            var result = detailsViewModelBuilder.Build(new DetailsViewModelBuilderArgs() { AccountReference = "123" });
+            var result = _viewModelBuilder.Build(new DetailsViewModelBuilderArgs() { AccountReference = "123" });
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Models.AccountHolder.DetailsViewModel));
+            Assert.IsInstanceOfType(result, typeof(ViewModel));
         }
 
         [TestMethod]
         public void OnBuildSetupsViewModelPropertiesAsExpected()
         {
             // Arrange
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-            SetupAccountHolderService(acountHolderService);
-
-            var detailsViewModelBuilder = new DetailsViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object);
+            SetupAccountHolderService(_mockAccountHolderService);
 
             // Act
-            var result = detailsViewModelBuilder.Build(new DetailsViewModelBuilderArgs() { AccountReference = "123" });
+            var result = _viewModelBuilder.Build(new DetailsViewModelBuilderArgs() { AccountReference = "123" });
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Models.AccountHolder.DetailsViewModel));
+            Assert.IsInstanceOfType(result, typeof(ViewModel));
             Assert.AreEqual(result.AccountReference, _accountHolder.AccountReference);
             Assert.AreEqual(result.Address, _accountHolder.Address());
             Assert.AreEqual(result.AddressLine1, _accountHolder.AddressLine1);
@@ -120,16 +122,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         public void OnBuildReturnsNull()
         {
             // Arrange
-            Mock<IAccountHolderService> acountHolderService = new Mock<IAccountHolderService>();
-
-            SetupAccountHolderService(acountHolderService);
-
-            var detailsViewModelBuilder = new DetailsViewModelBuilder(
-                _mockLogger.Object,
-                acountHolderService.Object);
+            SetupAccountHolderService(_mockAccountHolderService);
 
             // Act
-            var result = detailsViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             Assert.IsNull(result);

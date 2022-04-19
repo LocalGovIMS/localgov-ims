@@ -14,6 +14,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IImportProcessingRuleConditionService> _mockImportProcessingRuleConditionService = new Mock<IImportProcessingRuleConditionService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockImportProcessingRuleConditionService.Object);
+        }
+
         private void SetupService(Mock<IImportProcessingRuleConditionService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.ImportProcessingRuleCondition.SearchCriteria>())).Returns(
@@ -45,12 +55,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupService(_mockImportProcessingRuleConditionService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType<ViewModel>();
@@ -63,12 +69,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupService(_mockImportProcessingRuleConditionService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(new Models.ImportProcessingRuleCondition.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.ImportProcessingRuleCondition.SearchCriteria());
 
             // Assert
             result.Should().BeOfType<ViewModel>();

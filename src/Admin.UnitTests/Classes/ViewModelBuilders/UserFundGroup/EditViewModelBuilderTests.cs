@@ -18,6 +18,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
         private readonly Mock<IFundGroupService> _mockFundGroupService = new Mock<IFundGroupService>();
         private readonly Mock<IUserFundGroupService> _mockUserFundGroupService = new Mock<IUserFundGroupService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserService.Object,
+                _mockFundGroupService.Object,
+                _mockUserFundGroupService.Object);
+        }
+
         private void SetupUserService(Mock<IUserService> service)
         {
             service.Setup(x => x.GetUser(It.IsAny<int>())).Returns(new BusinessLogic.Entities.User()
@@ -85,14 +97,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockFundGroupService.Object,
-                _mockUserFundGroupService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -107,14 +114,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
             SetupFundGroupService(_mockFundGroupService);
             SetupUserFundGroupService(_mockUserFundGroupService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockFundGroupService.Object,
-                _mockUserFundGroupService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(2);
+            var result = _viewModelBuilder.Build(2);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -127,14 +128,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
             SetupFundGroupService(_mockFundGroupService);
             SetupUserFundGroupService(_mockUserFundGroupService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockFundGroupService.Object,
-                _mockUserFundGroupService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -147,14 +142,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
             SetupUserService(_mockUserService);
             SetupFundGroupService(_mockFundGroupService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserService.Object,
-                _mockFundGroupService.Object,
-                _mockUserFundGroupService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

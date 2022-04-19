@@ -8,15 +8,23 @@ using System.Collections.Generic;
 using ViewModel = Admin.Models.MethodOfPaymentMetadata.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata.CreateViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
-
 {
     [TestClass]
     public class CreateViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentMetadataService> _mockMethodOfPaymentMetadataService = new Mock<IMethodOfPaymentMetadataService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockMethodOfPaymentMetadataService.Object);
+        }
 
         private void SetupServices()
         {
@@ -35,17 +43,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         public void Build_without_arguments_returns_null()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMethodOfPaymentMetadataService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void Build_with_arguments_returns_a_view_model()
@@ -53,12 +57,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockMethodOfPaymentMetadataService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(new CreateViewModelBuilderArgs() { MopCode = "M1" });
+            var result = _viewModelBuilder.Build(new CreateViewModelBuilderArgs() { MopCode = "M1" });
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

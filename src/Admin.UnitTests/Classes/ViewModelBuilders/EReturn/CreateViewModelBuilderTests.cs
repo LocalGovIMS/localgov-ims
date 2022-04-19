@@ -11,10 +11,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
     [TestClass]
     public class CreateViewModelBuilderTests
     {
-
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ITemplateService> _mockTemplateService = new Mock<ITemplateService>();
         private readonly Mock<IEReturnTypeService> _mockEReturnTypeService = new Mock<IEReturnTypeService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockTemplateService.Object,
+                _mockEReturnTypeService.Object);
+        }
 
         private void SetupTemplateService(Mock<ITemplateService> service)
         {
@@ -47,30 +57,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
             SetupTemplateService(_mockTemplateService);
             SetupEReturnTypeService(_mockEReturnTypeService);
 
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTemplateService.Object,
-                _mockEReturnTypeService.Object);
-
             // Act
-            var result = viewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             //Assert
             result.Should().BeOfType<ViewModel>();
         }
 
-
         [TestMethod]
         public void BuildIssueReturnsNull()
         {
             // Arrange
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTemplateService.Object,
-                _mockEReturnTypeService.Object);
 
             // Act
-            var result = viewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             //Assert
             result.Should().BeNull();
@@ -80,13 +80,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         public void OnBuildWithParamReturnsNull()
         {
             // Arrange
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTemplateService.Object,
-                _mockEReturnTypeService.Object);
 
             // Act
-            var result = viewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             //Assert
             result.Should().BeNull();
@@ -99,18 +95,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
             SetupTemplateService(_mockTemplateService);
             SetupEReturnTypeService(_mockEReturnTypeService);
 
-            var viewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTemplateService.Object,
-                _mockEReturnTypeService.Object);
-
             var model = new ViewModel()
             {
                 TemplateId = 987
             };
 
             // Act
-            var result = viewModelBuilder.Rebuild(model);
+            var result = _viewModelBuilder.Rebuild(model);
 
             //Assert
             result.Should().BeOfType<ViewModel>();
