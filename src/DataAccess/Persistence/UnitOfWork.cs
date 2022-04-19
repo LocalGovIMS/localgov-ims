@@ -23,6 +23,7 @@ namespace DataAccess.Persistence
         public IAccountHolderRepository AccountHolders { get; private set; }
         public IAccountReferenceValidatorRepository AccountReferenceValidators { get; private set; }
         public IActivityLogRepository ActivityLogs { get; private set; }
+        public ICheckDigitConfigurationRepository CheckDigitConfigurations { get; private set; }
         public IEReturnRepository EReturns { get; private set; }
         public IEReturnCashRepository EReturnCashes { get; private set; }
         public IEReturnChequeRepository EReturnCheques { get; private set; }
@@ -67,6 +68,7 @@ namespace DataAccess.Persistence
             IAccountHolderRepository accountHolderRepository,
             IAccountReferenceValidatorRepository accountReferenceValidatorRepository,
             IActivityLogRepository activityLogRepository,
+            ICheckDigitConfigurationRepository checkDigitConfigurationRepository,
             IEReturnRepository eReturnRepository,
             IEReturnCashRepository eReturnCashesRepository,
             IEReturnChequeRepository eReturnChequesRepository,
@@ -112,6 +114,7 @@ namespace DataAccess.Persistence
             AccountHolders = accountHolderRepository;
             AccountReferenceValidators = accountReferenceValidatorRepository;
             ActivityLogs = activityLogRepository;
+            CheckDigitConfigurations = checkDigitConfigurationRepository;
             EReturns = eReturnRepository;
             EReturnCashes = eReturnCashesRepository;
             EReturnCheques = eReturnChequesRepository;

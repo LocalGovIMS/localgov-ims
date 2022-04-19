@@ -153,6 +153,20 @@
             </a>
         </div>
     }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "CheckDigitConfiguration")">
+                <div class="content">
+                    <div class="header">Check Digit Configurations</div>
+                    <div class="description">
+                        <p>Check digit configurations</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
 </div>
 
 <h2 class="ui dividing header">

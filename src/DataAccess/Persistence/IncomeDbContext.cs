@@ -22,6 +22,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<AccountReferenceValidator> AccountReferenceValidators { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
+        public virtual DbSet<CheckDigitConfiguration> CheckDigitConfigurations { get; set; }
         public virtual DbSet<EmailLog> EmailLogs { get; set; }
         public virtual DbSet<EReturn> EReturns { get; set; }
         public virtual DbSet<EReturnCash> EReturnCashes { get; set; }

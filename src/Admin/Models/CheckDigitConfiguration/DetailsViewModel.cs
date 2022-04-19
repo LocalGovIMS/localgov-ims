@@ -1,35 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BusinessLogic.Entities
+namespace Admin.Models.CheckDigitConfiguration
 {
-    public partial class CheckDigitConfiguration
+    public class DetailsViewModel
     {
-        public CheckDigitConfiguration()
-        {
-            AccountReferenceValidators = new HashSet<AccountReferenceValidator>();
-        }
-
         public int Id { get; set; }
 
-        [StringLength(100)]
         public string Name { get; set; }
 
-        public int Type { get; set; }
+        public BusinessLogic.Enums.CheckDigitType Type { get; set; }
+
+        public string TypeName { get; set; }
 
         public short Modulus { get; set; }
 
+        [DisplayName("Source substitutions")]
         [StringLength(20)]
         public string SourceSubstitutions { get; set; }
 
         [StringLength(30)]
         public string Weightings { get; set; }
 
+        [DisplayName("Result substitutions")]
         [StringLength(20)]
         public string ResultSubstitutions { get; set; }
 
+        [DisplayName("Apply subtraction")]
         public bool ApplySubtraction { get; set; }
-
-        public virtual ICollection<AccountReferenceValidator> AccountReferenceValidators { get; set; }
     }
 }

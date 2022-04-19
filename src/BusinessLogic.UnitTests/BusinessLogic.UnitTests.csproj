@@ -190,6 +190,12 @@
     <Compile Include="Services\EReturn\CreateTests.cs" />
     <Compile Include="Services\EReturn\SearchTests.cs" />
     <Compile Include="Services\EReturn\GetEReturnTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\BaseCheckDigitConfigurationTest.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\CreateTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\GetAllFundsTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\GetTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\SearchTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\UpdateTests.cs" />
     <Compile Include="Services\FundGroup\BaseFundGroupTest.cs" />
     <Compile Include="Services\FundGroup\RemoveTests.cs" />
     <Compile Include="Services\FundGroup\CreateTests.cs" />

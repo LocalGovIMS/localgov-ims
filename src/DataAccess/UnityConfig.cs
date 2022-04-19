@@ -17,6 +17,7 @@ namespace DataAccess
                 .RegisterType<IAccountHolderRepository, AccountHolderRepository>()
                 .RegisterType<IAccountReferenceValidatorRepository, AccountReferenceValidatorRepository>()
                 .RegisterType<IActivityLogRepository, ActivityLogRepository>()
+                .RegisterType<ICheckDigitConfigurationRepository, CheckDigitConfigurationRepository>()
                 .RegisterType<IEReturnRepository, EReturnRepository>()
                 .RegisterType<IEReturnCashRepository, EReturnCashRepository>()
                 .RegisterType<IEReturnChequeRepository, EReturnChequeRepository>()
