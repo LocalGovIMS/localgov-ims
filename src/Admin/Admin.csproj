@@ -203,6 +203,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Classes\Attributes\Security\UserDisabledCheckActionFilterAttribute.cs" />
+    <Compile Include="Classes\Commands\AccountReferenceValidator\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\AccountReferenceValidator\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\AccountReferenceValidator\EditCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\CreateCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommand.cs" />
@@ -277,6 +280,9 @@
     <Compile Include="Classes\Commands\User\CreateCommand.cs" />
     <Compile Include="Classes\Commands\User\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\EditCommand.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountReferenceValidator\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountReferenceValidator\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\AccountReferenceValidator\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\ListViewModelBuilder.cs" />
@@ -312,8 +318,11 @@
     <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountReferenceValidatorController.cs" />
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\AccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\CheckDigitConfigurationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IAccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ICheckDigitConfigurationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
@@ -474,6 +483,10 @@
     <Compile Include="Models\AccountHolder\LookupViewModel.cs" />
     <Compile Include="Models\AccountHolder\SearchCriteria.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
+    <Compile Include="Models\AccountReferenceValidator\DetailsViewModel.cs" />
+    <Compile Include="Models\AccountReferenceValidator\EditViewModel.cs" />
+    <Compile Include="Models\AccountReferenceValidator\ListViewModel.cs" />
+    <Compile Include="Models\AccountReferenceValidator\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\ListViewModel.cs" />
     <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
     <Compile Include="Models\EReturn\CreateViewModel.cs" />
@@ -1612,6 +1625,11 @@
     <Content Include="Views\CheckDigitConfiguration\Edit.cshtml" />
     <Content Include="Views\CheckDigitConfiguration\List.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\AccountReferenceValidator\_Search.cshtml" />
+    <Content Include="Views\AccountReferenceValidator\Create.cshtml" />
+    <Content Include="Views\AccountReferenceValidator\Details.cshtml" />
+    <Content Include="Views\AccountReferenceValidator\Edit.cshtml" />
+    <Content Include="Views\AccountReferenceValidator\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

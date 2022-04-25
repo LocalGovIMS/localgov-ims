@@ -181,8 +181,12 @@
     <Compile Include="Services\AccountHolder\GetByAccountReferenceStringStringTests.cs" />
     <Compile Include="Services\AccountHolder\CreateAccountHolderTests.cs" />
     <Compile Include="Services\AccountReferenceValidator\BaseAccountReferenceValidatorTest.cs" />
+    <Compile Include="Services\AccountReferenceValidator\CreateTests.cs" />
     <Compile Include="Services\AccountReferenceValidator\GetAllTests.cs" />
     <Compile Include="Services\AccountReferenceValidator\GetByFundCodeTests.cs" />
+    <Compile Include="Services\AccountReferenceValidator\GetTests.cs" />
+    <Compile Include="Services\AccountReferenceValidator\SearchTests.cs" />
+    <Compile Include="Services\AccountReferenceValidator\UpdateTests.cs" />
     <Compile Include="Services\EReturn\BaseTest.cs" />
     <Compile Include="Services\EReturn\ApproveTests.cs" />
     <Compile Include="Services\EReturn\SubmitTests.cs" />
@@ -192,7 +196,7 @@
     <Compile Include="Services\EReturn\GetEReturnTests.cs" />
     <Compile Include="Services\CheckDigitConfiguration\BaseCheckDigitConfigurationTest.cs" />
     <Compile Include="Services\CheckDigitConfiguration\CreateTests.cs" />
-    <Compile Include="Services\CheckDigitConfiguration\GetAllFundsTests.cs" />
+    <Compile Include="Services\CheckDigitConfiguration\GetAllTests.cs" />
     <Compile Include="Services\CheckDigitConfiguration\GetTests.cs" />
     <Compile Include="Services\CheckDigitConfiguration\SearchTests.cs" />
     <Compile Include="Services\CheckDigitConfiguration\UpdateTests.cs" />

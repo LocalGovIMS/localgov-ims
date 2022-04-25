@@ -274,6 +274,14 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.CheckDigitConfiguration.DeleteCommand>("CheckDigitConfiguration.Command.Delete")
+
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.DetailsViewModel, int>, ViewModelBuilders.AccountReferenceValidator.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.EditViewModel, int>, ViewModelBuilders.AccountReferenceValidator.EditViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.EditViewModel, int>, ViewModelBuilders.AccountReferenceValidator.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.ListViewModel, ViewModels.AccountReferenceValidator.SearchCriteria>, ViewModelBuilders.AccountReferenceValidator.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.AccountReferenceValidator.DeleteCommand>("AccountReferenceValidator.Command.Delete")
                 ;
         }
 
@@ -281,6 +289,7 @@ namespace Admin
         {
             container
                 .RegisterType<IAccountHolderControllerDependencies, AccountHolderControllerDependencies>()
+                .RegisterType<IAccountReferenceValidatorControllerDependencies, AccountReferenceValidatorControllerDependencies>()
                 .RegisterType<IHomeControllerDependencies, HomeControllerDependencies>()
                 .RegisterType<IFundGroupControllerDependencies, FundGroupControllerDependencies>()
                 .RegisterType<IEReturnControllerDependencies, EReturnControllerDependencies>()
@@ -309,7 +318,6 @@ namespace Admin
                 .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
                 .RegisterType<IImportControllerDependencies, ImportControllerDependencies>()
                 .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>();
-
         }
 
         private static void RegisterOther(IUnityContainer container)
