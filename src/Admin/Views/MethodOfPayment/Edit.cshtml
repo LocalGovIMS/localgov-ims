@@ -24,10 +24,8 @@
 
             <div class="four wide field">
                 @Html.LabelFor(m => m.Code)
-                @Html.EditorFor(m => m.Code)
-                <div class="form__element--error">
-                    @Html.ValidationMessageFor(m => m.Code)
-                </div>
+                @Html.DisplayFor(m => m.Code)
+                @Html.HiddenFor(m => m.Code)
             </div>
 
             <div class="four wide field">
