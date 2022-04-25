@@ -4,18 +4,18 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
-using Command = Admin.Classes.Commands.CheckDigitConfiguration.CreateCommand;
+using Command = Admin.Classes.Commands.AccountReferenceValidator.CreateCommand;
 using CommandResult = Admin.Classes.Commands.CommandResult;
-using ViewModel = Admin.Models.CheckDigitConfiguration.EditViewModel;
+using ViewModel = Admin.Models.AccountReferenceValidator.EditViewModel;
 
-namespace Admin.UnitTests.Classes.Commands.CheckDigitConfiguration
+namespace Admin.UnitTests.Classes.Commands.AccountReferenceValidator
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class CreateCommandTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<ICheckDigitConfigurationService> _mockCheckDigitConfigurationService = new Mock<ICheckDigitConfigurationService>();
+        private readonly Mock<IAccountReferenceValidatorService> _mockAccountReferenceValidatorService = new Mock<IAccountReferenceValidatorService>();
 
         private ViewModel GenerateViewModel()
         {
@@ -32,7 +32,7 @@ namespace Admin.UnitTests.Classes.Commands.CheckDigitConfiguration
             // Arrange
             var command = new Command(
                 _mockLogger.Object,
-                _mockCheckDigitConfigurationService.Object);
+                _mockAccountReferenceValidatorService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());
@@ -46,12 +46,12 @@ namespace Admin.UnitTests.Classes.Commands.CheckDigitConfiguration
         public void OnExecuteReturnsCommandResultFromResult()
         {
             // Arrange
-            _mockCheckDigitConfigurationService.Setup(x => x.Create(It.IsAny<BusinessLogic.Entities.CheckDigitConfiguration>()))
+            _mockAccountReferenceValidatorService.Setup(x => x.Create(It.IsAny<BusinessLogic.Entities.AccountReferenceValidator>()))
                .Returns(new Result());
 
             var command = new Command(
                 _mockLogger.Object,
-                _mockCheckDigitConfigurationService.Object);
+                _mockAccountReferenceValidatorService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());

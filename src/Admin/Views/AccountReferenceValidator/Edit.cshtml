@@ -1,0 +1,118 @@
+﻿@model Admin.Models.AccountReferenceValidator.EditViewModel
+@{
+    ViewBag.Title = "Edit account reference validator";
+}
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        <div class="sub header">
+            Account reference validator details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "AccountReferenceValidator", FormMethod.Post))
+{
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MinLength)
+            @Html.EditorFor(m => m.MinLength)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.MinLength)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.MaxLength)
+            @Html.EditorFor(m => m.MaxLength)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.MaxLength)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Regex)
+            @Html.EditorFor(m => m.Regex)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Regex)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.InputMask)
+            @Html.EditorFor(m => m.InputMask)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.InputMask)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.CharacterType)
+            <div class="ui selection dropdown character-type-dropdown">
+                @Html.HiddenFor(x => x.CharacterType, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select character type</div>
+                <div class="menu">
+                    @foreach (var item in Model.CharacterTypes.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.CharacterType)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.CheckDigitConfigurationId)
+            <div class="ui selection dropdown check-digit-configuration-dropdown">
+                @Html.HiddenFor(x => x.CheckDigitConfigurationId, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select check digit configuration</div>
+                <div class="menu">
+                    @foreach (var item in Model.CheckDigitConfigurations.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.CheckDigitConfigurationId)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "AccountReferenceValidator", null, new { @class = "ui button" })
+
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.character-type-dropdown').dropdown();
+            $('.check-digit-configuration-dropdown').dropdown();
+        });
+    </script>
+}

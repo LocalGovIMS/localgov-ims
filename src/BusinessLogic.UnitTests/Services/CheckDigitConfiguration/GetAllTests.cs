@@ -6,7 +6,7 @@ namespace BusinessLogic.UnitTests.Services.CheckDigitConfiguration
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class GetAllCheckDigitConfigurationsTests : BaseCheckDigitConfigurationTest
+    public class GetAllTests : BaseCheckDigitConfigurationTest
     {
         private void SetupUnitOfWork()
         {

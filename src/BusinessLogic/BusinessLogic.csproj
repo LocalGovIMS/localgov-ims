@@ -292,6 +292,7 @@
     <Compile Include="Interfaces\Validators\IEReturnReferenceValidator.cs" />
     <Compile Include="Models\AccountHolder\SearchCriteria.cs" />
     <Compile Include="Models\BaseSearchCriteria.cs" />
+    <Compile Include="Models\AccountReferenceValidator\SearchCriteria.cs" />
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
