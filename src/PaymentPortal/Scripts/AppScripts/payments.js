@@ -6,9 +6,22 @@ if (!String.prototype.startsWith) {
     };
 }
 
+function paymentTypeChange() {
+
+    var referenceFieldLabel = $("#PaymentType  option:selected").data("referencefieldlabel");
+    var referenceFieldMessage = $("#PaymentType option:selected").data("referencefieldmessage");
+
+    $('label[for="PaymentReference"]').text(referenceFieldLabel);
+    $('span[for="paymentmessage"]').text(referenceFieldMessage);
+
+}
+
 $(document).ready(function () {
 
-    console.log('here');
+    $("#PaymentType").change(function () { paymentTypeChange(); })
+    $("#PaymentReference").change(function () { paymentTypeChange(); })
+
+    paymentTypeChange();
 
     $(".ui-send-email").click(function (e) {
 
