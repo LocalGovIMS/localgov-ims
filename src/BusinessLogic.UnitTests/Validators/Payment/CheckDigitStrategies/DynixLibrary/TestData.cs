@@ -57,11 +57,11 @@ namespace BusinessLogic.UnitTests.Validators.Payment.CheckDigitStrategies.DynixL
                             Modulus = 10,
                             SourceSubstitutions = "98",
                             ResultSubstitutions = "10:Z",
-                            Weightings = "2,0,3,0,4,0,5,0,0,0",
+                            Weightings = "2,0,3,0,4,0,5,0,6",
                             ApplySubtraction = true
                         },
-                        "AB1234563",
-                        '3',
+                        "AB1234567",
+                        '7',
                     },
                     new object[]
                     {
@@ -71,11 +71,11 @@ namespace BusinessLogic.UnitTests.Validators.Payment.CheckDigitStrategies.DynixL
                             Modulus = 10,
                             SourceSubstitutions = "",
                             ResultSubstitutions = "10:Z",
-                            Weightings = "9,8,7,6,5,4,3,2,1,0,0",
+                            Weightings = "9,8,7,6,5,4,3,2,1,0",
                             ApplySubtraction = true
                         },
-                        "9634561389",
-                        '9',
+                        "963456138Z",
+                        'Z',
                     }
                 };
             }
