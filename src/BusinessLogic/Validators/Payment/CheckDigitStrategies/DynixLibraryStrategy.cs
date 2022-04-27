@@ -7,6 +7,7 @@ namespace BusinessLogic.Validators.Payment
     {
         private int[] _weightings;
         private int _sum = 0;
+        private string _remainder;
         private string _calculatedCheckDigit;
 
         public DynixLibraryStrategy()
@@ -38,14 +39,15 @@ namespace BusinessLogic.Validators.Payment
         private void CalculateCheckDigit(CheckDigitStrategyArgs args)
         {
             GenerateSum(args);
-            SetCheckDigit(args);
+            CalculateRemainder(args);
+            ApplyResultSubstitutions(args);
         }
 
         private void GenerateSum(CheckDigitStrategyArgs args)
         {
             var referenceToCheck = args.Reference.WithoutCheckDigit().ToCharArray();
 
-            for (var i = 0; i < referenceToCheck.Length-1; i++)
+            for (var i = 0; i < referenceToCheck.Length; i++)
             {
                 if (!char.IsDigit(referenceToCheck[i]))
                     continue;
@@ -75,9 +77,18 @@ namespace BusinessLogic.Validators.Payment
             }
         }
 
-        private void SetCheckDigit(CheckDigitStrategyArgs args)
+        private void CalculateRemainder(CheckDigitStrategyArgs args)
         {
-            _calculatedCheckDigit = (args.CheckDigitConfiguration.Modulus - (_sum % args.CheckDigitConfiguration.Modulus)).ToString();
+            _remainder = (args.CheckDigitConfiguration.Modulus - (_sum % args.CheckDigitConfiguration.Modulus)).ToString();
+        }
+
+        private void ApplyResultSubstitutions(CheckDigitStrategyArgs args)
+        {
+            var conversions = args.CheckDigitConfiguration.ResultSubstitutionsDictionary();
+
+            _calculatedCheckDigit = conversions.ContainsKey(_remainder.ToString())
+                    ? conversions[_remainder.ToString()]
+                    : _remainder.ToString();
         }
 
         private void ValidateCheckDigit(CheckDigitStrategyArgs args)
