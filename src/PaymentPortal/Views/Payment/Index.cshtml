@@ -81,15 +81,15 @@
 
                             <div>
                                 @Html.LabelFor(m => m.PaymentReference)
+                                <div class="form__element form__element--paymentmessage">
+                                    <span for="paymentmessage"></span>
+                                </div>
                                 @Html.TextBoxFor(m => m.PaymentReference, new { @style = "text-transform:uppercase", @maxlength = "30" })
                             </div>
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.PaymentReference)
                             </div>
-                            <div class="form__element form__element--paymentmessage">
-                                <label for="paymentmessage"></label>
-                            </div>
-
+                            
                             <div>
                                 @Html.LabelFor(m => m.Amount)
                                 @Html.TextBoxFor(m => m.Amount, new { @type = "number", @step = "0.01" })

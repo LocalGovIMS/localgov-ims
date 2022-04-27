@@ -933,3 +933,7 @@ input, select {
 
     .panel--payment-info { order: 3; width: 100%; }
 }
+
+.form__element--paymentmessage {
+    margin-bottom: 0.5em;
+}
