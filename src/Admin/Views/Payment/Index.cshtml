@@ -96,7 +96,6 @@
                 {
                     <div class="eight wide field">
                         @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
-                        //this is just for good measure, as it should always be populated...
                         <div class="form__element--error">
                             @Html.ValidationMessageFor(m => m.MopCode)
                         </div>
