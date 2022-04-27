@@ -12,7 +12,7 @@
         public const string IsACardPaymentFee = "IsACardPaymentFee";
         public const string IsACardAtpPayment = "IsACardAtpPayment";
         public const string IsACardViaStaffPayment = "IsACardViaStaffPayment";
-        public const string IsAChequePayment = "IsACheque";
+        public const string IsAChequePayment = "IsAChequePayment";
         public const string IsARefundablePayment = "IsRefundable";
         public const string BackgroundColour = "BackgroundColour";
         public const string TextColour = "TextColour";
