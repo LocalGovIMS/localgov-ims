@@ -32,9 +32,8 @@ namespace Admin.Models.AccountReferenceValidator
         [StringLength(36, ErrorMessage = "Input mask cannot be longer than 36 characters")]
         public string InputMask { get; set; }
 
-        [Required]
         [DisplayName("Character type")]
-        public CharacterType CharacterType { get; set; }
+        public CharacterType? CharacterType { get; set; }
 
         [DisplayName("Check digit configuration")]
         public int? CheckDigitConfigurationId { get; set; }

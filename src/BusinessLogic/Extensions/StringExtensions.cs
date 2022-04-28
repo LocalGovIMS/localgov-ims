@@ -5,8 +5,11 @@ namespace BusinessLogic.Extensions
     public static class StringExtensions
     {
         private const string AlphaRegex = @"^[a-zA-Z]+$";
+        private const string AlphaWhiteSpaceRegex = @"^[a-zA-Z\s]+$";
         private const string NumericRegex = @"^[0-9]+$";
+        private const string NumericWhiteSpaceRegex = @"^[0-9\s]+$";
         private const string AlphaNumericRegex = @"^[a-zA-Z0-9]+$";
+        private const string AlphaNumericWhiteSpaceRegex = @"^[a-zA-Z0-9\s]+$";
 
         public static string ToSentenceCase(this string value)
         {
@@ -26,6 +29,14 @@ namespace BusinessLogic.Extensions
             return Regex.IsMatch(value, AlphaRegex);
         }
 
+        public static bool IsAlphaWhiteSpace(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return false;
+
+            return Regex.IsMatch(value, AlphaWhiteSpaceRegex);
+        }
+
         public static bool IsNumeric(this string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -34,12 +45,28 @@ namespace BusinessLogic.Extensions
             return Regex.IsMatch(value, NumericRegex);
         }
 
+        public static bool IsNumericWhiteSpace(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return false;
+
+            return Regex.IsMatch(value, NumericWhiteSpaceRegex);
+        }
+
         public static bool IsAlphaNumeric(this string value)
         {
             if (string.IsNullOrWhiteSpace(value))
                 return false;
 
             return Regex.IsMatch(value, AlphaNumericRegex);
+        }
+
+        public static bool IsAlphaNumericWhiteSpace(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return false;
+
+            return Regex.IsMatch(value, AlphaNumericWhiteSpaceRegex);
         }
 
         public static string WithoutCheckDigit(this string value)

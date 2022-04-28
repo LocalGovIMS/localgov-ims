@@ -46,10 +46,13 @@
             @Html.DisplayFor(m => m.InputMask)
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.CharacterType)
-            @Html.DisplayFor(m => m.CharacterType)
-        </div>
+        @if (Model.CharacterType.HasValue)
+        {
+            <div class="four wide field">
+                @Html.LabelFor(m => m.CharacterType)
+                @Html.DisplayFor(m => m.CharacterType)
+            </div>
+        }
 
         @if (!string.IsNullOrWhiteSpace(Model.CheckDigitConfigurationName))
         {

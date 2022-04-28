@@ -3,6 +3,7 @@ using BusinessLogic.Interfaces.Services;
 using log4net;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc.Html;
 using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
@@ -37,7 +38,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
 
             if (data == null) return model;
 
-            model.CharacterType = data.CharacterType.Value;
+            model.CharacterType = data.CharacterType;
             model.CheckDigitConfigurationId = data.Id;
             model.Id = data.Id;
             model.InputMask = data.InputMask;
@@ -55,27 +56,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
         // TODO: What if we add a new option? We have to manually update this???
         private SelectList GetCharacterTypes()
         {
-            var selectListItems = new List<SelectListItem>
-            {
-                new SelectListItem()
-                {
-                    Value = ((int)BusinessLogic.Enums.CharacterType.Alpha).ToString(),
-                    Text = "Alpha",
-                },
-                new SelectListItem()
-                {
-                    Value = ((int)BusinessLogic.Enums.CharacterType.Numeric).ToString(),
-                    Text = "Numeric",
-                },
-                new SelectListItem()
-                {
-                    Value = ((int)BusinessLogic.Enums.CharacterType.Alpha + (int)BusinessLogic.Enums.CharacterType.Numeric).ToString(),
-                    Text = "Alphanumeric",
-                }
-            };
-
-
-            return new SelectList(selectListItems, false);
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.CharacterType)), false);
         }
 
         private SelectList GetCheckDigitConfigurations()
