@@ -28,7 +28,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
 
             return new DetailsViewModel()
             {
-                CharacterType = data.CharacterType.Value, // TODO: Why is this optional???
+                CharacterType = data.CharacterType,
                 CheckDigitConfigurationId = data.Id,
                 CheckDigitConfigurationName = data.CheckDigitConfiguration?.Name,
                 Id = data.Id,

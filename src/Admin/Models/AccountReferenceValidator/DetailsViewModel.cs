@@ -21,7 +21,7 @@ namespace Admin.Models.AccountReferenceValidator
         public string InputMask { get; set; }
 
         [DisplayName("Character type")]
-        public CharacterType CharacterType { get; set; }
+        public CharacterType? CharacterType { get; set; }
 
         [DisplayName("Check digit configuration")]
         public int? CheckDigitConfigurationId { get; set; }

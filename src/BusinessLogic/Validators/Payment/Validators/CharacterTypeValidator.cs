@@ -14,8 +14,11 @@ namespace BusinessLogic.Validators.Payment
         private void ValidateCharacters(PaymentValidationArgs args)
         {
             ValidateAlpha(args);
+            ValidateAlphaWhiteSpace(args);
             ValidateNumeric(args);
+            ValidateNumericWhiteSpace(args);
             ValidateAlphaNumeric(args);
+            ValidateAlphaNumericWhiteSpace(args);
         }
 
         private void ValidateAlpha(PaymentValidationArgs args)
@@ -23,6 +26,15 @@ namespace BusinessLogic.Validators.Payment
             if (args.AccountReferenceValidator.CharacterType.Value == CharacterType.Alpha)
             {
                 if (!args.Reference.IsAlpha())
+                    throw new PaymentValidationException();
+            }
+        }
+
+        private void ValidateAlphaWhiteSpace(PaymentValidationArgs args)
+        {
+            if (args.AccountReferenceValidator.CharacterType.Value == CharacterType.AlphaWhiteSpace)
+            {
+                if (!args.Reference.IsAlphaWhiteSpace())
                     throw new PaymentValidationException();
             }
         }
@@ -36,12 +48,29 @@ namespace BusinessLogic.Validators.Payment
             }
         }
 
+        private void ValidateNumericWhiteSpace(PaymentValidationArgs args)
+        {
+            if (args.AccountReferenceValidator.CharacterType.Value == CharacterType.NumericWhiteSpace)
+            {
+                if (!args.Reference.IsNumericWhiteSpace())
+                    throw new PaymentValidationException();
+            }
+        }
+
         private void ValidateAlphaNumeric(PaymentValidationArgs args)
         {
-            var alphaNumeric = CharacterType.Alpha & CharacterType.Numeric;
-            if (args.AccountReferenceValidator.CharacterType.Value.HasFlag(alphaNumeric))
+            if (args.AccountReferenceValidator.CharacterType.Value == CharacterType.AlphaNumeric)
             {
                 if (!args.Reference.IsAlphaNumeric())
+                    throw new PaymentValidationException();
+            }
+        }
+
+        private void ValidateAlphaNumericWhiteSpace(PaymentValidationArgs args)
+        {
+            if (args.AccountReferenceValidator.CharacterType.Value == CharacterType.AlphaNumericWhiteSpace)
+            {
+                if (!args.Reference.IsAlphaNumericWhiteSpace())
                     throw new PaymentValidationException();
             }
         }
