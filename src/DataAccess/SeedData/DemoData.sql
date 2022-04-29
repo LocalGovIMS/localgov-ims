@@ -210,30 +210,30 @@ VALUES ([Key], [Value], [VatCode]);
 MERGE INTO Funds AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('5M', 'Library Charges', '5', 'N0', 100, 1, 0, 1, '.', 1, 72100710220, 0, 0, 1, 'Library Charges', 0, NULL, 0),
-			('52', 'Market Stall Rental', '5', 'E0', 5000, 1, 0, 1, NULL, 1, 72200850079, 0, 0, 1, 'Market Stall Rental', 0, 1, 0),
-			('2R', 'Fixed Penalty Notice', '5', 'N0', 500, 0, 1, 1, 'E02R', 1, 72100021754, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0, 0),
-			('3U', 'Landlord Accreditation Service', '5', 'W0', 99.99, 0, 0, 1, NULL, 1, 72101580438, 0, 0, 1, 'Landlord Accreditation Service', 0, 1, 0),
-			('1Z', 'HMO Premises Licence', '5', 'N0', 99999999, 1, 0, 1, NULL, 1, 72101920227, 0, 0, 1, NULL, 0, 1, 0),
-			('ZZ', 'Not Authorised Cards', '20', 'N0', 99999999, 0, 0, 0, NULL, 0, NULL, 0, 0, 1, NULL, 0, 0, 0),
-			('1', 'Bank Suspense', '12', 'M0', 99999999.99, 1, 0, 1, 'E930', 1, 964024, 1, 0, 1, NULL, 0, 1, 0),			
-			('5', 'Housing Rents', '5', 'N0', 99999.99, 0, 1, 1, 'E005', 1, 964104, 1, 1, 1, 'Housing Rents', 0, 0, 0),
-			('13', 'Misc Cash', '5', 'W0', 999999999.99, 1, 0, 1, NULL, 0, NULL, 0, 0, 1, NULL, 1, 1, 0),
-			('SP', 'Suspense', '5', 'M0', 99999999, 1, 0, 1, NULL, 1, 964023, 0, 0, 1, NULL, 0, 1, 0),
-			('XT', 'Transfers', '12', 'N0', 99999999, 0, 0, 0, NULL, 0, NULL, 0, 0, 1, NULL, 0, 0, 0),
-			('19', 'SAP Invoices', '5', '11', 99999999, 0, 1, 0, 'E060', 0, NULL, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0, 0),
-			('20', 'BCT Invoices', '5', '11', 99999999, 0, 1, 0, 'E060', 0, NULL, 1, 1, 1, 'Invoices Starting M or P', 0, 0, 0),
-			('11', 'Parking Fines', '5', 'N0', 99999999, 0, 1, 1, 'E011', 1, 72104021624, 1, 0, 1, 'Parking Fines starting BJ', 0, 0, 0),
-			('24', 'Business Rates', '5', 'N0', 9999999.99, 0, 1, 1, 'E902', 1, 964102, 1, 1, 1, 'Business Rates', 0, 0, 0),
-			('23', 'Council Tax', '5', 'N0', 999999.99, 1, 1, 1, 'E902', 1, 964101, 1, 1, 1, 'Council Tax', 0, 0, 0),
-			('25', 'Benefit Overpayments', '5', 'N0', 9999.99, 0, 1, 1, 'E925', 1, 72320550287, 1, 1, 1, 'Benefit Overpayments', 0, 0, 0),
-			('32', 'Developmnet Control', '5', 'N0', 99999, 1, 0, 1, '.', 1, 72101750163, 0, 0, 1, 'Planning Fees', 0, 1, 0),
-			('31', 'Building Control', '5', 'W0', 99999, 1, 0, 1, '.', 1, 72101750164, 0, 0, 1, 'Building Control Fees', 0, 1, 0))
-	AS S ([FundCode], [FundName], [AccessLevel], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])) AS [Source]
+			('5M', 'Library Charges', 'N0', 100, 0, 0, 1, 'Library Charges', 0, NULL, 0),
+			('52', 'Market Stall Rental', 'E0', 5000, 0, 0, 1, 'Market Stall Rental', 0, 1, 0),
+			('2R', 'Fixed Penalty Notice', 'N0', 500, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0, 0),
+			('3U', 'Landlord Accreditation Service', 'W0', 99.99, 0, 0, 1, 'Landlord Accreditation Service', 0, 1, 0),
+			('1Z', 'HMO Premises Licence', 'N0', 99999999, 0, 0, 1, NULL, 0, 1, 0),
+			('ZZ', 'Not Authorised Cards', 'N0', 99999999, 0, 0, 1, NULL, 0, 0, 0),
+			('1', 'Bank Suspense', 'M0', 99999999.99, 1, 0, 1, NULL, 0, 1, 0),			
+			('5', 'Housing Rents', 'N0', 99999.99, 1, 1, 1, 'Housing Rents', 0, 0, 0),
+			('13', 'Misc Cash', 'W0', 999999999.99, 0, 0, 1, NULL, 1, 1, 0),
+			('SP', 'Suspense', 'M0', 99999999, 0, 0, 1, NULL, 0, 1, 0),
+			('XT', 'Transfers', 'N0', 99999999, 0, 0, 1, NULL, 0, 0, 0),
+			('19', 'SAP Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0, 0),
+			('20', 'BCT Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting M or P', 0, 0, 0),
+			('11', 'Parking Fines', 'N0', 99999999, 1, 0, 1, 'Parking Fines starting BJ', 0, 0, 0),
+			('24', 'Business Rates', 'N0', 9999999.99, 1, 1, 1, 'Business Rates', 0, 0, 0),
+			('23', 'Council Tax', 'N0', 999999.99, 1, 1, 1, 'Council Tax', 0, 0, 0),
+			('25', 'Benefit Overpayments', 'N0', 9999.99, 1, 1, 1, 'Benefit Overpayments', 0, 0, 0),
+			('32', 'Developmnet Control', 'N0', 99999, 0, 0, 1, 'Planning Fees', 0, 1, 0),
+			('31', 'Building Control', 'W0', 99999, 0, 0, 1, 'Building Control Fees', 0, 1, 0))
+	AS S ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([FundCode], [FundName], [AccessLevel], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])
-VALUES ([FundCode], [FundName], [AccessLevel], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled]);
+INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])
+VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled]);
 
 MERGE INTO FundMetaData AS [Target]
 USING (SELECT * 
@@ -275,7 +275,59 @@ USING (SELECT *
 			('Basket.ReferenceFieldLabel', 'Traders reference and surname', '52'),
 			('Basket.ReferenceFieldMessage', 'Please enter your 4 digit reference followed by your surname', '52'),
 			('IsABasketFund', 'True', '5'),
-			('Basket.ReferenceFieldLabel', 'Housing rents reference', '5')) 
+			('Basket.ReferenceFieldLabel', 'Housing rents reference', '5'), 
+			('ExportToLedger', 'True', '5M'),
+			('UseGeneralLedgerCode', 'True', '5M'),
+			('GeneralLedgerCode', '72100710220', '5M'),
+			('ExportToLedger', 'True', '52'),
+			('UseGeneralLedgerCode', 'True', '52'),
+			('GeneralLedgerCode', '72200850079', '52'),
+			('ExportToLedger', 'True', '2R'),
+			('UseGeneralLedgerCode', 'True', '2R'),
+			('GeneralLedgerCode', '72100021754', '2R'),
+			('ExportToLedger', 'True', '3U'),
+			('UseGeneralLedgerCode', 'True', '3U'),
+			('GeneralLedgerCode', '72101580438', '3U'),
+			('ExportToLedger', 'True', '1Z'),
+			('UseGeneralLedgerCode', 'True', '1Z'),
+			('GeneralLedgerCode', '72101920227', '1Z'),
+			('ExportToLedger', 'False', 'ZZ'),
+			('UseGeneralLedgerCode', 'False', 'ZZ'),
+			('ExportToLedger', 'True', '1'),
+			('UseGeneralLedgerCode', 'True', '1'),
+			('GeneralLedgerCode', '964024', '1'),
+			('ExportToLedger', 'True', '5'),
+			('UseGeneralLedgerCode', 'True', '5'),
+			('GeneralLedgerCode', '964104', '5'),
+			('ExportToLedger', 'True', '13'),
+			('UseGeneralLedgerCode', 'False', '13'),
+			('ExportToLedger', 'True', 'SP'),
+			('UseGeneralLedgerCode', 'True', 'SP'),
+			('GeneralLedgerCode', '964023', 'SP'),
+			('ExportToLedger', 'False', 'XT'),
+			('UseGeneralLedgerCode', 'False', 'XT'),
+			('ExportToLedger', 'False', '19'),
+			('UseGeneralLedgerCode', 'False', '19'),
+			('ExportToLedger', 'False', '20'),
+			('UseGeneralLedgerCode', 'False', '20'),
+			('ExportToLedger', 'True', '11'),
+			('UseGeneralLedgerCode', 'True', '11'),
+			('GeneralLedgerCode', '72104021624', '11'),
+			('ExportToLedger', 'True', '24'),
+			('UseGeneralLedgerCode', 'True', '24'),
+			('GeneralLedgerCode', '964102', '24'),
+			('ExportToLedger', 'True', '23'),
+			('UseGeneralLedgerCode', 'True', '23'),
+			('GeneralLedgerCode', '964101', '23'),
+			('ExportToLedger', 'True', '25'),
+			('UseGeneralLedgerCode', 'True', '25'),
+			('GeneralLedgerCode', '72320550287', '25'),
+			('ExportToLedger', 'True', '32'),
+			('UseGeneralLedgerCode', 'True', '32'),
+			('GeneralLedgerCode', '72101750163', '32'),
+			('ExportToLedger', 'True', '31'),
+			('UseGeneralLedgerCode', 'True', '31'),
+			('GeneralLedgerCode', '72101750164', '31'))
 	AS S ([Key], [Value], [FundCode])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 	AND [Target].[Key] = [Source].[Key] 

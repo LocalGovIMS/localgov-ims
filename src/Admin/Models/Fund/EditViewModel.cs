@@ -15,11 +15,6 @@ namespace Admin.Models.Fund
         [Required(ErrorMessage = "Name is required")]
         [StringLength(50, ErrorMessage = "Fund name cannot be longer than 50 characters")]
         public string FundName { get; set; }
-
-        [DisplayName("Access level")]
-        [Required(ErrorMessage = "Access level is required")]
-        [StringLength(2, ErrorMessage = "Access level cannot be longer than 2 characters")]
-        public string AccessLevel { get; set; }
         
         [DisplayName("Account reference validator")]
         public int? AccountReferenceValidatorId { get; set; }
@@ -31,27 +26,6 @@ namespace Admin.Models.Fund
         [DisplayName("Maximum amount")]
         [Required(ErrorMessage = "Maximum amount is required")]
         public decimal? MaximumAmount { get; set; }
-
-        public bool Narrative { get; set; }
-
-        [DisplayName("Export to fund")]
-        public bool ExportToFund { get; set; }
-
-        [DisplayName("Export to ledger")]
-        public bool ExportToLedger { get; set; }
-
-        [DisplayName("Export to format")]
-        [Required(ErrorMessage = "Export to format is required")]
-        [StringLength(10, ErrorMessage = "Export to format cannot be longer than 10 characters")]
-        public string FundExportFormat { get; set; }
-
-        [DisplayName("Use GL code")]
-        public bool UseGLCode { get; set; }
-
-        [DisplayName("GL code")]
-        [Required(ErrorMessage = "GL code is required")]
-        [StringLength(20, ErrorMessage = "GL code cannot be longer than 20 characters")]
-        public string GLCode { get; set; }
 
         [DisplayName("Overpay account")]
         public bool OverPayAccount { get; set; }
