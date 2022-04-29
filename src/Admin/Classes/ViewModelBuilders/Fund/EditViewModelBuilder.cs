@@ -37,19 +37,12 @@ namespace Admin.Classes.ViewModelBuilders.Fund
 
             if (data == null) return model;
 
-            model.AccessLevel = data.AccessLevel;
             model.AccountExist = data.AccountExist;
             model.AquireAddress = data.AquireAddress;
-            model.ExportToFund = data.ExportToFund;
-            model.ExportToLedger = data.ExportToLedger;
             model.DisplayName = data.DisplayName;
-            model.FundExportFormat = data.FundExportFormat;
             model.FundName = data.FundName;
-            model.GLCode = data.GeneralLedgerCode;
             model.MaximumAmount = data.MaximumAmount;
-            model.Narrative = data.NarrativeFlag;
             model.OverPayAccount = data.OverPayAccount;
-            model.UseGLCode = data.UseGeneralLedgerCode;
             model.AccountReferenceValidatorId = data.AccountReferenceValidatorId;
             model.FundCode = data.FundCode;
             model.VatCode = data.VatCode;

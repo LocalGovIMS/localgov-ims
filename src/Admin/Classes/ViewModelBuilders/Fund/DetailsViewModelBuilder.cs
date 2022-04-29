@@ -27,19 +27,12 @@ namespace Admin.Classes.ViewModelBuilders.Fund
 
             return new DetailsViewModel()
             {
-                AccessLevel = data.AccessLevel,
                 AccountExist = data.AccountExist,
                 AquireAddress = data.AquireAddress,
-                ExportToFund = data.ExportToFund,
-                ExportToLedger = data.ExportToLedger,
                 DisplayName = data.DisplayName,
-                FundExportFormat = data.FundExportFormat,
                 FundName = data.FundName,
-                GLCode = data.GeneralLedgerCode,
                 MaximumAmount = data.MaximumAmount,
-                Narrative = data.NarrativeFlag,
                 OverPayAccount = data.OverPayAccount,
-                UseGLCode = data.UseGeneralLedgerCode,
                 AccountReferenceValidatorId = data.AccountReferenceValidatorId,
                 AccountReferenceValidatorName = data.AccountReferenceValidator?.Name,
                 FundCode = data.FundCode,
