@@ -24,7 +24,7 @@ namespace Admin.Controllers
             return PartialView("_BasicList", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "User Templates")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Templates")]
         [HttpGet]
         public ActionResult Edit(int id)
         {

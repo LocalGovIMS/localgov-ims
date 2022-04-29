@@ -49,7 +49,7 @@ namespace Admin.Classes.ViewModelBuilders.UserRole
 
         private ICollection<CheckBoxListItem> GetRoles(List<BusinessLogic.Entities.UserRole> existingItems)
         {
-            var allItems = _roleService.GetAllRoles();
+            var allItems = _roleService.GetAllRoles().OrderBy(x => x.Name);
 
             return allItems.Select(x => new CheckBoxListItem()
             {

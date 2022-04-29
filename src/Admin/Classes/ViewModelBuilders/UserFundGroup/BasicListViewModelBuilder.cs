@@ -24,12 +24,13 @@ namespace Admin.Classes.ViewModelBuilders.UserFundGroup
 
         protected override BasicListViewModel OnBuild(int id)
         {
-            var data = _userFundGroupService.GetUserFundGroups(id);
+            var data = _userFundGroupService.GetUserFundGroups(id).OrderBy(x => x.FundGroup.Name);
 
             var model = new BasicListViewModel()
             {
                 ListTitle = "User fund groups",
                 ColumnTitle = "Fund group",
+                NoItemsMessage = "There are no user fund groups specified",
                 Items = data.Select(x => x.FundGroup.Name).ToList()
             };
 

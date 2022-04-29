@@ -24,7 +24,7 @@ namespace Admin.Controllers
             return PartialView("_BasicList", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "User Roles")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Roles")]
         [HttpGet]
         public ActionResult Edit(int id)
         {

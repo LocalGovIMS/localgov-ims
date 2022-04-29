@@ -66,7 +66,7 @@ namespace Admin.UnitTests.Controllers.UserFundGroup.Edit
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("User Fund Groups", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Edit Fund Groups", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

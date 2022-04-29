@@ -6,70 +6,70 @@
 @section Header {
     <h1 class="ui header">
         @Model.UserName
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
         <div class="sub header">
             User details
         </div>
     </h1>
 }
 
-<div>
-    @Html.ActionLink("Edit user", "Edit", new { id = Model.UserId }, new { @class = "ui button" })
-    @Html.ActionLink("Edit roles", "Edit", "UserRole", new { id = Model.UserId }, new { @class = "ui button" })
-    @Html.ActionLink("Edit fund groups", "Edit", "UserFundGroup", new { id = Model.UserId }, new { @class = "ui button" })
-    @Html.ActionLink("Edit templates", "Edit", "UserTemplate", new { id = Model.UserId }, new { @class = "ui button" })
-</div>
-<div>
+<div class="ui form">
 
     @Html.HiddenFor(m => m.UserId)
 
-    <div class="form__field">
-        @Html.LabelFor(m => m.LastLogin)
+    <div class="ui vertical segment">
 
-        @if (Model.LastLogin.HasValue)
-        {
-            @Html.DisplayFor(m => m.LastLogin)
-        }
-        else
-        {
-            <span>The user has never logged in</span>
-        }
-    </div>
-
-    <div class="form__field">
-        @Html.LabelFor(m => m.DisplayName)
-        @Html.DisplayFor(m => m.DisplayName)
-    </div>
-
-    <div class="form__field">
-        @Html.LabelFor(m => m.ExpiryDays)
-        @Html.DisplayFor(m => m.ExpiryDays)
-    </div>
-
-    <div class="form__field">
-        @Html.LabelFor(m => m.OfficeCode)
-        @Html.DisplayFor(m => m.OfficeCode)
-    </div>
-
-    <div class="form__field">
-        @Html.LabelFor(m => m.Disabled)
-        @Html.DisplayFor(m => m.Disabled)
-    </div>
-
-    <div class="ui grid stackable">
-        <div class="eight wide column">
-            @Html.Action("_ListForUser", "UserRole", new { id = Model.UserId })
+        <div class="four wide field">
+            @Html.LabelFor(m => m.LastLogin)
+            @if (Model.LastLogin.HasValue)
+            {
+                @Html.DisplayFor(m => m.LastLogin)
+            }
+            else
+            {
+                <span>The user has never logged in</span>
+            }
         </div>
 
-        <div class="eight wide column">
-            @Html.Action("_ListForUser", "UserFundGroup", new { id = Model.UserId })
+        <div class="four wide field">
+            @Html.LabelFor(m => m.DisplayName)
+            @Html.DisplayFor(m => m.DisplayName)
         </div>
 
-        <div class="eight wide column">
-            @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ExpiryDays)
+            @Html.DisplayFor(m => m.ExpiryDays)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.OfficeCode)
+            @Html.DisplayFor(m => m.OfficeCode)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Disabled)
+            @Html.DisplayFor(m => m.Disabled)
         </div>
     </div>
 
-    <br />
+    <div class="ui vertical segment">
+        <h3>User roles</h3>
+        @Html.Action("_ListForUser", "UserRole", new { id = Model.UserId })
+    </div>
 
-    @Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
+    <div class="ui vertical segment">
+        <h3>User fund groups</h3>
+        @Html.Action("_ListForUser", "UserFundGroup", new { id = Model.UserId })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3>User templates</h3>
+        @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
+    </div>
+
 </div>
+
+<br />
+
+@Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
+

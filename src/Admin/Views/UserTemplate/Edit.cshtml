@@ -20,44 +20,41 @@
 {
     @Html.HiddenFor(m => m.UserId)
 
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th>
-                    Templates
-                </th>
-            </tr>
-        </thead>
+    if (Model.Templates != null && Model.Templates.Any())
+    {
+        <table class="ui celled table striped teal">
+            <thead>
+                <tr>
+                    <th>
+                        Templates
+                    </th>
+                </tr>
+            </thead>
 
-        @if (Model.Items != null && Model.Items.Any())
-        {
-            // This is view logic, but it kind of stinks a bit.
-            // TODO - There must be a better way to creae a checkbox list.
-            // I also don't like the fact we're using tables.
-            var items = Model.Items.OrderBy(x => x.Text).ToList();
-            for (var i = 0; i < items.Count(); i++)
+            @{ var templates = Model.Templates.ToList(); }
+
+            @for (var i = 0; i < templates.Count(); i++)
             {
                 <tr>
                     <td>
-                        @Html.HiddenFor(x => items[i].Id)
-                        @Html.HiddenFor(x => items[i].Text)
-                        @Html.CheckBoxFor(x => items[i].IsChecked)
-                        @Html.DisplayFor(x => items[i].Text)
+                        @Html.HiddenFor(x => templates[i].Id)
+                        @Html.HiddenFor(x => templates[i].Text)
+                        @Html.CheckBoxFor(x => templates[i].IsChecked)
+                        @Html.DisplayFor(x => templates[i].Text)
                     </td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td>
-                    No available templates!
-                </td>
-            </tr>
-        }
-    </table>
 
-    <input type="submit" value="Save" class="ui button" />
+        </table>
+    }
+    else
+    {
+        <div class="ui info message">
+            No available templates
+        </div>
+    }
+
+    <input type="submit" value="Save" class="ui primary button" />
     @Html.ActionLink("Back", "Back", "UserTemplate", null, new { @class = "ui button" })
 
 }

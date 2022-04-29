@@ -49,7 +49,7 @@ namespace Admin.Classes.ViewModelBuilders.UserFundGroup
 
         private ICollection<CheckBoxListItem> GetUserFundGroups(List<BusinessLogic.Entities.UserFundGroup> existingItems)
         {
-            var allItems = _fundGroupService.GetAllFundGroups();
+            var allItems = _fundGroupService.GetAllFundGroups().OrderBy(x => x.Name);
 
             return allItems.Select(x => new CheckBoxListItem()
             {
