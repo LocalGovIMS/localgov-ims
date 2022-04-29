@@ -325,11 +325,11 @@
     <Compile Include="Services\Transaction\GetPendingTransactionsByInternalReferenceTests.cs" />
     <Compile Include="Services\Base\GetNextReferenceIdTests.cs" />
     <Compile Include="Services\UserFundGroup\BaseUserFundGroupTest.cs" />
-    <Compile Include="Services\UserFundGroup\GetUserFundGroupsIntTests.cs" />
+    <Compile Include="Services\UserFundGroup\GetByUserIdTests.cs" />
     <Compile Include="Services\UserFundGroup\UpdateTests.cs" />
     <Compile Include="Services\UserRole\BaseUserRoleTest.cs" />
-    <Compile Include="Services\UserRole\GetUserRolesStringTests.cs" />
-    <Compile Include="Services\UserRole\GetUserRolesIntTests.cs" />
+    <Compile Include="Services\UserRole\GetByUsernameTests.cs" />
+    <Compile Include="Services\UserRole\GetByUserIdTests.cs" />
     <Compile Include="Services\UserRole\UpdateTests.cs" />
     <Compile Include="Services\User\BaseUserTest.cs" />
     <Compile Include="Services\User\DoesUserAccountNeedDisablingTests.cs" />

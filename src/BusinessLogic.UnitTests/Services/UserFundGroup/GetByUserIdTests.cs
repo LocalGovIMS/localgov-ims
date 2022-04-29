@@ -4,16 +4,18 @@ using Moq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BusinessLogic.UnitTests.Services.UserRole
+namespace BusinessLogic.UnitTests.Services.UserFundGroup
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class GetUserRolesStringTests : BaseUserRoleTest
+    public class GetByUserIdTests : BaseUserFundGroupTest
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserRoles.GetUserRoles(It.IsAny<string>(), It.IsAny<bool>()))
-                .Returns(new List<string>());
+            MockUnitOfWork.Setup(x => x.UserFundGroups.GetByUserId(It.IsAny<int>()))
+                .Returns(new List<Entities.UserFundGroup>() {
+                    new Entities.UserFundGroup()
+                });
         }
 
         private void SetupSecurityContext(bool result)
@@ -31,11 +33,11 @@ namespace BusinessLogic.UnitTests.Services.UserRole
             var service = GetService();
 
             // Act
-            var result = service.GetUserRoles("Test");
+            var result = service.GetByUserId(1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<string>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserFundGroup>));
         }
 
         [TestMethod]
@@ -46,11 +48,11 @@ namespace BusinessLogic.UnitTests.Services.UserRole
             var service = GetService();
 
             // Act
-            var result = service.GetUserRoles("Test");
+            var result = service.GetByUserId(1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<string>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserFundGroup>));
             Assert.AreEqual(result.Count, 0);
         }
 
@@ -62,11 +64,11 @@ namespace BusinessLogic.UnitTests.Services.UserRole
             var service = GetService();
 
             // Act
-            var result = service.GetUserRoles("Test");
+            var result = service.GetByUserId(1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<string>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserFundGroup>));
             Assert.AreEqual(result.Count, 0);
         }
 
@@ -84,20 +86,21 @@ namespace BusinessLogic.UnitTests.Services.UserRole
                 () =>
                 {
                     // Act
-                    var result = service.GetUserRoles("Test");
+                    var result = service.GetByUserId(1);
 
                     // Assert
                     Assert.IsNotNull(result);
-                    Assert.IsInstanceOfType(result, typeof(List<string>));
+                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserFundGroup>));
                 },
                 () =>
                 {
                     // Act
-                    var result = service.GetUserRoles(1);
+                    var result = service.GetByUserId(1);
 
                     // Assert
                     Assert.IsNotNull(result);
-                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
+                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserFundGroup>));
+                    Assert.AreEqual(result.Count, 0);
                 });
 
             // Act

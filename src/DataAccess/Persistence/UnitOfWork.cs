@@ -50,7 +50,7 @@ namespace DataAccess.Persistence
         public IUserFundGroupRepository UserFundGroups { get; private set; }
         public IUserRoleRepository UserRoles { get; private set; }
         public IUserTemplateRepository UserTemplates { get; private set; }
-        public IUserPostPaymentMopCodeRepository UserPostPaymentMopCodes { get; private set; }
+        public IUserMopCodeRepository UserMopCodes { get; private set; }
         public IVatRepository Vats { get; private set; }
         public IVatMetadataRepository VatMetadatas { get; private set; }
         public IPaymentIntegrationRepository PaymentIntegrations { get; private set; }
@@ -95,7 +95,7 @@ namespace DataAccess.Persistence
             IUserFundGroupRepository userFundGroupRepository,
             IUserRoleRepository userRoleRepository,
             IUserTemplateRepository userTemplateRepository,
-            IUserPostPaymentMopCodeRepository userPostPaymentMopCodeRepository,
+            IUserMopCodeRepository userPostPaymentMopCodeRepository,
             IVatRepository vatRepository,
             IVatMetadataRepository VatMetadataRepository,
             IPaymentIntegrationRepository paymentIntegrationRepository,
@@ -141,7 +141,7 @@ namespace DataAccess.Persistence
             UserFundGroups = userFundGroupRepository;
             UserRoles = userRoleRepository;
             UserTemplates = userTemplateRepository;
-            UserPostPaymentMopCodes = userPostPaymentMopCodeRepository;
+            UserMopCodes = userPostPaymentMopCodeRepository;
             Vats = vatRepository;
             VatMetadatas = VatMetadataRepository;
             PaymentIntegrations = paymentIntegrationRepository;

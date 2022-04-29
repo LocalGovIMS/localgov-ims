@@ -68,7 +68,7 @@ namespace BusinessLogic.UnitTests.Security
         public void CanGetUserRoles()
         {
             // Arrange
-            _mockUserRoleRepository.Setup(x => x.GetUserRoles(It.IsAny<string>(), It.IsAny<bool>()))
+            _mockUserRoleRepository.Setup(x => x.GetByUsername(It.IsAny<string>(), It.IsAny<bool>()))
                 .Returns(new List<string>()
                 {
                     "Role1", "Role2"
@@ -147,7 +147,7 @@ namespace BusinessLogic.UnitTests.Security
         public void CanGetUserTemplate()
         {
             // Arrange
-            _mockUserTemplateRepository.Setup(x => x.GetUserTemplates(It.IsAny<string>()))
+            _mockUserTemplateRepository.Setup(x => x.GetByUsername(It.IsAny<string>()))
                 .Returns(new List<string>()
                 {
                     "Template1", "Template2"

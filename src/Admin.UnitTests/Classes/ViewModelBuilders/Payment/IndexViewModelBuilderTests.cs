@@ -15,7 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
         private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
-        private readonly Mock<IUserPostPaymentMopCodeService> _mockUserPostPaymentMopCodeService = new Mock<IUserPostPaymentMopCodeService>();
+        private readonly Mock<IUserMopCodeService> _mockUserMopCodeService = new Mock<IUserMopCodeService>();
         private readonly Mock<ISecurityContext> _mockSecurityContext = new Mock<ISecurityContext>();
 
         private ViewModelBuilder _viewModelBuilder;
@@ -27,7 +27,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
                 _mockLogger.Object,
                 _mockFundService.Object,
                 _mockVatService.Object,
-                _mockUserPostPaymentMopCodeService.Object,
+                _mockUserMopCodeService.Object,
                 _mockSecurityContext.Object);
         }
 
@@ -57,12 +57,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
             });
         }
 
-        private void SetupUserPostPaymentMopCodeSerivce(Mock<IUserPostPaymentMopCodeService> mockVatService)
+        private void SetupUserMopCodeSerivce(Mock<IUserMopCodeService> mockVatService)
         {
-            mockVatService.Setup(x => x.GetUserPostPaymentMopCodes(It.IsAny<int>()))
-                .Returns(new System.Collections.Generic.List<BusinessLogic.Entities.UserPostPaymentMopCode>()
+            mockVatService.Setup(x => x.GetByUserId(It.IsAny<int>()))
+                .Returns(new System.Collections.Generic.List<BusinessLogic.Entities.UserMopCode>()
                 {
-                    new BusinessLogic.Entities.UserPostPaymentMopCode()
+                    new BusinessLogic.Entities.UserMopCode()
                     {
                         Id = 1,
                         MopCode = "23",
@@ -79,7 +79,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
             // Arrange
             SetupFundService(_mockFundService);
             SetupVatSerivce(_mockVatService);
-            SetupUserPostPaymentMopCodeSerivce(_mockUserPostPaymentMopCodeService);
+            SetupUserMopCodeSerivce(_mockUserMopCodeService);
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -94,7 +94,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Payment
             // Arrange
             SetupFundService(_mockFundService);
             SetupVatSerivce(_mockVatService);
-            SetupUserPostPaymentMopCodeSerivce(_mockUserPostPaymentMopCodeService);
+            SetupUserMopCodeSerivce(_mockUserMopCodeService);
 
             // Act
             var result = _viewModelBuilder.Build(new ViewModel());

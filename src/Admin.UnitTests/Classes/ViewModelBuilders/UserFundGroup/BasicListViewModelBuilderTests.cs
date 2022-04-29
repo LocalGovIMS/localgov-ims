@@ -27,7 +27,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserFundGroup
 
         private void SetupUserFundGroupService(Mock<IUserFundGroupService> service)
         {
-            service.Setup(x => x.GetUserFundGroups(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserFundGroup>()
+            service.Setup(x => x.GetByUserId(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserFundGroup>()
             {
                 {
                     new BusinessLogic.Entities.UserFundGroup() {

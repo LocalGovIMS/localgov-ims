@@ -8,43 +8,42 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class UserFundGroupRepository : Repository<UserFundGroup>, IUserFundGroupRepository
+    public class UserMopCodeRepository : Repository<UserMopCode>, IUserMopCodeRepository
     {
-        public UserFundGroupRepository(IncomeDbContext context) : base(context)
+        public UserMopCodeRepository(IncomeDbContext context) : base(context)
         {
         }
 
-        public List<UserFundGroup> GetByUserId(int id)
+        public List<UserMopCode> GetByUserId(int id)
         {
-            var items = DbSet
-                .Include(x => x.FundGroup)
+            var results = IncomeDbContext.ImsUserMopCodes
+                .AsQueryable()
+                .Include(x => x.Mop)
+                .Where(x => x.UserId == id)
                 .ApplyFilters(Filters)
-                .Where(x => x.UserId == id).ToList();
+                .ToList();
 
-            items.ForEach(x => x.User = null);
-            items.ForEach(x => x.FundGroup.UserFundGroups = null);
-
-            return items;
+            return results;
         }
 
-        public void Update(List<UserFundGroup> items, int userId)
+        public void Update(List<UserMopCode> items, int userId)
         {
             var filteredItems = items
                 .AsQueryable()
                 .ApplyFilters(Filters);
 
-            var existingItems = IncomeDbContext.ImsUserFundGroups
+            var existingItems = IncomeDbContext.ImsUserMopCodes
                 .Where(x => x.UserId == userId)
                 .ApplyFilters(Filters)
                 .ToList();
 
-            #region Delete every role
+            #region Delete every mop code
 
             if (items == null || items.Count < 1)
             {
                 foreach (var item in existingItems)
                 {
-                    IncomeDbContext.ImsUserFundGroups.Remove(item);
+                    IncomeDbContext.ImsUserMopCodes.Remove(item);
                 }
 
                 return;
@@ -52,34 +51,34 @@ namespace DataAccess.Repositories
 
             #endregion
 
-            #region Delete UserRoles
+            #region Delete user mop codes
 
             var toKeep = from a in existingItems
                          join b in filteredItems
-                         on new { a.FundGroupId, a.UserId } equals new { b.FundGroupId, b.UserId }
+                         on new { a.MopCode, a.UserId } equals new { b.MopCode, b.UserId }
                          select a;
 
             var toRemove = existingItems.Except(toKeep);
 
             foreach (var item in toRemove)
             {
-                IncomeDbContext.ImsUserFundGroups.Remove(item);
+                IncomeDbContext.ImsUserMopCodes.Remove(item);
             }
 
             #endregion
 
-            #region Add UserRoles
+            #region Add user mop codes
 
             var alreadyExist = from a in filteredItems
                                join b in existingItems
-                               on new { a.FundGroupId, a.UserId } equals new { b.FundGroupId, b.UserId }
+                               on new { a.MopCode, a.UserId } equals new { b.MopCode, b.UserId }
                                select a;
 
             var toAdd = items.Except(alreadyExist);
 
             foreach (var item in toAdd)
             {
-                IncomeDbContext.ImsUserFundGroups.Add(item);
+                IncomeDbContext.ImsUserMopCodes.Add(item);
             }
 
             #endregion

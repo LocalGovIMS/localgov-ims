@@ -157,6 +157,10 @@
     <Compile Include="Migrations\202204290856512_Removed_redundant_Fund_fields.designer.cs">
       <DependentUpon>202204290856512_Removed_redundant_Fund_fields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204291419492_Renamed_UserPostPaymentMopCodes_table.cs" />
+    <Compile Include="Migrations\202204291419492_Renamed_UserPostPaymentMopCodes_table.designer.cs">
+      <DependentUpon>202204291419492_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -195,7 +199,7 @@
     <Compile Include="Repositories\MethodOfPaymentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\EReturnCashRepository.cs" />
-    <Compile Include="Repositories\UserPostPaymentMopCodeRepository.cs" />
+    <Compile Include="Repositories\UserMopCodeRepository.cs" />
     <Compile Include="Repositories\UserTemplateRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VatRepository.cs" />
@@ -259,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204290856512_Removed_redundant_Fund_fields.resx">
       <DependentUpon>202204290856512_Removed_redundant_Fund_fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204291419492_Renamed_UserPostPaymentMopCodes_table.resx">
+      <DependentUpon>202204291419492_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

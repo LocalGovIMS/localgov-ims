@@ -13,7 +13,7 @@ namespace BusinessLogic.UnitTests.Services.UserRole
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserRoles.UpdateUserRoles(It.IsAny<List<Entities.UserRole>>(), It.IsAny<int>()));
+            MockUnitOfWork.Setup(x => x.UserRoles.Update(It.IsAny<List<Entities.UserRole>>(), It.IsAny<int>()));
         }
 
         private void SetupSecurityContext(bool result)

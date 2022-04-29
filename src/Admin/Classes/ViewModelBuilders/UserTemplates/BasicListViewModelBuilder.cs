@@ -24,7 +24,7 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
 
         protected override BasicListViewModel OnBuild(int id)
         {
-            var data = _userTemplateService.GetUserTemplates(id).OrderBy(x => x.Template.Name);
+            var data = _userTemplateService.GetByUserId(id).OrderBy(x => x.Template.Name);
 
             var model = new BasicListViewModel()
             {

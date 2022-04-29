@@ -6,7 +6,7 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IUserFundGroupService
     {
-        List<UserFundGroup> GetUserFundGroups(int id);
+        List<UserFundGroup> GetByUserId(int id);
         IResult Update(List<UserFundGroup> items, int userId);
     }
 }

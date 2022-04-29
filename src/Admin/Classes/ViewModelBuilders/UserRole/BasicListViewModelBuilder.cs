@@ -24,7 +24,7 @@ namespace Admin.Classes.ViewModelBuilders.UserRole
 
         protected override BasicListViewModel OnBuild(int id)
         {
-            var data = _userRoleService.GetUserRoles(id).OrderBy(x => x.Role.Name);
+            var data = _userRoleService.GetByUserId(id).OrderBy(x => x.Role.Name);
 
             var model = new BasicListViewModel()
             {

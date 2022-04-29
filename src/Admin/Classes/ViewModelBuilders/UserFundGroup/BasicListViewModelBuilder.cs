@@ -24,7 +24,7 @@ namespace Admin.Classes.ViewModelBuilders.UserFundGroup
 
         protected override BasicListViewModel OnBuild(int id)
         {
-            var data = _userFundGroupService.GetUserFundGroups(id).OrderBy(x => x.FundGroup.Name);
+            var data = _userFundGroupService.GetByUserId(id).OrderBy(x => x.FundGroup.Name);
 
             var model = new BasicListViewModel()
             {
