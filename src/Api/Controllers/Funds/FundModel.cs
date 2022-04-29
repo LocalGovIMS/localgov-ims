@@ -16,9 +16,6 @@
         {
             FundCode = source.FundCode;
             FundName = source.FundName;
-            UseGeneralLedgerCode = source.UseGeneralLedgerCode;
-            GeneralLedgerCode = source.GeneralLedgerCode;
-            IsGeneralLedgerDetail = source.LedgerDetail ?? false;
         }
     }
 }

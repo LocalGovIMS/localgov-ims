@@ -210,30 +210,30 @@ VALUES ([Key], [Value], [VatCode]);
 MERGE INTO Funds AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('5M', 'Library Charges', 'N0', 100, 0, 0, 1, 'Library Charges', 0, NULL, 0),
-			('52', 'Market Stall Rental', 'E0', 5000, 0, 0, 1, 'Market Stall Rental', 0, 1, 0),
-			('2R', 'Fixed Penalty Notice', 'N0', 500, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0, 0),
-			('3U', 'Landlord Accreditation Service', 'W0', 99.99, 0, 0, 1, 'Landlord Accreditation Service', 0, 1, 0),
-			('1Z', 'HMO Premises Licence', 'N0', 99999999, 0, 0, 1, NULL, 0, 1, 0),
-			('ZZ', 'Not Authorised Cards', 'N0', 99999999, 0, 0, 1, NULL, 0, 0, 0),
-			('1', 'Bank Suspense', 'M0', 99999999.99, 1, 0, 1, NULL, 0, 1, 0),			
-			('5', 'Housing Rents', 'N0', 99999.99, 1, 1, 1, 'Housing Rents', 0, 0, 0),
-			('13', 'Misc Cash', 'W0', 999999999.99, 0, 0, 1, NULL, 1, 1, 0),
-			('SP', 'Suspense', 'M0', 99999999, 0, 0, 1, NULL, 0, 1, 0),
-			('XT', 'Transfers', 'N0', 99999999, 0, 0, 1, NULL, 0, 0, 0),
-			('19', 'SAP Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0, 0),
-			('20', 'BCT Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting M or P', 0, 0, 0),
-			('11', 'Parking Fines', 'N0', 99999999, 1, 0, 1, 'Parking Fines starting BJ', 0, 0, 0),
-			('24', 'Business Rates', 'N0', 9999999.99, 1, 1, 1, 'Business Rates', 0, 0, 0),
-			('23', 'Council Tax', 'N0', 999999.99, 1, 1, 1, 'Council Tax', 0, 0, 0),
-			('25', 'Benefit Overpayments', 'N0', 9999.99, 1, 1, 1, 'Benefit Overpayments', 0, 0, 0),
-			('32', 'Developmnet Control', 'N0', 99999, 0, 0, 1, 'Planning Fees', 0, 1, 0),
-			('31', 'Building Control', 'W0', 99999, 0, 0, 1, 'Building Control Fees', 0, 1, 0))
-	AS S ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])) AS [Source]
+			('5M', 'Library Charges', 'N0', 100, 0, 0, 1, 'Library Charges', 0, 0),
+			('52', 'Market Stall Rental', 'E0', 5000, 0, 0, 1, 'Market Stall Rental', 0, 0),
+			('2R', 'Fixed Penalty Notice', 'N0', 500, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0),
+			('3U', 'Landlord Accreditation Service', 'W0', 99.99, 0, 0, 1, 'Landlord Accreditation Service', 0, 0),
+			('1Z', 'HMO Premises Licence', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('ZZ', 'Not Authorised Cards', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('1', 'Bank Suspense', 'M0', 99999999.99, 1, 0, 1, NULL, 0, 0),			
+			('5', 'Housing Rents', 'N0', 99999.99, 1, 1, 1, 'Housing Rents', 0, 0),
+			('13', 'Misc Cash', 'W0', 999999999.99, 0, 0, 1, NULL, 1, 0),
+			('SP', 'Suspense', 'M0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('XT', 'Transfers', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('19', 'SAP Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0),
+			('20', 'BCT Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting M or P', 0, 0),
+			('11', 'Parking Fines', 'N0', 99999999, 1, 0, 1, 'Parking Fines starting BJ', 0, 0),
+			('24', 'Business Rates', 'N0', 9999999.99, 1, 1, 1, 'Business Rates', 0, 0),
+			('23', 'Council Tax', 'N0', 999999.99, 1, 1, 1, 'Council Tax', 0, 0),
+			('25', 'Benefit Overpayments', 'N0', 9999.99, 1, 1, 1, 'Benefit Overpayments', 0, 0),
+			('32', 'Developmnet Control', 'N0', 99999, 0, 0, 1, 'Planning Fees', 0, 0),
+			('31', 'Building Control', 'W0', 99999, 0, 0, 1, 'Building Control Fees', 0, 0))
+	AS S ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])
-VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled]);
+INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])
+VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled]);
 
 MERGE INTO FundMetaData AS [Target]
 USING (SELECT * 

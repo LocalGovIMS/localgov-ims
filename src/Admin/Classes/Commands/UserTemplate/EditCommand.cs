@@ -19,7 +19,7 @@ namespace Admin.Classes.Commands.UserTemplate
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var items = model.Items
+            var items = model.Templates
                 .Where(x => x.IsChecked == true)
                 .Select(x => new BusinessLogic.Entities.UserTemplate
                 {

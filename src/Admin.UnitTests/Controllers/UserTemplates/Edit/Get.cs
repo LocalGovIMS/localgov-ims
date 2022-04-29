@@ -9,10 +9,10 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.UserRoleController;
-using Dependencies = Admin.Controllers.UserRoleControllerDependencies;
+using Controller = Admin.Controllers.UserTemplateController;
+using Dependencies = Admin.Controllers.UserTemplateControllerDependencies;
 
-namespace Admin.UnitTests.Controllers.UserRole.Edit
+namespace Admin.UnitTests.Controllers.UserTemplate.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -22,7 +22,7 @@ namespace Admin.UnitTests.Controllers.UserRole.Edit
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IModelBuilder<Models.Shared.BasicListViewModel, int>> _mockBasicListViewModelBuilder = new Mock<IModelBuilder<Models.Shared.BasicListViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.UserRole.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.UserRole.EditViewModel>>();
+        private readonly Mock<IModelCommand<Models.UserTemplate.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.UserTemplate.EditViewModel>>();
 
         private MethodInfo GetMethod()
         {
@@ -34,8 +34,8 @@ namespace Admin.UnitTests.Controllers.UserRole.Edit
 
         private ActionResult GetResult()
         {
-            var editViewModelBuilder = new Mock<IModelBuilder<Models.UserRole.EditViewModel, int>>();
-            editViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.UserRole.EditViewModel());
+            var editViewModelBuilder = new Mock<IModelBuilder<Models.UserTemplate.EditViewModel, int>>();
+            editViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.UserTemplate.EditViewModel());
 
             var dependencies = new Dependencies(
                 _mockLogger.Object,
@@ -67,7 +67,7 @@ namespace Admin.UnitTests.Controllers.UserRole.Edit
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Edit Roles", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Edit Templates", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace Admin.UnitTests.Controllers.UserRole.Edit
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(Models.UserRole.EditViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(Models.UserTemplate.EditViewModel));
         }
     }
 }

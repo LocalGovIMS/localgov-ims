@@ -20,22 +20,20 @@
 {
     @Html.HiddenFor(m => m.UserId)
 
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th>
-                    Roles
-                </th>
-            </tr>
-        </thead>
+    if (Model.Roles != null && Model.Roles.Any())
+    {
+        <table class="ui celled table striped teal">
+            <thead>
+                <tr>
+                    <th>
+                        Roles
+                    </th>
+                </tr>
+            </thead>
 
-        @if (Model.Roles != null && Model.Roles.Any())
-        {
-            // This is view logic, but it kind of stinks a bit.
-            // TODO - There must be a better way to creae a checkbox list.
-            // I also don't like the fact we're using tables.
-            var roles = Model.Roles.OrderBy(x => x.Text).ToList();
-            for (var i = 0; i < roles.Count(); i++)
+            @{ var roles = Model.Roles.ToList(); }
+
+            @for (var i = 0; i < roles.Count(); i++)
             {
                 <tr>
                     <td>
@@ -46,18 +44,17 @@
                     </td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td>
-                    No available roles!
-                </td>
-            </tr>
-        }
-    </table>
 
-    <input type="submit" value="Save" class="ui button" />
+        </table>
+    }
+    else
+    {
+        <div class="ui info message">
+            No available roles
+        </div>
+    }
+
+    <input type="submit" value="Save" class="ui primary button" />
     @Html.ActionLink("Back", "Back", "UserRole", null, new { @class = "ui button" })
 
 }
