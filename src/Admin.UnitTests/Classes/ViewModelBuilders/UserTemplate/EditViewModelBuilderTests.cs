@@ -65,7 +65,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
 
         private void SetupUserTemplateService(Mock<IUserTemplateService> service)
         {
-            service.Setup(x => x.GetUserTemplates(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserTemplate>()
+            service.Setup(x => x.GetByUserId(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserTemplate>()
             {
                 {
                     new BusinessLogic.Entities.UserTemplate() {

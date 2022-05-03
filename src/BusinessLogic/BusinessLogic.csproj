@@ -175,7 +175,7 @@
     <Compile Include="Entities\TransactionStatus.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserFundGroup.cs" />
-    <Compile Include="Entities\UserPostPaymentMopCode.cs" />
+    <Compile Include="Entities\UserMethodOfPayment.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\UserTemplate.cs" />
     <Compile Include="Entities\Vat.cs" />
@@ -253,7 +253,7 @@
     <Compile Include="Interfaces\Repositories\ITransactionNotificationRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITransactionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserFundGroupRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IUserPostPaymentMopCodeRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserMethodOfPaymentRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserTemplateRepository.cs" />
@@ -279,7 +279,7 @@
     <Compile Include="Interfaces\Services\ITemplateRowService.cs" />
     <Compile Include="Interfaces\Services\ITransferService.cs" />
     <Compile Include="Interfaces\Services\IMethodOfPaymentService.cs" />
-    <Compile Include="Interfaces\Services\IUserPostPaymentMopCodeService.cs" />
+    <Compile Include="Interfaces\Services\IUserMethodOfPaymentService.cs" />
     <Compile Include="Interfaces\Services\IUserTemplateService.cs" />
     <Compile Include="Interfaces\Services\ICheckDigitConfigurationService.cs" />
     <Compile Include="Interfaces\Strategies\IApproveEReturnsStrategy.cs" />
@@ -343,7 +343,7 @@
     <Compile Include="Services\TemplateRowService.cs" />
     <Compile Include="Services\TransferService.cs" />
     <Compile Include="Services\MethodOfPaymentService.cs" />
-    <Compile Include="Services\UserPostPaymentMopCodeService.cs" />
+    <Compile Include="Services\UserMethodOfPaymentService.cs" />
     <Compile Include="Services\UserTemplateService.cs" />
     <Compile Include="UnityConfig.cs" />
     <Compile Include="Enums\EmailTypeEnum.cs" />

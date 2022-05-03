@@ -13,7 +13,7 @@ namespace BusinessLogic.UnitTests.Services.UserFundGroup
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserFundGroups.UpdateUserFundGroups(
+            MockUnitOfWork.Setup(x => x.UserFundGroups.Update(
                 It.IsAny<List<Entities.UserFundGroup>>(),
                 It.IsAny<int>()));
         }

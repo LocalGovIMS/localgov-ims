@@ -33,7 +33,7 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
         protected override EditViewModel OnBuild(int id)
         {
             var user = _userService.GetUser(id);
-            var existingItems = _userTemplateService.GetUserTemplates(id);
+            var existingItems = _userTemplateService.GetByUserId(id);
 
             var model = new EditViewModel();
 

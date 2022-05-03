@@ -71,7 +71,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
 
         private void SetupUserRoleService(Mock<IUserRoleService> service)
         {
-            service.Setup(x => x.GetUserRoles(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserRole>()
+            service.Setup(x => x.GetByUserId(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserRole>()
             {
                 {
                     new BusinessLogic.Entities.UserRole() {

@@ -60,7 +60,7 @@ namespace BusinessLogic
                 .RegisterType<IUserRoleService, UserRoleService>()
                 .RegisterType<IUserService, UserService>()
                 .RegisterType<IUserTemplateService, UserTemplateService>()
-                .RegisterType<IUserPostPaymentMopCodeService, UserPostPaymentMopCodeService>()
+                .RegisterType<IUserMethodOfPaymentService, UserMethodOfPaymentService>()
                 .RegisterType<IVatService, VatService>()
                 .RegisterType<IVatMetadataService, VatMetadataService>()
                 .RegisterType<ICryptographyService, MD5CryptographyService>()

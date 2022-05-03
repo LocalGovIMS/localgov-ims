@@ -15,7 +15,7 @@ namespace DataAccess.Repositories
         {
         }
 
-        public List<UserRole> GetUserRoles(int id)
+        public List<UserRole> GetByUserId(int id)
         {
             var results = IncomeDbContext.ImsUserRoles
                 .AsQueryable()
@@ -30,7 +30,7 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public List<string> GetUserRoles(string userName, bool track = true)
+        public List<string> GetByUsername(string userName, bool track = true)
         {
             var userRoles = new List<UserRole>();
 
@@ -48,7 +48,7 @@ namespace DataAccess.Repositories
             return userRoles.Select(x => x.Role.Name).ToList();
         }
 
-        public void UpdateUserRoles(List<UserRole> items, int userId)
+        public void Update(List<UserRole> items, int userId)
         {
             var filteredItems = items
                 .AsQueryable()

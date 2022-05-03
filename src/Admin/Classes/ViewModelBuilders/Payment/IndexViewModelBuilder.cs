@@ -15,19 +15,19 @@ namespace Admin.Classes.ViewModelBuilders.Payment
     {
         private readonly IFundService _fundService;
         private readonly IVatService _vatService;
-        private readonly IUserPostPaymentMopCodeService _userPostPaymentMopCodeService;
+        private readonly IUserMethodOfPaymentService _userMethodOfPaymentService;
         private readonly ISecurityContext _securityContext;
 
         public IndexViewModelBuilder(ILog log
             , IFundService fundService
             , IVatService vatService
-            , IUserPostPaymentMopCodeService userPostPaymentMopCodeService
+            , IUserMethodOfPaymentService userMethodOfPaymentService
             , ISecurityContext securityContext) :
             base(log)
         {
             _fundService = fundService;
             _vatService = vatService;
-            _userPostPaymentMopCodeService = userPostPaymentMopCodeService;
+            _userMethodOfPaymentService = userMethodOfPaymentService;
             _securityContext = securityContext;
         }
 
@@ -35,7 +35,7 @@ namespace Admin.Classes.ViewModelBuilders.Payment
         {
             var funds = _fundService.GetAllFunds().OrderBy(x => x.FundName);
             var vatCodes = _vatService.GetAllCodes().OrderBy(x => x.VatCode);
-            var mopCodes = _userPostPaymentMopCodeService.GetUserPostPaymentMopCodes(_securityContext.UserId).OrderBy(x => x.MopCode);
+            var mopCodes = _userMethodOfPaymentService.GetByUserId(_securityContext.UserId).OrderBy(x => x.MopCode);
 
             return new IndexViewModel()
             {
@@ -51,7 +51,7 @@ namespace Admin.Classes.ViewModelBuilders.Payment
         {
             var funds = _fundService.GetAllFunds().OrderBy(x => x.FundName);
             var vatCodes = _vatService.GetAllCodes().OrderBy(x => x.VatCode);
-            var mopCodes = _userPostPaymentMopCodeService.GetUserPostPaymentMopCodes(_securityContext.UserId).OrderBy(x => x.MopCode);
+            var mopCodes = _userMethodOfPaymentService.GetByUserId(_securityContext.UserId).OrderBy(x => x.MopCode);
 
             source.VatCodes = GetVatCodeList(vatCodes);
             source.Funds = GetFundsList(funds);
@@ -102,7 +102,7 @@ namespace Admin.Classes.ViewModelBuilders.Payment
             return new SelectList(fundSelectListItems, true);
         }
 
-        private SelectList GetMopCodeList(IOrderedEnumerable<UserPostPaymentMopCode> mopCodes)
+        private SelectList GetMopCodeList(IOrderedEnumerable<BusinessLogic.Entities.UserMethodOfPayment> mopCodes)
         {
             var selectListItems = new List<SelectListItem>();
 
@@ -126,7 +126,7 @@ namespace Admin.Classes.ViewModelBuilders.Payment
             }
             else
             {
-                var mop = _userPostPaymentMopCodeService.GetDefaultUserPostPaymentMopCode();
+                var mop = _userMethodOfPaymentService.GetDefaultUserMethodOfPayment();
 
                 var dataAttributes = new List<ValuePair>
                 {

@@ -1,0 +1,60 @@
+﻿@model Admin.Models.UserMethodOfPayment.EditViewModel
+@{
+    ViewBag.Title = "Edit user mop codes";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        User MOP codes
+        <div class="sub header">
+            MOP code selection
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "UserMethodOfPayment", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.UserId)
+
+    if (Model.MopCodes != null && Model.MopCodes.Any())
+    {
+        <table class="ui celled table striped teal">
+            <thead>
+                <tr>
+                    <th>
+                        MOP codes
+                    </th>
+                </tr>
+            </thead>
+
+            @{ var mopCodes = Model.MopCodes.ToList(); }
+
+            @for (var i = 0; i < mopCodes.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(x => mopCodes[i].Id)
+                        @Html.HiddenFor(x => mopCodes[i].Text)
+                        @Html.CheckBoxFor(x => mopCodes[i].IsChecked)
+                        @Html.DisplayFor(x => mopCodes[i].Text)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <div class="ui info message">
+            No available MOP codes
+        </div>
+    }
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "UserMethodOfPayment", null, new { @class = "ui button" })
+
+}

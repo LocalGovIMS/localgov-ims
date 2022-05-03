@@ -42,7 +42,7 @@ namespace DataAccess
                 .RegisterType<IUserFundGroupRepository, UserFundGroupRepository>()
                 .RegisterType<IUserRepository, UserRepository>()
                 .RegisterType<IUserRoleRepository, UserRoleRepository>()
-                .RegisterType<IUserPostPaymentMopCodeRepository, UserPostPaymentMopCodeRepository>()
+                .RegisterType<IUserMethodOfPaymentRepository, UserMethodOfPaymentRepository>()
                 .RegisterType<IUserTemplateRepository, UserTemplateRepository>()
                 .RegisterType<IVatRepository, VatRepository>()
                 .RegisterType<IVatMetadataRepository, VatMetadataRepository>()

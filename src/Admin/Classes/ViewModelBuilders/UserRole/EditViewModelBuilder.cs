@@ -33,7 +33,7 @@ namespace Admin.Classes.ViewModelBuilders.UserRole
         protected override EditViewModel OnBuild(int id)
         {
             var user = _userService.GetUser(id);
-            var userRoles = _userRoleService.GetUserRoles(id);
+            var userRoles = _userRoleService.GetByUserId(id);
 
             var model = new EditViewModel();
 

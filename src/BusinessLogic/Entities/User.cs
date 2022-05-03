@@ -16,7 +16,7 @@ namespace BusinessLogic.Entities
             SuspenseNotes = new HashSet<SuspenseNote>();
             SuspenseProcessedTransactions = new HashSet<SuspenseProcessedTransaction>();
             UserFundGroups = new HashSet<UserFundGroup>();
-            UserPostPaymentMopCodes = new HashSet<UserPostPaymentMopCode>();
+            UserMethodOfPayments = new HashSet<UserMethodOfPayment>();
             UserRoles = new HashSet<UserRole>();
             UserTemplates = new HashSet<UserTemplate>();
             Imports = new HashSet<Import>();
@@ -62,7 +62,7 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<UserFundGroup> UserFundGroups { get; set; }
 
-        public virtual ICollection<UserPostPaymentMopCode> UserPostPaymentMopCodes { get; set; }
+        public virtual ICollection<UserMethodOfPayment> UserMethodOfPayments { get; set; }
 
         public virtual ICollection<UserRole> UserRoles { get; set; }
 

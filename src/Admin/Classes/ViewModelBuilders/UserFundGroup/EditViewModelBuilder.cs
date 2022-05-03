@@ -33,7 +33,7 @@ namespace Admin.Classes.ViewModelBuilders.UserFundGroup
         protected override EditViewModel OnBuild(int id)
         {
             var user = _userService.GetUser(id);
-            var items = _userFundGroupService.GetUserFundGroups(id);
+            var items = _userFundGroupService.GetByUserId(id);
 
             var model = new EditViewModel();
 

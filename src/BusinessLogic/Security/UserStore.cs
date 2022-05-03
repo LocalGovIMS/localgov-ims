@@ -34,7 +34,7 @@ namespace BusinessLogic.Security
 
         public string[] GetUserRoles(string userName)
         {
-            return _userRoleRepository.GetUserRoles(userName, false).ToArray();
+            return _userRoleRepository.GetByUsername(userName, false).ToArray();
         }
 
         public string[] GetUserFunds(string userName)
@@ -76,7 +76,7 @@ namespace BusinessLogic.Security
 
         public string[] GetUserTemplates(string userName)
         {
-            return _userTemplateRepository.GetUserTemplates(userName).ToArray();
+            return _userTemplateRepository.GetByUsername(userName).ToArray();
         }
     }
 }

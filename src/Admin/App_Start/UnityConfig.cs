@@ -215,6 +215,10 @@ namespace Admin
                 .RegisterType<IModelBuilder<ViewModels.UserTemplate.EditViewModel, int>, ViewModelBuilders.UserTemplate.EditViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.UserTemplate.EditViewModel>, Commands.UserTemplate.EditCommand>()
 
+                .RegisterType<IModelBuilder<ViewModels.Shared.BasicListViewModel, int>, ViewModelBuilders.UserMethodOfPayment.BasicListViewModelBuilder>("UserMethodOfPayment.ViewModelBuider.BasicList")
+                .RegisterType<IModelBuilder<ViewModels.UserMethodOfPayment.EditViewModel, int>, ViewModelBuilders.UserMethodOfPayment.EditViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.UserMethodOfPayment.EditViewModel>, Commands.UserMethodOfPayment.EditCommand>()
+
                 .RegisterType<IModelBuilder<ViewModels.Vat.DetailsViewModel, string>, ViewModelBuilders.Vat.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Vat.EditViewModel, string>, ViewModelBuilders.Vat.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<IList<ViewModels.Vat.DetailsViewModel>, string>, ViewModelBuilders.Vat.ListViewModelBuilder>()
@@ -317,7 +321,8 @@ namespace Admin
                 .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>()
                 .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
                 .RegisterType<IImportControllerDependencies, ImportControllerDependencies>()
-                .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>();
+                .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>()
+                .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>();
         }
 
         private static void RegisterOther(IUnityContainer container)
