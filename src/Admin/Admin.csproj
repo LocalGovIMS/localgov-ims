@@ -228,6 +228,7 @@
     <Compile Include="Classes\Commands\FundGroup\CreateCommand.cs" />
     <Compile Include="Classes\Commands\FundGroup\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExport.cs" />
+    <Compile Include="Classes\Commands\UserMethodOfPayment\EditCommand.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommand.cs" />
     <Compile Include="Classes\Commands\VatMetadata\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\VatMetadata\EditCommand.cs" />
@@ -291,6 +292,8 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\EditViewModelBuilder.cs" />
@@ -328,8 +331,10 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IUserMethodOfPaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\PaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\UserMethodOfPaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IVatMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IFundMetadataControllerDependencies.cs" />
@@ -424,6 +429,7 @@
     <Compile Include="Controllers\PaymentIntegrationController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
+    <Compile Include="Controllers\UserMethodOfPaymentController.cs" />
     <Compile Include="Controllers\VatMetadataController.cs" />
     <Compile Include="Controllers\FundMetadataController.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadataController.cs" />
@@ -503,6 +509,7 @@
     <Compile Include="Models\PaymentIntegration\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
+    <Compile Include="Models\UserMethodOfPayment\EditViewModel.cs" />
     <Compile Include="Models\VatMetadata\DetailsViewModel.cs" />
     <Compile Include="Models\VatMetadata\EditViewModel.cs" />
     <Compile Include="Models\VatMetadata\ListViewModel.cs" />
@@ -1630,6 +1637,7 @@
     <Content Include="Views\AccountReferenceValidator\Details.cshtml" />
     <Content Include="Views\AccountReferenceValidator\Edit.cshtml" />
     <Content Include="Views\AccountReferenceValidator\List.cshtml" />
+    <Content Include="Views\UserMethodOfPayment\Edit.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

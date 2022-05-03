@@ -7,12 +7,12 @@
     {
         public override void Up()
         {
-            RenameTable(name: "dbo.UserPostPaymentMopCodes", newName: "UserMopCodes");
+            RenameTable(name: "dbo.UserPostPaymentMopCodes", newName: "UserMethodOfPayments");
         }
         
         public override void Down()
         {
-            RenameTable(name: "dbo.UserMopCodes", newName: "UserPostPaymentMopCodes");
+            RenameTable(name: "dbo.UserMethodOfPayments", newName: "UserPostPaymentMopCodes");
         }
     }
 }

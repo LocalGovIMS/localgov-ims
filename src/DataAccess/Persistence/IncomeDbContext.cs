@@ -47,7 +47,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<PendingTransaction> PendingTransactions { get; set; }
         public virtual DbSet<ProcessedTransaction> ProcessedTransactions { get; set; }
         public virtual DbSet<UserFundGroup> ImsUserFundGroups { get; set; }
-        public virtual DbSet<UserMopCode> ImsUserMopCodes { get; set; }
+        public virtual DbSet<UserMethodOfPayment> ImsUserMethodOfPayments { get; set; }
         public virtual DbSet<UserRole> ImsUserRoles { get; set; }
         public virtual DbSet<User> ImsUsers { get; set; }
         public virtual DbSet<UserTemplate> ImsUserTemplates { get; set; }
@@ -176,7 +176,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Mop>()
-                .HasMany(e => e.UserMopCodes)
+                .HasMany(e => e.UserMethodOfPayments)
                 .WithRequired(e => e.Mop)
                 .HasForeignKey(e => e.MopCode)
                 .WillCascadeOnDelete(false);
@@ -290,7 +290,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.UserMopCodes)
+                .HasMany(e => e.UserMethodOfPayments)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
@@ -407,7 +407,7 @@ namespace DataAccess.Persistence
                 .HasIndex(s => new { s.UserId, s.FundGroupId })
                 .IsUnique(true);
 
-            modelBuilder.Entity<UserMopCode>()
+            modelBuilder.Entity<UserMethodOfPayment>()
                 .HasIndex(s => new { s.UserId, s.MopCode })
                 .IsUnique(true);
 

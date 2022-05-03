@@ -5,15 +5,15 @@ using Moq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
+namespace BusinessLogic.UnitTests.Services.UserRole
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class UpdateTests : BaseUserMethodOfPaymentTest
+    public class UpdateTests : BaseUserRoleTest
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserMethodOfPayments.Update(It.IsAny<List<Entities.UserMethodOfPayment>>(), It.IsAny<int>()));
+            MockUnitOfWork.Setup(x => x.UserRoles.Update(It.IsAny<List<Entities.UserRole>>(), It.IsAny<int>()));
         }
 
         private void SetupSecurityContext(bool result)
@@ -31,7 +31,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
             var service = GetService();
 
             // Act
-            var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+            var result = service.Update(new List<Entities.UserRole>(), 0);
 
             // Assert
             Assert.IsNotNull(result);
@@ -47,7 +47,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
             var service = GetService();
 
             // Act
-            var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+            var result = service.Update(new List<Entities.UserRole>(), 0);
 
             // Assert
             Assert.IsNotNull(result);
@@ -63,7 +63,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
             var service = GetService();
 
             // Act
-            var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+            var result = service.Update(new List<Entities.UserRole>(), 0);
 
             // Assert
             Assert.IsNotNull(result);
@@ -80,7 +80,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
             var service = GetService();
 
             // Act
-            var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+            var result = service.Update(new List<Entities.UserRole>(), 0);
 
             // Assert
             Assert.IsNotNull(result);
@@ -92,7 +92,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
         public void CheckPermissions()
         {
             // Arrange
-            var roles = new List<string>() { BusinessLogic.Security.Role.ServiceDesk, BusinessLogic.Security.Role.SystemAdmin };
+            var roles = new List<string>() { BusinessLogic.Security.Role.SystemAdmin };
             var service = GetService();
             SetupUnitOfWork();
 
@@ -102,7 +102,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
                 () =>
                 {
                     // Act
-                    var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+                    var result = service.Update(new List<Entities.UserRole>(), 0);
 
                     // Assert
                     Assert.IsNotNull(result);
@@ -111,7 +111,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
                 () =>
                 {
                     // Act
-                    var result = service.Update(new List<Entities.UserMethodOfPayment>(), 0);
+                    var result = service.Update(new List<Entities.UserRole>(), 0);
 
                     // Assert
                     Assert.IsNotNull(result);

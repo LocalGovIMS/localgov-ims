@@ -103,6 +103,14 @@
         @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
     </div>
 
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            User methods of payment
+            @Html.ActionLink("Edit methods of payment", "Edit", "UserMethodOfPayment", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_ListForUser", "UserMethodOfPayment", new { id = Model.UserId })
+    </div>
+
     <br />
 
     <input type="submit" value="Save" class="ui primary button" />

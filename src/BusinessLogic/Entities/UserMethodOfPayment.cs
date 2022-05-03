@@ -2,7 +2,7 @@ namespace BusinessLogic.Entities
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class UserMopCode
+    public partial class UserMethodOfPayment
     {
         public int Id { get; set; }
 

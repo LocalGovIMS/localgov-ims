@@ -67,6 +67,11 @@
         @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
     </div>
 
+    <div class="ui vertical segment">
+        <h3>User methods of payment</h3>
+        @Html.Action("_ListForUser", "UserMethodOfPayment", new { id = Model.UserId })
+    </div>
+
 </div>
 
 <br />

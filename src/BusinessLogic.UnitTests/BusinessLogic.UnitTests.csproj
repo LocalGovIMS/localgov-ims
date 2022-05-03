@@ -218,6 +218,10 @@
     <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
     <Compile Include="Services\SuspenseNote\CreateTests.cs" />
     <Compile Include="Services\SuspenseNote\GetTests.cs" />
+    <Compile Include="Services\UserMethodOfPayment\BaseUserRoleTest.cs" />
+    <Compile Include="Services\UserMethodOfPayment\GetByUserIdTests.cs" />
+    <Compile Include="Services\UserMethodOfPayment\GetByUsernameTests.cs" />
+    <Compile Include="Services\UserMethodOfPayment\UpdateTests.cs" />
     <Compile Include="Services\VatMetadata\BaseVatMetadataTest.cs" />
     <Compile Include="Services\VatMetadata\CreateTests.cs" />
     <Compile Include="Services\VatMetadata\DeleteTests.cs" />
@@ -328,7 +332,6 @@
     <Compile Include="Services\UserFundGroup\GetByUserIdTests.cs" />
     <Compile Include="Services\UserFundGroup\UpdateTests.cs" />
     <Compile Include="Services\UserRole\BaseUserRoleTest.cs" />
-    <Compile Include="Services\UserRole\GetByUsernameTests.cs" />
     <Compile Include="Services\UserRole\GetByUserIdTests.cs" />
     <Compile Include="Services\UserRole\UpdateTests.cs" />
     <Compile Include="Services\User\BaseUserTest.cs" />

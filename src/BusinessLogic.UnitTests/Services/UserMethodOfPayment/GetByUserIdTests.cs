@@ -4,17 +4,17 @@ using Moq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
+namespace BusinessLogic.UnitTests.Services.UserRole
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class GetByUserIdTests : BaseUserMethodOfPaymentTest
+    public class GetByUserIdTests : BaseUserRoleTest
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.UserMethodOfPayments.GetByUserId(It.IsAny<int>()))
-                .Returns(new List<Entities.UserMethodOfPayment>() {
-                    new Entities.UserMethodOfPayment()
+            MockUnitOfWork.Setup(x => x.UserRoles.GetByUserId(It.IsAny<int>()))
+                .Returns(new List<Entities.UserRole>() {
+                    new Entities.UserRole()
                 });
         }
 
@@ -37,7 +37,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<Entities.UserMethodOfPayment>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<Entities.UserMethodOfPayment>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
             Assert.AreEqual(result.Count, 0);
         }
 
@@ -68,7 +68,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<Entities.UserMethodOfPayment>));
+            Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
             Assert.AreEqual(result.Count, 0);
         }
 
@@ -76,7 +76,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
         public void CheckPermissions()
         {
             // Arrange
-            var roles = new List<string>() { BusinessLogic.Security.Role.PostPayment, BusinessLogic.Security.Role.SystemAdmin };
+            var roles = new List<string>() { BusinessLogic.Security.Role.SystemAdmin };
             var service = GetService();
             SetupUnitOfWork();
 
@@ -90,7 +90,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
 
                     // Assert
                     Assert.IsNotNull(result);
-                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserMethodOfPayment>));
+                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
                 },
                 () =>
                 {
@@ -99,7 +99,7 @@ namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
 
                     // Assert
                     Assert.IsNotNull(result);
-                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserMethodOfPayment>));
+                    Assert.IsInstanceOfType(result, typeof(List<Entities.UserRole>));
                     Assert.AreEqual(result.Count, 0);
                 });
 

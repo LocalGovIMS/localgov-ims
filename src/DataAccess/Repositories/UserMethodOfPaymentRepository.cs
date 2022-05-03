@@ -8,15 +8,15 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class UserMopCodeRepository : Repository<UserMopCode>, IUserMopCodeRepository
+    public class UserMethodOfPaymentRepository : Repository<UserMethodOfPayment>, IUserMethodOfPaymentRepository
     {
-        public UserMopCodeRepository(IncomeDbContext context) : base(context)
+        public UserMethodOfPaymentRepository(IncomeDbContext context) : base(context)
         {
         }
 
-        public List<UserMopCode> GetByUserId(int id)
+        public List<UserMethodOfPayment> GetByUserId(int id)
         {
-            var results = IncomeDbContext.ImsUserMopCodes
+            var results = IncomeDbContext.ImsUserMethodOfPayments
                 .AsQueryable()
                 .Include(x => x.Mop)
                 .Where(x => x.UserId == id)
@@ -26,13 +26,13 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public void Update(List<UserMopCode> items, int userId)
+        public void Update(List<UserMethodOfPayment> items, int userId)
         {
             var filteredItems = items
                 .AsQueryable()
                 .ApplyFilters(Filters);
 
-            var existingItems = IncomeDbContext.ImsUserMopCodes
+            var existingItems = IncomeDbContext.ImsUserMethodOfPayments
                 .Where(x => x.UserId == userId)
                 .ApplyFilters(Filters)
                 .ToList();
@@ -43,7 +43,7 @@ namespace DataAccess.Repositories
             {
                 foreach (var item in existingItems)
                 {
-                    IncomeDbContext.ImsUserMopCodes.Remove(item);
+                    IncomeDbContext.ImsUserMethodOfPayments.Remove(item);
                 }
 
                 return;
@@ -62,7 +62,7 @@ namespace DataAccess.Repositories
 
             foreach (var item in toRemove)
             {
-                IncomeDbContext.ImsUserMopCodes.Remove(item);
+                IncomeDbContext.ImsUserMethodOfPayments.Remove(item);
             }
 
             #endregion
@@ -78,7 +78,7 @@ namespace DataAccess.Repositories
 
             foreach (var item in toAdd)
             {
-                IncomeDbContext.ImsUserMopCodes.Add(item);
+                IncomeDbContext.ImsUserMethodOfPayments.Add(item);
             }
 
             #endregion

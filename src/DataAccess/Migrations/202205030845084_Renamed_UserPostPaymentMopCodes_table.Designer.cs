@@ -13,7 +13,7 @@ namespace DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202204291419492_Renamed_UserPostPaymentMopCodes_table"; }
+            get { return "202205030845084_Renamed_UserPostPaymentMopCodes_table"; }
         }
         
         string IMigrationMetadata.Source

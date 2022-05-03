@@ -4,13 +4,13 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
-using Service = BusinessLogic.Services.UserMethodOfPaymentService;
+using Service = BusinessLogic.Services.UserRoleService;
 
-namespace BusinessLogic.UnitTests.Services.UserMethodOfPayment
+namespace BusinessLogic.UnitTests.Services.UserRole
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class BaseUserMethodOfPaymentTest
+    public class BaseUserRoleTest
     {
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
         protected readonly Mock<IUnitOfWork> MockUnitOfWork = new Mock<IUnitOfWork>();

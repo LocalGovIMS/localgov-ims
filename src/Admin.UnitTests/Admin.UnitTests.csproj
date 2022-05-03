@@ -172,6 +172,7 @@
     <Compile Include="Classes\Commands\PaymentIntegration\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExportCommandTests.cs" />
+    <Compile Include="Classes\Commands\UserMethodOfPayment\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\VatMetadata\EditCommandTests.cs" />
@@ -230,6 +231,8 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\EditViewModelBuilderTests.cs" />
@@ -373,6 +376,10 @@
     <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
     <Compile Include="Controllers\Transaction\TestBase.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\ConstructorTests.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\Edit\Get.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\Edit\Post.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\List\Get.cs" />
     <Compile Include="Controllers\UserTemplates\ConstructorTests.cs" />
     <Compile Include="Controllers\UserTemplates\Edit\Get.cs" />
     <Compile Include="Controllers\UserTemplates\Edit\Post.cs" />

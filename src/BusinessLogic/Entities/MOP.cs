@@ -9,7 +9,7 @@ namespace BusinessLogic.Entities
         {
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
-            UserMopCodes = new HashSet<UserMopCode>();
+            UserMethodOfPayments = new HashSet<UserMethodOfPayment>();
             MetaData = new HashSet<MopMetaData>();
         }
 
@@ -31,7 +31,7 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
 
-        public virtual ICollection<UserMopCode> UserMopCodes { get; set; }
+        public virtual ICollection<UserMethodOfPayment> UserMethodOfPayments { get; set; }
 
         public virtual ICollection<MopMetaData> MetaData { get; set; }
     }
