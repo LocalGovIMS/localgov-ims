@@ -1,4 +1,5 @@
 ﻿using Admin.Models.AccountReferenceValidator;
+using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using log4net;
 
@@ -19,7 +20,7 @@ namespace Admin.Classes.Commands.AccountReferenceValidator
         {
             var item = new BusinessLogic.Entities.AccountReferenceValidator()
             {
-                CharacterType = model.CharacterType,
+                CharacterType = (CharacterType?)model.CharacterType,
                 CheckDigitConfigurationId = model.CheckDigitConfigurationId,
                 Id = model.Id,
                 InputMask = model.InputMask,
