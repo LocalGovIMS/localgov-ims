@@ -38,8 +38,8 @@ namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
 
             if (data == null) return model;
 
-            model.CharacterType = data.CharacterType;
-            model.CheckDigitConfigurationId = data.Id;
+            model.CharacterType = (int?)data.CharacterType;
+            model.CheckDigitConfigurationId = data.CheckDigitConfigurationId;
             model.Id = data.Id;
             model.InputMask = data.InputMask;
             model.MaxLength = data.MaxLength;

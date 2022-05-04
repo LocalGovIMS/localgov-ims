@@ -63,7 +63,7 @@
         <div class="four wide field">
             @Html.LabelFor(m => m.CharacterType)
             <div class="ui selection dropdown character-type-dropdown">
-                @Html.HiddenFor(x => x.CharacterType, new { size = 4 })
+                @Html.HiddenFor(x => x.CharacterType)
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select character type</div>
                 <div class="menu">
@@ -83,7 +83,7 @@
         <div class="four wide field">
             @Html.LabelFor(m => m.CheckDigitConfigurationId)
             <div class="ui selection dropdown check-digit-configuration-dropdown">
-                @Html.HiddenFor(x => x.CheckDigitConfigurationId, new { size = 4 })
+                @Html.HiddenFor(x => x.CheckDigitConfigurationId)
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select check digit configuration</div>
                 <div class="menu">
