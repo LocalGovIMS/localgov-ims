@@ -114,7 +114,7 @@ VALUES ([UserId], [RoleId]);
 MERGE INTO AspNetUsers AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			('a0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[SeedData.UITestData.User1.EmailAddress]]', 1, '[[SeedData.DemoData.User1.PasswordHash]]', 'c024171d-c8a2-459d-af7d-4c1d1483f23a', NULL, 0, 0, NULL, 1, 0, '[[SeedData.UITestData.User1.EmailAddress]]'))
+			('a0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[SeedData.DemoData.User1.Username]]', 1, '[[SeedData.DemoData.User1.PasswordHash]]', 'c024171d-c8a2-459d-af7d-4c1d1483f23a', NULL, 0, 0, NULL, 1, 0, '[[SeedData.DemoData.User1.Username]]'))
 	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
 ON [Target].[Id] = [Source].[Id] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -124,7 +124,7 @@ WHEN NOT MATCHED BY TARGET THEN
 MERGE INTO AspNetUsers AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			('b0f013ed-bdd1-4d1a-9b01-07b65de845ed', '[[SeedData.UITestData.User2.EmailAddress]]', 1, '[[SeedData.DemoData.User2.PasswordHash]]', 'd034611d-a8a2-859d-ff7d-5c1d1483f24b', NULL, 0, 0, NULL, 1, 0, '[[SeedData.UITestData.User2.EmailAddress]]'))
+			('b0f013ed-bdd1-4d1a-9b01-07b65de845ed', '[[SeedData.DemoData.User2.Username]]', 1, '[[SeedData.DemoData.User2.PasswordHash]]', 'd034611d-a8a2-859d-ff7d-5c1d1483f24b', NULL, 0, 0, NULL, 1, 0, '[[SeedData.DemoData.User2.Username]]'))
 	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
 ON [Target].[Id] = [Source].[Id] 
 WHEN NOT MATCHED BY TARGET THEN
