@@ -120,20 +120,22 @@ namespace BusinessLogic.Services
         {
             return new List<Metadata>()
             {
-                new Metadata() { Key = "IsAJournal", Description = "Is A Journal" },
-                new Metadata() { Key = "IsAJournalReallocation", Description = "Is A Journal Reallocation" },
-                new Metadata() { Key = "IsATransferOut", Description = "Is A Transfer Out" },
-                new Metadata() { Key = "IsACardSelfServicePayment", Description = "Is A Card Self Service Payment" },
+                new Metadata() { Key = "IsAJournal", Description = "Is a Journal" },
+                new Metadata() { Key = "IsAJournalReallocation", Description = "Is a Journal Reallocation" },
+                new Metadata() { Key = "IsATransferOut", Description = "Is a Transfer Out" },
+                new Metadata() { Key = "IsACardSelfServicePayment", Description = "Is a Card Self Service Payment" },
                 new Metadata() { Key = "IsRefundable", Description = "Is Refundable" },
-                new Metadata() { Key = "IsATransferIn", Description = "Is A Transfer In" },
-                new Metadata() { Key = "IsACardAtpPayment", Description = "Is A Card Atp Payment" },
-                new Metadata() { Key = "IsAChequePayment", Description = "Is A Cheque Payment" },
-                new Metadata() { Key = "IsACardViaStaffPayment", Description = "Is A Card Via Staff Payment" },
-                new Metadata() { Key = "IsACashPayment", Description = "Is A Cash Payment" },
-                new Metadata() { Key = "IsAnEReturnChequePayment", Description = "Is An EReturn Cheque Payment" },
+                new Metadata() { Key = "IsATransferIn", Description = "Is a Transfer In" },
+                new Metadata() { Key = "IsACardAtpPayment", Description = "Is a Card Atp Payment" },
+                new Metadata() { Key = "IsAChequePayment", Description = "Is a Cheque Payment" },
+                new Metadata() { Key = "IsACardViaStaffPayment", Description = "Is a Card Via Staff Payment" },
+                new Metadata() { Key = "IsACashPayment", Description = "Is a Cash Payment" },
+                new Metadata() { Key = "IsAnEReturnChequePayment", Description = "Is an EReturn Cheque Payment" },
                 new Metadata() { Key = "PaymentIntegrationId", Description = "Payment Integration" },
                 new Metadata() { Key = "BackgroundColour", Description = "Background Colour" },
                 new Metadata() { Key = "TextColour", Description = "Text Colour" },
+                new Metadata() { Key = "IsACardPaymentFee", Description = "Is a Card Payment Fee" },
+                new Metadata() { Key = "IncursAFee", Description = "Incurs a Fee" }
             };
         }
     }

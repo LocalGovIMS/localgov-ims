@@ -21,5 +21,6 @@
         public const string IsACentralChargeFee = "IsACentralChargeFee";
         public const string FeeAccountReference = "FeeAccountReference";
         public const string FeeFundCode = "FeeFundCode";
+        public const string PaymentIntegrationId = "PaymentIntegrationId";
     }
 }

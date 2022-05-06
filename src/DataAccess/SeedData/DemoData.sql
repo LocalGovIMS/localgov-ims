@@ -1,3 +1,15 @@
+SET IDENTITY_INSERT PaymentIntegrations ON;
+MERGE INTO PaymentIntegrations AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			(1, '[[SeedData.DemoData.PaymentIntegration.Name]]', '[[SeedData.DemoData.PaymentIntegration.BaseUri]]')) 
+	AS S ([Id], [Name], [BaseUri])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Id], [Name], [BaseUri])
+VALUES ([Id], [Name], [BaseUri]);
+SET IDENTITY_INSERT PaymentIntegrations OFF;
+
 MERGE INTO Offices AS [Target]
 USING (SELECT * 
 		FROM (VALUES
@@ -12,11 +24,11 @@ INSERT ([OfficeCode], [Name])
 VALUES ([OfficeCode], [Name]);    
 
 DECLARE @User1Id INT = NULL;
-DECLARE @User1Username VARCHAR(100) = '[[DBInitialiser.User1.Username]]';
+DECLARE @User1Username VARCHAR(100) = '[[SeedData.DemoData.User1.Username]]';
 MERGE INTO Users AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			(@User1Username, GETDATE(), 90, 0, '[[DBInitialiser.User1.Name]]', GETDATE(), NULL, 'SP')) 
+			(@User1Username, GETDATE(), 90, 0, '[[SeedData.DemoData.User1.Name]]', GETDATE(), NULL, 'SP')) 
 	AS S ([UserName], [LastLogin], [ExpiryDays], [Disabled], [DisplayName], [CreatedAt], [LastEnabledAt], [OfficeCode])) AS [Source]
 ON [Target].[UserName] = [Source].[UserName] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -56,11 +68,11 @@ INSERT ([UserId], [RoleId])
 VALUES ([UserId], [RoleId]);
 
 DECLARE @User2Id INT = NULL;
-DECLARE @User2Username VARCHAR(100) = '[[DBInitialiser.User2.Username]]';
+DECLARE @User2Username VARCHAR(100) = '[[SeedData.DemoData.User2.Username]]';
 MERGE INTO Users AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			(@User2Username, GETDATE(), 90, 0, '[[DBInitialiser.User2.Name]]',	GETDATE(), NULL, 'SP')) 
+			(@User2Username, GETDATE(), 90, 0, '[[SeedData.DemoData.User2.Name]]',	GETDATE(), NULL, 'SP')) 
 	AS S ([UserName], [LastLogin], [ExpiryDays], [Disabled], [DisplayName], [CreatedAt], [LastEnabledAt], [OfficeCode])) AS [Source]
 ON [Target].[UserName] = [Source].[UserName] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -99,6 +111,26 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([UserId], [RoleId])
 VALUES ([UserId], [RoleId]);
 
+MERGE INTO AspNetUsers AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			('a0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[SeedData.UITestData.User1.EmailAddress]]', 1, '[[SeedData.DemoData.User1.PasswordHash]]', 'c024171d-c8a2-459d-af7d-4c1d1483f23a', NULL, 0, 0, NULL, 1, 0, '[[SeedData.UITestData.User1.EmailAddress]]'))
+	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
+	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);
+
+MERGE INTO AspNetUsers AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			('b0f013ed-bdd1-4d1a-9b01-07b65de845ed', '[[SeedData.UITestData.User2.EmailAddress]]', 1, '[[SeedData.DemoData.User2.PasswordHash]]', 'd034611d-a8a2-859d-ff7d-5c1d1483f24b', NULL, 0, 0, NULL, 1, 0, '[[SeedData.UITestData.User2.EmailAddress]]'))
+	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
+	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);
+
 MERGE INTO Mops AS [Target]
 USING (SELECT * 
 		FROM (VALUES
@@ -117,9 +149,10 @@ USING (SELECT *
 			('20', 'All Pay - IVR Desktop', 99999.99, 0, 0),
 			('21', 'All Pay - Bills Online', 99999.99, 0, 0),
 			('28', 'Interfaces', 999999999, 0, 0),
-			('90', 'SmartPay SelfService cards', 999999999, 0, 0),
-			('91', 'SmartPay ATP cards', 999999999, 0, 0),
-			('92', 'SmartPay Staff cards', 999999999, 0, 0)) 
+			('90', 'GOV.UK Pay SelfService cards', 999999999, 0, 0),
+			('91', 'GOV.UK Pay ATP cards', 999999999, 0, 0),
+			('92', 'GOV.UK Pay Staff cards', 999999999, 0, 0),
+			('PF', 'GOV.UK Pay Fee', 999999999, 0, 0)) 
 	AS S ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled])) AS [Source]
 ON [Target].[MopCode] = [Source].[MopCode] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -174,7 +207,15 @@ USING (SELECT *
 			('TextColour', '#fff', '90'),
 			('TextColour', '#fff', '91'),
 			('TextColour', '#fff', '92'),
-			('TextColour', '#fff', '24')) 
+			('TextColour', '#fff', '24'),
+			('PaymentIntegrationId', '1', '90'),
+			('PaymentIntegrationId', '1', '91'),
+			('PaymentIntegrationId', '1', '92'),
+			('IncursAFee', 'TRUE', '90'),
+			('IncursAFee', 'TRUE', '91'),
+			('IncursAFee', 'TRUE', '92'),
+			('IsACardPaymentFee', 'TRUE', 'PF')
+			) 
 	AS S ([Key], [Value], [MopCode])) AS [Source]
 ON [Target].[MopCode] = [Source].[MopCode] 
 	AND [Target].[Key] = [Source].[Key] 
@@ -327,7 +368,9 @@ USING (SELECT *
 			('GeneralLedgerCode', '72101750163', '32'),
 			('ExportToLedger', 'True', '31'),
 			('UseGeneralLedgerCode', 'True', '31'),
-			('GeneralLedgerCode', '72101750164', '31'))
+			('GeneralLedgerCode', '72101750164', '31'),
+			('[[SeedData.DemoData.FundMetadata.Key1]]', '[[SeedData.DemoData.FundMetadata.Value1]]', '[[SeedData.DemoData.FundMetadata.FundCode1]]')
+			)
 	AS S ([Key], [Value], [FundCode])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 	AND [Target].[Key] = [Source].[Key] 
@@ -367,15 +410,15 @@ USING (SELECT *
 		FROM (VALUES
 			('Open Validation', 1, 30, NULL,  '******************************', 1, NULL),
 			('Market stalls', 5, 30, NULL,  '#*****************************', 1, NULL),
-			('Parking Fines', 10, 10, NULL,  'BJ#######@', 1, @CheckDigitConfigurationId_ParkingFines),
+			('Parking Fines', 10, 10, NULL,  'BJ#######@', 5, @CheckDigitConfigurationId_ParkingFines),
 			('Miscellaneous Income', 11, 11, NULL,  '###########', 1, NULL),
 			('SAP Debtors', 10, 10, NULL,  '##########', 1, NULL),
 			('Old Debtors', 11, 11, NULL,  '?##########', 1, NULL),
 			('Academy CTAX/NNDR', 9, 9, NULL,  '########@', 1, @CheckDigitConfigurationId_AcademyCtax),
 			('Benefit Overpayments', 8, 8, NULL,  '########', 1, NULL),
-			('Fixed Penalty Notice', 10, 10, NULL,  'FP#######@', 3, @CheckDigitConfigurationId_FixedPenaltyNotice),
+			('Fixed Penalty Notice', 10, 10, NULL,  'FP#######@', 5, @CheckDigitConfigurationId_FixedPenaltyNotice),
 			('Building Control', 6, 30, NULL,  '******************************', 1, NULL),
-			('Landlord accredit', 13, 13, NULL,  'ALS/####/####', 1, NULL),
+			('Landlord accredit', 13, 13, NULL,  'ALS/####/####', 5, NULL),
 			('Housing Rents', 11, 11, NULL,  '##########@', 1, @CheckDigitConfigurationId_HousingRents),
 			('Library Charges', 14, 14, NULL,  '#############@', 1, @CheckDigitConfigurationId_LibraryCharges)) 
 	AS S ([Name], [MinLength], [MaxLength], [Regex], [InputMask], [CharacterType], [CheckDigitConfigurationId])) AS [Source]
@@ -399,18 +442,6 @@ UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceV
 UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Landlord accredit') WHERE FundCode = '3U'
 UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Housing Rents') WHERE FundCode = '5'
 UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Library Charges') WHERE FundCode = '5M'
-
-SET IDENTITY_INSERT PaymentIntegrations ON;
-MERGE INTO PaymentIntegrations AS [Target]
-USING (SELECT * 
-		FROM (VALUES 
-			(1, '[[DBInitialiser.PaymentIntegration.Name]]', '[[DBInitialiser.PaymentIntegration.BaseUri]]')) 
-	AS S ([Id], [Name], [BaseUri])) AS [Source]
-ON [Target].[Id] = [Source].[Id] 
-WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Id], [Name], [BaseUri])
-VALUES ([Id], [Name], [BaseUri]);
-SET IDENTITY_INSERT PaymentIntegrations OFF;
 
 MERGE INTO Templates AS [Target]
 USING (SELECT * 
