@@ -103,7 +103,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountReferenceValidator
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.CharacterType.Should().Be(CharacterType.Alpha);
+            result.CharacterType.Should().Be((int?)CharacterType.Alpha);
         }
 
         [TestMethod]

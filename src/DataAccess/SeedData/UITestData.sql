@@ -2,7 +2,7 @@ SET IDENTITY_INSERT PaymentIntegrations ON;
 MERGE INTO PaymentIntegrations AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			(1, '[[UITestInitialisation.PaymentIntegration.Name]]', '[[UITestInitialisation.PaymentIntegration.BaseUri]]')) 
+			(1, '[[SeedData.UITestData.PaymentIntegration.Name]]', '[[SeedData.UITestData.PaymentIntegration.BaseUri]]')) 
 	AS S ([Id], [Name], [BaseUri])) AS [Source]
 ON [Target].[Id] = [Source].[Id] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -10,7 +10,7 @@ WHEN NOT MATCHED BY TARGET THEN
 	VALUES ([Id], [Name], [BaseUri])
 WHEN MATCHED THEN
 	UPDATE SET [BaseUri] = [Source].[BaseUri];
-SET IDENTITY_INSERT PaymentIntegrations OFF;   
+SET IDENTITY_INSERT PaymentIntegrations OFF;
 
 MERGE INTO AccountHolders AS [Target]
 USING (SELECT * 
@@ -21,23 +21,3 @@ ON [Target].[AccountReference] = [Source].[AccountReference]
 WHEN NOT MATCHED BY TARGET THEN
 INSERT ([AccountReference], [FundCode], [CurrentBalance], [PeriodDebit], [Title], [Forename], [Surname], [SurnameSoundex], [AddressLine1], [AddressLine2], [AddressLine3], [AddressLine4], [Postcode], [PeriodCredit], [RecordType], [UserField1], [UserField2], [UserField3], [StopMessageReference], [LastUpdated])
 VALUES ([AccountReference], [FundCode], [CurrentBalance], [PeriodDebit], [Title], [Forename], [Surname], [SurnameSoundex], [AddressLine1], [AddressLine2], [AddressLine3], [AddressLine4], [Postcode], [PeriodCredit], [RecordType], [UserField1], [UserField2], [UserField3], [StopMessageReference], [LastUpdated]);
-
-MERGE INTO AspNetUsers AS [Target]
-USING (SELECT * 
-		FROM (VALUES 
-			('f0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[UITestInitialisation.User1.EmailAddress]]', 1, '[[UITestInitialisation.User1.PasswordHash]]', 'c024171d-c8a2-459d-af7d-4c1d1483f23a', NULL, 0, 0, NULL, 1, 0, '[[UITestInitialisation.User1.EmailAddress]]'))
-	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
-ON [Target].[Id] = [Source].[Id] 
-WHEN NOT MATCHED BY TARGET THEN
-	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
-	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);
-
-	MERGE INTO AspNetUsers AS [Target]
-USING (SELECT * 
-		FROM (VALUES 
-			('f0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[UITestInitialisation.User2.EmailAddress]]', 1, '[[UITestInitialisation.User2.PasswordHash]]', 'd034611d-a8a2-859d-ff7d-5c1d1483f24b', NULL, 0, 0, NULL, 1, 0, '[[UITestInitialisation.User2.EmailAddress]]'))
-	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
-ON [Target].[Id] = [Source].[Id] 
-WHEN NOT MATCHED BY TARGET THEN
-	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
-	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);

@@ -7,19 +7,20 @@ namespace DataAccess.SeedData
         public static string Process(string script)
         {
             return script
-                .Replace("[[DBInitialiser.PaymentIntegration.Name]]", ConfigurationManager.AppSettings["DatabaseInitialisation.PaymentIntegration.Name"])
-                .Replace("[[DBInitialiser.PaymentIntegration.BaseUri]]", ConfigurationManager.AppSettings["DatabaseInitialisation.PaymentIntegration.BaseUri"])
-                .Replace("[[DBInitialiser.User1.Username]]", ConfigurationManager.AppSettings["DatabaseInitialisation.User1.Username"])
-                .Replace("[[DBInitialiser.User1.Name]]", ConfigurationManager.AppSettings["DatabaseInitialisation.User1.Name"])
-                .Replace("[[DBInitialiser.User2.Username]]", ConfigurationManager.AppSettings["DatabaseInitialisation.User2.Username"])
-                .Replace("[[DBInitialiser.User2.Name]]", ConfigurationManager.AppSettings["DatabaseInitialisation.User2.Name"])
+                .Replace("[[SeedData.DemoData.PaymentIntegration.Name]]", ConfigurationManager.AppSettings["SeedData.DemoData.PaymentIntegration.Name"])
+                .Replace("[[SeedData.DemoData.PaymentIntegration.BaseUri]]", ConfigurationManager.AppSettings["SeedData.DemoData.PaymentIntegration.BaseUri"])
+                .Replace("[[SeedData.DemoData.User1.Username]]", ConfigurationManager.AppSettings["SeedData.DemoData.User1.Username"])
+                .Replace("[[SeedData.DemoData.User1.Name]]", ConfigurationManager.AppSettings["SeedData.DemoData.User1.Name"])
+                .Replace("[[SeedData.DemoData.User1.PasswordHash]]", ConfigurationManager.AppSettings["SeedData.DemoData.User1.PasswordHash"])
+                .Replace("[[SeedData.DemoData.User2.Username]]", ConfigurationManager.AppSettings["SeedData.DemoData.User2.Username"])
+                .Replace("[[SeedData.DemoData.User2.Name]]", ConfigurationManager.AppSettings["SeedData.DemoData.User2.Name"])
+                .Replace("[[SeedData.DemoData.User2.PasswordHash]]", ConfigurationManager.AppSettings["SeedData.DemoData.User2.PasswordHash"])
+                .Replace("[[SeedData.DemoData.FundMetadata.Key1]]", ConfigurationManager.AppSettings["SeedData.DemoData.FundMetadata.Key1"])
+                .Replace("[[SeedData.DemoData.FundMetadata.Value1]]", ConfigurationManager.AppSettings["SeedData.DemoData.FundMetadata.Value1"])
+                .Replace("[[SeedData.DemoData.FundMetadata.FundCode1]]", ConfigurationManager.AppSettings["SeedData.DemoData.FundMetadata.FundCode1"])
 
-                .Replace("[[UITestInitialisation.PaymentIntegration.Name]]", ConfigurationManager.AppSettings["UITestInitialisation.PaymentIntegration.Name"])
-                .Replace("[[UITestInitialisation.PaymentIntegration.BaseUri]]", ConfigurationManager.AppSettings["UITestInitialisation.PaymentIntegration.BaseUri"])
-                .Replace("[[UITestInitialisation.User1.EmailAddress]]", ConfigurationManager.AppSettings["UITestInitialisation.User1.EmailAddress"])
-                .Replace("[[UITestInitialisation.User1.PasswordHash]]", ConfigurationManager.AppSettings["UITestInitialisation.User1.PasswordHash"])
-                .Replace("[[UITestInitialisation.User2.EmailAddress]]", ConfigurationManager.AppSettings["UITestInitialisation.User2.EmailAddress"])
-                .Replace("[[UITestInitialisation.User2.PasswordHash]]", ConfigurationManager.AppSettings["UITestInitialisation.User2.PasswordHash"])
+                .Replace("[[SeedData.UITestData.PaymentIntegration.Name]]", ConfigurationManager.AppSettings["SeedData.UITestData.PaymentIntegration.Name"])
+                .Replace("[[SeedData.UITestData.PaymentIntegration.BaseUri]]", ConfigurationManager.AppSettings["SeedData.UITestData.PaymentIntegration.BaseUri"])
                 ;
         }
     }
