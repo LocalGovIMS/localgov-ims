@@ -16,7 +16,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _ListForImportProcessingRule(int id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { ImportProcessingRuleId = id });
@@ -25,7 +24,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _EditListForImportProcessingRule(int id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { ImportProcessingRuleId = id });

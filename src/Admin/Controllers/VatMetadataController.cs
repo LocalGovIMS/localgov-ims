@@ -16,7 +16,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _ListForVat(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
@@ -25,7 +24,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _EditListForVat(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
