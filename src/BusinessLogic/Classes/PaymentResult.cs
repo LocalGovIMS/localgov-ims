@@ -7,5 +7,6 @@
         public string MerchantReference { get; set; }
         public string MerchantSig { get; set; }
         public string PaymentMethod { get; set; }
+        public decimal Fee { get; set; }
     }
 }

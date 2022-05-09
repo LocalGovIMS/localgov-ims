@@ -24,12 +24,13 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
 
         protected override BasicListViewModel OnBuild(int id)
         {
-            var data = _userTemplateService.GetUserTemplates(id);
+            var data = _userTemplateService.GetByUserId(id).OrderBy(x => x.Template.Name);
 
             var model = new BasicListViewModel()
             {
                 ListTitle = "User Templates",
                 ColumnTitle = "Template",
+                NoItemsMessage = "There are no user templates specified",
                 Items = data.Select(x => x.Template.Name).ToList()
             };
 

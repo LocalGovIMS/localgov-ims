@@ -145,16 +145,32 @@
     <Compile Include="Migrations\202201261102016_Increased_length_of_PspReference_field.designer.cs">
       <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs" />
+    <Compile Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.designer.cs">
+      <DependentUpon>202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204151131018_Added_CheckDigitConfiguration_Name_field.cs" />
+    <Compile Include="Migrations\202204151131018_Added_CheckDigitConfiguration_Name_field.designer.cs">
+      <DependentUpon>202204151131018_Added_CheckDigitConfiguration_Name_field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204290856512_Removed_redundant_Fund_fields.cs" />
+    <Compile Include="Migrations\202204290856512_Removed_redundant_Fund_fields.designer.cs">
+      <DependentUpon>202204290856512_Removed_redundant_Fund_fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205030845084_Renamed_UserPostPaymentMopCodes_table.cs" />
+    <Compile Include="Migrations\202205030845084_Renamed_UserPostPaymentMopCodes_table.designer.cs">
+      <DependentUpon>202205030845084_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountHolderRepository.cs" />
-    <Compile Include="Repositories\AccountValidationRepository.cs" />
-    <Compile Include="Repositories\AccountValidationWeightingRepository.cs" />
+    <Compile Include="Repositories\AccountReferenceValidatorRepository.cs" />
     <Compile Include="Repositories\ActivityLogRepository.cs" />
     <Compile Include="Repositories\EReturnChequeRepository.cs" />
     <Compile Include="Repositories\EReturnStatusRepository.cs" />
+    <Compile Include="Repositories\CheckDigitConfigurationRepository.cs" />
     <Compile Include="Repositories\ImportRepository.cs" />
     <Compile Include="Repositories\VatMetadataRepository.cs" />
     <Compile Include="Repositories\FundMetadataRepository.cs" />
@@ -183,7 +199,7 @@
     <Compile Include="Repositories\MethodOfPaymentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\EReturnCashRepository.cs" />
-    <Compile Include="Repositories\UserPostPaymentMopCodeRepository.cs" />
+    <Compile Include="Repositories\UserMethodOfPaymentRepository.cs" />
     <Compile Include="Repositories\UserTemplateRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\VatRepository.cs" />
@@ -238,6 +254,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201261102016_Increased_length_of_PspReference_field.resx">
       <DependentUpon>202201261102016_Increased_length_of_PspReference_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.resx">
+      <DependentUpon>202204041823127_Added_new_account_reference_validation_entities_and_removed_old_ones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204151131018_Added_CheckDigitConfiguration_Name_field.resx">
+      <DependentUpon>202204151131018_Added_CheckDigitConfiguration_Name_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204290856512_Removed_redundant_Fund_fields.resx">
+      <DependentUpon>202204290856512_Removed_redundant_Fund_fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205030845084_Renamed_UserPostPaymentMopCodes_table.resx">
+      <DependentUpon>202205030845084_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

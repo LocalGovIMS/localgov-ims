@@ -18,6 +18,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
         private readonly Mock<IMethodOfPaymentService> _mockMopService = new Mock<IMethodOfPaymentService>();
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockTransactionService.Object,
+                _mockFundService.Object,
+                _mockMopService.Object,
+                _mockUserService.Object);
+        }
+
         private void SetupTransactionService(Mock<ITransactionService> service, int page)
         {
             service.Setup(x => x.SearchTransactions(It.IsAny<BusinessLogic.Models.Transactions.SearchCriteria>())).Returns(
@@ -144,8 +157,6 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
             );
         }
 
-
-
         [TestMethod]
         public void OnBuildWithoutParamReturnsViewModel()
         {
@@ -163,12 +174,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
                 _mockUserService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -180,14 +190,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
             SetupMopService(_mockMopService);
             SetupUserService(_mockUserService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTransactionService.Object,
-                _mockFundService.Object,
-                _mockMopService.Object,
-                _mockUserService.Object);
-
-            var result = viewModelBuidler.Build(new Admin.Models.Transaction.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Transaction.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -202,14 +205,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
             SetupMopService(_mockMopService);
             SetupUserService(_mockUserService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTransactionService.Object,
-                _mockFundService.Object,
-                _mockMopService.Object,
-                _mockUserService.Object);
-
-            var result = viewModelBuidler.Build(new Admin.Models.Transaction.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Transaction.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

@@ -167,8 +167,7 @@ namespace DataAccess.Repositories
 
             if (criteria.EndDate != null)
             {
-                DateTime endDate = ((DateTime)criteria.EndDate).AddDays(1);
-                transactions = transactions.Where(x => x.EntryDate < endDate);
+                transactions = transactions.Where(x => x.EntryDate <= criteria.EndDate);
             }
 
             if (!string.IsNullOrWhiteSpace(criteria.BatchReference))

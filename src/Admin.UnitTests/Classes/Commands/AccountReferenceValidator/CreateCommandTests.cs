@@ -1,0 +1,64 @@
+﻿using BusinessLogic.Classes.Result;
+using BusinessLogic.Interfaces.Services;
+using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Diagnostics.CodeAnalysis;
+using Command = Admin.Classes.Commands.AccountReferenceValidator.CreateCommand;
+using CommandResult = Admin.Classes.Commands.CommandResult;
+using ViewModel = Admin.Models.AccountReferenceValidator.EditViewModel;
+
+namespace Admin.UnitTests.Classes.Commands.AccountReferenceValidator
+{
+    [TestClass]
+    [ExcludeFromCodeCoverage]
+    public class CreateCommandTests
+    {
+        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        private readonly Mock<IAccountReferenceValidatorService> _mockAccountReferenceValidatorService = new Mock<IAccountReferenceValidatorService>();
+
+        private ViewModel GenerateViewModel()
+        {
+            return new ViewModel()
+            {
+                Id = 0,
+                Name = "New Check Digit Configuration"
+            };
+        }
+
+        [TestMethod]
+        public void OnExecuteReturnsCommandResult()
+        {
+            // Arrange
+            var command = new Command(
+                _mockLogger.Object,
+                _mockAccountReferenceValidatorService.Object);
+
+            // Act
+            var result = command.Execute(GenerateViewModel());
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CommandResult));
+        }
+
+        [TestMethod]
+        public void OnExecuteReturnsCommandResultFromResult()
+        {
+            // Arrange
+            _mockAccountReferenceValidatorService.Setup(x => x.Create(It.IsAny<BusinessLogic.Entities.AccountReferenceValidator>()))
+               .Returns(new Result());
+
+            var command = new Command(
+                _mockLogger.Object,
+                _mockAccountReferenceValidatorService.Object);
+
+            // Act
+            var result = command.Execute(GenerateViewModel());
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CommandResult));
+        }
+    }
+}

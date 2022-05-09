@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundMetadataService> _mockFundMetadataService = new Mock<IFundMetadataService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundMetadataService.Object);
+        }
+
         private void SetupService(Mock<IFundMetadataService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMetadata.SearchCriteria>())).Returns(
@@ -51,12 +61,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
             // Arrange
             SetupService(_mockFundMetadataService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundMetadataService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType<ViewModel>();
@@ -69,12 +75,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
             // Arrange
             SetupService(_mockFundMetadataService);
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockFundMetadataService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(new Models.FundMetadata.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.FundMetadata.SearchCriteria());
 
             // Assert
             result.Should().BeOfType<ViewModel>();

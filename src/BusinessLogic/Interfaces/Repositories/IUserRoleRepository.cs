@@ -5,8 +5,8 @@ namespace BusinessLogic.Interfaces.Repositories
 {
     public interface IUserRoleRepository : IRepository<UserRole>
     {
-        List<UserRole> GetUserRoles(int id);
-        List<string> GetUserRoles(string userName, bool track);
-        void UpdateUserRoles(List<UserRole> roles, int userId);
+        List<UserRole> GetByUserId(int id);
+        List<string> GetByUsername(string userName, bool track);
+        void Update(List<UserRole> roles, int userId);
     }
 }

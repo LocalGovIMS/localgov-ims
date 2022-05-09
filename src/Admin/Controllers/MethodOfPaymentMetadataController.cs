@@ -16,7 +16,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _ListForMethodOfPayment(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = id });
@@ -25,7 +24,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _EditListForMethodOfPayment(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = id });

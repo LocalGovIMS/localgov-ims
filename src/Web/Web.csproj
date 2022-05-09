@@ -76,6 +76,7 @@
     <Compile Include="Mvc\CheckBoxListItem.cs" />
     <Compile Include="Mvc\DataAnnotations\CheckDenominationValueAttribute.cs" />
     <Compile Include="Mvc\Attributes\MultipleButtonAttribute.cs" />
+    <Compile Include="Mvc\DataAnnotations\GreaterThanAttribute.cs" />
     <Compile Include="Mvc\Extensions\TempDataDictionaryExtensions.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinder.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinderProvider.cs" />

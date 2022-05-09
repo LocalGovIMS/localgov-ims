@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Office
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IOfficeService> _mockOfficeService = new Mock<IOfficeService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockOfficeService.Object);
+        }
+
         private void SetupMopService(Mock<IOfficeService> service)
         {
             service.Setup(x => x.GetAll()).Returns(
@@ -37,12 +47,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Office
             // Arrange
             SetupMopService(_mockOfficeService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockOfficeService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType<List<ViewModel>>();
@@ -52,12 +58,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Office
         public void OnBuildWithNoDataReturnsNull()
         {
             // Arrange          
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockOfficeService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -67,12 +70,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Office
         public void OnBuildWithParamReturnsNull()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockOfficeService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build("V1");
+            var result = _viewModelBuilder.Build("V1");
 
             // Assert
             result.Should().BeNull();

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Classes;
 using BusinessLogic.Enums;
+using BusinessLogic.Interfaces.Result;
 using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Services
@@ -10,5 +11,6 @@ namespace BusinessLogic.Interfaces.Services
         PaymentResponse CreateHppPayments(List<PaymentDetails> paymentDetails);
         ProcessPaymentResponse ProcessPayment(PaymentResult paymentResult);
         ProcessPaymentResponse ProcessPayments(List<PaymentDetails> payments, PaymentTypeEnum type);
+        IResult ProcessFee(PaymentResult paymentResult);
     }
 }

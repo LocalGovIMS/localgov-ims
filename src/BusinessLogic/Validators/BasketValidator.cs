@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
@@ -16,7 +15,7 @@ namespace BusinessLogic.Validators
         private readonly ILog _logger;
         private readonly IFundService _fundService;
         private readonly IAccountHolderService _accountHolderService;
-        private readonly IAccountReferenceValidator _accountReferenceValidator;
+        private readonly IPaymentValidationHandler _paymentValidationHandler;
         private readonly ISecurityContext _securityContext;
 
         private const string DefaultErrorMessage = "There is an error with the basket";
@@ -24,13 +23,13 @@ namespace BusinessLogic.Validators
         public BasketValidator(ILog logger
             , IFundService fundService
             , IAccountHolderService accountHolderService
-            , IAccountReferenceValidator accountReferenceValidator
+            , IPaymentValidationHandler paymentValidationHandler
             , ISecurityContext securityContext)
         {
             _logger = logger;
             _fundService = fundService;
             _accountHolderService = accountHolderService;
-            _accountReferenceValidator = accountReferenceValidator;
+            _paymentValidationHandler = paymentValidationHandler;
             _securityContext = securityContext;
         }
 
@@ -84,7 +83,13 @@ namespace BusinessLogic.Validators
 
                 foreach (var item in basket.Items)
                 {
-                    var result = _accountReferenceValidator.ValidateReference(item.AccountReference, item.FundCode, item.Amount, AccountReferenceValidationSource.Payments);
+                    var result = _paymentValidationHandler.Validate(new Payment.PaymentValidationArgs()
+                    {
+                        Reference = item.AccountReference,
+                        FundCode = item.FundCode,
+                        Amount = item.Amount
+                    });
+
                     if (!result.Success)
                     {
                         validationResult.AddError(result.Error);

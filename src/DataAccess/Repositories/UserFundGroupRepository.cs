@@ -14,7 +14,7 @@ namespace DataAccess.Repositories
         {
         }
 
-        public List<UserFundGroup> GetUserFundGroups(int id)
+        public List<UserFundGroup> GetByUserId(int id)
         {
             var items = DbSet
                 .Include(x => x.FundGroup)
@@ -27,7 +27,7 @@ namespace DataAccess.Repositories
             return items;
         }
 
-        public void UpdateUserFundGroups(List<UserFundGroup> items, int userId)
+        public void Update(List<UserFundGroup> items, int userId)
         {
             var filteredItems = items
                 .AsQueryable()

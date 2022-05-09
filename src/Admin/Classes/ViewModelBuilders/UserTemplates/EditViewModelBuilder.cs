@@ -33,7 +33,7 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
         protected override EditViewModel OnBuild(int id)
         {
             var user = _userService.GetUser(id);
-            var existingItems = _userTemplateService.GetUserTemplates(id);
+            var existingItems = _userTemplateService.GetByUserId(id);
 
             var model = new EditViewModel();
 
@@ -42,14 +42,14 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
 
             model.UserId = user.UserId;
             model.UserName = user.UserName;
-            model.Items = GetTemplates(existingItems);
+            model.Templates = GetTemplates(existingItems);
 
             return model;
         }
 
         private ICollection<CheckBoxListItem> GetTemplates(List<BusinessLogic.Entities.UserTemplate> existingItems)
         {
-            var allItems = _templateService.GetAllTemplates();
+            var allItems = _templateService.GetAllTemplates().OrderBy(x => x.Name);
 
             return allItems.Select(x => new CheckBoxListItem()
             {

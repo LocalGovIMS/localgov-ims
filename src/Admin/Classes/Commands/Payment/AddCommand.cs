@@ -1,6 +1,5 @@
 ﻿using Admin.Models.Payment;
 using Admin.Models.Shared;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
@@ -14,20 +13,19 @@ namespace Admin.Classes.Commands.Payment
     {
         private readonly IFundService _fundService;
         private readonly IMethodOfPaymentService _mopService;
-
-        private readonly IAccountReferenceValidator _accountReferenceValidator;
+        private readonly IPaymentValidationHandler _paymentValidationHandler;
         private readonly ISecurityContext _securityContext;
 
         public AddCommand(ILog log,
             IFundService fundService,
             IMethodOfPaymentService mopService,
-            IAccountReferenceValidator accountReferenceValidator,
+            IPaymentValidationHandler paymentValidationHandler,
             ISecurityContext securityContext)
             : base(log)
         {
             _fundService = fundService;
             _mopService = mopService;
-            _accountReferenceValidator = accountReferenceValidator;
+            _paymentValidationHandler = paymentValidationHandler;
             _securityContext = securityContext;
         }
 
@@ -86,7 +84,12 @@ namespace Admin.Classes.Commands.Payment
                 return false;
             }
 
-            var result = _accountReferenceValidator.ValidateReference(model.AccountReference, model.FundCode, model.Amount, AccountReferenceValidationSource.Payments);
+            var result = _paymentValidationHandler.Validate(new BusinessLogic.Validators.Payment.PaymentValidationArgs()
+            {
+                Reference = model.AccountReference,
+                FundCode = model.FundCode,
+                Amount = model.Amount
+            });
 
             if (!result.Success)
             {

@@ -7,7 +7,6 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IAccountHolderService
     {
-        AccountValidation GetAccountValidation(string validationReference);
         IResult Create(AccountHolder accountHolder);
         IResult Update(AccountHolder accountHolder);
         AccountHolder GetByAccountReference(string accountReference);

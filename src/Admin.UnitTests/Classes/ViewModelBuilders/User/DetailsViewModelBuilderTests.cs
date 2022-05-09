@@ -4,6 +4,8 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using ViewModel = Admin.Models.User.DetailsViewModel;
+using ViewModelBuilder = Admin.Classes.ViewModelBuilders.User.DetailsViewModelBuilder;
 
 namespace Admin.UnitTests.Classes.ViewModelBuilders.User
 {
@@ -13,37 +15,53 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.User
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
 
-        [TestMethod]
-        public void TestUserDetailsViewModelThrowsException()
-        {
-            var detailsViewModelBuilder = new Admin.Classes.ViewModelBuilders.User.DetailsViewModelBuilder
-                (_mockLogger.Object, _mockUserService.Object);
+        private ViewModelBuilder _viewModelBuilder;
 
-            var result = detailsViewModelBuilder.Build();
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserService.Object);
+        }
+
+        private void SetupUserService(Mock<IUserService> service)
+        {
+            service.Setup(x => x.GetUser(It.IsAny<int>()))
+                .Returns(new BusinessLogic.Entities.User()
+                {
+                    UserId = 123,
+                    UserName = "MockUserDetails",
+                    LastLogin = DateTime.Now,
+                    ExpiryDays = 30,
+                    Disabled = false
+
+                });
+        }
+
+        [TestMethod]
+        public void OnBuildWithoutParamReturnsNull()
+        {
+            // Arrange
+
+            // Act
+            var result = _viewModelBuilder.Build();
+
+            // Assert
             result.Should().BeNull();
         }
 
-
         [TestMethod]
-        public void TestUserDetailsViewModel()
+        public void OnBuildWithParamReturnsViewModel()
         {
-            Mock<IUserService> mockUserService = new Mock<IUserService>();
+            // Arrange
+            SetupUserService(_mockUserService);
 
-            mockUserService.Setup(x => x.GetUser(It.IsAny<int>())).Returns(new BusinessLogic.Entities.User()
-            {
-                UserId = 123,
-                UserName = "MockUserDetails",
-                LastLogin = DateTime.Now,
-                ExpiryDays = 30,
-                Disabled = false
+            // Act
+            var result = _viewModelBuilder.Build(1);
 
-            });
-            var detailsViewModelBuilder = new Admin.Classes.ViewModelBuilders.User.DetailsViewModelBuilder
-                (_mockLogger.Object, mockUserService.Object);
-
-            var result = detailsViewModelBuilder.Build(2);
-
-            result.UserName.Should().Be("MockUserDetails");
+            // Assert
+            result.Should().BeOfType(typeof(ViewModel));
         }
     }
 }

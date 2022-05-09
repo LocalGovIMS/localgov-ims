@@ -103,6 +103,31 @@ $('.account-reference-search').click(function (e) {
 
 })
 
+$('#Amount').blur(function (e) {
+    var message = validateInput();
+
+    var text = $('.amount-validator');
+
+    text.empty();
+
+    if (message.length != 0) {
+        text.empty();
+        text.append(message);
+        text.addClass('field-validation-error');
+        text.removeClass('field-validation-valid');
+        $('.message').show();
+        e.preventDefault();
+        $('#Amount').addClass('input-validation-error');
+        return false;
+    }
+    else {
+
+        text.removeClass('field-validation-error');
+        text.addClass('field-validation-valid');
+        $('#Amount').removeClass('input-validation-error');
+    }
+});
+
 $.validator.setDefaults({ ignore: null });
 
 
@@ -112,12 +137,21 @@ $(".add-to-basket").click(function (e) {
 
     var text = $('.amount-validator');
 
+    text.empty();
+
     if (message.length != 0) {
         text.empty();
         text.append(message);
+        text.addClass('field-validation-error');
+        text.removeClass('field-validation-valid');
         $('.message').show();
         e.preventDefault();
-        return false;       
+        return false;
+    }
+    else {
+
+        text.removeClass('field-validation-error');
+        text.addClass('field-validation-valid');
     }
 });
 
@@ -130,19 +164,15 @@ function validateInput(message) {
 
     var html = [];
 
-    html.push('<ul>');
-
     if (parseFloat($('#Amount').val()) < parseFloat($("#MopCode").data("mop-minimum-amount"))) {
-        html.push('<li>You must enter an amount greater than £' + $("#MopCode").data("mop-minimum-amount") +'</li>');
+        html.push('You must enter an amount greater than £' + $("#MopCode").data("mop-minimum-amount"));
         result = false;
     }
 
     if (parseFloat($('#Amount').val()) > parseFloat($("#MopCode").data("mop-maximum-amount"))) {
-        html.push('<li>You must enter an amount less than £' + $("#MopCode").data("mop-maximum-amount") + '</li>');
+        html.push('You must enter an amount less than £' + $("#MopCode").data("mop-maximum-amount"));
         result = false;
     }
-
-    html.push('</ul>');
 
     if (result) {
         return '';
@@ -151,7 +181,6 @@ function validateInput(message) {
         return html.join('');
     }
 }
-
 
 $(".post-payment").on("click",
     function (e) {

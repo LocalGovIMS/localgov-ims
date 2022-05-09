@@ -10,34 +10,17 @@ namespace Admin.Models.Fund
         [DisplayName("Name")]
         public string FundName { get; set; }
 
-        [DisplayName("Access level")]
-        public string AccessLevel { get; set; }
+        [DisplayName("Account reference validator")]
+        public int? AccountReferenceValidatorId { get; set; }
 
-        [DisplayName("Validation reference")]
-        public string ValidationReference { get; set; }
+        [DisplayName("Account reference validator")]
+        public string AccountReferenceValidatorName { get; set; }
 
         [DisplayName("VAT code")]
         public string VatCode { get; set; }
 
         [DisplayName("Maximum amount")]
         public decimal? MaximumAmount { get; set; }
-
-        public bool Narrative { get; set; }
-
-        [DisplayName("Export to fund")]
-        public bool ExportToFund { get; set; }
-
-        [DisplayName("Export to ledger")]
-        public bool ExportToLedger { get; set; }
-
-        [DisplayName("Export to format")]
-        public string FundExportFormat { get; set; }
-
-        [DisplayName("Use GL code")]
-        public bool UseGLCode { get; set; }
-
-        [DisplayName("GL code")]
-        public string GLCode { get; set; }
 
         [DisplayName("Overpay account")]
         public bool OverPayAccount { get; set; }

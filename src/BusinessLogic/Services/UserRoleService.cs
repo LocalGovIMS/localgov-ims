@@ -20,14 +20,14 @@ namespace BusinessLogic.Services
         {
         }
 
-        public List<UserRole> GetUserRoles(int id)
+        public List<UserRole> GetByUserId(int id)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<UserRole>();
 
             try
             {
-                return UnitOfWork.UserRoles.GetUserRoles(id).ToList();
+                return UnitOfWork.UserRoles.GetByUserId(id).ToList();
             }
             catch (Exception e)
             {
@@ -36,14 +36,14 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<string> GetUserRoles(string userName)
+        public List<string> GetByUserRole(string userName)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<string>();
 
             try
             {
-                return UnitOfWork.UserRoles.GetUserRoles(userName, true);
+                return UnitOfWork.UserRoles.GetByUsername(userName, true);
             }
             catch (Exception e)
             {
@@ -64,7 +64,7 @@ namespace BusinessLogic.Services
 
             try
             {
-                UnitOfWork.UserRoles.UpdateUserRoles(items, userId);
+                UnitOfWork.UserRoles.Update(items, userId);
 
                 UnitOfWork.Complete(SecurityContext.UserId);
 

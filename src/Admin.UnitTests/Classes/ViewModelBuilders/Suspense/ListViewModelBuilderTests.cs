@@ -18,6 +18,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ISuspenseService> _mockSuspenseService = new Mock<ISuspenseService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockSuspenseService.Object);
+        }
+        
         private void SetupSuspenseService(Mock<ISuspenseService> service, int page)
         {
             service.Setup(x => x.Search(It.IsAny<SearchCriteria>())).Returns(
@@ -45,12 +55,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
                 _mockSuspenseService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -58,11 +67,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
             // Arrange
             SetupSuspenseService(_mockSuspenseService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockSuspenseService.Object);
-
-            var result = viewModelBuidler.Build(new Admin.Models.Suspense.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Suspense.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -74,11 +79,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Suspense
             // Arrange
             SetupSuspenseService(_mockSuspenseService, 1);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockSuspenseService.Object);
-
-            var result = viewModelBuidler.Build(new Admin.Models.Suspense.SearchCriteria());
+            var result = _viewModelBuilder.Build(new Models.Suspense.SearchCriteria());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

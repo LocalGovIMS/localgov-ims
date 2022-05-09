@@ -15,9 +15,9 @@ namespace DataAccess
         {
             container
                 .RegisterType<IAccountHolderRepository, AccountHolderRepository>()
-                .RegisterType<IAccountValidationRepository, AccountValidationRepository>()
-                .RegisterType<IAccountValidationWeightingRepository, AccountValidationWeightingRepository>()
+                .RegisterType<IAccountReferenceValidatorRepository, AccountReferenceValidatorRepository>()
                 .RegisterType<IActivityLogRepository, ActivityLogRepository>()
+                .RegisterType<ICheckDigitConfigurationRepository, CheckDigitConfigurationRepository>()
                 .RegisterType<IEReturnRepository, EReturnRepository>()
                 .RegisterType<IEReturnCashRepository, EReturnCashRepository>()
                 .RegisterType<IEReturnChequeRepository, EReturnChequeRepository>()
@@ -42,7 +42,7 @@ namespace DataAccess
                 .RegisterType<IUserFundGroupRepository, UserFundGroupRepository>()
                 .RegisterType<IUserRepository, UserRepository>()
                 .RegisterType<IUserRoleRepository, UserRoleRepository>()
-                .RegisterType<IUserPostPaymentMopCodeRepository, UserPostPaymentMopCodeRepository>()
+                .RegisterType<IUserMethodOfPaymentRepository, UserMethodOfPaymentRepository>()
                 .RegisterType<IUserTemplateRepository, UserTemplateRepository>()
                 .RegisterType<IVatRepository, VatRepository>()
                 .RegisterType<IVatMetadataRepository, VatMetadataRepository>()

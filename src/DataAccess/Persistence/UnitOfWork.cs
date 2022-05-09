@@ -21,9 +21,9 @@ namespace DataAccess.Persistence
         #region Repositories
 
         public IAccountHolderRepository AccountHolders { get; private set; }
-        public IAccountValidationRepository AccountValidations { get; private set; }
-        public IAccountValidationWeightingRepository AccountValidationWeightings { get; private set; }
+        public IAccountReferenceValidatorRepository AccountReferenceValidators { get; private set; }
         public IActivityLogRepository ActivityLogs { get; private set; }
+        public ICheckDigitConfigurationRepository CheckDigitConfigurations { get; private set; }
         public IEReturnRepository EReturns { get; private set; }
         public IEReturnCashRepository EReturnCashes { get; private set; }
         public IEReturnChequeRepository EReturnCheques { get; private set; }
@@ -50,7 +50,7 @@ namespace DataAccess.Persistence
         public IUserFundGroupRepository UserFundGroups { get; private set; }
         public IUserRoleRepository UserRoles { get; private set; }
         public IUserTemplateRepository UserTemplates { get; private set; }
-        public IUserPostPaymentMopCodeRepository UserPostPaymentMopCodes { get; private set; }
+        public IUserMethodOfPaymentRepository UserMethodOfPayments { get; private set; }
         public IVatRepository Vats { get; private set; }
         public IVatMetadataRepository VatMetadatas { get; private set; }
         public IPaymentIntegrationRepository PaymentIntegrations { get; private set; }
@@ -66,9 +66,9 @@ namespace DataAccess.Persistence
         public UnitOfWork(IncomeDbContext context,
             ISecurityContext securityContext,
             IAccountHolderRepository accountHolderRepository,
-            IAccountValidationRepository accountValidationRepository,
-            IAccountValidationWeightingRepository accountValidationWeightingRepository,
+            IAccountReferenceValidatorRepository accountReferenceValidatorRepository,
             IActivityLogRepository activityLogRepository,
+            ICheckDigitConfigurationRepository checkDigitConfigurationRepository,
             IEReturnRepository eReturnRepository,
             IEReturnCashRepository eReturnCashesRepository,
             IEReturnChequeRepository eReturnChequesRepository,
@@ -95,7 +95,7 @@ namespace DataAccess.Persistence
             IUserFundGroupRepository userFundGroupRepository,
             IUserRoleRepository userRoleRepository,
             IUserTemplateRepository userTemplateRepository,
-            IUserPostPaymentMopCodeRepository userPostPaymentMopCodeRepository,
+            IUserMethodOfPaymentRepository userPostPaymentMopCodeRepository,
             IVatRepository vatRepository,
             IVatMetadataRepository VatMetadataRepository,
             IPaymentIntegrationRepository paymentIntegrationRepository,
@@ -112,9 +112,9 @@ namespace DataAccess.Persistence
             _securityContext = securityContext;
 
             AccountHolders = accountHolderRepository;
-            AccountValidations = accountValidationRepository;
-            AccountValidationWeightings = accountValidationWeightingRepository;
+            AccountReferenceValidators = accountReferenceValidatorRepository;
             ActivityLogs = activityLogRepository;
+            CheckDigitConfigurations = checkDigitConfigurationRepository;
             EReturns = eReturnRepository;
             EReturnCashes = eReturnCashesRepository;
             EReturnCheques = eReturnChequesRepository;
@@ -141,7 +141,7 @@ namespace DataAccess.Persistence
             UserFundGroups = userFundGroupRepository;
             UserRoles = userRoleRepository;
             UserTemplates = userTemplateRepository;
-            UserPostPaymentMopCodes = userPostPaymentMopCodeRepository;
+            UserMethodOfPayments = userPostPaymentMopCodeRepository;
             Vats = vatRepository;
             VatMetadatas = VatMetadataRepository;
             PaymentIntegrations = paymentIntegrationRepository;

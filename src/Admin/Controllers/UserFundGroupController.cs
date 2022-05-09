@@ -21,7 +21,7 @@ namespace Admin.Controllers
             return PartialView("_BasicList", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "User Fund Groups")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Fund Groups")]
         [HttpGet]
         public ActionResult Edit(int id)
         {

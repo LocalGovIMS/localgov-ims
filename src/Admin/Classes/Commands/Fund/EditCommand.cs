@@ -20,20 +20,13 @@ namespace Admin.Classes.Commands.Fund
             var item = new BusinessLogic.Entities.Fund()
             {
                 FundCode = model.FundCode,
-                AccessLevel = model.AccessLevel,
                 AccountExist = model.AccountExist,
                 AquireAddress = model.AquireAddress,
-                ExportToFund = model.ExportToFund,
-                ExportToLedger = model.ExportToLedger,
                 DisplayName = model.DisplayName,
-                FundExportFormat = model.FundExportFormat,
                 FundName = model.FundName,
-                GeneralLedgerCode = model.GLCode,
                 MaximumAmount = model.MaximumAmount,
-                NarrativeFlag = model.Narrative,
                 OverPayAccount = model.OverPayAccount,
-                UseGeneralLedgerCode = model.UseGLCode,
-                ValidationReference = model.ValidationReference,
+                AccountReferenceValidatorId = model.AccountReferenceValidatorId,
                 VatCode = model.VatCode,
                 VatOverride = model.VatOverride,
                 Disabled = model.IsDisabled

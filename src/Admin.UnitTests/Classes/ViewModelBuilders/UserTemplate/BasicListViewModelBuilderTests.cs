@@ -15,9 +15,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserTemplateService> _mockUserTemplateService = new Mock<IUserTemplateService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserTemplateService.Object);
+        }
+
         private void SetupUserTemplateService(Mock<IUserTemplateService> service)
         {
-            service.Setup(x => x.GetUserTemplates(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserTemplate>()
+            service.Setup(x => x.GetByUserId(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserTemplate>()
             {
                 {
                     new BusinessLogic.Entities.UserTemplate() {
@@ -46,17 +56,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var listViewModelBuilder = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockUserTemplateService.Object);
 
             // Act
-            var result = listViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -64,11 +70,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             // Arrange
             SetupUserTemplateService(_mockUserTemplateService);
 
-            var listViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserTemplateService.Object);
-
-            var result = listViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

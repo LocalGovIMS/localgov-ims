@@ -14,7 +14,7 @@ namespace DataAccess.Repositories
         {
         }
 
-        public List<UserTemplate> GetUserTemplates(int id)
+        public List<UserTemplate> GetByUserId(int id)
         {
             var results = IncomeDbContext.ImsUserTemplates
                 .AsQueryable()
@@ -26,7 +26,7 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public List<string> GetUserTemplates(string userName)
+        public List<string> GetByUsername(string userName)
         {
             var results = IncomeDbContext.ImsUserTemplates
                 .AsQueryable()
@@ -39,7 +39,7 @@ namespace DataAccess.Repositories
             return results.Select(x => x.Template.Id.ToString()).ToList();
         }
 
-        public void UpdateUserTemplates(List<UserTemplate> items, int userId)
+        public void Update(List<UserTemplate> items, int userId)
         {
             var filteredItems = items
                 .AsQueryable()

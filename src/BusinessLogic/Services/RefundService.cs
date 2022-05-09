@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Classes;
 using BusinessLogic.Entities;
+using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Security;
@@ -167,7 +168,7 @@ namespace BusinessLogic.Services
         {
             var mop = UnitOfWork.Mops.GetMop(mopCode);
 
-            var paymentIntegrationId = Convert.ToInt32(mop.MetaData.First(x => x.Key == "PaymentIntegrationId").Value);
+            var paymentIntegrationId = Convert.ToInt32(mop.MetaData.First(x => x.Key == MopMetaDataKeys.PaymentIntegrationId).Value);
 
             return UnitOfWork.PaymentIntegrations.SingleOrDefault(x => x.Id == paymentIntegrationId);
         }

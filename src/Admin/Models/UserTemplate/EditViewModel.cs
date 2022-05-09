@@ -11,6 +11,6 @@ namespace Admin.Models.UserTemplate
         [DisplayName("User Name")]
         public string UserName { get; set; }
 
-        public ICollection<CheckBoxListItem> Items { get; set; }
+        public ICollection<CheckBoxListItem> Templates { get; set; }
     }
 }

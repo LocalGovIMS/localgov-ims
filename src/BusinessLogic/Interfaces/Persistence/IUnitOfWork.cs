@@ -6,9 +6,9 @@ namespace BusinessLogic.Interfaces.Persistence
     public interface IUnitOfWork
     {
         IAccountHolderRepository AccountHolders { get; }
-        IAccountValidationRepository AccountValidations { get; }
-        IAccountValidationWeightingRepository AccountValidationWeightings { get; }
+        IAccountReferenceValidatorRepository AccountReferenceValidators { get; }
         IActivityLogRepository ActivityLogs { get; }
+        ICheckDigitConfigurationRepository CheckDigitConfigurations { get; }
         IEReturnRepository EReturns { get; }
         IEReturnCashRepository EReturnCashes { get; }
         IEReturnChequeRepository EReturnCheques { get; }
@@ -35,7 +35,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IUserFundGroupRepository UserFundGroups { get; }
         IUserRoleRepository UserRoles { get; }
         IUserTemplateRepository UserTemplates { get; }
-        IUserPostPaymentMopCodeRepository UserPostPaymentMopCodes { get; }
+        IUserMethodOfPaymentRepository UserMethodOfPayments { get; }
         IVatRepository Vats { get; }
         IVatMetadataRepository VatMetadatas { get; }
         IPaymentIntegrationRepository PaymentIntegrations { get; }

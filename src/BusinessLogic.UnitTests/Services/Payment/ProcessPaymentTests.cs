@@ -1,6 +1,10 @@
 ﻿using BusinessLogic.Classes;
+using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
+using BusinessLogic.Models;
+using BusinessLogic.Services;
+using BusinessLogic.Validators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -12,6 +16,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
     [ExcludeFromCodeCoverage]
     public class ProcessPaymentTests : BasePaymentTest
     {
+        private string _incursAFee = "False";
 
         private void SetupUnitOfWork()
         {
@@ -31,8 +36,40 @@ namespace BusinessLogic.UnitTests.Services.Payment
                                 Value = "True"
                             }
                         }
+                    },
+                    new Mop()
+                    {
+                        MopCode = "PF",
+                        MetaData = new List<MopMetaData>()
+                        {
+                            new MopMetaData()
+                            {
+                                Key = MopMetaDataKeys.IsACardPaymentFee,
+                                Value = "True"
+                            }
+                        }
                     }
                 });
+
+            MockUnitOfWork.Setup(x => x.Mops.GetMop(It.IsAny<string>()))
+                .Returns(new Mop()
+                    {
+                        MopCode = "90",
+                        MetaData = new List<MopMetaData>()
+                        {
+                            new MopMetaData()
+                            {
+                                Key = MopMetaDataKeys.IsACardSelfServicePayment,
+                                Value = "True"
+                            },
+                            new MopMetaData()
+                            {
+                                Key = MopMetaDataKeys.IncursAFee,
+                                Value = _incursAFee
+                            }
+                        }
+                    }
+                );
         }
 
         private void SetupSecurityContext(bool result)
@@ -48,13 +85,22 @@ namespace BusinessLogic.UnitTests.Services.Payment
                 .Returns(new List<PendingTransaction>() { pendingTransaction });
 
             MockTransactionService.Setup(x =>
-                x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()));
+                x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Response() { Success = true });
 
             MockTransactionService.Setup(x =>
-                x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+                x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Result());
 
             MockTransactionService.Setup(x =>
-                x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+                x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new Result());
+        }
+
+        private void SetupValidator()
+        {
+            MockTransactionFeeValidator.Setup(x => x.Validate(It.IsAny<TransactionFeeValidatorArgs>()))
+                .Returns(new Result());
         }
 
         [TestMethod]
@@ -235,6 +281,47 @@ namespace BusinessLogic.UnitTests.Services.Payment
 
             // Assert
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void When_the_fee_is_zero_a_processed_transaction_for_it_is_not_added_to_the_database()
+        {
+            // Arrange
+            _incursAFee = "True";
+            SetupUnitOfWork();
+            SetupSecurityContext(true);
+            SetupTransactionService(new PendingTransaction()
+            {
+                SuccessUrl = "http://www.test.com/success"
+            });
+            var service = GetService();
+
+            // Act
+            var result = service.ProcessPayment(new PaymentResult() { AuthResult = ResponseCode.Authorised, Fee = 0 });
+
+            // Assert
+            MockUnitOfWork.Verify(x => x.Transactions.Add(It.IsAny<ProcessedTransaction>()), Times.Never);
+        }
+
+        [TestMethod]
+        public void When_the_fee_greater_than_zero_a_processed_transaction_for_it_is_added_to_the_database()
+        {
+            // Arrange
+            _incursAFee = "True";
+            SetupUnitOfWork();
+            SetupSecurityContext(true);
+            SetupTransactionService(new PendingTransaction()
+            {
+                SuccessUrl = "http://www.test.com/success"
+            });
+            SetupValidator();
+            var service = GetService();
+
+            // Act
+            var result = service.ProcessPayment(new PaymentResult() { AuthResult = ResponseCode.Authorised, Fee = 0.50M });
+
+            // Assert
+            MockTransactionService.Verify(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()), Times.Once);
         }
 
     }

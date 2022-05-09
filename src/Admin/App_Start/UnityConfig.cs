@@ -215,6 +215,10 @@ namespace Admin
                 .RegisterType<IModelBuilder<ViewModels.UserTemplate.EditViewModel, int>, ViewModelBuilders.UserTemplate.EditViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.UserTemplate.EditViewModel>, Commands.UserTemplate.EditCommand>()
 
+                .RegisterType<IModelBuilder<ViewModels.Shared.BasicListViewModel, int>, ViewModelBuilders.UserMethodOfPayment.BasicListViewModelBuilder>("UserMethodOfPayment.ViewModelBuider.BasicList")
+                .RegisterType<IModelBuilder<ViewModels.UserMethodOfPayment.EditViewModel, int>, ViewModelBuilders.UserMethodOfPayment.EditViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.UserMethodOfPayment.EditViewModel>, Commands.UserMethodOfPayment.EditCommand>()
+
                 .RegisterType<IModelBuilder<ViewModels.Vat.DetailsViewModel, string>, ViewModelBuilders.Vat.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Vat.EditViewModel, string>, ViewModelBuilders.Vat.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<IList<ViewModels.Vat.DetailsViewModel>, string>, ViewModelBuilders.Vat.ListViewModelBuilder>()
@@ -266,6 +270,22 @@ namespace Admin
                 .RegisterType<IModelBuilder<IList<ViewModels.PaymentIntegration.DetailsViewModel>, int>, ViewModelBuilders.PaymentIntegration.ListViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.PaymentIntegration.EditViewModel>, Commands.PaymentIntegration.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.PaymentIntegration.EditViewModel>, Commands.PaymentIntegration.EditCommand>("Edit")
+
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.DetailsViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.EditViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.EditViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.EditViewModel, int>, ViewModelBuilders.CheckDigitConfiguration.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.CheckDigitConfiguration.ListViewModel, ViewModels.CheckDigitConfiguration.SearchCriteria>, ViewModelBuilders.CheckDigitConfiguration.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.CheckDigitConfiguration.EditViewModel>, Commands.CheckDigitConfiguration.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.CheckDigitConfiguration.DeleteCommand>("CheckDigitConfiguration.Command.Delete")
+
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.DetailsViewModel, int>, ViewModelBuilders.AccountReferenceValidator.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.EditViewModel, int>, ViewModelBuilders.AccountReferenceValidator.EditViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.EditViewModel, int>, ViewModelBuilders.AccountReferenceValidator.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.AccountReferenceValidator.ListViewModel, ViewModels.AccountReferenceValidator.SearchCriteria>, ViewModelBuilders.AccountReferenceValidator.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.AccountReferenceValidator.DeleteCommand>("AccountReferenceValidator.Command.Delete")
                 ;
         }
 
@@ -273,6 +293,7 @@ namespace Admin
         {
             container
                 .RegisterType<IAccountHolderControllerDependencies, AccountHolderControllerDependencies>()
+                .RegisterType<IAccountReferenceValidatorControllerDependencies, AccountReferenceValidatorControllerDependencies>()
                 .RegisterType<IHomeControllerDependencies, HomeControllerDependencies>()
                 .RegisterType<IFundGroupControllerDependencies, FundGroupControllerDependencies>()
                 .RegisterType<IEReturnControllerDependencies, EReturnControllerDependencies>()
@@ -300,8 +321,8 @@ namespace Admin
                 .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>()
                 .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
                 .RegisterType<IImportControllerDependencies, ImportControllerDependencies>()
-                .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>();
-
+                .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>()
+                .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>();
         }
 
         private static void RegisterOther(IUnityContainer container)

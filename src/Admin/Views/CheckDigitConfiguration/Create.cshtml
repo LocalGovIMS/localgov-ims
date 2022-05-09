@@ -1,0 +1,84 @@
+﻿@model Admin.Models.CheckDigitConfiguration.EditViewModel
+@{
+    ViewBag.Title = "Create check digit configuration";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create check digit configuration
+        <div class="sub header">
+            Check digit configuration details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "CheckDigitConfiguration", FormMethod.Post))
+{
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Type)
+            @Html.EnumDropDownListFor(m => m.Type)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Type)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Modulus)
+            @Html.EditorFor(m => m.Modulus)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Modulus)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.SourceSubstitutions)
+            @Html.EditorFor(m => m.SourceSubstitutions)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.SourceSubstitutions)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ResultSubstitutions)
+            @Html.EditorFor(m => m.ResultSubstitutions)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ResultSubstitutions)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Weightings)
+            @Html.EditorFor(m => m.Weightings)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Weightings)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ApplySubtraction)
+            @Html.EditorFor(m => m.ApplySubtraction)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ApplySubtraction)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "CheckDigitConfiguration", null, new { @class = "ui button" })
+
+    </div>
+
+}

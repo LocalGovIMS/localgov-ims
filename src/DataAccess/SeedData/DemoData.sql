@@ -1,3 +1,15 @@
+SET IDENTITY_INSERT PaymentIntegrations ON;
+MERGE INTO PaymentIntegrations AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			(1, '[[SeedData.DemoData.PaymentIntegration.Name]]', '[[SeedData.DemoData.PaymentIntegration.BaseUri]]')) 
+	AS S ([Id], [Name], [BaseUri])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Id], [Name], [BaseUri])
+VALUES ([Id], [Name], [BaseUri]);
+SET IDENTITY_INSERT PaymentIntegrations OFF;
+
 MERGE INTO Offices AS [Target]
 USING (SELECT * 
 		FROM (VALUES
@@ -12,11 +24,11 @@ INSERT ([OfficeCode], [Name])
 VALUES ([OfficeCode], [Name]);    
 
 DECLARE @User1Id INT = NULL;
-DECLARE @User1Username VARCHAR(100) = '[[DBInitialiser.User1.Username]]';
+DECLARE @User1Username VARCHAR(100) = '[[SeedData.DemoData.User1.Username]]';
 MERGE INTO Users AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			(@User1Username, GETDATE(), 90, 0, '[[DBInitialiser.User1.Name]]', GETDATE(), NULL, 'SP')) 
+			(@User1Username, GETDATE(), 90, 0, '[[SeedData.DemoData.User1.Name]]', GETDATE(), NULL, 'SP')) 
 	AS S ([UserName], [LastLogin], [ExpiryDays], [Disabled], [DisplayName], [CreatedAt], [LastEnabledAt], [OfficeCode])) AS [Source]
 ON [Target].[UserName] = [Source].[UserName] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -56,11 +68,11 @@ INSERT ([UserId], [RoleId])
 VALUES ([UserId], [RoleId]);
 
 DECLARE @User2Id INT = NULL;
-DECLARE @User2Username VARCHAR(100) = '[[DBInitialiser.User2.Username]]';
+DECLARE @User2Username VARCHAR(100) = '[[SeedData.DemoData.User2.Username]]';
 MERGE INTO Users AS [Target]
 USING (SELECT * 
 		FROM (VALUES 
-			(@User2Username, GETDATE(), 90, 0, '[[DBInitialiser.User2.Name]]',	GETDATE(), NULL, 'SP')) 
+			(@User2Username, GETDATE(), 90, 0, '[[SeedData.DemoData.User2.Name]]',	GETDATE(), NULL, 'SP')) 
 	AS S ([UserName], [LastLogin], [ExpiryDays], [Disabled], [DisplayName], [CreatedAt], [LastEnabledAt], [OfficeCode])) AS [Source]
 ON [Target].[UserName] = [Source].[UserName] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -99,6 +111,26 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([UserId], [RoleId])
 VALUES ([UserId], [RoleId]);
 
+MERGE INTO AspNetUsers AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			('a0f013ed-bdd1-4d1a-9b01-07b65de272af', '[[SeedData.DemoData.User1.Username]]', 1, '[[SeedData.DemoData.User1.PasswordHash]]', 'c024171d-c8a2-459d-af7d-4c1d1483f23a', NULL, 0, 0, NULL, 1, 0, '[[SeedData.DemoData.User1.Username]]'))
+	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
+	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);
+
+MERGE INTO AspNetUsers AS [Target]
+USING (SELECT * 
+		FROM (VALUES 
+			('b0f013ed-bdd1-4d1a-9b01-07b65de845ed', '[[SeedData.DemoData.User2.Username]]', 1, '[[SeedData.DemoData.User2.PasswordHash]]', 'd034611d-a8a2-859d-ff7d-5c1d1483f24b', NULL, 0, 0, NULL, 1, 0, '[[SeedData.DemoData.User2.Username]]'))
+	AS S ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])) AS [Source]
+ON [Target].[Id] = [Source].[Id] 
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName])
+	VALUES ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]);
+
 MERGE INTO Mops AS [Target]
 USING (SELECT * 
 		FROM (VALUES
@@ -117,9 +149,10 @@ USING (SELECT *
 			('20', 'All Pay - IVR Desktop', 99999.99, 0, 0),
 			('21', 'All Pay - Bills Online', 99999.99, 0, 0),
 			('28', 'Interfaces', 999999999, 0, 0),
-			('90', 'SmartPay SelfService cards', 999999999, 0, 0),
-			('91', 'SmartPay ATP cards', 999999999, 0, 0),
-			('92', 'SmartPay Staff cards', 999999999, 0, 0)) 
+			('90', 'GOV.UK Pay SelfService cards', 999999999, 0, 0),
+			('91', 'GOV.UK Pay ATP cards', 999999999, 0, 0),
+			('92', 'GOV.UK Pay Staff cards', 999999999, 0, 0),
+			('PF', 'GOV.UK Pay Fee', 999999999, 0, 0)) 
 	AS S ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled])) AS [Source]
 ON [Target].[MopCode] = [Source].[MopCode] 
 WHEN NOT MATCHED BY TARGET THEN
@@ -174,7 +207,15 @@ USING (SELECT *
 			('TextColour', '#fff', '90'),
 			('TextColour', '#fff', '91'),
 			('TextColour', '#fff', '92'),
-			('TextColour', '#fff', '24')) 
+			('TextColour', '#fff', '24'),
+			('PaymentIntegrationId', '1', '90'),
+			('PaymentIntegrationId', '1', '91'),
+			('PaymentIntegrationId', '1', '92'),
+			('IncursAFee', 'TRUE', '90'),
+			('IncursAFee', 'TRUE', '91'),
+			('IncursAFee', 'TRUE', '92'),
+			('IsACardPaymentFee', 'TRUE', 'PF')
+			) 
 	AS S ([Key], [Value], [MopCode])) AS [Source]
 ON [Target].[MopCode] = [Source].[MopCode] 
 	AND [Target].[Key] = [Source].[Key] 
@@ -210,30 +251,30 @@ VALUES ([Key], [Value], [VatCode]);
 MERGE INTO Funds AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('5M', 'Library Charges', '5', '5M', 'N0', 100, 1, 0, 1, '.', 1, 72100710220, 0, 0, 1, 'Library Charges', 0, NULL, 0),
-			('52', 'Market Stall Rental', '5', '05D', 'E0', 5000, 1, 0, 1, NULL, 1, 72200850079, 0, 0, 1, 'Market Stall Rental', 0, 1, 0),
-			('2R', 'Fixed Penalty Notice', '5', '2R', 'N0', 500, 0, 1, 1, 'E02R', 1, 72100021754, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0, 0),
-			('3U', 'Landlord Accreditation Service', '5', '3U', 'W0', 99.99, 0, 0, 1, NULL, 1, 72101580438, 0, 0, 1, 'Landlord Accreditation Service', 0, 1, 0),
-			('1Z', 'HMO Premises Licence', '5', '0', 'N0', 99999999, 1, 0, 1, NULL, 1, 72101920227, 0, 0, 1, NULL, 0, 1, 0),
-			('ZZ', 'Not Authorised Cards', '20', '0', 'N0', 99999999, 0, 0, 0, NULL, 0, NULL, 0, 0, 1, NULL, 0, 0, 0),
-			('1', 'Bank Suspense', '12', '0', 'M0', 99999999.99, 1, 0, 1, 'E930', 1, 964024, 1, 0, 1, NULL, 0, 1, 0),			
-			('5', 'Housing Rents', '5', '5', 'N0', 99999.99, 0, 1, 1, 'E005', 1, 964104, 1, 1, 1, 'Housing Rents', 0, 0, 0),
-			('13', 'Misc Cash', '5', '13', 'W0', 999999999.99, 1, 0, 1, NULL, 0, NULL, 0, 0, 1, NULL, 1, 1, 0),
-			('SP', 'Suspense', '5', '0', 'M0', 99999999, 1, 0, 1, NULL, 1, 964023, 0, 0, 1, NULL, 0, 1, 0),
-			('XT', 'Transfers', '12', '0', 'N0', 99999999, 0, 0, 0, NULL, 0, NULL, 0, 0, 1, NULL, 0, 0, 0),
-			('19', 'SAP Invoices', '5', '19', '11', 99999999, 0, 1, 0, 'E060', 0, NULL, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0, 0),
-			('20', 'BCT Invoices', '5', '20', '11', 99999999, 0, 1, 0, 'E060', 0, NULL, 1, 1, 1, 'Invoices Starting M or P', 0, 0, 0),
-			('11', 'Parking Fines', '5', '11', 'N0', 99999999, 0, 1, 1, 'E011', 1, 72104021624, 1, 0, 1, 'Parking Fines starting BJ', 0, 0, 0),
-			('24', 'Business Rates', '5', '22', 'N0', 9999999.99, 0, 1, 1, 'E902', 1, 964102, 1, 1, 1, 'Business Rates', 0, 0, 0),
-			('23', 'Council Tax', '5', '22', 'N0', 999999.99, 1, 1, 1, 'E902', 1, 964101, 1, 1, 1, 'Council Tax', 0, 0, 0),
-			('25', 'Benefit Overpayments', '5', '25', 'N0', 9999.99, 0, 1, 1, 'E925', 1, 72320550287, 1, 1, 1, 'Benefit Overpayments', 0, 0, 0),
-			('32', 'Developmnet Control', '5', '31', 'N0', 99999, 1, 0, 1, '.', 1, 72101750163, 0, 0, 1, 'Planning Fees', 0, 1, 0),
-			('31', 'Building Control', '5', '31', 'W0', 99999, 1, 0, 1, '.', 1, 72101750164, 0, 0, 1, 'Building Control Fees', 0, 1, 0))
-	AS S ([FundCode], [FundName], [AccessLevel], [ValidationReference], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])) AS [Source]
+			('5M', 'Library Charges', 'N0', 100, 0, 0, 1, 'Library Charges', 0, 0),
+			('52', 'Market Stall Rental', 'E0', 5000, 0, 0, 1, 'Market Stall Rental', 0, 0),
+			('2R', 'Fixed Penalty Notice', 'N0', 500, 1, 0, 1, 'Fixed Penalty Notice starting FP', 0, 0),
+			('3U', 'Landlord Accreditation Service', 'W0', 99.99, 0, 0, 1, 'Landlord Accreditation Service', 0, 0),
+			('1Z', 'HMO Premises Licence', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('ZZ', 'Not Authorised Cards', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('1', 'Bank Suspense', 'M0', 99999999.99, 1, 0, 1, NULL, 0, 0),			
+			('5', 'Housing Rents', 'N0', 99999.99, 1, 1, 1, 'Housing Rents', 0, 0),
+			('13', 'Misc Cash', 'W0', 999999999.99, 0, 0, 1, NULL, 1, 0),
+			('SP', 'Suspense', 'M0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('XT', 'Transfers', 'N0', 99999999, 0, 0, 1, NULL, 0, 0),
+			('19', 'SAP Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting 3 or 9', 0, 0),
+			('20', 'BCT Invoices', '11', 99999999, 1, 1, 1, 'Invoices Starting M or P', 0, 0),
+			('11', 'Parking Fines', 'N0', 99999999, 1, 0, 1, 'Parking Fines starting BJ', 0, 0),
+			('24', 'Business Rates', 'N0', 9999999.99, 1, 1, 1, 'Business Rates', 0, 0),
+			('23', 'Council Tax', 'N0', 999999.99, 1, 1, 1, 'Council Tax', 0, 0),
+			('25', 'Benefit Overpayments', 'N0', 9999.99, 1, 1, 1, 'Benefit Overpayments', 0, 0),
+			('32', 'Developmnet Control', 'N0', 99999, 0, 0, 1, 'Planning Fees', 0, 0),
+			('31', 'Building Control', 'W0', 99999, 0, 0, 1, 'Building Control Fees', 0, 0))
+	AS S ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([FundCode], [FundName], [AccessLevel], [ValidationReference], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled])
-VALUES ([FundCode], [FundName], [AccessLevel], [ValidationReference], [VatCode], [MaximumAmount], [NarrativeFlag], [ExportToFund], [ExportToLedger], [FundExportFormat], [UseGeneralLedgerCode], [GeneralLedgerCode], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [LedgerDetail], [Disabled]);
+INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])
+VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled]);
 
 MERGE INTO FundMetaData AS [Target]
 USING (SELECT * 
@@ -275,7 +316,61 @@ USING (SELECT *
 			('Basket.ReferenceFieldLabel', 'Traders reference and surname', '52'),
 			('Basket.ReferenceFieldMessage', 'Please enter your 4 digit reference followed by your surname', '52'),
 			('IsABasketFund', 'True', '5'),
-			('Basket.ReferenceFieldLabel', 'Housing rents reference', '5')) 
+			('Basket.ReferenceFieldLabel', 'Housing rents reference', '5'), 
+			('ExportToLedger', 'True', '5M'),
+			('UseGeneralLedgerCode', 'True', '5M'),
+			('GeneralLedgerCode', '72100710220', '5M'),
+			('ExportToLedger', 'True', '52'),
+			('UseGeneralLedgerCode', 'True', '52'),
+			('GeneralLedgerCode', '72200850079', '52'),
+			('ExportToLedger', 'True', '2R'),
+			('UseGeneralLedgerCode', 'True', '2R'),
+			('GeneralLedgerCode', '72100021754', '2R'),
+			('ExportToLedger', 'True', '3U'),
+			('UseGeneralLedgerCode', 'True', '3U'),
+			('GeneralLedgerCode', '72101580438', '3U'),
+			('ExportToLedger', 'True', '1Z'),
+			('UseGeneralLedgerCode', 'True', '1Z'),
+			('GeneralLedgerCode', '72101920227', '1Z'),
+			('ExportToLedger', 'False', 'ZZ'),
+			('UseGeneralLedgerCode', 'False', 'ZZ'),
+			('ExportToLedger', 'True', '1'),
+			('UseGeneralLedgerCode', 'True', '1'),
+			('GeneralLedgerCode', '964024', '1'),
+			('ExportToLedger', 'True', '5'),
+			('UseGeneralLedgerCode', 'True', '5'),
+			('GeneralLedgerCode', '964104', '5'),
+			('ExportToLedger', 'True', '13'),
+			('UseGeneralLedgerCode', 'False', '13'),
+			('ExportToLedger', 'True', 'SP'),
+			('UseGeneralLedgerCode', 'True', 'SP'),
+			('GeneralLedgerCode', '964023', 'SP'),
+			('ExportToLedger', 'False', 'XT'),
+			('UseGeneralLedgerCode', 'False', 'XT'),
+			('ExportToLedger', 'False', '19'),
+			('UseGeneralLedgerCode', 'False', '19'),
+			('ExportToLedger', 'False', '20'),
+			('UseGeneralLedgerCode', 'False', '20'),
+			('ExportToLedger', 'True', '11'),
+			('UseGeneralLedgerCode', 'True', '11'),
+			('GeneralLedgerCode', '72104021624', '11'),
+			('ExportToLedger', 'True', '24'),
+			('UseGeneralLedgerCode', 'True', '24'),
+			('GeneralLedgerCode', '964102', '24'),
+			('ExportToLedger', 'True', '23'),
+			('UseGeneralLedgerCode', 'True', '23'),
+			('GeneralLedgerCode', '964101', '23'),
+			('ExportToLedger', 'True', '25'),
+			('UseGeneralLedgerCode', 'True', '25'),
+			('GeneralLedgerCode', '72320550287', '25'),
+			('ExportToLedger', 'True', '32'),
+			('UseGeneralLedgerCode', 'True', '32'),
+			('GeneralLedgerCode', '72101750163', '32'),
+			('ExportToLedger', 'True', '31'),
+			('UseGeneralLedgerCode', 'True', '31'),
+			('GeneralLedgerCode', '72101750164', '31'),
+			('[[SeedData.DemoData.FundMetadata.Key1]]', '[[SeedData.DemoData.FundMetadata.Value1]]', '[[SeedData.DemoData.FundMetadata.FundCode1]]')
+			)
 	AS S ([Key], [Value], [FundCode])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
 	AND [Target].[Key] = [Source].[Key] 
@@ -283,54 +378,70 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([Key], [Value], [FundCode])
 VALUES ([Key], [Value], [FundCode]);
 
-MERGE INTO AccountValidations AS [Target]
+DECLARE @CheckDigitConfigurationId_ParkingFines INT = 1;
+DECLARE @CheckDigitConfigurationId_AcademyCtax INT = 2;
+DECLARE @CheckDigitConfigurationId_FixedPenaltyNotice INT = 3;
+DECLARE @CheckDigitConfigurationId_HousingRents INT = 4;
+DECLARE @CheckDigitConfigurationId_LibraryCharges INT = 5;
+
+DECLARE @Type_WeightedSum INT = 1;
+DECLARE @Type_Dynix INT = 2;
+
+SET IDENTITY_INSERT CheckDigitConfigurations ON;
+
+MERGE INTO CheckDigitConfigurations AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('0', 'Open Validation', '9', '0', '******************************', 1, 30, 0, NULL, 0),
-			('5', 'Housing Rents', '10', '0', '##########@', 11, 11, 1, NULL, 0),
-			('13', 'Miscellaneous Income', '9', '0', '###########', 11, 11, 0, NULL, 0),
-			('19', 'SAP Debtors', '9', '0', '##########', 10, 10, 0, NULL, 0),
-			('20', 'Old Debtors', '9', '0', '?##########', 11, 11, 0, NULL, 0),
-			('11', 'Parking Fines', '11', 'A', 'BJ#######@', 10, 10, 0, '05', 0),
-			('22', 'Academy CTAX/NNDR', '10', '0', '########@', 9, 9, 1, NULL, 0),
-			('25', 'Benefit Overpayments', '9', '0', '########', 8, 8, 0, NULL, 0),
-			('2R', 'Fixed Penalty Notice', '11', 'A', 'FP#######@', 10, 10, 0, '12', 0),
-			('3U', 'Landlord accredit', '9', '0', 'ALS/####/####', 13, 13, 0, NULL, 0),
-			('5M', 'Library Charges', 'OE', '0', '#############@', 14, 14, 0, NULL, 0),
-			('31', 'Building Control', '10', '0', '******************************', 6, 30, 0, NULL, 1),
-			('05D', 'Market stalls', '10', '0', '#*****************************', 5, 30, 0, NULL, 1)) 
-	AS S ([ValidationReference], [Name], [Modulus], [TenConversion], [InputMask], [MinLength], [MaxLength], [SubtractFlag], [CheckDigitCalcAlphaReplace], [CanNotBeNumeric])) AS [Source]
-ON [Target].[ValidationReference] = [Source].[ValidationReference]
-	AND [Target].[Name] = [Source].[Name]
+			(@CheckDigitConfigurationId_ParkingFines, @Type_WeightedSum, 11, '05', '9,8,7,6,5,4,3,2,1,0', '10:A', 0),
+			(@CheckDigitConfigurationId_AcademyCtax, @Type_WeightedSum, 10, NULL, '3,7,1,3,7,1,3,7,0', '10:0', 1),
+			(@CheckDigitConfigurationId_FixedPenaltyNotice, @Type_WeightedSum, 11, '12', '9,8,7,6,5,4,3,2,1,0', '10:A', 0),
+			(@CheckDigitConfigurationId_HousingRents, @Type_WeightedSum, 10, NULL, '0,0,9,7,1,4,6,3,2,8,0', '10:0', 1),
+			(@CheckDigitConfigurationId_LibraryCharges, @Type_Dynix, 10, NULL, '2,0,2,0,2,0,2,0,2,0,2,0,2,0', '10:0', 0))
+	AS S ([Id], [Type], [Modulus], [SourceSubstitutions], [Weightings], [ResultSubstitutions], [ApplySubtraction])) AS [Source]
+ON [Target].[Id] = [Source].[Id]
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([ValidationReference], [Name], [Modulus], [TenConversion], [InputMask], [MinLength], [MaxLength], [SubtractFlag], [CheckDigitCalcAlphaReplace], [CanNotBeNumeric])
-VALUES ([ValidationReference], [Name], [Modulus], [TenConversion], [InputMask], [MinLength], [MaxLength], [SubtractFlag], [CheckDigitCalcAlphaReplace], [CanNotBeNumeric]);
+INSERT ([Id], [Type], [Modulus], [SourceSubstitutions], [Weightings], [ResultSubstitutions], [ApplySubtraction])
+VALUES ([Id], [Type], [Modulus], [SourceSubstitutions], [Weightings], [ResultSubstitutions], [ApplySubtraction]);
 
-MERGE INTO AccountValidationWeightings AS [Target]
+SET IDENTITY_INSERT CheckDigitConfigurations OFF;
+
+MERGE INTO AccountReferenceValidators AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('5', 0, 0, 9, 7, 1, 4, 6, 3, 2, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-			('11', 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-			('22', 3, 7, 1, 3, 7, 1, 3, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-			('2R', 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-			('5M', 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)) 
-	AS S ([ValidationReference], [Digit1Weighting], [Digit2Weighting], [Digit3Weighting], [Digit4Weighting], [Digit5Weighting], [Digit6Weighting], [Digit7Weighting], [Digit8Weighting], [Digit9Weighting], [Digit10Weighting], [Digit11Weighting], [Digit12Weighting], [Digit13Weighting], [Digit14Weighting], [Digit15Weighting], [Digit16Weighting], [Digit17Weighting], [Digit18Weighting], [Digit19Weighting], [Digit20Weighting], [Digit21Weighting], [Digit22Weighting], [Digit23Weighting], [Digit24Weighting], [Digit25Weighting], [Digit26Weighting], [Digit27Weighting], [Digit28Weighting], [Digit29Weighting], [Digit30Weighting])) AS [Source]
-ON [Target].[ValidationReference] = [Source].[ValidationReference]
+			('Open Validation', 1, 30, NULL,  '******************************', 1, NULL),
+			('Market stalls', 5, 30, NULL,  '#*****************************', 1, NULL),
+			('Parking Fines', 10, 10, NULL,  'BJ#######@', 5, @CheckDigitConfigurationId_ParkingFines),
+			('Miscellaneous Income', 11, 11, NULL,  '###########', 1, NULL),
+			('SAP Debtors', 10, 10, NULL,  '##########', 1, NULL),
+			('Old Debtors', 11, 11, NULL,  '?##########', 1, NULL),
+			('Academy CTAX/NNDR', 9, 9, NULL,  '########@', 1, @CheckDigitConfigurationId_AcademyCtax),
+			('Benefit Overpayments', 8, 8, NULL,  '########', 1, NULL),
+			('Fixed Penalty Notice', 10, 10, NULL,  'FP#######@', 5, @CheckDigitConfigurationId_FixedPenaltyNotice),
+			('Building Control', 6, 30, NULL,  '******************************', 1, NULL),
+			('Landlord accredit', 13, 13, NULL,  'ALS/####/####', 5, NULL),
+			('Housing Rents', 11, 11, NULL,  '##########@', 1, @CheckDigitConfigurationId_HousingRents),
+			('Library Charges', 14, 14, NULL,  '#############@', 1, @CheckDigitConfigurationId_LibraryCharges)) 
+	AS S ([Name], [MinLength], [MaxLength], [Regex], [InputMask], [CharacterType], [CheckDigitConfigurationId])) AS [Source]
+ON [Target].[Name] = [Source].[Name]
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([ValidationReference], [Digit1Weighting], [Digit2Weighting], [Digit3Weighting], [Digit4Weighting], [Digit5Weighting], [Digit6Weighting], [Digit7Weighting], [Digit8Weighting], [Digit9Weighting], [Digit10Weighting], [Digit11Weighting], [Digit12Weighting], [Digit13Weighting], [Digit14Weighting], [Digit15Weighting], [Digit16Weighting], [Digit17Weighting], [Digit18Weighting], [Digit19Weighting], [Digit20Weighting], [Digit21Weighting], [Digit22Weighting], [Digit23Weighting], [Digit24Weighting], [Digit25Weighting], [Digit26Weighting], [Digit27Weighting], [Digit28Weighting], [Digit29Weighting], [Digit30Weighting])
-VALUES ([ValidationReference], [Digit1Weighting], [Digit2Weighting], [Digit3Weighting], [Digit4Weighting], [Digit5Weighting], [Digit6Weighting], [Digit7Weighting], [Digit8Weighting], [Digit9Weighting], [Digit10Weighting], [Digit11Weighting], [Digit12Weighting], [Digit13Weighting], [Digit14Weighting], [Digit15Weighting], [Digit16Weighting], [Digit17Weighting], [Digit18Weighting], [Digit19Weighting], [Digit20Weighting], [Digit21Weighting], [Digit22Weighting], [Digit23Weighting], [Digit24Weighting], [Digit25Weighting], [Digit26Weighting], [Digit27Weighting], [Digit28Weighting], [Digit29Weighting], [Digit30Weighting]);
+INSERT ([Name], [MinLength], [MaxLength], [Regex], [InputMask], [CharacterType], [CheckDigitConfigurationId])
+VALUES ([Name], [MinLength], [MaxLength], [Regex], [InputMask], [CharacterType], [CheckDigitConfigurationId]);
 
-SET IDENTITY_INSERT PaymentIntegrations ON;
-MERGE INTO PaymentIntegrations AS [Target]
-USING (SELECT * 
-		FROM (VALUES 
-			(1, '[[DBInitialiser.PaymentIntegration.Name]]', '[[DBInitialiser.PaymentIntegration.BaseUri]]')) 
-	AS S ([Id], [Name], [BaseUri])) AS [Source]
-ON [Target].[Id] = [Source].[Id] 
-WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Id], [Name], [BaseUri])
-VALUES ([Id], [Name], [BaseUri]);
-SET IDENTITY_INSERT PaymentIntegrations OFF;
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Market stalls') WHERE FundCode = '52'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Parking Fines') WHERE FundCode = '11'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Miscellaneous Income') WHERE FundCode = '13'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'SAP Debtors') WHERE FundCode = '19'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Old Debtors') WHERE FundCode = '20'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Academy CTAX/NNDR') WHERE FundCode = '22'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Academy CTAX/NNDR') WHERE FundCode = '23'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Academy CTAX/NNDR') WHERE FundCode = '24'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Benefit Overpayments') WHERE FundCode = '25'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Fixed Penalty Notice') WHERE FundCode = '2R'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Building Control') WHERE FundCode = '31'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Building Control') WHERE FundCode = '32'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Landlord accredit') WHERE FundCode = '3U'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Housing Rents') WHERE FundCode = '5'
+UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceValidators WHERE [Name] = 'Library Charges') WHERE FundCode = '5M'
 
 MERGE INTO Templates AS [Target]
 USING (SELECT * 

@@ -41,6 +41,7 @@ namespace DataAccess.Repositories
             return IncomeDbContext.Funds
                 .Include(x => x.MetaData)
                 .Include(s => s.Vat)
+                .Include(s => s.AccountReferenceValidator)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.FundCode == fundCode);
         }
@@ -84,22 +85,15 @@ namespace DataAccess.Repositories
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 
-            item.AccessLevel = entity.AccessLevel;
             item.AccountExist = entity.AccountExist;
             item.AccountHolders = entity.AccountHolders;
             item.AquireAddress = entity.AquireAddress;
             item.DisplayName = entity.DisplayName;
-            item.ExportToFund = entity.ExportToFund;
-            item.ExportToLedger = entity.ExportToLedger;
-            item.FundExportFormat = entity.FundExportFormat;
             item.FundName = entity.FundName;
-            item.GeneralLedgerCode = entity.GeneralLedgerCode;
             item.MaximumAmount = entity.MaximumAmount;
-            item.NarrativeFlag = entity.NarrativeFlag;
             item.OverPayAccount = entity.OverPayAccount;
             item.StopMessages = entity.StopMessages;
-            item.UseGeneralLedgerCode = entity.UseGeneralLedgerCode;
-            item.ValidationReference = entity.ValidationReference;
+            item.AccountReferenceValidatorId = entity.AccountReferenceValidatorId;
             item.VatOverride = entity.VatOverride;
             item.VatCode = entity.VatCode;
             item.Disabled = entity.Disabled;

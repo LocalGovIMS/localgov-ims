@@ -16,7 +16,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _ListForFund(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = id });
@@ -25,7 +24,6 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        [HttpGet]
         public ActionResult _EditListForFund(string id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = id });

@@ -20,14 +20,14 @@ namespace BusinessLogic.Services
         {
         }
 
-        public List<UserFundGroup> GetUserFundGroups(int id)
+        public List<UserFundGroup> GetByUserId(int id)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<UserFundGroup>();
 
             try
             {
-                return UnitOfWork.UserFundGroups.GetUserFundGroups(id).ToList();
+                return UnitOfWork.UserFundGroups.GetByUserId(id).ToList();
             }
             catch (Exception e)
             {
@@ -48,7 +48,7 @@ namespace BusinessLogic.Services
 
             try
             {
-                UnitOfWork.UserFundGroups.UpdateUserFundGroups(items, userId);
+                UnitOfWork.UserFundGroups.Update(items, userId);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();

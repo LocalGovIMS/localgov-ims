@@ -6,8 +6,8 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IUserRoleService
     {
-        List<UserRole> GetUserRoles(int id);
-        List<string> GetUserRoles(string userName);
+        List<UserRole> GetByUserId(int id);
+        List<string> GetByUserRole(string userName);
         IResult Update(List<UserRole> roles, int userId);
     }
 }

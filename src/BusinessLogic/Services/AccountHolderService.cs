@@ -26,19 +26,6 @@ namespace BusinessLogic.Services
             _accountHolderStopMessageValidator = accountHolderStopMessageValidator;
         }
 
-        public AccountValidation GetAccountValidation(string validationReference)
-        {
-            try
-            {
-                return UnitOfWork.AccountValidations.GetAccountValidation(validationReference);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return null;
-            }
-        }
-
         public IResult Create(AccountHolder accountHolder)
         {
             try

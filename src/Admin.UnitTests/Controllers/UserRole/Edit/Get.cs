@@ -67,7 +67,7 @@ namespace Admin.UnitTests.Controllers.UserRole.Edit
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("User Roles", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Edit Roles", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

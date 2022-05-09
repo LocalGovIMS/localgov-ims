@@ -62,6 +62,21 @@ namespace BusinessLogic.Extensions
             return item.IsA(MopMetaDataKeys.IsARefundablePayment);
         }
 
+        public static bool IsACardPaymentFee(this Mop item)
+        {
+            return item.IsA(MopMetaDataKeys.IsACardPaymentFee);
+        }
+
+        public static bool IsARechargeFee(this Mop item)
+        {
+            return IsA(item, MopMetaDataKeys.IsARechargeFee);
+        }
+
+        public static bool IsACentralChargeFee(this Mop item)
+        {
+            return IsA(item, MopMetaDataKeys.IsACentralChargeFee);
+        }
+
         private static bool IsA(this Mop item, string key)
         {
             if (item == null) return false;
@@ -83,6 +98,11 @@ namespace BusinessLogic.Extensions
             return GetMopMetaDataValue(item, MopMetaDataKeys.TextColour, "#FFFFFF");
         }
 
+        public static bool IncursAFee(this Mop item)
+        {
+            return GetMopMetaDataValue(item, MopMetaDataKeys.IncursAFee, false);
+        }
+
         public static string GetMopMetaDataValue(this Mop item, string key)
         {
             return GetMopMetaDataValue(item, key, string.Empty);
@@ -93,6 +113,20 @@ namespace BusinessLogic.Extensions
             if (item.MetaData == null) return defaultValue;
 
             return item.MetaData.FirstOrDefault(x => x.Key == key)?.Value ?? defaultValue;
+        }
+
+        public static T GetMopMetaDataValue<T>(this Mop item, string key)
+        {
+            return GetMopMetaDataValue(item, key, default(T));
+        }
+
+        public static T GetMopMetaDataValue<T>(this Mop item, string key, T defaultValue)
+        {
+            if (item.MetaData == null) return defaultValue;
+
+            return item.MetaData.FirstOrDefault(x => x.Key == key)?.Value == null
+                ? defaultValue
+                : (T)Convert.ChangeType(item.MetaData.FirstOrDefault(x => x.Key == key)?.Value, typeof(T));
         }
     }
 }

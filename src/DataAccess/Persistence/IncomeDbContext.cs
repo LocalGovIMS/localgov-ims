@@ -19,10 +19,10 @@ namespace DataAccess.Persistence
         }
 
         public virtual DbSet<AccountHolder> AccountHolders { get; set; }
-        public virtual DbSet<AccountValidation> AccountValidations { get; set; }
-        public virtual DbSet<AccountValidationWeighting> Account_Validation_Weightings { get; set; }
+        public virtual DbSet<AccountReferenceValidator> AccountReferenceValidators { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
+        public virtual DbSet<CheckDigitConfiguration> CheckDigitConfigurations { get; set; }
         public virtual DbSet<EmailLog> EmailLogs { get; set; }
         public virtual DbSet<EReturn> EReturns { get; set; }
         public virtual DbSet<EReturnCash> EReturnCashes { get; set; }
@@ -47,7 +47,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<PendingTransaction> PendingTransactions { get; set; }
         public virtual DbSet<ProcessedTransaction> ProcessedTransactions { get; set; }
         public virtual DbSet<UserFundGroup> ImsUserFundGroups { get; set; }
-        public virtual DbSet<UserPostPaymentMopCode> ImsUserPostPaymentMopCodes { get; set; }
+        public virtual DbSet<UserMethodOfPayment> ImsUserMethodOfPayments { get; set; }
         public virtual DbSet<UserRole> ImsUserRoles { get; set; }
         public virtual DbSet<User> ImsUsers { get; set; }
         public virtual DbSet<UserTemplate> ImsUserTemplates { get; set; }
@@ -111,9 +111,9 @@ namespace DataAccess.Persistence
                 .WithMany(c => c.AccountHolders)
                 .HasForeignKey(p => new { p.StopMessageReference, p.FundCode });
 
-            modelBuilder.Entity<AccountValidation>()
-                .HasMany(e => e.AccountValidationWeightings)
-                .WithRequired(e => e.AccountValidation)
+            modelBuilder.Entity<AccountReferenceValidator>()
+                .HasOptional(c => c.CheckDigitConfiguration)
+                .WithMany(a => a.AccountReferenceValidators)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<EReturn>()
@@ -170,8 +170,13 @@ namespace DataAccess.Persistence
                 .HasForeignKey(e => e.FundCode)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Fund>()
+                .HasOptional(e => e.AccountReferenceValidator)
+                .WithMany(f => f.Funds)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Mop>()
-                .HasMany(e => e.UserPostPaymentMopCodes)
+                .HasMany(e => e.UserMethodOfPayments)
                 .WithRequired(e => e.Mop)
                 .HasForeignKey(e => e.MopCode)
                 .WillCascadeOnDelete(false);
@@ -285,7 +290,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.UserPostPaymentMopCodes)
+                .HasMany(e => e.UserMethodOfPayments)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
@@ -402,7 +407,7 @@ namespace DataAccess.Persistence
                 .HasIndex(s => new { s.UserId, s.FundGroupId })
                 .IsUnique(true);
 
-            modelBuilder.Entity<UserPostPaymentMopCode>()
+            modelBuilder.Entity<UserMethodOfPayment>()
                 .HasIndex(s => new { s.UserId, s.MopCode })
                 .IsUnique(true);
 

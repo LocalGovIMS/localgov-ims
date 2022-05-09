@@ -14,74 +14,109 @@
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post))
 {
-    <div class="ui form">
-        @Html.HiddenFor(m => m.UserId)
+<div class="ui form">
 
-        <div class="six wide field">
-            @Html.LabelFor(m => m.UserName)
-            @Html.EditorFor(m => m.UserName)
-        </div>
+    @Html.HiddenFor(m => m.UserId)
 
-        <div class="six wide field">
-            @Html.ValidationMessageFor(m => m.UserName)
-        </div>
+    <div class="six wide field">
+        @Html.LabelFor(m => m.UserName)
+        @Html.EditorFor(m => m.UserName)
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DisplayName)
-            @Html.EditorFor(m => m.DisplayName)
-        </div>
+    <div class="six wide field">
+        @Html.ValidationMessageFor(m => m.UserName)
+    </div>
 
-        <div class="four wide field">
-            @Html.ValidationMessageFor(m => m.DisplayName)
-        </div>
+    <div class="four wide field">
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.EditorFor(m => m.DisplayName)
+    </div>
 
-        <div class="six wide field">
-            @Html.LabelFor(m => m.OfficeCode)
-            <div class="ui search selection dropdown mop-dropdown">
-                @Html.HiddenFor(x => x.OfficeCode)
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select office code</div>
-                <div class="menu">
-                    @foreach (var item in Model.Offices.Items)
-                    {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
-                    }
-                </div>
+    <div class="four wide field">
+        @Html.ValidationMessageFor(m => m.DisplayName)
+    </div>
+
+    <div class="six wide field">
+        @Html.LabelFor(m => m.OfficeCode)
+        <div class="ui search selection dropdown mop-dropdown">
+            @Html.HiddenFor(x => x.OfficeCode)
+            <i class="dropdown icon"></i>
+            <div class="default text no-overflow">Select office code</div>
+            <div class="menu">
+                @foreach (var item in Model.Offices.Items)
+                {
+                    <div class="item" data-value="@item.Value">
+                        @item.Text
+                    </div>
+                }
             </div>
         </div>
-        <div class="eight wide field">
-            @Html.ValidationMessageFor(m => m.OfficeCode)
-        </div>
-
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.LastLogin)
-            @Html.DisplayFor(m => m.LastLogin)
-        </div>
-
-        <div class="two wide field">
-            @Html.LabelFor(m => m.ExpiryDays)
-            @Html.EditorFor(m => m.ExpiryDays)
-        </div>
-
-        <div class="form__element--error">
-            @Html.ValidationMessageFor(m => m.ExpiryDays)
-        </div>
-
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.Disabled)
-            @Html.EditorFor(m => m.Disabled)
-        </div>
-
-        <div class="form__element--error">
-            @Html.ValidationMessageFor(m => m.Disabled)
-        </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
-
     </div>
+    <div class="eight wide field">
+        @Html.ValidationMessageFor(m => m.OfficeCode)
+    </div>
+
+    <div class="eight wide field">
+        @Html.LabelFor(m => m.LastLogin)
+        @Html.DisplayFor(m => m.LastLogin)
+    </div>
+
+    <div class="two wide field">
+        @Html.LabelFor(m => m.ExpiryDays)
+        @Html.EditorFor(m => m.ExpiryDays)
+    </div>
+
+    <div class="form__element--error">
+        @Html.ValidationMessageFor(m => m.ExpiryDays)
+    </div>
+
+    <div class="eight wide field">
+        @Html.LabelFor(m => m.Disabled)
+        @Html.EditorFor(m => m.Disabled)
+    </div>
+
+    <div class="form__element--error">
+        @Html.ValidationMessageFor(m => m.Disabled)
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            User roles
+            @Html.ActionLink("Edit roles", "Edit", "UserRole", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_ListForUser", "UserRole", new { id = Model.UserId })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            User fund groups
+            @Html.ActionLink("Edit fund groups", "Edit", "UserFundGroup", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_ListForUser", "UserFundGroup", new { id = Model.UserId })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            User templates
+            @Html.ActionLink("Edit templates", "Edit", "UserTemplate", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            User methods of payment
+            @Html.ActionLink("Edit methods of payment", "Edit", "UserMethodOfPayment", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_ListForUser", "UserMethodOfPayment", new { id = Model.UserId })
+    </div>
+
+    <br />
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
+
+</div>
 }
 
 <script type="text/javascript">

@@ -15,9 +15,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserRoleService> _mockUserRoleService = new Mock<IUserRoleService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockUserRoleService.Object);
+        }
+
         private void SetupUserRoleService(Mock<IUserRoleService> service)
         {
-            service.Setup(x => x.GetUserRoles(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserRole>()
+            service.Setup(x => x.GetByUserId(It.IsAny<int>())).Returns(new List<BusinessLogic.Entities.UserRole>()
             {
                 {
                     new BusinessLogic.Entities.UserRole() {
@@ -44,17 +54,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var listViewModelBuilder = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockUserRoleService.Object);
 
             // Act
-            var result = listViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -62,11 +68,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserRole
             // Arrange
             SetupUserRoleService(_mockUserRoleService);
 
-            var listViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockUserRoleService.Object);
-
-            var result = listViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

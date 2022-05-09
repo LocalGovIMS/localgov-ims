@@ -15,6 +15,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<ITransactionService> _mockTransactionService = new Mock<ITransactionService>();
 
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockTransactionService.Object);
+        }
+
         private void SetupTransactionService(Mock<ITransactionService> service)
         {
             var processedTransactions = new List<BusinessLogic.Entities.ProcessedTransaction>();
@@ -37,12 +47,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
         public void OnBuildWithoutParamReturnsNull()
         {
             // Arrange
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockTransactionService.Object);
 
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
@@ -55,11 +62,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
             // Arrange
             SetupTransactionService(_mockTransactionService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockTransactionService.Object);
-
-            var result = viewModelBuidler.Build("Ref");
+            // Act
+            var result = _viewModelBuilder.Build("Ref");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

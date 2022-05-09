@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 
-namespace Admin.UnitTests.Controllers.Fund.ListForUser
+namespace Admin.UnitTests.Controllers.Fund.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

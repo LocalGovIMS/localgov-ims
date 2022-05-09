@@ -3,6 +3,8 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using ViewModel = Admin.Models.FundGroup.EditViewModel;
+using ViewModelBuilder = Admin.Classes.ViewModelBuilders.FundGroup.EditViewModelBuilder;
 
 namespace Admin.UnitTests.Classes.ViewModelBuilders.FundGroup
 {
@@ -13,27 +15,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundGroup
         private readonly Mock<IFundGroupService> _mockFundGroupService = new Mock<IFundGroupService>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
 
-        [TestMethod]
-        public void TestFundGroupEditViewModelOnBuildReturnsNull()
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
         {
-            var editViewModelBuilder = new Admin.Classes.ViewModelBuilders.FundGroup.EditViewModelBuilder
-                (_mockLogger.Object, _mockFundGroupService.Object, _mockFundService.Object);
-
-            var result = editViewModelBuilder.Build();
-            result.Should().BeNull();
-
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundGroupService.Object,
+                _mockFundService.Object);
         }
 
-        [TestMethod]
-
-        public void TestFundGroupEditViewModelOnBuildReturnModel()
+        private void SetupServices()
         {
-            Mock<IFundGroupService> mockFundGroupService = new Mock<IFundGroupService>();
-
-            Mock<IFundService> mockFundService = new Mock<IFundService>();
-
-
-            mockFundGroupService.Setup(x => x.GetFundGroup(It.IsAny<int>())).Returns(new BusinessLogic.Entities.FundGroup()
+            _mockFundGroupService.Setup(x => x.GetFundGroup(It.IsAny<int>())).Returns(new BusinessLogic.Entities.FundGroup()
             {
                 FundGroupId = 1,
                 Name = "MOCKTEST",
@@ -52,8 +47,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundGroup
                 }
             });
 
-
-            mockFundService.Setup(x => x.GetAllFunds()).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Fund>()
+            _mockFundService.Setup(x => x.GetAllFunds()).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Fund>()
             {
                 new BusinessLogic.Entities.Fund()
                 {
@@ -61,18 +55,63 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundGroup
                 }
             });
 
-            mockFundService.Setup(x => x.GetAllFunds(It.IsAny<bool>())).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Fund>()
+            _mockFundService.Setup(x => x.GetAllFunds(It.IsAny<bool>())).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Fund>()
             {
                 new BusinessLogic.Entities.Fund()
                 {
                     FundCode= "23"
                 }
             });
+        }
 
-            var editViewModelBuilder = new Admin.Classes.ViewModelBuilders.FundGroup.EditViewModelBuilder
-               (_mockLogger.Object, mockFundGroupService.Object, mockFundService.Object);
+        [TestMethod]
+        public void Build_without_an_Id_returns_null()
+        {
+            // Arrange
 
-            var result = editViewModelBuilder.Build(2);
+            // Act
+            var result = _viewModelBuilder.Build();
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Build_with_an_Id_returns_a_view_model()
+        {
+            // Arrange
+            SetupServices();
+
+            // Act
+            var result = _viewModelBuilder.Build(1);
+
+            // Assert
+            result.Should().BeOfType(typeof(ViewModel));
+        }
+
+        [TestMethod]
+        public void Build_sets_the_Id_property_correctly()
+        {
+            // Arrange
+            SetupServices();
+
+            // Act
+            var result = _viewModelBuilder.Build(1);
+
+            // Assert
+            result.Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void Build_sets_the_FundGroupName_property_correctly()
+        {
+            // Arrange
+            SetupServices();
+
+            // Act
+            var result = _viewModelBuilder.Build(1);
+
+            // Assert
             result.FundGroupName.Should().Be("MOCKTEST");
         }
     }

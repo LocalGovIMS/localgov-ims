@@ -46,11 +46,10 @@
                                 </div>
                             }
                         </div>
-
                     </div>
-                </div>
-                <div class="form__element--error">
-                    @Html.ValidationMessageFor(m => m.FundCode)
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.FundCode)
+                    </div>
                 </div>
 
                 @if (User.IsInRole(Role.PostPayment))
@@ -74,9 +73,9 @@
                                     }
                                 </div>
                             </div>
-                        </div>
-                        <div class="form__element--error">
-                            @Html.ValidationMessageFor(m => m.MopCode)
+                            <div class="form__element--error">
+                                @Html.ValidationMessageFor(m => m.MopCode)
+                            </div>
                         </div>
                     }
                     else
@@ -95,30 +94,28 @@
                 }
                 else
                 {
-                    @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
-                    //this is just for good measure, as it should always be populated...
-                    <div class="form__element--error">
-                        @Html.ValidationMessageFor(m => m.MopCode)
+                    <div class="eight wide field">
+                        @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
+                        <div class="form__element--error">
+                            @Html.ValidationMessageFor(m => m.MopCode)
+                        </div>
                     </div>
                 }
 
-
-
-                    <div class="seven wide field">
-                        @Html.LabelFor(m => m.AccountReference)
-                        <div class="ui input account-reference-wrapper">
-                            @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 30 })
-                            @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "ui blue right button account-reference-search", @style = "display:none;" })
-                        </div>
-                        <div id="AccountName"></div>
-                        <div id="AccountBalance"></div>
+                <div class="eight wide field">
+                    @Html.LabelFor(m => m.AccountReference)
+                    <div class="ui input account-reference-wrapper">
+                        @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 30 })
+                        @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "ui blue right button account-reference-search", @style = "display:none;" })
                     </div>
-                <div class="form__element--error">
-                    <div class="account-reference-validator">
-
+                    <div id="AccountName"></div>
+                    <div id="AccountBalance"></div>
+                    <div class="form__element--error">
+                        <div class="account-reference-validator"></div>
+                        @Html.ValidationMessageFor(m => m.AccountReference)
                     </div>
-                    @Html.ValidationMessageFor(m => m.AccountReference)
                 </div>
+
                 <div class="eight wide field vat-option">
                     @Html.LabelFor(m => m.VatCode)
                     <div class="ui search selection dropdown vat-dropdown">
@@ -138,13 +135,13 @@
                         @Html.ValidationMessageFor(m => m.VatCode)
                     </div>
                 </div>
-                <div class="seven wide field">
+                <div class="eight wide field">
                     @Html.LabelFor(m => m.Narrative, new { @class = "optional" })
                     <div class="ui input">
                         @Html.TextAreaFor(m => m.Narrative, new { @placeholder = "", @rows = "3", @cols = "60", @maxlength = 100 })
                     </div>
                 </div>
-                <div class="three wide field">
+                <div class="eight wide field">
                     @Html.LabelFor(m => m.Amount)
                     <div class="ui labeled input">
                         <div class="ui label">
@@ -152,14 +149,11 @@
                         </div>
                         @Html.TextBoxFor(m => m.Amount, new { @placeholder = "0.00", @class = "monetary-amount" })
                     </div>
-                </div>
-                <div class="form__element--error">
-                    <div class="amount-validator">
-
+                    <div class="form__element--error">
+                        <span class="field-validation-error amount-validator"></span>
+                        @Html.ValidationMessageFor(m => m.Amount)
                     </div>
-                    @Html.ValidationMessageFor(m => m.Amount)
                 </div>
-
                 <div class="six wide field">
                     <button value="Card" name="action" type="submit" class="ui green button add-to-basket">Add to basket</button>
                 </div>
@@ -214,9 +208,6 @@
         }
     </div>
 }
-
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/payment")

@@ -20,14 +20,14 @@ namespace BusinessLogic.Services
         {
         }
 
-        public List<UserTemplate> GetUserTemplates(int id)
+        public List<UserTemplate> GetByUserId(int id)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<UserTemplate>();
 
             try
             {
-                return UnitOfWork.UserTemplates.GetUserTemplates(id).ToList();
+                return UnitOfWork.UserTemplates.GetByUserId(id).ToList();
             }
             catch (Exception e)
             {
@@ -36,14 +36,14 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<string> GetUserTemplates(string userName)
+        public List<string> GetByUsername(string userName)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<string>();
 
             try
             {
-                return UnitOfWork.UserTemplates.GetUserTemplates(userName);
+                return UnitOfWork.UserTemplates.GetByUsername(userName);
             }
             catch (Exception e)
             {
@@ -64,7 +64,7 @@ namespace BusinessLogic.Services
 
             try
             {
-                UnitOfWork.UserTemplates.UpdateUserTemplates(items, userId);
+                UnitOfWork.UserTemplates.Update(items, userId);
 
                 UnitOfWork.Complete(SecurityContext.UserId);
 

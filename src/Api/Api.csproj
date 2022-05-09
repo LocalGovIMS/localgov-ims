@@ -144,6 +144,7 @@
     <Compile Include="Controllers\PendingTransactions\PendingTransactionModel.cs" />
     <Compile Include="Controllers\ProcessedTransactions\ProcessedTransactionsController.cs" />
     <Compile Include="Controllers\ProcessedTransactions\ProcessedTransactionModel.cs" />
+    <Compile Include="Controllers\PendingTransactions\ProcessFeeModel.cs" />
     <Compile Include="Controllers\ProcessedTransactions\SearchCriteriaModel.cs" />
     <Compile Include="Controllers\Suspense\SearchCriteria.cs" />
     <Compile Include="Controllers\Suspense\SuspenseController.cs" />

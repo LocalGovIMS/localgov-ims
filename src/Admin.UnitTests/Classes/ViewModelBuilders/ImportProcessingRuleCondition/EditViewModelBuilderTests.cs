@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using ViewModel = Admin.Models.ImportProcessingRuleCondition.EditViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.ImportProcessingRuleCondition.EditViewModelBuilder;
 
-
 namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleCondition
-
 {
     [TestClass]
     public class EditViewModelBuilderTests
@@ -19,6 +17,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
         private readonly Mock<IImportProcessingRuleFieldService> _mockImportProcessingRuleFieldService = new Mock<IImportProcessingRuleFieldService>();
         private readonly Mock<IImportProcessingRuleOperatorService> _mockImportProcessingRuleOperatorService = new Mock<IImportProcessingRuleOperatorService>();
         private readonly Mock<IImportProcessingRuleService> _mockImportProcessingRuleService = new Mock<IImportProcessingRuleService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockImportProcessingRuleConditionService.Object,
+                _mockImportProcessingRuleFieldService.Object,
+                _mockImportProcessingRuleOperatorService.Object,
+                _mockImportProcessingRuleService.Object);
+        }
 
         private void SetupServices()
         {
@@ -77,20 +88,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
         public void Build_without_an_Id_returns_null()
         {
             // Arrange
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object,
-                _mockImportProcessingRuleFieldService.Object,
-                _mockImportProcessingRuleOperatorService.Object,
-                _mockImportProcessingRuleService.Object);
 
             // Act
-            var result = editViewModelBuilder.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeNull();
         }
-
 
         [TestMethod]
         public void Build_with_an_Id_returns_a_view_model()
@@ -98,15 +102,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object,
-                _mockImportProcessingRuleFieldService.Object,
-                _mockImportProcessingRuleOperatorService.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -118,15 +115,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object,
-                _mockImportProcessingRuleFieldService.Object,
-                _mockImportProcessingRuleOperatorService.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Id.Should().Be(1);
@@ -138,15 +128,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object,
-                _mockImportProcessingRuleFieldService.Object,
-                _mockImportProcessingRuleOperatorService.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.ImportProcessingRuleId.Should().Be(1);
@@ -158,15 +141,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                 _mockLogger.Object,
-                 _mockImportProcessingRuleConditionService.Object,
-                 _mockImportProcessingRuleFieldService.Object,
-                 _mockImportProcessingRuleOperatorService.Object,
-                 _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.ImportProcessingRuleFieldId.Should().Be(1);
@@ -178,15 +154,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                 _mockLogger.Object,
-                 _mockImportProcessingRuleConditionService.Object,
-                 _mockImportProcessingRuleFieldService.Object,
-                 _mockImportProcessingRuleOperatorService.Object,
-                 _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.ImportProcessingRuleOperatorId.Should().Be(1);
@@ -198,15 +167,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRuleConditio
             // Arrange
             SetupServices();
 
-            var editViewModelBuilder = new ViewModelBuilder(
-                _mockLogger.Object,
-                _mockImportProcessingRuleConditionService.Object,
-                _mockImportProcessingRuleFieldService.Object,
-                _mockImportProcessingRuleOperatorService.Object,
-                _mockImportProcessingRuleService.Object);
-
             // Act
-            var result = editViewModelBuilder.Build(1);
+            var result = _viewModelBuilder.Build(1);
 
             // Assert
             result.Value.Should().Be("Test value");

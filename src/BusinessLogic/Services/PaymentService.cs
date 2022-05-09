@@ -1,11 +1,14 @@
 ﻿using BusinessLogic.Classes;
+using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
+using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Services.Cryptography;
+using BusinessLogic.Interfaces.Validators;
 using log4net;
 using Newtonsoft.Json;
 using System;
@@ -20,18 +23,21 @@ namespace BusinessLogic.Services
         private readonly ITransactionService _transactionService;
         private readonly ICryptographyService _cryptographyService;
         private readonly IFundService _fundService;
+        private readonly ITransactionFeeValidator _transactionFeeValidator;
 
         public PaymentService(ILog logger
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext
             , ITransactionService transactionService
             , ICryptographyService cryptographyService
-            , IFundService fundService)
+            , IFundService fundService
+            , ITransactionFeeValidator transactionFeeValidator)
             : base(logger, unitOfWork, securityContext)
         {
             _transactionService = transactionService ?? throw new ArgumentNullException("transactionService");
             _cryptographyService = cryptographyService ?? throw new ArgumentNullException("cryptographyService");
             _fundService = fundService ?? throw new ArgumentNullException("fundService");
+            _transactionFeeValidator = transactionFeeValidator ?? throw new ArgumentNullException("transactionFeeValidator");
         }
 
         public PaymentResponse CreateHppPayment(PaymentDetails paymentDetails)
@@ -74,59 +80,128 @@ namespace BusinessLogic.Services
 
         public ProcessPaymentResponse ProcessPayment(PaymentResult paymentResult)
         {
-            Logger.DebugFormat("Processing Payment: {0}", Newtonsoft.Json.JsonConvert.SerializeObject(paymentResult));
+            Logger.DebugFormat("Processing Payment: {0}", JsonConvert.SerializeObject(paymentResult));
 
             if (!SecurityContext.IsInRole(Security.Role.Payments)) return null;
+            
+            var transactions = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference);
+            if (transactions == null || !transactions.Any())
+                throw new InvalidOperationException($"Unable to load transactions for refernece {paymentResult.MerchantReference}");
 
-            var transaction = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference).First();
-
-            var response = new ProcessPaymentResponse();
+            var response = new ProcessPaymentResponse() 
+            { 
+                RedirectUrl = transactions.FailUrl(),
+                IsLegacy = transactions.Legacy() ?? false,
+                Success = false
+            };
 
             switch (paymentResult.AuthResult.ToUpper())
             {
                 case ResponseCode.Authorised:
-                    _transactionService.AuthorisePendingTransactionByInternalReference(paymentResult.MerchantReference, paymentResult.PspReference);
-                    response.RedirectUrl = $"{transaction.SuccessUrl}/{paymentResult.PspReference}";
+                    var authoriseResult = _transactionService.AuthorisePendingTransactionByInternalReference(paymentResult.MerchantReference, paymentResult.PspReference);
+
+                    if (!authoriseResult.Success)
+                        throw new InvalidOperationException(authoriseResult.ErrorMessage);
+
+                    response.RedirectUrl = $"{transactions.SuccessUrl()}/{paymentResult.PspReference}";
                     response.Success = true;
                     break;
 
                 case ResponseCode.Pending:
-                    _transactionService.SuspendPendingTransaction(
+                    var pendingResult = _transactionService.SuspendPendingTransaction(
                         paymentResult.MerchantReference,
                         paymentResult.PspReference,
                         GetCardSelfServiceMopCode()); // HIGH: Why is a MOP code being used as an Auth Result value?
-                    response.RedirectUrl = $"{transaction.SuccessUrl}";
+
+                    if (!pendingResult.Success)
+                        throw new InvalidOperationException(pendingResult.Error);
+
+                    response.RedirectUrl = $"{transactions.SuccessUrl()}";
                     response.Success = true;
                     break;
 
                 case ResponseCode.Refused:
                 case ResponseCode.Error:
-                    _transactionService.FailPendingTransaction(
+                    var failResult = _transactionService.FailPendingTransaction(
                         paymentResult.MerchantReference,
                         paymentResult.PspReference,
                         paymentResult.AuthResult);
-                    response.RedirectUrl = transaction.FailUrl;
+
+                    if (!failResult.Success)
+                        throw new InvalidOperationException(failResult.Error);
+
+                    response.RedirectUrl = transactions.FailUrl();
                     response.Success = true;
                     break;
 
                 case ResponseCode.Cancelled:
-                    _transactionService.FailPendingTransaction(
+                    var cancelResult = _transactionService.FailPendingTransaction(
                         paymentResult.MerchantReference,
                         paymentResult.PspReference,
                         paymentResult.AuthResult);
-                    response.RedirectUrl = transaction.CancelUrl;
+
+                    if (!cancelResult.Success)
+                        throw new InvalidOperationException(cancelResult.Error);
+
+                    response.RedirectUrl = transactions.CancelUrl();
                     response.Success = true;
                     break;
             }
 
-            response.IsLegacy = transaction.Legacy ?? false;
-
+            ProcessFee(paymentResult, transactions);
+            
             return response;
+        }
+
+        public IResult ProcessFee(PaymentResult paymentResult)
+        {
+            var transactions = _transactionService.GetPendingTransactionsByInternalReference(paymentResult.MerchantReference);
+
+            return ProcessFee(paymentResult, transactions);
+        }
+
+        private IResult ProcessFee(PaymentResult paymentResult, List<PendingTransaction> transactions)
+        {
+            try
+            {
+                // Initialise
+                var cardPaymentFeeMopCode = GetCardPaymentFeeMopCode();
+                var mop = UnitOfWork.Mops.GetMop(transactions.First().MopCode);
+                var validatorArgs = new Validators.TransactionFeeValidatorArgs()
+                {
+                    Transactions = transactions,
+                    PaymentResult = paymentResult,
+                    CardPaymentFeeMopCode = cardPaymentFeeMopCode,
+                    Mop = mop
+                };
+
+                // Validate
+                var validationResult = _transactionFeeValidator.Validate(validatorArgs);
+
+                if (!validationResult.Success)
+                    return validationResult;
+
+                // Process
+                var feeTransaction = transactions.ToFeeTransaction(paymentResult, mop, cardPaymentFeeMopCode);
+
+                _transactionService.CreateProcessedTransaction(new CreateProcessedTransactionArgs() { ProcessedTransaction = feeTransaction, GenerateNewReference = false });
+
+                return new Result();
+            }
+            catch(Exception ex)
+            {
+                return new Result(ex.Message);
+            }
         }
 
         private string GetCardSelfServiceMopCode()
         {
             return UnitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsACardSelfServicePayment()).MopCode;
+        }
+
+        private string GetCardPaymentFeeMopCode()
+        {
+            return UnitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsACardPaymentFee()).MopCode;
         }
 
         public ProcessPaymentResponse ProcessPayments(List<PaymentDetails> payments, PaymentTypeEnum type)
@@ -332,7 +407,7 @@ namespace BusinessLogic.Services
         {
             var mop = UnitOfWork.Mops.GetMop(mopCode);
 
-            var paymentIntegrationId = Convert.ToInt32(mop.MetaData.First(x => x.Key == "PaymentIntegrationId").Value);
+            var paymentIntegrationId = Convert.ToInt32(mop.MetaData.First(x => x.Key == MopMetaDataKeys.PaymentIntegrationId).Value);
 
             return UnitOfWork.PaymentIntegrations.SingleOrDefault(x => x.Id == paymentIntegrationId);
         }

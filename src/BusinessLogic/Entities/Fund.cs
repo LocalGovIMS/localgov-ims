@@ -23,30 +23,12 @@ namespace BusinessLogic.Entities
         [Required]
         public string FundName { get; set; }
 
-        [StringLength(2)]
-        public string AccessLevel { get; set; }
-
-        [StringLength(3)]
-        public string ValidationReference { get; set; }
+        public int? AccountReferenceValidatorId { get; set; }
 
         [StringLength(2)]
         public string VatCode { get; set; }
 
         public decimal? MaximumAmount { get; set; }
-
-        public bool NarrativeFlag { get; set; }
-
-        public bool ExportToFund { get; set; }
-
-        public bool ExportToLedger { get; set; }
-
-        [StringLength(10)]
-        public string FundExportFormat { get; set; }
-
-        public bool UseGeneralLedgerCode { get; set; }
-
-        [StringLength(20)]
-        public string GeneralLedgerCode { get; set; }
 
         public bool OverPayAccount { get; set; }
 
@@ -58,8 +40,6 @@ namespace BusinessLogic.Entities
         public string DisplayName { get; set; }
 
         public bool VatOverride { get; set; }
-
-        public bool? LedgerDetail { get; set; }
 
         public bool Disabled { get; set; }
 
@@ -76,5 +56,7 @@ namespace BusinessLogic.Entities
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
 
         public virtual ICollection<FundMetaData> MetaData { get; set; }
+
+        public virtual AccountReferenceValidator AccountReferenceValidator { get; set; }
     }
 }

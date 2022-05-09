@@ -15,8 +15,20 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
-        private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
         private readonly Mock<IMethodOfPaymentService> _mockMopService = new Mock<IMethodOfPaymentService>();
+        private readonly Mock<IVatService> _mockVatService = new Mock<IVatService>();
+
+        private ViewModelBuilder _viewModelBuilder;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _viewModelBuilder = new ViewModelBuilder(
+                _mockLogger.Object,
+                _mockFundService.Object,
+                _mockMopService.Object,
+                _mockVatService.Object);
+        }
 
         private void SetupFundService(Mock<IFundService> service)
         {
@@ -131,19 +143,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
             SetupVatService(_mockVatService);
             SetupMopService(_mockMopService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockFundService.Object,
-               _mockMopService.Object,
-               _mockVatService.Object);
-
             // Act
-            var result = viewModelBuidler.Build();
+            var result = _viewModelBuilder.Build();
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
         }
-
 
         [TestMethod]
         public void OnBuildWithParamReturnsViewModel()
@@ -153,14 +158,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
             SetupVatService(_mockVatService);
             SetupMopService(_mockMopService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockFundService.Object,
-               _mockMopService.Object,
-               _mockVatService.Object);
-
             // Act
-            var result = viewModelBuidler.Build("Ref");
+            var result = _viewModelBuilder.Build("Ref");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
@@ -174,14 +173,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
             SetupVatService(_mockVatService);
             SetupMopService(_mockMopService);
 
-            var viewModelBuidler = new ViewModelBuilder(
-               _mockLogger.Object,
-               _mockFundService.Object,
-               _mockMopService.Object,
-               _mockVatService.Object);
-
             // Act
-            var result = viewModelBuidler.Rebuild(new ViewModel());
+            var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));

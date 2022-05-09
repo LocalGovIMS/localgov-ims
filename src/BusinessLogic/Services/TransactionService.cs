@@ -780,23 +780,31 @@ namespace BusinessLogic.Services
             return CreateProcessedTransaction(processedTransaction, true);
         }
 
-        public IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChanges)
+        public IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChagnes)
+        {
+            return CreateProcessedTransaction(new CreateProcessedTransactionArgs() { ProcessedTransaction = processedTransaction, SaveChanges = saveChagnes });
+        }
+
+        public IResult CreateProcessedTransaction(CreateProcessedTransactionArgs args)
         {
             if (!SecurityContext.IsInRole(Security.Role.TransactionCreate)) return null;
 
             try
             {
-                processedTransaction.TransactionReference = GetNextReferenceId();
-                processedTransaction.InternalReference = processedTransaction.TransactionReference;
+                if (args.GenerateNewReference)
+                {
+                    args.ProcessedTransaction.TransactionReference = GetNextReferenceId();
+                    args.ProcessedTransaction.InternalReference = args.ProcessedTransaction.TransactionReference;
+                }
 
-                UnitOfWork.Transactions.Add(processedTransaction);
+                UnitOfWork.Transactions.Add(args.ProcessedTransaction);
 
-                if (saveChanges)
+                if (args.SaveChanges)
                 {
                     UnitOfWork.Complete(SecurityContext.UserId);
                 }
 
-                return new Result() { Data = processedTransaction };
+                return new Result() { Data = args.ProcessedTransaction };
             }
             catch (DbUpdateException ex)
             {
@@ -811,5 +819,12 @@ namespace BusinessLogic.Services
                 return new Result(ex.Message);
             }
         }
+    }
+
+    public class CreateProcessedTransactionArgs
+    {
+        public ProcessedTransaction ProcessedTransaction { get; set; }
+        public bool SaveChanges { get; set; } = true;
+        public bool GenerateNewReference { get; set; } = true;
     }
 }
