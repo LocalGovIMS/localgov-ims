@@ -31,9 +31,9 @@ An API allowing other services to integrate with the IMS
 [Quick Start](\docs\quick-start.md)  
 <br>
 [Prerequisites](\docs\prerequisites.md)  
-[AppSettings](\docs\app-settings.md)  
-[DB Initialisers](\docs\db-initialisers.md)  
-[DB Migrations](\docs\db-migrations.md)  
+[Application settings](\docs\app-settings.md)  
+[Database initialisation & seed data](\docs\database-initialisation-and-seed-data.md)  
+[Database migrations](\docs\database-migrations.md)  
 [Setting up a user account](\docs\setting-up-a-user-account.md)  
 [Adding a payment integration](\docs\adding-a-payment-integration.md)  
 

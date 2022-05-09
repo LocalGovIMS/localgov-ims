@@ -43,28 +43,21 @@
 |Organisation.Address.AddressLine3|Address Line 3|Third line of your organisations address|
 |Organisation.Address.PostCode||Post Code|
 
-### DB Initialisation
+### Demo Seed Data
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
-|DatabaseInitialisation.PaymentIntegration.Name|Integration||
-|DatabaseInitialisation.PaymentIntegration.BaseUri|https://www.your-payment-integration.com/Payment||
-|DatabaseInitialisation.User1.Username|tester1@your-organisation.com||
-|DatabaseInitialisation.User1.Name|Tester 1||
-|DatabaseInitialisation.User2.Username|tester2@your-organisation.com||
-|DatabaseInitialisation.User2.Name|Tester 2||
-
-
-### UI Test Initialisation
-
-|Key|Example Value|Description|
-|---|-------------|-----------|
-|UITestInitialisation.PaymentIntegration.Name|Integration||
-|UITestInitialisation.PaymentIntegration.BaseUri|https://www.your-ui-test-payment-integration.com/Payment||
-|UITestInitialisation.User1.EmailAddress|tester1@your-organisation.com||
-|UITestInitialisation.User1.PasswordHash|AP59Z8CoHL2gGqqgLb/CTu0u2sbCkw+zkSxqA1lh+MmGRkqvORuRRFG2lHMdmsqbTg==||
-|UITestInitialisation.User2.EmailAddress|tester2@your-organisation.com||
-|UITestInitialisation.User2.PasswordHash|AP59Z8CoHL2gGqqgLb/CTu0u2sbCkw+zkSxqA1lh+MmGRkqvORuRRFG2lHMdmsqbTg==||
+|SeedData.DemoData.PaymentIntegration.Name|Integration||
+|SeedData.DemoData.PaymentIntegration.BaseUri|https://www.your-payment-integration.com/Payment||
+|SeedData.DemoData.User1.Username|tester1@your-organisation.com||
+|SeedData.DemoData.User1.Name|Tester 1||
+|SeedData.DemoData.User1.PasswordHash|AP59Z8CoHL2gGqqgLb/CTu0u2sbCkw+zkSxqA1lh+MmGRkqvORuRRFG2lHMdmsqbTg==||
+|SeedData.DemoData.User2.Username|tester2@your-organisation.com||
+|SeedData.DemoData.User2.Name|Tester 2||
+|SeedData.DemoData.User2.PasswordHash|AP59Z8CoHL2gGqqgLb/CTu0u2sbCkw+zkSxqA1lh+MmGRkqvORuRRFG2lHMdmsqbTg==||
+|SeedData.DemoData.FundMetadata.Key1|IsABasketFund||
+|SeedData.DemoData.FundMetadata.Value1|TRUE||
+|SeedData.DemoData.FundMetadata.FundCode1|F1||
 
 ## Admin
 

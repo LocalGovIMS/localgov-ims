@@ -27,7 +27,7 @@ Before you start, please read the following:
 
 The package will be output to the bin folder. It should contain the version number in the filename.
 
-# Publish your client to GitHub Packages
+# Publish your client to the LocalGov IMS Packages feed
 
 1. Open the Developer Powershell from Visual Studio (Tools > Command Line > Developer Powershell)
 2. Add the LocalGov IMS package source:
