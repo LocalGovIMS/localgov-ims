@@ -1,18 +1,18 @@
-# Database initialisation & Seed data
+# Database Initialisation & Seed Data
 
 Entity Framework uses database initialisers to manage how and when code first model changes are applied to the database.
 There are serveral initialisers available and it's possible to create your own custom initialiser.
 By default Entity Framework uses an initialiser which will create the database if it doesn't exist.
 
-# Suggested reading
+# Suggested Reading
 
 1. [Code First and Database Initialization](https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/november/cutting-edge-code-first-and-database-initialization)
 
-# Custom initialiser
+# Custom Initialiser
 
-A custom initialiser has been used to allow us to run db initialisation SQL scripts depending on what environment we're targetting.
+A custom initialiser has been used to allow us to run database initialisation SQL scripts depending on what environment we're targeting.
 
-# How to use an initiliser
+# How To Use An Initialiser
 
 First you can decide whether to use it or not.
 If you don't want to use it, do nothing.
@@ -36,9 +36,9 @@ Add the following to you web.config transformation file:
 </entityFramework> 
 ```
 
-## Setting the environment
+## Setting the Environment
 
-The environment can be configured by setting the appSetting for "Environment" like so:
+The environment can be configured by setting the 'appSetting' for "Environment" like so:
 
 ```
 <appSettings>
@@ -54,7 +54,7 @@ The following environments are supported:
 * Test
 * Live
 
-# Seed data
+# Seed Data
 
 The solution contains several seed data scripts. 
 
@@ -63,7 +63,7 @@ The solution contains several seed data scripts.
 * DemoData.sql - Adds some settings data (e.g. Fund codes) allowing you to run the solution and log in.
 * UITestData.sql - Adds data required by some UI Tests
 
-The SeedData.sql and Indexes.sql are run regardless of environemnt.
+The SeedData.sql and Indexes.sql are run regardless of environment.
 
 If the environment is set to "Demo" the following scripts will also be ran:
 * DemoData.sql

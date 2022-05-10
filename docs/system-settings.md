@@ -1,6 +1,5 @@
-# Database Migrations
+# System Settings
 
-The solution uses a code first approach to database management via Entity Framework 6.
 
 # Suggested Reading
 

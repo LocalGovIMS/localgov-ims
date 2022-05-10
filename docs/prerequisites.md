@@ -5,17 +5,17 @@ Before you can begin to develop the IMS it is recommended that the following are
 1. You have somewhere to create a SQL database
 2. You have added the LocalGov IMS package feed as a package source
 
-## Accessing a SQL instance
+# Accessing a SQL Instance
 
-You'll need access to either a remote and local SQL instance.
-<br>
-You'll require **dbowner** privileges
+You'll need access to a SQL instance with an account which has **dbowner** privileges
 
-## Adding a NuGet package source
+# Adding a NuGet Package Source
 
-Two simple options for this are to add it via the Visual Studio UI, or command line
+There are two options for this:
+1. Add it via the Visual Studio UI
+2. Add it via the command line
 
-### Setup NuGet package sources via Visual Studio
+## Setup NuGet Package Sources via Visual Studio
 
 1. Open  Tools > NuGet Package Manager > Package Manager Settings
 2. In the 'Options' dialog that's shown navigate to NuGet Package Manager > Package Sources
@@ -25,7 +25,7 @@ Two simple options for this are to add it via the Visual Studio UI, or command l
    * Source: https://nuget.pkg.github.com/LocalGovIMS/index.json
 5. Click 'OK'
 
-### Setup NuGet pacakge sources via command line
+## Setup NuGet Package Sources via Command Line
 
 1. [Create a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) in Github
 2. Open a command prompt

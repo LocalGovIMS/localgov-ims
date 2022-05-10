@@ -1,3 +1,3 @@
-# Setting Up a User Account
+# Setting up a user account
 
 TODO

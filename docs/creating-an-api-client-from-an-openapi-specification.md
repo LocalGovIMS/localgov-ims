@@ -1,11 +1,11 @@
 # Introduction 
-The following document describes how to setup your development environment so that you can auto-geneate API client libraries.
+The following document describes how to setup your development environment so that you can auto-generate API client libraries.
 
-## Why auto-generate API client libraries
+## Why Auto-generate API Client Libraries
 There are many reasons to auto-generate API client libraries, such as:
-1. It reduces the amount of code devs have to write to integrate with an API
+1. It reduces the amount of code developers have to write to integrate with an API
 2. It improves the developer experience
-3. Using the tooling available makes it easy to generate clients in multiple languages
+3. Using the tooling available makes it easy to generate clients in multiple programming languages
 
 # Tooling
 A number of technologies and tools are used in this process:
@@ -21,14 +21,14 @@ This guide explains how to setup a Windows PC ready for API client generation
     * Open a command prompt
     * Run: npm install @openapitools/openapi-generator-cli -g
 
-# Client creation prerequisites 
+# Client Creation Prerequisites 
 
 1. You will need to [create the OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api.md) for the API you're creating a client for
 2. Not required, but creating a repository for the client code at this stage will help if you wish to create a NuGet package for you client at a later stage
 
-# Creating a client
+# Creating a Client
 
-1. Save the OpenAPI spec YAML file to a fodler on your device
+1. Save the OpenAPI spec YAML file to a folder on your device
 2. Open a command prompt and navigate to that folder
 3. Run the [OpenAPI Genearator](https://openapi-generator.tech/) to create the client:
     * Run: npx @openapitools/openapi-generator-cli generate -i [Name of your YAML file].yaml -g csharp-netcore -o [Location to save to e.g. /Dev/MyClient/] --package-name [Name of your client]
@@ -38,11 +38,11 @@ This guide explains how to setup a Windows PC ready for API client generation
     * Open the 'Application' tab
     * Change the 'Target framework' value to '.NET Standard 2.1'
 
-# Next steps
+# Next Steps
 
 Read about how to [package your API client](packaging-your-api-client.md) as a NuGet package
 
-# Previsou steps
+# Previous Steps
 
 Read about how to [create an OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api.md) for your API
 

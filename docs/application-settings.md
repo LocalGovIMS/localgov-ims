@@ -1,8 +1,8 @@
-# App Settings
+# Application Settings
 
-## Payment Portal
+# Payment Portal
 
-### General Settings
+## General Settings
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -13,7 +13,7 @@
 |OtherWaysToPayUrl||A link to a list of other ways to pay|
 |ReferenceSalt||The salt used when creating transaction references|
 
-### Email
+## Email
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -23,7 +23,7 @@
 |Notification.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of any system notifications|
 |DuplicateTransaction.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of the duplicate transaction alert email|
 
-### Organisation
+## Organisation
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -43,7 +43,7 @@
 |Organisation.Address.AddressLine3|Address Line 3|Third line of your organisations address|
 |Organisation.Address.PostCode||Post Code|
 
-### Demo Seed Data
+## Demo Seed Data
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -59,16 +59,16 @@
 |SeedData.DemoData.FundMetadata.Value1|TRUE||
 |SeedData.DemoData.FundMetadata.FundCode1|F1||
 
-## Admin
+# Admin
 
-### General Settings
+## General Settings
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
 |ReferenceSalt||The salt used when creating transaction references|
 |FileImport.UploadDirectory|~/Uploads/|The directory that any imports files which are uploaded will be saved to|
 
-### Email
+## Email
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -80,7 +80,7 @@
 |Notification.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of any system notifications|
 |DuplicateTransaction.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of the duplicate transaction alert email|
 
-### Organisation
+## Organisation
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
@@ -100,9 +100,9 @@
 |Organisation.Address.AddressLine3|Address Line 3|Third line of your organisations address|
 |Organisation.Address.PostCode||Post Code|
 
-## API
+# API
 
-### General Settings
+## General Settings
 
 |Key|Example Value|Description|
 |---|-------------|-----------|

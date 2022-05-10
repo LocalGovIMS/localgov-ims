@@ -1,5 +1,5 @@
 # Introduction 
-The following document describes what is requied to generate an [OpenApi specification](https://swagger.io/specification/) for the LocalGov IMS API
+The following document describes what is required to generate an [OpenApi specification](https://swagger.io/specification/) for the LocalGov IMS API
 
 The LocalGov IMS API is written in .NET Framework 4.8, and as such, the tooling that's available to create an OpenAPI specification is limited.
 
@@ -30,7 +30,7 @@ This guide explains how to setup a Windows PC ready for API client generation
 4. Copy the JSON output 
 6. Save the JSON to a new .json file on your PC
 
-# Next steps
+# Next Steps
 
 Read about how to [create an API client](creating-an-api-client-from-an-openapi-specification.md) from an OpenAPI specification
 
