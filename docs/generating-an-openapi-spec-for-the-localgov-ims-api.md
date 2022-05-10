@@ -25,7 +25,7 @@ This guide explains how to setup a Windows PC ready for API client generation
 # Creating the OpanAPI Specification
 
 1. Open NSwagStudio
-2. Load the [NSawg project file](src\Api\LocalGovImsApi.nsawg)
+2. Load the [NSawg project file](../src/Api/LocalGovImsApi.nsawg)
 3. Click the 'Generate Outputs' button
 4. Copy the JSON output 
 6. Save the JSON to a new .json file on your PC

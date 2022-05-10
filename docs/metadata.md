@@ -17,9 +17,9 @@ Examples are: BackgroundColour - allowing the user to specify a background colou
 
 Various entities have system metadata:
 
-* [Fund Code Metadata](\metadata-fund-code.md)
-* [Method of Payment Metadata](\metadata-method-of-payment.md)
-* [VAT Code Metadata](\metadata-vat-code.md)
+* [Fund Code Metadata](metadata-fund.md)
+* [Method of Payment Metadata](metadata-method-of-payment.md)
+* [VAT Code Metadata](metadata-vat.md)
 
 ## Custom Metadata
 
