@@ -1,5 +1,6 @@
 # Introduction 
-TODO:
+API Clients are wrappers for API implementations.
+We can package API clients and reference them within project via the [LocalGov IMS Packages feed](https://github.com/orgs/LocalGovIMS/packages)
 
 # Stages
 

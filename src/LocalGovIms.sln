@@ -52,10 +52,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.UnitTests", "Admin.Un
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6CD1B341-B920-4DA9-8DCD-70DD88BD946C}"
 	ProjectSection(SolutionItems) = preProject
+		..\docs\adding-a-payment-integration.md = ..\docs\adding-a-payment-integration.md
+		..\docs\application-settings.md = ..\docs\application-settings.md
 		..\docs\creating-an-api-client-from-an-openapi-specification.md = ..\docs\creating-an-api-client-from-an-openapi-specification.md
 		..\docs\creating-an-api-client.md = ..\docs\creating-an-api-client.md
+		..\docs\database-initialisation-and-seed-data.md = ..\docs\database-initialisation-and-seed-data.md
+		..\docs\database-migrations.md = ..\docs\database-migrations.md
 		..\docs\generating-an-openapi-spec-for-the-localgov-ims-api.md = ..\docs\generating-an-openapi-spec-for-the-localgov-ims-api.md
+		..\docs\metadata-fund.md = ..\docs\metadata-fund.md
+		..\docs\metadata-method-of-payment.md = ..\docs\metadata-method-of-payment.md
+		..\docs\metadata-vat.md = ..\docs\metadata-vat.md
+		..\docs\metadata.md = ..\docs\metadata.md
 		..\docs\packaging-your-api-client.md = ..\docs\packaging-your-api-client.md
+		..\docs\prerequisites.md = ..\docs\prerequisites.md
+		..\docs\setting-up-a-user-account.md = ..\docs\setting-up-a-user-account.md
+		..\docs\system-settings.md = ..\docs\system-settings.md
 	EndProjectSection
 EndProject
 Global
