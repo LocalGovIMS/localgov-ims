@@ -92,6 +92,12 @@ namespace BusinessLogic.Entities
         [StringLength(10)]
         public string CardHolderPostCode { get; set; }
 
+        [StringLength(6)]
+        public string CardPrefix { get; set; }
+
+        [StringLength(4)]
+        public string CardSuffix { get; set; }
+
         public float VatRate { get; set; }
 
         [StringLength(36)]

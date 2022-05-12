@@ -35,6 +35,12 @@ namespace Admin.Models.Transaction
 
         public string BatchReference { get; set; }
 
+        [Display(Name = "Card Prefix")]
+        public string CardPrefix { get; set; }
+
+        [Display(Name = "Card Suffix")]
+        public string CardSuffix { get; set; }
+
         public int Page { get; set; }
 
         public SelectList Funds { get; set; }

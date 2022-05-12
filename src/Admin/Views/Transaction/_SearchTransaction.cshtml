@@ -11,7 +11,7 @@
                 <div class="header source-message-header">Search invalid</div>
                 <p class="header source-message-text"></p>
             </div>
-            <div class="four fields">
+            <div class="six fields">
                 <div class="field">
                     <label>Fund type</label>
                     <div class="ui fluid search selection dropdown">
@@ -63,6 +63,14 @@
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
                     </div>
+                </div>
+                <div class="field">
+                    <label>Card prefix</label>
+                    @Html.TextBoxFor(m => m.CardPrefix, new { size = 6, placeholder = "Enter card prefix" })
+                </div>
+                <div class="field">
+                    <label>Card suffix</label>
+                    @Html.TextBoxFor(m => m.CardSuffix, new { size = 4, placeholder = "Enter card suffix" })
                 </div>
             </div>
             <div class="six fields">

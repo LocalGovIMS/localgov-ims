@@ -656,8 +656,7 @@ namespace BusinessLogic.Services
 
             try
             {
-                int resultCount;
-                var result = UnitOfWork.Transactions.Search(criteria.TrimStringProperties(), out resultCount);
+                var result = UnitOfWork.Transactions.Search(criteria.TrimStringProperties(), out int resultCount);
 
                 return new SearchResult<ProcessedTransaction>()
                 {
