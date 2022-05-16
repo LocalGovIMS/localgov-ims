@@ -175,6 +175,16 @@ namespace DataAccess.Repositories
                 transactions = transactions.Where(x => x.BatchReference == criteria.BatchReference);
             }
 
+            if (!string.IsNullOrWhiteSpace(criteria.CardPrefix))
+            {
+                transactions = transactions.Where(x => x.CardPrefix.StartsWith(criteria.CardPrefix));
+            }
+
+            if (!string.IsNullOrWhiteSpace(criteria.CardSuffix))
+            {
+                transactions = transactions.Where(x => x.CardSuffix.StartsWith(criteria.CardSuffix));
+            }
+
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;
 

@@ -161,6 +161,10 @@
     <Compile Include="Migrations\202205030845084_Renamed_UserPostPaymentMopCodes_table.designer.cs">
       <DependentUpon>202205030845084_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205120853290_Added_ProcessedTransaction_Card_fields.cs" />
+    <Compile Include="Migrations\202205120853290_Added_ProcessedTransaction_Card_fields.designer.cs">
+      <DependentUpon>202205120853290_Added_ProcessedTransaction_Card_fields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -266,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205030845084_Renamed_UserPostPaymentMopCodes_table.resx">
       <DependentUpon>202205030845084_Renamed_UserPostPaymentMopCodes_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205120853290_Added_ProcessedTransaction_Card_fields.resx">
+      <DependentUpon>202205120853290_Added_ProcessedTransaction_Card_fields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
