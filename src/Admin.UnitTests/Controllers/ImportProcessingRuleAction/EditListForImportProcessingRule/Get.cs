@@ -43,19 +43,13 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRuleAction.EditListForImpo
         [TestMethod]
         public void HasCorrectNumberOfCustomAttributes()
         {
-            Assert.AreEqual(2, GetListMethod().CustomAttributes.Count());
+            Assert.AreEqual(1, GetListMethod().CustomAttributes.Count());
         }
 
         [TestMethod]
         public void HasASingleChildActionOnlyAttribute()
         {
             Assert.AreEqual(1, GetListMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
-        }
-
-        [TestMethod]
-        public void HasASingleGetAttribute()
-        {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(HttpGetAttribute)).Count());
         }
 
         private ActionResult GetTestListResult()

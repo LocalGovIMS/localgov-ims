@@ -98,7 +98,13 @@ namespace BusinessLogic.Services
             switch (paymentResult.AuthResult.ToUpper())
             {
                 case ResponseCode.Authorised:
-                    var authoriseResult = _transactionService.AuthorisePendingTransactionByInternalReference(paymentResult.MerchantReference, paymentResult.PspReference);
+                    var authoriseResult = _transactionService.AuthorisePendingTransactionByInternalReference(new Models.Transactions.AuthorisePendingTransactionByInternalReferenceArgs()
+                    {
+                        InternalReference = paymentResult.MerchantReference,
+                        PspReference = paymentResult.PspReference,
+                        CardPrefix = paymentResult.CardPrefix,
+                        CardSuffix = paymentResult.CardSuffix
+                    } );
 
                     if (!authoriseResult.Success)
                         throw new InvalidOperationException(authoriseResult.ErrorMessage);

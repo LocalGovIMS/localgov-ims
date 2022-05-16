@@ -66,20 +66,20 @@ namespace BusinessLogic.Services
             }
         }
 
-        public Response AuthorisePendingTransactionByInternalReference(string internalReference, string pspReference)
+        public Response AuthorisePendingTransactionByInternalReference(AuthorisePendingTransactionByInternalReferenceArgs args)
         {
             if (!SecurityContext.IsInRole(Security.Role.TransactionCreate)) return null;
 
             var response = new Response();
             try
             {
-                if (TransactionAlreadyProcessed(internalReference))
+                if (TransactionAlreadyProcessed(args.InternalReference))
                 {
                     response.Success = true;
                     return response;
                 }
 
-                var pendingTransactions = UnitOfWork.PendingTransactions.GetByInternalReference(internalReference);
+                var pendingTransactions = UnitOfWork.PendingTransactions.GetByInternalReference(args.InternalReference);
 
                 var transactions = new List<ProcessedTransaction>();
 
@@ -88,7 +88,9 @@ namespace BusinessLogic.Services
                     pendingTransaction.Processed = true;
                     pendingTransaction.StatusId = (int)Enums.TransactionStatus.Successful;
                     var transaction = ConvertPendingTransactionToTransaction(pendingTransaction);
-                    transaction.PspReference = pspReference;
+                    transaction.PspReference = args.PspReference;
+                    transaction.CardPrefix = args.CardPrefix;
+                    transaction.CardSuffix = args.CardSuffix;
                     transaction.TransactionDate = DateTime.Now;
                     transactions.Add(transaction);
                 }

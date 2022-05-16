@@ -87,7 +87,11 @@ namespace Api.Controllers.PendingTransactions
         {
             try
             {
-                var response = _transactionService.AuthorisePendingTransactionByInternalReference(reference, model.PspReference);
+                var response = _transactionService.AuthorisePendingTransactionByInternalReference(new BusinessLogic.Models.Transactions.AuthorisePendingTransactionByInternalReferenceArgs()
+                {
+                    InternalReference = reference,
+                    PspReference = model.PspReference
+                });
 
                 if (response.Success)
                     return Ok();

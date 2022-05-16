@@ -3,6 +3,7 @@ using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.Models;
+using BusinessLogic.Models.Transactions;
 using BusinessLogic.Services;
 using BusinessLogic.Validators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -85,7 +86,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
                 .Returns(new List<PendingTransaction>() { pendingTransaction });
 
             MockTransactionService.Setup(x =>
-                x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()))
+                x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()))
                 .Returns(new Response() { Success = true });
 
             MockTransactionService.Setup(x =>
@@ -143,7 +144,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             Assert.IsInstanceOfType(result, typeof(ProcessPaymentResponse));
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual("http://www.test.com/fail", result.RedirectUrl);
-            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()), Times.Never);
             MockTransactionService.Verify(x => x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
@@ -167,7 +168,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             Assert.IsInstanceOfType(result, typeof(ProcessPaymentResponse));
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual("http://www.test.com/fail", result.RedirectUrl);
-            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()), Times.Never);
             MockTransactionService.Verify(x => x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
@@ -192,7 +193,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             Assert.IsInstanceOfType(result, typeof(ProcessPaymentResponse));
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual("http://www.test.com/success/1234", result.RedirectUrl);
-            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()), Times.Once);
             MockTransactionService.Verify(x => x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
 
@@ -217,7 +218,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             Assert.AreEqual(true, result.Success);
             Assert.AreEqual("http://www.test.com/success", result.RedirectUrl);
             MockTransactionService.Verify(x => x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
-            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()), Times.Never);
             MockTransactionService.Verify(x => x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
 
@@ -243,7 +244,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
             Assert.AreEqual("http://www.test.com/cancel", result.RedirectUrl);
             MockTransactionService.Verify(x => x.FailPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
             MockTransactionService.Verify(x => x.SuspendPendingTransaction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
-            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            MockTransactionService.Verify(x => x.AuthorisePendingTransactionByInternalReference(It.IsAny<AuthorisePendingTransactionByInternalReferenceArgs>()), Times.Never);
         }
 
         [TestMethod]

@@ -10,7 +10,7 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface ITransactionService
     {
-        Response AuthorisePendingTransactionByInternalReference(string internalReference, string pspReference);
+        Response AuthorisePendingTransactionByInternalReference(AuthorisePendingTransactionByInternalReferenceArgs args);
         IResult AuthoriseTransactionByNotification(TransactionNotification notification);
         IResult AuthoriseRefundByNotification(string internalReference, string pspReference);
         IResult FailPendingTransaction(string reference, string pspReference, string authResult);

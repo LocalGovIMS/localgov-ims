@@ -9,6 +9,8 @@ namespace Api.Controllers.PendingTransactions
         public string MerchantReference { get; set; }
         public string PaymentMethod { get; set; }
         public decimal? Fee { get; set; }
+        public string CardPrefix { get; set; }
+        public string CardSuffix { get; set; }
 
         public PaymentResult ToPaymentResult()
         {
@@ -18,7 +20,9 @@ namespace Api.Controllers.PendingTransactions
                 AuthResult = this.AuthResult,
                 PaymentMethod = this.PaymentMethod,
                 PspReference = this.PspReference,
-                Fee = this.Fee ?? 0
+                Fee = this.Fee ?? 0,
+                CardPrefix = this.CardPrefix,
+                CardSuffix = this.CardSuffix
             };
         }
     }

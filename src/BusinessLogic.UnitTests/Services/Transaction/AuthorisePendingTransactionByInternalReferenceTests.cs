@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Models;
+using BusinessLogic.Models.Transactions;
 using BusinessLogic.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -56,7 +57,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             var service = GetService();
 
             // Act
-            var result = service.AuthorisePendingTransactionByInternalReference("", "");
+            var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
             // Assert
             Assert.IsNotNull(result);
@@ -72,7 +73,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             var service = GetService();
 
             // Act
-            var result = service.AuthorisePendingTransactionByInternalReference("", "");
+            var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
             // Assert
             Assert.IsNotNull(result);
@@ -88,7 +89,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             var service = GetService();
 
             // Act
-            var result = service.AuthorisePendingTransactionByInternalReference("", "");
+            var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
             // Assert
             Assert.IsNotNull(result);
@@ -104,7 +105,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             var service = GetService();
 
             // Act
-            var result = service.AuthorisePendingTransactionByInternalReference("", "");
+            var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
             // Assert
             Assert.IsNull(result);
@@ -119,7 +120,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             var service = GetService();
 
             // Act
-            var result = service.AuthorisePendingTransactionByInternalReference("", "");
+            var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
             // Assert
             Assert.IsNotNull(result);
@@ -142,7 +143,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
                 {
 
                     // Act
-                    var result = service.AuthorisePendingTransactionByInternalReference("", "");
+                    var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
                     // Assert
                     Assert.IsNotNull(result);
@@ -154,7 +155,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
                 {
 
                     // Act
-                    var result = service.AuthorisePendingTransactionByInternalReference("", "");
+                    var result = service.AuthorisePendingTransactionByInternalReference(new AuthorisePendingTransactionByInternalReferenceArgs());
 
                     // Assert
                     Assert.IsNull(result);
