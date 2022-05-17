@@ -18,15 +18,22 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Import File")]
+        [NavigatablePageActionFilter(DisplayText = "Imports")]
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [NavigatablePageActionFilter(DisplayText = "File Import")]
+        [HttpGet]
+        public ActionResult FileImport()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase postedFile)
+        public ActionResult FileImport(HttpPostedFileBase postedFile)
         {
             var result = Dependencies.SaveImportFileCommand.Execute(
                 new SaveImportFileCommandArgs

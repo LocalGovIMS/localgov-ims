@@ -362,6 +362,7 @@
     <Compile Include="Controllers\Import\ConstructorTests.cs" />
     <Compile Include="Controllers\Import\Confirm\Get.cs" />
     <Compile Include="Controllers\Import\Confirm\Post.cs" />
+    <Compile Include="Controllers\Import\FileImport\Get.cs" />
     <Compile Include="Controllers\Import\Index\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />

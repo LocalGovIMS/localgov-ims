@@ -1,32 +1,45 @@
 ﻿@{
-    ViewBag.Title = "Import File";
-}
-
-@section Messages {
-    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+    ViewBag.Title = "Import";
 }
 
 @section Header {
-    <h1 class="ui header">
-        Import File
+    <div class="ui header">
+        <h1>Import</h1>
         <div class="sub header">
-            File details
-        </div>
-    </h1>
-}
-@using (Html.BeginForm("Index", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="ui form">
-        <div class="ui vertical segment">
-
-            <div class="four wide field">
-                <input type="file" name="postedFile" />
-            </div>
-
-            <input type="submit" value="Upload" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "Import", null, new { @class = "ui button" })
-
+            Import
         </div>
     </div>
-
+    
 }
+
+<div class="ui grid stackable">
+
+    @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("FileImport", "Import")">
+                <div class="content">
+                    <div class="header">File Import</div>
+                    <div class="description">
+                        <p>Import a file</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "ImportProcessingRule")">
+                <div class="content">
+                    <div class="header">Import Processing Rules</div>
+                    <div class="description">
+                        <p>Manage import processing rules</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>

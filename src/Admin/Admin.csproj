@@ -1620,7 +1620,7 @@
     <Content Include="Views\SuspenseNote\Create.cshtml" />
     <Content Include="Views\SuspenseNote\List.cshtml" />
     <Content Include="Views\SuspenseNote\_List.cshtml" />
-    <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Import\FileImport.cshtml" />
     <Content Include="Views\Import\Confirm.cshtml" />
     <Content Include="Views\PaymentIntegration\Create.cshtml" />
     <Content Include="Views\PaymentIntegration\Details.cshtml" />
@@ -1638,6 +1638,7 @@
     <Content Include="Views\AccountReferenceValidator\Edit.cshtml" />
     <Content Include="Views\AccountReferenceValidator\List.cshtml" />
     <Content Include="Views\UserMethodOfPayment\Edit.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

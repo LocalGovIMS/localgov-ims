@@ -12,7 +12,7 @@ using Web.Mvc.Navigation;
 using Controller = Admin.Controllers.ImportController;
 using Dependencies = Admin.Controllers.ImportControllerDependencies;
 
-namespace Admin.UnitTests.Controllers.Import.Index
+namespace Admin.UnitTests.Controllers.Import.FileImport
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -28,7 +28,7 @@ namespace Admin.UnitTests.Controllers.Import.Index
         {
             return _controller.GetMethods()
                 .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Index")
+                .Where(x => x.Name == "FileImport")
                 .FirstOrDefault();
         }
 
@@ -63,7 +63,7 @@ namespace Admin.UnitTests.Controllers.Import.Index
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Imports", namedArgument.TypedValue.Value);
+            Assert.AreEqual("File Import", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace Admin.UnitTests.Controllers.Import.Index
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "FileImport");
         }
     }
 }
