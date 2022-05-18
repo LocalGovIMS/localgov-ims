@@ -52,11 +52,11 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                     new Mop()
                     {
                         MopCode = "91",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsACardViaStaffPayment,
+                                Key = MopMetadataKeys.IsACardViaStaffPayment,
                                 Value = "True"
                             }
                         }

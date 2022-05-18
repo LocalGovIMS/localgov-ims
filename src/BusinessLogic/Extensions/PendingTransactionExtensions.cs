@@ -37,8 +37,8 @@ namespace BusinessLogic.Extensions
             }
             else if (mop.IsACentralChargeFee())
             {
-                feeTransaction.AccountReference = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeAccountReference);
-                feeTransaction.FundCode = mop.GetMopMetaDataValue<string>(MopMetaDataKeys.FeeFundCode);
+                feeTransaction.AccountReference = mop.GetMopMetadataValue<string>(MopMetadataKeys.FeeAccountReference);
+                feeTransaction.FundCode = mop.GetMopMetadataValue<string>(MopMetadataKeys.FeeFundCode);
             }
 
             return feeTransaction;

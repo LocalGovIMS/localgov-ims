@@ -12,7 +12,7 @@ namespace BusinessLogic.Entities
             StopMessages = new HashSet<StopMessage>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
-            MetaData = new HashSet<FundMetaData>();
+            Metadata = new HashSet<FundMetadata>();
         }
 
         [Key]
@@ -55,7 +55,7 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
 
-        public virtual ICollection<FundMetaData> MetaData { get; set; }
+        public virtual ICollection<FundMetadata> Metadata { get; set; }
 
         public virtual AccountReferenceValidator AccountReferenceValidator { get; set; }
     }

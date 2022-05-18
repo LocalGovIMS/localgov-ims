@@ -42,11 +42,11 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                     new Entities.Fund()
                     {
                         FundCode = "01",
-                        MetaData = new List<Entities.FundMetaData>()
+                        Metadata = new List<Entities.FundMetadata>()
                         {
-                            new Entities.FundMetaData()
+                            new Entities.FundMetadata()
                             {
-                                Key = FundMetaDataKeys.IsAnEReturnDefaultFund,
+                                Key = FundMetadataKeys.IsAnEReturnDefaultFund,
                                 Value = "True"
                             }
                         }
@@ -54,11 +54,11 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                     new Entities.Fund()
                     {
                         FundCode = "13",
-                        MetaData = new List<Entities.FundMetaData>()
+                        Metadata = new List<Entities.FundMetadata>()
                         {
-                            new Entities.FundMetaData()
+                            new Entities.FundMetadata()
                             {
-                                Key = FundMetaDataKeys.IsAnEReturnDefaultFund,
+                                Key = FundMetadataKeys.IsAnEReturnDefaultFund,
                                 Value = "True"
                             }
                         }
@@ -70,11 +70,11 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                     new Entities.Mop()
                     {
                         MopCode = "01",
-                        MetaData = new List<Entities.MopMetaData>()
+                        Metadata = new List<Entities.MopMetadata>()
                         {
-                            new Entities.MopMetaData()
+                            new Entities.MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsACashPayment,
+                                Key = MopMetadataKeys.IsACashPayment,
                                 Value = "True"
                             }
                         }
@@ -82,11 +82,11 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                     new Entities.Mop()
                     {
                         MopCode = "02",
-                        MetaData = new List<Entities.MopMetaData>()
+                        Metadata = new List<Entities.MopMetadata>()
                         {
-                            new Entities.MopMetaData()
+                            new Entities.MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAnEReturnChequePayment,
+                                Key = MopMetadataKeys.IsAnEReturnChequePayment,
                                 Value = "True"
                             }
                         }

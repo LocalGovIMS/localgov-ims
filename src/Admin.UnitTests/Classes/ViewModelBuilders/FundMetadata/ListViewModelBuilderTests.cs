@@ -28,11 +28,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
         private void SetupService(Mock<IFundMetadataService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMetadata.SearchCriteria>())).Returns(
-                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.FundMetaData>()
+                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.FundMetadata>()
                 {
-                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.FundMetaData>()
+                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.FundMetadata>()
                     {
-                        new BusinessLogic.Entities.FundMetaData()
+                        new BusinessLogic.Entities.FundMetadata()
                         {
                             Id = 1,
                             Key = "Test key",

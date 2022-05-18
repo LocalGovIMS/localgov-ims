@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Repositories
 {
-    public interface IFundMetadataRepository : IRepository<FundMetaData>
+    public interface IFundMetadataRepository : IRepository<FundMetadata>
     {
-        IEnumerable<FundMetaData> Search(SearchCriteria criteria, out int resultCount);
-        FundMetaData Get(int id);
-        FundMetaData Get(string fundCode, string key);
-        void Update(FundMetaData entity);
+        IEnumerable<FundMetadata> Search(SearchCriteria criteria, out int resultCount);
+        FundMetadata Get(int id);
+        FundMetadata Get(string fundCode, string key);
+        void Update(FundMetadata entity);
     }
 }

@@ -13,7 +13,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.MopMetadatas.Add(It.IsAny<Entities.MopMetaData>()));
+            MockUnitOfWork.Setup(x => x.MopMetadatas.Add(It.IsAny<Entities.MopMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)
@@ -31,7 +31,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.MopMetaData());
+            var result = service.Create(new Entities.MopMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -47,7 +47,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.MopMetaData());
+            var result = service.Create(new Entities.MopMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -63,7 +63,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.MopMetaData());
+            var result = service.Create(new Entities.MopMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -80,7 +80,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.MopMetaData());
+            var result = service.Create(new Entities.MopMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -103,7 +103,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
                 {
 
                     // Act
-                    var result = service.Create(new Entities.MopMetaData());
+                    var result = service.Create(new Entities.MopMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);
@@ -115,7 +115,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
                 {
 
                     // Act
-                    var result = service.Create(new Entities.MopMetaData());
+                    var result = service.Create(new Entities.MopMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);

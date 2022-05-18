@@ -15,8 +15,8 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsASuspenseJournalFund_returns_the_expected_result(bool value, bool expectedResult)
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = new List<Entities.FundMetaData>() };
-            fund.MetaData.Add(new Entities.FundMetaData() { Key = FundMetaDataKeys.IsASuspenseJournalFund, Value = value.ToString() });
+            var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
+            fund.Metadata.Add(new Entities.FundMetadata() { Key = FundMetadataKeys.IsASuspenseJournalFund, Value = value.ToString() });
 
             // Act
             var result = fund.IsASuspenseJournalFund();
@@ -29,7 +29,7 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsASuspenseJournalFund_returns_false_when_metadata_is_null()
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = null };
+            var fund = new Entities.Fund() { Metadata = null };
 
             // Act
             var result = fund.IsASuspenseJournalFund();
@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsASuspenseJournalFund_returns_false_when_metadata_is_empty()
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = new List<Entities.FundMetaData>() };
+            var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
 
             // Act
             var result = fund.IsASuspenseJournalFund();

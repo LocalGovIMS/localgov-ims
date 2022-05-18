@@ -16,9 +16,9 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
             var test = 1;
 
             MockUnitOfWork.Setup(x => x.VatMetadatas.Search(It.IsAny<SearchCriteria>(), out test))
-                .Returns(new List<Entities.VatMetaData>()
+                .Returns(new List<Entities.VatMetadata>()
                     {
-                        new Entities.VatMetaData()
+                        new Entities.VatMetadata()
                         {
                             Id = 1,
                             Key = "Key",
@@ -46,7 +46,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetadata>));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetadata>));
             Assert.AreEqual(result.Page, 1);
         }
 
@@ -77,7 +77,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.VatMetadata>));
             Assert.AreEqual(result.PageSize, 20);
         }
 

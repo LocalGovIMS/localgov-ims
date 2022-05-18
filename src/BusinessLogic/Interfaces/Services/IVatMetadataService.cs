@@ -9,10 +9,10 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IVatMetadataService
     {
-        IResult Create(VatMetaData item);
-        VatMetaData Get(int id);
-        SearchResult<VatMetaData> Search(SearchCriteria criteria);
-        IResult Update(VatMetaData item);
+        IResult Create(VatMetadata item);
+        VatMetadata Get(int id);
+        SearchResult<VatMetadata> Search(SearchCriteria criteria);
+        IResult Update(VatMetadata item);
         IResult Delete(int id);
         List<Metadata> GetMetadata();
     }

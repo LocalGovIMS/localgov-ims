@@ -116,7 +116,7 @@
     <Compile Include="Extensions\Int\IsEvenTests.cs" />
     <Compile Include="Extensions\Int\IsOddTests.cs" />
     <Compile Include="Extensions\List\IsNullOrEmptyTests.cs" />
-    <Compile Include="Extensions\Mop\GetMopMetaDataValueTests.cs" />
+    <Compile Include="Extensions\Mop\GetMopMetadataValueTests.cs" />
     <Compile Include="Extensions\Mop\IncursAFeeTests.cs" />
     <Compile Include="Extensions\Mop\IsACentralChargeFeeTests.cs" />
     <Compile Include="Extensions\Mop\IsARechargeFeeTests.cs" />

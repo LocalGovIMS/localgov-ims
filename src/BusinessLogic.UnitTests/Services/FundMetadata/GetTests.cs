@@ -12,7 +12,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
         {
             MockUnitOfWork.Setup(x => x.FundMetadatas.Get(
                 It.IsAny<int>()))
-                .Returns(new Entities.FundMetaData());
+                .Returns(new Entities.FundMetadata());
         }
 
         private void SetupSecurityContext(bool result)
@@ -34,7 +34,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Entities.FundMetaData));
+            Assert.IsInstanceOfType(result, typeof(Entities.FundMetadata));
         }
 
         [TestMethod]

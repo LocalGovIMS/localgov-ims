@@ -32,11 +32,11 @@ namespace BusinessLogic.UnitTests.Classes.Strategies
                     new Mop()
                     {
                         MopCode = "JR",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournalReallocation,
+                                Key = MopMetadataKeys.IsAJournalReallocation,
                                 Value = "True"
                             }
                         }
@@ -48,11 +48,11 @@ namespace BusinessLogic.UnitTests.Classes.Strategies
                     new Vat()
                     {
                         VatCode = "M0",
-                        MetaData = new List<VatMetaData>()
+                        Metadata = new List<VatMetadata>()
                         {
-                            new VatMetaData()
+                            new VatMetadata()
                             {
-                                Key = VatMetaDataKeys.IsASuspenseJournalVatCode,
+                                Key = VatMetadataKeys.IsASuspenseJournalVatCode,
                                 Value = "True"
                             }
                         }
@@ -64,11 +64,11 @@ namespace BusinessLogic.UnitTests.Classes.Strategies
                     new Fund()
                     {
                         FundCode = "01",
-                        MetaData = new List<FundMetaData>()
+                        Metadata = new List<FundMetadata>()
                         {
-                            new FundMetaData()
+                            new FundMetadata()
                             {
-                                Key = FundMetaDataKeys.IsASuspenseJournalFund,
+                                Key = FundMetadataKeys.IsASuspenseJournalFund,
                                 Value = "True"
                             }
                         }

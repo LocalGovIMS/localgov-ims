@@ -9,13 +9,11 @@ namespace BusinessLogic.UnitTests.Extensions.AccountHolder
     {
         [TestMethod]
         [DataRow(null, false)]
-        [DataRow("", false)]
-        [DataRow(" ", false)]
-        [DataRow("SM1", true)]
-        public void IsOnStop_returns_expected_value(string stopMessageReference, bool expectedResult)
+        [DataRow(1, true)]
+        public void IsOnStop_returns_expected_value(int? StopMessageId, bool expectedResult)
         {
             // Arrange
-            var accountHolder = new Entities.AccountHolder() { StopMessageReference = stopMessageReference };
+            var accountHolder = new Entities.AccountHolder() { StopMessageId = StopMessageId };
 
             // Act
             var result = accountHolder.IsOnStop();

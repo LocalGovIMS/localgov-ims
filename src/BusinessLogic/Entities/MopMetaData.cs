@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessLogic.Entities
 {
-    [Table("MopMetaData")]
-    public partial class MopMetaData
+    [Table("MopMetadata")]
+    public partial class MopMetadata
     {
         public int Id { get; set; }
 

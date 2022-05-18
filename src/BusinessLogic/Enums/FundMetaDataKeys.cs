@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Enums
 {
-    public static class FundMetaDataKeys
+    public static class FundMetadataKeys
     {
         public const string IsACreditNoteEnabledFund = "IsACreditNoteEnabledFund";
         public const string IsAnEReturnDefaultFund = "IsAnEReturnDefaultFund";

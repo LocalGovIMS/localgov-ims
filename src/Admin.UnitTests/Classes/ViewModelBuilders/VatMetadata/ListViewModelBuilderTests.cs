@@ -28,11 +28,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         private void SetupService(Mock<IVatMetadataService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.VatMetadata.SearchCriteria>())).Returns(
-                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.VatMetaData>()
+                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.VatMetadata>()
                 {
-                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.VatMetaData>()
+                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.VatMetadata>()
                     {
-                        new BusinessLogic.Entities.VatMetaData()
+                        new BusinessLogic.Entities.VatMetadata()
                         {
                             Id = 1,
                             Key = "Test key",

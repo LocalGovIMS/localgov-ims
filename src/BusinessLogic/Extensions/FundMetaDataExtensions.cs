@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace BusinessLogic.Extensions
 {
-    public static class FundMetaDataExtensions
+    public static class FundMetadataExtensions
     {
-        public static string GetValue(this ICollection<FundMetaData> metaData, string key)
+        public static string GetValue(this ICollection<FundMetadata> metaData, string key)
         {
             if (metaData == null || !metaData.Any()) return string.Empty;
 

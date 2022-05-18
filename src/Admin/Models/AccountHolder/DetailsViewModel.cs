@@ -63,7 +63,7 @@ namespace Admin.Models.AccountHolder
         public string UserField3 { get; set; }
 
         [DisplayName("Stop message")]
-        public string StopMessageReference { get; set; }
+        public int? StopMessageId { get; set; }
 
         [DisplayName("Stop message")]
         public string StopMessage { get; set; }

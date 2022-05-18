@@ -10,8 +10,7 @@ namespace BusinessLogic.Entities
             AccountHolders = new HashSet<AccountHolder>();
         }
 
-        [StringLength(2)]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(5)]
         public string FundCode { get; set; }
@@ -22,5 +21,6 @@ namespace BusinessLogic.Entities
         public virtual Fund Fund { get; set; }
 
         public virtual ICollection<AccountHolder> AccountHolders { get; set; }
+        public virtual ICollection<StopMessageMetadata> Metadata { get; set; }
     }
 }

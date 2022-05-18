@@ -12,7 +12,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
         {
             MockUnitOfWork.Setup(x => x.MopMetadatas.Get(
                 It.IsAny<int>()))
-                .Returns(new Entities.MopMetaData());
+                .Returns(new Entities.MopMetadata());
         }
 
         private void SetupSecurityContext(bool result)
@@ -34,7 +34,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Entities.MopMetaData));
+            Assert.IsInstanceOfType(result, typeof(Entities.MopMetadata));
         }
 
         [TestMethod]

@@ -108,9 +108,9 @@
         </div>
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.StopMessageReference)
+            @Html.LabelFor(m => m.StopMessageId)
             <div class="ui selection dropdown stop-message-dropdown">
-                @Html.HiddenFor(x => x.StopMessageReference, new { size = 4 })
+                @Html.HiddenFor(x => x.StopMessageId, new { size = 4 })
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select stop message type</div>
                 <div class="menu">
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.StopMessageReference)
+                @Html.ValidationMessageFor(m => m.StopMessageId)
             </div>
         </div>
 

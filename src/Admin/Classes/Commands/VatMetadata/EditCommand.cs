@@ -17,7 +17,7 @@ namespace Admin.Classes.Commands.VatMetadata
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var item = new BusinessLogic.Entities.VatMetaData()
+            var item = new BusinessLogic.Entities.VatMetadata()
             {
                 Id = model.Id,
                 VatCode = model.VatCode,

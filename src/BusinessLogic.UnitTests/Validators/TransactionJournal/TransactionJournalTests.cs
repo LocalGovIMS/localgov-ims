@@ -213,7 +213,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 Mop = new Entities.Mop()
                 {
                     MopCode = "M1",
-                    MetaData = new List<Entities.MopMetaData>()
+                    Metadata = new List<Entities.MopMetadata>()
                 }
             };
         }
@@ -228,7 +228,7 @@ namespace BusinessLogic.UnitTests.Validators.TransactionJournal
                 Mop = new Entities.Mop()
                 {
                     MopCode = "M1",
-                    MetaData = new List<Entities.MopMetaData>()
+                    Metadata = new List<Entities.MopMetadata>()
                 }
             };
         }

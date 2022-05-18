@@ -240,11 +240,11 @@ namespace BusinessLogic.UnitTests.Services.Refund
                 Mop = new Mop()
                 {
                     MopCode = RefundableMopCode,
-                    MetaData = new List<MopMetaData>()
+                    Metadata = new List<MopMetadata>()
                     {
-                        new MopMetaData()
+                        new MopMetadata()
                         {
-                            Key = MopMetaDataKeys.IsARefundablePayment,
+                            Key = MopMetadataKeys.IsARefundablePayment,
                             Value = isRefundableMop.ToString(),
                             MopCode = RefundableMopCode
                         }

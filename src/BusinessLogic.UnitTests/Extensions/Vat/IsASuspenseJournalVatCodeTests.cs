@@ -15,8 +15,8 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsASuspenseJournalVatCode_returns_the_expected_result(bool value, bool expectedResult)
         {
             // Arrange
-            var vat = new Entities.Vat() { MetaData = new List<Entities.VatMetaData>() };
-            vat.MetaData.Add(new Entities.VatMetaData() { Key = VatMetaDataKeys.IsASuspenseJournalVatCode, Value = value.ToString() });
+            var vat = new Entities.Vat() { Metadata = new List<Entities.VatMetadata>() };
+            vat.Metadata.Add(new Entities.VatMetadata() { Key = VatMetadataKeys.IsASuspenseJournalVatCode, Value = value.ToString() });
 
             // Act
             var result = vat.IsASuspenseJournalVatCode();
@@ -29,7 +29,7 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsASuspenseJournalVatCode_returns_false_when_metadata_is_null()
         {
             // Arrange
-            var vat = new Entities.Vat() { MetaData = null };
+            var vat = new Entities.Vat() { Metadata = null };
 
             // Act
             var result = vat.IsASuspenseJournalVatCode();
@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsASuspenseJournalVatCode_returns_false_when_metadata_is_empty()
         {
             // Arrange
-            var vat = new Entities.Vat() { MetaData = new List<Entities.VatMetaData>() };
+            var vat = new Entities.Vat() { Metadata = new List<Entities.VatMetadata>() };
 
             // Act
             var result = vat.IsASuspenseJournalVatCode();

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class VatMetadataRepository : Repository<VatMetaData>, IVatMetadataRepository
+    public class VatMetadataRepository : Repository<VatMetadata>, IVatMetadataRepository
     {
         public VatMetadataRepository(IncomeDbContext context) : base(context)
         {
@@ -17,9 +17,9 @@ namespace DataAccess.Repositories
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public IEnumerable<VatMetaData> Search(SearchCriteria criteria, out int resultCount)
+        public IEnumerable<VatMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
-            var items = IncomeDbContext.VatMetadatas
+            var items = IncomeDbContext.VatMetadata
                 .AsQueryable();
 
             items = items.Where(x => x.VatCode == criteria.VatCode);
@@ -39,9 +39,9 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public VatMetaData Get(int id)
+        public VatMetadata Get(int id)
         {
-            var item = IncomeDbContext.VatMetadatas
+            var item = IncomeDbContext.VatMetadata
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -50,9 +50,9 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public void Update(VatMetaData entity)
+        public void Update(VatMetadata entity)
         {
-            var item = IncomeDbContext.VatMetadatas
+            var item = IncomeDbContext.VatMetadata
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
                 .ApplyFilters(Filters)

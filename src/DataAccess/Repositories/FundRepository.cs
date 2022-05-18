@@ -22,14 +22,14 @@ namespace DataAccess.Repositories
             if (includeDisabled)
             {
                 return IncomeDbContext.Funds
-                    .Include(x => x.MetaData)
+                    .Include(x => x.Metadata)
                     .AsQueryable()
                     .ApplyFilters(Filters)
                     .ToList();
             }
 
             return IncomeDbContext.Funds
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)
@@ -39,7 +39,7 @@ namespace DataAccess.Repositories
         public Fund GetByFundCode(string fundCode)
         {
             return IncomeDbContext.Funds
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .Include(s => s.Vat)
                 .Include(s => s.AccountReferenceValidator)
                 .ApplyFilters(Filters)
@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
         public IEnumerable<Fund> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.Funds
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(criteria.FundCode))

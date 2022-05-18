@@ -57,8 +57,7 @@ namespace BusinessLogic.Entities
         [StringLength(50)]
         public string UserField3 { get; set; }
 
-        [StringLength(100)]
-        public string StopMessageReference { get; set; }
+        public int? StopMessageId { get; set; }
 
         public DateTime? LastUpdated { get; set; }
 

@@ -37,7 +37,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 Postcode = string.Empty,
                 RecordType = string.Empty,
                 SurnameSoundex = string.Empty,
-                StopMessageReference = string.Empty,
+                StopMessageId = null,
                 StopMessage = new BusinessLogic.Entities.StopMessage()
                 {
                     Message = "A stop message"
@@ -109,7 +109,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Assert.AreEqual(result.RecordType, _accountHolder.RecordType);
             Assert.AreEqual(result.ShowSelect, false);
             Assert.AreEqual(result.StopMessage, _accountHolder.StopMessage.Message);
-            Assert.AreEqual(result.StopMessageReference, _accountHolder.StopMessageReference);
+            Assert.AreEqual(result.StopMessageId, _accountHolder.StopMessageId);
             Assert.AreEqual(result.Surname, _accountHolder.Surname);
             Assert.AreEqual(result.Title, _accountHolder.Title);
             Assert.AreEqual(result.UserField1, _accountHolder.UserField1);

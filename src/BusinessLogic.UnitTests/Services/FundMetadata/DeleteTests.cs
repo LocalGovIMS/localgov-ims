@@ -14,9 +14,9 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
         private void SetupUnitOfWork()
         {
             MockUnitOfWork.Setup(x => x.FundMetadatas.Get(It.IsAny<int>()))
-                .Returns(new Entities.FundMetaData());
+                .Returns(new Entities.FundMetadata());
 
-            MockUnitOfWork.Setup(x => x.FundMetadatas.Update(It.IsAny<Entities.FundMetaData>()));
+            MockUnitOfWork.Setup(x => x.FundMetadatas.Update(It.IsAny<Entities.FundMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)

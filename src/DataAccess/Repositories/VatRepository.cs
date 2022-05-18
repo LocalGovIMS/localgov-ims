@@ -16,16 +16,16 @@ namespace DataAccess.Repositories
 
         public Vat GetVatByVatCode(string vatCode)
         {
-            return IncomeDbContext.VATs
-                .Include(x => x.MetaData)
+            return IncomeDbContext.Vat
+                .Include(x => x.Metadata)
                 .ApplyFilters(Filters)
                 .Single(x => x.VatCode == vatCode);
         }
 
         public void Update(Vat entity)
         {
-            var item = IncomeDbContext.VATs
-                .Include(x => x.MetaData)
+            var item = IncomeDbContext.Vat
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.VatCode == entity.VatCode)
                 .ApplyFilters(Filters)
@@ -39,15 +39,15 @@ namespace DataAccess.Repositories
         {
             if (includeDisabled)
             {
-                return IncomeDbContext.VATs
-                    .Include(x => x.MetaData)
+                return IncomeDbContext.Vat
+                    .Include(x => x.Metadata)
                     .AsQueryable()
                     .ApplyFilters(Filters)
                     .ToList();
             }
 
-            return IncomeDbContext.VATs
-                .Include(x => x.MetaData)
+            return IncomeDbContext.Vat
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)

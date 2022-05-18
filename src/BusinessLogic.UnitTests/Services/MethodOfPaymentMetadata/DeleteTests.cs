@@ -14,9 +14,9 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
         private void SetupUnitOfWork()
         {
             MockUnitOfWork.Setup(x => x.MopMetadatas.Get(It.IsAny<int>()))
-                .Returns(new Entities.MopMetaData());
+                .Returns(new Entities.MopMetadata());
 
-            MockUnitOfWork.Setup(x => x.MopMetadatas.Update(It.IsAny<Entities.MopMetaData>()));
+            MockUnitOfWork.Setup(x => x.MopMetadatas.Update(It.IsAny<Entities.MopMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)

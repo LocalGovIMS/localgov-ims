@@ -14,9 +14,9 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
         private void SetupUnitOfWork()
         {
             MockUnitOfWork.Setup(x => x.VatMetadatas.Get(It.IsAny<int>()))
-                .Returns(new Entities.VatMetaData());
+                .Returns(new Entities.VatMetadata());
 
-            MockUnitOfWork.Setup(x => x.VatMetadatas.Update(It.IsAny<Entities.VatMetaData>()));
+            MockUnitOfWork.Setup(x => x.VatMetadatas.Update(It.IsAny<Entities.VatMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)

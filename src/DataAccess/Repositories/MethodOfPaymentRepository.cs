@@ -18,7 +18,7 @@ namespace DataAccess.Repositories
         public Mop GetMop(string id)
         {
             var item = IncomeDbContext.MOPs
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.MopCode == id)
                 .ApplyFilters(Filters)
@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
 
             if (!string.IsNullOrWhiteSpace(criteria.Type))
             {
-                mops = mops.Where(x => x.MetaData.Any(y => y.Key == criteria.Type && y.Value == "TRUE"));
+                mops = mops.Where(x => x.Metadata.Any(y => y.Key == criteria.Type && y.Value == "TRUE"));
             }
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
@@ -54,7 +54,7 @@ namespace DataAccess.Repositories
         public void Update(Mop entity)
         {
             var item = IncomeDbContext.MOPs
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.MopCode == entity.MopCode)
                 .ApplyFilters(Filters)
@@ -71,13 +71,13 @@ namespace DataAccess.Repositories
             if (includeDisabled)
             {
                 return IncomeDbContext.MOPs
-                    .Include(x => x.MetaData)
+                    .Include(x => x.Metadata)
                     .AsQueryable()
                     .ApplyFilters(Filters).ToList();
             }
 
             return IncomeDbContext.MOPs
-                .Include(x => x.MetaData)
+                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)

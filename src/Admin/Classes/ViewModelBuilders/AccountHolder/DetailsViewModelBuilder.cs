@@ -48,7 +48,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
                 UserField1 = item.UserField1,
                 UserField2 = item.UserField2,
                 UserField3 = item.UserField3,
-                StopMessageReference = item.StopMessageReference,
+                StopMessageId = item.StopMessageId,
                 StopMessage = item.StopMessage?.Message,
                 LastUpdated = item.LastUpdated,
                 ShowSelect = args.ShowSelect

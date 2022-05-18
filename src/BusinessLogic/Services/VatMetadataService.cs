@@ -23,13 +23,13 @@ namespace BusinessLogic.Services
         {
         }
 
-        public SearchResult<VatMetaData> Search(SearchCriteria criteria)
+        public SearchResult<VatMetadata> Search(SearchCriteria criteria)
         {
             try
             {
                 var items = UnitOfWork.VatMetadatas.Search(criteria, out int itemsCount).ToList();
 
-                return new SearchResult<VatMetaData>()
+                return new SearchResult<VatMetadata>()
                 {
                     Count = itemsCount,
                     Items = items,
@@ -44,7 +44,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public VatMetaData Get(int id)
+        public VatMetadata Get(int id)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Create(VatMetaData item)
+        public IResult Create(VatMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
@@ -76,7 +76,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Update(VatMetaData item)
+        public IResult Update(VatMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");

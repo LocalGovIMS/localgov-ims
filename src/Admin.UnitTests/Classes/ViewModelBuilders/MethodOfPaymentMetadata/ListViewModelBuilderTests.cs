@@ -28,11 +28,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         private void SetupService(Mock<IMethodOfPaymentMetadataService> service)
         {
             service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria>())).Returns(
-                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MopMetaData>()
+                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MopMetadata>()
                 {
-                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.MopMetaData>()
+                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.MopMetadata>()
                     {
-                        new BusinessLogic.Entities.MopMetaData()
+                        new BusinessLogic.Entities.MopMetadata()
                         {
                             Id = 1,
                             Key = "Test key",

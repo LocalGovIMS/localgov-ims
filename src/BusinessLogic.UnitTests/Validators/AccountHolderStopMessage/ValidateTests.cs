@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -11,25 +12,13 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderStopMessage
     {
         private void SetupStopMessageService()
         {
-            MockStopMessageService.Setup(x => x.GetAll())
-                .Returns(new List<Entities.StopMessage>()
-                {
-                    new Entities.StopMessage()
+            MockStopMessageService.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(new Entities.StopMessage()
                     {
-                        Id = "1",
+                        Id = 1,
                         FundCode = "F1"
-                    },
-                    new Entities.StopMessage()
-                    {
-                        Id = "2",
-                        FundCode = "F2"
-                    },
-                    new Entities.StopMessage()
-                    {
-                        Id = "3",
-                        FundCode = "F2"
-                    },
-                });
+                    }
+                );
         }
 
         [TestMethod]
@@ -39,7 +28,7 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderStopMessage
             SetupStopMessageService();
 
             var validator = GetAccountHolderStopMessageValidator();
-            var accountHolder = new Entities.AccountHolder() { FundCode = "F1", StopMessageReference = "1" };
+            var accountHolder = new Entities.AccountHolder() { FundCode = "F1", StopMessageId = 1 };
 
             // Act
             var result = validator.Validate(accountHolder);
@@ -49,20 +38,36 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderStopMessage
         }
 
         [TestMethod]
-        public void WhenTheStopMessageIsNotRelatedToTheFundReturnAFailure()
+        public void WhenTheStopMessageIsNotFoundReturnAFailure()
         {
             // Arrange
-            SetupStopMessageService();
 
             var validator = GetAccountHolderStopMessageValidator();
-            var accountHolder = new Entities.AccountHolder() { FundCode = "F2", StopMessageReference = "1" };
+            var accountHolder = new Entities.AccountHolder() { FundCode = "F2", StopMessageId = 3 };
 
             // Act
             var result = validator.Validate(accountHolder);
 
             // Assert
             result.Success.Should().BeFalse();
-            result.Error.Should().Be("The fund/stop message combination is not valid");
+            result.Error.Should().Be("The stop message is not valid");
+        }
+
+        [TestMethod]
+        public void WhenTheStopMessageIsNotRelatedToTheFundReturnAFailure()
+        {
+            // Arrange
+            SetupStopMessageService();
+
+            var validator = GetAccountHolderStopMessageValidator();
+            var accountHolder = new Entities.AccountHolder() { FundCode = "F2", StopMessageId = 3 };
+
+            // Act
+            var result = validator.Validate(accountHolder);
+
+            // Assert
+            result.Success.Should().BeFalse();
+            result.Error.Should().Be("The stop message is not valid");
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             model.UserField1 = data.UserField1;
             model.UserField2 = data.UserField2;
             model.UserField3 = data.UserField3;
-            model.StopMessageReference = data.StopMessageReference;
+            model.StopMessageId = data.StopMessageId;
             
             model.Funds = GetFundsList();
             model.StopMessages = GetStopMessagesList();

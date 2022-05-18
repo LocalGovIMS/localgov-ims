@@ -23,13 +23,13 @@ namespace BusinessLogic.Services
         {
         }
 
-        public SearchResult<FundMetaData> Search(SearchCriteria criteria)
+        public SearchResult<FundMetadata> Search(SearchCriteria criteria)
         {
             try
             {
                 var items = UnitOfWork.FundMetadatas.Search(criteria, out int itemsCount).ToList();
 
-                return new SearchResult<FundMetaData>()
+                return new SearchResult<FundMetadata>()
                 {
                     Count = itemsCount,
                     Items = items,
@@ -44,7 +44,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public FundMetaData Get(int id)
+        public FundMetadata Get(int id)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public FundMetaData Get(string fundCode, string key)
+        public FundMetadata Get(string fundCode, string key)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Create(FundMetaData item)
+        public IResult Create(FundMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
@@ -89,7 +89,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Update(FundMetaData item)
+        public IResult Update(FundMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");

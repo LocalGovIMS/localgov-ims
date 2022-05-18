@@ -9,31 +9,31 @@ namespace BusinessLogic.Extensions
     {
         public static bool IsACreditNoteEnabledFund(this Fund item)
         {
-            return item.IsA(FundMetaDataKeys.IsACreditNoteEnabledFund);
+            return item.IsA(FundMetadataKeys.IsACreditNoteEnabledFund);
         }
 
         public static bool IsAnEReturnDefaultFund(this Fund item)
         {
-            return item.IsA(FundMetaDataKeys.IsAnEReturnDefaultFund);
+            return item.IsA(FundMetadataKeys.IsAnEReturnDefaultFund);
         }
 
         public static bool IsASuspenseJournalFund(this Fund item)
         {
-            return item.IsA(FundMetaDataKeys.IsASuspenseJournalFund);
+            return item.IsA(FundMetadataKeys.IsASuspenseJournalFund);
         }
 
         public static bool IsABasketFund(this Fund item)
         {
-            return item.IsA(FundMetaDataKeys.IsABasketFund);
+            return item.IsA(FundMetadataKeys.IsABasketFund);
         }
 
         private static bool IsA(this Fund item, string key)
         {
             if (item == null) return false;
 
-            if (item.MetaData == null || !item.MetaData.Any()) return false;
+            if (item.Metadata == null || !item.Metadata.Any()) return false;
 
-            var metaData = item.MetaData.FirstOrDefault(x => x.Key == key && Convert.ToBoolean(x.Value).Equals(true));
+            var metaData = item.Metadata.FirstOrDefault(x => x.Key == key && Convert.ToBoolean(x.Value).Equals(true));
 
             return metaData != null;
         }

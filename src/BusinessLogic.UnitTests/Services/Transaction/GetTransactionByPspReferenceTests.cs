@@ -20,7 +20,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
             SetupUnitOfWork(returnTransactions, transactionMopCode, "Test", "Test");
         }
 
-        private void SetupUnitOfWork(bool returnTransactions, string transactionMopCode, string mopMetaDataKey, string mopMetaDataValue)
+        private void SetupUnitOfWork(bool returnTransactions, string transactionMopCode, string mopMetadataKey, string mopMetadataValue)
         {
             MockUnitOfWork.Setup(x => x.Transactions.GetByPspReference(
                 It.IsAny<string>()))
@@ -33,12 +33,12 @@ namespace BusinessLogic.UnitTests.Services.Transaction
                                 Mop = new Mop()
                                 {
                                     MopCode = transactionMopCode,
-                                    MetaData = new List<MopMetaData>()
+                                    Metadata = new List<MopMetadata>()
                                     {
-                                        new MopMetaData
+                                        new MopMetadata
                                         {
-                                            Key = mopMetaDataKey,
-                                            Value = mopMetaDataValue,
+                                            Key = mopMetadataKey,
+                                            Value = mopMetadataValue,
                                             MopCode = transactionMopCode
                                         }
                                     }
@@ -154,7 +154,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
         public void ReturnsNullIfMopCodeIsJournalReAllocation()
         {
             // Arrange
-            SetupUnitOfWork(true, JournalReallocationMopCode, MopMetaDataKeys.IsAJournalReallocation, "True");
+            SetupUnitOfWork(true, JournalReallocationMopCode, MopMetadataKeys.IsAJournalReallocation, "True");
             SetupSecurityContext(true);
             var service = GetService();
 
@@ -168,7 +168,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
         public void ReturnsNullIfMopCodeIsJournal()
         {
             // Arrange
-            SetupUnitOfWork(true, JournalReallocationMopCode, MopMetaDataKeys.IsAJournal, "True");
+            SetupUnitOfWork(true, JournalReallocationMopCode, MopMetadataKeys.IsAJournal, "True");
             SetupSecurityContext(true);
             var service = GetService();
 

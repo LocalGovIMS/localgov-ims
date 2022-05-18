@@ -13,7 +13,7 @@ namespace BusinessLogic.Entities
             TemplateRows = new HashSet<TemplateRow>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
-            MetaData = new HashSet<VatMetaData>();
+            Metadata = new HashSet<VatMetadata>();
         }
 
         [Key]
@@ -32,6 +32,6 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
 
-        public virtual ICollection<VatMetaData> MetaData { get; set; }
+        public virtual ICollection<VatMetadata> Metadata { get; set; }
     }
 }

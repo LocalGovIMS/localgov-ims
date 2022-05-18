@@ -50,14 +50,15 @@ namespace DataAccess.Classes
             { typeof(TransactionStatus).ToString(), 35 },
             { typeof(UserMethodOfPayment).ToString(), 36 },
             { typeof(SuspenseNote).ToString(), 37 },
-            { typeof(FundMetaData).ToString(), 38 },
-            { typeof(MopMetaData).ToString(), 39 },
-            { typeof(VatMetaData).ToString(), 40 },
+            { typeof(FundMetadata).ToString(), 38 },
+            { typeof(MopMetadata).ToString(), 39 },
+            { typeof(VatMetadata).ToString(), 40 },
             { typeof(Office).ToString(), 41 },
             { typeof(AccountHolder).ToString(), 42 },
             { typeof(AccountReferenceValidator).ToString(), 43 },
             { typeof(EReturnStatus).ToString(), 44 },
-            { typeof(EReturnType).ToString(), 45 }
+            { typeof(EReturnType).ToString(), 45 },
+            { typeof(StopMessageMetadata).ToString(), 46 }
         };
 
         private readonly Dictionary<string, Func<object, string>> _idMapping = new Dictionary<string, Func<object, string>>() {
@@ -65,7 +66,7 @@ namespace DataAccess.Classes
             { typeof(FundGroupFund).ToString(), (item) => { return ((FundGroupFund)item).FundGroupFundId.ToString(); } },
             { typeof(Fund).ToString(), (item) => { return ((Fund)item).FundCode; } },
             { typeof(Mop).ToString(), (item) => { return ((Mop)item).MopCode; } },
-            { typeof(StopMessage).ToString(), (item) => { return ((StopMessage)item).Id; } },
+            { typeof(StopMessage).ToString(), (item) => { return ((StopMessage)item).Id.ToString(); } },
             { typeof(TransactionNotification).ToString(), (item) => { return ((TransactionNotification)item).Id.ToString(); } },
             { typeof(PendingTransaction).ToString(), (item) => { return ((PendingTransaction)item).Id.ToString(); } },
             { typeof(ProcessedTransaction).ToString(), (item) => { return ((ProcessedTransaction)item).Id.ToString(); } },
@@ -97,15 +98,16 @@ namespace DataAccess.Classes
             { typeof(TransactionStatus).ToString(), (item) => { return ((TransactionStatus)item).Id.ToString(); } },
             { typeof(UserMethodOfPayment).ToString(), (item) => { return ((UserMethodOfPayment)item).Id.ToString(); } },
             { typeof(SuspenseNote).ToString(), (item) => { return ((SuspenseNote)item).Id.ToString(); } },
-            { typeof(FundMetaData).ToString(), (item) => { return ((FundMetaData)item).Id.ToString(); } },
-            { typeof(MopMetaData).ToString(), (item) => { return ((MopMetaData)item).Id.ToString(); } },
-            { typeof(VatMetaData).ToString(), (item) => { return ((VatMetaData)item).Id.ToString(); } },
+            { typeof(FundMetadata).ToString(), (item) => { return ((FundMetadata)item).Id.ToString(); } },
+            { typeof(MopMetadata).ToString(), (item) => { return ((MopMetadata)item).Id.ToString(); } },
+            { typeof(VatMetadata).ToString(), (item) => { return ((VatMetadata)item).Id.ToString(); } },
             { typeof(Office).ToString(), (item) => { return ((Office)item).OfficeCode.ToString(); } },
             { typeof(AccountHolder).ToString(), (item) => { return ((AccountHolder)item).AccountReference.ToString(); } },
             { typeof(AccountReferenceValidator).ToString(), (item) => { return ((AccountReferenceValidator)item).Id.ToString(); } },
             { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } },
             { typeof(EReturnStatus).ToString(), (item) => { return ((EReturnStatus)item).Id.ToString(); } },
-            { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } }
+            { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } },
+            { typeof(StopMessageMetadata).ToString(), (item) => { return ((StopMessageMetadata)item).Id.ToString(); } }
         };
 
         public void CreateAudit(IncomeDbContext context, int userId)

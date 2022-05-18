@@ -1,7 +1,5 @@
-﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Entities;
+﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Persistence;
-using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using log4net;
@@ -27,6 +25,19 @@ namespace BusinessLogic.Services
             {
                 Logger.Error("Exception loading all stop messages", e);
                 return new List<StopMessage>();
+            }
+        }
+
+        public StopMessage GetById(int id)
+        {
+            try
+            {
+                return UnitOfWork.StopMessages.SingleOrDefault(x => x.Id == id);
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Exception loading stop message", e);
+                return null;
             }
         }
     }

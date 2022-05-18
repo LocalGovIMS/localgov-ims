@@ -16,9 +16,9 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
             var test = 1;
 
             MockUnitOfWork.Setup(x => x.MopMetadatas.Search(It.IsAny<SearchCriteria>(), out test))
-                .Returns(new List<Entities.MopMetaData>()
+                .Returns(new List<Entities.MopMetadata>()
                     {
-                        new Entities.MopMetaData()
+                        new Entities.MopMetadata()
                         {
                             Id = 1,
                             Key = "Key",
@@ -46,7 +46,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetadata>));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetadata>));
             Assert.AreEqual(result.Page, 1);
         }
 
@@ -77,7 +77,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.MopMetadata>));
             Assert.AreEqual(result.PageSize, 20);
         }
 

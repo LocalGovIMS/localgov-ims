@@ -28,7 +28,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
         private void SetupService(Mock<IFundMetadataService> service)
         {
             service.Setup(x => x.Get(It.IsAny<int>())).Returns(
-                new BusinessLogic.Entities.FundMetaData()
+                new BusinessLogic.Entities.FundMetadata()
                 {
                     Id = 1,
                     Key = "Test key",

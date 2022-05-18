@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Repositories
 {
-    public interface IVatMetadataRepository : IRepository<VatMetaData>
+    public interface IVatMetadataRepository : IRepository<VatMetadata>
     {
-        IEnumerable<VatMetaData> Search(SearchCriteria criteria, out int resultCount);
-        VatMetaData Get(int id);
-        void Update(VatMetaData entity);
+        IEnumerable<VatMetadata> Search(SearchCriteria criteria, out int resultCount);
+        VatMetadata Get(int id);
+        void Update(VatMetadata entity);
     }
 }

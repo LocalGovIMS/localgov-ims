@@ -56,7 +56,7 @@ namespace Admin.Models.AccountHolder
         public string UserField3 { get; set; }
 
         [DisplayName("Stop message")]
-        public string StopMessageReference { get; set; }
+        public int? StopMessageId { get; set; }
         
         public SelectList Funds { get; set; }
 

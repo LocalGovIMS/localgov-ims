@@ -42,7 +42,7 @@ namespace Api.Controllers.AccountHolders
 
         public string PersonalisedStopMessage { get; set; }
 
-        public string StopMessageReference { get; set; }
+        public int? StopMessageId { get; set; }
 
         public AccountHolderModel() { }
 
@@ -65,7 +65,7 @@ namespace Api.Controllers.AccountHolders
             UserField1 = source.UserField1;
             UserField2 = source.UserField2;
             UserField3 = source.UserField3;
-            StopMessageReference = source.StopMessageReference;
+            StopMessageId = source.StopMessageId;
         }
 
         public AccountHolder GetAccountHolder()
@@ -89,7 +89,7 @@ namespace Api.Controllers.AccountHolders
                 UserField1 = UserField1,
                 UserField2 = UserField2,
                 UserField3 = UserField3,
-                StopMessageReference = StopMessageReference
+                StopMessageId = StopMessageId
             };
         }
     }

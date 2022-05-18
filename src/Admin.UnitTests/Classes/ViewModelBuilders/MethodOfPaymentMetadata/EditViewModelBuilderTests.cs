@@ -30,7 +30,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         private void SetupServices()
         {
             _mockMethodOfPaymentMetadataService.Setup(x => x.Get(It.IsAny<int>())).Returns(
-                new BusinessLogic.Entities.MopMetaData()
+                new BusinessLogic.Entities.MopMetadata()
                 {
                     Id = 1,
                     Key = "Test key",

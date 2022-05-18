@@ -17,7 +17,7 @@ namespace Admin.Classes.Commands.MethodOfPaymentMetadata
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var item = new BusinessLogic.Entities.MopMetaData()
+            var item = new BusinessLogic.Entities.MopMetadata()
             {
                 Id = model.Id,
                 MopCode = model.MopCode,
