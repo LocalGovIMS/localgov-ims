@@ -48,8 +48,8 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
                 UserField1 = item.UserField1,
                 UserField2 = item.UserField2,
                 UserField3 = item.UserField3,
-                StopMessageId = item.StopMessageId,
-                StopMessage = item.StopMessage?.Message,
+                FundMessageId = item.FundMessageId,
+                FundMessage = item.FundMessage?.Message,
                 LastUpdated = item.LastUpdated,
                 ShowSelect = args.ShowSelect
             };

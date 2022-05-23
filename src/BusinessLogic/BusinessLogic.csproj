@@ -154,7 +154,7 @@
     <Compile Include="Entities\ImportProcessingRuleCondition.cs" />
     <Compile Include="Entities\ImportProcessingRuleAction.cs" />
     <Compile Include="Entities\ImportProcessingRule.cs" />
-    <Compile Include="Entities\StopMessageMetadata.cs" />
+    <Compile Include="Entities\FundMessageMetadata.cs" />
     <Compile Include="Entities\PaymentIntegration.cs" />
     <Compile Include="Entities\Import.cs" />
     <Compile Include="Entities\SuspenseNote.cs" />
@@ -164,7 +164,7 @@
     <Compile Include="Entities\Office.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\ScheduleLog.cs" />
-    <Compile Include="Entities\StopMessage.cs" />
+    <Compile Include="Entities\FundMessage.cs" />
     <Compile Include="Entities\Suspense.cs" />
     <Compile Include="Entities\SuspenseProcessedTransaction.cs" />
     <Compile Include="Entities\SystemMessage.cs" />
@@ -181,7 +181,6 @@
     <Compile Include="Entities\UserTemplate.cs" />
     <Compile Include="Entities\Vat.cs" />
     <Compile Include="Enums\AccountReferenceValidationSource.cs" />
-    <Compile Include="Enums\ActivityObjectType.cs" />
     <Compile Include="Enums\CheckDigitType.cs" />
     <Compile Include="Enums\EReturnStatus.cs" />
     <Compile Include="Enums\EReturnType.cs" />
@@ -246,7 +245,7 @@
     <Compile Include="Interfaces\Repositories\IPendingTransactionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IStopMessageRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFundMessageRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISuspenseRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISystemMessageRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITemplateRepository.cs" />
@@ -271,7 +270,7 @@
     <Compile Include="Interfaces\Services\IImportProcessingRuleActionService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleOperatorService.cs" />
     <Compile Include="Interfaces\Services\IImportProcessingRuleFieldService.cs" />
-    <Compile Include="Interfaces\Services\IStopMessageService.cs" />
+    <Compile Include="Interfaces\Services\IFundMessageService.cs" />
     <Compile Include="Interfaces\Services\ISystemMessageService.cs" />
     <Compile Include="Interfaces\Services\IOfficeService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseService.cs" />
@@ -286,7 +285,7 @@
     <Compile Include="Interfaces\Strategies\IApproveEReturnsStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IJournalAllocationStrategy.cs" />
     <Compile Include="Interfaces\Strategies\ITransactionVatStrategy.cs" />
-    <Compile Include="Interfaces\Validators\IAccountHolderStopMessageValidator.cs" />
+    <Compile Include="Interfaces\Validators\IAccountHolderFundMessageValidator.cs" />
     <Compile Include="Interfaces\Validators\ICheckDigitStrategy.cs" />
     <Compile Include="Interfaces\Validators\IEReturnDescriptionValidator.cs" />
     <Compile Include="Interfaces\Validators\ITemplateRowValidator.cs" />
@@ -340,7 +339,7 @@
     <Compile Include="Services\SuspenseService.cs" />
     <Compile Include="Services\EReturnService.cs" />
     <Compile Include="Services\EReturnTypeService.cs" />
-    <Compile Include="Services\StopMessageService.cs" />
+    <Compile Include="Services\FundMessageService.cs" />
     <Compile Include="Services\SystemMessageService.cs" />
     <Compile Include="Services\TemplateRowService.cs" />
     <Compile Include="Services\TransferService.cs" />

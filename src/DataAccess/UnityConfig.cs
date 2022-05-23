@@ -32,7 +32,7 @@ namespace DataAccess
                 .RegisterType<IOfficeRepository, OfficeRepository>()
                 .RegisterType<IPendingTransactionRepository, PendingTransactionRepository>()
                 .RegisterType<IRoleRepository, RoleRepository>()
-                .RegisterType<IStopMessageRepository, StopMessageRepository>()
+                .RegisterType<IFundMessageRepository, FundMessageRepository>()
                 .RegisterType<ISuspenseRepository, SuspenseRepository>()
                 .RegisterType<ISystemMessageRepository, SystemMessageRepository>()
                 .RegisterType<ITemplateRepository, TemplateRepository>()

@@ -9,7 +9,7 @@ namespace BusinessLogic.Entities
         {
             AccountHolders = new HashSet<AccountHolder>();
             FundGroupFunds = new HashSet<FundGroupFund>();
-            StopMessages = new HashSet<StopMessage>();
+            FundMessages = new HashSet<FundMessage>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
             Metadata = new HashSet<FundMetadata>();
@@ -49,7 +49,7 @@ namespace BusinessLogic.Entities
 
         public virtual Vat Vat { get; set; }
 
-        public virtual ICollection<StopMessage> StopMessages { get; set; }
+        public virtual ICollection<FundMessage> FundMessages { get; set; }
 
         public virtual ICollection<PendingTransaction> PendingTransactions { get; set; }
 

@@ -4,9 +4,9 @@ using DataAccess.Persistence;
 
 namespace DataAccess.Repositories
 {
-    public class StopMessageRepository : Repository<StopMessage>, IStopMessageRepository
+    public class FundMessageRepository : Repository<FundMessage>, IFundMessageRepository
     {
-        public StopMessageRepository(IncomeDbContext context) : base(context)
+        public FundMessageRepository(IncomeDbContext context) : base(context)
         {
         }
     }

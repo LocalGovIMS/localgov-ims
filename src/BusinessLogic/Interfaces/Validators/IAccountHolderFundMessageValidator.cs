@@ -3,7 +3,7 @@ using BusinessLogic.Interfaces.Result;
 
 namespace BusinessLogic.Interfaces.Validators
 {
-    public interface IAccountHolderStopMessageValidator
+    public interface IAccountHolderFundMessageValidator
     {
         IResult Validate(AccountHolder accountHolder);
     }

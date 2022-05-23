@@ -2,7 +2,7 @@
 
 namespace BusinessLogic.Interfaces.Repositories
 {
-    public interface IStopMessageRepository : IRepository<StopMessage>
+    public interface IFundMessageRepository : IRepository<FundMessage>
     {
     }
 }

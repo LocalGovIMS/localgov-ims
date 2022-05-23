@@ -62,11 +62,11 @@ namespace Admin.Models.AccountHolder
         [DisplayName("User defined information")]
         public string UserField3 { get; set; }
 
-        [DisplayName("Stop message")]
-        public int? StopMessageId { get; set; }
+        [DisplayName("Message")]
+        public int? FundMessageId { get; set; }
 
-        [DisplayName("Stop message")]
-        public string StopMessage { get; set; }
+        [DisplayName("Message")]
+        public string FundMessage { get; set; }
 
         [DisplayName("Last updated")]
         public DateTime? LastUpdated { get; set; }

@@ -2,21 +2,21 @@
 
     $('.fund-dropdown').dropdown({
         onChange: function (e) {
-            configureStopMessage(e);
+            configureFundMessage(e);
         }
     });
 
-    $('.stop-message-dropdown').dropdown();
+    $('.fund-message-dropdown').dropdown();
 
-    configureStopMessage($('.fund-dropdown').val());
+    configureFundMessage($('.fund-dropdown').val());
 });
 
-function configureStopMessage(fundCode) {
+function configureFundMessage(fundCode) {
     var optionsExistForThisFundCode = false;
 
-    $('.stop-message-dropdown').dropdown('clear');
+    $('.fund-message-dropdown').dropdown('clear');
 
-    $('.stop-message-dropdown > .menu > .item').each(function () {
+    $('.fund-message-dropdown > .menu > .item').each(function () {
         if ($(this).data('fund-code') == fundCode) {
             $(this).show();
             optionsExistForThisFundCode = true;
@@ -27,9 +27,9 @@ function configureStopMessage(fundCode) {
     });
 
     if (optionsExistForThisFundCode) {
-        $('.stop-message-reference').disableSelection();
+        $('.fund-message-reference').disableSelection();
     }
     else {
-        $('.stop-message-reference').enableSelection();
+        $('.fund-message-reference').enableSelection();
     }
 }

@@ -37,10 +37,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 Postcode = string.Empty,
                 RecordType = string.Empty,
                 SurnameSoundex = string.Empty,
-                StopMessageId = null,
-                StopMessage = new BusinessLogic.Entities.StopMessage()
+                FundMessageId = null,
+                FundMessage = new BusinessLogic.Entities.FundMessage()
                 {
-                    Message = "A stop message"
+                    Message = "A message"
                 },
                 Surname = string.Empty,
                 Title = string.Empty,
@@ -108,8 +108,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Assert.AreEqual(result.PeriodDebit, _accountHolder.PeriodDebit);
             Assert.AreEqual(result.RecordType, _accountHolder.RecordType);
             Assert.AreEqual(result.ShowSelect, false);
-            Assert.AreEqual(result.StopMessage, _accountHolder.StopMessage.Message);
-            Assert.AreEqual(result.StopMessageId, _accountHolder.StopMessageId);
+            Assert.AreEqual(result.FundMessage, _accountHolder.FundMessage.Message);
+            Assert.AreEqual(result.FundMessageId, _accountHolder.FundMessageId);
             Assert.AreEqual(result.Surname, _accountHolder.Surname);
             Assert.AreEqual(result.Title, _accountHolder.Title);
             Assert.AreEqual(result.UserField1, _accountHolder.UserField1);

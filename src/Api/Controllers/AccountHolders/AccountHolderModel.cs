@@ -40,9 +40,9 @@ namespace Api.Controllers.AccountHolders
 
         public string UserField3 { get; set; }
 
-        public string PersonalisedStopMessage { get; set; }
+        public string PersonalisedMessage { get; set; }
 
-        public int? StopMessageId { get; set; }
+        public int? FundMessageId { get; set; }
 
         public AccountHolderModel() { }
 
@@ -65,7 +65,7 @@ namespace Api.Controllers.AccountHolders
             UserField1 = source.UserField1;
             UserField2 = source.UserField2;
             UserField3 = source.UserField3;
-            StopMessageId = source.StopMessageId;
+            FundMessageId = source.FundMessageId;
         }
 
         public AccountHolder GetAccountHolder()
@@ -89,7 +89,7 @@ namespace Api.Controllers.AccountHolders
                 UserField1 = UserField1,
                 UserField2 = UserField2,
                 UserField3 = UserField3,
-                StopMessageId = StopMessageId
+                FundMessageId = FundMessageId
             };
         }
     }

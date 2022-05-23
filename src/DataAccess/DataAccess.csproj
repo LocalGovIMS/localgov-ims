@@ -165,9 +165,9 @@
     <Compile Include="Migrations\202205120853290_Added_ProcessedTransaction_Card_fields.designer.cs">
       <DependentUpon>202205120853290_Added_ProcessedTransaction_Card_fields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205181007166_Updated_StopMessage_and_added_StopMessageMetadata.cs" />
-    <Compile Include="Migrations\202205181007166_Updated_StopMessage_and_added_StopMessageMetadata.designer.cs">
-      <DependentUpon>202205181007166_Updated_StopMessage_and_added_StopMessageMetadata.cs</DependentUpon>
+    <Compile Include="Migrations\202205230950221_Changed_from_StopMessages_to_FundMessages.cs" />
+    <Compile Include="Migrations\202205230950221_Changed_from_StopMessages_to_FundMessages.designer.cs">
+      <DependentUpon>202205230950221_Changed_from_StopMessages_to_FundMessages.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
@@ -197,7 +197,7 @@
     <Compile Include="Repositories\PendingTransactionRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
-    <Compile Include="Repositories\StopMessageRepository.cs" />
+    <Compile Include="Repositories\FundMessageRepository.cs" />
     <Compile Include="Repositories\TemplateRowRepository.cs" />
     <Compile Include="Repositories\TemplateRepository.cs" />
     <Compile Include="Repositories\TransactionNotificationRepository.cs" />
@@ -278,8 +278,8 @@
     <EmbeddedResource Include="Migrations\202205120853290_Added_ProcessedTransaction_Card_fields.resx">
       <DependentUpon>202205120853290_Added_ProcessedTransaction_Card_fields.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205181007166_Updated_StopMessage_and_added_StopMessageMetadata.resx">
-      <DependentUpon>202205181007166_Updated_StopMessage_and_added_StopMessageMetadata.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202205230950221_Changed_from_StopMessages_to_FundMessages.resx">
+      <DependentUpon>202205230950221_Changed_from_StopMessages_to_FundMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

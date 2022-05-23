@@ -18,7 +18,7 @@ namespace DataAccess.Classes
             { typeof(FundGroupFund).ToString(), 2 },
             { typeof(Fund).ToString(), 3 },
             { typeof(Mop).ToString(), 4 },
-            { typeof(StopMessage).ToString(), 6 },
+            { typeof(FundMessage).ToString(), 6 },
             { typeof(TransactionNotification).ToString(), 7 },
             { typeof(PendingTransaction).ToString(), 8 },
             { typeof(ProcessedTransaction).ToString(), 9 },
@@ -58,7 +58,7 @@ namespace DataAccess.Classes
             { typeof(AccountReferenceValidator).ToString(), 43 },
             { typeof(EReturnStatus).ToString(), 44 },
             { typeof(EReturnType).ToString(), 45 },
-            { typeof(StopMessageMetadata).ToString(), 46 }
+            { typeof(FundMessageMetadata).ToString(), 46 }
         };
 
         private readonly Dictionary<string, Func<object, string>> _idMapping = new Dictionary<string, Func<object, string>>() {
@@ -66,7 +66,7 @@ namespace DataAccess.Classes
             { typeof(FundGroupFund).ToString(), (item) => { return ((FundGroupFund)item).FundGroupFundId.ToString(); } },
             { typeof(Fund).ToString(), (item) => { return ((Fund)item).FundCode; } },
             { typeof(Mop).ToString(), (item) => { return ((Mop)item).MopCode; } },
-            { typeof(StopMessage).ToString(), (item) => { return ((StopMessage)item).Id.ToString(); } },
+            { typeof(FundMessage).ToString(), (item) => { return ((FundMessage)item).Id.ToString(); } },
             { typeof(TransactionNotification).ToString(), (item) => { return ((TransactionNotification)item).Id.ToString(); } },
             { typeof(PendingTransaction).ToString(), (item) => { return ((PendingTransaction)item).Id.ToString(); } },
             { typeof(ProcessedTransaction).ToString(), (item) => { return ((ProcessedTransaction)item).Id.ToString(); } },
@@ -107,7 +107,7 @@ namespace DataAccess.Classes
             { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } },
             { typeof(EReturnStatus).ToString(), (item) => { return ((EReturnStatus)item).Id.ToString(); } },
             { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } },
-            { typeof(StopMessageMetadata).ToString(), (item) => { return ((StopMessageMetadata)item).Id.ToString(); } }
+            { typeof(FundMessageMetadata).ToString(), (item) => { return ((FundMessageMetadata)item).Id.ToString(); } }
         };
 
         public void CreateAudit(IncomeDbContext context, int userId)

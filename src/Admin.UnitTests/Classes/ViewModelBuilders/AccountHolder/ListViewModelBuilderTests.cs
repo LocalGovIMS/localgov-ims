@@ -53,7 +53,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                         Postcode = string.Empty,
                         RecordType = string.Empty,
                         SurnameSoundex = string.Empty,
-                        StopMessageId = null,
+                        FundMessageId = null,
                         Surname = string.Empty,
                         Title = string.Empty,
                         UserField1 = string.Empty,

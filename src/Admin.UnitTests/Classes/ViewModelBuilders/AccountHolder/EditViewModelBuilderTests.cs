@@ -15,7 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IAccountHolderService> _mockAccountHolderService = new Mock<IAccountHolderService>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
-        private readonly Mock<IStopMessageService> _mockStopMessageService = new Mock<IStopMessageService>();
+        private readonly Mock<IFundMessageService> _mockFundMessageService = new Mock<IFundMessageService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -26,7 +26,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                _mockLogger.Object,
                _mockAccountHolderService.Object,
                _mockFundService.Object,
-               _mockStopMessageService.Object);
+               _mockFundMessageService.Object);
         }
 
         private void SetupAccountHolderService(Mock<IAccountHolderService> service)
@@ -50,13 +50,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 });
         }
 
-        private void SetupStopMessageService(Mock<IStopMessageService> service)
+        private void SetupFundMessageService(Mock<IFundMessageService> service)
         {
             service.Setup(x => x.GetAll()).Returns(
-                new List<BusinessLogic.Entities.StopMessage>()
+                new List<BusinessLogic.Entities.FundMessage>()
                 {
                     {
-                        new BusinessLogic.Entities.StopMessage()
+                        new BusinessLogic.Entities.FundMessage()
                         {
                             Message = "A message"
                         }
@@ -70,7 +70,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Build("F1");
@@ -85,7 +85,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Build("F1");
@@ -96,19 +96,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         }
 
         [TestMethod]
-        public void OnBuildReturnsViewModelWithStopMessages()
+        public void OnBuildReturnsViewModelWithFundMessages()
         {
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Build("F1");
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
-            result.StopMessages.Should().NotBeNull();
+            result.FundMessages.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         {
             // Arrange
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Build("F1");
@@ -131,7 +131,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Rebuild(new ViewModel());
@@ -146,7 +146,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Rebuild(new ViewModel());
@@ -157,19 +157,19 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
         }
 
         [TestMethod]
-        public void OnRebuildReturnsViewModelWithStopMessages()
+        public void OnRebuildReturnsViewModelWithFundMessages()
         {
             // Arrange
             SetupAccountHolderService(_mockAccountHolderService);
             SetupFundService(_mockFundService);
-            SetupStopMessageService(_mockStopMessageService);
+            SetupFundMessageService(_mockFundMessageService);
 
             // Act
             var result = _viewModelBuilder.Rebuild(new ViewModel());
 
             // Assert
             result.Should().BeOfType(typeof(ViewModel));
-            result.StopMessages.Should().NotBeNull();
+            result.FundMessages.Should().NotBeNull();
         }
     }
 }

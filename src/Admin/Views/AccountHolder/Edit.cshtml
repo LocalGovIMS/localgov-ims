@@ -108,13 +108,13 @@
         </div>
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.StopMessageId)
-            <div class="ui selection dropdown stop-message-dropdown">
-                @Html.HiddenFor(x => x.StopMessageId, new { size = 4 })
+            @Html.LabelFor(m => m.FundMessageId)
+            <div class="ui selection dropdown fund-message-dropdown">
+                @Html.HiddenFor(x => x.FundMessageId, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select stop message type</div>
+                <div class="default text no-overflow">Select message type</div>
                 <div class="menu">
-                    @foreach (var item in Model.StopMessages.Items)
+                    @foreach (var item in Model.FundMessages.Items)
                     {
                         <div class="item" 
                              data-fund-code="@item.DataAttributes.First(x => x.Key == "fundCode").Value">
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.StopMessageId)
+                @Html.ValidationMessageFor(m => m.FundMessageId)
             </div>
         </div>
 

@@ -92,7 +92,7 @@ namespace DataAccess.Repositories
             item.FundName = entity.FundName;
             item.MaximumAmount = entity.MaximumAmount;
             item.OverPayAccount = entity.OverPayAccount;
-            item.StopMessages = entity.StopMessages;
+            item.FundMessages = entity.FundMessages;
             item.AccountReferenceValidatorId = entity.AccountReferenceValidatorId;
             item.VatOverride = entity.VatOverride;
             item.VatCode = entity.VatCode;

@@ -10,10 +10,10 @@ namespace BusinessLogic.UnitTests.Extensions.AccountHolder
         [TestMethod]
         [DataRow(null, false)]
         [DataRow(1, true)]
-        public void IsOnStop_returns_expected_value(int? StopMessageId, bool expectedResult)
+        public void IsOnStop_returns_expected_value(int? fundMessageId, bool expectedResult)
         {
             // Arrange
-            var accountHolder = new Entities.AccountHolder() { StopMessageId = StopMessageId };
+            var accountHolder = new Entities.AccountHolder() { FundMessageId = fundMessageId };
 
             // Act
             var result = accountHolder.IsOnStop();

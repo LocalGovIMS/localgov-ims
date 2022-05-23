@@ -3,9 +3,9 @@ namespace BusinessLogic.Entities
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class StopMessage
+    public partial class FundMessage
     {
-        public StopMessage()
+        public FundMessage()
         {
             AccountHolders = new HashSet<AccountHolder>();
         }
@@ -21,6 +21,6 @@ namespace BusinessLogic.Entities
         public virtual Fund Fund { get; set; }
 
         public virtual ICollection<AccountHolder> AccountHolders { get; set; }
-        public virtual ICollection<StopMessageMetadata> Metadata { get; set; }
+        public virtual ICollection<FundMessageMetadata> Metadata { get; set; }
     }
 }

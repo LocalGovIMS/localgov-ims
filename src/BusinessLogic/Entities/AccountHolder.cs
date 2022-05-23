@@ -57,12 +57,12 @@ namespace BusinessLogic.Entities
         [StringLength(50)]
         public string UserField3 { get; set; }
 
-        public int? StopMessageId { get; set; }
+        public int? FundMessageId { get; set; }
 
         public DateTime? LastUpdated { get; set; }
 
         public virtual Fund Fund { get; set; }
 
-        public virtual StopMessage StopMessage { get; set; }
+        public virtual FundMessage FundMessage { get; set; }
     }
 }

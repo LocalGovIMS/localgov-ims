@@ -119,7 +119,7 @@ namespace BusinessLogic.UnitTests.Classes.Strategies
         //        new Mock<IOriginRepository>().Object,
         //        new Mock<IPendingTransactionRepository>().Object,
         //        new Mock<IRoleRepository>().Object,
-        //        new Mock<IStopMessageRepository>().Object,
+        //        new Mock<IAccountHolderMessageRepository>().Object,
         //        mockSuspenseRepository.Object,
         //        new Mock<ITemplateRepository>().Object,
         //        new Mock<ITransactionRepository>().Object,

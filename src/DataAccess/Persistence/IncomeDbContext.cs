@@ -54,8 +54,8 @@ namespace DataAccess.Persistence
         public virtual DbSet<Vat> Vat { get; set; }
         public virtual DbSet<VatMetadata> VatMetadata { get; set; }
         public virtual DbSet<ScheduleLog> ScheduleLogs { get; set; }
-        public virtual DbSet<StopMessage> StopMessages { get; set; }
-        public virtual DbSet<StopMessageMetadata> StopMessageMetadata { get; set; }
+        public virtual DbSet<FundMessage> FundMessages { get; set; }
+        public virtual DbSet<FundMessageMetadata> FundMessageMetadata { get; set; }
         public virtual DbSet<TransactionStatus> TransactionStatus { get; set; }
         public virtual DbSet<PaymentIntegration> PaymentIntegrations { get; set; }
         public virtual DbSet<ImportProcessingRule> ImportProcessingRules { get; set; }
@@ -105,9 +105,9 @@ namespace DataAccess.Persistence
         private void SetupRelationships(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccountHolder>()
-                .HasOptional(p => p.StopMessage)
+                .HasOptional(p => p.FundMessage)
                 .WithMany(c => c.AccountHolders)
-                .HasForeignKey(p => p.StopMessageId);
+                .HasForeignKey(p => p.FundMessageId);
 
             modelBuilder.Entity<AccountReferenceValidator>()
                 .HasOptional(c => c.CheckDigitConfiguration)
@@ -152,7 +152,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Fund>()
-                .HasMany(e => e.StopMessages)
+                .HasMany(e => e.FundMessages)
                 .WithRequired(e => e.Fund)
                 .WillCascadeOnDelete(false);
 
@@ -200,10 +200,10 @@ namespace DataAccess.Persistence
                 .WithRequired(e => e.Role)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<StopMessage>()
+            modelBuilder.Entity<FundMessage>()
                 .HasMany(e => e.Metadata)
-                .WithRequired(e => e.StopMessage)
-                .HasForeignKey(e => e.StopMessageId)
+                .WithRequired(e => e.FundMessage)
+                .HasForeignKey(e => e.FundMessageId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Suspense>()

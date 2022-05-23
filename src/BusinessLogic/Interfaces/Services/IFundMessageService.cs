@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Services
 {
-    public interface IStopMessageService
+    public interface IFundMessageService
     {
-        List<StopMessage> GetAll();
-        StopMessage GetById(int id);
+        List<FundMessage> GetAll();
+        FundMessage GetById(int id);
     }
 }

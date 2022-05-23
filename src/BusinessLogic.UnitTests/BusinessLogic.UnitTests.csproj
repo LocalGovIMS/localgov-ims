@@ -355,8 +355,8 @@
     <Compile Include="Services\Vat\GetByFundCodeTests.cs" />
     <Compile Include="Services\Vat\GetByVatCodeTests.cs" />
     <Compile Include="Services\Vat\GetAllCodesTests.cs" />
-    <Compile Include="Validators\AccountHolderStopMessage\BaseAccountHolderStopMessageTest.cs" />
-    <Compile Include="Validators\AccountHolderStopMessage\ValidateTests.cs" />
+    <Compile Include="Validators\AccountHolderFundMessage\BaseAccountHolderStopMessageTest.cs" />
+    <Compile Include="Validators\AccountHolderFundMessage\ValidateTests.cs" />
     <Compile Include="Validators\AccountReference\BaseAccountReferenceValidatorTest.cs" />
     <Compile Include="Validators\AccountReference\ValidateReferenceTest.cs" />
     <Compile Include="Validators\Basket\BaseBasket.cs" />

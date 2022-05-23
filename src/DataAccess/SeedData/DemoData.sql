@@ -159,7 +159,7 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled])
 VALUES ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled]);
 
-MERGE INTO MopMetaData AS [Target]
+MERGE INTO MopMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
 			('IsAJournal', 'TRUE', 'JN'),
@@ -237,7 +237,7 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([VatCode], [Percentage], [Disabled])
 VALUES ([VatCode], [Percentage], [Disabled]);
 
-MERGE INTO VatMetaData AS [Target]
+MERGE INTO VatMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
 			('IsASuspenseJournalVatCode', 'True', 'M0')) 
@@ -276,7 +276,7 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])
 VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled]);
 
-MERGE INTO FundMetaData AS [Target]
+MERGE INTO FundMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
 			('IsACreditNoteEnabledFund', 'True', '19'),
@@ -503,21 +503,64 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([TemplateId], [Reference], [VatCode], [Description], [VatOverride], [ReferenceOverride], [DescriptionOverride])
 VALUES ([TemplateId], [Reference], [VatCode], [Description], [VatOverride], [ReferenceOverride], [DescriptionOverride]);
 
-MERGE INTO StopMessages AS [Target]
+DECLARE @FundMessageId_Squatter INT = 1;
+DECLARE @FundMessageId_DoNotAcceptPayment INT = 2;
+DECLARE @FundMessageId_AcceptPayment INT = 3;
+DECLARE @FundMessageId_DoNotAcceptCheques INT = 4;
+DECLARE @FundMessageId_ReferToBerneslaiHomes INT = 5;
+DECLARE @FundMessageId_Bailiff INT = 6;
+DECLARE @FundMessageId_RequiresConsultation INT = 7;
+
+SET IDENTITY_INSERT FundMessages ON;
+
+MERGE INTO FundMessages AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('62', '5', 'Squatter'),
-			('63', '5', 'Do not accept payment - COURT'),
-			('64', '5', 'Accept Payment - Refer for Int'),
-			('65', '5', 'Do Not Accept CHEQUES'),
-			('66', '5', 'Do Not Accept Payment - Refer to Berneslai Homes'),
-			('67', '5', 'Do Not Accept Payment - BAILIFF. Refer to Berneslai Homes.'),
-			('66', '11', 'Payment should only be accepted after consultation with Parking Services.'))
+			(@FundMessageId_Squatter, '5', 'Squatter'),
+			(@FundMessageId_DoNotAcceptPayment, '5', 'Do not accept payment - COURT'),
+			(@FundMessageId_AcceptPayment, '5', 'Accept Payment - Refer for Int'),
+			(@FundMessageId_DoNotAcceptCheques, '5', 'Do Not Accept CHEQUES'),
+			(@FundMessageId_ReferToBerneslaiHomes, '5', 'Do Not Accept Payment - Refer to Berneslai Homes'),
+			(@FundMessageId_Bailiff, '5', 'Do Not Accept Payment - BAILIFF. Refer to Berneslai Homes.'),
+			(@FundMessageId_RequiresConsultation, '11', 'Payment should only be accepted after consultation with Parking Services.'))
 	AS S ([Id], [FundCode], [Message])) AS [Source]
 ON [Target].[Id] = [Source].[Id] 
 WHEN NOT MATCHED BY TARGET THEN
 INSERT ([Id], [FundCode], [Message])
 VALUES ([Id], [FundCode], [Message]);
+
+SET IDENTITY_INSERT FundMessages OFF;
+
+MERGE INTO FundMessageMetadata AS [Target]
+USING (SELECT * 
+		FROM (VALUES
+			('StopForAdmin', 'TRUE', @FundMessageId_Squatter),
+			('StopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			('StopForAdmin', 'TRUE', @FundMessageId_AcceptPayment),
+			('StopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			('StopForAdmin', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			('StopForAdmin', 'TRUE', @FundMessageId_Bailiff),
+			('StopForAdmin', 'TRUE', @FundMessageId_RequiresConsultation),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_Squatter),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_AcceptPayment),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_Bailiff),
+			('StopForPaymentPortal', 'TRUE', @FundMessageId_RequiresConsultation),
+			('Code', '62', @FundMessageId_Squatter),
+			('Code', '63', @FundMessageId_DoNotAcceptPayment),
+			('Code', '64', @FundMessageId_AcceptPayment),
+			('Code', '65', @FundMessageId_DoNotAcceptCheques),
+			('Code', '66', @FundMessageId_ReferToBerneslaiHomes),
+			('Code', '67', @FundMessageId_Bailiff),
+			('Code', '66', @FundMessageId_RequiresConsultation)) 
+	AS S ([Key], [Value], [FundMessageId])) AS [Source]
+ON [Target].[FundMessageId] = [Source].[FundMessageId] 
+	AND [Target].[Key] = [Source].[Key] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Key], [Value], [FundMessageId])
+VALUES ([Key], [Value], [FundMessageId]);
 
 BEGIN TRAN
 

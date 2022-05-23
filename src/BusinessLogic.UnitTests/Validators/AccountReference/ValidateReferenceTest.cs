@@ -96,7 +96,7 @@
 
 //            MockAccountHolderService.Setup(x => x.GetByAccountReference(It.IsAny<string>(), It.IsAny<string>())).Returns(new Entities.AccountHolder()
 //            {
-//                StopMessageReference = "test stop message"
+//                AccountHolderMessageReference = "test stop message"
 //            });
 
 //            var validator = GetAccountReferenceValidator();

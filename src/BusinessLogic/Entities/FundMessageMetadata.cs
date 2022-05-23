@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessLogic.Entities
 {
-    [Table("StopMessageMetadata")]
-    public partial class StopMessageMetadata
+    [Table("FundMessageMetadata")]
+    public partial class FundMessageMetadata
     {
         public int Id { get; set; }
 
@@ -16,8 +16,8 @@ namespace BusinessLogic.Entities
         public string Value { get; set; }
 
         [Required]
-        public int StopMessageId { get; set; }
+        public int FundMessageId { get; set; }
 
-        public virtual StopMessage StopMessage { get; set; }
+        public virtual FundMessage FundMessage { get; set; }
     }
 }

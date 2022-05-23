@@ -38,7 +38,7 @@ namespace DataAccess.Persistence
         public IOfficeRepository Offices { get; private set; }
         public IPendingTransactionRepository PendingTransactions { get; private set; }
         public IRoleRepository Roles { get; private set; }
-        public IStopMessageRepository StopMessages { get; private set; }
+        public IFundMessageRepository FundMessages { get; private set; }
         public ISystemMessageRepository SystemMessages { get; private set; }
         public ISuspenseRepository Suspenses { get; private set; }
         public IRepository<SuspenseNote> SuspenseNotes { get; private set; }
@@ -83,7 +83,7 @@ namespace DataAccess.Persistence
             IOfficeRepository officeRepository,
             IPendingTransactionRepository pendingTransactionRepository,
             IRoleRepository roleRepository,
-            IStopMessageRepository stopMessageRepository,
+            IFundMessageRepository fundMessageRepository,
             ISystemMessageRepository systemMessageRepository,
             ISuspenseRepository suspenseRepository,
             IRepository<SuspenseNote> suspenseNoteRepository,
@@ -129,7 +129,7 @@ namespace DataAccess.Persistence
             Offices = officeRepository;
             PendingTransactions = pendingTransactionRepository;
             Roles = roleRepository;
-            StopMessages = stopMessageRepository;
+            FundMessages = fundMessageRepository;
             Suspenses = suspenseRepository;
             SuspenseNotes = suspenseNoteRepository;
             SystemMessages = systemMessageRepository;

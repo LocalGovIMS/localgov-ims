@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Updated_StopMessage_and_added_StopMessageMetadata : IMigrationMetadata
+    public sealed partial class Changed_from_StopMessages_to_FundMessages : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Updated_StopMessage_and_added_StopMessageMetadata));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Changed_from_StopMessages_to_FundMessages));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205181007166_Updated_StopMessage_and_added_StopMessageMetadata"; }
+            get { return "202205230950221_Changed_from_StopMessages_to_FundMessages"; }
         }
         
         string IMigrationMetadata.Source
