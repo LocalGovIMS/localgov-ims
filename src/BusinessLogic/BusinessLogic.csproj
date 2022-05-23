@@ -229,6 +229,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICheckDigitConfigurationRepository.cs" />
     <Compile Include="Interfaces\Repositories\IImportRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFundMessageMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVatMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMethodOfPaymentMetadataRepository.cs" />
@@ -300,6 +301,7 @@
     <Compile Include="Models\Import\ProcessResult.cs" />
     <Compile Include="Models\Import\LoadFromFileResult.cs" />
     <Compile Include="Models\Transactions\AuthorisePendingTransactionByInternalReferenceArgs.cs" />
+    <Compile Include="Models\FundMessageMetadata\SearchCriteria.cs" />
     <Compile Include="Models\VatMetadata\SearchCriteria.cs" />
     <Compile Include="Models\Fund\SearchCriteria.cs" />
     <Compile Include="Models\FundMetadata\SearchCriteria.cs" />

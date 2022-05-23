@@ -33,6 +33,7 @@ namespace DataAccess
                 .RegisterType<IPendingTransactionRepository, PendingTransactionRepository>()
                 .RegisterType<IRoleRepository, RoleRepository>()
                 .RegisterType<IFundMessageRepository, FundMessageRepository>()
+                .RegisterType<IFundMessageMetadataRepository, FundMessageMetadataRepository>()
                 .RegisterType<ISuspenseRepository, SuspenseRepository>()
                 .RegisterType<ISystemMessageRepository, SystemMessageRepository>()
                 .RegisterType<ITemplateRepository, TemplateRepository>()
