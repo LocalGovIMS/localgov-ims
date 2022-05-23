@@ -50,6 +50,7 @@ namespace BusinessLogic
                 .RegisterType<ISuspenseService, SuspenseService>()
                 .RegisterType<ISuspenseNoteService, SuspenseNoteService>()
                 .RegisterType<IFundMessageService, FundMessageService>()
+                .RegisterType<IFundMessageMetadataService, FundMessageMetadataService>()
                 .RegisterType<ISystemMessageService, SystemMessageService>()
                 .RegisterType<ITemplateService, TemplateService>()
                 .RegisterType<ITemplateRowService, TemplateRowService>()

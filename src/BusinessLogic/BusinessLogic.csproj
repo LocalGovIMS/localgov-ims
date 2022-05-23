@@ -264,6 +264,7 @@
     <Compile Include="Interfaces\Services\IImportService.cs" />
     <Compile Include="Interfaces\Services\IPaymentIntegrationService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
+    <Compile Include="Interfaces\Services\IFundMessageMetadataService.cs" />
     <Compile Include="Interfaces\Services\IVatMetadataService.cs" />
     <Compile Include="Interfaces\Services\IFundMetadataService.cs" />
     <Compile Include="Interfaces\Services\IMethodOfPaymentMetadataService.cs" />
@@ -329,6 +330,7 @@
     <Compile Include="Services\ImportService.cs" />
     <Compile Include="Services\PaymentIntegrationService.cs" />
     <Compile Include="Services\SuspenseNoteService.cs" />
+    <Compile Include="Services\FundMessageMetadataService.cs" />
     <Compile Include="Services\VatMetadataService.cs" />
     <Compile Include="Services\FundMetadataService.cs" />
     <Compile Include="Services\MethodOfPaymentMetadataService.cs" />

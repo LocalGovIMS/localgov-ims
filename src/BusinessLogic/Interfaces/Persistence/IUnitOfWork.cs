@@ -24,6 +24,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IPendingTransactionRepository PendingTransactions { get; }
         IRoleRepository Roles { get; }
         IFundMessageRepository FundMessages { get; }
+        IFundMessageMetadataRepository FundMessageMetadata { get; }
         ISystemMessageRepository SystemMessages { get; }
         ISuspenseRepository Suspenses { get; }
         IRepository<SuspenseNote> SuspenseNotes { get; }
