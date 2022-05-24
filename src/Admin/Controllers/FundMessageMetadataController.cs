@@ -1,5 +1,5 @@
-﻿using Admin.Classes.ViewModelBuilders.VatMetadata;
-using Admin.Models.VatMetadata;
+﻿using Admin.Classes.ViewModelBuilders.FundMessageMetadata;
+using Admin.Models.FundMessageMetadata;
 using Admin.Models.Shared;
 using BusinessLogic.Security;
 using System.Web.Mvc;
@@ -8,25 +8,25 @@ using Web.Mvc.Navigation;
 namespace Admin.Controllers
 {
     [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
-    public class VatMetadataController : BaseController<IVatMetadataControllerDependencies>
+    public class FundMessageMetadataController : BaseController<IFundMessageMetadataControllerDependencies>
     {
-        public VatMetadataController(IVatMetadataControllerDependencies dependecies)
+        public FundMessageMetadataController(IFundMessageMetadataControllerDependencies dependecies)
             : base(dependecies)
         {
         }
 
         [ChildActionOnly]
-        public ActionResult _ListForVat(string id)
+        public ActionResult _ListForFundMessage(int id)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundMessageId = id });
 
             return PartialView("_List", model);
         }
 
         [ChildActionOnly]
-        public ActionResult _EditListForVat(string id)
+        public ActionResult _EditListForFundMessage(int id)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundMessageId = id });
 
             return PartialView("_EditList", model);
         }
@@ -34,11 +34,11 @@ namespace Admin.Controllers
         [NavigatablePageActionFilter(DisplayText = "Create Metadata")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Create(string id)
+        public ActionResult Create(int id)
         {
             var model = Dependencies.CreateViewModelBuilder.Build(new CreateViewModelBuilderArgs()
             {
-                VatCode = id
+                FundMessageId = id
             });
 
             return View(model);
@@ -70,7 +70,7 @@ namespace Admin.Controllers
 
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Delete(int id, string vatCode)
+        public ActionResult Delete(int id, int fundMessageId)
         {
             var result = Dependencies.DeleteCommand.Execute(id);
 
@@ -81,7 +81,7 @@ namespace Admin.Controllers
                 TempData["Message"] = errorMsg;
             }
 
-            return RedirectToAction("Edit", "Vat", new { id = vatCode });
+            return RedirectToAction("Edit", "FundMessage", new { id = fundMessageId });
         }
     }
 }

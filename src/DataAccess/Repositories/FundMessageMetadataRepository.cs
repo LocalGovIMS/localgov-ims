@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             var items = IncomeDbContext.FundMessageMetadata
                 .AsQueryable();
 
-            items = items.Where(x => x.Id == criteria.Id);
+            items = items.Where(x => x.FundMessageId == criteria.Id);
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;

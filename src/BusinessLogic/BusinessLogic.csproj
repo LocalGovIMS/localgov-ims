@@ -298,6 +298,7 @@
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
+    <Compile Include="Models\FundMessage\SearchCriteria.cs" />
     <Compile Include="Models\ProcessedTransactionModel.cs" />
     <Compile Include="Models\Import\ProcessResult.cs" />
     <Compile Include="Models\Import\LoadFromFileResult.cs" />

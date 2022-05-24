@@ -132,6 +132,20 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.FundMetadata.EditViewModel>, Commands.FundMetadata.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.FundMetadata.DeleteCommand>("FundMetadata.Command.Delete")
 
+                .RegisterType<IModelBuilder<ViewModels.FundMessage.DetailsViewModel, int>, ViewModelBuilders.FundMessage.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMessage.EditViewModel, int>, ViewModelBuilders.FundMessage.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMessage.ListViewModel, ViewModels.FundMessage.SearchCriteria>, ViewModelBuilders.FundMessage.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.FundMessage.EditViewModel>, Commands.FundMessage.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.FundMessage.EditViewModel>, Commands.FundMessage.EditCommand>("Edit")
+
+                .RegisterType<IModelBuilder<ViewModels.FundMessageMetadata.DetailsViewModel, int>, ViewModelBuilders.FundMessageMetadata.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMessageMetadata.EditViewModel, ViewModelBuilders.FundMessageMetadata.CreateViewModelBuilderArgs>, ViewModelBuilders.FundMessageMetadata.CreateViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMessageMetadata.EditViewModel, int>, ViewModelBuilders.FundMessageMetadata.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.FundMessageMetadata.ListViewModel, ViewModels.FundMessageMetadata.SearchCriteria>, ViewModelBuilders.FundMessageMetadata.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.FundMessageMetadata.EditViewModel>, Commands.FundMessageMetadata.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.FundMessageMetadata.EditViewModel>, Commands.FundMessageMetadata.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.FundMessageMetadata.DeleteCommand>("FundMessageMetadata.Command.Delete")
+
                 .RegisterType<IModelBuilder<IList<ViewModels.SystemMessage.DetailsViewModel>, string>, ViewModelBuilders.Home.ListViewModelBuilder>()
 
                 .RegisterType<IModelBuilder<ViewModels.MethodOfPayment.DetailsViewModel, string>, ViewModelBuilders.MethodOfPayment.DetailsViewModelBuilder>()
@@ -315,6 +329,8 @@ namespace Admin
                 .RegisterType<IVatMetadataControllerDependencies, VatMetadataControllerDependencies>()
                 .RegisterType<IFundControllerDependencies, FundControllerDependencies>()
                 .RegisterType<IFundMetadataControllerDependencies, FundMetadataControllerDependencies>()
+                .RegisterType<IFundMessageControllerDependencies, FundMessageControllerDependencies>()
+                .RegisterType<IFundMessageMetadataControllerDependencies, FundMessageMetadataControllerDependencies>()
                 .RegisterType<IValidationControllerDependencies, ValidationControllerDependencies>()
                 .RegisterType<IImportProcessingRuleControllerDependencies, ImportProcessingRuleControllerDependencies>()
                 .RegisterType<IImportProcessingRuleConditionControllerDependencies, ImportProcessingRuleConditionControllerDependencies>()

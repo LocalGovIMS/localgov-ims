@@ -8,6 +8,7 @@ namespace BusinessLogic.Entities
         public FundMessage()
         {
             AccountHolders = new HashSet<AccountHolder>();
+            Metadata = new HashSet<FundMessageMetadata>();
         }
 
         public int Id { get; set; }

@@ -1,6 +1,6 @@
-﻿@model Admin.Models.VatMetadata.EditViewModel
+﻿@model Admin.Models.FundMessage.EditViewModel
 @{
-    ViewBag.Title = "Create VAT metadata";
+    ViewBag.Title = "Create fund message";
 }
 
 @section Messages {
@@ -9,27 +9,26 @@
 
 @section Header {
     <h1 class="ui header">
-        Create VAT metadata
+        Create fund message
         <div class="sub header">
-            VAT metadata details
+            Fund message details
         </div>
     </h1>
 }
 
-@using (Html.BeginForm("Create", "VatMetadata", FormMethod.Post))
+@using (Html.BeginForm("Create", "FundMessage", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.VatCode)
 
     <div class="ui form">
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.Key)
-            <div class="ui search selection dropdown keys-dropdown">
-                @Html.HiddenFor(x => x.Key, new { size = 4 })
+            @Html.LabelFor(m => m.FundCode)
+            <div class="ui selection dropdown fund-dropdown">
+                @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                 <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select key</div>
+                <div class="default text no-overflow">Select fund type</div>
                 <div class="menu">
-                    @foreach (var item in Model.Keys.Items)
+                    @foreach (var item in Model.Funds.Items)
                     {
                         <div class="item" data-value="@item.Value">
                             @item.Text
@@ -38,33 +37,29 @@
                 </div>
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Key)
+                @Html.ValidationMessageFor(m => m.FundCode)
             </div>
         </div>
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.Value)
-            @Html.EditorFor(m => m.Value)
+            @Html.LabelFor(m => m.Message)
+            @Html.EditorFor(m => m.Message)
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Value)
+                @Html.ValidationMessageFor(m => m.Message)
             </div>
         </div>
 
         <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "VatMetadata", null, new { @class = "ui button" })
+        @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
 
     </div>
 
 }
 
 @section Scripts {
-
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.keys-dropdown').dropdown();
-
+        $('.ui.dropdown').dropdown({
+            match: 'both'
         });
     </script>
-
 }

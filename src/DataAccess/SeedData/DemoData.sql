@@ -534,27 +534,27 @@ SET IDENTITY_INSERT FundMessages OFF;
 MERGE INTO FundMessageMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('StopForAdmin', 'TRUE', @FundMessageId_Squatter),
-			('StopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptPayment),
-			('StopForAdmin', 'TRUE', @FundMessageId_AcceptPayment),
-			('StopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptCheques),
-			('StopForAdmin', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
-			('StopForAdmin', 'TRUE', @FundMessageId_Bailiff),
-			('StopForAdmin', 'TRUE', @FundMessageId_RequiresConsultation),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_Squatter),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptPayment),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_AcceptPayment),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptCheques),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_Bailiff),
-			('StopForPaymentPortal', 'TRUE', @FundMessageId_RequiresConsultation),
-			('Code', '62', @FundMessageId_Squatter),
-			('Code', '63', @FundMessageId_DoNotAcceptPayment),
-			('Code', '64', @FundMessageId_AcceptPayment),
-			('Code', '65', @FundMessageId_DoNotAcceptCheques),
-			('Code', '66', @FundMessageId_ReferToBerneslaiHomes),
-			('Code', '67', @FundMessageId_Bailiff),
-			('Code', '66', @FundMessageId_RequiresConsultation)) 
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_Squatter),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_AcceptPayment),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_Bailiff),
+			('IsOnStopForAdmin', 'TRUE', @FundMessageId_RequiresConsultation),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_Squatter),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_AcceptPayment),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_Bailiff),
+			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_RequiresConsultation),
+			('ExternalCode', '62', @FundMessageId_Squatter),
+			('ExternalCode', '63', @FundMessageId_DoNotAcceptPayment),
+			('ExternalCode', '64', @FundMessageId_AcceptPayment),
+			('ExternalCode', '65', @FundMessageId_DoNotAcceptCheques),
+			('ExternalCode', '66', @FundMessageId_ReferToBerneslaiHomes),
+			('ExternalCode', '67', @FundMessageId_Bailiff),
+			('ExternalCode', '66', @FundMessageId_RequiresConsultation)) 
 	AS S ([Key], [Value], [FundMessageId])) AS [Source]
 ON [Target].[FundMessageId] = [Source].[FundMessageId] 
 	AND [Target].[Key] = [Source].[Key] 

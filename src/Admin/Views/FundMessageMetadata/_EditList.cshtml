@@ -1,4 +1,4 @@
-﻿@model Admin.Models.VatMetadata.ListViewModel
+﻿@model Admin.Models.FundMessageMetadata.ListViewModel
 
 @if (Model.Items != null && Model.Items.Any())
 {
@@ -13,8 +13,8 @@
                     @item.Value
                 </td>
                 <td style="width:20%;">
-                    @Html.ActionLink("Edit", "Edit", "VatMetadata", new { id = item.Id }, new { @class = "ui button" })
-                    @Html.ActionLink("Delete", "Delete", "VatMetadata", new { id = item.Id, vatCode = item.ParentCode }, new { @class = "ui button delete-action" })
+                    @Html.ActionLink("Edit", "Edit", "FundMessageMetadata", new { id = item.Id }, new { @class = "ui button" })
+                    @Html.ActionLink("Delete", "Delete", "FundMessageMetadata", new { id = item.Id, fundMessageId = item.ParentCode }, new { @class = "ui button delete-action" })
                 </td>
             </tr>
         }

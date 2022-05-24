@@ -120,7 +120,9 @@ namespace BusinessLogic.Services
         {
             return new List<Metadata>()
             {
-                new Metadata() { Key = "IsASuspenseJournalVatCode", Description = "Is A Suspense Journal Vat Code" }
+                new Metadata() { Key = "IsOnStopForPaymentPortal", Description = "Payments via the Payment Portal are stopped" },
+                new Metadata() { Key = "IsOnStopForAdmin", Description = "Payments via Admin are stopped" },
+                new Metadata() { Key = "ExternalCode", Description = "External code" }
             };
         }
     }

@@ -1,6 +1,6 @@
-﻿@model Admin.Models.VatMetadata.EditViewModel
+﻿@model Admin.Models.FundMessageMetadata.EditViewModel
 @{
-    ViewBag.Title = "Create VAT metadata";
+    ViewBag.Title = "Edit fund message metadata";
 }
 
 @section Messages {
@@ -9,16 +9,17 @@
 
 @section Header {
     <h1 class="ui header">
-        Create VAT metadata
+        Edit fund message metadata
         <div class="sub header">
-            VAT metadata details
+            Fund message metadata details
         </div>
     </h1>
 }
 
-@using (Html.BeginForm("Create", "VatMetadata", FormMethod.Post))
+@using (Html.BeginForm("Edit", "FundMessageMetadata", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.VatCode)
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.FundMessageId)
 
     <div class="ui form">
 
@@ -51,7 +52,7 @@
         </div>
 
         <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "VatMetadata", null, new { @class = "ui button" })
+        @Html.ActionLink("Back", "Back", "FundMessageMetadata", null, new { @class = "ui button" })
 
     </div>
 
