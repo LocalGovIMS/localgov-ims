@@ -16,7 +16,7 @@ using EditViewModel = Admin.Models.FundMetadata.EditViewModel;
 using ListViewModel = Admin.Models.FundMetadata.ListViewModel;
 using SearchCriteria = Admin.Models.FundMetadata.SearchCriteria;
 
-namespace Admin.UnitTests.Controllers.FundMetadata.EditListForImportProcessingRule
+namespace Admin.UnitTests.Controllers.FundMetadata.ListForFund
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -36,7 +36,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.EditListForImportProcessingRu
         private MethodInfo GetListMethod()
         {
             return _controller.GetMethods()
-                .Where(x => x.Name == "_EditListForFund")
+                .Where(x => x.Name == "_ListForFund")
                 .FirstOrDefault();
         }
 
@@ -69,7 +69,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.EditListForImportProcessingRu
 
             var controller = new Controller(dependencies);
 
-            return controller._EditListForFund("1");
+            return controller._ListForFund("1");
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.EditListForImportProcessingRu
             var result = GetTestListResult() as PartialViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "_EditList");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "_List");
         }
     }
 }

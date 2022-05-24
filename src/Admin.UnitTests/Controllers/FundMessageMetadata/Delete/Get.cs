@@ -1,4 +1,4 @@
-﻿using Admin.Classes.ViewModelBuilders.FundMetadata;
+﻿using Admin.Classes.ViewModelBuilders.FundMessageMetadata;
 using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
 using log4net;
@@ -9,14 +9,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.FundMetadataController;
-using ControllerDependencies = Admin.Controllers.FundMetadataControllerDependencies;
-using DetailsViewModel = Admin.Models.FundMetadata.DetailsViewModel;
-using EditViewModel = Admin.Models.FundMetadata.EditViewModel;
-using ListViewModel = Admin.Models.FundMetadata.ListViewModel;
-using SearchCriteria = Admin.Models.FundMetadata.SearchCriteria;
+using Controller = Admin.Controllers.FundMessageMetadataController;
+using ControllerDependencies = Admin.Controllers.FundMessageMetadataControllerDependencies;
+using DetailsViewModel = Admin.Models.FundMessageMetadata.DetailsViewModel;
+using EditViewModel = Admin.Models.FundMessageMetadata.EditViewModel;
+using ListViewModel = Admin.Models.FundMessageMetadata.ListViewModel;
+using SearchCriteria = Admin.Models.FundMessageMetadata.SearchCriteria;
 
-namespace Admin.UnitTests.Controllers.FundMetadata.ListForImportProcessingRule
+namespace Admin.UnitTests.Controllers.FundMessageMetadata.Delete
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -33,61 +33,73 @@ namespace Admin.UnitTests.Controllers.FundMetadata.ListForImportProcessingRule
         private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
         private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
 
-        private MethodInfo GetListMethod()
+        private MethodInfo GetMethod()
         {
             return _controller.GetMethods()
-                .Where(x => x.Name == "_ListForFund")
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
+                .Where(x => x.Name == "Delete")
                 .FirstOrDefault();
         }
 
-        [TestMethod]
-        public void HasCorrectNumberOfCustomAttributes()
+        private ActionResult GetResult()
         {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Count());
-        }
-
-        [TestMethod]
-        public void HasASingleChildActionOnlyAttribute()
-        {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
-        }
-
-        private ActionResult GetTestListResult()
-        {
-            var listViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<SearchCriteria>())).Returns(new ListViewModel());
+            var deleteCommand = new Mock<IModelCommand<int>>();
+            deleteCommand.Setup(x => x.Execute(It.IsAny<int>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
             var dependencies = new ControllerDependencies(
                 _mockLogger.Object,
                 _mockDetailsViewModelBuilder.Object,
                 _mockCreateViewModelBuilder.Object,
                 _mockEditViewModelBuilder.Object,
-                listViewModelBuilder.Object,
+                _mockListViewModelBuilder.Object,
                 _mockCreateCommand.Object,
                 _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
+                deleteCommand.Object);
 
             var controller = new Controller(dependencies);
 
-            return controller._ListForFund("1");
+            return controller.Delete(1, 1);
         }
 
         [TestMethod]
-        public void ReturnsAPartialView()
+        public void HasCorrectNumberOfCustomAttributes()
         {
-            var result = GetTestListResult();
-
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(PartialViewResult));
+            Assert.AreEqual(2, GetMethod().CustomAttributes.Count());
         }
 
         [TestMethod]
-        public void ReturnsCorrectViewName()
+        public void HasASingleHttpGetAttribute()
         {
-            var result = GetTestListResult() as PartialViewResult;
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(HttpGetAttribute)).Count());
+        }
+
+        [TestMethod]
+        public void ReturnsARedirectAction()
+        {
+            var result = GetResult();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "_List");
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+
+        [TestMethod]
+        public void RedirectsToTheCorrectController()
+        {
+            var result = GetResult() as RedirectToRouteResult;
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(result.RouteValues["controller"], "FundMessage");
+        }
+
+        [TestMethod]
+        public void RedirectsToTheCorrectAction()
+        {
+            var result = GetResult() as RedirectToRouteResult;
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(result.RouteValues["action"], "Edit");
         }
     }
 }
