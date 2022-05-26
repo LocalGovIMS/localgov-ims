@@ -29,7 +29,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         private void SetupServices()
         {
             _mockVatMetadataService.Setup(x => x.Get(It.IsAny<int>())).Returns(
-                new BusinessLogic.Entities.VatMetaData()
+                new BusinessLogic.Entities.VatMetadata()
                 {
                     Id = 1,
                     Key = "Test key",

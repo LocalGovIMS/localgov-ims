@@ -3,29 +3,29 @@ using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
-using System.Linq;
 
 namespace BusinessLogic.Validators
 {
-    public class AccountHolderStopMessageValidator : IAccountHolderStopMessageValidator
+    public class AccountHolderFundMessageValidator : IAccountHolderFundMessageValidator
     {
-        private readonly IStopMessageService _stopMessaageService;
-        public AccountHolderStopMessageValidator(IStopMessageService stopMessageService)
+        private readonly IFundMessageService _fundMessageService;
+        public AccountHolderFundMessageValidator(IFundMessageService fundMessageService)
         {
-            _stopMessaageService = stopMessageService;
+            _fundMessageService = fundMessageService;
         }
 
         public IResult Validate(AccountHolder accountHolder)
         {
-            if(string.IsNullOrEmpty(accountHolder.StopMessageReference)) 
+            if(!accountHolder.FundMessageId.HasValue) 
                 return new Result();
 
-            var matchingStopMessage = _stopMessaageService
-                .GetAll()
-                .FirstOrDefault(x => x.FundCode == accountHolder.FundCode && x.Id == accountHolder.StopMessageReference);
+            var matchingFundMessage = _fundMessageService.GetById(accountHolder.FundMessageId.Value);
 
-            if (matchingStopMessage is null) 
-                return new Result("The fund/stop message combination is not valid");
+            if (matchingFundMessage is null) 
+                return new Result("The message is not valid");
+
+            if (matchingFundMessage.FundCode != accountHolder.FundCode) 
+                return new Result("The message is not valid");
 
             return new Result();
         }

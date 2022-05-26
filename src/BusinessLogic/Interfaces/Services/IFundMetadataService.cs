@@ -9,11 +9,11 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IFundMetadataService
     {
-        IResult Create(FundMetaData item);
-        FundMetaData Get(int id);
-        FundMetaData Get(string fundCode, string key);
-        SearchResult<FundMetaData> Search(SearchCriteria criteria);
-        IResult Update(FundMetaData item);
+        IResult Create(FundMetadata item);
+        FundMetadata Get(int id);
+        FundMetadata Get(string fundCode, string key);
+        SearchResult<FundMetadata> Search(SearchCriteria criteria);
+        IResult Update(FundMetadata item);
         IResult Delete(int id);
         List<Metadata> GetMetadata();
     }

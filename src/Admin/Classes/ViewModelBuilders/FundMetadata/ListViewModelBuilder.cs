@@ -47,7 +47,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
         }
 
         private StaticPagedList<MetadataViewModel> GetSearchResultAsPagedList(
-            SearchResult<BusinessLogic.Entities.FundMetaData> searchResult)
+            SearchResult<BusinessLogic.Entities.FundMetadata> searchResult)
         {
             return new StaticPagedList<MetadataViewModel>(
                 searchResult.Items.Select(x => new MetadataViewModel() 

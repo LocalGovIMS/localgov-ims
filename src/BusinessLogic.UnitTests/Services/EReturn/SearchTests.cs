@@ -32,11 +32,11 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                     new Entities.Fund()
                     {
                         FundCode = "13",
-                        MetaData = new List<Entities.FundMetaData>()
+                        Metadata = new List<Entities.FundMetadata>()
                         {
-                            new Entities.FundMetaData()
+                            new Entities.FundMetadata()
                             {
-                                Key = FundMetaDataKeys.IsAnEReturnDefaultFund,
+                                Key = FundMetadataKeys.IsAnEReturnDefaultFund,
                                 Value = "True"
                             }
                         }

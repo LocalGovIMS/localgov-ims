@@ -31,7 +31,7 @@ namespace Admin.Classes.Commands.AccountHolder
                 PeriodDebit = model.PeriodDebit,
                 Postcode = model.Postcode,
                 RecordType = model.RecordType,
-                StopMessageReference = model.StopMessageReference,
+                FundMessageId = model.FundMessageId,
                 Surname = model.Surname,
                 Title = model.Title,
                 UserField1 = model.UserField1,

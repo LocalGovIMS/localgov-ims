@@ -21,7 +21,8 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.AccountHolders
                 .Include(x => x.Fund)
-                .Include(x => x.StopMessage)
+                .Include(x => x.FundMessage)
+                .Include(x => x.FundMessage.Metadata)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.AccountReference == accountReference);
         }
@@ -30,7 +31,8 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.AccountHolders
                 .Include(x => x.Fund)
-                .Include(x => x.StopMessage)
+                .Include(x => x.FundMessage)
+                .Include(x => x.FundMessage.Metadata)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.AccountReference == accountReference && x.FundCode == fundCode);
         }

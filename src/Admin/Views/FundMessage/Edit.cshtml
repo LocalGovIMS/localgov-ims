@@ -1,0 +1,78 @@
+﻿@model Admin.Models.FundMessage.EditViewModel
+@{
+    ViewBag.Title = "Edit fund message";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.FundName - (@Model.FundCode)
+        <div class="sub header">
+            Fund message details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "FundMessage", FormMethod.Post))
+{
+
+    <div class="ui form">
+
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.FundCode)
+            <div class="ui selection dropdown fund-dropdown">
+                @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select fund type</div>
+                <div class="menu">
+                    @foreach (var item in Model.Funds.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.FundCode)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Message)
+            @Html.EditorFor(m => m.Message)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Message)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            Metadata
+            @Html.ActionLink("Add metadata", "Create", "FundMessageMetadata", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        </h3>
+        @Html.Action("_EditListForFundMessage", "FundMessageMetadata", new { id = Model.Id })
+
+    </div>
+
+    <br />
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown({
+            match: 'both'
+        });
+    </script>
+}

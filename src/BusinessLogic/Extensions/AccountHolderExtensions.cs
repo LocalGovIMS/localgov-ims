@@ -36,12 +36,12 @@ namespace BusinessLogic.Extensions
             existingAccountHolder.UserField1 = newAccountHolder.UserField1;
             existingAccountHolder.UserField2 = newAccountHolder.UserField2;
             existingAccountHolder.UserField3 = newAccountHolder.UserField3;
-            existingAccountHolder.StopMessageReference = newAccountHolder.StopMessageReference;
+            existingAccountHolder.FundMessageId = newAccountHolder.FundMessageId;
         }
 
         public static bool IsOnStop(this AccountHolder accountHolder)
         {
-            return string.IsNullOrWhiteSpace(accountHolder.StopMessageReference) == false;
+            return accountHolder.FundMessageId.HasValue;
         }
     }
 }

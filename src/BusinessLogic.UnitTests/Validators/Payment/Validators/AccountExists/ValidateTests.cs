@@ -98,7 +98,7 @@ namespace BusinessLogic.UnitTests.Validators.Payment.Validators.AccountExists
         private void PutAccountHolderOnStop()
         {
             _mockAccountHolderService.Setup(x => x.GetByAccountReference(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(new Entities.AccountHolder() { StopMessageReference = "S1" });
+                .Returns(new Entities.AccountHolder() { FundMessageId = 1 });
         }
 
         private void MakeUserAFinanceUser(bool isFinanceUser)

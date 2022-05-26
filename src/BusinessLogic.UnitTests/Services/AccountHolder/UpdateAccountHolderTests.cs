@@ -16,9 +16,9 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
                 .Returns(new Entities.AccountHolder());
         }
 
-        private void SetupAccountHolderStopMessageValidator(Result result)
+        private void SetupAccountHolderFundMessageValidator(Result result)
         {
-            MockAccountHolderStopMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
+            MockAccountHolderFundMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
                 .Returns(result);
         }
 
@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         {
             // Arrange
             SetupUnitOfWork();
-            SetupAccountHolderStopMessageValidator(new Result());
+            SetupAccountHolderFundMessageValidator(new Result());
 
             var service = GetService();
 
@@ -59,7 +59,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         public void UpdateErrorReturnsFailure()
         {
             // Arrange
-            SetupAccountHolderStopMessageValidator(new Result());
+            SetupAccountHolderFundMessageValidator(new Result());
 
             var service = GetService();
 
@@ -76,7 +76,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         public void UpdateToAnAccountHolderThatDoesNotExistReturnsFailure()
         {
             // Arrange
-            SetupAccountHolderStopMessageValidator(new Result());
+            SetupAccountHolderFundMessageValidator(new Result());
             SetupUnitOfWork();
 
             var service = GetService();
@@ -95,10 +95,10 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         }
 
         [TestMethod]
-        public void UpdateReturnsErrorIfAccountHolderStopMessageValidationFails()
+        public void UpdateReturnsErrorIfAccountHolderFundMessageValidationFails()
         {
             // Arrange
-            SetupAccountHolderStopMessageValidator(new Result("error"));
+            SetupAccountHolderFundMessageValidator(new Result("error"));
             SetupUnitOfWork();
 
             var service = GetService();
@@ -113,10 +113,10 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         }
 
         [TestMethod]
-        public void UnexpectedEceptionReturnsError()
+        public void UnexpectedExceptionReturnsError()
         {
             // Arrange
-            MockAccountHolderStopMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
+            MockAccountHolderFundMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
                 .Throws(new InvalidOperationException());
 
             var service = GetService();

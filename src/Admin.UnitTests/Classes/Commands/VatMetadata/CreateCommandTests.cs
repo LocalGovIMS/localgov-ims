@@ -53,7 +53,7 @@ namespace Admin.UnitTests.Classes.Commands.VatMetadata
             var result = command.Execute(GenerateViewModel());
 
             // Assert
-            _mockVatMetadataService.Verify(x => x.Create(It.IsAny<BusinessLogic.Entities.VatMetaData>()), Times.Once);
+            _mockVatMetadataService.Verify(x => x.Create(It.IsAny<BusinessLogic.Entities.VatMetadata>()), Times.Once);
         }
     }
 }

@@ -9,124 +9,124 @@ namespace BusinessLogic.Extensions
     {
         public static bool IsACashPayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsACashPayment);
+            return item.IsA(MopMetadataKeys.IsACashPayment);
         }
 
         public static bool IsAnEReturnChequePayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsAnEReturnChequePayment);
+            return item.IsA(MopMetadataKeys.IsAnEReturnChequePayment);
         }
 
         public static bool IsAJournal(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsAJournal);
+            return item.IsA(MopMetadataKeys.IsAJournal);
         }
 
         public static bool IsAJournalReallocation(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsAJournalReallocation);
+            return item.IsA(MopMetadataKeys.IsAJournalReallocation);
         }
 
         public static bool IsATransferOut(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsATransferOut);
+            return item.IsA(MopMetadataKeys.IsATransferOut);
         }
 
         public static bool IsATransferIn(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsATransferIn);
+            return item.IsA(MopMetadataKeys.IsATransferIn);
         }
 
         public static bool IsACardSelfServicePayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsACardSelfServicePayment);
+            return item.IsA(MopMetadataKeys.IsACardSelfServicePayment);
         }
 
         public static bool IsACardAtpPayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsACardAtpPayment);
+            return item.IsA(MopMetadataKeys.IsACardAtpPayment);
         }
 
         public static bool IsACardViaStaffPayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsACardViaStaffPayment);
+            return item.IsA(MopMetadataKeys.IsACardViaStaffPayment);
         }
 
         public static bool IsAChequePayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsAChequePayment);
+            return item.IsA(MopMetadataKeys.IsAChequePayment);
         }
 
         public static bool IsARefundablePayment(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsARefundablePayment);
+            return item.IsA(MopMetadataKeys.IsARefundablePayment);
         }
 
         public static bool IsACardPaymentFee(this Mop item)
         {
-            return item.IsA(MopMetaDataKeys.IsACardPaymentFee);
+            return item.IsA(MopMetadataKeys.IsACardPaymentFee);
         }
 
         public static bool IsARechargeFee(this Mop item)
         {
-            return IsA(item, MopMetaDataKeys.IsARechargeFee);
+            return IsA(item, MopMetadataKeys.IsARechargeFee);
         }
 
         public static bool IsACentralChargeFee(this Mop item)
         {
-            return IsA(item, MopMetaDataKeys.IsACentralChargeFee);
+            return IsA(item, MopMetadataKeys.IsACentralChargeFee);
         }
 
         private static bool IsA(this Mop item, string key)
         {
             if (item == null) return false;
 
-            if (item.MetaData == null || !item.MetaData.Any()) return false;
+            if (item.Metadata == null || !item.Metadata.Any()) return false;
 
-            var metaData = item.MetaData.FirstOrDefault(x => x.Key == key && Convert.ToBoolean(x.Value).Equals(true));
+            var metaData = item.Metadata.FirstOrDefault(x => x.Key == key && Convert.ToBoolean(x.Value).Equals(true));
 
             return metaData != null;
         }
 
         public static string BackgroundColour(this Mop item)
         {
-            return GetMopMetaDataValue(item, MopMetaDataKeys.BackgroundColour, "#CCCCCC");
+            return GetMopMetadataValue(item, MopMetadataKeys.BackgroundColour, "#CCCCCC");
         }
 
         public static string TextColour(this Mop item)
         {
-            return GetMopMetaDataValue(item, MopMetaDataKeys.TextColour, "#FFFFFF");
+            return GetMopMetadataValue(item, MopMetadataKeys.TextColour, "#FFFFFF");
         }
 
         public static bool IncursAFee(this Mop item)
         {
-            return GetMopMetaDataValue(item, MopMetaDataKeys.IncursAFee, false);
+            return GetMopMetadataValue(item, MopMetadataKeys.IncursAFee, false);
         }
 
-        public static string GetMopMetaDataValue(this Mop item, string key)
+        public static string GetMopMetadataValue(this Mop item, string key)
         {
-            return GetMopMetaDataValue(item, key, string.Empty);
+            return GetMopMetadataValue(item, key, string.Empty);
         }
 
-        public static string GetMopMetaDataValue(this Mop item, string key, string defaultValue)
+        public static string GetMopMetadataValue(this Mop item, string key, string defaultValue)
         {
-            if (item.MetaData == null) return defaultValue;
+            if (item.Metadata == null) return defaultValue;
 
-            return item.MetaData.FirstOrDefault(x => x.Key == key)?.Value ?? defaultValue;
+            return item.Metadata.FirstOrDefault(x => x.Key == key)?.Value ?? defaultValue;
         }
 
-        public static T GetMopMetaDataValue<T>(this Mop item, string key)
+        public static T GetMopMetadataValue<T>(this Mop item, string key)
         {
-            return GetMopMetaDataValue(item, key, default(T));
+            return GetMopMetadataValue(item, key, default(T));
         }
 
-        public static T GetMopMetaDataValue<T>(this Mop item, string key, T defaultValue)
+        public static T GetMopMetadataValue<T>(this Mop item, string key, T defaultValue)
         {
-            if (item.MetaData == null) return defaultValue;
+            if (item.Metadata == null) return defaultValue;
 
-            return item.MetaData.FirstOrDefault(x => x.Key == key)?.Value == null
+            return item.Metadata.FirstOrDefault(x => x.Key == key)?.Value == null
                 ? defaultValue
-                : (T)Convert.ChangeType(item.MetaData.FirstOrDefault(x => x.Key == key)?.Value, typeof(T));
+                : (T)Convert.ChangeType(item.Metadata.FirstOrDefault(x => x.Key == key)?.Value, typeof(T));
         }
     }
 }

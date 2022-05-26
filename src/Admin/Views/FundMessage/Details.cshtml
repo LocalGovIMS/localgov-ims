@@ -1,0 +1,39 @@
+﻿@model Admin.Models.FundMessage.DetailsViewModel
+@{
+    ViewBag.Title = "Fund message";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.FundName - (@Model.FundCode)
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Fund message details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.FundName)
+        @Html.DisplayFor(m => m.FundName)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Message)
+        @Html.DisplayFor(m => m.Message)
+    </div>
+
+    <div class="ui vertical segment">
+        <h3>
+            Metadata
+        </h3>
+        @Html.Action("_ListForFundMessage", "FundMessageMetadata", new { id = Model.Id })
+    </div>
+
+    <br />
+
+    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+
+</div>

@@ -13,7 +13,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.VatMetadatas.Update(It.IsAny<Entities.VatMetaData>()));
+            MockUnitOfWork.Setup(x => x.VatMetadatas.Update(It.IsAny<Entities.VatMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)
@@ -31,7 +31,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
             var service = GetService();
 
             // Act
-            var result = service.Update(new Entities.VatMetaData());
+            var result = service.Update(new Entities.VatMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -47,7 +47,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
             var service = GetService();
 
             // Act
-            var result = service.Update(new Entities.VatMetaData());
+            var result = service.Update(new Entities.VatMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -63,7 +63,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
             var service = GetService();
 
             // Act
-            var result = service.Update(new Entities.VatMetaData());
+            var result = service.Update(new Entities.VatMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -80,7 +80,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
             var service = GetService();
 
             // Act
-            var result = service.Update(new Entities.VatMetaData());
+            var result = service.Update(new Entities.VatMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -103,7 +103,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
                 {
 
                     // Act
-                    var result = service.Update(new Entities.VatMetaData());
+                    var result = service.Update(new Entities.VatMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);
@@ -115,7 +115,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
                 {
 
                     // Act
-                    var result = service.Update(new Entities.VatMetaData());
+                    var result = service.Update(new Entities.VatMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);

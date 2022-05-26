@@ -8,7 +8,7 @@
 
         public string Value { get; set; }
 
-        public FundMetadataModel(BusinessLogic.Entities.FundMetaData source)
+        public FundMetadataModel(BusinessLogic.Entities.FundMetadata source)
         {
             FundCode = source.FundCode;
             Key = source.Key;

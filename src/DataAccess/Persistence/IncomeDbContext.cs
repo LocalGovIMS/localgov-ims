@@ -32,9 +32,9 @@ namespace DataAccess.Persistence
         public virtual DbSet<FundGroup> FundGroups { get; set; }
         public virtual DbSet<FundGroupFund> FundGroupFunds { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
-        public virtual DbSet<FundMetaData> FundMetadatas { get; set; }
+        public virtual DbSet<FundMetadata> FundMetadata { get; set; }
         public virtual DbSet<Mop> MOPs { get; set; }
-        public virtual DbSet<MopMetaData> MopMetadatas { get; set; }
+        public virtual DbSet<MopMetadata> MopMetadata { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<Role> ImsRoles { get; set; }
         public virtual DbSet<Suspense> Suspenses { get; set; }
@@ -51,10 +51,11 @@ namespace DataAccess.Persistence
         public virtual DbSet<UserRole> ImsUserRoles { get; set; }
         public virtual DbSet<User> ImsUsers { get; set; }
         public virtual DbSet<UserTemplate> ImsUserTemplates { get; set; }
-        public virtual DbSet<Vat> VATs { get; set; }
-        public virtual DbSet<VatMetaData> VatMetadatas { get; set; }
+        public virtual DbSet<Vat> Vat { get; set; }
+        public virtual DbSet<VatMetadata> VatMetadata { get; set; }
         public virtual DbSet<ScheduleLog> ScheduleLogs { get; set; }
-        public virtual DbSet<StopMessage> Stop_Message { get; set; }
+        public virtual DbSet<FundMessage> FundMessages { get; set; }
+        public virtual DbSet<FundMessageMetadata> FundMessageMetadata { get; set; }
         public virtual DbSet<TransactionStatus> TransactionStatus { get; set; }
         public virtual DbSet<PaymentIntegration> PaymentIntegrations { get; set; }
         public virtual DbSet<ImportProcessingRule> ImportProcessingRules { get; set; }
@@ -99,17 +100,14 @@ namespace DataAccess.Persistence
 
             modelBuilder.Entity<ScheduleLog>()
                 .HasKey(x => x.Id, config => config.IsClustered(false));
-
-            modelBuilder.Entity<StopMessage>()
-                .HasKey(x => new { x.Id, x.FundCode });
         }
 
         private void SetupRelationships(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccountHolder>()
-                .HasOptional(p => p.StopMessage)
+                .HasOptional(p => p.FundMessage)
                 .WithMany(c => c.AccountHolders)
-                .HasForeignKey(p => new { p.StopMessageReference, p.FundCode });
+                .HasForeignKey(p => p.FundMessageId);
 
             modelBuilder.Entity<AccountReferenceValidator>()
                 .HasOptional(c => c.CheckDigitConfiguration)
@@ -154,12 +152,12 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Fund>()
-                .HasMany(e => e.StopMessages)
+                .HasMany(e => e.FundMessages)
                 .WithRequired(e => e.Fund)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Fund>()
-                .HasMany(e => e.MetaData)
+                .HasMany(e => e.Metadata)
                 .WithRequired(e => e.Fund)
                 .HasForeignKey(e => e.FundCode)
                 .WillCascadeOnDelete(false);
@@ -182,7 +180,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Mop>()
-                .HasMany(e => e.MetaData)
+                .HasMany(e => e.Metadata)
                 .WithRequired(e => e.Mop)
                 .HasForeignKey(e => e.MopCode)
                 .WillCascadeOnDelete(false);
@@ -200,6 +198,12 @@ namespace DataAccess.Persistence
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.UserRoles)
                 .WithRequired(e => e.Role)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<FundMessage>()
+                .HasMany(e => e.Metadata)
+                .WithRequired(e => e.FundMessage)
+                .HasForeignKey(e => e.FundMessageId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Suspense>()
@@ -316,7 +320,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Vat>()
-                .HasMany(e => e.MetaData)
+                .HasMany(e => e.Metadata)
                 .WithRequired(e => e.Vat)
                 .HasForeignKey(e => e.VatCode)
                 .WillCascadeOnDelete(false);

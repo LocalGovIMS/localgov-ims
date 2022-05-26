@@ -154,11 +154,11 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                     {
                         MopName = MopName,
                         MopCode = MopCode,
-                        MetaData = new List<Entities.MopMetaData>()
+                        Metadata = new List<Entities.MopMetadata>()
                         {
-                            new Entities.MopMetaData()
+                            new Entities.MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournalReallocation,
+                                Key = MopMetadataKeys.IsAJournalReallocation,
                                 Value = "True"
                             }
                         }
@@ -182,11 +182,11 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                     {
                         MopName = MopName,
                         MopCode = MopCode,
-                        MetaData = new List<Entities.MopMetaData>()
+                        Metadata = new List<Entities.MopMetadata>()
                         {
-                            new Entities.MopMetaData()
+                            new Entities.MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournalReallocation,
+                                Key = MopMetadataKeys.IsAJournalReallocation,
                                 Value = "True"
                             }
                         }
@@ -204,11 +204,11 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                     {
                         MopName = MopName,
                         MopCode = MopCode,
-                        MetaData = new List<Entities.MopMetaData>()
+                        Metadata = new List<Entities.MopMetadata>()
                         {
-                            new Entities.MopMetaData()
+                            new Entities.MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournalReallocation,
+                                Key = MopMetadataKeys.IsAJournalReallocation,
                                 Value = "True"
                             }
                         }

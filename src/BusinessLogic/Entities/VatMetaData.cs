@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessLogic.Entities
 {
-    [Table("VatMetaData")]
-    public partial class VatMetaData
+    [Table("VatMetadata")]
+    public partial class VatMetadata
     {
         public int Id { get; set; }
 

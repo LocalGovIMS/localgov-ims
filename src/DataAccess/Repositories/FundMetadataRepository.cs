@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class FundMetadataRepository : Repository<FundMetaData>, IFundMetadataRepository
+    public class FundMetadataRepository : Repository<FundMetadata>, IFundMetadataRepository
     {
         public FundMetadataRepository(IncomeDbContext context) : base(context)
         {
@@ -17,9 +17,9 @@ namespace DataAccess.Repositories
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public IEnumerable<FundMetaData> Search(SearchCriteria criteria, out int resultCount)
+        public IEnumerable<FundMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
-            var items = IncomeDbContext.FundMetadatas
+            var items = IncomeDbContext.FundMetadata
                 .AsQueryable();
 
             items = items.Where(x => x.FundCode == criteria.FundCode);
@@ -39,9 +39,9 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public FundMetaData Get(int id)
+        public FundMetadata Get(int id)
         {
-            var item = IncomeDbContext.FundMetadatas
+            var item = IncomeDbContext.FundMetadata
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -50,9 +50,9 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public FundMetaData Get(string fundCode, string key)
+        public FundMetadata Get(string fundCode, string key)
         {
-            var item = IncomeDbContext.FundMetadatas
+            var item = IncomeDbContext.FundMetadata
                 .AsQueryable()
                 .Where(x => x.FundCode == fundCode && x.Key == key)
                 .ApplyFilters(Filters)
@@ -61,9 +61,9 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public void Update(FundMetaData entity)
+        public void Update(FundMetadata entity)
         {
-            var item = IncomeDbContext.FundMetadatas
+            var item = IncomeDbContext.FundMetadata
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
                 .ApplyFilters(Filters)

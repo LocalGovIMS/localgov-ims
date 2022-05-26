@@ -47,7 +47,7 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         }
 
         private StaticPagedList<MetadataViewModel> GetSearchResultAsPagedList(
-            SearchResult<BusinessLogic.Entities.MopMetaData> searchResult)
+            SearchResult<BusinessLogic.Entities.MopMetadata> searchResult)
         {
             return new StaticPagedList<MetadataViewModel>(
                 searchResult.Items.Select(x => new MetadataViewModel() 

@@ -53,11 +53,11 @@ namespace BusinessLogic.UnitTests.Classes.Smtp
                     MopCode = "90",
                     Mop = new Mop() {
                         MopCode = "90",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsARefundablePayment,
+                                Key = MopMetadataKeys.IsARefundablePayment,
                                 Value = "True"
                             }
                         }

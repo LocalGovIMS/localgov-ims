@@ -12,7 +12,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
         {
             MockUnitOfWork.Setup(x => x.VatMetadatas.Get(
                 It.IsAny<int>()))
-                .Returns(new Entities.VatMetaData());
+                .Returns(new Entities.VatMetadata());
         }
 
         private void SetupSecurityContext(bool result)
@@ -34,7 +34,7 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Entities.VatMetaData));
+            Assert.IsInstanceOfType(result, typeof(Entities.VatMetadata));
         }
 
         [TestMethod]

@@ -15,24 +15,24 @@ namespace BusinessLogic.Services
 {
     public class AccountHolderService : BaseService, IAccountHolderService
     {
-        private readonly IAccountHolderStopMessageValidator _accountHolderStopMessageValidator;
+        private readonly IAccountHolderFundMessageValidator _accountHolderFundMessageValidator;
 
         public AccountHolderService(ILog logger
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext
-            , IAccountHolderStopMessageValidator accountHolderStopMessageValidator)
+            , IAccountHolderFundMessageValidator accountHolderFundMessageValidator)
             : base(logger, unitOfWork, securityContext)
         {
-            _accountHolderStopMessageValidator = accountHolderStopMessageValidator;
+            _accountHolderFundMessageValidator = accountHolderFundMessageValidator;
         }
 
         public IResult Create(AccountHolder accountHolder)
         {
             try
             {
-                var validateStopMessageResult = _accountHolderStopMessageValidator.Validate(accountHolder);
-                if (!validateStopMessageResult.Success) 
-                    return validateStopMessageResult;
+                var validateAccountHolderFundMessageResult = _accountHolderFundMessageValidator.Validate(accountHolder);
+                if (!validateAccountHolderFundMessageResult.Success) 
+                    return validateAccountHolderFundMessageResult;
 
                 UnitOfWork.AccountHolders.Add(accountHolder);
                 UnitOfWork.Complete(SecurityContext.UserId);
@@ -50,9 +50,9 @@ namespace BusinessLogic.Services
         {
             try
             {
-                var validateStopMessageResult = _accountHolderStopMessageValidator.Validate(accountHolder);
-                if (!validateStopMessageResult.Success) 
-                    return validateStopMessageResult;
+                var validateAccountHolderFundMessageResult = _accountHolderFundMessageValidator.Validate(accountHolder);
+                if (!validateAccountHolderFundMessageResult.Success) 
+                    return validateAccountHolderFundMessageResult;
 
                 var existingRecord = UnitOfWork.AccountHolders.GetByAccountReference(accountHolder.AccountReference);
 

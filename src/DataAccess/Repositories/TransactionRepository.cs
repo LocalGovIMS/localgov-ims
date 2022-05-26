@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
                 .Where(x => x.PspReference == pspReference)
                 .Include(x => x.Fund)
                 .Include(x => x.Mop)
-                .Include(x => x.Mop.MetaData)
+                .Include(x => x.Mop.Metadata)
                 .Include(x => x.Vat)
                 .Include(x => x.User)
                 .Include(x => x.SuspenseProcessedTransactions)
@@ -57,7 +57,7 @@ namespace DataAccess.Repositories
                 .Where(x => x.AppReference == appReference)
                 .Include(x => x.Fund)
                 .Include(x => x.Mop)
-                .Include(x => x.Mop.MetaData)
+                .Include(x => x.Mop.Metadata)
                 .Include(x => x.Vat)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();

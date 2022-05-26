@@ -55,11 +55,11 @@ namespace Admin.Models.AccountHolder
         [DisplayName("User field 3")]
         public string UserField3 { get; set; }
 
-        [DisplayName("Stop message")]
-        public string StopMessageReference { get; set; }
+        [DisplayName("Message")]
+        public int? FundMessageId { get; set; }
         
         public SelectList Funds { get; set; }
 
-        public SelectList StopMessages { get; set; }
+        public SelectList FundMessages { get; set; }
     }
 }

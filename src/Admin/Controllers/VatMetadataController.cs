@@ -70,7 +70,7 @@ namespace Admin.Controllers
 
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Delete(int id, string mopCode)
+        public ActionResult Delete(int id, string vatCode)
         {
             var result = Dependencies.DeleteCommand.Execute(id);
 
@@ -81,7 +81,7 @@ namespace Admin.Controllers
                 TempData["Message"] = errorMsg;
             }
 
-            return RedirectToAction("Edit", "Vat", new { id = mopCode });
+            return RedirectToAction("Edit", "Vat", new { id = vatCode });
         }
     }
 }

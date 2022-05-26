@@ -30,11 +30,11 @@ namespace BusinessLogic.UnitTests.Services.TransactionJournal
                     new Mop()
                     {
                         MopCode = "JR",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournalReallocation,
+                                Key = MopMetadataKeys.IsAJournalReallocation,
                                 Value = "True"
                             }
                         }
@@ -42,11 +42,11 @@ namespace BusinessLogic.UnitTests.Services.TransactionJournal
                     new Mop()
                     {
                         MopCode = "JN",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsAJournal,
+                                Key = MopMetadataKeys.IsAJournal,
                                 Value = "True"
                             }
                         }

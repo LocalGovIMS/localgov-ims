@@ -354,8 +354,8 @@ namespace PaymentPortal.Controllers
                 {
                     Text = string.IsNullOrEmpty(fund.DisplayName) ? fund.FundName : fund.DisplayName,
                     Value = fund.FundCode,
-                    ReferenceFieldMessage = fund.MetaData.GetValue(FundMetaDataKeys.Basket.ReferenceFieldMessage),
-                    ReferenceFieldLabel = fund.MetaData.GetValue(FundMetaDataKeys.Basket.ReferenceFieldLabel),
+                    ReferenceFieldMessage = fund.Metadata.GetValue(FundMetadataKeys.Basket.ReferenceFieldMessage),
+                    ReferenceFieldLabel = fund.Metadata.GetValue(FundMetadataKeys.Basket.ReferenceFieldLabel),
                 });
             }
 

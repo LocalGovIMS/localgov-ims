@@ -29,11 +29,11 @@ namespace BusinessLogic.UnitTests.Services.Payment
                     new Mop()
                     {
                         MopCode = "90",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsACardSelfServicePayment,
+                                Key = MopMetadataKeys.IsACardSelfServicePayment,
                                 Value = "True"
                             }
                         }
@@ -41,11 +41,11 @@ namespace BusinessLogic.UnitTests.Services.Payment
                     new Mop()
                     {
                         MopCode = "PF",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsACardPaymentFee,
+                                Key = MopMetadataKeys.IsACardPaymentFee,
                                 Value = "True"
                             }
                         }
@@ -56,16 +56,16 @@ namespace BusinessLogic.UnitTests.Services.Payment
                 .Returns(new Mop()
                     {
                         MopCode = "90",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsACardSelfServicePayment,
+                                Key = MopMetadataKeys.IsACardSelfServicePayment,
                                 Value = "True"
                             },
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IncursAFee,
+                                Key = MopMetadataKeys.IncursAFee,
                                 Value = _incursAFee
                             }
                         }

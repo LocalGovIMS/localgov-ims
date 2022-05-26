@@ -17,7 +17,7 @@ namespace Admin.Classes.Commands.FundMetadata
 
         protected override CommandResult OnExecute(EditViewModel model)
         {
-            var item = new BusinessLogic.Entities.FundMetaData()
+            var item = new BusinessLogic.Entities.FundMetadata()
             {
                 FundCode = model.FundCode,
                 Key = model.Key,                

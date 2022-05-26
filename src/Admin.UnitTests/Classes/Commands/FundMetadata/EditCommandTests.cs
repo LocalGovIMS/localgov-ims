@@ -54,7 +54,7 @@ namespace Admin.UnitTests.Classes.Commands.FundMetadata
             var result = command.Execute(GenerateViewModel());
 
             // Assert
-            _mockFundMetadataService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.FundMetaData>()), Times.Once);
+            _mockFundMetadataService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.FundMetadata>()), Times.Once);
         }
     }
 }

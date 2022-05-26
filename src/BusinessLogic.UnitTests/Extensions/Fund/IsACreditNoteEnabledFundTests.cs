@@ -15,8 +15,8 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsACreditNoteEnabledFund_returns_the_expected_result(bool value, bool expectedResult)
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = new List<Entities.FundMetaData>() };
-            fund.MetaData.Add(new Entities.FundMetaData() { Key = FundMetaDataKeys.IsACreditNoteEnabledFund, Value = value.ToString() });
+            var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
+            fund.Metadata.Add(new Entities.FundMetadata() { Key = FundMetadataKeys.IsACreditNoteEnabledFund, Value = value.ToString() });
 
             // Act
             var result = fund.IsACreditNoteEnabledFund();
@@ -29,7 +29,7 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsACreditNoteEnabledFund_returns_false_when_metadata_is_null()
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = null };
+            var fund = new Entities.Fund() { Metadata = null };
 
             // Act
             var result = fund.IsACreditNoteEnabledFund();
@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         public void IsACreditNoteEnabledFund_returns_false_when_metadata_is_empty()
         {
             // Arrange
-            var fund = new Entities.Fund() { MetaData = new List<Entities.FundMetaData>() };
+            var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
 
             // Act
             var result = fund.IsACreditNoteEnabledFund();

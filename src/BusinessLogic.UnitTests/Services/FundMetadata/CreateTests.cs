@@ -13,7 +13,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.FundMetadatas.Add(It.IsAny<Entities.FundMetaData>()));
+            MockUnitOfWork.Setup(x => x.FundMetadatas.Add(It.IsAny<Entities.FundMetadata>()));
         }
 
         private void SetupSecurityContext(bool result)
@@ -31,7 +31,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.FundMetaData());
+            var result = service.Create(new Entities.FundMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -47,7 +47,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.FundMetaData());
+            var result = service.Create(new Entities.FundMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -63,7 +63,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.FundMetaData());
+            var result = service.Create(new Entities.FundMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -80,7 +80,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
             var service = GetService();
 
             // Act
-            var result = service.Create(new Entities.FundMetaData());
+            var result = service.Create(new Entities.FundMetadata());
 
             // Assert
             Assert.IsNotNull(result);
@@ -103,7 +103,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
                 {
 
                     // Act
-                    var result = service.Create(new Entities.FundMetaData());
+                    var result = service.Create(new Entities.FundMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);
@@ -115,7 +115,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
                 {
 
                     // Act
-                    var result = service.Create(new Entities.FundMetaData());
+                    var result = service.Create(new Entities.FundMetadata());
 
                     // Assert
                     Assert.IsNotNull(result);

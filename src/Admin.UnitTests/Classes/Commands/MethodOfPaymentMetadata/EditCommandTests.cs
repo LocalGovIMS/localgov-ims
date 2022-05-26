@@ -54,7 +54,7 @@ namespace Admin.UnitTests.Classes.Commands.MethodOfPaymentMetadata
             var result = command.Execute(GenerateViewModel());
 
             // Assert
-            _mockMethodOfPaymentMetadataService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.MopMetaData>()), Times.Once);
+            _mockMethodOfPaymentMetadataService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.MopMetadata>()), Times.Once);
         }
     }
 }

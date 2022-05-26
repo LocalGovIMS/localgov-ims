@@ -29,11 +29,11 @@ namespace BusinessLogic.UnitTests.Services.TransactionTransfer
                     new Mop()
                     {
                         MopCode = "10",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsATransferIn,
+                                Key = MopMetadataKeys.IsATransferIn,
                                 Value = "True"
                             }
                         }
@@ -41,11 +41,11 @@ namespace BusinessLogic.UnitTests.Services.TransactionTransfer
                     new Mop()
                     {
                         MopCode = "11",
-                        MetaData = new List<MopMetaData>()
+                        Metadata = new List<MopMetadata>()
                         {
-                            new MopMetaData()
+                            new MopMetadata()
                             {
-                                Key = MopMetaDataKeys.IsATransferOut,
+                                Key = MopMetadataKeys.IsATransferOut,
                                 Value = "True"
                             }
                         }

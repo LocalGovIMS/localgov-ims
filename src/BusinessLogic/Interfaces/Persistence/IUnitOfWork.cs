@@ -23,7 +23,8 @@ namespace BusinessLogic.Interfaces.Persistence
         IOfficeRepository Offices { get; }
         IPendingTransactionRepository PendingTransactions { get; }
         IRoleRepository Roles { get; }
-        IStopMessageRepository StopMessages { get; }
+        IFundMessageRepository FundMessages { get; }
+        IFundMessageMetadataRepository FundMessageMetadata { get; }
         ISystemMessageRepository SystemMessages { get; }
         ISuspenseRepository Suspenses { get; }
         IRepository<SuspenseNote> SuspenseNotes { get; }

@@ -23,13 +23,13 @@ namespace BusinessLogic.Services
         {
         }
 
-        public SearchResult<MopMetaData> Search(SearchCriteria criteria)
+        public SearchResult<MopMetadata> Search(SearchCriteria criteria)
         {
             try
             {
                 var items = UnitOfWork.MopMetadatas.Search(criteria, out int itemsCount).ToList();
 
-                return new SearchResult<MopMetaData>()
+                return new SearchResult<MopMetadata>()
                 {
                     Count = itemsCount,
                     Items = items,
@@ -44,7 +44,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public MopMetaData Get(int id)
+        public MopMetadata Get(int id)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Create(MopMetaData item)
+        public IResult Create(MopMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
@@ -76,7 +76,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Update(MopMetaData item)
+        public IResult Update(MopMetadata item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");

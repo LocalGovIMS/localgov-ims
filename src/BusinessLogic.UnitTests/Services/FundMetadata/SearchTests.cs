@@ -16,9 +16,9 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
             var test = 1;
 
             MockUnitOfWork.Setup(x => x.FundMetadatas.Search(It.IsAny<SearchCriteria>(), out test))
-                .Returns(new List<Entities.FundMetaData>()
+                .Returns(new List<Entities.FundMetadata>()
                     {
-                        new Entities.FundMetaData()
+                        new Entities.FundMetadata()
                         {
                             Id = 1,
                             Key = "Key",
@@ -46,7 +46,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetadata>));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetadata>));
             Assert.AreEqual(result.Page, 1);
         }
 
@@ -77,7 +77,7 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetaData>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<Entities.FundMetadata>));
             Assert.AreEqual(result.PageSize, 20);
         }
 

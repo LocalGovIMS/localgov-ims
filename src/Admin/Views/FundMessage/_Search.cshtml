@@ -1,0 +1,43 @@
+﻿@model Admin.Models.FundMessage.SearchCriteria
+
+@using (Html.BeginForm("Search", "FundMessage", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    <label>Fund type</label>
+                    <div class="ui fluid search selection dropdown">
+                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                        <i class="dropdown icon"></i>
+                        <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
+                        <div class="menu">
+                            <div class="item" data-value="">
+                                None
+                            </div>
+                            @foreach (var item in Model.Funds.Items)
+                            {
+                                <div class="item" data-value="@item.Value">
+                                    @item.Text
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Message</label>
+                    @Html.TextBoxFor(m => m.Message, new { size = 50, placeholder = "Enter message" })
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -11,17 +11,17 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
     {
         private readonly IAccountHolderService _accountHolderService;
         private readonly IFundService _fundService;
-        private readonly IStopMessageService _stopMessageService;
+        private readonly IFundMessageService _fundMessageService;
 
         public EditViewModelBuilder(ILog log
             , IAccountHolderService accountHolderService
             , IFundService fundService
-            , IStopMessageService stopMessageService)
+            , IFundMessageService fundMessageService)
             : base(log)
         {
             _accountHolderService = accountHolderService;
             _fundService = fundService;
-            _stopMessageService = stopMessageService;
+            _fundMessageService = fundMessageService;
         }
 
         protected override EditViewModel OnBuild()
@@ -29,7 +29,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             var model = new EditViewModel();
 
             model.Funds = GetFundsList();
-            model.StopMessages = GetStopMessagesList();
+            model.FundMessages = GetFundMessagesList();
 
             return model;
         }
@@ -58,10 +58,10 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             model.UserField1 = data.UserField1;
             model.UserField2 = data.UserField2;
             model.UserField3 = data.UserField3;
-            model.StopMessageReference = data.StopMessageReference;
+            model.FundMessageId = data.FundMessageId;
             
             model.Funds = GetFundsList();
-            model.StopMessages = GetStopMessagesList();
+            model.FundMessages = GetFundMessagesList();
 
             return model;
         }
@@ -69,7 +69,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
         protected override EditViewModel OnRebuild(EditViewModel model)
         {
             model.Funds = GetFundsList();
-            model.StopMessages = GetStopMessagesList();
+            model.FundMessages = GetFundMessagesList();
 
             return base.OnRebuild(model);
         }
@@ -91,10 +91,10 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             return new SelectList(selectListItems, true);
         }
 
-        private SelectList GetStopMessagesList()
+        private SelectList GetFundMessagesList()
         {
             var selectListItems = new List<SelectListItem>();
-            var items = _stopMessageService.GetAll().OrderBy(x => x.Message);
+            var items = _fundMessageService.GetAll().OrderBy(x => x.Message);
 
             foreach (var item in items)
             {

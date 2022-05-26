@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class MethodOfPaymentMetadataRepository : Repository<MopMetaData>, IMethodOfPaymentMetadataRepository
+    public class MethodOfPaymentMetadataRepository : Repository<MopMetadata>, IMethodOfPaymentMetadataRepository
     {
         public MethodOfPaymentMetadataRepository(IncomeDbContext context) : base(context)
         {
@@ -17,9 +17,9 @@ namespace DataAccess.Repositories
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public IEnumerable<MopMetaData> Search(SearchCriteria criteria, out int resultCount)
+        public IEnumerable<MopMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
-            var items = IncomeDbContext.MopMetadatas
+            var items = IncomeDbContext.MopMetadata
                 .AsQueryable();
 
             items = items.Where(x => x.MopCode == criteria.MopCode);
@@ -39,9 +39,9 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public MopMetaData Get(int id)
+        public MopMetadata Get(int id)
         {
-            var item = IncomeDbContext.MopMetadatas
+            var item = IncomeDbContext.MopMetadata
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -50,9 +50,9 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public void Update(MopMetaData entity)
+        public void Update(MopMetadata entity)
         {
-            var item = IncomeDbContext.MopMetadatas
+            var item = IncomeDbContext.MopMetadata
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
                 .ApplyFilters(Filters)

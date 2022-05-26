@@ -15,8 +15,8 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsAChequePayment_returns_the_expected_result(bool value, bool expectedResult)
         {
             // Arrange
-            var mop = new Entities.Mop() { MetaData = new List<Entities.MopMetaData>() };
-            mop.MetaData.Add(new Entities.MopMetaData() { Key = MopMetaDataKeys.IsAChequePayment, Value = value.ToString() });
+            var mop = new Entities.Mop() { Metadata = new List<Entities.MopMetadata>() };
+            mop.Metadata.Add(new Entities.MopMetadata() { Key = MopMetadataKeys.IsAChequePayment, Value = value.ToString() });
 
             // Act
             var result = mop.IsAChequePayment();
@@ -29,7 +29,7 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsAChequePayment_returns_false_when_metadata_is_null()
         {
             // Arrange
-            var mop = new Entities.Mop() { MetaData = null };
+            var mop = new Entities.Mop() { Metadata = null };
 
             // Act
             var result = mop.IsAChequePayment();
@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         public void IsAChequePayment_returns_false_when_metadata_is_empty()
         {
             // Arrange
-            var mop = new Entities.Mop() { MetaData = new List<Entities.MopMetaData>() };
+            var mop = new Entities.Mop() { Metadata = new List<Entities.MopMetadata>() };
 
             // Act
             var result = mop.IsAChequePayment();

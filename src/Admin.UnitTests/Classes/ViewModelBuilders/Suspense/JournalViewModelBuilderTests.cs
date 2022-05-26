@@ -123,11 +123,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
                    {
                        MopCode="JR",
                        MopName="Journal Reallocation",
-                       MetaData = new List<BusinessLogic.Entities.MopMetaData>()
+                       Metadata = new List<BusinessLogic.Entities.MopMetadata>()
                        {
-                           new BusinessLogic.Entities.MopMetaData()
+                           new BusinessLogic.Entities.MopMetadata()
                            {
-                               Key = MopMetaDataKeys.IsAJournalReallocation,
+                               Key = MopMetadataKeys.IsAJournalReallocation,
                                Value = "true"
                            }
                        }

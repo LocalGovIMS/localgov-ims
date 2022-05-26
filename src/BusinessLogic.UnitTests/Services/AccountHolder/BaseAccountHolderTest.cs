@@ -16,7 +16,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
         protected readonly Mock<IUnitOfWork> MockUnitOfWork = new Mock<IUnitOfWork>();
         protected readonly Mock<ISecurityContext> MockSecurityContext = new Mock<ISecurityContext>();
-        protected readonly Mock<IAccountHolderStopMessageValidator> MockAccountHolderStopMessageValidator = new Mock<IAccountHolderStopMessageValidator>();
+        protected readonly Mock<IAccountHolderFundMessageValidator> MockAccountHolderFundMessageValidator = new Mock<IAccountHolderFundMessageValidator>();
 
         protected Service GetService()
         {
@@ -24,7 +24,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
                 MockLogger.Object,
                 MockUnitOfWork.Object,
                 MockSecurityContext.Object,
-                MockAccountHolderStopMessageValidator.Object);
+                MockAccountHolderFundMessageValidator.Object);
 
             return service;
         }

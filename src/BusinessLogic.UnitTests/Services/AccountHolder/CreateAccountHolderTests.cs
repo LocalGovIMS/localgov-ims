@@ -14,9 +14,9 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
             MockUnitOfWork.Setup(x => x.AccountHolders.Add(It.IsAny<Entities.AccountHolder>()));
         }
 
-        private void SetupAccountHolderStopMessageValidator(Result result)
+        private void SetupAccountHolderFundMessageValidator(Result result)
         {
-            MockAccountHolderStopMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
+            MockAccountHolderFundMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
                 .Returns(result);
         }
 
@@ -40,7 +40,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         {
             // Arrange
             SetupUnitOfWork();
-            SetupAccountHolderStopMessageValidator(new Result());
+            SetupAccountHolderFundMessageValidator(new Result());
 
             var service = GetService();
 
@@ -57,7 +57,7 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         public void CreateErrorReturnsFailure()
         {
             // Arrange
-            SetupAccountHolderStopMessageValidator(new Result());
+            SetupAccountHolderFundMessageValidator(new Result());
 
             var service = GetService();
 
@@ -71,10 +71,10 @@ namespace BusinessLogic.UnitTests.Services.AccountHolder
         }
 
         [TestMethod]
-        public void CreateReturnsErrorIfAccountHolderStopMessageValidationFails()
+        public void CreateReturnsErrorIfAccountHolderFundMessageValidationFails()
         {
             // Arrange
-            SetupAccountHolderStopMessageValidator(new Result("error"));
+            SetupAccountHolderFundMessageValidator(new Result("error"));
             SetupUnitOfWork();
 
             var service = GetService();

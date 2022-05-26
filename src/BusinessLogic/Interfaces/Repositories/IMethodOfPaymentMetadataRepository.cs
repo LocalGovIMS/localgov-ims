@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Repositories
 {
-    public interface IMethodOfPaymentMetadataRepository : IRepository<MopMetaData>
+    public interface IMethodOfPaymentMetadataRepository : IRepository<MopMetadata>
     {
-        IEnumerable<MopMetaData> Search(SearchCriteria criteria, out int resultCount);
-        MopMetaData Get(int id);
-        void Update(MopMetaData entity);
+        IEnumerable<MopMetadata> Search(SearchCriteria criteria, out int resultCount);
+        MopMetadata Get(int id);
+        void Update(MopMetadata entity);
     }
 }

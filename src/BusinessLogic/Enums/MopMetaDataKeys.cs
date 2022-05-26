@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Enums
 {
-    public static class MopMetaDataKeys
+    public static class MopMetadataKeys
     {
         public const string IsACashPayment = "IsACashPayment";
         public const string IsAnEReturnChequePayment = "IsAnEReturnChequePayment";

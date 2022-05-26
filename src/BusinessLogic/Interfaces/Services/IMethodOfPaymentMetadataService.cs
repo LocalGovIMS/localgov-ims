@@ -9,10 +9,10 @@ namespace BusinessLogic.Interfaces.Services
 {
     public interface IMethodOfPaymentMetadataService
     {
-        IResult Create(MopMetaData item);
-        MopMetaData Get(int id);
-        SearchResult<MopMetaData> Search(SearchCriteria criteria);
-        IResult Update(MopMetaData item);
+        IResult Create(MopMetadata item);
+        MopMetadata Get(int id);
+        SearchResult<MopMetadata> Search(SearchCriteria criteria);
+        IResult Update(MopMetadata item);
         IResult Delete(int id);
         List<Metadata> GetMetadata();
     }

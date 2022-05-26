@@ -43,7 +43,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Receipt
                         Mop = new BusinessLogic.Entities.Mop()
                         {
                             MopCode = "90",
-                            MetaData = new List<BusinessLogic.Entities.MopMetaData>()
+                            Metadata = new List<BusinessLogic.Entities.MopMetadata>()
                         }
                     }
                 }
