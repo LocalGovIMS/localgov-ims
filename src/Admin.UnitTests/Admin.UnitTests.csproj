@@ -171,8 +171,8 @@
     <Compile Include="Classes\Commands\FundMessageMetadata\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\FundMessageMetadata\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\FundMessageMetadata\EditCommandTests.cs" />
-    <Compile Include="Classes\Commands\Import\ProcessImportCommandTests.cs" />
-    <Compile Include="Classes\Commands\Import\SaveImportFileCommandTests.cs" />
+    <Compile Include="Classes\Commands\FileImport\ProcessCommandTests.cs" />
+    <Compile Include="Classes\Commands\FileImport\SaveCommandTests.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
@@ -286,7 +286,7 @@
     <Compile Include="Controllers\Dependencies\CheckDigitConfigurationControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundMessagesControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundMessageMetadataControllerDependenciesTests.cs" />
-    <Compile Include="Controllers\Dependencies\ImportControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\Dependencies\FileImportControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\VatMetadataControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundMetadataControllerDependenciesTests.cs" />
@@ -381,11 +381,11 @@
     <Compile Include="Controllers\FundMessageMetadata\Edit\Get.cs" />
     <Compile Include="Controllers\FundMessageMetadata\Edit\Post.cs" />
     <Compile Include="Controllers\FundMessageMetadata\ListForFundMessage\Get.cs" />
-    <Compile Include="Controllers\Import\ConstructorTests.cs" />
-    <Compile Include="Controllers\Import\Confirm\Get.cs" />
-    <Compile Include="Controllers\Import\Confirm\Post.cs" />
-    <Compile Include="Controllers\Import\FileImport\Get.cs" />
-    <Compile Include="Controllers\Import\Index\Get.cs" />
+    <Compile Include="Controllers\FileImport\ConstructorTests.cs" />
+    <Compile Include="Controllers\FileImport\Confirm\Get.cs" />
+    <Compile Include="Controllers\FileImport\Confirm\Post.cs" />
+    <Compile Include="Controllers\FileImport\Import\Get.cs" />
+    <Compile Include="Controllers\FileImport\Index\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Post.cs" />

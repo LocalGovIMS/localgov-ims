@@ -276,8 +276,8 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleAction.EditViewModel>, Commands.ImportProcessingRuleAction.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleAction.DeleteCommand>("ImportProcessingRuleAction.Command.Delete")
 
-                .RegisterType<IModelCommand<Commands.Import.SaveImportFileCommandArgs>, Commands.Import.SaveImportFileCommand>()
-                .RegisterType<IModelCommand<string>, Commands.Import.ProcessImportCommand>("Import.Command.ProcessImport")
+                .RegisterType<IModelCommand<Commands.FileImport.SaveCommandArgs>, Commands.FileImport.SaveCommand>()
+                .RegisterType<IModelCommand<string>, Commands.FileImport.ProcessCommand>("FileImport.Command.Process")
 
                 .RegisterType<IModelBuilder<ViewModels.PaymentIntegration.DetailsViewModel, int>, ViewModelBuilders.PaymentIntegration.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.PaymentIntegration.EditViewModel, int>, ViewModelBuilders.PaymentIntegration.EditViewModelBuilder>()
@@ -336,7 +336,7 @@ namespace Admin
                 .RegisterType<IImportProcessingRuleConditionControllerDependencies, ImportProcessingRuleConditionControllerDependencies>()
                 .RegisterType<IImportProcessingRuleActionControllerDependencies, ImportProcessingRuleActionControllerDependencies>()
                 .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
-                .RegisterType<IImportControllerDependencies, ImportControllerDependencies>()
+                .RegisterType<IFileImportControllerDependencies, FileImportControllerDependencies>()
                 .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>()
                 .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>();
         }

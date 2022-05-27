@@ -4,7 +4,7 @@ namespace BusinessLogic.Models
 {
     public class ProcessResult
     {
-        public Import Import { get; set; }
+        public FileImport FileImport { get; set; }
 
         public int NumberOfRowsImported { get; set; }
 

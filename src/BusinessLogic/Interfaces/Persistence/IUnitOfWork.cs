@@ -45,7 +45,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IImportProcessingRuleActionRepository ImportProcessingRuleActions { get; }
         IRepository<ImportProcessingRuleField> ImportProcessingRuleFields { get; }
         IRepository<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; }
-        IImportRepository Imports { get; }
+        IFileImportRepository FileImports { get; }
 
         int Complete(int userId);
         void ResetChanges();

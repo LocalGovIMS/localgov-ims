@@ -146,9 +146,9 @@
     <Compile Include="ImportProcessing\FileImporter\ImportFileTests.cs" />
     <Compile Include="ImportProcessing\FileImporter\ConstructorTests.cs" />
     <Compile Include="ImportProcessing\FileImporter\TestBase.cs" />
-    <Compile Include="ImportProcessing\ImportProcessor\ConstructorTests.cs" />
-    <Compile Include="ImportProcessing\ImportProcessor\ProcessTests.cs" />
-    <Compile Include="ImportProcessing\ImportProcessor\TestBase.cs" />
+    <Compile Include="ImportProcessing\FileImportProcessor\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\FileImportProcessor\ProcessTests.cs" />
+    <Compile Include="ImportProcessing\FileImportProcessor\TestBase.cs" />
     <Compile Include="ImportProcessing\Operations\DecimalOperatorTests.cs" />
     <Compile Include="ImportProcessing\Operations\TextOperatorTests.cs" />
     <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder\BuildFromCsvTests.cs" />
@@ -220,9 +220,9 @@
     <Compile Include="Services\FundMessageMetadata\SearchTests.cs" />
     <Compile Include="Services\FundMessageMetadata\UpdateTests.cs" />
     <Compile Include="Services\FundMetadata\GetStringFundCodeStringKeyTests.cs" />
-    <Compile Include="Services\Import\BaseImportTest.cs" />
-    <Compile Include="Services\Import\ProcessTests.cs" />
-    <Compile Include="Services\Import\LoadFromFileTests.cs" />
+    <Compile Include="Services\FileImport\BaseImportTest.cs" />
+    <Compile Include="Services\FileImport\ProcessTests.cs" />
+    <Compile Include="Services\FileImport\LoadFromFileTests.cs" />
     <Compile Include="Services\PaymentIntegration\BaseTest.cs" />
     <Compile Include="Services\PaymentIntegration\CreateTests.cs" />
     <Compile Include="Services\PaymentIntegration\GetAllTests.cs" />

@@ -52,7 +52,7 @@ namespace DataAccess
                 .RegisterType<IImportProcessingRuleRepository, ImportProcessingRuleRepository>()
                 .RegisterType<IImportProcessingRuleConditionRepository, ImportProcessingRuleConditionRepository>()
                 .RegisterType<IImportProcessingRuleActionRepository, ImportProcessingRuleActionRepository>()
-                .RegisterType<IImportRepository, ImportRepository>()
+                .RegisterType<IFileImportRepository, FileImportRepository>()
                 .RegisterType(typeof(IRepository<>), typeof(Repository<>))
                 .RegisterType<IAuditLogger, AuditLogger>()
                 ;

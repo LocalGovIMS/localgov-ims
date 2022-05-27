@@ -64,8 +64,8 @@ namespace DataAccess.Persistence
         public virtual DbSet<ImportProcessingRuleField> ImportProcessingRuleFields { get; set; }
         public virtual DbSet<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; set; }
 
-        public virtual DbSet<Import> Imports { get; set; }
-        public virtual DbSet<ImportRow> ImportRows { get; set; }
+        public virtual DbSet<FileImport> FileImports { get; set; }
+        public virtual DbSet<FileImportRow> FileImportRows { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -309,7 +309,7 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Imports)
+                .HasMany(e => e.FileImports)
                 .WithRequired(e => e.CreatedByUser)
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
@@ -355,9 +355,9 @@ namespace DataAccess.Persistence
                 .HasForeignKey(e => e.ImportProcessingRuleOperatorId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Import>()
+            modelBuilder.Entity<FileImport>()
                 .HasMany(e => e.Rows)
-                .WithRequired(e => e.Import)
+                .WithRequired(e => e.FileImport)
                 .WillCascadeOnDelete(false);
         }
 

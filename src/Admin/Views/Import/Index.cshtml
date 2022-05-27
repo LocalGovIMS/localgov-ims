@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Import";
+    ViewBag.Title = "Imports";
 }
 
 @section Header {
     <div class="ui header">
-        <h1>Import</h1>
+        <h1>Imports</h1>
         <div class="sub header">
-            Import
+            Imports
         </div>
     </div>
     
@@ -14,28 +14,14 @@
 
 <div class="ui grid stackable">
 
-    @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
+    @if (User.IsInRole(Role.Finance))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("FileImport", "Import")">
+            <a class="ui card" href="@Url.Action("FileImport", "FileImport")">
                 <div class="content">
-                    <div class="header">File Import</div>
+                    <div class="header">File Imports</div>
                     <div class="description">
-                        <p>Import a file</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "ImportProcessingRule")">
-                <div class="content">
-                    <div class="header">Import Processing Rules</div>
-                    <div class="description">
-                        <p>Manage import processing rules</p>
+                        <p>Manual imports via file uploads</p>
                     </div>
                 </div>
             </a>
