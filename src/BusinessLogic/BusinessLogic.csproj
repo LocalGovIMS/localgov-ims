@@ -148,7 +148,7 @@
     <Compile Include="Entities\FundGroup.cs" />
     <Compile Include="Entities\FundGroupFund.cs" />
     <Compile Include="Entities\FundMetadata.cs" />
-    <Compile Include="Entities\ImportRow.cs" />
+    <Compile Include="Entities\FileImportRow.cs" />
     <Compile Include="Entities\ImportProcessingRuleOperator.cs" />
     <Compile Include="Entities\ImportProcessingRuleField.cs" />
     <Compile Include="Entities\ImportProcessingRuleCondition.cs" />
@@ -156,7 +156,7 @@
     <Compile Include="Entities\ImportProcessingRule.cs" />
     <Compile Include="Entities\FundMessageMetadata.cs" />
     <Compile Include="Entities\PaymentIntegration.cs" />
-    <Compile Include="Entities\Import.cs" />
+    <Compile Include="Entities\FileImport.cs" />
     <Compile Include="Entities\SuspenseNote.cs" />
     <Compile Include="Entities\VatMetadata.cs" />
     <Compile Include="Entities\MopMetadata.cs" />
@@ -209,8 +209,8 @@
     <Compile Include="Extensions\MopExtensions.cs" />
     <Compile Include="Extensions\ProcessedTransactionExtensions.cs" />
     <Compile Include="ImportProcessing\Enums\OperationType.cs" />
-    <Compile Include="ImportProcessing\Interfaces\IImportProcessor.cs" />
-    <Compile Include="ImportProcessing\ImportProcessor.cs" />
+    <Compile Include="ImportProcessing\Interfaces\IFileImportProcessor.cs" />
+    <Compile Include="ImportProcessing\FileImportProcessor.cs" />
     <Compile Include="ImportProcessing\FileImporter.cs" />
     <Compile Include="ImportProcessing\Interfaces\IFileImporter.cs" />
     <Compile Include="ImportProcessing\Interfaces\IOperations.cs" />
@@ -228,7 +228,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICheckDigitConfigurationRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IImportRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFileImportRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMessageMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVatMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMetadataRepository.cs" />
@@ -261,7 +261,7 @@
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
-    <Compile Include="Interfaces\Services\IImportService.cs" />
+    <Compile Include="Interfaces\Services\IFileImportService.cs" />
     <Compile Include="Interfaces\Services\IPaymentIntegrationService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
     <Compile Include="Interfaces\Services\IFundMessageMetadataService.cs" />
@@ -328,7 +328,7 @@
     <Compile Include="Interfaces\Services\IImportProcessingRuleService.cs" />
     <Compile Include="Interfaces\Services\IAccountReferenceValidatorService.cs" />
     <Compile Include="Services\CheckDigitConfigurationService.cs" />
-    <Compile Include="Services\ImportService.cs" />
+    <Compile Include="Services\FileImportService.cs" />
     <Compile Include="Services\PaymentIntegrationService.cs" />
     <Compile Include="Services\SuspenseNoteService.cs" />
     <Compile Include="Services\FundMessageMetadataService.cs" />

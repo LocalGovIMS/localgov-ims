@@ -4,7 +4,7 @@ namespace BusinessLogic.Models
 {
     public class LoadFromFileResult
     {
-        public Import Import { get; set; }
+        public FileImport FileImport { get; set; }
 
         public int RowCount { get; set; }
     }

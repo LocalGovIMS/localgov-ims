@@ -18,7 +18,7 @@ namespace BusinessLogic.ImportProcessing
         private readonly IFileSystem _fileSystem;
 
         private int _rowCount = 0;
-        private Import _import;
+        private FileImport _fileImport;
 
         public FileImporter(ILog log
             , ISecurityContext securityContext
@@ -44,7 +44,7 @@ namespace BusinessLogic.ImportProcessing
 
         private void CreateImport(FileImporterArgs args)
         {
-            _import = new Import()
+            _fileImport = new FileImport()
             {
                 BatchReference = args.BatchReference,
                 CreatedAt = DateTime.Now,
@@ -66,7 +66,7 @@ namespace BusinessLogic.ImportProcessing
 
                     _rowCount++;
 
-                    _import.Rows.Add(new ImportRow
+                    _fileImport.Rows.Add(new FileImportRow
                     {
                         RowData = line
                     });
@@ -76,7 +76,7 @@ namespace BusinessLogic.ImportProcessing
 
         private void SaveImport()
         {
-            _unitOfWork.Imports.Add(_import);
+            _unitOfWork.FileImports.Add(_fileImport);
             _unitOfWork.Complete(_securityContext.UserId);
         }
 
@@ -86,7 +86,7 @@ namespace BusinessLogic.ImportProcessing
 
             result.SetData(new LoadFromFileResult()
             {
-                Import = _import,
+                FileImport = _fileImport,
                 RowCount = _rowCount
             });
 

@@ -211,8 +211,8 @@
     <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundMessage\CreateCommand.cs" />
     <Compile Include="Classes\Commands\FundMessage\EditCommand.cs" />
-    <Compile Include="Classes\Commands\Import\ProcessImportCommand.cs" />
-    <Compile Include="Classes\Commands\Import\SaveImportFileCommand.cs" />
+    <Compile Include="Classes\Commands\FileImport\ProcessCommand.cs" />
+    <Compile Include="Classes\Commands\FileImport\SaveCommand.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\CreateCommand.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\EditCommand.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommand.cs" />
@@ -341,10 +341,10 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IAccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ICheckDigitConfigurationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IFundMessageControllerDependencies.cs" />
-    <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IFileImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
-    <Compile Include="Controllers\Dependencies\ImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\FileImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IUserMethodOfPaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IFundMessageMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\PaymentIntegrationControllerDependencies.cs" />
@@ -444,6 +444,7 @@
     <Compile Include="Controllers\CheckDigitConfigurationController.cs" />
     <Compile Include="Controllers\FundMessageController.cs" />
     <Compile Include="Controllers\PaymentIntegrationController.cs" />
+    <Compile Include="Controllers\FileImportController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
     <Compile Include="Controllers\UserMethodOfPaymentController.cs" />
@@ -1646,8 +1647,8 @@
     <Content Include="Views\SuspenseNote\Create.cshtml" />
     <Content Include="Views\SuspenseNote\List.cshtml" />
     <Content Include="Views\SuspenseNote\_List.cshtml" />
-    <Content Include="Views\Import\FileImport.cshtml" />
-    <Content Include="Views\Import\Confirm.cshtml" />
+    <Content Include="Views\FileImport\Import.cshtml" />
+    <Content Include="Views\FileImport\Confirm.cshtml" />
     <Content Include="Views\PaymentIntegration\Create.cshtml" />
     <Content Include="Views\PaymentIntegration\Details.cshtml" />
     <Content Include="Views\PaymentIntegration\Edit.cshtml" />
@@ -1664,7 +1665,7 @@
     <Content Include="Views\AccountReferenceValidator\Edit.cshtml" />
     <Content Include="Views\AccountReferenceValidator\List.cshtml" />
     <Content Include="Views\UserMethodOfPayment\Edit.cshtml" />
-    <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\FileImport\Index.cshtml" />
     <Content Include="Views\FundMessageMetadata\_EditList.cshtml" />
     <Content Include="Views\FundMessageMetadata\_List.cshtml" />
     <Content Include="Views\FundMessageMetadata\Create.cshtml" />
@@ -1674,6 +1675,7 @@
     <Content Include="Views\FundMessage\Edit.cshtml" />
     <Content Include="Views\FundMessage\List.cshtml" />
     <Content Include="Views\FundMessage\_Search.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
