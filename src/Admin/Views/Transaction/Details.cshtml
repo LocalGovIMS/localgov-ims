@@ -14,7 +14,7 @@
         <span class="ui-psp-reference">@Model.Transaction.PspReference</span>
         @if (!string.IsNullOrEmpty(Model.Transaction.ParentPspReference))
         {
-            @Html.ActionLink("View parent", "Details", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
+            @Html.ActionLink("Origin", "Origin", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
         }
 
         @if (Model.Transaction.SuspenseId.HasValue)
