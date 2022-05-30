@@ -397,6 +397,7 @@
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
     <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\Transaction\Origin\Get.cs" />
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
     <Compile Include="Controllers\Transaction\TestBase.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\ConstructorTests.cs" />

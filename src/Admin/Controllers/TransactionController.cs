@@ -48,6 +48,18 @@ namespace Admin.Controllers
             return View(model);
         }
 
+        [NavigatablePageActionFilter(DisplayText = "Origin Details")]
+        [Classes.Security.Attributes.Authorize(Roles = Role.TransactionDetails)]
+        [HttpGet]
+        public ActionResult Origin(string id)
+        {
+            var model = Dependencies.DetailsViewModelBuilder.Build(id);
+
+            if (model.Transaction == null) return Back();
+
+            return View("Details", model);
+        }
+
         [Classes.Security.Attributes.Authorize(Roles = Role.TransactionDetails)]
         [HttpGet]
         public ActionResult Receipt(string id)
