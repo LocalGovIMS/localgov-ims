@@ -231,6 +231,7 @@
     <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
     <Compile Include="Services\SuspenseNote\CreateTests.cs" />
     <Compile Include="Services\SuspenseNote\GetTests.cs" />
+    <Compile Include="Services\Transaction\UpdateCardDetailsTests.cs" />
     <Compile Include="Services\UserTemplate\BaseUserTemplateTest.cs" />
     <Compile Include="Services\UserTemplate\GetByUserIdTests.cs" />
     <Compile Include="Services\UserTemplate\GetByUsernameTests.cs" />

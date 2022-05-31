@@ -36,5 +36,6 @@ namespace BusinessLogic.Interfaces.Services
         IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction);
         IResult CreateProcessedTransaction(ProcessedTransaction processedTransaction, bool saveChanges);
         IResult CreateProcessedTransaction(CreateProcessedTransactionArgs args);
+        IResult UpdateCardDetails(UpdateCardDetailsArgs args);
     }
 }
