@@ -820,6 +820,29 @@ namespace BusinessLogic.Services
                 return new Result(ex.Message);
             }
         }
+
+        public IResult UpdateCardDetails(UpdateCardDetailsArgs args)
+        {
+            try
+            {
+                var transactions = GetTransactionsByInternalReference(args.MerchantReference);
+
+                foreach (var item in transactions)
+                {
+                    item.CardPrefix = args.CardPrefix;
+                    item.CardSuffix = args.CardSuffix;
+                }
+
+                UnitOfWork.Complete(SecurityContext.UserId);
+
+                return new Result();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return new Result($"Unable to update the card details for transactions with internal reference: {args.MerchantReference}");
+            }
+        }
     }
 
     public class CreateProcessedTransactionArgs

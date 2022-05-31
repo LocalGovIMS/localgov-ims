@@ -105,5 +105,28 @@ namespace Api.Controllers.ProcessedTransactions
                 return BadRequest();
             }
         }
+
+        [HttpPost]
+        [Route("api/ProcessedTransactions/{reference}/UpdateCardDetails")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Ok", null)]
+        [SwaggerResponse(System.Net.HttpStatusCode.BadRequest, "Bad request", typeof(string))]
+        public IHttpActionResult UpdateCardDetails([FromUri] string reference, [FromBody] UpdateCardDetailsModel model)
+        {
+            try
+            {
+                var response = _transactionService.UpdateCardDetails(model.ToUpdateCardDetailsArgs());
+
+                if (response.Success)
+                    return Ok();
+
+                return BadRequest(response.Error);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+
+                return BadRequest();
+            }
+        }
     }
 }
