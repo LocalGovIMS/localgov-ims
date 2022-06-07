@@ -25,6 +25,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
+                .Include(x => x.TransactionImportTypes)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(criteria.Name))
@@ -57,6 +58,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
+                .Include(x => x.TransactionImportTypes)
                 .FirstOrDefault();
 
             return item;
@@ -72,6 +74,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
+                .Include(x => x.TransactionImportTypes)
                 .ToList();
 
             return items;

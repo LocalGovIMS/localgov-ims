@@ -4,14 +4,14 @@
   "documentGenerator": {
     "webApiToOpenApi": {
       "controllerNames": [
-        "Api.Controllers.Notification.NotificationController",
-        "Api.Controllers.PendingTransactions.PendingTransactionsController",
-        "Api.Controllers.Suspense.SuspenseController",
-        "Api.Controllers.ProcessedTransactions.ProcessedTransactionsController",
-        "Api.Controllers.Funds.FundsController",
         "Api.Controllers.AccountHolders.AccountHoldersController",
         "Api.Controllers.FundMetadata.FundMetadataController",
-        "Api.Controllers.MethodOfPayments.MethodOfPaymentsController"
+        "Api.Controllers.Funds.FundsController",
+        "Api.Controllers.MethodOfPayments.MethodOfPaymentsController",
+        "Api.Controllers.PendingTransactions.PendingTransactionsController",
+        "Api.Controllers.ProcessedTransactions.ProcessedTransactionsController",
+        "Api.Controllers.Suspense.SuspenseController",
+        "Api.Controllers.Notification.NotificationController"
       ],
       "isAspNetCore": false,
       "resolveJsonOptions": false,

@@ -7,7 +7,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class GetAllActiveTests : BaseImportProcessingRuleTest
+    public class GetAllTests : BaseImportProcessingRuleTest
     {
         private void SetupUnitOfWork()
         {
@@ -30,7 +30,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.GetAll(false);
 
             // Assert
             Assert.IsNotNull(result);
@@ -45,7 +45,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.GetAll(false);
 
             // Assert
             Assert.IsNull(result);
@@ -59,7 +59,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.GetAll(false);
 
             // Assert
             Assert.IsNull(result);

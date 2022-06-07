@@ -1,0 +1,65 @@
+﻿@model Admin.Models.TransactionImportType.EditViewModel
+@{
+    ViewBag.Title = "Edit transaction import type";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        <div class="sub header">
+            Transaction import type details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "TransactionImportType", FormMethod.Post))
+{
+
+    <div class="ui form">
+        
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ExternalReference)
+            @Html.EditorFor(m => m.ExternalReference)
+        </div>
+
+    </div>
+
+    <div class="ui vertical segment">
+        <h3 style="padding-bottom:10px;">
+            Import processing rules
+            @if (Model.ImportProcessingRulesAreAvailableToAdd)
+            {
+                @Html.ActionLink("Add an import processing rule", "Create", "TransactionImportTypeImportProcessingRule", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+            }
+        </h3>
+        @Html.Action("_Edit", "TransactionImportTypeImportProcessingRule", new { id = Model.Id })
+    </div>
+
+    <br />
+
+    <input type="submit" value="Save" class="ui primary button" />
+    @Html.ActionLink("Back", "Back", "TransactionImportType", null, new { @class = "ui button" })
+
+}

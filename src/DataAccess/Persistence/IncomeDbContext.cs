@@ -66,6 +66,8 @@ namespace DataAccess.Persistence
 
         public virtual DbSet<FileImport> FileImports { get; set; }
         public virtual DbSet<FileImportRow> FileImportRows { get; set; }
+        public virtual DbSet<TransactionImportType> TransactionImportTypes { get; set; }
+        public virtual DbSet<TransactionImportTypeImportProcessingRule> TransactionImportTypeImportProcessingRules { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -426,6 +428,10 @@ namespace DataAccess.Persistence
             modelBuilder.Entity<ScheduleLog>()
                 .HasIndex(r => r.JobRunTime)
                 .IsClustered(true);
+
+            modelBuilder.Entity<TransactionImportTypeImportProcessingRule>()
+                .HasIndex(s => new { s.TransactionImportTypeId, s.ImportProcessingRuleId})
+                .IsUnique(true);
         }
     }
 }

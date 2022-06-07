@@ -17,5 +17,7 @@ namespace Admin.Models.ImportProcessingRule
 
         [DisplayName("Disabled")]
         public bool IsDisabled { get; set; }
+
+        public bool TransactionImportTypesAreAvailableToAdd { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IImportProcessingRuleService> _mockImportProcessingRuleService = new Mock<IImportProcessingRuleService>();
+        private readonly Mock<ITransactionImportTypeService> _mockTransactionImportTypeService = new Mock<ITransactionImportTypeService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -21,7 +22,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
         {
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockImportProcessingRuleService.Object);
+                _mockImportProcessingRuleService.Object,
+                _mockTransactionImportTypeService.Object);
         }
 
         private void SetupService(Mock<IImportProcessingRuleService> service)

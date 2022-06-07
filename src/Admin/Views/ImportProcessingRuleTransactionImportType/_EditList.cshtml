@@ -1,0 +1,45 @@
+﻿@model Admin.Models.ImportProcessingRuleTransactionImportType.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @item.TransactionImportType.Name
+                </td>
+                <td>
+                    @item.TransactionImportType.Description
+                </td>
+                <td style="width:20%;">
+                    @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleTransactionImportType", new { id = item.Id }, new { @class = "ui button" })
+                    @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleTransactionImportType", new { id = item.Id, importProcessingRuleId = item.ImportProcessingRuleId }, new { @class = "ui button delete-transaction-import-type-import-processing-rule" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no linked transaction import types
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".delete-transaction-import-type-import-processing-rule").on("click",
+            function (e) {
+                if (window.confirm("Are you sure you want to delete this link?")) {
+
+                } else {
+                    e.preventDefault();
+                    e.stopPropogation();
+                    return false;
+                }
+            });
+
+    });
+</script>

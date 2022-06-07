@@ -10,7 +10,7 @@ namespace BusinessLogic.Interfaces.Services
     {
         IResult Create(ImportProcessingRule item);
         ImportProcessingRule Get(int id);
-        List<ImportProcessingRule> GetAllActive();
+        List<ImportProcessingRule> GetAll(bool includeDisabled);
         SearchResult<ImportProcessingRule> Search(SearchCriteria criteria);
         IResult Update(ImportProcessingRule item);
     }

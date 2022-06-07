@@ -61,6 +61,8 @@ namespace DataAccess.Persistence
         public IRepository<ImportProcessingRuleField> ImportProcessingRuleFields { get; private set; }
         public IRepository<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; private set; }
         public IFileImportRepository FileImports { get; private set; }
+        public ITransactionImportTypeRepository TransactionImportTypes { get; private set; }
+        public ITransactionImportTypeImportProcessingRuleRepository TransactionImportTypeImportProcessingRules { get; private set; }
 
         #endregion
 
@@ -107,6 +109,8 @@ namespace DataAccess.Persistence
             IRepository<ImportProcessingRuleField> importProcessingRuleFieldRepository,
             IRepository<ImportProcessingRuleOperator> importProcessingRuleOperatorRepository,
             IFileImportRepository fileImports,
+            ITransactionImportTypeRepository transactionImportTypes,
+            ITransactionImportTypeImportProcessingRuleRepository transactionImportTypeImportProcessingRules,
             IAuditLogger auditLogger,
             ILog log)
         {
@@ -154,6 +158,8 @@ namespace DataAccess.Persistence
             ImportProcessingRuleFields = importProcessingRuleFieldRepository;
             ImportProcessingRuleOperators = importProcessingRuleOperatorRepository;
             FileImports = fileImports;
+            TransactionImportTypes = transactionImportTypes;
+            TransactionImportTypeImportProcessingRules = transactionImportTypeImportProcessingRules;
 
             _auditLogger = auditLogger;
             _log = log;

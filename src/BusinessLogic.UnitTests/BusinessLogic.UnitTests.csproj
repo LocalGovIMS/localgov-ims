@@ -269,7 +269,7 @@
     <Compile Include="Services\MethodOfPaymentMetadata\UpdateTests.cs" />
     <Compile Include="Services\ImportProcessingRule\BaseImportProcessingRuleTest.cs" />
     <Compile Include="Services\ImportProcessingRule\CreateTests.cs" />
-    <Compile Include="Services\ImportProcessingRule\GetAllActiveTests.cs" />
+    <Compile Include="Services\ImportProcessingRule\GetAllTests.cs" />
     <Compile Include="Services\ImportProcessingRule\GetTests.cs" />
     <Compile Include="Services\ImportProcessingRule\SearchTests.cs" />
     <Compile Include="Services\ImportProcessingRule\UpdateTests.cs" />

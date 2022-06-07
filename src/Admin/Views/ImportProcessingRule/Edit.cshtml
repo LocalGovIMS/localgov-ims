@@ -55,7 +55,17 @@
                 @Html.ActionLink("Add an action", "Create", "ImportProcessingRuleAction", new { importProcessingRuleId = Model.Id }, new { @class = "ui blue button right floated" })
             </h3>
             @Html.Action("_EditListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
+        </div>
 
+        <div class="ui vertical segment">
+            <h3 style="padding-bottom:10px;">
+                Transaction import types
+                @if (Model.TransactionImportTypesAreAvailableToAdd)
+                {
+                    @Html.ActionLink("Add a transaction import type", "Create", "ImportProcessingRuleTransactionImportType", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+                }
+            </h3>
+            @Html.Action("_EditList", "ImportProcessingRuleTransactionImportType", new { id = Model.Id })
         </div>
 
     </div>

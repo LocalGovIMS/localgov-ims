@@ -56,12 +56,12 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<ImportProcessingRule> GetAllActive()
+        public List<ImportProcessingRule> GetAll(bool includeDisabled)
         {
             try
             {
                 return UnitOfWork.ImportProcessingRules
-                    .GetAll(false)
+                    .GetAll(includeDisabled)
                     .ToList();
             }
             catch (Exception e)
