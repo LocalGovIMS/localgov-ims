@@ -3,18 +3,18 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
-using Command = Admin.Classes.Commands.ImportProcessingRuleAction.EditCommand;
+using Command = Admin.Classes.Commands.ImportProcessingRuleTransactionImportType.EditCommand;
 using CommandResult = Admin.Classes.Commands.CommandResult;
-using ViewModel = Admin.Models.ImportProcessingRuleAction.EditViewModel;
+using ViewModel = Admin.Models.ImportProcessingRuleTransactionImportType.EditViewModel;
 
-namespace Admin.UnitTests.Classes.Commands.ImportProcessingRuleAction
+namespace Admin.UnitTests.Classes.Commands.ImportProcessingRuleTransactionImportType
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
     public class EditCommandTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IImportProcessingRuleActionService> _mockImportProcessingRuleActionService = new Mock<IImportProcessingRuleActionService>();
+        private readonly Mock<ITransactionImportTypeImportProcessingRuleService> _mockTransactionImportTypeImportProcessingRuleService = new Mock<ITransactionImportTypeImportProcessingRuleService>();
 
         private ViewModel GenerateViewModel()
         {
@@ -22,8 +22,8 @@ namespace Admin.UnitTests.Classes.Commands.ImportProcessingRuleAction
             {
                 Id = 1,
                 ImportProcessingRuleId = 1,
-                ImportProcessingRuleFieldId = 1,
-                Value = "Test value"
+                TransactionImportTypeId = 0,
+                TransactionImportTypes = new Web.Mvc.SelectList()
             };
         }
 
@@ -33,7 +33,7 @@ namespace Admin.UnitTests.Classes.Commands.ImportProcessingRuleAction
             // Arrange
             var command = new Command(
                 _mockLogger.Object,
-                _mockImportProcessingRuleActionService.Object);
+                _mockTransactionImportTypeImportProcessingRuleService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());
@@ -44,18 +44,18 @@ namespace Admin.UnitTests.Classes.Commands.ImportProcessingRuleAction
         }
 
         [TestMethod]
-        public void Execute_calls_ImportProcessingRuleService_Update_method_once()
+        public void Execute_calls_TransactionImportTypeImportProcessingRuleService_Update_method_once()
         {
             // Arrange
             var command = new Command(
                 _mockLogger.Object,
-                _mockImportProcessingRuleActionService.Object);
+                _mockTransactionImportTypeImportProcessingRuleService.Object);
 
             // Act
             var result = command.Execute(GenerateViewModel());
 
             // Assert
-            _mockImportProcessingRuleActionService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.ImportProcessingRuleAction>()), Times.Once);
+            _mockTransactionImportTypeImportProcessingRuleService.Verify(x => x.Update(It.IsAny<BusinessLogic.Entities.TransactionImportTypeImportProcessingRule>()), Times.Once);
         }
     }
 }

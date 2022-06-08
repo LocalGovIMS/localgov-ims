@@ -307,10 +307,10 @@
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleTranactionImportType\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleTranactionImportType\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\ImportProcessingRuleTranactionImportType\ListViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\TranactionImportTypeImportProcessingRule\CreateViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\TranactionImportTypeImportProcessingRule\DetailsViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\TranactionImportTypeImportProcessingRule\EditViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\TranactionImportTypeImportProcessingRule\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImportTypeImportProcessingRule\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImportTypeImportProcessingRule\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImportTypeImportProcessingRule\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImportTypeImportProcessingRule\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />

@@ -2,7 +2,6 @@
 using BusinessLogic.Interfaces.Services;
 using log4net;
 using System;
-using System.Linq;
 
 namespace Admin.Classes.ViewModelBuilders.TransactionImportType
 {

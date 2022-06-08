@@ -41,9 +41,9 @@ namespace Admin.Classes.ViewModelBuilders.TransactionImportTypeImportProcessingR
             if (data == null) return model;
 
             model.Id = data.Id;
-            model.TransactionImportTypeId = data.TransactionImportTypeId;
+            model.TransactionImportTypeId = data.TransactionImportType.Id;
             model.TransactionImportTypeName = data.TransactionImportType.Name;
-            model.ImportProcessingRuleId = data.ImportProcessingRuleId;
+            model.ImportProcessingRuleId = data.ImportProcessingRule.Id;
 
             return model;
         }

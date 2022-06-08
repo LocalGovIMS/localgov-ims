@@ -4,8 +4,6 @@ using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Admin.Classes.ViewModelBuilders.TransactionImportType
 {
