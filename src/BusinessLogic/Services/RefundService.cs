@@ -138,7 +138,7 @@ namespace BusinessLogic.Services
                 {
                     Amount = totalRefundAmount,
                     Reference = pspReference,
-                    ImsReference = internalReference,
+                    ImsReference = savePendingTransactionResult.PaymentId,
                     TransactionDate = transactionDate
                 })).Result;
 
