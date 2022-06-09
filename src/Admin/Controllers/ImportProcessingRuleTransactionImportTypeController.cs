@@ -47,7 +47,7 @@ namespace Admin.Controllers
             return BaseCreate(model, Dependencies.CreateCommand);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Edit Transaction ")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Transaction Import Type Link")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult Edit(int id)

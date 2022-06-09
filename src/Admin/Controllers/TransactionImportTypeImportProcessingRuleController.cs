@@ -23,7 +23,7 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult _Edit(int id)
+        public ActionResult _EditList(int id)
         {
             var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { TransactionImportTypeId = id });
 
@@ -47,7 +47,7 @@ namespace Admin.Controllers
             return BaseCreate(model, Dependencies.CreateCommand);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Edit Transaction ")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Import Processing Rule Link")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult Edit(int id)
