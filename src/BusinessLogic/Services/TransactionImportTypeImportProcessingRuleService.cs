@@ -21,38 +21,6 @@ namespace BusinessLogic.Services
         {
         }
 
-        public IResult Create(TransactionImportTypeImportProcessingRule item)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
-                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
-
-            try
-            {
-                UnitOfWork.TransactionImportTypeImportProcessingRules.Add(item);
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new Result("Unable to create the Transaction Import Type Import Processing Rule record");
-            }
-        }
-
-        public TransactionImportTypeImportProcessingRule Get(int id)
-        {
-            try
-            {
-                return UnitOfWork.TransactionImportTypeImportProcessingRules.Get(id);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return null;
-            }
-        }
-
         public SearchResult<TransactionImportTypeImportProcessingRule> Search(SearchCriteria criteria)
         {
             try
@@ -71,6 +39,38 @@ namespace BusinessLogic.Services
             {
                 Logger.Error(null, e);
                 return null;
+            }
+        }
+
+        public TransactionImportTypeImportProcessingRule Get(int id)
+        {
+            try
+            {
+                return UnitOfWork.TransactionImportTypeImportProcessingRules.Get(id);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return null;
+            }
+        }
+
+        public IResult Create(TransactionImportTypeImportProcessingRule item)
+        {
+            if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
+                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
+
+            try
+            {
+                UnitOfWork.TransactionImportTypeImportProcessingRules.Add(item);
+                UnitOfWork.Complete(SecurityContext.UserId);
+
+                return new Result();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return new Result("Unable to create the Transaction Import Type Import Processing Rule record");
             }
         }
 

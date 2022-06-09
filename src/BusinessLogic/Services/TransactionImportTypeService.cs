@@ -26,8 +26,7 @@ namespace BusinessLogic.Services
         {
             try
             {
-                int itemsCount;
-                var items = UnitOfWork.TransactionImportTypes.Search(criteria, out itemsCount).ToList();
+                var items = UnitOfWork.TransactionImportTypes.Search(criteria, out int itemsCount).ToList();
 
                 return new SearchResult<TransactionImportType>()
                 {
@@ -66,7 +65,8 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error("Exception loading transaction import type", e);
-                return null;
+
+                return new List<TransactionImportType>();
             }
         }
 
