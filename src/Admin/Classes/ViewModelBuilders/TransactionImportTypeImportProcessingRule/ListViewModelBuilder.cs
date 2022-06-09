@@ -4,6 +4,7 @@ using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
+using System.Linq;
 
 namespace Admin.Classes.ViewModelBuilders.TransactionImportTypeImportProcessingRule
 {
@@ -48,7 +49,7 @@ namespace Admin.Classes.ViewModelBuilders.TransactionImportTypeImportProcessingR
             SearchResult<BusinessLogic.Entities.TransactionImportTypeImportProcessingRule> searchResult)
         {
             return new StaticPagedList<BusinessLogic.Entities.TransactionImportTypeImportProcessingRule>(
-                searchResult.Items,
+                searchResult.Items.OrderBy(x => x.ImportProcessingRule.Name),
                 searchResult.Page,
                 searchResult.PageSize,
                 searchResult.Count);
