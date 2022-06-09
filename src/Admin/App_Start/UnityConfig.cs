@@ -300,6 +300,29 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.AccountReferenceValidator.EditViewModel>, Commands.AccountReferenceValidator.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.AccountReferenceValidator.DeleteCommand>("AccountReferenceValidator.Command.Delete")
+
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportType.DetailsViewModel, int>, ViewModelBuilders.TransactionImportType.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportType.EditViewModel, int>, ViewModelBuilders.TransactionImportType.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportType.ListViewModel, ViewModels.TransactionImportType.SearchCriteria>, ViewModelBuilders.TransactionImportType.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.TransactionImportType.EditViewModel>, Commands.TransactionImportType.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.TransactionImportType.EditViewModel>, Commands.TransactionImportType.EditCommand>("Edit")
+
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportTypeImportProcessingRule.DetailsViewModel, int>, ViewModelBuilders.TransactionImportTypeImportProcessingRule.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportTypeImportProcessingRule.EditViewModel, int>, ViewModelBuilders.TransactionImportTypeImportProcessingRule.CreateViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportTypeImportProcessingRule.EditViewModel, int>, ViewModelBuilders.TransactionImportTypeImportProcessingRule.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.TransactionImportTypeImportProcessingRule.ListViewModel, ViewModels.TransactionImportTypeImportProcessingRule.SearchCriteria>, ViewModelBuilders.TransactionImportTypeImportProcessingRule.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.TransactionImportTypeImportProcessingRule.EditViewModel>, Commands.TransactionImportTypeImportProcessingRule.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.TransactionImportTypeImportProcessingRule.EditViewModel>, Commands.TransactionImportTypeImportProcessingRule.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.TransactionImportTypeImportProcessingRule.DeleteCommand>("TransactionImportTypeImportProcessingRule.Command.Delete")
+
+                .RegisterType<IModelBuilder<ViewModels.ImportProcessingRuleTransactionImportType.DetailsViewModel, int>, ViewModelBuilders.ImportProcessingRuleTransactionImportType.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel, int>, ViewModelBuilders.ImportProcessingRuleTransactionImportType.CreateViewModelBuilder>("Create")
+                .RegisterType<IModelBuilder<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel, int>, ViewModelBuilders.ImportProcessingRuleTransactionImportType.EditViewModelBuilder>("Edit")
+                .RegisterType<IModelBuilder<ViewModels.ImportProcessingRuleTransactionImportType.ListViewModel, ViewModels.ImportProcessingRuleTransactionImportType.SearchCriteria>, ViewModelBuilders.ImportProcessingRuleTransactionImportType.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel>, Commands.ImportProcessingRuleTransactionImportType.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel>, Commands.ImportProcessingRuleTransactionImportType.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleTransactionImportType.DeleteCommand>("ImportProcessingRuleTransactionImportType.Command.Delete")
+
                 ;
         }
 
@@ -338,7 +361,10 @@ namespace Admin
                 .RegisterType<IOfficeControllerDependencies, OfficeControllerDependencies>()
                 .RegisterType<IFileImportControllerDependencies, FileImportControllerDependencies>()
                 .RegisterType<IPaymentIntegrationControllerDependencies, PaymentIntegrationControllerDependencies>()
-                .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>();
+                .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>()
+                .RegisterType<ITransactionImportTypeControllerDependencies, TransactionImportTypeControllerDependencies>()
+                .RegisterType<ITransactionImportTypeImportProcessingRuleControllerDependencies, TransactionImportTypeImportProcessingRuleControllerDependencies>()
+                .RegisterType<IImportProcessingRuleTransactionImportTypeControllerDependencies, ImportProcessingRuleTransactionImportTypeControllerDependencies>();
         }
 
         private static void RegisterOther(IUnityContainer container)

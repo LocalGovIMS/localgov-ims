@@ -143,6 +143,8 @@
     <Compile Include="Entities\EReturnCash.cs" />
     <Compile Include="Entities\EReturnCheque.cs" />
     <Compile Include="Entities\EReturnStatus.cs" />
+    <Compile Include="Entities\TransactionImportTypeImportProcessingRule.cs" />
+    <Compile Include="Entities\TransactionImportType.cs" />
     <Compile Include="Entities\EReturnType.cs" />
     <Compile Include="Entities\Fund.cs" />
     <Compile Include="Entities\FundGroup.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="Interfaces\Repositories\ICheckDigitConfigurationRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFileImportRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMessageMetadataRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITransactionImportTypeImportProcessingRuleRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVatMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\IMethodOfPaymentMetadataRepository.cs" />
@@ -258,10 +261,12 @@
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserTemplateRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITransactionImportTypeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVatRepository.cs" />
     <Compile Include="Interfaces\Security\ISecurityContext.cs" />
     <Compile Include="Interfaces\Services\IEReturnStatusService.cs" />
     <Compile Include="Interfaces\Services\IFileImportService.cs" />
+    <Compile Include="Interfaces\Services\ITransactionImportTypeImportProcessingRuleService.cs" />
     <Compile Include="Interfaces\Services\IPaymentIntegrationService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
     <Compile Include="Interfaces\Services\IFundMessageMetadataService.cs" />
@@ -284,6 +289,7 @@
     <Compile Include="Interfaces\Services\IUserMethodOfPaymentService.cs" />
     <Compile Include="Interfaces\Services\IUserTemplateService.cs" />
     <Compile Include="Interfaces\Services\ICheckDigitConfigurationService.cs" />
+    <Compile Include="Interfaces\Services\ITransactionImportTypeService.cs" />
     <Compile Include="Interfaces\Strategies\IApproveEReturnsStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IJournalAllocationStrategy.cs" />
     <Compile Include="Interfaces\Strategies\ITransactionVatStrategy.cs" />
@@ -298,6 +304,8 @@
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
+    <Compile Include="Models\TransactionImportTypeImportProcessingRule\SearchCriteria.cs" />
+    <Compile Include="Models\TransactionImportType\SearchCriteria.cs" />
     <Compile Include="Models\FundMessage\SearchCriteria.cs" />
     <Compile Include="Models\ProcessedTransactionModel.cs" />
     <Compile Include="Models\Import\ProcessResult.cs" />
@@ -330,6 +338,7 @@
     <Compile Include="Interfaces\Services\IAccountReferenceValidatorService.cs" />
     <Compile Include="Services\CheckDigitConfigurationService.cs" />
     <Compile Include="Services\FileImportService.cs" />
+    <Compile Include="Services\TransactionImportTypeImportProcessingRuleService.cs" />
     <Compile Include="Services\PaymentIntegrationService.cs" />
     <Compile Include="Services\SuspenseNoteService.cs" />
     <Compile Include="Services\FundMessageMetadataService.cs" />
@@ -352,6 +361,7 @@
     <Compile Include="Services\MethodOfPaymentService.cs" />
     <Compile Include="Services\UserMethodOfPaymentService.cs" />
     <Compile Include="Services\UserTemplateService.cs" />
+    <Compile Include="Services\TransactionImportTypeService.cs" />
     <Compile Include="UnityConfig.cs" />
     <Compile Include="Enums\EmailTypeEnum.cs" />
     <Compile Include="Extensions\NumberFormatExtension.cs" />

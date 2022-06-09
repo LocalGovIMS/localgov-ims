@@ -34,7 +34,7 @@ namespace BusinessLogic.ImportProcessing
 
         private void LoadRules()
         {
-            _rules = _importProcessingRuleService.GetAllActive();
+            _rules = _importProcessingRuleService.GetAll(false);
         }
 
         public ProcessedTransaction Process(ProcessedTransaction transaction)

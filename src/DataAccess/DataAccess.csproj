@@ -173,6 +173,10 @@
     <Compile Include="Migrations\202205261429550_Renamed_Import_and_ImportRow_entities.designer.cs">
       <DependentUpon>202205261429550_Renamed_Import_and_ImportRow_entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206011238408_Added_TransactionImportType.cs" />
+    <Compile Include="Migrations\202206011238408_Added_TransactionImportType.designer.cs">
+      <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -185,6 +189,7 @@
     <Compile Include="Repositories\CheckDigitConfigurationRepository.cs" />
     <Compile Include="Repositories\FileImportRepository.cs" />
     <Compile Include="Repositories\FundMessageMetadataRepository.cs" />
+    <Compile Include="Repositories\TransactionImportTypeImportProcessingRuleRepository.cs" />
     <Compile Include="Repositories\VatMetadataRepository.cs" />
     <Compile Include="Repositories\FundMetadataRepository.cs" />
     <Compile Include="Repositories\MethodOfPaymentMetadataRepository.cs" />
@@ -215,6 +220,7 @@
     <Compile Include="Repositories\UserMethodOfPaymentRepository.cs" />
     <Compile Include="Repositories\UserTemplateRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
+    <Compile Include="Repositories\TransactionImportTypeRepository.cs" />
     <Compile Include="Repositories\VatRepository.cs" />
     <Compile Include="SeedData\PlaceholderReplacer.cs" />
     <Compile Include="UnityConfig.cs" />
@@ -288,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205261429550_Renamed_Import_and_ImportRow_entities.resx">
       <DependentUpon>202205261429550_Renamed_Import_and_ImportRow_entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206011238408_Added_TransactionImportType.resx">
+      <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

@@ -1,0 +1,25 @@
+﻿@model Admin.Models.ImportProcessingRuleTransactionImportType.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @item.TransactionImportType.Name
+                </td>
+                <td>
+                    @item.TransactionImportType.Description
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no linked transaction import types
+    </div>
+}
+

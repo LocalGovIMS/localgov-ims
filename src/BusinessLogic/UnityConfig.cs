@@ -67,6 +67,8 @@ namespace BusinessLogic
                 .RegisterType<ICryptographyService, MD5CryptographyService>()
                 .RegisterType<IAccountReferenceValidatorService, AccountReferenceValidatorService>()
                 .RegisterType<ICheckDigitConfigurationService, CheckDigitConfigurationService>()
+                .RegisterType<ITransactionImportTypeService, TransactionImportTypeService>()
+                .RegisterType<ITransactionImportTypeImportProcessingRuleService, TransactionImportTypeImportProcessingRuleService>()
 
                 .RegisterType<IEmailService, EmailService>()
                 .RegisterType<IEmailServiceDependencies, EmailServiceDependencies>()

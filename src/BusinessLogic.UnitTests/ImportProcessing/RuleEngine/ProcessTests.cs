@@ -34,7 +34,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.RuleEngine
 
         private void SetupRules(List<ImportProcessingRule> rules)
         {
-            _mockImportProcessingRuleService.Setup(x => x.GetAllActive()).Returns(rules);
+            _mockImportProcessingRuleService.Setup(x => x.GetAll(It.IsAny<bool>())).Returns(rules);
         }
 
         private void SetupRuleEngine()

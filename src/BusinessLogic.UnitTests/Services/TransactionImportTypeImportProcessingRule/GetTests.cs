@@ -1,18 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using Type = BusinessLogic.Entities.TransactionImportTypeImportProcessingRule;
 
-namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
+namespace BusinessLogic.UnitTests.Services.TransactionImportTypeImportProcessingRule
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class GetAllActiveTests : BaseImportProcessingRuleTest
+    public class GetTests : BaseTest
     {
         private void SetupUnitOfWork()
         {
-            MockUnitOfWork.Setup(x => x.ImportProcessingRules.GetAll())
-                .Returns(new List<Entities.ImportProcessingRule>());
+            MockUnitOfWork.Setup(x => x.TransactionImportTypeImportProcessingRules.Get(It.IsAny<int>()))
+                .Returns(new Type());
         }
 
         private void SetupSecurityContext(bool result)
@@ -30,11 +31,11 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.Get(1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(List<Entities.ImportProcessingRule>));
+            Assert.IsInstanceOfType(result, typeof(Type));
         }
 
         [TestMethod]
@@ -45,7 +46,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.Get(1);
 
             // Assert
             Assert.IsNull(result);
@@ -59,7 +60,7 @@ namespace BusinessLogic.UnitTests.Services.ImportProcessingRule
             var service = GetService();
 
             // Act
-            var result = service.GetAllActive();
+            var result = service.Get(1);
 
             // Assert
             Assert.IsNull(result);

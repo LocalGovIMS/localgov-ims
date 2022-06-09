@@ -32,7 +32,7 @@ namespace Admin.UnitTests.Classes.Commands.MethodOfPaymentMetadata
         }
 
         [TestMethod]
-        public void Execute_calls_ImportProcessingRuleService_Create_method_once()
+        public void Execute_calls_ImportProcessingRuleService_Delete_method_once()
         {
             // Arrange
             var command = new Command(
