@@ -17,7 +17,7 @@ namespace Admin.UnitTests.Classes.Dependencies
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
 
         private readonly Mock<IModelCommand<SaveCommandArgs>> _mockSaveCommand = new Mock<IModelCommand<SaveCommandArgs>>();
-        private readonly Mock<IModelCommand<string>> _mockProcessCommand = new Mock<IModelCommand<string>>();
+        private readonly Mock<IModelCommand<int>> _mockProcessCommand = new Mock<IModelCommand<int>>();
 
         [TestMethod]
         public void ThrowsCorrectExceptionTypeWhenSaveCommandIsNull()

@@ -15,12 +15,12 @@ namespace DataAccess.Repositories
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public FileImport GetByBatchReference(string batchReference)
+        public FileImport GetByTransactionImportId(int transactionImportId)
         {
             var item = IncomeDbContext.FileImports
                 .Include(x => x.Rows)
                 .AsQueryable()
-                .Where(x => x.BatchReference == batchReference)
+                .Where(x => x.TransactionImportId == transactionImportId)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 

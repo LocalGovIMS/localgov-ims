@@ -27,9 +27,7 @@ namespace BusinessLogic.Entities
 
         public decimal Amount { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        public string BatchReference { get; set; }
+        public int? TransactionImportId { get; set; }
 
         [StringLength(36)]
         public string ProcessId { get; set; }

@@ -34,8 +34,8 @@ namespace BusinessLogic.Services
             {
                 return _fileImporter.ImportFile(new FileImporterArgs()
                 {
-                    BatchReference = GetNextReferenceId(),
-                    Path = path
+                    Path = path,
+                    TransactionImportTypeId = 1 // TODO: This needs to come from the UI
                 });
             }
             catch (Exception e)
@@ -46,7 +46,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Process(string batchReference)
+        public IResult Process(int transactionImportId)
         {
             if (!SecurityContext.IsInRole(Security.Role.Finance))
                 return new Result("You do not have permission to import transactions");
@@ -55,7 +55,7 @@ namespace BusinessLogic.Services
             {
                 return _fileImportProcessor.Process(new FileImportProcessorArgs()
                 {
-                    BatchReference = batchReference,
+                    TransactionImportId = transactionImportId,
                 });
             }
             catch (Exception e)

@@ -46,9 +46,14 @@ namespace BusinessLogic.ImportProcessing
         {
             _fileImport = new FileImport()
             {
-                BatchReference = args.BatchReference,
-                CreatedAt = DateTime.Now,
-                CreatedByUserId = _securityContext.UserId,
+                TransactionImport = new TransactionImport()
+                {
+                    TransactionImportTypeId = args.TransactionImportTypeId,
+                    Description = "TODO - Get Description from Transaction Type",
+                    ExternalReference = "TODO - Get External Reference from Transaction Type",
+                    CreatedAt = DateTime.Now,
+                    CreatedByUserId = _securityContext.UserId
+                },
                 OriginalFilename = args.Path, // TODO: Sort this out...
                 WorkingFilename = args.Path // TODO: Sort this out...
             };
@@ -97,6 +102,6 @@ namespace BusinessLogic.ImportProcessing
     public class FileImporterArgs
     {
         public string Path { get; set; }
-        public string BatchReference { get; set; }
+        public int TransactionImportTypeId { get; set; }
     }
 }

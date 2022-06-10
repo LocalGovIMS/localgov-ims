@@ -4,6 +4,6 @@ namespace BusinessLogic.Interfaces.Repositories
 {
     public interface IFileImportRepository : IRepository<FileImport>
     {
-        FileImport GetByBatchReference(string batchReference);
+        FileImport GetByTransactionImportId(int transactionImportId);
     }
 }

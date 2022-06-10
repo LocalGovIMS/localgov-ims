@@ -22,7 +22,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IModelCommand<SaveCommandArgs>> _mockSaveCommand = new Mock<IModelCommand<SaveCommandArgs>>();
-        private readonly Mock<IModelCommand<string>> _mockProcessCommand = new Mock<IModelCommand<string>>();
+        private readonly Mock<IModelCommand<int>> _mockProcessCommand = new Mock<IModelCommand<int>>();
 
         private MethodInfo GetMethod()
         {
@@ -41,7 +41,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
             var controller = new Controller(dependencies);
 
-            return controller.Confirm("Batch Reference", 2);
+            return controller.Confirm(1, 2);
         }
 
         [TestMethod]

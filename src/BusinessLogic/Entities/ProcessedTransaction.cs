@@ -54,9 +54,6 @@ namespace BusinessLogic.Entities
         public string Narrative { get; set; }
 
         [StringLength(30)]
-        public string BatchReference { get; set; }
-
-        [StringLength(30)]
         public string MerchantNumber { get; set; }
 
         [StringLength(15)]
@@ -130,6 +127,10 @@ namespace BusinessLogic.Entities
 
         [StringLength(13)]
         public string OriginalTransactionReference { get; set; }
+
+        public int? TransactionImportId { get; set; }
+
+        public TransactionImport TransactionImport { get; set; }
 
         public virtual EReturn EReturn { get; set; }
 

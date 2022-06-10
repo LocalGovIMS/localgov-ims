@@ -33,7 +33,7 @@ namespace Admin.Models.Transaction
 
         public DateTime? StartDate { get; set; }
 
-        public string BatchReference { get; set; }
+        public int? TransactionImportId { get; set; }
 
         [Display(Name = "Card Prefix")]
         public string CardPrefix { get; set; }

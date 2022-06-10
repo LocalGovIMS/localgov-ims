@@ -5,19 +5,16 @@ namespace BusinessLogic.ImportProcessing
 {
     public class ProcessedTransactionModelBuilder : IProcessedTransactionModelBuilder
     {
-        public ProcessedTransactionModel BuildFromCsvRow(string csvRow, string batchReference)
+        public ProcessedTransactionModel BuildFromCsvRow(string csvRow, int transactionImportId)
         {
             var fields = csvRow.Split(',');
 
             if (fields.Length != 15)
                 throw new InvalidOperationException("The row data does not contain the correct number of fields");
 
-            if (string.IsNullOrEmpty(batchReference) || string.IsNullOrWhiteSpace(batchReference))
-                throw new InvalidOperationException("The batch reference is missing");
-
             var model = new ProcessedTransactionModel();
 
-            model.BatchReference = batchReference;
+            model.TransactionImportId = transactionImportId;
             model.Reference = GetValue(() => { return fields[0]; }, "Reference");
             model.InternalReference = GetValue(() => { return fields[1]; }, "Reference");
             model.PspReference = GetValue(() => { return fields[2]; }, "Reference");

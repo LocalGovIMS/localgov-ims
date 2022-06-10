@@ -42,7 +42,7 @@ namespace BusinessLogic.ImportProcessing
 
         public IResult Process(FileImportProcessorArgs args)
         {
-            LoadImport(args.BatchReference);
+            LoadImport(args.TransactionImportId);
 
             ProcessImport();
 
@@ -51,9 +51,9 @@ namespace BusinessLogic.ImportProcessing
             return CreateResult();
         }
 
-        private void LoadImport(string batchReference)
+        private void LoadImport(int transactionImportId)
         {
-            _fileImport = _unitOfWork.FileImports.GetByBatchReference(batchReference);
+            _fileImport = _unitOfWork.FileImports.GetByTransactionImportId(transactionImportId);
         }
 
         private void ProcessImport()
@@ -96,7 +96,7 @@ namespace BusinessLogic.ImportProcessing
 
         private ProcessedTransaction BuildProcessedTransaction(string rowData)
         {
-            var processedTransactionModel = _processedTransactionModelBuilder.BuildFromCsvRow(rowData, _fileImport.BatchReference);
+            var processedTransactionModel = _processedTransactionModelBuilder.BuildFromCsvRow(rowData, _fileImport.TransactionImportId);
 
             return processedTransactionModel.GetProcessedTransaction();
         }
@@ -128,6 +128,6 @@ namespace BusinessLogic.ImportProcessing
 
     public class FileImportProcessorArgs
     {
-        public string BatchReference { get; set; }
+        public int TransactionImportId { get; set; }
     }
 }

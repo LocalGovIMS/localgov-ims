@@ -143,6 +143,9 @@
     <Compile Include="Entities\EReturnCash.cs" />
     <Compile Include="Entities\EReturnCheque.cs" />
     <Compile Include="Entities\EReturnStatus.cs" />
+    <Compile Include="Entities\TransactionImportEventLog.cs" />
+    <Compile Include="Entities\TransactionImportRow.cs" />
+    <Compile Include="Entities\TransactionImport.cs" />
     <Compile Include="Entities\TransactionImportTypeImportProcessingRule.cs" />
     <Compile Include="Entities\TransactionImportType.cs" />
     <Compile Include="Entities\EReturnType.cs" />

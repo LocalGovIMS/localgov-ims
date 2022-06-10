@@ -4,6 +4,6 @@ namespace BusinessLogic.ImportProcessing
 {
     public interface IProcessedTransactionModelBuilder
     {
-        ProcessedTransactionModel BuildFromCsvRow(string csvRow, string batchReference);
+        ProcessedTransactionModel BuildFromCsvRow(string csvRow, int transactionImportId);
     }
 }

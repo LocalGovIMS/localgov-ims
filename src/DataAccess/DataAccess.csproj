@@ -177,6 +177,10 @@
     <Compile Include="Migrations\202206011238408_Added_TransactionImportType.designer.cs">
       <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206101440317_Added_TransactionImports.cs" />
+    <Compile Include="Migrations\202206101440317_Added_TransactionImports.designer.cs">
+      <DependentUpon>202206101440317_Added_TransactionImports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206011238408_Added_TransactionImportType.resx">
       <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206101440317_Added_TransactionImports.resx">
+      <DependentUpon>202206101440317_Added_TransactionImports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

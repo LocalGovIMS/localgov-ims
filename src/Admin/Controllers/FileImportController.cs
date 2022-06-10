@@ -47,7 +47,7 @@ namespace Admin.Controllers
                 return RedirectToAction("Confirm", 
                     new 
                     { 
-                        batchReference = ((LoadFromFileResult)result.Data).FileImport.BatchReference,
+                        transactionImportId = ((LoadFromFileResult)result.Data).FileImport.TransactionImportId,
                         rowCount = ((LoadFromFileResult)result.Data).RowCount
                     });
             }
@@ -59,9 +59,9 @@ namespace Admin.Controllers
 
         [NavigatablePageActionFilter(DisplayText = "Confirm Import", OnlyComparePath = true)]
         [HttpGet]
-        public ActionResult Confirm(string batchReference, int rowCount)
+        public ActionResult Confirm(int transactionImportId, int rowCount)
         {
-            var model = new ConfirmViewModel() { BatchReference = batchReference, RowCount = rowCount };
+            var model = new ConfirmViewModel() { TransactionImportId = transactionImportId, RowCount = rowCount };
 
             return View(model);
         }
@@ -69,18 +69,18 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Confirm(ConfirmViewModel model)
         {
-            var result = Dependencies.ProcessCommand.Execute(model.BatchReference);
+            var result = Dependencies.ProcessCommand.Execute(model.TransactionImportId);
 
             if (!result.Success)
             {
                 TempData["Message"] = new ErrorMessage(result.Messages);
 
-                return RedirectToAction("Confirm", new ConfirmViewModel() { BatchReference = model.BatchReference, RowCount = model.RowCount });
+                return RedirectToAction("Confirm", new ConfirmViewModel() { TransactionImportId = model.TransactionImportId, RowCount = model.RowCount });
             }
 
             TempData["Message"] =  new SuccessMessage($"{((ProcessResult)result.Data).NumberOfRowsImported} rows have been imported");
 
-            return RedirectToAction("Search", "Transaction", new { BatchReference = ((ProcessResult)result.Data).FileImport.BatchReference });
+            return RedirectToAction("Search", "Transaction", new { TransactionImportId = ((ProcessResult)result.Data).FileImport.TransactionImportId });
         }
     }
 }
