@@ -31,22 +31,6 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
         }
 
         [TestMethod]
-        [DataRow("")]
-        [DataRow(" ")]
-        [DataRow(null)]
-        public void When_the_BatchReference_is_invalid_an_exception_is_thrown(int transactionImportId)
-        {
-            // Arrange
-            var builder = new ModelBuilder();
-
-            // Act
-            Action act = () => builder.BuildFromCsvRow(GoodRowData, transactionImportId);
-
-            // Assert
-            act.Should().Throw<InvalidOperationException>().WithMessage("The batch reference is missing");
-        }
-
-        [TestMethod]
         [DataRow("gaR4jfj2G,OvqPtXJ89,OvqPtXJ89,SP,202gregre1-11-22 11:30:41.8941794,2021-11-22 11:30:41.8941794,12345678901IM,1,13,11,6.66,W0,0.2,4.44,Transfer", "Unable to set the Entry Date value")]
         [DataRow("gaR4jfj2G,OvqPtXJ89,OvqPtXJ89,SP,2021-11-22 11:30:41.8941794,20gregre21-11-22 11:30:41.8941794,12345678901IM,1,13,11,6.66,W0,0.2,4.44,Transfer", "Unable to set the Transaction Date value")]
         [DataRow("gaR4jfj2G,OvqPtXJ89,OvqPtXJ89,SP,2021-11-22 11:30:41.8941794,2021-11-22 11:30:41.8941794,12345678901IM,A,13,11,6.66,W0,0.2,4.44,Transfer", "Unable to set the User Code value")]
