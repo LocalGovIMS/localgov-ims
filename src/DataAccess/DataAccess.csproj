@@ -169,17 +169,9 @@
     <Compile Include="Migrations\202205230950221_Changed_from_StopMessages_to_FundMessages.designer.cs">
       <DependentUpon>202205230950221_Changed_from_StopMessages_to_FundMessages.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205261429550_Renamed_Import_and_ImportRow_entities.cs" />
-    <Compile Include="Migrations\202205261429550_Renamed_Import_and_ImportRow_entities.designer.cs">
-      <DependentUpon>202205261429550_Renamed_Import_and_ImportRow_entities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206011238408_Added_TransactionImportType.cs" />
-    <Compile Include="Migrations\202206011238408_Added_TransactionImportType.designer.cs">
-      <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202206101440317_Added_TransactionImports.cs" />
-    <Compile Include="Migrations\202206101440317_Added_TransactionImports.designer.cs">
-      <DependentUpon>202206101440317_Added_TransactionImports.cs</DependentUpon>
+    <Compile Include="Migrations\202206240841385_Added_TransactionImports_and_supporting_entities.cs" />
+    <Compile Include="Migrations\202206240841385_Added_TransactionImports_and_supporting_entities.designer.cs">
+      <DependentUpon>202206240841385_Added_TransactionImports_and_supporting_entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
@@ -191,6 +183,7 @@
     <Compile Include="Repositories\EReturnChequeRepository.cs" />
     <Compile Include="Repositories\EReturnStatusRepository.cs" />
     <Compile Include="Repositories\CheckDigitConfigurationRepository.cs" />
+    <Compile Include="Repositories\TransactionImportRepository.cs" />
     <Compile Include="Repositories\FileImportRepository.cs" />
     <Compile Include="Repositories\FundMessageMetadataRepository.cs" />
     <Compile Include="Repositories\TransactionImportTypeImportProcessingRuleRepository.cs" />
@@ -296,14 +289,8 @@
     <EmbeddedResource Include="Migrations\202205230950221_Changed_from_StopMessages_to_FundMessages.resx">
       <DependentUpon>202205230950221_Changed_from_StopMessages_to_FundMessages.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205261429550_Renamed_Import_and_ImportRow_entities.resx">
-      <DependentUpon>202205261429550_Renamed_Import_and_ImportRow_entities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206011238408_Added_TransactionImportType.resx">
-      <DependentUpon>202206011238408_Added_TransactionImportType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202206101440317_Added_TransactionImports.resx">
-      <DependentUpon>202206101440317_Added_TransactionImports.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206240841385_Added_TransactionImports_and_supporting_entities.resx">
+      <DependentUpon>202206240841385_Added_TransactionImports_and_supporting_entities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

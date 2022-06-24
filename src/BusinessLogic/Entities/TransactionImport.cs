@@ -10,9 +10,10 @@ namespace BusinessLogic.Entities
         public TransactionImport()
         {
             Rows = new HashSet<TransactionImportRow>();
-            EventLog = new HashSet<TransactionImportEventLog>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
             FileImports = new HashSet<FileImport>();
+            StatusHistories = new HashSet<TransactionImportStatusHistory>();
+            EventLogs = new HashSet<TransactionImportEventLog>();
         }
 
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,7 +22,7 @@ namespace BusinessLogic.Entities
         public int TransactionImportTypeId { get; set; }
         public virtual TransactionImportType TransactionImportType { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Required]
         public int CreatedByUserId { get; set; }
@@ -37,13 +38,12 @@ namespace BusinessLogic.Entities
 
         public decimal TotalNumberOfTransactions { get; set; }
 
-        public int NumberOfErrors { get; set; }
-
-        public DateTime ReversedDate { get; set; }
+        public DateTime? ReversedDate { get; set; }
 
         public virtual ICollection<TransactionImportRow> Rows { get; set; }
-        public virtual ICollection<TransactionImportEventLog> EventLog { get; set; }
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
         public virtual ICollection<FileImport> FileImports { get; set; }
+        public virtual ICollection<TransactionImportStatusHistory> StatusHistories { get; set; }
+        public virtual ICollection<TransactionImportEventLog> EventLogs { get; set; }
     }
 }

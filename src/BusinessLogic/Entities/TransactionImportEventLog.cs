@@ -8,22 +8,20 @@ namespace BusinessLogic.Entities
     {
         public TransactionImportEventLog()
         {
+            
         }
 
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        
+        public DateTime CreatedDate { get; set; }
 
+        [Required]
         public int TransactionImportId { get; set; }
         public virtual TransactionImport TransactionImport { get; set; }
+        
+        public byte Type { get; set; }
 
-        public int? TransactionImportRowId { get; set; }
-        public virtual TransactionImportRow TransactionImportRow { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public string Type { get; set; }
-
-        [StringLength(255)]
-        public string Description { get; set; }
+        public string Message { get; set; }
     }
 }

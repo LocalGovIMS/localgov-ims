@@ -48,7 +48,7 @@ namespace Api.Controllers.ProcessedTransactions
             return new BusinessLogic.Entities.ProcessedTransaction()
             {
                 TransactionReference = "Unknown", // TODO: Should be populated in the service?
-                InternalReference = "Unkown", // TODO: Should be populated in the service?
+                InternalReference = "Unknown", // TODO: Should be populated in the service?
                 PspReference = PspReference,
                 OfficeCode = OfficeCode,
                 EntryDate = DateTime.Now, // TODO: Should be populated in the service?

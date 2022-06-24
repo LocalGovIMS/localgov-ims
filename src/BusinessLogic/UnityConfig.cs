@@ -2,6 +2,7 @@
 using BusinessLogic.Classes.Dependencies;
 using BusinessLogic.Classes.Smtp;
 using BusinessLogic.Classes.Strategies;
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Dependencies;
@@ -94,6 +95,9 @@ namespace BusinessLogic
                 .RegisterType<IOperations, Operations>()
                 .RegisterType<IFileImporter, FileImporter>()
                 .RegisterType<IFileImportProcessor, FileImportProcessor>()
+                .RegisterType<ITransactionImportProcessor, TransactionImportProcessor>()
+                .RegisterType<IValidator<TransactionImport>, TransactionImportProcessorValidator>()
+                
                 .RegisterType<IProcessedTransactionModelBuilder, ProcessedTransactionModelBuilder>()
 
                 .RegisterType<IPaymentValidationHandler, PaymentValidationHandler>()

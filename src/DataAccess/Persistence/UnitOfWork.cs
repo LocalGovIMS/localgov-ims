@@ -63,6 +63,7 @@ namespace DataAccess.Persistence
         public IFileImportRepository FileImports { get; private set; }
         public ITransactionImportTypeRepository TransactionImportTypes { get; private set; }
         public ITransactionImportTypeImportProcessingRuleRepository TransactionImportTypeImportProcessingRules { get; private set; }
+        public ITransactionImportRepository TransactionImports { get; private set; }
 
         #endregion
 
@@ -111,6 +112,7 @@ namespace DataAccess.Persistence
             IFileImportRepository fileImports,
             ITransactionImportTypeRepository transactionImportTypes,
             ITransactionImportTypeImportProcessingRuleRepository transactionImportTypeImportProcessingRules,
+            ITransactionImportRepository transactionImportsRepository,
             IAuditLogger auditLogger,
             ILog log)
         {
@@ -160,6 +162,7 @@ namespace DataAccess.Persistence
             FileImports = fileImports;
             TransactionImportTypes = transactionImportTypes;
             TransactionImportTypeImportProcessingRules = transactionImportTypeImportProcessingRules;
+            TransactionImports = transactionImportsRepository;
 
             _auditLogger = auditLogger;
             _log = log;

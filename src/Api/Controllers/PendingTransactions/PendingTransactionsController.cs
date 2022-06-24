@@ -36,16 +36,16 @@ namespace Api.Controllers.PendingTransactions
             {
                 // TODO: It would be nice if this returned the transactions that were created.
                 // We wouldn't have to go and retrieve the data later on then.
-                var response = _transactionService.SavePendingTransaction(model.GetPendingTransaction(), "Api"); // TODO: Workout what the source should be
+                var result = _transactionService.SavePendingTransaction(model.GetPendingTransaction(), "Api"); // TODO: Workout what the source should be
 
-                if (response.Success)
+                if (result.Success)
                 {
-                    var data = _transactionService.GetPendingTransactionsByInternalReference(response.PaymentId);
+                    var data = _transactionService.GetPendingTransactionsByInternalReference(result.PaymentId);
 
-                    return CreatedAtRoute("PendingTransactionsGet", new { reference = response.PaymentId }, data.Select(x => new PendingTransactionModel(x)).ToList());
+                    return CreatedAtRoute("PendingTransactionsGet", new { reference = result.PaymentId }, data.Select(x => new PendingTransactionModel(x)).ToList());
                 }
 
-                return BadRequest(response.ErrorMessage);
+                return BadRequest(result.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -87,16 +87,16 @@ namespace Api.Controllers.PendingTransactions
         {
             try
             {
-                var response = _transactionService.AuthorisePendingTransactionByInternalReference(new BusinessLogic.Models.Transactions.AuthorisePendingTransactionByInternalReferenceArgs()
+                var result = _transactionService.AuthorisePendingTransactionByInternalReference(new BusinessLogic.Models.Transactions.AuthorisePendingTransactionByInternalReferenceArgs()
                 {
                     InternalReference = reference,
                     PspReference = model.PspReference
                 });
 
-                if (response.Success)
+                if (result.Success)
                     return Ok();
 
-                return BadRequest(response.ErrorMessage);
+                return BadRequest(result.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -114,10 +114,10 @@ namespace Api.Controllers.PendingTransactions
         {
             try
             {
-                var response = _paymentService.ProcessPayment(model.ToPaymentResult());
+                var result = _paymentService.ProcessPayment(model.ToPaymentResult());
 
-                if (response.Success)
-                    return Ok(response);
+                if (result.Success)
+                    return Ok(result);
 
                 return BadRequest();
             }
@@ -137,12 +137,12 @@ namespace Api.Controllers.PendingTransactions
         {
             try
             {
-                var response = _paymentService.ProcessFee(model.ToPaymentResult());
+                var result = _paymentService.ProcessFee(model.ToPaymentResult());
 
-                if (response.Success)
+                if (result.Success)
                     return Ok();
 
-                return BadRequest(response.Error);
+                return BadRequest(result.Error);
             }
             catch (Exception ex)
             {

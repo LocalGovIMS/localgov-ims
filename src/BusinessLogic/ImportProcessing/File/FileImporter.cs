@@ -51,7 +51,7 @@ namespace BusinessLogic.ImportProcessing
                     TransactionImportTypeId = args.TransactionImportTypeId,
                     Description = "TODO - Get Description from Transaction Type",
                     ExternalReference = "TODO - Get External Reference from Transaction Type",
-                    CreatedAt = DateTime.Now,
+                    CreatedDate = DateTime.Now,
                     CreatedByUserId = _securityContext.UserId
                 },
                 OriginalFilename = args.Path, // TODO: Sort this out...

@@ -69,7 +69,6 @@ namespace DataAccess.Persistence
         public virtual DbSet<TransactionImportTypeImportProcessingRule> TransactionImportTypeImportProcessingRules { get; set; }
         public virtual DbSet<TransactionImport> TransactionImports { get; set; }
         public virtual DbSet<TransactionImportRow> TransactionImportRows { get; set; }
-        public virtual DbSet<TransactionImportEventLog> TransactionImportEventLogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -318,6 +317,12 @@ namespace DataAccess.Persistence
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.TransactionImportStatusHistories)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Vat>()
                 .HasMany(e => e.TemplateRows)
                 .WithRequired(e => e.VAT)
@@ -370,22 +375,17 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TransactionImport>()
-                .HasMany(e => e.EventLog)
-                .WithRequired(e => e.TransactionImport)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TransactionImportRow>()
-                .HasMany(e => e.EventLog)
-                .WithOptional(e => e.TransactionImportRow)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TransactionImport>()
                 .HasMany(e => e.ProcessedTransactions)
                 .WithOptional(e => e.TransactionImport)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TransactionImport>()
                 .HasMany(e => e.FileImports)
+                .WithRequired(e => e.TransactionImport)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TransactionImport>()
+                .HasMany(e => e.StatusHistories)
                 .WithRequired(e => e.TransactionImport)
                 .WillCascadeOnDelete(false);
         }

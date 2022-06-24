@@ -20,6 +20,7 @@ namespace BusinessLogic.Entities
             UserRoles = new HashSet<UserRole>();
             UserTemplates = new HashSet<UserTemplate>();
             TransactionImports = new HashSet<TransactionImport>();
+            TransactionImportStatusHistories = new HashSet<TransactionImportStatusHistory>();
         }
 
         public int UserId { get; set; }
@@ -70,5 +71,6 @@ namespace BusinessLogic.Entities
         
         public virtual ICollection<TransactionImport> TransactionImports { get; set; }
 
+        public virtual ICollection<TransactionImportStatusHistory> TransactionImportStatusHistories { get; set; }
     }
 }
