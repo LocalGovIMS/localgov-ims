@@ -24,7 +24,7 @@ namespace BusinessLogic.ImportProcessing
         private readonly IValidator<TransactionImport> _transactionImportValidator;
 
         private TransactionImportProcessorArgs _args; 
-        private List<string> _processingErrors = new List<string>();
+        private readonly List<string> _processingErrors = new List<string>();
 
         public TransactionImportProcessor(ILog log
             , ISecurityContext securityContext

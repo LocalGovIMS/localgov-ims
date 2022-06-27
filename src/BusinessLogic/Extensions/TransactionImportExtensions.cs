@@ -27,9 +27,9 @@ namespace BusinessLogic.Extensions
 
             item.SetStatus(
                 createdByUserId,
-                item.Errors().IsNullOrEmpty()
-                    ? TransactionImportStatusEnum.Completed 
-                    : TransactionImportStatusEnum.Failed);
+                item.HasErrors()
+                    ? TransactionImportStatusEnum.Failed
+                    : TransactionImportStatusEnum.Completed);
         }
 
         public static void Revert(this TransactionImport item, int createdByUserId)

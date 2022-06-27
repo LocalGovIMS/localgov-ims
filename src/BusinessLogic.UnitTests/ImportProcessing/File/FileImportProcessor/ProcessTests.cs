@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
     [TestClass]
     public class ProcessTests : TestBase

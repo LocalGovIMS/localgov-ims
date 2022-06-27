@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
     [TestClass]
     public class TestBase

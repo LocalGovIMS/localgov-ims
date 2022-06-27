@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO.Abstractions;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImporter
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImporter
 {
     [TestClass]
     public class TestBase
