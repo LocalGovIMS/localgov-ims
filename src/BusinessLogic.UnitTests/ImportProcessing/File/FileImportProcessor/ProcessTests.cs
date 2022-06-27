@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
     [TestClass]
     public class ProcessTests : TestBase
     {
         private void Initialise()
         {
-            MockUnitOfWork.Setup(x => x.FileImports.GetByBatchReference(It.IsAny<string>()))
+            MockUnitOfWork.Setup(x => x.FileImports.GetByTransactionImportId(It.IsAny<int>()))
                 .Returns(GetImport());
 
             MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>()))
@@ -21,13 +21,13 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<ProcessedTransaction>(), It.IsAny<bool>()))
                 .Returns(new Result());
 
-            MockProcessedTransactionModelBuilder.Setup(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<string>()))
+            MockProcessedTransactionModelBuilder.Setup(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(GetProcessedTransactionModel());
         }
 
         private void SetupBadImportData()
         {
-            MockProcessedTransactionModelBuilder.Setup(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<string>()))
+            MockProcessedTransactionModelBuilder.Setup(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<int>()))
                 .Throws(new InvalidCastException());
         }
 
@@ -59,7 +59,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
             var result = ImportProcessor.Process(Args);
 
             // Assert
-            MockProcessedTransactionModelBuilder.Verify(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(10));
+            MockProcessedTransactionModelBuilder.Verify(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(10));
         }
 
         [TestMethod]

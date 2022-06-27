@@ -40,7 +40,7 @@ namespace BusinessLogic.UnitTests.Services.FileImport
             var service = GetService();
 
             // Act
-            var result = service.Process("");
+            var result = service.Process(1);
 
             // Assert
             Assert.IsNotNull(result);
@@ -57,7 +57,7 @@ namespace BusinessLogic.UnitTests.Services.FileImport
             var service = GetService();
 
             // Act
-            var result = service.Process("");
+            var result = service.Process(1);
 
             // Assert
             Assert.IsNotNull(result);
@@ -78,7 +78,7 @@ namespace BusinessLogic.UnitTests.Services.FileImport
             var service = GetService();
 
             // Act
-            var result = service.Process("");
+            var result = service.Process(1);
 
             // Assert
             Assert.IsNotNull(result);
@@ -95,7 +95,7 @@ namespace BusinessLogic.UnitTests.Services.FileImport
             var service = GetService();
 
             // Act
-            var result = service.Process("");
+            var result = service.Process(1);
 
             // Assert
             Assert.IsNotNull(result);
@@ -119,7 +119,7 @@ namespace BusinessLogic.UnitTests.Services.FileImport
                 {
 
                     // Act
-                    var result = service.Process("");
+                    var result = service.Process(1);
 
                     // Assert
                     Assert.IsNotNull(result);

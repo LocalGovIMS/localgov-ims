@@ -15,12 +15,14 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
     [ExcludeFromCodeCoverage]
     public class ProcessCommandTests
     {
+        private const int TransactionImportId = 1;
+
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFileImportService> _mockFileImportService = new Mock<IFileImportService>();
 
         public ProcessCommandTests()
         {
-            _mockFileImportService.Setup(x => x.Process(It.IsAny<string>()))
+            _mockFileImportService.Setup(x => x.Process(It.IsAny<int>()))
                 .Returns(new Result() { Data = new ProcessResult() });
 
         }
@@ -39,7 +41,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute("Batch Reference");
+            var result = command.Execute(TransactionImportId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -53,7 +55,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute("Batch Reference");
+            var result = command.Execute(TransactionImportId);
 
             // Assert
             result.Messages[0].Should().Be("File processed successfully.");
@@ -66,10 +68,10 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute("Batch Reference");
+            var result = command.Execute(TransactionImportId);
 
             // Assert
-            _mockFileImportService.Verify(x => x.Process(It.IsAny<string>()), Times.Once);
+            _mockFileImportService.Verify(x => x.Process(It.IsAny<int>()), Times.Once);
         }
 
         [TestMethod]
@@ -80,11 +82,11 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             
             var expectedErrorMessage = "An error message";
 
-            _mockFileImportService.Setup(x => x.Process(It.IsAny<string>()))
+            _mockFileImportService.Setup(x => x.Process(It.IsAny<int>()))
                 .Returns(new Result(expectedErrorMessage) { Data = new ProcessResult() });
 
             // Act
-            var result = command.Execute("Batch Reference");
+            var result = command.Execute(TransactionImportId);
 
             // Assert
             result.Messages[0].Should().Be(expectedErrorMessage);

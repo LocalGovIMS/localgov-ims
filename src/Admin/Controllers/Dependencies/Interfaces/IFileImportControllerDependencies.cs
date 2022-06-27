@@ -6,6 +6,6 @@ namespace Admin.Controllers
     public interface IFileImportControllerDependencies : IBaseControllerDependencies
     {
         IModelCommand<SaveCommandArgs> SaveCommand { get; }
-        IModelCommand<string> ProcessCommand { get; }
+        IModelCommand<int> ProcessCommand { get; }
     }
 }

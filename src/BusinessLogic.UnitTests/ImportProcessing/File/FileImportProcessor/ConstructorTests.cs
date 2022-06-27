@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
     public class ConstructorTests : TestBase
     {

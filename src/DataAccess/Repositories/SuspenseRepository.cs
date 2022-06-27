@@ -44,9 +44,9 @@ namespace DataAccess.Repositories
                 data = data.Where(x => x.Narrative.Contains(criteria.Narrative));
             }
 
-            if (!string.IsNullOrEmpty(criteria.BatchReference))
+            if (criteria.TransactionImportId.HasValue)
             {
-                data = data.Where(x => x.BatchReference.Contains(criteria.BatchReference));
+                data = data.Where(x => x.TransactionImportId == criteria.TransactionImportId.Value);
             }
 
             if (criteria.Amount.HasValue)

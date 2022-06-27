@@ -9,6 +9,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
     public class BuildFromCsvTests
     {
         private const string GoodRowData = "gaR4jfj2G,OvqPtXJ89,OvqPtXJ89,SP,2021-11-22 11:30:41.8941794,2021-11-22 11:30:41.8941794,12345678901IM,1,13,11,6.66,W0,0.2,4.44,Transfer";
+        private const int TransactionImportId = 1;
 
         public BuildFromCsvTests()
         {
@@ -23,26 +24,10 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            Action act = () => builder.BuildFromCsvRow(rowData, "Batch Reference");
+            Action act = () => builder.BuildFromCsvRow(rowData, TransactionImportId);
 
             // Assert
             act.Should().Throw<InvalidOperationException>().WithMessage("The row data does not contain the correct number of fields");
-        }
-
-        [TestMethod]
-        [DataRow("")]
-        [DataRow(" ")]
-        [DataRow(null)]
-        public void When_the_BatchReference_is_invalid_an_exception_is_thrown(string batchReference)
-        {
-            // Arrange
-            var builder = new ModelBuilder();
-
-            // Act
-            Action act = () => builder.BuildFromCsvRow(GoodRowData, batchReference);
-
-            // Assert
-            act.Should().Throw<InvalidOperationException>().WithMessage("The batch reference is missing");
         }
 
         [TestMethod]
@@ -58,7 +43,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            Action act = () => builder.BuildFromCsvRow(rowData, "Batch Reference");
+            Action act = () => builder.BuildFromCsvRow(rowData, TransactionImportId);
 
             // Assert
             act.Should().Throw<InvalidCastException>().WithMessage(expectedMessage);
@@ -71,7 +56,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-           var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+           var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.Reference.Should().Be("gaR4jfj2G");
@@ -84,7 +69,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.InternalReference.Should().Be("OvqPtXJ89");
@@ -97,7 +82,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.PspReference.Should().Be("OvqPtXJ89");
@@ -110,7 +95,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.OfficeCode.Should().Be("SP");
@@ -123,7 +108,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             ((DateTime)result.EntryDate).ToString("yyyy-MM-dd hh:mm:ss.fffffff").Should().Be("2021-11-22 11:30:41.8941794");
@@ -136,7 +121,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             ((DateTime)result.TransactionDate).ToString("yyyy-MM-dd hh:mm:ss.fffffff").Should().Be("2021-11-22 11:30:41.8941794");
@@ -149,7 +134,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.AccountReference.Should().Be("12345678901IM");
@@ -162,7 +147,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.UserCode.Should().Be(1);
@@ -175,7 +160,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.FundCode.Should().Be("13");
@@ -188,7 +173,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.MopCode.Should().Be("11");
@@ -201,7 +186,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.Amount.Should().Be(6.66M);
@@ -214,7 +199,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.VatCode.Should().Be("W0");
@@ -227,7 +212,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.VatRate.Should().Be(0.2F);
@@ -240,7 +225,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.VatAmount.Should().Be(4.44M);
@@ -253,7 +238,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ProcessedTransactionModelBuil
             var builder = new ModelBuilder();
 
             // Act
-            var result = builder.BuildFromCsvRow(GoodRowData, "Batch Reference");
+            var result = builder.BuildFromCsvRow(GoodRowData, TransactionImportId);
 
             // Assert
             result.Narrative.Should().Be("Transfer");

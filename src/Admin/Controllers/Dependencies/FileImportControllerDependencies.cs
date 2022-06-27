@@ -11,7 +11,7 @@ namespace Admin.Controllers
         public FileImportControllerDependencies(
             ILog log
             , IModelCommand<SaveCommandArgs> saveCommand
-            , [Dependency("FileImport.Command.Process")]IModelCommand<string> processCommand)
+            , [Dependency("FileImport.Command.Process")]IModelCommand<int> processCommand)
              : base(log)
         {
             SaveCommand = saveCommand ?? throw new ArgumentNullException("saveCommand");
@@ -19,6 +19,6 @@ namespace Admin.Controllers
         }
 
         public IModelCommand<SaveCommandArgs> SaveCommand { get; private set; }
-        public IModelCommand<string> ProcessCommand { get; private set; }
+        public IModelCommand<int> ProcessCommand { get; private set; }
     }
 }

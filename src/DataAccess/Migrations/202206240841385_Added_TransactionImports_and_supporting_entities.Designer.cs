@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Renamed_Import_and_ImportRow_entities : IMigrationMetadata
+    public sealed partial class Added_TransactionImports_and_supporting_entities : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Renamed_Import_and_ImportRow_entities));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Added_TransactionImports_and_supporting_entities));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205261429550_Renamed_Import_and_ImportRow_entities"; }
+            get { return "202206240841385_Added_TransactionImports_and_supporting_entities"; }
         }
         
         string IMigrationMetadata.Source

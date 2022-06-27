@@ -5,7 +5,7 @@ using System;
 
 namespace Admin.Classes.Commands.FileImport
 {
-    public class ProcessCommand : BaseCommand<string>
+    public class ProcessCommand : BaseCommand<int>
     {
         private readonly IFileImportService _fileImportService;
 
@@ -17,11 +17,11 @@ namespace Admin.Classes.Commands.FileImport
             _fileImportService = fileImportService ?? throw new ArgumentNullException("fileImportService");
         }
 
-        protected override CommandResult OnExecute(string batchReference)
+        protected override CommandResult OnExecute(int transactionImportId)
         {
             try
             {
-                var result = _fileImportService.Process(batchReference);
+                var result = _fileImportService.Process(transactionImportId);
 
                 if(!result.Success)
                 {

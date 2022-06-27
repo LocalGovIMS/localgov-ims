@@ -150,6 +150,8 @@
     <Compile Include="Controllers\Suspense\SearchCriteria.cs" />
     <Compile Include="Controllers\Suspense\SuspenseController.cs" />
     <Compile Include="Controllers\Suspense\SuspenseModel.cs" />
+    <Compile Include="Controllers\TransactionImport\TransactionImportModel.cs" />
+    <Compile Include="Controllers\TransactionImport\TransactionImportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

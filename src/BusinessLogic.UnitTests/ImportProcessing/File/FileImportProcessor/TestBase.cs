@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 
-namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
+namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
     [TestClass]
     public class TestBase
@@ -38,7 +38,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
         {
             Args = new FileImportProcessorArgs()
             {
-                BatchReference = "Batch Reference"
+                TransactionImportId = 1
             };
         }
 
@@ -46,7 +46,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
         {
             return new Entities.FileImport()
             {
-                BatchReference = "Batch Reference",
+                TransactionImportId = 1,
                 Rows = new List<Entities.FileImportRow>()
                 {
                     new Entities.FileImportRow()
@@ -125,7 +125,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
         {
             return new Entities.FileImport()
             {
-                BatchReference = "Batch Reference",
+                TransactionImportId = 1,
                 Rows = new List<Entities.FileImportRow>()
                 {
                     new Entities.FileImportRow()
@@ -204,7 +204,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.FileImportProcessor
         {
             var model = new ProcessedTransactionModel();
 
-            model.BatchReference = "Batch Reference";
+            model.TransactionImportId = 1;
             model.Reference = "ABC123";
             model.InternalReference = "DEF456";
             model.PspReference = "GHI789";

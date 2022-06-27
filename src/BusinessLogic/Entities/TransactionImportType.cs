@@ -9,6 +9,7 @@ namespace BusinessLogic.Entities
         public TransactionImportType()
         {
             ImportProcessingRules = new HashSet<TransactionImportTypeImportProcessingRule>();
+            TransactionImports = new HashSet<TransactionImport>();
         }
 
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,5 +25,7 @@ namespace BusinessLogic.Entities
         public string ExternalReference { get; set; }
 
         public virtual ICollection<TransactionImportTypeImportProcessingRule> ImportProcessingRules { get; set; }
+
+        public virtual ICollection<TransactionImport> TransactionImports { get; set; }
     }
 }

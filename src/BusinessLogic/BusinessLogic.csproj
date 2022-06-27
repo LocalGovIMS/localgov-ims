@@ -143,6 +143,10 @@
     <Compile Include="Entities\EReturnCash.cs" />
     <Compile Include="Entities\EReturnCheque.cs" />
     <Compile Include="Entities\EReturnStatus.cs" />
+    <Compile Include="Entities\TransactionImportEventLog.cs" />
+    <Compile Include="Entities\TransactionImportStatusHistory.cs" />
+    <Compile Include="Entities\TransactionImportRow.cs" />
+    <Compile Include="Entities\TransactionImport.cs" />
     <Compile Include="Entities\TransactionImportTypeImportProcessingRule.cs" />
     <Compile Include="Entities\TransactionImportType.cs" />
     <Compile Include="Entities\EReturnType.cs" />
@@ -187,9 +191,11 @@
     <Compile Include="Enums\EReturnStatus.cs" />
     <Compile Include="Enums\EReturnType.cs" />
     <Compile Include="Enums\CharacterType.cs" />
+    <Compile Include="Enums\TranactionImportEventLogTypes.cs" />
     <Compile Include="Enums\LogicalOperationType.cs" />
     <Compile Include="Enums\FundMetadataKeys.cs" />
     <Compile Include="Enums\FieldType.cs" />
+    <Compile Include="Enums\TransactionImportStatusEnum.cs" />
     <Compile Include="Enums\VatMetadataKeys.cs" />
     <Compile Include="Enums\PaymentTypeEnum.cs" />
     <Compile Include="Enums\MopMetadataKeys.cs" />
@@ -207,13 +213,16 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ImportProcessingRuleConditionExtensions.cs" />
+    <Compile Include="Extensions\TransactionImportRowExtensions.cs" />
+    <Compile Include="Extensions\TransactionImportExtensions.cs" />
     <Compile Include="Extensions\VatExtensions.cs" />
     <Compile Include="Extensions\MopExtensions.cs" />
     <Compile Include="Extensions\ProcessedTransactionExtensions.cs" />
     <Compile Include="ImportProcessing\Enums\OperationType.cs" />
+    <Compile Include="ImportProcessing\Interfaces\ITransactionImportProcessor.cs" />
     <Compile Include="ImportProcessing\Interfaces\IFileImportProcessor.cs" />
-    <Compile Include="ImportProcessing\FileImportProcessor.cs" />
-    <Compile Include="ImportProcessing\FileImporter.cs" />
+    <Compile Include="ImportProcessing\File\FileImportProcessor.cs" />
+    <Compile Include="ImportProcessing\File\FileImporter.cs" />
     <Compile Include="ImportProcessing\Interfaces\IFileImporter.cs" />
     <Compile Include="ImportProcessing\Interfaces\IOperations.cs" />
     <Compile Include="ImportProcessing\Interfaces\IRuleEngine.cs" />
@@ -221,6 +230,9 @@
     <Compile Include="ImportProcessing\Operations.cs" />
     <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder.cs" />
     <Compile Include="ImportProcessing\RuleEngine.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessorValidator.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessorException.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessor.cs" />
     <Compile Include="Interfaces\Persistence\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Repositories\IAccountHolderRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAccountReferenceValidatorRepository.cs" />
@@ -230,6 +242,7 @@
     <Compile Include="Interfaces\Repositories\IEReturnRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEReturnStatusRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICheckDigitConfigurationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITransactionImportRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFileImportRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFundMessageMetadataRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITransactionImportTypeImportProcessingRuleRepository.cs" />
@@ -304,6 +317,7 @@
     <Compile Include="Models\EReturnWrapper.cs" />
     <Compile Include="Models\EReturns\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\SearchCriteria.cs" />
+    <Compile Include="Models\Import\TransactionImport\ProcessResult.cs" />
     <Compile Include="Models\TransactionImportTypeImportProcessingRule\SearchCriteria.cs" />
     <Compile Include="Models\TransactionImportType\SearchCriteria.cs" />
     <Compile Include="Models\FundMessage\SearchCriteria.cs" />

@@ -19,7 +19,7 @@ namespace Api.Controllers.ProcessedTransactions
         public float VatRate { get; set; } // TODO: When we insert a pending transaction this field is calculated from the VatCode - is there a reason this isn't?
         public decimal? VatAmount { get; set; } // TODO: When we insert a pending transaction this field is calculated from the VatCode - is there a reason this isn't?
         public string Narrative { get; set; }
-        public string BatchReference { get; set; }
+        public int? TransactionImportId { get; set; } // TODO: Should this really be here?
 
         public ProcessedTransactionModel() { }
 
@@ -40,7 +40,7 @@ namespace Api.Controllers.ProcessedTransactions
             VatRate = source.VatRate;
             VatAmount = source.VatAmount;
             Narrative = source.Narrative;
-            BatchReference = source.BatchReference;
+            TransactionImportId = source.TransactionImportId;
         }
 
         public BusinessLogic.Entities.ProcessedTransaction GetProcessedTransaction()
@@ -48,7 +48,7 @@ namespace Api.Controllers.ProcessedTransactions
             return new BusinessLogic.Entities.ProcessedTransaction()
             {
                 TransactionReference = "Unknown", // TODO: Should be populated in the service?
-                InternalReference = "Unkown", // TODO: Should be populated in the service?
+                InternalReference = "Unknown", // TODO: Should be populated in the service?
                 PspReference = PspReference,
                 OfficeCode = OfficeCode,
                 EntryDate = DateTime.Now, // TODO: Should be populated in the service?
@@ -62,7 +62,7 @@ namespace Api.Controllers.ProcessedTransactions
                 VatRate = VatRate, // TODO: Should be populated in the service?
                 VatAmount = VatAmount, // TODO: Should be populated in the service?
                 Narrative = Narrative,
-                BatchReference = BatchReference
+                TransactionImportId = TransactionImportId
             };
         }
     }

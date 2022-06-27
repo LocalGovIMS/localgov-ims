@@ -63,11 +63,12 @@ namespace DataAccess.Persistence
         public virtual DbSet<ImportProcessingRuleAction> ImportProcessingRuleActions { get; set; }
         public virtual DbSet<ImportProcessingRuleField> ImportProcessingRuleFields { get; set; }
         public virtual DbSet<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; set; }
-
         public virtual DbSet<FileImport> FileImports { get; set; }
         public virtual DbSet<FileImportRow> FileImportRows { get; set; }
         public virtual DbSet<TransactionImportType> TransactionImportTypes { get; set; }
         public virtual DbSet<TransactionImportTypeImportProcessingRule> TransactionImportTypeImportProcessingRules { get; set; }
+        public virtual DbSet<TransactionImport> TransactionImports { get; set; }
+        public virtual DbSet<TransactionImportRow> TransactionImportRows { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -311,7 +312,13 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.FileImports)
+                .HasMany(e => e.TransactionImports)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.TransactionImportStatusHistories)
                 .WithRequired(e => e.CreatedByUser)
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
@@ -360,6 +367,26 @@ namespace DataAccess.Persistence
             modelBuilder.Entity<FileImport>()
                 .HasMany(e => e.Rows)
                 .WithRequired(e => e.FileImport)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TransactionImport>()
+                .HasMany(e => e.Rows)
+                .WithRequired(e => e.TransactionImport)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TransactionImport>()
+                .HasMany(e => e.ProcessedTransactions)
+                .WithOptional(e => e.TransactionImport)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TransactionImport>()
+                .HasMany(e => e.FileImports)
+                .WithRequired(e => e.TransactionImport)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TransactionImport>()
+                .HasMany(e => e.StatusHistories)
+                .WithRequired(e => e.TransactionImport)
                 .WillCascadeOnDelete(false);
         }
 

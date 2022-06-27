@@ -114,12 +114,12 @@ namespace Api.Controllers.ProcessedTransactions
         {
             try
             {
-                var response = _transactionService.UpdateCardDetails(model.ToUpdateCardDetailsArgs());
+                var result = _transactionService.UpdateCardDetails(model.ToUpdateCardDetailsArgs());
 
-                if (response.Success)
+                if (result.Success)
                     return Ok();
 
-                return BadRequest(response.Error);
+                return BadRequest(result.Error);
             }
             catch (Exception ex)
             {

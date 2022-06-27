@@ -277,7 +277,7 @@ namespace Admin
                 .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleAction.DeleteCommand>("ImportProcessingRuleAction.Command.Delete")
 
                 .RegisterType<IModelCommand<Commands.FileImport.SaveCommandArgs>, Commands.FileImport.SaveCommand>()
-                .RegisterType<IModelCommand<string>, Commands.FileImport.ProcessCommand>("FileImport.Command.Process")
+                .RegisterType<IModelCommand<int>, Commands.FileImport.ProcessCommand>("FileImport.Command.Process")
 
                 .RegisterType<IModelBuilder<ViewModels.PaymentIntegration.DetailsViewModel, int>, ViewModelBuilders.PaymentIntegration.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.PaymentIntegration.EditViewModel, int>, ViewModelBuilders.PaymentIntegration.EditViewModelBuilder>()

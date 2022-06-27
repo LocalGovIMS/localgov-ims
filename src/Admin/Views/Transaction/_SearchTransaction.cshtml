@@ -3,7 +3,7 @@
 @using (Html.BeginForm("Search", "Transaction", FormMethod.Get, new { id = "search-form" } ))
 {
 
-    @Html.HiddenFor(x => x.BatchReference)
+    @Html.HiddenFor(x => x.TransactionImportId)
 
     <div class="ui segment">
         <div class="ui form">

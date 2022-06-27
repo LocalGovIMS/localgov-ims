@@ -33,7 +33,11 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.TransactionImportTypeImportP
                     {
                         new BusinessLogic.Entities.TransactionImportTypeImportProcessingRule()
                         {
-                            Id = 1
+                            Id = 1,
+                            ImportProcessingRule = new BusinessLogic.Entities.ImportProcessingRule()
+                            {
+                                Name = "Import Processing Rule"
+                            }
                         }
                     },
                     Count = 1,

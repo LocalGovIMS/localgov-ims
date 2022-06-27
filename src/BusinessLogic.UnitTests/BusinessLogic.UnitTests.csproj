@@ -72,6 +72,9 @@
     <Reference Include="Moq, Version=4.16.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.16.1\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -140,20 +143,33 @@
     <Compile Include="Extensions\String\WithoutCheckDigitTests.cs" />
     <Compile Include="Extensions\String\IsNumericTests.cs" />
     <Compile Include="Extensions\String\IsAlphaTests.cs" />
+    <Compile Include="Extensions\TransactionImport\AddInfoTests.cs" />
+    <Compile Include="Extensions\TransactionImport\CompleteTests.cs" />
+    <Compile Include="Extensions\TransactionImport\AddErrorTests.cs" />
+    <Compile Include="Extensions\TransactionImport\HasErrorsTests.cs" />
+    <Compile Include="Extensions\TransactionImport\RevertTests.cs" />
+    <Compile Include="Extensions\TransactionImport\ErrorsTests.cs" />
+    <Compile Include="Extensions\TransactionImport\StartTests.cs" />
+    <Compile Include="Extensions\TransactionImport\TestBase.cs" />
+    <Compile Include="Extensions\TransactionImport\InitialiseTests.cs" />
     <Compile Include="Extensions\Vat\IsASuspenseJournalVatCodeTests.cs" />
     <Compile Include="Helpers\PermissionTestHelper.cs" />
     <Compile Include="Classes\Smtp\VatReceiptEmailTests.cs" />
-    <Compile Include="ImportProcessing\FileImporter\ImportFileTests.cs" />
-    <Compile Include="ImportProcessing\FileImporter\ConstructorTests.cs" />
-    <Compile Include="ImportProcessing\FileImporter\TestBase.cs" />
-    <Compile Include="ImportProcessing\FileImportProcessor\ConstructorTests.cs" />
-    <Compile Include="ImportProcessing\FileImportProcessor\ProcessTests.cs" />
-    <Compile Include="ImportProcessing\FileImportProcessor\TestBase.cs" />
+    <Compile Include="ImportProcessing\File\FileImporter\ImportFileTests.cs" />
+    <Compile Include="ImportProcessing\File\FileImporter\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\File\FileImporter\TestBase.cs" />
+    <Compile Include="ImportProcessing\File\FileImportProcessor\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\File\FileImportProcessor\ProcessTests.cs" />
+    <Compile Include="ImportProcessing\File\FileImportProcessor\TestBase.cs" />
     <Compile Include="ImportProcessing\Operations\DecimalOperatorTests.cs" />
     <Compile Include="ImportProcessing\Operations\TextOperatorTests.cs" />
     <Compile Include="ImportProcessing\ProcessedTransactionModelBuilder\BuildFromCsvTests.cs" />
     <Compile Include="ImportProcessing\RuleEngine\ProcessTests.cs" />
     <Compile Include="ImportProcessing\RuleEngine\TestData.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessorValidator\ValidateTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessor\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessor\ProcessTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportProcessor\TestBase.cs" />
     <Compile Include="Models\EReturnWrapperTests.cs" />
     <Compile Include="Models\JournalTransactionTests.cs" />
     <Compile Include="Models\Transaction\CreatedByTests.cs" />

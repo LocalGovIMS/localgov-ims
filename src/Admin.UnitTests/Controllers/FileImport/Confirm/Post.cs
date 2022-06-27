@@ -23,7 +23,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IModelCommand<SaveCommandArgs>> _mockSaveCommand = new Mock<IModelCommand<SaveCommandArgs>>();
-        private readonly Mock<IModelCommand<string>> _mockProcessCommand = new Mock<IModelCommand<string>>();
+        private readonly Mock<IModelCommand<int>> _mockProcessCommand = new Mock<IModelCommand<int>>();
 
         private MethodInfo GetMethod()
         {
@@ -42,7 +42,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
             var controller = new Controller(dependencies);
 
-            return controller.Confirm(new ConfirmViewModel() { BatchReference = "Batch Reference", RowCount = 2 });
+            return controller.Confirm(new ConfirmViewModel() { TransactionImportId = 1, RowCount = 2 });
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
         public void ReturnsRedirectToRouteResultIfProcessImportCommandFails()
         {
             // Arrange
-            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<string>()))
+            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<int>()))
                 .Returns(new Admin.Classes.Commands.CommandResult(false));
 
             // Act
@@ -74,7 +74,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
         public void RedirectToImportConfirmIfProcessImportCommandIsSuccessful()
         {
             // Arrange
-            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<string>()))
+            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<int>()))
                 .Returns(new Admin.Classes.Commands.CommandResult(false));
 
             // Act
@@ -88,14 +88,14 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
         public void ReturnsRedirectToRouteResultIfProcessImportCommandIsSuccessful()
         {
             // Arrange
-            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<string>()))
+            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<int>()))
                 .Returns(new Admin.Classes.Commands.CommandResult(true)
                 {
                     Data = new ProcessResult()
                     {
                         FileImport = new BusinessLogic.Entities.FileImport()
                         {
-                            BatchReference = "Batch Reference",
+                            TransactionImportId = 1,
                         },
                         NumberOfRowsImported = 2
                     }
@@ -112,14 +112,14 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
         public void RedirectToTransactionSearchIfProcessImportCommandIsSuccessful()
         {
             // Arrange
-            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<string>()))
+            _mockProcessCommand.Setup(x => x.Execute(It.IsAny<int>()))
                 .Returns(new Admin.Classes.Commands.CommandResult(true)
                 {
                     Data = new ProcessResult()
                     {
                         FileImport = new BusinessLogic.Entities.FileImport()
                         {
-                            BatchReference = "Batch Reference",
+                            TransactionImportId = 1,
                         },
                         NumberOfRowsImported = 2
                     }

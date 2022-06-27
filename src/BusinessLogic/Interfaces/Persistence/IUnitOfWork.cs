@@ -48,6 +48,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IFileImportRepository FileImports { get; }
         ITransactionImportTypeRepository TransactionImportTypes { get; }
         ITransactionImportTypeImportProcessingRuleRepository TransactionImportTypeImportProcessingRules { get; }
+        ITransactionImportRepository TransactionImports { get; }
 
         int Complete(int userId);
         void ResetChanges();

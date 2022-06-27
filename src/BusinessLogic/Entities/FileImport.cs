@@ -14,8 +14,8 @@ namespace BusinessLogic.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string BatchReference { get; set; }
+        public int TransactionImportId { get; set; }
+        public virtual TransactionImport TransactionImport { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -24,13 +24,6 @@ namespace BusinessLogic.Entities
         [Required]
         [StringLength(200)]
         public string WorkingFilename { get; set; }
-
-        [Required]
-        public DateTime CreatedAt { get; set; }
-
-        [Required]
-        public int CreatedByUserId { get; set; }
-        public virtual User CreatedByUser { get; set; }
 
         public virtual ICollection<FileImportRow> Rows { get; set; }
     }

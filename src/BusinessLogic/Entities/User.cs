@@ -19,7 +19,8 @@ namespace BusinessLogic.Entities
             UserMethodOfPayments = new HashSet<UserMethodOfPayment>();
             UserRoles = new HashSet<UserRole>();
             UserTemplates = new HashSet<UserTemplate>();
-            FileImports = new HashSet<FileImport>();
+            TransactionImports = new HashSet<TransactionImport>();
+            TransactionImportStatusHistories = new HashSet<TransactionImportStatusHistory>();
         }
 
         public int UserId { get; set; }
@@ -68,7 +69,8 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<UserTemplate> UserTemplates { get; set; }
         
-        public virtual ICollection<FileImport> FileImports { get; set; }
+        public virtual ICollection<TransactionImport> TransactionImports { get; set; }
 
+        public virtual ICollection<TransactionImportStatusHistory> TransactionImportStatusHistories { get; set; }
     }
 }

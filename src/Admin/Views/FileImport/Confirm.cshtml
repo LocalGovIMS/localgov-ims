@@ -18,7 +18,7 @@
 }
 @using (Html.BeginForm("Confirm", "FileImport", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.BatchReference)
+    @Html.HiddenFor(m => m.TransactionImportId)
     @Html.HiddenFor(m => m.RowCount)
 
     <div class="ui form">
