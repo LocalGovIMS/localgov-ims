@@ -5,7 +5,7 @@ using Web.Mvc.Navigation;
 
 namespace Admin.Controllers
 {
-    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
+    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin + "," + Role.Finance)]
     public class TransactionImportController : BaseController<ITransactionImportControllerDependencies>
     {
         public TransactionImportController(ITransactionImportControllerDependencies dependecies)
@@ -13,8 +13,7 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Transaction Imports")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Transaction Imports")]
         [HttpGet]
         public ActionResult List()
         {
@@ -23,8 +22,7 @@ namespace Admin.Controllers
             return View("List", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Transaction Imports")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Transaction Imports")]
         [AcceptVerbs("GET", "POST")]
         public ActionResult Search(SearchCriteria criteria)
         {

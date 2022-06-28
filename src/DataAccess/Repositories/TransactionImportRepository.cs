@@ -46,10 +46,10 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.TransactionImportTypeId == criteria.TransactionImportTypeId.Value);
             }
 
-            //if (criteria.TransactionImportTypeId.HasValue)
-            //{
-            //    items = items.Where(x => x.TransactionImportTypeId == criteria.TransactionImportTypeId.Value);
-            //}
+            if (criteria.StatusId.HasValue)
+            {
+                items = items.Where(x => x.StatusHistories.OrderByDescending(y => y.CreatedDate).FirstOrDefault().StatusId == criteria.StatusId);
+            }
 
             if (criteria.StartDate != null)
             {
