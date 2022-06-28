@@ -70,6 +70,7 @@ namespace BusinessLogic
                 .RegisterType<ICheckDigitConfigurationService, CheckDigitConfigurationService>()
                 .RegisterType<ITransactionImportTypeService, TransactionImportTypeService>()
                 .RegisterType<ITransactionImportTypeImportProcessingRuleService, TransactionImportTypeImportProcessingRuleService>()
+                .RegisterType<ITransactionImportService, TransactionImportService>()
 
                 .RegisterType<IEmailService, EmailService>()
                 .RegisterType<IEmailServiceDependencies, EmailServiceDependencies>()

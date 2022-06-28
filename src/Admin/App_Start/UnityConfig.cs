@@ -323,6 +323,8 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel>, Commands.ImportProcessingRuleTransactionImportType.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleTransactionImportType.DeleteCommand>("ImportProcessingRuleTransactionImportType.Command.Delete")
 
+                .RegisterType<IModelBuilder<ViewModels.TransactionImport.ListViewModel, ViewModels.TransactionImport.SearchCriteria>, ViewModelBuilders.TransactionImport.ListViewModelBuilder>()
+
                 ;
         }
 
@@ -364,7 +366,8 @@ namespace Admin
                 .RegisterType<IUserMethodOfPaymentControllerDependencies, UserMethodOfPaymentControllerDependencies>()
                 .RegisterType<ITransactionImportTypeControllerDependencies, TransactionImportTypeControllerDependencies>()
                 .RegisterType<ITransactionImportTypeImportProcessingRuleControllerDependencies, TransactionImportTypeImportProcessingRuleControllerDependencies>()
-                .RegisterType<IImportProcessingRuleTransactionImportTypeControllerDependencies, ImportProcessingRuleTransactionImportTypeControllerDependencies>();
+                .RegisterType<IImportProcessingRuleTransactionImportTypeControllerDependencies, ImportProcessingRuleTransactionImportTypeControllerDependencies>()
+                .RegisterType<ITransactionImportControllerDependencies, TransactionImportControllerDependencies>();
         }
 
         private static void RegisterOther(IUnityContainer container)

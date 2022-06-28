@@ -1,0 +1,55 @@
+﻿@model Admin.Models.TransactionImport.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped teal">
+        <thead>
+            <tr>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Total Amount (£)
+                </th>
+                <th>
+                    Number of Transactions
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.TransactionImportType.Name
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.TotalAmount
+                    </td>
+                    <td>
+                        @item.Rows.Count()
+                    </td>
+                    <td>
+                        @item.CurrentStatus()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no imports in the system
+    </div>
+}
+

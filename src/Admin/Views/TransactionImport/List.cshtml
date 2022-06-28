@@ -1,0 +1,99 @@
+﻿@using PagedList.Mvc
+
+@model Admin.Models.TransactionImport.ListViewModel
+@{
+    ViewBag.Title = "Transaction Imports";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Transaction imports
+        @Html.ActionLink("Create fund", "Create", new { }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Transction imports
+        </div>
+    </h1>
+}
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Total Amount (£)
+                </th>
+                <th>
+                    Number of Transactions
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.TransactionImportType.Name
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.TotalAmount
+                    </td>
+                    <td>
+                        @item.Rows.Count()
+                    </td>
+                    <td>
+                        @item.CurrentStatus()
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="7">
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                            {
+                                page = page,
+                                transactionImportTypeId = Model.SearchCriteria.TransactionImportTypeId,
+                                statusId = Model.SearchCriteria.StatusId,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                            }))
+                        }
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no funds in the system
+    </div>
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown({
+            match: 'both'
+        });
+    </script>
+}
