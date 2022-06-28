@@ -79,5 +79,13 @@ namespace BusinessLogic.Extensions
                 Message = message
             });
         }
+
+        public static TransactionImportStatusEnum CurrentStatus(this TransactionImport item)
+        {
+            return (TransactionImportStatusEnum)item.StatusHistories
+                .OrderByDescending(x => x.CreatedDate)
+                .FirstOrDefault()
+                .StatusId;
+        }
     }
 }

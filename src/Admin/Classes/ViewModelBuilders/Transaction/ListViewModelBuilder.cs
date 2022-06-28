@@ -34,15 +34,15 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
 
         protected override ListViewModel OnBuild()
         {
-            var transactionCriteria = new BusinessLogic.Models.Transactions.SearchCriteria()
+            var searchCriteria = new BusinessLogic.Models.Transactions.SearchCriteria()
             {
                 Page = 1,
                 PageSize = 20
             };
 
-            var searchResult = _transactionService.SearchTransactions(transactionCriteria);
+            var searchResult = _transactionService.SearchTransactions(searchCriteria);
 
-            var searchCriteria = new SearchCriteria
+            var criteria = new SearchCriteria
             {
                 Funds = GetFundsList(),
                 Mops = GetMopList(),
@@ -52,7 +52,7 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
             return new ListViewModel()
             {
                 Transactions = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = searchCriteria,
+                SearchCriteria = criteria,
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page

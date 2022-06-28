@@ -316,6 +316,7 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImport\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessageMetadata\CreateViewModelBuilder.cs" />
@@ -359,6 +360,8 @@
     <Compile Include="Controllers\Dependencies\FundMessageControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleTransactionImportTypeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleTransactionImportTypeControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\ITransactionImportControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\TransactionImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\TransactionImportTypeImportProcessingRuleControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IAccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ICheckDigitConfigurationControllerDependencies.cs" />
@@ -469,6 +472,7 @@
     <Compile Include="Controllers\CheckDigitConfigurationController.cs" />
     <Compile Include="Controllers\FundMessageController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleTransactionImportTypeController.cs" />
+    <Compile Include="Controllers\TransactionImportController.cs" />
     <Compile Include="Controllers\TransactionImportTypeImportProcessingRuleController.cs" />
     <Compile Include="Controllers\PaymentIntegrationController.cs" />
     <Compile Include="Controllers\FileImportController.cs" />
@@ -568,6 +572,8 @@
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\TransactionImportType\ListViewModel.cs" />
     <Compile Include="Models\TransactionImportType\SearchCriteria.cs" />
+    <Compile Include="Models\TransactionImport\ListViewModel.cs" />
+    <Compile Include="Models\TransactionImport\SearchCriteria.cs" />
     <Compile Include="Models\UserMethodOfPayment\EditViewModel.cs" />
     <Compile Include="Models\FundMessageMetadata\DetailsViewModel.cs" />
     <Compile Include="Models\FundMessageMetadata\EditViewModel.cs" />
@@ -1729,6 +1735,9 @@
     <Content Include="Views\ImportProcessingRuleTransactionImportType\_List.cshtml" />
     <Content Include="Views\ImportProcessingRuleTransactionImportType\Create.cshtml" />
     <Content Include="Views\ImportProcessingRuleTransactionImportType\Edit.cshtml" />
+    <Content Include="Views\TransactionImport\_List.cshtml" />
+    <Content Include="Views\TransactionImport\_Search.cshtml" />
+    <Content Include="Views\TransactionImport\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

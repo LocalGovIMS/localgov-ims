@@ -54,5 +54,24 @@ namespace BusinessLogic.UnitTests.Extensions.TransactionImport
 
             return transactionImport;
         }
+
+        protected Entities.TransactionImport GetTransactionWithImportStatusHistories(TransactionImportStatusEnum latestStatus)
+        {
+            var transactionImport = GetTransactionImport();
+
+            transactionImport.StatusHistories.Add(new Entities.TransactionImportStatusHistory()
+            {
+                CreatedDate = System.DateTime.Now.AddMinutes(-1),
+                StatusId = (int)TransactionImportStatusEnum.Received
+            });
+
+            transactionImport.StatusHistories.Add(new Entities.TransactionImportStatusHistory()
+            {
+                CreatedDate = System.DateTime.Now,
+                StatusId = (int)latestStatus
+            });
+
+            return transactionImport;
+        }
     }
 }

@@ -283,6 +283,7 @@
     <Compile Include="Interfaces\Services\IPaymentIntegrationService.cs" />
     <Compile Include="Interfaces\Services\ISuspenseNoteService.cs" />
     <Compile Include="Interfaces\Services\IFundMessageMetadataService.cs" />
+    <Compile Include="Interfaces\Services\ITransactionImportService.cs" />
     <Compile Include="Interfaces\Services\IVatMetadataService.cs" />
     <Compile Include="Interfaces\Services\IFundMetadataService.cs" />
     <Compile Include="Interfaces\Services\IMethodOfPaymentMetadataService.cs" />
@@ -324,6 +325,7 @@
     <Compile Include="Models\ProcessedTransactionModel.cs" />
     <Compile Include="Models\Import\ProcessResult.cs" />
     <Compile Include="Models\Import\LoadFromFileResult.cs" />
+    <Compile Include="Models\TransactionImport\SearchCriteria.cs" />
     <Compile Include="Models\Transactions\UpdateCardDetailsArgs.cs" />
     <Compile Include="Models\Transactions\AuthorisePendingTransactionByInternalReferenceArgs.cs" />
     <Compile Include="Models\FundMessageMetadata\SearchCriteria.cs" />
@@ -356,6 +358,7 @@
     <Compile Include="Services\PaymentIntegrationService.cs" />
     <Compile Include="Services\SuspenseNoteService.cs" />
     <Compile Include="Services\FundMessageMetadataService.cs" />
+    <Compile Include="Services\TransactionImportService.cs" />
     <Compile Include="Services\VatMetadataService.cs" />
     <Compile Include="Services\FundMetadataService.cs" />
     <Compile Include="Services\MethodOfPaymentMetadataService.cs" />
