@@ -12,10 +12,10 @@
                     Date
                 </th>
                 <th>
-                    Total Amount (£)
+                    Total amount (£)
                 </th>
                 <th>
-                    Number of Transactions
+                    Number of transactions
                 </th>
                 <th>
                     Status
@@ -39,7 +39,7 @@
                         @item.Rows.Count()
                     </td>
                     <td>
-                        @item.CurrentStatus()
+                        @item.CurrentStatus().GetDisplayName()
                     </td>
                 </tr>
             }

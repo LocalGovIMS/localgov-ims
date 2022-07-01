@@ -202,6 +202,7 @@
     <Compile Include="Enums\TransactionStatus.cs" />
     <Compile Include="Extensions\AccountHolderExtensions.cs" />
     <Compile Include="Extensions\CheckDigitConfigurationExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FundMetadataExtensions.cs" />

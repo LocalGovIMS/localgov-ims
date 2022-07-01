@@ -398,3 +398,7 @@ pre {
 .ui.feed > .event > .content .summary > .list-date {
     margin: 0;
 }
+
+.ui.vertical.segment label:first-of-type {
+    font-weight:bold;
+}

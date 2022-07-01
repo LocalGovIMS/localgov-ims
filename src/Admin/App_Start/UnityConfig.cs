@@ -323,6 +323,7 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.ImportProcessingRuleTransactionImportType.EditViewModel>, Commands.ImportProcessingRuleTransactionImportType.EditCommand>("Edit")
                 .RegisterType<IModelCommand<int>, Commands.ImportProcessingRuleTransactionImportType.DeleteCommand>("ImportProcessingRuleTransactionImportType.Command.Delete")
 
+                .RegisterType<IModelBuilder<ViewModels.TransactionImport.DetailsViewModel, int>, ViewModelBuilders.TransactionImport.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.TransactionImport.ListViewModel, ViewModels.TransactionImport.SearchCriteria>, ViewModelBuilders.TransactionImport.ListViewModelBuilder>()
 
                 ;

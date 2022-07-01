@@ -9,14 +9,17 @@ namespace Admin.Controllers
     {
         public TransactionImportControllerDependencies(
             ILog log
+            , IModelBuilder<DetailsViewModel, int> detailsViewModelBuilder
             , IModelBuilder<ListViewModel, SearchCriteria> listViewModelBuilder)
              : base(log)
         {
+            DetailsViewModelBuilder = detailsViewModelBuilder ?? throw new ArgumentNullException("detailsViewModelBuilder");
             ListViewModelBuilder = listViewModelBuilder ?? throw new ArgumentNullException("listViewModelBuilder");
         }
 
         #region ModelBuiders
 
+        public IModelBuilder<DetailsViewModel, int> DetailsViewModelBuilder { get; private set; }
         public IModelBuilder<ListViewModel, SearchCriteria> ListViewModelBuilder { get; private set; }
 
         #endregion

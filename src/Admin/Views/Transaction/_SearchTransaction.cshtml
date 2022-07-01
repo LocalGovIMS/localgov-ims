@@ -1,6 +1,6 @@
 ﻿@model Admin.Models.Transaction.SearchCriteria
 
-@using (Html.BeginForm("Search", "Transaction", FormMethod.Get, new { id = "search-form" } ))
+@using (Html.BeginForm(Model.SearchAction, "Transaction", FormMethod.Get, new { id = "search-form" } ))
 {
 
     @Html.HiddenFor(x => x.TransactionImportId)

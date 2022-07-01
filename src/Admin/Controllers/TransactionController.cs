@@ -36,6 +36,14 @@ namespace Admin.Controllers
             return View("~/Views/Transaction/List.cshtml", model);
         }
 
+        [NavigatablePageActionFilter(OnlyComparePath = true, DisplayText = "Transactions")]
+        [Classes.Security.Attributes.Authorize(Roles = Role.TransactionList)]
+        [AcceptVerbs("GET", "POST")]
+        public ActionResult ListForTransactionImport(SearchCriteria criteria)
+        {
+            return Search(criteria);
+        }
+
         [NavigatablePageActionFilter(DisplayText = "Transaction Details")]
         [Classes.Security.Attributes.Authorize(Roles = Role.TransactionDetails)]
         [HttpGet]
