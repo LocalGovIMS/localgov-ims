@@ -33,6 +33,11 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.Name.Contains(criteria.Name));
             }
 
+            if (criteria.IsGlobal.HasValue)
+            {
+                items = items.Where(x => x.IsGlobal == criteria.IsGlobal);
+            }
+
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;
 
@@ -68,6 +73,22 @@ namespace DataAccess.Repositories
         {
             var items = IncomeDbContext.ImportProcessingRules.AsQueryable()
                 .Where(x => x.Disabled == false || includeDisabled == true)
+                .ApplyFilters(Filters)
+                .Include(x => x.Conditions)
+                .Include(x => x.Conditions.Select(y => y.Field))
+                .Include(x => x.Conditions.Select(y => y.Operator))
+                .Include(x => x.Actions)
+                .Include(x => x.Actions.Select(y => y.Field))
+                .Include(x => x.TransactionImportTypes)
+                .ToList();
+
+            return items;
+        }
+
+        public IEnumerable<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId)
+        {
+            var items = IncomeDbContext.ImportProcessingRules.AsQueryable()
+                .Where(x => x.TransactionImportTypes.Any(y => y.TransactionImportTypeId == transactionImportTypeId))
                 .ApplyFilters(Filters)
                 .Include(x => x.Conditions)
                 .Include(x => x.Conditions.Select(y => y.Field))

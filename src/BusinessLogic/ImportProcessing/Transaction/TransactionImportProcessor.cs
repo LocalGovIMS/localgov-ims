@@ -122,7 +122,7 @@ namespace BusinessLogic.ImportProcessing
             {
                 var processedTransactionToCreate = row.ToProcessedTransaction();
 
-                _ruleEngine.Process(processedTransactionToCreate);
+                _ruleEngine.Process(processedTransactionToCreate, _args.TransactionImport.TransactionImportTypeId);
 
                 _args.TransactionImport.ProcessedTransactions.Add(processedTransactionToCreate);
 

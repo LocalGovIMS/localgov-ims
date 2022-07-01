@@ -71,6 +71,21 @@ namespace BusinessLogic.Services
             }
         }
 
+        public List<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId)
+        {
+            try
+            {
+                return UnitOfWork.ImportProcessingRules
+                    .GetByTransactionImportType(transactionImportTypeId)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return null;
+            }
+        }
+
         public IResult Create(ImportProcessingRule item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
