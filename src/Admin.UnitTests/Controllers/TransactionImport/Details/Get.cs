@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 using Web.Mvc.Navigation;
 using Controller = Admin.Controllers.TransactionImportController;
 
-namespace Admin.UnitTests.Controllers.TransactionImport.List
+namespace Admin.UnitTests.Controllers.TransactionImport.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -21,13 +22,15 @@ namespace Admin.UnitTests.Controllers.TransactionImport.List
         {
             return typeof(Controller).GetMethods()
                 .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == nameof(Controller.List))
+                .Where(x => x.Name == nameof(Controller.Details))
                 .FirstOrDefault();
         }
 
         private ActionResult GetResult()
-        {           
-            return Controller.List();
+        {
+            MockDetailsViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.TransactionImport.DetailsViewModel());
+
+            return Controller.Details(1);
         }
 
         [TestMethod]
@@ -49,7 +52,7 @@ namespace Admin.UnitTests.Controllers.TransactionImport.List
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Transaction Imports", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Transaction Import Details", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

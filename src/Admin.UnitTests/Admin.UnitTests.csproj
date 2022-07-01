@@ -247,6 +247,7 @@
     <Compile Include="Classes\ViewModelBuilders\FundMessageMetadata\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessageMetadata\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessageMetadata\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImport\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\TransactionImport\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\TransactionImportType\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\TransactionImportType\EditViewModelBuilderTests.cs" />
@@ -292,7 +293,9 @@
     <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
     <Compile Include="Controllers\Dependencies\TransactionImportControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\TransactionImport\BaseTest.cs" />
     <Compile Include="Controllers\TransactionImport\ConstructorTests.cs" />
+    <Compile Include="Controllers\TransactionImport\Details\Get.cs" />
     <Compile Include="Controllers\TransactionImport\List\Get.cs" />
     <Compile Include="Controllers\TransactionImportType\ConstructorTests.cs" />
     <Compile Include="Controllers\TransactionImportType\Create\Get.cs" />
@@ -457,8 +460,10 @@
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
     <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
     <Compile Include="Controllers\TransactionImport\Search\Get.cs" />
+    <Compile Include="Controllers\TransactionImport\_List\Get.cs" />
     <Compile Include="Controllers\Transaction\Origin\Get.cs" />
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
+    <Compile Include="Controllers\Transaction\ListForTransactionImport\Get.cs" />
     <Compile Include="Controllers\Transaction\TestBase.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\ConstructorTests.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Get.cs" />

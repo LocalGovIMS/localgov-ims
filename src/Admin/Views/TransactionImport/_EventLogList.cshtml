@@ -1,0 +1,43 @@
+﻿@model List<Admin.Models.TransactionImport.EventLogViewModel>
+
+@if (Model.Any())
+{
+    <table class="ui celled table striped teal">
+        <thead>
+            <tr>
+                <th>
+                    Created date
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Message
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @item.Message
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no event log entries to display
+    </div>
+}
+

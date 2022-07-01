@@ -7,6 +7,7 @@ namespace Admin.Controllers
     {
         #region ModelBuilders
 
+        IModelBuilder<DetailsViewModel, int> DetailsViewModelBuilder { get; }
         IModelBuilder<ListViewModel, SearchCriteria> ListViewModelBuilder { get; }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Admin.Controllers;
+using System;
 using System.ComponentModel.DataAnnotations;
 using Web.Mvc;
 
@@ -50,5 +51,9 @@ namespace Admin.Models.Transaction
         public bool WildSearchAccountReference { get; set; }
 
         public int PageSize { get; set; } = 20;
+
+        public bool IsForATransactionImport => TransactionImportId.HasValue;
+
+        public string SearchAction => IsForATransactionImport ? nameof(TransactionController.ListForTransactionImport) : nameof(TransactionController.Search);
     }
 }

@@ -39,5 +39,14 @@ namespace Admin.Controllers
 
             return PartialView(model);
         }
+
+        [NavigatablePageActionFilter(DisplayText = "Transaction Import Details")]
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var model = Dependencies.DetailsViewModelBuilder.Build(id);
+
+            return View(model);
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace BusinessLogic.Entities
 
         public decimal TotalAmount { get; set; }
 
-        public decimal TotalNumberOfTransactions { get; set; }
+        public decimal TotalNumberOfTransactions { get; set; } // TODO: Change to int
 
         public DateTime? ReversedDate { get; set; }
 

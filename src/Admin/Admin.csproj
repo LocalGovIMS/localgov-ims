@@ -316,6 +316,7 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\TransactionImport\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\TransactionImport\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilder.cs" />
@@ -572,6 +573,7 @@
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\TransactionImportType\ListViewModel.cs" />
     <Compile Include="Models\TransactionImportType\SearchCriteria.cs" />
+    <Compile Include="Models\TransactionImport\DetailsViewModel.cs" />
     <Compile Include="Models\TransactionImport\ListViewModel.cs" />
     <Compile Include="Models\TransactionImport\SearchCriteria.cs" />
     <Compile Include="Models\UserMethodOfPayment\EditViewModel.cs" />
@@ -1738,6 +1740,9 @@
     <Content Include="Views\TransactionImport\_List.cshtml" />
     <Content Include="Views\TransactionImport\_Search.cshtml" />
     <Content Include="Views\TransactionImport\List.cshtml" />
+    <Content Include="Views\TransactionImport\Details.cshtml" />
+    <Content Include="Views\TransactionImport\_StatusHistoryList.cshtml" />
+    <Content Include="Views\TransactionImport\_EventLogList.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

@@ -13,12 +13,24 @@
 @section Header {
     <h1 class="ui header">
         Transactions
-        <a href="@Url.Action("Search", "Transaction")" class="ui button right floated" id="reset">
-            <i class="undo icon"></i> Reset search
-        </a>
-        <a href="@Url.Action("Import", "FileImport")" class="ui button right floated" id="upload">
-            <i class="upload icon"></i> File Import
-        </a>
+
+        @if (!Model.SearchCriteria.IsForATransactionImport)
+        {
+            <a href="@Url.Action("Search", "Transaction")" class="ui button right floated" id="reset">
+                <i class="undo icon"></i> Reset search
+            </a>
+            <a href="@Url.Action("Import", "FileImport")" class="ui button right floated" id="upload">
+                <i class="upload icon"></i> File Import
+            </a>
+        }
+
+        @if (Model.SearchCriteria.IsForATransactionImport)
+        {
+            <a href="@Url.Action("ListForTransactionImport", "Transaction", new { TransactionImportId = Model.SearchCriteria.TransactionImportId })" class="ui button right floated" id="reset">
+                <i class="undo icon"></i> Reset search
+            </a>
+        }
+
         <a class="ui button right floated" id="export" onclick="SubmitMyForm()">
             <i class="download icon"></i> Export
         </a>
@@ -97,20 +109,21 @@
                     <div class="ui pagination menu">
                         @if (Model.Pages > 1)
                         {
-                            @Html.PagedListPager(Model.Transactions, page => Url.Action("Search", new
-                       {
-                           page = page,
-                           amount = Model.SearchCriteria.Amount,
-                           fundCode = Model.SearchCriteria.FundCode,
-                           receiptNumber = Model.SearchCriteria.ReceiptNumber,
-                           startDate = Model.SearchCriteria.StartDate,
-                           endDate = Model.SearchCriteria.EndDate,
-                           accountReference = Model.SearchCriteria.AccountReference,
-                           userId = Model.SearchCriteria.UserId,
-                           mopCode = Model.SearchCriteria.MopCode,
-                           narrative = Model.SearchCriteria.Narrative,
-                           WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference
-                       }))
+                            @Html.PagedListPager(Model.Transactions, page => Url.Action(Model.SearchCriteria.SearchAction, new
+                            {
+                                page = page,
+                                amount = Model.SearchCriteria.Amount,
+                                fundCode = Model.SearchCriteria.FundCode,
+                                receiptNumber = Model.SearchCriteria.ReceiptNumber,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                                accountReference = Model.SearchCriteria.AccountReference,
+                                userId = Model.SearchCriteria.UserId,
+                                mopCode = Model.SearchCriteria.MopCode,
+                                narrative = Model.SearchCriteria.Narrative,
+                                WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
+                                TransactionImportId = Model.SearchCriteria.TransactionImportId
+                            }))
                         }
                     </div>
                 </th>

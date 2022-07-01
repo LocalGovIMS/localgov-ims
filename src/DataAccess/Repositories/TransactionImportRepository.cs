@@ -24,6 +24,8 @@ namespace DataAccess.Repositories
                 .Include(x => x.EventLogs)
                 .Include(x => x.TransactionImportType)
                 .Include(x => x.StatusHistories)
+                .Include(x => x.StatusHistories.Select(y => y.CreatedByUser))
+                .Include(x => x.CreatedByUser)
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
