@@ -40,6 +40,11 @@
                     </td>
                     <td>
                         @item.CurrentStatus().GetDisplayName()
+                        @if (item.HasErrors())
+                        {
+                            <br />
+                            <span>(@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
+                        }
                     </td>
                 </tr>
             }

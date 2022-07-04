@@ -59,6 +59,10 @@
                     </td>
                     <td>
                         @item.CurrentStatus().GetDisplayName()
+                        @if (item.HasErrors())
+                        {
+                            <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
