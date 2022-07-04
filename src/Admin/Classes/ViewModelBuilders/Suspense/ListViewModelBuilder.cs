@@ -43,7 +43,7 @@ namespace Admin.Classes.ViewModelBuilders.Suspense
                 AccountNumber = searchCriteria.AccountNumber,
                 Amount = searchCriteria.Amount,
                 Narrative = searchCriteria.Narrative,
-                ShowAllocated = searchCriteria.IncludeAllocated,
+                ShowAll = searchCriteria.ShowAll,
                 Page = searchCriteria.Page,
                 PageSize = 6
             };

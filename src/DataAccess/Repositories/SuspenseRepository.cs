@@ -54,13 +54,9 @@ namespace DataAccess.Repositories
                 data = data.Where(x => x.Amount == criteria.Amount.Value);
             }
 
-            if (!criteria.ShowAllocated) // If we don't want to include allocated suspense items - add this filter.
+            if (!criteria.ShowAll) // If we don't want to show all, we just show unallocated
             {
                 data = data.Where(x => x.Amount - x.SuspenseProcessedTransactions.Sum(y => y.Amount) > 0 || x.SuspenseProcessedTransactions.Any() == false);
-            }
-            else
-            {
-                data = data.Where(x => x.Amount == x.SuspenseProcessedTransactions.Sum(y => y.Amount) && x.SuspenseProcessedTransactions.Any());
             }
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
