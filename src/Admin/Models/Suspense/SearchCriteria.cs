@@ -9,7 +9,7 @@ namespace Admin.Models.Suspense
         public string AccountNumber { get; set; }
         public string Narrative { get; set; }
         public decimal? Amount { get; set; }
-        public bool IncludeAllocated { get; set; }
+        public bool ShowAll { get; set; }
         public int Page { get; set; }
     }
 }
