@@ -4,6 +4,7 @@ using System;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
 {
+    [TestClass]
     public class ConstructorTests : TestBase
     {
         [TestMethod]
