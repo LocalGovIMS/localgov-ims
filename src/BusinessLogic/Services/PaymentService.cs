@@ -379,7 +379,8 @@ namespace BusinessLogic.Services
                     CardHolderPostCode = paymentDetails.Postcode,
                     VatCode = paymentDetails.VatCode,
                     CallRecordingSource = paymentDetails.CallRecordingSource,
-                    CallRecordingUserName = paymentDetails.CallRecordingUserName
+                    CallRecordingUserName = paymentDetails.CallRecordingUserName,
+                    UserCode = SecurityContext.UserId
                 });
             }
 
