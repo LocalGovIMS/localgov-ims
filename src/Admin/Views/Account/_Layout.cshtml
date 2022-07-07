@@ -30,10 +30,12 @@
 </head>
 
 <body cz-shortcut-listen="true">
-    @{ Html.RenderPartial("_MainMenu"); }
-    <div class="main">
 
-        <div class="nav" style="background-color: #fff; color: #333; box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem; padding: 1rem; z-index:2">
+    @{ Html.RenderPartial("_MainMenu"); }
+    
+    <div class="main" style="margin-left: 11rem;">
+        
+        <div class="nav" style="background-color: #fff; color: #333; box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem; padding: 1rem; z-index:2;">
             <div style="float: right;">
                 <strong><i class="user icon"></i> @User.Identity.Name</strong>
                 @if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//localhost"))
@@ -48,7 +50,8 @@
                 {
                     <div class="environment environment--test">TEST</div>
                 }
-
+            </div>
+            <div style="display:inline-block;">
             </div>
         </div>
         @{ Html.RenderAction("GetSystemMessages", "Home");}
@@ -73,4 +76,4 @@
     @Scripts.Render("~/bundles/App/Shared")
     @RenderSection("scripts", required: false)
 </body>
-</html>
+</html>px;

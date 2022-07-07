@@ -4,6 +4,7 @@ using BusinessLogic.Interfaces.Dependencies;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -39,7 +40,6 @@ namespace BusinessLogic.Services
                     Subject = email.Email.Subject,
                     Body = email.Email.Body,
                 });
-
 
                 return new Result();
             }
@@ -86,6 +86,22 @@ namespace BusinessLogic.Services
             try
             {
                 var email = _dependencies.EmailFactory.SendDuplicateTransactionEmail(transactions);
+
+                _smtpClient.Send(email.Email);
+
+                return new Result();
+            }
+            catch (Exception e)
+            {
+                return new Result(e.Message);
+            }
+        }
+
+        public IResult SendPasswordResetEmail(IdentityMessage message)
+        {
+            try
+            {
+                var email = _dependencies.EmailFactory.SendPasswordResetEmail(message);
 
                 _smtpClient.Send(email.Email);
 

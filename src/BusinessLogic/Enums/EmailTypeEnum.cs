@@ -6,5 +6,6 @@
         NonVatReceipt = 2,
         EReturnDeleted = 3,
         NotificationEmail = 4,
+        PasswordReset = 5
     }
 }

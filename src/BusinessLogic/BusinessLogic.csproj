@@ -123,6 +123,7 @@
     <Compile Include="Classes\Smtp\EmailFactory.cs" />
     <Compile Include="Classes\Smtp\Emails\BaseEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\DuplicateTransactionEmail.cs" />
+    <Compile Include="Classes\Smtp\Emails\PasswordResetEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\NotificationEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\EReturnDeletedEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\VatReceiptEmail.cs" />
