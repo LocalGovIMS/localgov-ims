@@ -1,4 +1,6 @@
 ﻿using BusinessLogic.Authentication.Identity;
+using BusinessLogic.Interfaces.Services;
+using BusinessLogic.Interfaces.Smtp;
 using DataAccess.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,14 +11,24 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Admin
 {
     [ExcludeFromCodeCoverage]
     public class EmailService : IIdentityMessageService
     {
+        private readonly IEmailService _emailService;
+
+        public EmailService(IEmailService emailService)
+        {
+            _emailService = emailService;
+        }
+
         public Task SendAsync(IdentityMessage message)
         {
+            _emailService.SendPasswordResetEmail(message);
+
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
@@ -77,7 +89,7 @@ namespace Admin
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
+            manager.EmailService = new EmailService(DependencyResolver.Current.GetService<IEmailService>());
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
