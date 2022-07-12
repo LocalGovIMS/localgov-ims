@@ -33,7 +33,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.TransactionImport
             MockUnitOfWork.Setup(x => x.Complete(It.IsAny<int>()));
             MockUnitOfWork.Setup(x => x.ResetChanges());
 
-            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>()));
+            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()));
 
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()));
 
@@ -158,7 +158,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.TransactionImport
             var result = _transactionImportProcessor.Process(args);
 
             // Assert
-            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>()), Times.Never);
+            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()), Times.Never);
             MockTransactionService.Verify(x => x.CreateProcessedTransaction(It.IsAny<ProcessedTransaction>()), Times.Never);
         }
 

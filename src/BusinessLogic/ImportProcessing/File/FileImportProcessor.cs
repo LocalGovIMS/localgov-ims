@@ -75,7 +75,7 @@ namespace BusinessLogic.ImportProcessing
             {
                 var processedTransactionToCreate = BuildProcessedTransaction(row.RowData);
 
-                _ruleEngine.Process(processedTransactionToCreate);
+                _ruleEngine.Process(processedTransactionToCreate, 0);
 
                 var result = _transactionService.CreateProcessedTransaction(processedTransactionToCreate, false);
 

@@ -35,14 +35,9 @@ namespace BusinessLogic.ImportProcessing
             var transactionImportTypeRules = _importProcessingRuleService.GetByTransactionImportType(transactionImportTypeId);
             var globalRules = _importProcessingRuleService.Search(new Models.ImportProcessingRule.SearchCriteria() { IsGlobal = true });
 
-            _rules = (IList<ImportProcessingRule>)transactionImportTypeRules.Union(globalRules.Items);
+            _rules = transactionImportTypeRules.Union(globalRules.Items).ToList();
         }
-
-        public ProcessedTransaction Process(ProcessedTransaction transaction)
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public ProcessedTransaction Process(ProcessedTransaction transaction, int transactionImportTypeId)
         {
             _transaction = transaction;

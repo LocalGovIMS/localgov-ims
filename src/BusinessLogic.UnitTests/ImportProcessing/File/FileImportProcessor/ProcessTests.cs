@@ -15,8 +15,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
             MockUnitOfWork.Setup(x => x.FileImports.GetByTransactionImportId(It.IsAny<int>()))
                 .Returns(GetImport());
 
-            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>()))
-                .Returns<ProcessedTransaction>(a => a);
+            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()))
+                .Returns((ProcessedTransaction a, int b) => a);
 
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<ProcessedTransaction>(), It.IsAny<bool>()))
                 .Returns(new Result());
