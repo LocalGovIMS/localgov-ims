@@ -27,19 +27,27 @@ namespace BusinessLogic.ImportProcessing
         {
             _log = log;
             _importProcessingRuleService = importProcessingRuleService;
-            _operations = operations;
-
-            LoadRules();
+            _operations = operations;           
         }
 
-        private void LoadRules()
+        private void LoadRules(int transactionImportTypeId)
         {
-            _rules = _importProcessingRuleService.GetAll(false);
+            var transactionImportTypeRules = _importProcessingRuleService.GetByTransactionImportType(transactionImportTypeId);
+            var globalRules = _importProcessingRuleService.Search(new Models.ImportProcessingRule.SearchCriteria() { IsGlobal = true });
+
+            _rules = (IList<ImportProcessingRule>)transactionImportTypeRules.Union(globalRules.Items);
         }
 
         public ProcessedTransaction Process(ProcessedTransaction transaction)
         {
+            throw new NotImplementedException();
+        }
+
+        public ProcessedTransaction Process(ProcessedTransaction transaction, int transactionImportTypeId)
+        {
             _transaction = transaction;
+
+            LoadRules(transactionImportTypeId);
 
             foreach (var rule in _rules)
             {
