@@ -33,7 +33,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.TransactionImport
             MockUnitOfWork.Setup(x => x.Complete(It.IsAny<int>()));
             MockUnitOfWork.Setup(x => x.ResetChanges());
 
-            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()));
+            MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>()));
 
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()));
 

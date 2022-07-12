@@ -26,7 +26,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.RuleEngine
             SetupRuleEngine();
 
             // Act
-            _ruleEngine.Process(transaction, 0);
+            _ruleEngine.Process(transaction);
 
             // Assert
             transaction.FundCode.Should().Be(expectedFundCode);
@@ -35,7 +35,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.RuleEngine
         private void SetupRules(List<ImportProcessingRule> rules)
         {
             _mockImportProcessingRuleService.Setup(x => x.GetByTransactionImportType(It.IsAny<int>())).Returns(rules);
-            _mockImportProcessingRuleService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.ImportProcessingRule.SearchCriteria>())).Returns(new BusinessLogic.Models.Shared.SearchResult<ImportProcessingRule>() { Items= new List<ImportProcessingRule>() });
+            _mockImportProcessingRuleService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.ImportProcessingRule.SearchCriteria>()))
+                .Returns(new BusinessLogic.Models.Shared.SearchResult<ImportProcessingRule>() { Items = rules });
         }
 
         private void SetupRuleEngine()
