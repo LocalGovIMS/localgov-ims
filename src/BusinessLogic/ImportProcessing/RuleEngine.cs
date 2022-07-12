@@ -15,7 +15,7 @@ namespace BusinessLogic.ImportProcessing
         private readonly IImportProcessingRuleService _importProcessingRuleService;
         private readonly IOperations _operations;
 
-        private IList<ImportProcessingRule> _rules;
+        private IList<ImportProcessingRule> _rules = new List<ImportProcessingRule>();
 
         private ProcessedTransaction _transaction;
         private bool _groupResult = false;
@@ -29,34 +29,47 @@ namespace BusinessLogic.ImportProcessing
             _importProcessingRuleService = importProcessingRuleService;
             _operations = operations;           
         }
-
-        private void LoadRules(int transactionImportTypeId)
-        {
-            var transactionImportTypeRules = _importProcessingRuleService.GetByTransactionImportType(transactionImportTypeId);
-            var globalRules = _importProcessingRuleService.Search(new Models.ImportProcessingRule.SearchCriteria() { IsGlobal = true });
-
-            _rules = (IList<ImportProcessingRule>)transactionImportTypeRules.Union(globalRules.Items);
-        }
-
+        
         public ProcessedTransaction Process(ProcessedTransaction transaction)
         {
-            throw new NotImplementedException();
+            _transaction = transaction;
+
+            LoadGlobalRules();
+
+            ProcessRules();
+
+            return transaction;
         }
 
         public ProcessedTransaction Process(ProcessedTransaction transaction, int transactionImportTypeId)
         {
-            _transaction = transaction;
+            LoadTransactionImportTypeRules(transactionImportTypeId);
 
-            LoadRules(transactionImportTypeId);
+            return Process(transaction);
+        }
 
+        private void LoadTransactionImportTypeRules(int transactionImportTypeId)
+        {
+            var transactionImportTypeRules = _importProcessingRuleService.GetByTransactionImportType(transactionImportTypeId);
+
+            _rules = _rules.Union(transactionImportTypeRules).ToList();
+        }
+
+        private void LoadGlobalRules()
+        {
+            var globalRules = _importProcessingRuleService.Search(new Models.ImportProcessingRule.SearchCriteria() { IsGlobal = true });
+
+            _rules = _rules.Union(globalRules.Items).ToList();
+        }
+
+        private void ProcessRules()
+        {
             foreach (var rule in _rules)
             {
                 InitialiseRuleCheck();
                 CheckTheRule(rule);
                 ProcessActions(rule.Actions);
             }
-
-            return transaction;
         }
 
         private void InitialiseRuleCheck()

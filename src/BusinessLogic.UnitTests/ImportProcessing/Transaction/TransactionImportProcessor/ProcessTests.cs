@@ -158,7 +158,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.TransactionImport
             var result = _transactionImportProcessor.Process(args);
 
             // Assert
-            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>()), Times.Never);
+            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()), Times.Never);
             MockTransactionService.Verify(x => x.CreateProcessedTransaction(It.IsAny<ProcessedTransaction>()), Times.Never);
         }
 
