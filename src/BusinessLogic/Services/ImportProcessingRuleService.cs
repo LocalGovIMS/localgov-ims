@@ -71,6 +71,21 @@ namespace BusinessLogic.Services
             }
         }
 
+        public List<ImportProcessingRule> GetByImportType(int importTypeId)
+        {
+            try
+            {
+                return UnitOfWork.ImportProcessingRules
+                    .GetByImportType(importTypeId)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return null;
+            }
+        }
+
         public IResult Create(ImportProcessingRule item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)

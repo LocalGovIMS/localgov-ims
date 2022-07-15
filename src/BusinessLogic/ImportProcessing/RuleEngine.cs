@@ -15,7 +15,7 @@ namespace BusinessLogic.ImportProcessing
         private readonly IImportProcessingRuleService _importProcessingRuleService;
         private readonly IOperations _operations;
 
-        private IList<ImportProcessingRule> _rules;
+        private IList<ImportProcessingRule> _rules = new List<ImportProcessingRule>();
 
         private ProcessedTransaction _transaction;
         private bool _groupResult = false;
@@ -27,28 +27,49 @@ namespace BusinessLogic.ImportProcessing
         {
             _log = log;
             _importProcessingRuleService = importProcessingRuleService;
-            _operations = operations;
-
-            LoadRules();
+            _operations = operations;           
         }
-
-        private void LoadRules()
+        
+        public ProcessedTransaction Process(ProcessedTransaction transaction, int importTypeId)
         {
-            _rules = _importProcessingRuleService.GetAll(false);
+            LoadImportTypeRules(importTypeId);
+
+            return Process(transaction);
         }
 
         public ProcessedTransaction Process(ProcessedTransaction transaction)
         {
             _transaction = transaction;
 
+            LoadGlobalRules();
+
+            ProcessRules();
+
+            return transaction;
+        }
+
+        private void LoadImportTypeRules(int importTypeId)
+        {
+            var transactionImportTypeRules = _importProcessingRuleService.GetByImportType(importTypeId);
+
+            _rules = _rules.Union(transactionImportTypeRules).ToList();
+        }
+
+        private void LoadGlobalRules()
+        {
+            var globalRules = _importProcessingRuleService.Search(new Models.ImportProcessingRule.SearchCriteria() { IsGlobal = true });
+
+            _rules = _rules.Union(globalRules.Items).ToList();
+        }
+
+        private void ProcessRules()
+        {
             foreach (var rule in _rules)
             {
                 InitialiseRuleCheck();
                 CheckTheRule(rule);
                 ProcessActions(rule.Actions);
             }
-
-            return transaction;
         }
 
         private void InitialiseRuleCheck()
