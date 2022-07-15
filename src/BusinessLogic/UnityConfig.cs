@@ -68,9 +68,9 @@ namespace BusinessLogic
                 .RegisterType<ICryptographyService, MD5CryptographyService>()
                 .RegisterType<IAccountReferenceValidatorService, AccountReferenceValidatorService>()
                 .RegisterType<ICheckDigitConfigurationService, CheckDigitConfigurationService>()
-                .RegisterType<ITransactionImportTypeService, TransactionImportTypeService>()
-                .RegisterType<ITransactionImportTypeImportProcessingRuleService, TransactionImportTypeImportProcessingRuleService>()
-                .RegisterType<ITransactionImportService, TransactionImportService>()
+                .RegisterType<IImportTypeService, ImportTypeService>()
+                .RegisterType<IImportTypeImportProcessingRuleService, ImportTypeImportProcessingRuleService>()
+                .RegisterType<IImportService, ImportService>()
 
                 .RegisterType<IEmailService, EmailService>()
                 .RegisterType<IEmailServiceDependencies, EmailServiceDependencies>()
@@ -96,9 +96,7 @@ namespace BusinessLogic
                 .RegisterType<IOperations, Operations>()
                 .RegisterType<IFileImporter, FileImporter>()
                 .RegisterType<IFileImportProcessor, FileImportProcessor>()
-                .RegisterType<ITransactionImportProcessor, TransactionImportProcessor>()
-                .RegisterType<IValidator<TransactionImport>, TransactionImportProcessorValidator>()
-                
+
                 .RegisterType<IProcessedTransactionModelBuilder, ProcessedTransactionModelBuilder>()
 
                 .RegisterType<IPaymentValidationHandler, PaymentValidationHandler>()
@@ -116,6 +114,17 @@ namespace BusinessLogic
                 .RegisterType<ICheckDigitStrategy, DynixLibraryStrategy>(CheckDigitType.DynixLibrary.ToString())
 
                 .RegisterFactory<Func<CheckDigitType, ICheckDigitStrategy>>(c => new Func<CheckDigitType, ICheckDigitStrategy>(type => c.Resolve<ICheckDigitStrategy>(type.ToString())))
+
+                .RegisterType<IImportProcessor, ImportProcessor>()
+
+                .RegisterType<IImportProcessingStrategy, TransactionImportProcessingStrategy>(ImportDataTypeEnum.Transaction.ToString())
+                .RegisterType<IImportProcessingStrategy, AccountHolderImportProcessingStrategy>(ImportDataTypeEnum.AccountHolder.ToString())
+                .RegisterFactory<Func<string, IImportProcessingStrategy>>(c => new Func<string, IImportProcessingStrategy>(name => c.Resolve<IImportProcessingStrategy>(name)))
+
+                .RegisterType<IValidator<Import>, TransactionImportProcessingStrategyValidator>(ImportDataTypeEnum.Transaction.ToString())
+                .RegisterType<IValidator<Import>, AccountHolderImportProcessingStrategyValidator>(ImportDataTypeEnum.AccountHolder.ToString())
+                .RegisterFactory<Func<string, IValidator<Import>>>(c => new Func<string, IValidator<Import>>(name => c.Resolve<IValidator<Import>>(name)))
+
             ;
         }
     }

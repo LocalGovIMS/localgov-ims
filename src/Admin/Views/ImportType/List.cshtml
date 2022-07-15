@@ -1,0 +1,97 @@
+﻿@using PagedList.Mvc
+
+@model Admin.Models.ImportType.ListViewModel
+@{
+    ViewBag.Title = "Import Types";
+}
+
+
+@section Header {
+    <h1 class="ui header">
+        Import types
+        @Html.ActionLink("Create type", "Create", new { }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Import type management
+        </div>
+    </h1>
+}
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Data type
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    External reference
+                </th>
+                <th>
+                    Is reversible
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @(((ImportDataTypeEnum)item.DataType).GetDisplayName())
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.ExternalReference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.IsReversible)
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="7">
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                            {
+                                Page = page,
+                                Name = Model.SearchCriteria.Name,
+                                ExternalReference = Model.SearchCriteria.ExternalReference,
+                                DataType = Model.SearchCriteria.DataType,
+                            }))
+                        }
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no import types in the system
+    </div>
+}

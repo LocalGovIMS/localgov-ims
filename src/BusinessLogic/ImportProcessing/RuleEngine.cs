@@ -30,6 +30,13 @@ namespace BusinessLogic.ImportProcessing
             _operations = operations;           
         }
         
+        public ProcessedTransaction Process(ProcessedTransaction transaction, int importTypeId)
+        {
+            LoadImportTypeRules(importTypeId);
+
+            return Process(transaction);
+        }
+
         public ProcessedTransaction Process(ProcessedTransaction transaction)
         {
             _transaction = transaction;
@@ -41,16 +48,9 @@ namespace BusinessLogic.ImportProcessing
             return transaction;
         }
 
-        public ProcessedTransaction Process(ProcessedTransaction transaction, int transactionImportTypeId)
+        private void LoadImportTypeRules(int importTypeId)
         {
-            LoadTransactionImportTypeRules(transactionImportTypeId);
-
-            return Process(transaction);
-        }
-
-        private void LoadTransactionImportTypeRules(int transactionImportTypeId)
-        {
-            var transactionImportTypeRules = _importProcessingRuleService.GetByTransactionImportType(transactionImportTypeId);
+            var transactionImportTypeRules = _importProcessingRuleService.GetByImportType(importTypeId);
 
             _rules = _rules.Union(transactionImportTypeRules).ToList();
         }

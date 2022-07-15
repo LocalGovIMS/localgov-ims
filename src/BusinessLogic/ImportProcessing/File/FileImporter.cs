@@ -3,7 +3,7 @@ using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using log4net;
 using System;
 using System.IO.Abstractions;
@@ -46,11 +46,10 @@ namespace BusinessLogic.ImportProcessing
         {
             _fileImport = new FileImport()
             {
-                TransactionImport = new TransactionImport()
+                Import = new Import()
                 {
-                    TransactionImportTypeId = args.TransactionImportTypeId,
-                    Description = "TODO - Get Description from Transaction Type",
-                    ExternalReference = "TODO - Get External Reference from Transaction Type",
+                    ImportTypeId = args.ImportTypeId,
+                    Notes = "TODO: Get from UI",
                     CreatedDate = DateTime.Now,
                     CreatedByUserId = _securityContext.UserId
                 },
@@ -102,6 +101,6 @@ namespace BusinessLogic.ImportProcessing
     public class FileImporterArgs
     {
         public string Path { get; set; }
-        public int TransactionImportTypeId { get; set; }
+        public int ImportTypeId { get; set; }
     }
 }

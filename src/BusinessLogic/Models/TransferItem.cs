@@ -13,6 +13,6 @@ namespace BusinessLogic.Models
         public string AccountReference { get; set; }
         public decimal Amount { get; set; }
         public string Narrative { get; set; }
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
     }
 }

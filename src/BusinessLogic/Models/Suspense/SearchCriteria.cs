@@ -8,7 +8,7 @@ namespace BusinessLogic.Models.Suspense
         public DateTime? CreatedAtDateTo { get; set; }
         public string AccountNumber { get; set; }
         public string Narrative { get; set; }
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
         public decimal? Amount { get; set; }
         public bool ShowAll { get; set; }
 

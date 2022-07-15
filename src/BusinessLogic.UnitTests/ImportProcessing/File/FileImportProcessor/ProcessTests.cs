@@ -12,7 +12,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
     {
         private void Initialise()
         {
-            MockUnitOfWork.Setup(x => x.FileImports.GetByTransactionImportId(It.IsAny<int>()))
+            MockUnitOfWork.Setup(x => x.FileImports.GetByImportId(It.IsAny<int>()))
                 .Returns(GetImport());
 
             MockRuleEngine.Setup(x => x.Process(It.IsAny<ProcessedTransaction>()))

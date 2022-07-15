@@ -128,9 +128,9 @@ namespace BusinessLogic.Entities
         [StringLength(13)]
         public string OriginalTransactionReference { get; set; }
 
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
 
-        public TransactionImport TransactionImport { get; set; }
+        public Import Import { get; set; }
 
         public virtual EReturn EReturn { get; set; }
 

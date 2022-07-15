@@ -19,7 +19,7 @@ namespace BusinessLogic.Models
         public float VatRate { get; set; }
         public decimal? VatAmount { get; set; }
         public string Narrative { get; set; }
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
 
         public ProcessedTransactionModel() { }
 
@@ -42,7 +42,7 @@ namespace BusinessLogic.Models
                 VatRate = VatRate,
                 VatAmount = VatAmount,
                 Narrative = Narrative,
-                TransactionImportId = TransactionImportId
+                ImportId = ImportId
             };
         }
     }

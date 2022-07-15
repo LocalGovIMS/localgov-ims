@@ -1,0 +1,102 @@
+﻿@using PagedList.Mvc
+
+@model Admin.Models.Import.ListViewModel
+@{
+    ViewBag.Title = "Imports";
+}
+
+@section Header {
+    <h1 class="ui header">
+        Imports
+        <div class="sub header">
+            Imports
+        </div>
+    </h1>
+}
+
+@Html.Partial("_Search", Model.SearchCriteria)
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="ui celled table striped">
+        <thead>
+            <tr>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Number of rows
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.ImportType.Name
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.Rows.Count()
+                    </td>
+                    <td>
+                        @item.CurrentStatus().GetDisplayName()
+                        @if (item.HasErrors())
+                        {
+                            <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="7">
+                    <div class="ui pagination menu">
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                            {
+                                page = page,
+                                importTypeId = Model.SearchCriteria.ImportTypeId,
+                                statusId = Model.SearchCriteria.StatusId,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                            }))
+                        }
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <div class="ui info message">
+        There are no imports in the system
+    </div>
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown({
+            match: 'both'
+        });
+    </script>
+}

@@ -14,7 +14,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IImportProcessingRuleService> _mockImportProcessingRuleService = new Mock<IImportProcessingRuleService>();
-        private readonly Mock<ITransactionImportTypeService> _mockTransactionImportTypeService = new Mock<ITransactionImportTypeService>();
+        private readonly Mock<IImportTypeService> _mockImportTypeService = new Mock<IImportTypeService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -24,7 +24,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
                 _mockImportProcessingRuleService.Object,
-                _mockTransactionImportTypeService.Object);
+                _mockImportTypeService.Object);
         }
 
         private void SetupImportProcessingRuleService(Mock<IImportProcessingRuleService> service)
@@ -33,9 +33,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
                 new BusinessLogic.Entities.ImportProcessingRule()
                 {
                     Id = 1,
-                    TransactionImportTypes = new List<BusinessLogic.Entities.TransactionImportTypeImportProcessingRule>()
+                    ImportTypes = new List<BusinessLogic.Entities.ImportTypeImportProcessingRule>()
                     {
-                        new BusinessLogic.Entities.TransactionImportTypeImportProcessingRule()
+                        new BusinessLogic.Entities.ImportTypeImportProcessingRule()
                         {
                             Id = 1
                         }
@@ -43,12 +43,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
                 });
         }
 
-        private void SetupTransactionImportTypeService(Mock<ITransactionImportTypeService> service)
+        private void SetupImportTypeService(Mock<IImportTypeService> service)
         {
             service.Setup(x => x.GetAll()).Returns(
-                new List<BusinessLogic.Entities.TransactionImportType>()
+                new List<BusinessLogic.Entities.ImportType>()
                 {
-                    new BusinessLogic.Entities.TransactionImportType()
+                    new BusinessLogic.Entities.ImportType()
                     {
                         Id = 1,
                     }
@@ -72,7 +72,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
         {
             // Arrange
             SetupImportProcessingRuleService(_mockImportProcessingRuleService);
-            SetupTransactionImportTypeService(_mockTransactionImportTypeService);
+            SetupImportTypeService(_mockImportTypeService);
 
             // Act
             var result = _viewModelBuilder.Build(1);
@@ -82,32 +82,32 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
         }
 
         [TestMethod]
-        public void Build_sets_the_TransactionImportTypesAreAvailableToAdd_to_false_when_there_are_no_TransactionImportTypes_available_to_add()
+        public void Build_sets_the_ImportTypesAreAvailableToAdd_to_false_when_there_are_no_ImportTypes_available_to_add()
         {
             // Arrange
             SetupImportProcessingRuleService(_mockImportProcessingRuleService);
-            SetupTransactionImportTypeService(_mockTransactionImportTypeService);
+            SetupImportTypeService(_mockImportTypeService);
 
             // Act
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.TransactionImportTypesAreAvailableToAdd.Should().BeFalse();
+            result.ImportTypesAreAvailableToAdd.Should().BeFalse();
         }
 
         [TestMethod]
-        public void Build_sets_the_TransactionImportTypesAreAvailableToAdd_to_true_when_there_are_TransactionImportTypes_available_to_add()
+        public void Build_sets_the_ImportTypesAreAvailableToAdd_to_true_when_there_are_ImportTypes_available_to_add()
         {
             // Arrange
             SetupImportProcessingRuleService(_mockImportProcessingRuleService);
-            _mockTransactionImportTypeService.Setup(x => x.GetAll()).Returns(
-                new List<BusinessLogic.Entities.TransactionImportType>()
+            _mockImportTypeService.Setup(x => x.GetAll()).Returns(
+                new List<BusinessLogic.Entities.ImportType>()
                 {
-                    new BusinessLogic.Entities.TransactionImportType()
+                    new BusinessLogic.Entities.ImportType()
                     {
                         Id = 1,
                     },
-                    new BusinessLogic.Entities.TransactionImportType()
+                    new BusinessLogic.Entities.ImportType()
                     {
                         Id = 2,
                     }
@@ -117,7 +117,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.ImportProcessingRule
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.TransactionImportTypesAreAvailableToAdd.Should().BeTrue();
+            result.ImportTypesAreAvailableToAdd.Should().BeTrue();
         }
     }
 }

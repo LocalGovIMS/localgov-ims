@@ -1,0 +1,63 @@
+﻿@model Admin.Models.ImportProcessingRuleImportType.EditViewModel
+@{
+    ViewBag.Title = "Edit import type link";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Edit import type link
+        <div class="sub header">
+            Details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Edit", "ImportProcessingRuleImportType", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ImportProcessingRuleId)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ImportTypeId)
+            <div class="ui search selection dropdown import-types-dropdown">
+                @Html.HiddenFor(x => x.ImportTypeId, new { size = 4 })
+                <i class="dropdown icon"></i>
+                <div class="default text no-overflow">Select import type</div>
+                <div class="menu">
+                    @foreach (var item in Model.ImportTypes.Items)
+                    {
+                        <div class="item" data-value="@item.Value">
+                            @item.Text
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.ImportTypes)
+            </div>
+        </div>
+        
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "ImportProcessingRuleImportType", null, new { @class = "ui button" })
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.import-types-dropdown').dropdown();
+
+        });
+    </script>
+
+}

@@ -46,6 +46,30 @@ namespace BusinessLogic.Services
             }
         }
 
+        public IResult Create(CreateAccountHolderArgs args)
+        {
+            try
+            {
+                var validateAccountHolderFundMessageResult = _accountHolderFundMessageValidator.Validate(args.AccountHolder);
+                if (!validateAccountHolderFundMessageResult.Success)
+                    return validateAccountHolderFundMessageResult;
+
+                UnitOfWork.AccountHolders.Add(args.AccountHolder);
+
+                if (args.SaveChanges)
+                {
+                    UnitOfWork.Complete(SecurityContext.UserId);
+                }
+
+                return new Result() { Data = args.AccountHolder };
+            }
+            catch (Exception e)
+            {
+                Logger.Error(null, e);
+                return new Result("Unable to save Account Holder");
+            }
+        }
+
         public IResult Update(AccountHolder accountHolder)
         {
             try
@@ -134,5 +158,11 @@ namespace BusinessLogic.Services
                 return null;
             }
         }
+    }
+
+    public class CreateAccountHolderArgs
+    {
+        public AccountHolder AccountHolder { get; set; }
+        public bool SaveChanges { get; set; } = true;
     }
 }

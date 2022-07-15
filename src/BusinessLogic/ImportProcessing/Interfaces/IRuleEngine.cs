@@ -6,6 +6,6 @@ namespace BusinessLogic.ImportProcessing
     {
         ProcessedTransaction Process(ProcessedTransaction transaction);
 
-        ProcessedTransaction Process(ProcessedTransaction transaction, int transactionImportTypeId);
+        ProcessedTransaction Process(ProcessedTransaction transaction, int importTypeId);
     }
 }

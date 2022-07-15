@@ -11,7 +11,7 @@ namespace BusinessLogic.Interfaces.Services
         IResult Create(ImportProcessingRule item);
         ImportProcessingRule Get(int id);
         List<ImportProcessingRule> GetAll(bool includeDisabled);
-        List<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId);
+        List<ImportProcessingRule> GetByImportType(int importTypeId);
         SearchResult<ImportProcessingRule> Search(SearchCriteria criteria);
         IResult Update(ImportProcessingRule item);
     }

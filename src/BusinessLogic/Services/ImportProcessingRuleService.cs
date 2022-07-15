@@ -71,12 +71,12 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId)
+        public List<ImportProcessingRule> GetByImportType(int importTypeId)
         {
             try
             {
                 return UnitOfWork.ImportProcessingRules
-                    .GetByTransactionImportType(transactionImportTypeId)
+                    .GetByImportType(importTypeId)
                     .ToList();
             }
             catch (Exception e)

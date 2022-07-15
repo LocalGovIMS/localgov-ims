@@ -9,7 +9,7 @@ namespace BusinessLogic.Interfaces.Repositories
         IEnumerable<ImportProcessingRule> Search(SearchCriteria criteria, out int resultCount);
         ImportProcessingRule Get(int id);
         IEnumerable<ImportProcessingRule> GetAll(bool includeDisabled);
-        IEnumerable<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId);
+        IEnumerable<ImportProcessingRule> GetByImportType(int importTypeId);
         void Update(ImportProcessingRule entity);
     }
 }

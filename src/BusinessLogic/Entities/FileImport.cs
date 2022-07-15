@@ -14,8 +14,8 @@ namespace BusinessLogic.Entities
         public int Id { get; set; }
 
         [Required]
-        public int TransactionImportId { get; set; }
-        public virtual TransactionImport TransactionImport { get; set; }
+        public int ImportId { get; set; }
+        public virtual Import Import { get; set; }
 
         [Required]
         [StringLength(200)]

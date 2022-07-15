@@ -9,7 +9,7 @@ namespace BusinessLogic.Entities
         {
             Conditions = new HashSet<ImportProcessingRuleCondition>();
             Actions = new HashSet<ImportProcessingRuleAction>();
-            TransactionImportTypes = new HashSet<TransactionImportTypeImportProcessingRule>();
+            ImportTypes = new HashSet<ImportTypeImportProcessingRule>();
         }
 
         public int Id { get; set; }
@@ -31,6 +31,6 @@ namespace BusinessLogic.Entities
 
         public virtual ICollection<ImportProcessingRuleAction> Actions { get; set; }
 
-        public virtual ICollection<TransactionImportTypeImportProcessingRule> TransactionImportTypes { get; set; }
+        public virtual ICollection<ImportTypeImportProcessingRule> ImportTypes { get; set; }
     }
 }

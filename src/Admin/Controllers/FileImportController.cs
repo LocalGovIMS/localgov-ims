@@ -1,7 +1,7 @@
 ﻿using Admin.Classes.Commands.FileImport;
 using Admin.Models.Import;
 using Admin.Models.Shared;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using BusinessLogic.Security;
 using System.Configuration;
 using System.Web;
@@ -47,7 +47,7 @@ namespace Admin.Controllers
                 return RedirectToAction("Confirm", 
                     new 
                     { 
-                        transactionImportId = ((LoadFromFileResult)result.Data).FileImport.TransactionImportId,
+                        importId = ((LoadFromFileResult)result.Data).FileImport.ImportId,
                         rowCount = ((LoadFromFileResult)result.Data).RowCount
                     });
             }
@@ -59,9 +59,9 @@ namespace Admin.Controllers
 
         [NavigatablePageActionFilter(DisplayText = "Confirm Import", OnlyComparePath = true)]
         [HttpGet]
-        public ActionResult Confirm(int transactionImportId, int rowCount)
+        public ActionResult Confirm(int importId, int rowCount)
         {
-            var model = new ConfirmViewModel() { TransactionImportId = transactionImportId, RowCount = rowCount };
+            var model = new ConfirmViewModel() { ImportId = importId, RowCount = rowCount };
 
             return View(model);
         }
@@ -69,18 +69,18 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Confirm(ConfirmViewModel model)
         {
-            var result = Dependencies.ProcessCommand.Execute(model.TransactionImportId);
+            var result = Dependencies.ProcessCommand.Execute(model.ImportId);
 
             if (!result.Success)
             {
                 TempData["Message"] = new ErrorMessage(result.Messages);
 
-                return RedirectToAction("Confirm", new ConfirmViewModel() { TransactionImportId = model.TransactionImportId, RowCount = model.RowCount });
+                return RedirectToAction("Confirm", new ConfirmViewModel() { ImportId = model.ImportId, RowCount = model.RowCount });
             }
 
             TempData["Message"] =  new SuccessMessage($"{((ProcessResult)result.Data).NumberOfRowsImported} rows have been imported");
 
-            return RedirectToAction("Search", "Transaction", new { TransactionImportId = ((ProcessResult)result.Data).FileImport.TransactionImportId });
+            return RedirectToAction("Search", "Transaction", new { ImportId = ((ProcessResult)result.Data).FileImport.ImportId });
         }
     }
 }

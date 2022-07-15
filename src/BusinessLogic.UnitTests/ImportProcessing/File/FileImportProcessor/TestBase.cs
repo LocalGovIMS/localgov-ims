@@ -38,7 +38,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
         {
             Args = new FileImportProcessorArgs()
             {
-                TransactionImportId = 1
+                ImportId = 1
             };
         }
 
@@ -46,7 +46,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
         {
             return new Entities.FileImport()
             {
-                TransactionImportId = 1,
+                ImportId = 1,
                 Rows = new List<Entities.FileImportRow>()
                 {
                     new Entities.FileImportRow()
@@ -125,7 +125,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
         {
             return new Entities.FileImport()
             {
-                TransactionImportId = 1,
+                ImportId = 1,
                 Rows = new List<Entities.FileImportRow>()
                 {
                     new Entities.FileImportRow()
@@ -204,7 +204,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
         {
             var model = new ProcessedTransactionModel();
 
-            model.TransactionImportId = 1;
+            model.ImportId = 1;
             model.Reference = "ABC123";
             model.InternalReference = "DEF456";
             model.PspReference = "GHI789";

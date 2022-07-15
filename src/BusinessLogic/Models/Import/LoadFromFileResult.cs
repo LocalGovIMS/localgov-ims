@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Entities;
 
-namespace BusinessLogic.Models
+namespace BusinessLogic.Models.Import
 {
     public class LoadFromFileResult
     {

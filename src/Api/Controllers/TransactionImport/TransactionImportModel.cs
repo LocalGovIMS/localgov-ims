@@ -8,39 +8,35 @@ namespace Api.Controllers.TransactionImport
 {
     public class TransactionImportModel
     {
-        public int TransactionImportTypeId { get; set; }
-        public string ExternalReference { get; set; }
-        public string Description { get; set; }
-        public decimal TotalAmount { get; set; }
-        public decimal TotalNumberOfTransactions { get; set; }
+        public int ImportTypeId { get; set; }
+        public string Notes { get; set; }
+        public int NumberOfRows { get; set; }
         public List<ProcessedTransactionModel> Rows { get; set; }
         public List<string> Errors { get; set; }
 
         public TransactionImportModel() { }
 
-        public BusinessLogic.Entities.TransactionImport GetTransactionImport()
+        public Import GetImport()
         {
-            return new BusinessLogic.Entities.TransactionImport()
+            return new Import()
             {
-                TransactionImportTypeId = TransactionImportTypeId,
-                ExternalReference = ExternalReference,
-                Description = Description,
-                TotalAmount = TotalAmount,
-                TotalNumberOfTransactions = TotalNumberOfTransactions,
-                Rows = GetTransactionImportRows(),  
-                EventLogs = GetTransactionImportEventLogs()
+                ImportTypeId = ImportTypeId,
+                Notes = Notes,
+                NumberOfRows = NumberOfRows,
+                Rows = GetImportRows(),  
+                EventLogs = GetImportEventLogs()
             }; 
         }
 
-        private List<TransactionImportRow> GetTransactionImportRows()
+        private List<ImportRow> GetImportRows()
         {
-            return Rows?.Select(x => new TransactionImportRow() { Data = Newtonsoft.Json.JsonConvert.SerializeObject(x.GetProcessedTransaction()) })
+            return Rows?.Select(x => new ImportRow() { Data = Newtonsoft.Json.JsonConvert.SerializeObject(x.GetProcessedTransaction()) })
                 .ToList();
         }
 
-        private List<TransactionImportEventLog> GetTransactionImportEventLogs()
+        private List<ImportEventLog> GetImportEventLogs()
         {
-            return Errors?.Select(x => new TransactionImportEventLog() { CreatedDate = System.DateTime.Now, Message = x, Type = (byte)TransactionImportEventLogTypeEnum.Error })
+            return Errors?.Select(x => new ImportEventLog() { CreatedDate = System.DateTime.Now, Message = x, Type = (byte)ImportEventLogTypeEnum.Error })
                 .ToList();
         }
     }

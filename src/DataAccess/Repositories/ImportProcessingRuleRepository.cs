@@ -25,7 +25,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
-                .Include(x => x.TransactionImportTypes)
+                .Include(x => x.ImportTypes)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(criteria.Name))
@@ -63,7 +63,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
-                .Include(x => x.TransactionImportTypes)
+                .Include(x => x.ImportTypes)
                 .FirstOrDefault();
 
             return item;
@@ -79,23 +79,23 @@ namespace DataAccess.Repositories
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
-                .Include(x => x.TransactionImportTypes)
+                .Include(x => x.ImportTypes)
                 .ToList();
 
             return items;
         }
 
-        public IEnumerable<ImportProcessingRule> GetByTransactionImportType(int transactionImportTypeId)
+        public IEnumerable<ImportProcessingRule> GetByImportType(int importTypeId)
         {
             var items = IncomeDbContext.ImportProcessingRules.AsQueryable()
-                .Where(x => x.TransactionImportTypes.Any(y => y.TransactionImportTypeId == transactionImportTypeId))
+                .Where(x => x.ImportTypes.Any(y => y.ImportTypeId == importTypeId))
                 .ApplyFilters(Filters)
                 .Include(x => x.Conditions)
                 .Include(x => x.Conditions.Select(y => y.Field))
                 .Include(x => x.Conditions.Select(y => y.Operator))
                 .Include(x => x.Actions)
                 .Include(x => x.Actions.Select(y => y.Field))
-                .Include(x => x.TransactionImportTypes)
+                .Include(x => x.ImportTypes)
                 .ToList();
 
             return items;

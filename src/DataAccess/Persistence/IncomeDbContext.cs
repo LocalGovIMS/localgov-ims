@@ -65,10 +65,11 @@ namespace DataAccess.Persistence
         public virtual DbSet<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; set; }
         public virtual DbSet<FileImport> FileImports { get; set; }
         public virtual DbSet<FileImportRow> FileImportRows { get; set; }
-        public virtual DbSet<TransactionImportType> TransactionImportTypes { get; set; }
-        public virtual DbSet<TransactionImportTypeImportProcessingRule> TransactionImportTypeImportProcessingRules { get; set; }
-        public virtual DbSet<TransactionImport> TransactionImports { get; set; }
-        public virtual DbSet<TransactionImportRow> TransactionImportRows { get; set; }
+        public virtual DbSet<Import> Imports { get; set; }
+        public virtual DbSet<ImportRow> ImportRows { get; set; }
+        public virtual DbSet<ImportType> ImportTypes { get; set; }
+        public virtual DbSet<ImportTypeImportProcessingRule> ImportTypeImportProcessingRules { get; set; }
+        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -312,13 +313,13 @@ namespace DataAccess.Persistence
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.TransactionImports)
+                .HasMany(e => e.Imports)
                 .WithRequired(e => e.CreatedByUser)
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.TransactionImportStatusHistories)
+                .HasMany(e => e.ImportStatusHistories)
                 .WithRequired(e => e.CreatedByUser)
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
@@ -369,24 +370,29 @@ namespace DataAccess.Persistence
                 .WithRequired(e => e.FileImport)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TransactionImport>()
+            modelBuilder.Entity<Import>()
                 .HasMany(e => e.Rows)
-                .WithRequired(e => e.TransactionImport)
+                .WithRequired(e => e.Import)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TransactionImport>()
+            modelBuilder.Entity<Import>()
                 .HasMany(e => e.ProcessedTransactions)
-                .WithOptional(e => e.TransactionImport)
+                .WithOptional(e => e.Import)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TransactionImport>()
+            modelBuilder.Entity<Import>()
                 .HasMany(e => e.FileImports)
-                .WithRequired(e => e.TransactionImport)
+                .WithRequired(e => e.Import)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TransactionImport>()
+            modelBuilder.Entity<Import>()
+                .HasMany(e => e.SuspenseItems)
+                .WithOptional(e => e.Import)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Import>()
                 .HasMany(e => e.StatusHistories)
-                .WithRequired(e => e.TransactionImport)
+                .WithRequired(e => e.Import)
                 .WillCascadeOnDelete(false);
         }
 
@@ -456,8 +462,12 @@ namespace DataAccess.Persistence
                 .HasIndex(r => r.JobRunTime)
                 .IsClustered(true);
 
-            modelBuilder.Entity<TransactionImportTypeImportProcessingRule>()
-                .HasIndex(s => new { s.TransactionImportTypeId, s.ImportProcessingRuleId})
+            modelBuilder.Entity<ImportTypeImportProcessingRule>()
+                .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId})
+                .IsUnique(true);
+
+            modelBuilder.Entity<ImportTypeImportProcessingRule>()
+                .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId })
                 .IsUnique(true);
         }
     }

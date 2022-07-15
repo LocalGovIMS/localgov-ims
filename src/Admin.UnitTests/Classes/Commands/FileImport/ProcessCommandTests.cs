@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,7 +15,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
     [ExcludeFromCodeCoverage]
     public class ProcessCommandTests
     {
-        private const int TransactionImportId = 1;
+        private const int ImportId = 1;
 
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFileImportService> _mockFileImportService = new Mock<IFileImportService>();
@@ -41,7 +41,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute(TransactionImportId);
+            var result = command.Execute(ImportId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -55,7 +55,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute(TransactionImportId);
+            var result = command.Execute(ImportId);
 
             // Assert
             result.Messages[0].Should().Be("File processed successfully.");
@@ -68,7 +68,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
             var command = CrateCommand();
 
             // Act
-            var result = command.Execute(TransactionImportId);
+            var result = command.Execute(ImportId);
 
             // Assert
             _mockFileImportService.Verify(x => x.Process(It.IsAny<int>()), Times.Once);
@@ -86,7 +86,7 @@ namespace Admin.UnitTests.Classes.Commands.FileImport
                 .Returns(new Result(expectedErrorMessage) { Data = new ProcessResult() });
 
             // Act
-            var result = command.Execute(TransactionImportId);
+            var result = command.Execute(ImportId);
 
             // Assert
             result.Messages[0].Should().Be(expectedErrorMessage);

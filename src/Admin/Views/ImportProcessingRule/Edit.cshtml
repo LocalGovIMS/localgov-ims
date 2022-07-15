@@ -60,12 +60,12 @@
         <div class="ui vertical segment">
             <h3 style="padding-bottom:10px;">
                 Transaction import types
-                @if (Model.TransactionImportTypesAreAvailableToAdd)
+                @if (Model.ImportTypesAreAvailableToAdd)
                 {
-                    @Html.ActionLink("Add a transaction import type", "Create", "ImportProcessingRuleTransactionImportType", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+                    @Html.ActionLink("Add a import type", "Create", "ImportProcessingRuleImportType", new { id = Model.Id }, new { @class = "ui blue button right floated" })
                 }
             </h3>
-            @Html.Action("_EditList", "ImportProcessingRuleTransactionImportType", new { id = Model.Id })
+            @Html.Action("_EditList", "ImportProcessingRuleImportType", new { id = Model.Id })
         </div>
 
     </div>

@@ -77,7 +77,7 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
                 PageSize = criteria.PageSize,
                 WildSearchAccountReference = criteria.WildSearchAccountReference,
-                TransactionImportId = criteria.TransactionImportId,
+                ImportId = criteria.ImportId,
                 CardPrefix = criteria.CardPrefix,
                 CardSuffix = criteria.CardSuffix
             };
