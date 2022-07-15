@@ -1,9 +1,4 @@
-﻿using Api.Controllers.ProcessedTransactions;
-using BusinessLogic.Entities;
-using BusinessLogic.Extensions;
-using BusinessLogic.ImportProcessing;
-using BusinessLogic.Interfaces.Persistence;
-using BusinessLogic.Interfaces.Services;
+﻿using BusinessLogic.ImportProcessing;
 using log4net;
 using Swashbuckle.Swagger.Annotations;
 using System;
@@ -14,14 +9,14 @@ namespace Api.Controllers.TransactionImport
     public class TransactionImportController : ApiController
     {
         private readonly ILog _log;
-        private readonly ITransactionImportProcessor _transactionImportProcessor;        
+        private readonly IImportProcessor _importProcessor;        
 
         public TransactionImportController(
             ILog log,
-            ITransactionImportProcessor transactionImportProcessor)
+            IImportProcessor importProcessor)
         {
             _log = log ?? throw new ArgumentNullException("log");
-            _transactionImportProcessor = transactionImportProcessor ?? throw new ArgumentNullException("transactionImportProcessor");
+            _importProcessor = importProcessor ?? throw new ArgumentNullException("importProcessor");
         }
 
         [HttpPost]
@@ -32,9 +27,9 @@ namespace Api.Controllers.TransactionImport
         {
             try
             {
-                var transactionImport = model.GetTransactionImport();
+                var import = model.GetImport();
 
-                var result = _transactionImportProcessor.Process(new TransactionImportProcessorArgs() { TransactionImport = transactionImport });
+                var result = _importProcessor.Process(new ImportProcessorArgs() { Import = import });
 
                 if (result.Success)
                     return Ok(result.Data);

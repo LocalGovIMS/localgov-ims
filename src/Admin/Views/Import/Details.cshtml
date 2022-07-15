@@ -1,0 +1,92 @@
+﻿@model Admin.Models.Import.DetailsViewModel
+@{
+    ViewBag.Title = "Import";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.ImportTypeName - @Model.CreatedDate
+        @if (Model.DataType == ImportDataTypeEnum.Transaction)
+        {
+            @Html.ActionLink("Transactions", "ListForTransactionImport", "Transaction", new { ImportId = Model.Id }, new { @class = "ui button blue right floated" })
+        }
+        <div class="sub header">
+            Transaction import details
+        </div>
+    </h1>
+}
+
+<div class="ui grid stackable">
+
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.DataType)
+            <br />
+            @Html.DisplayTextFor(m => m.DataType)
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.ImportTypeName)
+            <br />
+            @Html.DisplayFor(m => m.ImportTypeName)
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.CreatedDate)
+            <br />
+            @Html.DisplayFor(m => m.CreatedDate)
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.CreatedByUserName)
+            <br />
+            @Html.DisplayFor(m => m.CreatedByUserName)
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Notes)
+            <br />
+            @Html.DisplayFor(m => m.Notes)
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.NumberOfRows)
+            <br />
+            @Html.DisplayFor(m => m.NumberOfRows)
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.CurrentStatus)
+            <br />
+            @Html.DisplayFor(m => m.CurrentStatus)
+        </div>
+        @if (Model.ReversedDate.HasValue)
+        {
+            <div class="ui vertical segment">
+                @Html.LabelFor(m => m.ReversedDate)
+                <br />
+                @Html.DisplayFor(m => m.ReversedDate)
+            </div>
+        }
+    </div>
+
+</div>
+<div class="ui vertical segment">
+    <h3>
+        Status History
+    </h3>
+    @Html.Partial("_StatusHistoryList", Model.StatusHistories)
+</div>
+
+<div class="ui vertical segment">
+    <h3>
+        Event Log
+    </h3>
+    @Html.Partial("_EventLogList", Model.EventLogs)
+</div>
+
+<br />
+
+@Html.ActionLink("Back", "Back", "Import", null, new { @class = "ui button" })
+
+

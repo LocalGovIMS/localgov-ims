@@ -28,7 +28,7 @@
         }
         @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
         {
-            <a id="menu__imports" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "TransactionImport" ? "active" : "")" href="@Url.Action("List", "TransactionImport")"><i class="upload icon"></i> Imports</a>
+            <a id="menu__imports" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Import" ? "active" : "")" href="@Url.Action("List", "Import")"><i class="upload icon"></i> Imports</a>
         }
         @if (User.IsInRole(Role.Finance))
         {

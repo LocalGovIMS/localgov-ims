@@ -167,8 +167,8 @@ namespace BusinessLogic.Classes.Strategies
             foreach (var journal in journalItems.OrderByDescending(x => x.Amount))
             {
                 var narrative = string.IsNullOrWhiteSpace(journal.Narrative) ? suspenses.FirstOrDefault(x => x.Item.Narrative != string.Empty).Item.Narrative : journal.Narrative;
-                var transactionImportId = suspenses.FirstOrDefault(x => x.Item.TransactionImportId.HasValue).Item.TransactionImportId.Value;
-                var suspenseTransactionDate = suspenses.FirstOrDefault(x => x.Item.TransactionImportId.HasValue).Item.CreatedAt; // we only allow 1 suspense item at the moment but if that changes this is not OK
+                var importId = suspenses.FirstOrDefault(x => x.Item.ImportId.HasValue).Item.ImportId.Value;
+                var suspenseTransactionDate = suspenses.FirstOrDefault(x => x.Item.ImportId.HasValue).Item.CreatedAt; // we only allow 1 suspense item at the moment but if that changes this is not OK
 
                 // If the journal amount is greater than the remainder of the suspense amount, add a credit note(s) for the difference
                 var suspenseAmountRemaining = suspenses.Sum(x => x.AmountRemaining);
@@ -176,7 +176,7 @@ namespace BusinessLogic.Classes.Strategies
                 if (suspenseAmountRemaining < journal.Amount)
                 {
                     var totalCreditNotesToAdd = journal.Amount - suspenseAmountRemaining;
-                    creditNotesToJournal = GenerateCreditNoteJournals(creditNotes, transactionImportId, totalCreditNotesToAdd, narrative);
+                    creditNotesToJournal = GenerateCreditNoteJournals(creditNotes, importId, totalCreditNotesToAdd, narrative);
                 }
 
                 var result = _transactionJournalService.CreateJournal(
@@ -187,7 +187,7 @@ namespace BusinessLogic.Classes.Strategies
                         FundCode = journal.FundCode,
                         MopCode = journal.MopCode,
                         Narrative = narrative,
-                        TransactionImportId = transactionImportId,
+                        ImportId = importId,
                         VatCode = journal.VatCode
                     },
                     new TransferItem()
@@ -196,7 +196,7 @@ namespace BusinessLogic.Classes.Strategies
                         Amount = -(journal.Amount - creditNotesToJournal.Sum(x => x.Amount)),
                         FundCode = _journalFundCode,
                         Narrative = suspenses.FirstOrDefault(x => x.Item.Narrative != string.Empty).Item.Narrative,
-                        TransactionImportId = transactionImportId,
+                        ImportId = importId,
                         VatCode = _journalVatCode,
                     },
                     creditNotesToJournal,
@@ -246,7 +246,7 @@ namespace BusinessLogic.Classes.Strategies
             _unitOfWork.Complete(_securityContext.UserId);
         }
 
-        public List<TransferItem> GenerateCreditNoteJournals(List<CreditNote> creditNotes, int transactionImportId, decimal totalToCredit, string narrative)
+        public List<TransferItem> GenerateCreditNoteJournals(List<CreditNote> creditNotes, int importId, decimal totalToCredit, string narrative)
         {
             var creditTransferItems = new List<TransferItem>();
 
@@ -265,7 +265,7 @@ namespace BusinessLogic.Classes.Strategies
                         FundCode = creditNote.FundCode,
                         MopCode = _creditMopCode,
                         Narrative = narrative,
-                        TransactionImportId = transactionImportId,
+                        ImportId = importId,
                         VatCode = creditNote.VatCode
                     });
 
@@ -280,7 +280,7 @@ namespace BusinessLogic.Classes.Strategies
                         FundCode = creditNote.FundCode,
                         MopCode = _creditMopCode,
                         Narrative = narrative,
-                        TransactionImportId = transactionImportId,
+                        ImportId = importId,
                         VatCode = creditNote.VatCode
                     });
 

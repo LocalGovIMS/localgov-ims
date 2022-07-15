@@ -5,6 +5,6 @@ namespace BusinessLogic.Interfaces.Services
     public interface IFileImportService
     {
         IResult LoadFromFile(string path);
-        IResult Process(int transactionImportId);
+        IResult Process(int importId);
     }
 }

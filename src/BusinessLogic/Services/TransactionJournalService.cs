@@ -94,7 +94,7 @@ namespace BusinessLogic.Services
             var credit = new ProcessedTransaction
             {
                 TransactionReference = GetNextReferenceId(),
-                TransactionImportId = creditSource.TransactionImportId,
+                ImportId = creditSource.ImportId,
                 InternalReference = internalReference,
                 PspReference = pspReference,
                 EntryDate = entryDate,
@@ -120,7 +120,7 @@ namespace BusinessLogic.Services
             var debit = new ProcessedTransaction
             {
                 TransactionReference = GetNextReferenceId(),
-                TransactionImportId = debitSource.TransactionImportId,
+                ImportId = debitSource.ImportId,
                 InternalReference = internalReference,
                 PspReference = pspReference,
                 EntryDate = entryDate,
@@ -159,7 +159,7 @@ namespace BusinessLogic.Services
                 credit = new ProcessedTransaction
                 {
                     TransactionReference = GetNextReferenceId(),
-                    TransactionImportId = transferIn.TransactionImportId,
+                    ImportId = transferIn.ImportId,
                     InternalReference = internalReference,
                     PspReference = pspReference,
                     EntryDate = entryDate,
@@ -185,7 +185,7 @@ namespace BusinessLogic.Services
                 debit = new ProcessedTransaction
                 {
                     TransactionReference = GetNextReferenceId(),
-                    TransactionImportId = transferOut.TransactionImportId,
+                    ImportId = transferOut.ImportId,
                     InternalReference = internalReference,
                     PspReference = pspReference,
                     EntryDate = entryDate,
@@ -214,7 +214,7 @@ namespace BusinessLogic.Services
                     var creditNoteTransaction = new ProcessedTransaction
                     {
                         TransactionReference = GetNextReferenceId(),
-                        TransactionImportId = creditNote.TransactionImportId,
+                        ImportId = creditNote.ImportId,
                         InternalReference = internalReference,
                         PspReference = pspReference,
                         EntryDate = entryDate,

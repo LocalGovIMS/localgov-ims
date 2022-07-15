@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using log4net;
 using System;
 
@@ -17,11 +17,11 @@ namespace Admin.Classes.Commands.FileImport
             _fileImportService = fileImportService ?? throw new ArgumentNullException("fileImportService");
         }
 
-        protected override CommandResult OnExecute(int transactionImportId)
+        protected override CommandResult OnExecute(int importId)
         {
             try
             {
-                var result = _fileImportService.Process(transactionImportId);
+                var result = _fileImportService.Process(importId);
 
                 if(!result.Success)
                 {

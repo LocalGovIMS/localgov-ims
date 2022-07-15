@@ -173,6 +173,10 @@
     <Compile Include="Migrations\202206240841385_Added_TransactionImports_and_supporting_entities.designer.cs">
       <DependentUpon>202206240841385_Added_TransactionImports_and_supporting_entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207131230283_Renamed_and_refactored_TransactionImport_entities.cs" />
+    <Compile Include="Migrations\202207131230283_Renamed_and_refactored_TransactionImport_entities.designer.cs">
+      <DependentUpon>202207131230283_Renamed_and_refactored_TransactionImport_entities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -183,10 +187,10 @@
     <Compile Include="Repositories\EReturnChequeRepository.cs" />
     <Compile Include="Repositories\EReturnStatusRepository.cs" />
     <Compile Include="Repositories\CheckDigitConfigurationRepository.cs" />
-    <Compile Include="Repositories\TransactionImportRepository.cs" />
+    <Compile Include="Repositories\ImportRepository.cs" />
     <Compile Include="Repositories\FileImportRepository.cs" />
     <Compile Include="Repositories\FundMessageMetadataRepository.cs" />
-    <Compile Include="Repositories\TransactionImportTypeImportProcessingRuleRepository.cs" />
+    <Compile Include="Repositories\ImportTypeImportProcessingRuleRepository.cs" />
     <Compile Include="Repositories\VatMetadataRepository.cs" />
     <Compile Include="Repositories\FundMetadataRepository.cs" />
     <Compile Include="Repositories\MethodOfPaymentMetadataRepository.cs" />
@@ -217,7 +221,7 @@
     <Compile Include="Repositories\UserMethodOfPaymentRepository.cs" />
     <Compile Include="Repositories\UserTemplateRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
-    <Compile Include="Repositories\TransactionImportTypeRepository.cs" />
+    <Compile Include="Repositories\ImportTypeRepository.cs" />
     <Compile Include="Repositories\VatRepository.cs" />
     <Compile Include="SeedData\PlaceholderReplacer.cs" />
     <Compile Include="UnityConfig.cs" />
@@ -291,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206240841385_Added_TransactionImports_and_supporting_entities.resx">
       <DependentUpon>202206240841385_Added_TransactionImports_and_supporting_entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207131230283_Renamed_and_refactored_TransactionImport_entities.resx">
+      <DependentUpon>202207131230283_Renamed_and_refactored_TransactionImport_entities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

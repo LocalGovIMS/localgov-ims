@@ -14,7 +14,7 @@
     <h1 class="ui header">
         Transactions
 
-        @if (!Model.SearchCriteria.IsForATransactionImport)
+        @if (!Model.SearchCriteria.IsForAnImport)
         {
             <a href="@Url.Action("Search", "Transaction")" class="ui button right floated" id="reset">
                 <i class="undo icon"></i> Reset search
@@ -24,9 +24,9 @@
             </a>
         }
 
-        @if (Model.SearchCriteria.IsForATransactionImport)
+        @if (Model.SearchCriteria.IsForAnImport)
         {
-            <a href="@Url.Action("ListForTransactionImport", "Transaction", new { TransactionImportId = Model.SearchCriteria.TransactionImportId })" class="ui button right floated" id="reset">
+            <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.SearchCriteria.ImportId })" class="ui button right floated" id="reset">
                 <i class="undo icon"></i> Reset search
             </a>
         }
@@ -122,7 +122,7 @@
                                 mopCode = Model.SearchCriteria.MopCode,
                                 narrative = Model.SearchCriteria.Narrative,
                                 WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
-                                TransactionImportId = Model.SearchCriteria.TransactionImportId
+                                ImportId = Model.SearchCriteria.ImportId
                             }))
                         }
                     </div>

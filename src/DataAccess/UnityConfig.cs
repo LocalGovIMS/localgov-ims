@@ -6,6 +6,7 @@ using DataAccess.Interfaces;
 using DataAccess.Persistence;
 using DataAccess.Repositories;
 using Unity;
+using Unity.Lifetime;
 
 namespace DataAccess
 {
@@ -53,15 +54,15 @@ namespace DataAccess
                 .RegisterType<IImportProcessingRuleConditionRepository, ImportProcessingRuleConditionRepository>()
                 .RegisterType<IImportProcessingRuleActionRepository, ImportProcessingRuleActionRepository>()
                 .RegisterType<IFileImportRepository, FileImportRepository>()
-                .RegisterType<ITransactionImportTypeRepository, TransactionImportTypeRepository>()
-                .RegisterType<ITransactionImportTypeImportProcessingRuleRepository, TransactionImportTypeImportProcessingRuleRepository>()
-                .RegisterType<ITransactionImportRepository, TransactionImportRepository>()
+                .RegisterType<IImportTypeRepository, ImportTypeRepository>()
+                .RegisterType<IImportTypeImportProcessingRuleRepository, ImportTypeImportProcessingRuleRepository>()
+                .RegisterType<IImportRepository, ImportRepository>()
                 .RegisterType(typeof(IRepository<>), typeof(Repository<>))
                 .RegisterType<IAuditLogger, AuditLogger>()
                 ;
 
             container
-                .RegisterType<IUnitOfWork, UnitOfWork>();
+                .RegisterType<IUnitOfWork, UnitOfWork>(new PerThreadLifetimeManager());
         }
     }
 }

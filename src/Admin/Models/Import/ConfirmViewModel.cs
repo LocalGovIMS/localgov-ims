@@ -2,7 +2,7 @@
 {
     public class ConfirmViewModel
     {
-        public int TransactionImportId { get; set; }
+        public int ImportId { get; set; }
         public int RowCount { get; set; }
     }
 }

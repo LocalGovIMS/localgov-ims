@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using log4net;
 using Newtonsoft.Json;
 using System;

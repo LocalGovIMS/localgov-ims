@@ -34,7 +34,7 @@ namespace Admin.Models.Transaction
 
         public DateTime? StartDate { get; set; }
 
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
 
         [Display(Name = "Card Prefix")]
         public string CardPrefix { get; set; }
@@ -52,8 +52,8 @@ namespace Admin.Models.Transaction
 
         public int PageSize { get; set; } = 20;
 
-        public bool IsForATransactionImport => TransactionImportId.HasValue;
+        public bool IsForAnImport => ImportId.HasValue;
 
-        public string SearchAction => IsForATransactionImport ? nameof(TransactionController.ListForTransactionImport) : nameof(TransactionController.Search);
+        public string SearchAction => IsForAnImport ? nameof(TransactionController.ListForTransactionImport) : nameof(TransactionController.Search);
     }
 }

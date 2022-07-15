@@ -170,9 +170,9 @@ namespace DataAccess.Repositories
                 transactions = transactions.Where(x => x.EntryDate <= criteria.EndDate);
             }
 
-            if (criteria.TransactionImportId.HasValue)
+            if (criteria.ImportId.HasValue)
             {
-                transactions = transactions.Where(x => x.TransactionImportId == criteria.TransactionImportId.Value);
+                transactions = transactions.Where(x => x.ImportId == criteria.ImportId.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(criteria.CardPrefix))

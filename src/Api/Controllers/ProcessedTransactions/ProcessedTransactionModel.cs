@@ -19,7 +19,7 @@ namespace Api.Controllers.ProcessedTransactions
         public float VatRate { get; set; } // TODO: When we insert a pending transaction this field is calculated from the VatCode - is there a reason this isn't?
         public decimal? VatAmount { get; set; } // TODO: When we insert a pending transaction this field is calculated from the VatCode - is there a reason this isn't?
         public string Narrative { get; set; }
-        public int? TransactionImportId { get; set; } // TODO: Should this really be here?
+        public int? ImportId { get; set; } // TODO: Should this really be here?
 
         public ProcessedTransactionModel() { }
 
@@ -40,7 +40,7 @@ namespace Api.Controllers.ProcessedTransactions
             VatRate = source.VatRate;
             VatAmount = source.VatAmount;
             Narrative = source.Narrative;
-            TransactionImportId = source.TransactionImportId;
+            ImportId = source.ImportId;
         }
 
         public BusinessLogic.Entities.ProcessedTransaction GetProcessedTransaction()
@@ -62,7 +62,7 @@ namespace Api.Controllers.ProcessedTransactions
                 VatRate = VatRate, // TODO: Should be populated in the service?
                 VatAmount = VatAmount, // TODO: Should be populated in the service?
                 Narrative = Narrative,
-                TransactionImportId = TransactionImportId
+                ImportId = ImportId
             };
         }
     }

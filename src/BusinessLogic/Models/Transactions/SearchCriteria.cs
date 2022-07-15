@@ -16,7 +16,7 @@ namespace BusinessLogic.Models.Transactions
         public string Narrative { get; set; }
         public string InternalReference { get; set; }
         public bool WildSearchAccountReference { get; set; }
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
         public string CardPrefix { get; set; }
         public string CardSuffix { get; set; }
 

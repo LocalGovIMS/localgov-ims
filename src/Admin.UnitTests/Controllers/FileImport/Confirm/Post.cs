@@ -1,7 +1,7 @@
 ﻿using Admin.Classes.Commands.FileImport;
 using Admin.Interfaces.Commands;
 using Admin.Models.Import;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -42,7 +42,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
             var controller = new Controller(dependencies);
 
-            return controller.Confirm(new ConfirmViewModel() { TransactionImportId = 1, RowCount = 2 });
+            return controller.Confirm(new ConfirmViewModel() { ImportId = 1, RowCount = 2 });
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
                     {
                         FileImport = new BusinessLogic.Entities.FileImport()
                         {
-                            TransactionImportId = 1,
+                            ImportId = 1,
                         },
                         NumberOfRowsImported = 2
                     }
@@ -119,7 +119,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
                     {
                         FileImport = new BusinessLogic.Entities.FileImport()
                         {
-                            TransactionImportId = 1,
+                            ImportId = 1,
                         },
                         NumberOfRowsImported = 2
                     }

@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

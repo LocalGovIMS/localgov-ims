@@ -61,9 +61,9 @@ namespace DataAccess.Persistence
         public IRepository<ImportProcessingRuleField> ImportProcessingRuleFields { get; private set; }
         public IRepository<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; private set; }
         public IFileImportRepository FileImports { get; private set; }
-        public ITransactionImportTypeRepository TransactionImportTypes { get; private set; }
-        public ITransactionImportTypeImportProcessingRuleRepository TransactionImportTypeImportProcessingRules { get; private set; }
-        public ITransactionImportRepository TransactionImports { get; private set; }
+        public IImportRepository Imports { get; private set; }
+        public IImportTypeRepository ImportTypes { get; private set; }
+        public IImportTypeImportProcessingRuleRepository ImportTypeImportProcessingRules { get; private set; }
 
         #endregion
 
@@ -110,9 +110,9 @@ namespace DataAccess.Persistence
             IRepository<ImportProcessingRuleField> importProcessingRuleFieldRepository,
             IRepository<ImportProcessingRuleOperator> importProcessingRuleOperatorRepository,
             IFileImportRepository fileImports,
-            ITransactionImportTypeRepository transactionImportTypes,
-            ITransactionImportTypeImportProcessingRuleRepository transactionImportTypeImportProcessingRules,
-            ITransactionImportRepository transactionImportsRepository,
+            IImportTypeRepository importTypes,
+            IImportTypeImportProcessingRuleRepository importTypeImportProcessingRules,
+            IImportRepository importsRepository,
             IAuditLogger auditLogger,
             ILog log)
         {
@@ -160,9 +160,9 @@ namespace DataAccess.Persistence
             ImportProcessingRuleFields = importProcessingRuleFieldRepository;
             ImportProcessingRuleOperators = importProcessingRuleOperatorRepository;
             FileImports = fileImports;
-            TransactionImportTypes = transactionImportTypes;
-            TransactionImportTypeImportProcessingRules = transactionImportTypeImportProcessingRules;
-            TransactionImports = transactionImportsRepository;
+            ImportTypes = importTypes;
+            ImportTypeImportProcessingRules = importTypeImportProcessingRules;
+            Imports = importsRepository;
 
             _auditLogger = auditLogger;
             _log = log;

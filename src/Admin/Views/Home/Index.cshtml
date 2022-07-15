@@ -17,9 +17,17 @@
 
     <div class="six wide column">
 
-        <h2>Latest Imports</h2>
+        <h2>Latest transaction imports</h2>
         <div>
-            @Html.Action("_List", "TransactionImport")
+            @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.Transaction })
+        </div>
+
+    </div>
+    <div class="six wide column">
+
+        <h2>Latest account holder imports</h2>
+        <div>
+            @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.AccountHolder })
         </div>
 
     </div>

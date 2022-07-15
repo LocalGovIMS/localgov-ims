@@ -6,16 +6,16 @@ namespace Admin.Classes.ViewModelBuilders.ImportProcessingRule
 {
     public class EditViewModelBuilder : BaseViewModelBuilder<EditViewModel, int>
     {
-        private readonly IImportProcessingRuleService _service;
-        private readonly ITransactionImportTypeService _transactionImportTypeService;
+        private readonly IImportProcessingRuleService _importProcessingRuleService;
+        private readonly IImportTypeService _importTypeService;
 
         public EditViewModelBuilder(ILog log
             , IImportProcessingRuleService importProcessingRuleService
-            , ITransactionImportTypeService transactionImportTypeService)
+            , IImportTypeService importTypeService)
             : base(log)
         {
-            _service = importProcessingRuleService;
-            _transactionImportTypeService = transactionImportTypeService;
+            _importProcessingRuleService = importProcessingRuleService;
+            _importTypeService = importTypeService;
         }
 
         protected override EditViewModel OnBuild()
@@ -25,7 +25,7 @@ namespace Admin.Classes.ViewModelBuilders.ImportProcessingRule
 
         protected override EditViewModel OnBuild(int id)
         {
-            var data = _service.Get(id);
+            var data = _importProcessingRuleService.Get(id);
             var model = new EditViewModel();
 
             if (data == null) return model;
@@ -34,16 +34,16 @@ namespace Admin.Classes.ViewModelBuilders.ImportProcessingRule
             model.Name = data.Name;
             model.Description = data.Description;
             model.IsDisabled = data.Disabled;
-            model.TransactionImportTypesAreAvailableToAdd = TransactionImportTypesAreAvailableToAdd(data);
+            model.ImportTypesAreAvailableToAdd = ImportTypesAreAvailableToAdd(data);
 
             return model;
         }
 
-        private bool TransactionImportTypesAreAvailableToAdd(BusinessLogic.Entities.ImportProcessingRule data)
+        private bool ImportTypesAreAvailableToAdd(BusinessLogic.Entities.ImportProcessingRule data)
         {
-            var allTransactionImportTypes = _transactionImportTypeService.GetAll();
+            var allImportTypes = _importTypeService.GetAll();
 
-            return allTransactionImportTypes.Count > data.TransactionImportTypes.Count;
+            return allImportTypes.Count > data.ImportTypes.Count;
         }
     }
 }

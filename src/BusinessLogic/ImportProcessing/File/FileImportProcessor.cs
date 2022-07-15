@@ -5,6 +5,7 @@ using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models;
+using BusinessLogic.Models.Import;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace BusinessLogic.ImportProcessing
 
         public IResult Process(FileImportProcessorArgs args)
         {
-            LoadImport(args.TransactionImportId);
+            LoadImport(args.ImportId);
 
             ProcessImport();
 
@@ -51,9 +52,9 @@ namespace BusinessLogic.ImportProcessing
             return CreateResult();
         }
 
-        private void LoadImport(int transactionImportId)
+        private void LoadImport(int importId)
         {
-            _fileImport = _unitOfWork.FileImports.GetByTransactionImportId(transactionImportId);
+            _fileImport = _unitOfWork.FileImports.GetByImportId(importId);
         }
 
         private void ProcessImport()
@@ -96,7 +97,7 @@ namespace BusinessLogic.ImportProcessing
 
         private ProcessedTransaction BuildProcessedTransaction(string rowData)
         {
-            var processedTransactionModel = _processedTransactionModelBuilder.BuildFromCsvRow(rowData, _fileImport.TransactionImportId);
+            var processedTransactionModel = _processedTransactionModelBuilder.BuildFromCsvRow(rowData, _fileImport.ImportId);
 
             return processedTransactionModel.GetProcessedTransaction();
         }
@@ -118,8 +119,7 @@ namespace BusinessLogic.ImportProcessing
             result.SetData(new ProcessResult()
             {
                 FileImport = _fileImport,
-                NumberOfRowsImported = _fileImport.Rows.Count,
-                TotalAmountImported = _totalAmountImported,
+                NumberOfRowsImported = _fileImport.Rows.Count
             });
 
             return result;
@@ -128,6 +128,6 @@ namespace BusinessLogic.ImportProcessing
 
     public class FileImportProcessorArgs
     {
-        public int TransactionImportId { get; set; }
+        public int ImportId { get; set; }
     }
 }

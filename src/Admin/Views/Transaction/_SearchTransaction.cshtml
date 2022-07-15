@@ -3,7 +3,7 @@
 @using (Html.BeginForm(Model.SearchAction, "Transaction", FormMethod.Get, new { id = "search-form" } ))
 {
 
-    @Html.HiddenFor(x => x.TransactionImportId)
+    @Html.HiddenFor(x => x.ImportId)
 
     <div class="ui segment">
         <div class="ui form">

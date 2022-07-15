@@ -16,7 +16,7 @@ namespace Api.Controllers.Suspense
 
         public decimal Amount { get; set; }
 
-        public int? TransactionImportId { get; set; }
+        public int? ImportId { get; set; }
 
         public string ProcessId { get; set; }
 
@@ -32,7 +32,7 @@ namespace Api.Controllers.Suspense
             AccountNumber = source.AccountNumber;
             Narrative = source.Narrative;
             Amount = source.Amount;
-            TransactionImportId = source.TransactionImportId;
+            ImportId = source.ImportId;
             ProcessId = source.ProcessId;
             Notes = source.Notes;
         }
@@ -47,7 +47,7 @@ namespace Api.Controllers.Suspense
                 AccountNumber = AccountNumber,
                 Narrative = Narrative,
                 Amount = Amount,
-                TransactionImportId = TransactionImportId,
+                ImportId = ImportId,
                 ProcessId = ProcessId,
                 Notes = Notes
             };
