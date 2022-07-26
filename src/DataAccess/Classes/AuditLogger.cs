@@ -120,8 +120,7 @@ namespace DataAccess.Classes
             { typeof(ImportRow).ToString(), (item) => { return ((ImportRow)item).Id.ToString(); } },
             { typeof(ImportStatusHistory).ToString(), (item) => { return ((ImportStatusHistory)item).Id.ToString(); } },
             { typeof(ImportType).ToString(), (item) => { return ((ImportType)item).Id.ToString(); } },
-            { typeof(ImportTypeImportProcessingRule).ToString(), (item) => { return ((ImportTypeImportProcessingRule)item).Id.ToString(); } },
-            { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } }
+            { typeof(ImportTypeImportProcessingRule).ToString(), (item) => { return ((ImportTypeImportProcessingRule)item).Id.ToString(); } }
         };
 
         public void CreateAudit(IncomeDbContext context, int userId)

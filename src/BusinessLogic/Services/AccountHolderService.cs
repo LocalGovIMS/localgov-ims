@@ -34,6 +34,9 @@ namespace BusinessLogic.Services
                 if (!validateAccountHolderFundMessageResult.Success) 
                     return validateAccountHolderFundMessageResult;
 
+                accountHolder.CreatedAt = DateTime.Now;
+                accountHolder.CreatedByUserId = SecurityContext.UserId;
+
                 UnitOfWork.AccountHolders.Add(accountHolder);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
@@ -53,6 +56,9 @@ namespace BusinessLogic.Services
                 var validateAccountHolderFundMessageResult = _accountHolderFundMessageValidator.Validate(args.AccountHolder);
                 if (!validateAccountHolderFundMessageResult.Success)
                     return validateAccountHolderFundMessageResult;
+
+                args.AccountHolder.CreatedAt = DateTime.Now;
+                args.AccountHolder.CreatedByUserId = SecurityContext.UserId;
 
                 UnitOfWork.AccountHolders.Add(args.AccountHolder);
 
@@ -83,7 +89,7 @@ namespace BusinessLogic.Services
                 if (existingRecord == null)
                     throw new NullReferenceException("Unable to find the Account Holder record to update");
 
-                existingRecord.Update(accountHolder);
+                existingRecord.Update(accountHolder, SecurityContext);
 
                 UnitOfWork.Complete(SecurityContext.UserId);
 
@@ -114,7 +120,7 @@ namespace BusinessLogic.Services
                 if (existingRecord == null)
                     throw new NullReferenceException("Unable to find the Account Holder record to update");
 
-                existingRecord.Update(args.AccountHolder);
+                existingRecord.Update(args.AccountHolder, SecurityContext);
 
                 if (args.SaveChanges)
                 {

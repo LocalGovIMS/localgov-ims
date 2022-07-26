@@ -325,6 +325,17 @@ namespace DataAccess.Persistence
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.CreatedAccountHolders)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.UpdatedAccountHolders)
+                .WithOptional(e => e.UpdatedByUser)
+                .HasForeignKey(e => e.UpdatedByUserId);
+
             modelBuilder.Entity<Vat>()
                 .HasMany(e => e.TemplateRows)
                 .WithRequired(e => e.VAT)

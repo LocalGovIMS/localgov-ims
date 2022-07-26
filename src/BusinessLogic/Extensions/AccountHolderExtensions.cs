@@ -1,4 +1,6 @@
 ﻿using BusinessLogic.Entities;
+using BusinessLogic.Interfaces.Security;
+using System;
 
 namespace BusinessLogic.Extensions
 {
@@ -18,8 +20,11 @@ namespace BusinessLogic.Extensions
                 .Trim(',', ' ');
         }
 
-        public static void Update(this AccountHolder existingAccountHolder, AccountHolder newAccountHolder)
+        public static void Update(this AccountHolder existingAccountHolder, AccountHolder newAccountHolder, ISecurityContext securityContext)
         {
+            existingAccountHolder.UpdatedAt = DateTime.Now;
+            existingAccountHolder.UpdatedByUserId = securityContext.UserId;
+
             existingAccountHolder.FundCode = newAccountHolder.FundCode;
             existingAccountHolder.CurrentBalance = newAccountHolder.CurrentBalance;
             existingAccountHolder.PeriodCredit = newAccountHolder.PeriodCredit;

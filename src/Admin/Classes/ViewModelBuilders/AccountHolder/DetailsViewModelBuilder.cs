@@ -50,7 +50,10 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
                 UserField3 = item.UserField3,
                 FundMessageId = item.FundMessageId,
                 FundMessage = item.FundMessage?.Message,
-                LastUpdated = item.LastUpdated,
+                CreatedAt = item.CreatedAt,
+                CreatedByUsername = item.CreatedByUser.UserName,
+                UpdatedAt = item.UpdatedAt,
+                UpdatedByUsername = item.UpdatedByUser?.UserName,
                 ShowSelect = args.ShowSelect
             };
         }

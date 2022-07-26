@@ -68,71 +68,39 @@
         @Html.DisplayFor(m => m.CurrentBalance)
     </div>
 
+    @if (!string.IsNullOrEmpty(Model.UserFieldsFormatted))
+    {
+        <div class="four wide field">
+            @Html.LabelFor(m => m.UserFieldsFormatted)
+            @Html.DisplayFor(m => m.UserFieldsFormatted)
+        </div>
+    }
+
     <div class="four wide field">
-        @Html.LabelFor(m => m.UserField1)
-        @string.Format("{0} {1} {2}",
-            Model.UserField1,
-            Model.UserField2,
-            Model.UserField3)
+        @Html.LabelFor(m => m.CreatedAt)
+        @Html.DisplayFor(m => m.CreatedAt)
     </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.CreatedByUsername)
+        @Html.DisplayFor(m => m.CreatedByUsername)
+    </div>
+
+    @if (Model.UpdatedAt.HasValue)
+    {
+        <div class="four wide field">
+            @Html.LabelFor(m => m.UpdatedAt)
+            @Html.DisplayFor(m => m.UpdatedAt)
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.UpdatedByUsername)
+            @Html.DisplayFor(m => m.UpdatedByUsername)
+        </div>
+    }
+
+    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
+
 </div>
 
-@*<div class="ui grid stackable">
-        <div class="eight wide column">
-            <div class="ui vertical segment">
-                <strong>Account Number</strong><br>@Model.AccountReference
-            </div>
-            <div class="ui vertical segment">
-                <strong>Title</strong><br>@Model.Title
-            </div>
-            <div class="ui vertical segment">
-                <strong>Forename</strong><br>@Model.Forename
-            </div>
-            <div class="ui vertical segment">
-                <strong>Surname</strong><br>@Model.Surname
-            </div>
-            <div class="ui vertical segment">
-                <strong>Address</strong><br>
-                @string.Format("{0} {1} {2} {3}",
-                    Model.AddressLine1,
-                    Model.AddressLine2,
-                    Model.AddressLine3,
-                    Model.AddressLine4)
-            </div>
-            <div class="ui vertical segment">
-                <strong>Post Code</strong><br>@Model.Postcode
-            </div>
-            <div class="ui vertical segment">
-                <strong>Standard Stop Message</strong><br>@Model.AccountHolderMessageReference
-            </div>
-        </div>
-        <div class="eight wide column">
-            <div class="ui vertical segment">
-                &nbsp;
-            </div>
-            <div class="ui vertical segment">
-                <strong>Account Type</strong><br>@Model.FundName
-            </div>
-            <div class="ui vertical segment">
-                <strong>Period Debt</strong><br>@Html.ToCurrency(Model.PeriodDebit)
-            </div>
-            <div class="ui vertical segment">
-                <strong>Current Balance</strong><br>@Html.ToCurrency(Model.CurrentBalance)
-            </div>
-            <div class="ui vertical segment">
-                &nbsp;
-            </div>
-            <div class="ui vertical segment">
-                <strong>User Defined Information</strong><br>
-                @string.Format("{0} {1} {2}",
-                    Model.UserField1,
-                    Model.UserField2,
-                    Model.UserField3)
-            </div>
-            <div class="ui vertical segment">
-                &nbsp;
-            </div>
-        </div>
-    </div>*@
 
-@Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
