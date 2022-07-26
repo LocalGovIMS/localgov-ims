@@ -62,14 +62,26 @@ namespace Admin.Models.AccountHolder
         [DisplayName("User defined information")]
         public string UserField3 { get; set; }
 
+        [DisplayName("User defined information")]
+        public string UserFieldsFormatted => string.Format("{0} {1} {2}", UserField1, UserField2, UserField3).Trim();
+
         [DisplayName("Message")]
         public int? FundMessageId { get; set; }
 
         [DisplayName("Message")]
         public string FundMessage { get; set; }
 
+        [DisplayName("Created date")]
+        public DateTime CreatedAt { get; set; }
+
+        [DisplayName("Created by")]
+        public string CreatedByUsername { get; set; }
+
         [DisplayName("Last updated")]
-        public DateTime? LastUpdated { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        [DisplayName("Updated by")]
+        public string UpdatedByUsername { get; set; }
 
         public bool ShowSelect { get; set; }
     }

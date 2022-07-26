@@ -4,6 +4,7 @@ using BusinessLogic.Interfaces.Services;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using ViewModel = Admin.Models.AccountHolder.DetailsViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.AccountHolder.DetailsViewModelBuilder;
@@ -31,7 +32,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                     FundName = "Fund Name"
                 },
                 FundCode = string.Empty,
-                LastUpdated = null,
+                CreatedAt = new DateTime(2022, 7, 26),
+                CreatedByUserId = 0,
+                CreatedByUser = new BusinessLogic.Entities.User()
+                {
+                    UserName = "Created By User"
+                },
+                UpdatedAt = new DateTime(2022, 7, 27),
+                UpdatedByUserId = 1,
+                UpdatedByUser = new BusinessLogic.Entities.User()
+                {
+                    UserName = "Updated By User"
+                },
                 PeriodCredit = 0,
                 PeriodDebit = 0,
                 Postcode = string.Empty,
@@ -102,7 +114,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             Assert.AreEqual(result.FullNameAndTitle, _accountHolder.FullNameAndTitle());
             Assert.AreEqual(result.FundCode, _accountHolder.FundCode);
             Assert.AreEqual(result.FundName, _accountHolder.Fund.FundName);
-            Assert.AreEqual(result.LastUpdated, _accountHolder.LastUpdated);
+            Assert.AreEqual(result.CreatedAt, _accountHolder.CreatedAt);
+            Assert.AreEqual(result.CreatedByUsername, _accountHolder.CreatedByUser.UserName);
+            Assert.AreEqual(result.UpdatedAt, _accountHolder.UpdatedAt);
+            Assert.AreEqual(result.UpdatedByUsername, _accountHolder.UpdatedByUser.UserName);
             Assert.AreEqual(result.PeriodCredit, _accountHolder.PeriodCredit);
             Assert.AreEqual(result.PeriodDebit, _accountHolder.PeriodDebit);
             Assert.AreEqual(result.RecordType, _accountHolder.RecordType);

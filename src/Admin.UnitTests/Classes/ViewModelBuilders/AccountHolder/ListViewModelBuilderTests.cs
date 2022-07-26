@@ -4,6 +4,7 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using ViewModel = Admin.Models.AccountHolder.ListViewModel;
@@ -47,7 +48,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                         Forename = string.Empty,
                         Fund = null,
                         FundCode = string.Empty,
-                        LastUpdated = null,
+                        CreatedAt = new DateTime(2022, 7, 26),
+                        CreatedByUserId = 0,
+                        UpdatedAt = new DateTime(2022, 7, 27),
+                        UpdatedByUserId = 1,
                         PeriodCredit = 0,
                         PeriodDebit = 0,
                         Postcode = string.Empty,

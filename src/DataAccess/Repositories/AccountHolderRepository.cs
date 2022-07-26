@@ -23,6 +23,8 @@ namespace DataAccess.Repositories
                 .Include(x => x.Fund)
                 .Include(x => x.FundMessage)
                 .Include(x => x.FundMessage.Metadata)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.UpdatedByUser)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.AccountReference == accountReference);
         }
@@ -33,6 +35,8 @@ namespace DataAccess.Repositories
                 .Include(x => x.Fund)
                 .Include(x => x.FundMessage)
                 .Include(x => x.FundMessage.Metadata)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.UpdatedByUser)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.AccountReference == accountReference && x.FundCode == fundCode);
         }

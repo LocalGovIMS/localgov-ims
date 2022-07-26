@@ -21,6 +21,8 @@ namespace BusinessLogic.Entities
             UserTemplates = new HashSet<UserTemplate>();
             Imports = new HashSet<Import>();
             ImportStatusHistories = new HashSet<ImportStatusHistory>();
+            CreatedAccountHolders = new HashSet<AccountHolder>();
+            UpdatedAccountHolders = new HashSet<AccountHolder>();
         }
 
         public int UserId { get; set; }
@@ -72,5 +74,9 @@ namespace BusinessLogic.Entities
         public virtual ICollection<Import> Imports { get; set; }
 
         public virtual ICollection<ImportStatusHistory> ImportStatusHistories { get; set; }
+
+        public virtual ICollection<AccountHolder> CreatedAccountHolders { get; set; }
+
+        public virtual ICollection<AccountHolder> UpdatedAccountHolders { get; set; }
     }
 }
