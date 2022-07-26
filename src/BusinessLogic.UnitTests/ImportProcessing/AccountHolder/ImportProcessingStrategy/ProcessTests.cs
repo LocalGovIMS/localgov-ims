@@ -24,6 +24,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             MockAccountHolderService.Verify(x => x.Update(It.IsAny<UpdateAccountHolderArgs>()), Times.Once);
         }
 
+        [TestMethod]
         public void Process_WhenTheAccountHolderExists_DoesNotCallAccountHolderServiceCreate()
         {
             // Arrange
@@ -37,6 +38,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             MockAccountHolderService.Verify(x => x.Create(It.IsAny<CreateAccountHolderArgs>()), Times.Never);
         }
 
+        [TestMethod]
         public void Process_WhenTheAccountHolderDoesNotExists_CallsAccountHolderServiceCreateOnce()
         {
             // Arrange
@@ -47,7 +49,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             Strategy.Process(GetArgs());
 
             // Assert
-            MockAccountHolderService.Verify(x => x.Create(It.IsAny<CreateAccountHolderArgs>()), Times.Never);
+            MockAccountHolderService.Verify(x => x.Create(It.IsAny<CreateAccountHolderArgs>()), Times.Once);
         }
 
         [TestMethod]
