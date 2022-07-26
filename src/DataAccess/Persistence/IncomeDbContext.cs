@@ -69,7 +69,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<ImportRow> ImportRows { get; set; }
         public virtual DbSet<ImportType> ImportTypes { get; set; }
         public virtual DbSet<ImportTypeImportProcessingRule> ImportTypeImportProcessingRules { get; set; }
-        
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -80,6 +80,7 @@ namespace DataAccess.Persistence
             SetupKeys(modelBuilder);
             SetupRelationships(modelBuilder);
             SetupIndexes(modelBuilder);
+            SetupComputedColumns(modelBuilder);
         }
 
         private void SetupGeneralProperties(DbModelBuilder modelBuilder)
@@ -463,12 +464,19 @@ namespace DataAccess.Persistence
                 .IsClustered(true);
 
             modelBuilder.Entity<ImportTypeImportProcessingRule>()
-                .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId})
+                .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId })
                 .IsUnique(true);
 
             modelBuilder.Entity<ImportTypeImportProcessingRule>()
                 .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId })
                 .IsUnique(true);
+        }
+
+        private void SetupComputedColumns(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AccountHolder>()
+                .Property(s => s.SurnameSoundex)
+                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Computed);
         }
     }
 }

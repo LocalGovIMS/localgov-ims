@@ -12,7 +12,11 @@ namespace DataAccess.DatabaseInitialisers
         protected override void Seed(IncomeDbContext context)
         {
             RunScript("DataAccess.SeedData.SeedData.sql", context);
+
+            // These two scripts are required to fill in for the limitations of the EF6 Code Frist tooling.
+            // Most (if not all) of what these scripts do can be performed via code in EF Core.
             RunScript("DataAccess.SeedData.Indexes.sql", context);
+            RunScript("DataAccess.SeedData.ComputedColumns.sql", context);
 
             if (ConfigurationManager.AppSettings["Environment"].Equals("Demo"))
             {

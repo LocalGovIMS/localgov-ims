@@ -17,6 +17,7 @@ namespace DataAccess.Migrations
         {
             RunScript("DataAccess.SeedData.SeedData.sql", context);
             RunScript("DataAccess.SeedData.Indexes.sql", context);
+            RunScript("DataAccess.SeedData.ComputedColumns.sql", context);
         }
 
         private void RunScript(string filename, Persistence.IncomeDbContext context)
