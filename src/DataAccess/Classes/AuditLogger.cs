@@ -58,7 +58,14 @@ namespace DataAccess.Classes
             { typeof(AccountReferenceValidator).ToString(), 43 },
             { typeof(EReturnStatus).ToString(), 44 },
             { typeof(EReturnType).ToString(), 45 },
-            { typeof(FundMessageMetadata).ToString(), 46 }
+            { typeof(FundMessageMetadata).ToString(), 46 },
+            { typeof(Import).ToString(), 47 },
+            { typeof(ImportEventLog).ToString(), 48 },
+            { typeof(ImportRow).ToString(), 49 },
+            { typeof(ImportStatusHistory).ToString(), 50 },
+            { typeof(ImportType).ToString(), 51 },
+            { typeof(ImportTypeImportProcessingRule).ToString(), 52 },
+            { typeof(CheckDigitConfiguration).ToString(), 53 }
         };
 
         private readonly Dictionary<string, Func<object, string>> _idMapping = new Dictionary<string, Func<object, string>>() {
@@ -107,7 +114,14 @@ namespace DataAccess.Classes
             { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } },
             { typeof(EReturnStatus).ToString(), (item) => { return ((EReturnStatus)item).Id.ToString(); } },
             { typeof(EReturnType).ToString(), (item) => { return ((EReturnType)item).Id.ToString(); } },
-            { typeof(FundMessageMetadata).ToString(), (item) => { return ((FundMessageMetadata)item).Id.ToString(); } }
+            { typeof(FundMessageMetadata).ToString(), (item) => { return ((FundMessageMetadata)item).Id.ToString(); } },
+            { typeof(Import).ToString(), (item) => { return ((Import)item).Id.ToString(); } },
+            { typeof(ImportEventLog).ToString(), (item) => { return ((ImportEventLog)item).Id.ToString(); } },
+            { typeof(ImportRow).ToString(), (item) => { return ((ImportRow)item).Id.ToString(); } },
+            { typeof(ImportStatusHistory).ToString(), (item) => { return ((ImportStatusHistory)item).Id.ToString(); } },
+            { typeof(ImportType).ToString(), (item) => { return ((ImportType)item).Id.ToString(); } },
+            { typeof(ImportTypeImportProcessingRule).ToString(), (item) => { return ((ImportTypeImportProcessingRule)item).Id.ToString(); } },
+            { typeof(CheckDigitConfiguration).ToString(), (item) => { return ((CheckDigitConfiguration)item).Id.ToString(); } }
         };
 
         public void CreateAudit(IncomeDbContext context, int userId)
