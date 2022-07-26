@@ -49,7 +49,7 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
 
             // Assert
             result.Success.Should().BeFalse();
-            result.Error.Should().Be("The message is not valid");
+            result.Error.Should().Be("The fund message is not valid");
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
 
             // Assert
             result.Success.Should().BeFalse();
-            result.Error.Should().Be("The message is not valid");
+            result.Error.Should().Be("The fund message is not valid for the fund code specified");
         }
     }
 }

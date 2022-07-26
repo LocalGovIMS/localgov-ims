@@ -15,16 +15,24 @@ namespace BusinessLogic.ImportProcessing
 
         public void Process(ImportProcessingStrategyArgs args)
         {
-            var accountHolderToCreate = args.Row.ToAccountHolder();
+            var accountHolderToUpsert = args.Row.ToAccountHolder();
 
-            var result = _accountHolderService.Create(new Services.CreateAccountHolderArgs()
+            var updateResult = _accountHolderService.Update(new Services.UpdateAccountHolderArgs()
             {
                 SaveChanges = false,
-                AccountHolder = accountHolderToCreate
+                AccountHolder = accountHolderToUpsert
             });
 
-            if (!result.Success)
-                throw new ImportProcessingException(result.Error);
+            if (updateResult.Success) return;
+
+            var createResult = _accountHolderService.Create(new Services.CreateAccountHolderArgs()
+            {
+                SaveChanges = false,
+                AccountHolder = accountHolderToUpsert
+            });
+
+            if (!createResult.Success)
+                throw new ImportProcessingException(createResult.Error);
         }
     }
 }

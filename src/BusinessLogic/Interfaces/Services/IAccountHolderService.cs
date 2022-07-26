@@ -11,6 +11,7 @@ namespace BusinessLogic.Interfaces.Services
         IResult Create(AccountHolder accountHolder);
         IResult Create(CreateAccountHolderArgs args);
         IResult Update(AccountHolder accountHolder);
+        IResult Update(UpdateAccountHolderArgs args);
         AccountHolder GetByAccountReference(string accountReference);
         AccountHolder GetByAccountReference(string accountReference, string fundCode);
         SearchResult<AccountHolder> Search(SearchCriteria searchCriteria);
