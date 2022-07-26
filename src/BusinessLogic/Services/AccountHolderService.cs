@@ -101,6 +101,40 @@ namespace BusinessLogic.Services
             }
         }
 
+        public IResult Update(UpdateAccountHolderArgs args)
+        {
+            try
+            {
+                var validateAccountHolderFundMessageResult = _accountHolderFundMessageValidator.Validate(args.AccountHolder);
+                if (!validateAccountHolderFundMessageResult.Success)
+                    return validateAccountHolderFundMessageResult;
+
+                var existingRecord = UnitOfWork.AccountHolders.GetByAccountReference(args.AccountHolder.AccountReference);
+
+                if (existingRecord == null)
+                    throw new NullReferenceException("Unable to find the Account Holder record to update");
+
+                existingRecord.Update(args.AccountHolder);
+
+                if (args.SaveChanges)
+                {
+                    UnitOfWork.Complete(SecurityContext.UserId);
+                }
+
+                return new Result() { Data = existingRecord };
+            }
+            catch (NullReferenceException ex)
+            {
+                Logger.Error(null, ex);
+                return new Result(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(null, ex);
+                return new Result("Unable to update Account Holder");
+            }
+        }
+
         public AccountHolder GetByAccountReference(string accountReference)
         {
             if (!SecurityContext.IsInRole(Security.Role.Payments)
@@ -161,6 +195,12 @@ namespace BusinessLogic.Services
     }
 
     public class CreateAccountHolderArgs
+    {
+        public AccountHolder AccountHolder { get; set; }
+        public bool SaveChanges { get; set; } = true;
+    }
+
+    public class UpdateAccountHolderArgs
     {
         public AccountHolder AccountHolder { get; set; }
         public bool SaveChanges { get; set; } = true;

@@ -22,10 +22,10 @@ namespace BusinessLogic.Validators
             var matchingFundMessage = _fundMessageService.GetById(accountHolder.FundMessageId.Value);
 
             if (matchingFundMessage is null) 
-                return new Result("The message is not valid");
+                return new Result("The fund message is not valid");
 
             if (matchingFundMessage.FundCode != accountHolder.FundCode) 
-                return new Result("The message is not valid");
+                return new Result("The fund message is not valid for the fund code specified");
 
             return new Result();
         }

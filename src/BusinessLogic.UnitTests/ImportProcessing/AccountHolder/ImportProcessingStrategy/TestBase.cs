@@ -14,14 +14,29 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
         protected Strategy Strategy;
 
-        protected void SetupDependencies()
+        protected void SetupDependenciesForExistingAccountHolder()
         {
+            MockAccountHolderService.Setup(x => x.Update(It.IsAny<UpdateAccountHolderArgs>()))
+                .Returns(new Result());
+
             MockAccountHolderService.Setup(x => x.Create(It.IsAny<CreateAccountHolderArgs>()))
                 .Returns(new Result());
         }
 
-        protected void SetupDependenciesForFailure(string errorMessage)
+        protected void SetupDependenciesForNewAccountHolder()
         {
+            MockAccountHolderService.Setup(x => x.Update(It.IsAny<UpdateAccountHolderArgs>()))
+                .Returns(new Result("Unable to find the Account Holder record to update"));
+
+            MockAccountHolderService.Setup(x => x.Create(It.IsAny<CreateAccountHolderArgs>()))
+                .Returns(new Result());
+        }
+
+        protected void SetupDependenciesForAccountHolderCreationFailure(string errorMessage)
+        {
+            MockAccountHolderService.Setup(x => x.Update(It.IsAny<UpdateAccountHolderArgs>()))
+                .Returns(new Result("Unable to find the Account Holder record to update"));
+
             MockAccountHolderService.Setup(x => x.Create(It.IsAny<CreateAccountHolderArgs>()))
                 .Returns(new Result(errorMessage));
         }
