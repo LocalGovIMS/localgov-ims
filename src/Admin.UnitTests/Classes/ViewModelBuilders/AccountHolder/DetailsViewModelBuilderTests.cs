@@ -36,7 +36,6 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
                 PeriodDebit = 0,
                 Postcode = string.Empty,
                 RecordType = string.Empty,
-                SurnameSoundex = string.Empty,
                 FundMessageId = null,
                 FundMessage = new BusinessLogic.Entities.FundMessage()
                 {
