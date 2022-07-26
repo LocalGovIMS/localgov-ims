@@ -26,7 +26,7 @@ namespace BusinessLogic.Entities
         public string Surname { get; set; }
 
         [StringLength(50)]
-        public string SurnameSoundex { get; set; }
+        public string SurnameSoundex { get; private set; }
 
         [StringLength(60)]
         public string AddressLine1 { get; set; }

@@ -177,6 +177,10 @@
     <Compile Include="Migrations\202207131230283_Renamed_and_refactored_TransactionImport_entities.designer.cs">
       <DependentUpon>202207131230283_Renamed_and_refactored_TransactionImport_entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207261339251_Made_AccountHolder_SurnameSoundex_a_computed_column.cs" />
+    <Compile Include="Migrations\202207261339251_Made_AccountHolder_SurnameSoundex_a_computed_column.designer.cs">
+      <DependentUpon>202207261339251_Made_AccountHolder_SurnameSoundex_a_computed_column.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -299,6 +303,9 @@
     <EmbeddedResource Include="Migrations\202207131230283_Renamed_and_refactored_TransactionImport_entities.resx">
       <DependentUpon>202207131230283_Renamed_and_refactored_TransactionImport_entities.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207261339251_Made_AccountHolder_SurnameSoundex_a_computed_column.resx">
+      <DependentUpon>202207261339251_Made_AccountHolder_SurnameSoundex_a_computed_column.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
     </EmbeddedResource>
@@ -315,6 +322,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SeedData\Indexes.sql">
+      <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SeedData\ComputedColumns.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
