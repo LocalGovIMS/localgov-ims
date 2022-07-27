@@ -2,22 +2,24 @@
 
     $('.fund-dropdown').dropdown({
         onChange: function (e) {
-            configureFundMessage(e);
+            configureFundMessage(e, null);
         }
     });
 
-    $('.fund-message-dropdown').dropdown();
+    configureFundMessage($('#FundCode').val(), $('#FundMessageId').val());
 
-    configureFundMessage($('.fund-dropdown').val());
+    $('.fund-message-dropdown').dropdown('set selected', $('#FundMessageId').val());
 });
 
-function configureFundMessage(fundCode) {
+function configureFundMessage(fundCode, fundMessageId) {
     var optionsExistForThisFundCode = false;
 
-    $('.fund-message-dropdown').dropdown('clear');
+    if (fundMessageId == null) {
+        $('.fund-message-dropdown').dropdown('clear');
+    }
 
     $('.fund-message-dropdown > .menu > .item').each(function () {
-        if ($(this).data('fund-code') == fundCode) {
+        if ($(this).data('fund-code') == fundCode || $(this).data('fund-code') == null) {
             $(this).show();
             optionsExistForThisFundCode = true;
         }

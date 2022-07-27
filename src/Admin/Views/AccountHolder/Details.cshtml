@@ -21,11 +21,9 @@
 
     @Html.HiddenFor(m => m.AccountReference)
 
-    <div class="two fields">
-        <div class="five wide field">
-            @Html.LabelFor(m => m.Title)
-            @Html.DisplayFor(m => m.Title)
-        </div>
+    <div class="five wide field">
+        @Html.LabelFor(m => m.Title)
+        @Html.DisplayFor(m => m.Title)
     </div>
 
     <div class="five wide field">
@@ -48,25 +46,45 @@
         @Html.DisplayFor(m => m.Postcode)
     </div>
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.FundMessage)
-        @Html.DisplayFor(m => m.FundMessage)
-    </div>
+    @if (!string.IsNullOrEmpty(Model.FundName))
+    {
+        <div class="five wide field">
+            @Html.LabelFor(m => m.FundName)
+            @Html.DisplayFor(m => m.FundName)
+        </div>
+    }
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.FundName)
-        @Html.DisplayFor(m => m.FundName)
-    </div>
+    @if (Model.FundMessageId.HasValue)
+    {
+        <div class="five wide field">
+            @Html.LabelFor(m => m.FundMessage)
+            @Html.DisplayFor(m => m.FundMessage)
+        </div>
+    }
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.PeriodDebit)
-        @Html.DisplayFor(m => m.PeriodDebit)
-    </div>
+    @if (Model.PeriodDebit.HasValue)
+    {
+        <div class="four wide field">
+            @Html.LabelFor(m => m.PeriodDebit)
+            @Html.DisplayFor(m => m.PeriodDebit)
+        </div>
+    }
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.CurrentBalance)
-        @Html.DisplayFor(m => m.CurrentBalance)
-    </div>
+    @if (Model.PeriodCredit.HasValue)
+    {
+        <div class="four wide field">
+            @Html.LabelFor(m => m.PeriodCredit)
+            @Html.DisplayFor(m => m.PeriodCredit)
+        </div>
+    }
+
+    @if (Model.CurrentBalance.HasValue)
+    {
+        <div class="four wide field">
+            @Html.LabelFor(m => m.CurrentBalance)
+            @Html.DisplayFor(m => m.CurrentBalance)
+        </div>
+    }
 
     @if (!string.IsNullOrEmpty(Model.UserFieldsFormatted))
     {

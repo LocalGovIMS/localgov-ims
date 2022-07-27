@@ -114,11 +114,15 @@
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select message type</div>
                 <div class="menu">
-                    @foreach (var item in Model.FundMessages.Items)
+                    <div class="item" data-value="">
+                        None
+                    </div>
+                    @foreach (var fundItem in Model.FundMessages.Items)
                     {
-                        <div class="item" 
-                             data-fund-code="@item.DataAttributes.First(x => x.Key == "fundCode").Value">
-                            @item.Text
+                        <div class="item"
+                             data-value="@fundItem.Value"
+                             data-fund-code="@fundItem.DataAttributes.First(x => x.Key == "fundCode").Value">
+                            @fundItem.Text
                         </div>
                     }
                 </div>
@@ -137,10 +141,10 @@
         </div>
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.PeriodDebit)
-            @Html.EditorFor(m => m.PeriodDebit)
+            @Html.LabelFor(m => m.PeriodCredit)
+            @Html.EditorFor(m => m.PeriodCredit)
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.PeriodDebit)
+                @Html.ValidationMessageFor(m => m.PeriodCredit)
             </div>
         </div>
 
