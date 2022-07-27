@@ -105,7 +105,7 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
 
                 selectListItems.Add(new SelectListItem()
                 {
-                    Value = item.FundCode,
+                    Value = item.Id.ToString(),
                     Text = item.Message,
                     DataAttributes = dataAttributes
                 });

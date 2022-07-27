@@ -62,9 +62,9 @@ namespace BusinessLogic.Validators.Payment
             // Finance can post/pay to stopped accounts, so payments are allowed whatever the 'stop' status
             if (_securityContext.IsInRole(Security.Role.Finance)) 
                 return;
-
-            if (_accountHolder.IsOnStop()) 
-                throw new PaymentValidationException("This account has been stopped");
+            
+            if (_accountHolder.IsOnStop())
+                throw new PaymentValidationException(_accountHolder.FundMessage.Message);
         }
     }
 }
