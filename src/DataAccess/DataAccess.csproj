@@ -185,6 +185,10 @@
     <Compile Include="Migrations\202207261835303_Add-CreatedAt-and-UpdatedAt-fields-to-AccountHolder.designer.cs">
       <DependentUpon>202207261835303_Add-CreatedAt-and-UpdatedAt-fields-to-AccountHolder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207271522024_Remove_PendingTransaction_BatchReference.cs" />
+    <Compile Include="Migrations\202207271522024_Remove_PendingTransaction_BatchReference.designer.cs">
+      <DependentUpon>202207271522024_Remove_PendingTransaction_BatchReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207261835303_Add-CreatedAt-and-UpdatedAt-fields-to-AccountHolder.resx">
       <DependentUpon>202207261835303_Add-CreatedAt-and-UpdatedAt-fields-to-AccountHolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207271522024_Remove_PendingTransaction_BatchReference.resx">
+      <DependentUpon>202207271522024_Remove_PendingTransaction_BatchReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
