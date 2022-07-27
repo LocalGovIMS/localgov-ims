@@ -660,7 +660,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\app.min.css" />
     <Content Include="Content\app.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\app-overrides.css" />
