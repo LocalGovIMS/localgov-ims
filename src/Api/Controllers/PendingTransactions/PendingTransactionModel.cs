@@ -41,9 +41,6 @@ namespace Api.Controllers.PendingTransactions
         [StringLength(100)]
         public string Narrative { get; set; }
 
-        [StringLength(30)]
-        public string BatchReference { get; set; }
-
         [StringLength(100)]
         public string ExternalReference { get; set; } // Reference from calling app
 
@@ -105,7 +102,6 @@ namespace Api.Controllers.PendingTransactions
             VatRate = source.VatRate;
             VatAmount = source.VatAmount;
             Narrative = source.Narrative;
-            BatchReference = source.BatchReference;
             ExternalReference = source.AppReference;
             PayeeName = source.CardHolderName;
             PayeeBusinessName = source.CardHolderBusinessName;
@@ -137,7 +133,6 @@ namespace Api.Controllers.PendingTransactions
                 Amount = Amount,
                 VatCode = VatCode,
                 Narrative = Narrative,
-                BatchReference = BatchReference,
                 AppReference = ExternalReference,
                 CardHolderName = PayeeName,
                 CardHolderBusinessName = PayeeBusinessName,

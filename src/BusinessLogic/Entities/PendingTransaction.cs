@@ -43,9 +43,6 @@ namespace BusinessLogic.Entities
         public string Narrative { get; set; }
 
         [StringLength(30)]
-        public string BatchReference { get; set; }
-
-        [StringLength(30)]
         public string MerchantNumber { get; set; }
 
         [StringLength(15)]
