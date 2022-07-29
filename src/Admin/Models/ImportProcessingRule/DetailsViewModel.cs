@@ -13,11 +13,17 @@ namespace Admin.Models.ImportProcessingRule
         [DisplayName("Description")]
         public string Description { get; set; }
 
+        [DisplayName("Global")]
+        public bool IsGlobal { get; set; }
+
         [DisplayName("Status")]
         public bool IsDisabled { get; set; }
 
         [DisplayName("Status")]
         public string Status => IsDisabled ? "Disabled" : "Active";
+
+        [DisplayName("Scope")]
+        public string Scope => IsGlobal ? "Global" : "Specific to the specified import types";
 
         public List<ImportProcessingRuleCondition.DetailsViewModel> Conditions { get; set; }
     }

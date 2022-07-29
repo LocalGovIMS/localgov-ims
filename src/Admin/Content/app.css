@@ -280,10 +280,11 @@ tr.selected td {
     font-weight: bold !important;
 }
 
-.ui.segment.search__toggle {
-    margin-top: 0;
-    padding: 0.5rem 0.75rem 0.25rem;
-    box-shadow: none;
+.ui.toggle.checkbox {
+    min-height: 1.5rem;
+    border: 1px solid rgba(34,36,38,.15);
+    padding: 0.525rem 0rem 0.525rem 1em;
+    border-radius: 0.28571429rem;
 }
 
 .page-actions {

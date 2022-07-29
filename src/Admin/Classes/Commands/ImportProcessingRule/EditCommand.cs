@@ -22,6 +22,7 @@ namespace Admin.Classes.Commands.ImportProcessingRule
                 Id = model.Id,
                 Name = model.Name,
                 Description = model.Description,
+                IsGlobal = model.IsGlobal,  
                 Disabled = model.IsDisabled
             };
 

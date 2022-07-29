@@ -36,11 +36,21 @@
             </div>
         </div>
 
-        <div class="four wide field">
+        <div class="field">
+            @Html.LabelFor(m => m.IsGlobal)
+            <div class="ui segment compact">
+                <div class="ui fitted toggle checkbox">
+                    @Html.CheckBoxFor(m => m.IsGlobal)
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
             @Html.LabelFor(m => m.IsDisabled)
-            @Html.EditorFor(m => m.IsDisabled)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
+            <div class="ui segment compact">
+                <div class="ui fitted toggle checkbox">
+                    @Html.CheckBoxFor(m => m.IsDisabled)
+                </div>
             </div>
         </div>
 
@@ -49,4 +59,10 @@
 
     </div>
 
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.checkbox').checkbox({});
+    </script>
 }

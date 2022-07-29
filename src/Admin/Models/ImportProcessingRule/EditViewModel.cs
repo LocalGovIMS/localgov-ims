@@ -15,6 +15,9 @@ namespace Admin.Models.ImportProcessingRule
         [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
 
+        [DisplayName("Global")]
+        public bool IsGlobal { get; set; }
+
         [DisplayName("Disabled")]
         public bool IsDisabled { get; set; }
 

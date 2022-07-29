@@ -41,6 +41,13 @@
             </div>
         </div>
 
+        <div class="field">
+            @Html.LabelFor(m => m.IsGlobal)
+            <div class="ui toggle checkbox">
+                @Html.CheckBoxFor(m => m.IsGlobal)
+            </div>
+        </div>
+
         <div class="ui vertical segment">
             <h3 style="padding-bottom:10px;">
                 Rules
@@ -73,4 +80,10 @@
     <input type="submit" value="Save" class="ui primary button" />
     @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
 
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.checkbox').checkbox({});
+    </script>
 }

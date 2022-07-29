@@ -30,6 +30,7 @@ namespace Admin.Classes.ViewModelBuilders.ImportProcessingRule
                 Id = data.Id,
                 Name = data.Name,
                 Description = data.Description,
+                IsGlobal = data.IsGlobal,
                 IsDisabled = data.Disabled
             };
         }

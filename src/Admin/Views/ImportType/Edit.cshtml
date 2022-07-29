@@ -54,10 +54,8 @@
 
         <div class="field">
             @Html.LabelFor(m => m.IsReversible)
-            <div class="ui segment compact search__toggle">
-                <div class="ui fitted toggle checkbox">
-                    @Html.CheckBoxFor(m => m.IsReversible)
-                </div>
+            <div class="ui toggle checkbox">
+                @Html.CheckBoxFor(m => m.IsReversible)
             </div>
         </div>
 
