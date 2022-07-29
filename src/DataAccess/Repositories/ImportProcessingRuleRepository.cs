@@ -111,6 +111,7 @@ namespace DataAccess.Repositories
 
             item.Name = entity.Name;
             item.Description = entity.Description;
+            item.IsGlobal = entity.IsGlobal;
             item.Disabled = entity.Disabled;
         }
     }

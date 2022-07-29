@@ -33,6 +33,7 @@ namespace Admin.Classes.ViewModelBuilders.ImportProcessingRule
             model.Id = data.Id;
             model.Name = data.Name;
             model.Description = data.Description;
+            model.IsGlobal = data.IsGlobal;
             model.IsDisabled = data.Disabled;
             model.ImportTypesAreAvailableToAdd = ImportTypesAreAvailableToAdd(data);
 

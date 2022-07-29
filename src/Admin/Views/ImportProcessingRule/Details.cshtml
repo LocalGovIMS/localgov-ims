@@ -18,15 +18,21 @@
     @Html.HiddenFor(m => m.Id)
 
     <div class="ui vertical segment">
-        <div class="four wide field">
+        <div class="wide field">
             @Html.LabelFor(m => m.Description)
             @Html.DisplayFor(m => m.Description)
         </div>
 
-        <div class="four wide field">
+        <div class="wide field">
             @Html.LabelFor(m => m.Status)
             @Html.DisplayFor(m => m.Status)
         </div>
+
+        <div class="wide field">
+            @Html.LabelFor(m => m.Scope)
+            @Html.DisplayFor(m => m.Scope)
+        </div>
+
     </div>
 
     <div class="ui vertical segment">
