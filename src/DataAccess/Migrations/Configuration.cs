@@ -1,4 +1,5 @@
 ﻿using DataAccess.SeedData;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.IO;
@@ -18,6 +19,17 @@ namespace DataAccess.Migrations
             RunScript("DataAccess.SeedData.SeedData.sql", context);
             RunScript("DataAccess.SeedData.Indexes.sql", context);
             RunScript("DataAccess.SeedData.ComputedColumns.sql", context);
+
+            if (ConfigurationManager.AppSettings["Environment"].Equals("Demo"))
+            {
+                RunScript("DataAccess.SeedData.DemoData.sql", context);
+            }
+
+            if (ConfigurationManager.AppSettings["Environment"].Equals("UITest"))
+            {
+                RunScript("DataAccess.SeedData.DemoData.sql", context);
+                RunScript("DataAccess.SeedData.UITestData.sql", context);
+            }
         }
 
         private void RunScript(string filename, Persistence.IncomeDbContext context)
