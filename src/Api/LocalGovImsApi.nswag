@@ -8,10 +8,12 @@
         "Api.Controllers.FundMetadata.FundMetadataController",
         "Api.Controllers.Funds.FundsController",
         "Api.Controllers.MethodOfPayments.MethodOfPaymentsController",
+        "Api.Controllers.Notification.NotificationController",
         "Api.Controllers.PendingTransactions.PendingTransactionsController",
         "Api.Controllers.ProcessedTransactions.ProcessedTransactionsController",
         "Api.Controllers.Suspense.SuspenseController",
-        "Api.Controllers.Notification.NotificationController"
+        "Api.Controllers.AccountHolderImport.AccountHolderImportController",
+        "Api.Controllers.TransactionImport.TransactionImportController"
       ],
       "isAspNetCore": false,
       "resolveJsonOptions": false,
