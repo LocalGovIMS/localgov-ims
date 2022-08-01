@@ -23,7 +23,7 @@ namespace Admin.Classes.Commands.Validation
 
             if (string.IsNullOrEmpty(model.FundCode))
             {
-                errors.Add("You must specify a fund code.");
+                errors.Add("You must specify a fund.");
             }
 
             if (string.IsNullOrEmpty(model.AccountReference))

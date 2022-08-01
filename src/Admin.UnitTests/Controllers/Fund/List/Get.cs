@@ -69,7 +69,7 @@ namespace Admin.UnitTests.Controllers.Fund.List
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Fund Codes", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Funds", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

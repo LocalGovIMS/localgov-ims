@@ -4,7 +4,7 @@ namespace Admin.Models.Fund
 {
     public class DetailsViewModel
     {
-        [DisplayName("Fund code")]
+        [DisplayName("Fund")]
         public string FundCode { get; set; }
 
         [DisplayName("Name")]

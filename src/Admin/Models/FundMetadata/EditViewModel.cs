@@ -19,7 +19,7 @@ namespace Admin.Models.FundMetadata
         [Required]
         public string Value { get; set; }
 
-        [DisplayName("Fund Code")]
+        [DisplayName("Fund")]
         public string FundCode { get; set; }
 
         public SelectList Keys { get; set; }
