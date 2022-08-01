@@ -28,8 +28,8 @@ This guide explains how to setup a Windows PC ready for API client generation
 
 # Creating a Client
 
-1. Save the OpenAPI spec YAML file to a folder on your device
-2. Open a command prompt and navigate to that folder
+1. Open a command prompt
+2. Navigate to the folder where you saved the OpenAPI specification in the previous step
 3. Run the [OpenAPI Genearator](https://openapi-generator.tech/) to create the client:
     * Run: npx @openapitools/openapi-generator-cli generate -i [Name of your YAML file].yaml -g csharp-netcore -o [Location to save to e.g. /Dev/MyClient/] --package-name [Name of your client]
 4. Open the solution that was created
