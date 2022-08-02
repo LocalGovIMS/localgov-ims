@@ -18,11 +18,11 @@
                 <div class="field">
                     @if (!Model.IsAPaymentSearch)
                     {
-                        <label>Fund</label>
+                        <label>Fund type</label>
                         <div class="ui fluid search selection dropdown fund">
                             @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                             <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select fund</div>
+                            <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
                             <div class="menu">
                                 <div class="item" data-value="">
                                     None

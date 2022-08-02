@@ -71,7 +71,7 @@ namespace Admin.UnitTests.Controllers.Fund.Edit
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Edit Fund Code", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Edit Fund", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

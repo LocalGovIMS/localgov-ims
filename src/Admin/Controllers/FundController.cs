@@ -13,7 +13,7 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Fund Codes")]
+        [NavigatablePageActionFilter(DisplayText = "Funds")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult List()
@@ -23,7 +23,7 @@ namespace Admin.Controllers
             return View("List", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Fund Codes")]
+        [NavigatablePageActionFilter(DisplayText = "Funds")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [AcceptVerbs("GET", "POST")]
         public ActionResult Search(SearchCriteria criteria)
@@ -33,7 +33,7 @@ namespace Admin.Controllers
             return View("List", model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Fund Code Details")]
+        [NavigatablePageActionFilter(DisplayText = "Fund Details")]
         [HttpGet]
         public ActionResult Details(string id)
         {
@@ -42,7 +42,7 @@ namespace Admin.Controllers
             return View(model);
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Edit Fund Code")]
+        [NavigatablePageActionFilter(DisplayText = "Edit Fund")]
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -66,7 +66,7 @@ namespace Admin.Controllers
             return RedirectToAction("Back");
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Create Fund Code")]
+        [NavigatablePageActionFilter(DisplayText = "Create Fund")]
         [HttpGet]
         public ActionResult Create()
         {

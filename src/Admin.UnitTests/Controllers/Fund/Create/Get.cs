@@ -71,7 +71,7 @@ namespace Admin.UnitTests.Controllers.Fund.Create
 
             var namedArgument = attribute.NamedArguments.Where(x => x.MemberName == "DisplayText").First();
 
-            Assert.AreEqual("Create Fund Code", namedArgument.TypedValue.Value);
+            Assert.AreEqual("Create Fund", namedArgument.TypedValue.Value);
         }
 
         [TestMethod]

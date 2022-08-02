@@ -10,7 +10,7 @@ namespace Admin.Models.AccountHolder
         [Required(ErrorMessage = "Account reference is required")]
         public string AccountReference { get; set; }
 
-        [DisplayName("Fund code")]
+        [DisplayName("Fund type")]
         public string FundCode { get; set; }
 
         [DisplayName("Current balance")]

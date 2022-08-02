@@ -8,7 +8,7 @@ namespace Admin.Models.AccountHolder
         [DisplayName("Account reference")]
         public string AccountReference { get; set; }
 
-        [DisplayName("Fund code")]
+        [DisplayName("Fund")]
         public string FundCode { get; set; }
 
         [DisplayName("Fund name")]

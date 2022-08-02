@@ -15,7 +15,7 @@ namespace Admin.Models.FundMetadata
         [DisplayName("Value")]
         public string Value { get; set; }
 
-        [DisplayName("Fund Code")]
+        [DisplayName("Fund code")]
         public string FundCode { get; set; }
     }
 }
