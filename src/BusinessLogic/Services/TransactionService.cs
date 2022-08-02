@@ -156,134 +156,7 @@ namespace BusinessLogic.Services
             var processedTransactions = UnitOfWork.Transactions.GetByInternalReference(internalReference).ToList();
             return processedTransactions.Any();
         }
-
-        public IResult AuthoriseTransactionByNotification(TransactionNotification notification)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.TransactionCreate)) return new Result("You do not have permission to perform the requested action");
-
-            try
-            {
-                var processedTransactions = UnitOfWork.Transactions.GetByInternalReference(notification.MerchantReference).ToList();
-
-                if (processedTransactions.Any())
-                {
-                    if (processedTransactions.All(x => x.PspReference != notification.PspReference))
-                    {
-                        HandleNotificationForDuplicateTransactions(notification, processedTransactions);
-                    }
-                    else if (processedTransactions.Any(x => x.PspReference == notification.PspReference))
-                    {
-                        HandleNotificationForExistingTransactions(notification, processedTransactions);
-                    }
-                }
-                else
-                {
-                    HandleNotificationForNewTransactions(notification, processedTransactions);
-                }
-
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (DbUpdateException e)
-            {
-                UnitOfWork.ResetChanges();
-                Logger.Warn(null, e);
-                return new Result("Unable to create a authorise Transaction by notification");
-            }
-            catch (Exception e)
-            {
-                UnitOfWork.ResetChanges();
-                Logger.Error(null, e);
-                return new Result("Unable to create a authorise Transaction by notification");
-            }
-        }
-
-        /// <summary>
-        /// Handle notifications which create new processed transactions from a pending transaction.
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <param name="processedTransactions"></param>
-        private void HandleNotificationForNewTransactions(TransactionNotification notification, List<ProcessedTransaction> processedTransactions)
-        {
-            if (!processedTransactions.Any())
-            {
-                var pendingTransactions =
-                    UnitOfWork.PendingTransactions.GetByInternalReference(notification.MerchantReference);
-
-                var transactions = new List<ProcessedTransaction>();
-
-                foreach (var pendingTransaction in pendingTransactions)
-                {
-                    pendingTransaction.Processed = true;
-                    pendingTransaction.StatusId = (int)Enums.TransactionStatus.Successful;
-                    var transaction = ConvertPendingTransactionToTransaction(pendingTransaction);
-                    transaction.PspReference = notification.PspReference;
-                    transaction.AuthorisationCode = notification.Reason;
-                    transaction.TransactionDate = notification.EventDate;
-                    transaction.EntryDate = DateTime.Now;
-                    transactions.Add(transaction);
-                }
-
-                UnitOfWork.Transactions.AddRange(transactions);
-            }
-        }
-
-        /// <summary>
-        /// Handle notifications which provide additional information for existing processed transactions, for example
-        /// the authorisation date to make sure payment provider balances and the Authorisation Code.
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <param name="processedTransactions"></param>
-        private static void HandleNotificationForExistingTransactions(TransactionNotification notification,
-            List<ProcessedTransaction> processedTransactions)
-        {
-            if (processedTransactions.Any(x => x.PspReference == notification.PspReference))
-            {
-                foreach (var processedTransaction in processedTransactions.Where(x =>
-                    x.PspReference == notification.PspReference))
-                {
-                    processedTransaction.AuthorisationCode = notification.Reason;
-                    processedTransaction.TransactionDate = notification.EventDate;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handle notifications for duplicate transactions - for example if we recieve two authorisation
-        /// events for the same payment and the customer has paid twice - this allows us to insert into the
-        /// processed table so it can be refunded later.
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <param name="processedTransactions"></param>
-        private void HandleNotificationForDuplicateTransactions(TransactionNotification notification,
-            List<ProcessedTransaction> processedTransactions)
-        {
-            if (processedTransactions.All(x => x.PspReference != notification.PspReference))
-            {
-                var pendingTransactions =
-                    UnitOfWork.PendingTransactions.GetByInternalReference(notification.MerchantReference);
-
-                var transactions = new List<ProcessedTransaction>();
-
-                foreach (var pendingTransaction in pendingTransactions)
-                {
-                    pendingTransaction.Processed = true;
-                    pendingTransaction.StatusId = (int)Enums.TransactionStatus.Successful;
-                    var transaction = ConvertPendingTransactionToTransaction(pendingTransaction);
-                    transaction.TransactionReference = GetNextReferenceId();
-                    transaction.PspReference = notification.PspReference;
-                    transaction.AuthorisationCode = notification.Reason;
-                    transaction.TransactionDate = notification.EventDate;
-                    transaction.EntryDate = DateTime.Now;
-                    transactions.Add(transaction);
-                }
-
-                _emailService.SendDuplicateTransactionEmail(transactions);
-
-                UnitOfWork.Transactions.AddRange(transactions);
-            }
-        }
+                
 
         // TODO: Move to refund service.
         public IResult AuthoriseRefundByNotification(string internalReference, string pspReference)
@@ -423,24 +296,6 @@ namespace BusinessLogic.Services
             };
 
             return SavePendingTransactions(pendingTransactions, source);
-        }
-
-        public IResult SaveNotification(TransactionNotification notification)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.NotificationCreate)) return new Result("You do not have permission to perform the requested action");
-
-            try
-            {
-                UnitOfWork.TransactionNotifications.Add(notification);
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new Result("Unable to create a Transaction Notification");
-            }
         }
 
         public IResult FailPendingTransaction(string reference, string pspReference, string authResult)
@@ -674,43 +529,7 @@ namespace BusinessLogic.Services
                 return null;
             }
         }
-
-        public List<TransactionNotification> GetUnprocessedNotifications()
-        {
-            // if (!SecurityContext.IsInRole("Notification.List")) return null; todo: check permission for this
-
-            try
-            {
-                return UnitOfWork.TransactionNotifications.Find(x => x.Processed == false).ToList();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new List<TransactionNotification>();
-            }
-        }
-
-        public IResult MarkNotificationAsProcessed(int transactionId)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.NotificationEdit)
-                && !SecurityContext.IsInRole(Security.Role.SystemAdmin)) return new Result("You do not have permission to perform the requested action");
-
-            try
-            {
-                var notification = UnitOfWork.TransactionNotifications.SingleOrDefault(x => x.Id == transactionId);
-                notification.Processed = true;
-
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new Result("Unable to mark Notification as processed");
-            }
-        }
-
+        
         public decimal GetAmountForPendingTransactionByReference(string reference)
         {
             var processedTransactions = GetTransactionsByInternalReference(reference);

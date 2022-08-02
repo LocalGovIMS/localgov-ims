@@ -11,20 +11,16 @@ namespace BusinessLogic.Interfaces.Services
     public interface ITransactionService
     {
         Response AuthorisePendingTransactionByInternalReference(AuthorisePendingTransactionByInternalReferenceArgs args);
-        IResult AuthoriseTransactionByNotification(TransactionNotification notification);
         IResult AuthoriseRefundByNotification(string internalReference, string pspReference);
         IResult FailPendingTransaction(string reference, string pspReference, string authResult);
         Response SaveChequesToProcessed(List<ProcessedTransaction> transactions);
         List<PendingTransaction> GetPendingTransactionsByInternalReference(string internalReference);
-        IResult SaveNotification(TransactionNotification notification);
         Response SavePendingTransaction(PendingTransaction pendingTransaction, string source);
         Response SavePendingTransactions(IEnumerable<PendingTransaction> pendingTransactions, string source);
         IResult SuspendPendingTransaction(string reference, string pspReference, string authResult);
         List<ProcessedTransaction> GetTransactionsByInternalReference(string internalReference);
         ProcessedTransaction GetTransaction(string transactionReference);
         SearchResult<ProcessedTransaction> SearchTransactions(SearchCriteria criteria);
-        List<TransactionNotification> GetUnprocessedNotifications();
-        IResult MarkNotificationAsProcessed(int transactionId);
         List<PendingTransaction> GetPendingRefunds(string transactionReference);
         List<ProcessedTransaction> GetProcessedRefunds(string transactionReference);
         List<ProcessedTransaction> GetTransfers(string transferGuid);

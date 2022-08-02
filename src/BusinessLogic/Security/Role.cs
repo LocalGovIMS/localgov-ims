@@ -25,8 +25,6 @@
         public const string EReturnDelete = "EReturn.Delete";
 
         // System roles
-        public const string NotificationCreate = "Notification.Create";
-        public const string NotificationEdit = "Notification.Edit";
         public const string TransactionEdit = "Transaction.Edit"; // would be required if we use pay pal...here for completeness
         public const string RefundsAuthorise = "Refunds.Authorise";
     }

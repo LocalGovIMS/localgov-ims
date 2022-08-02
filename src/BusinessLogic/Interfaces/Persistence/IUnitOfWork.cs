@@ -31,7 +31,6 @@ namespace BusinessLogic.Interfaces.Persistence
         ITemplateRepository Templates { get; }
         ITemplateRowRepository TemplateRows { get; }
         ITransactionRepository Transactions { get; }
-        ITransactionNotificationRepository TransactionNotifications { get; }
         IUserRepository Users { get; }
         IUserFundGroupRepository UserFundGroups { get; }
         IUserRoleRepository UserRoles { get; }

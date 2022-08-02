@@ -39,7 +39,6 @@ namespace DataAccess
                 .RegisterType<ISystemMessageRepository, SystemMessageRepository>()
                 .RegisterType<ITemplateRepository, TemplateRepository>()
                 .RegisterType<ITemplateRowRepository, TemplateRowRepository>()
-                .RegisterType<ITransactionNotificationRepository, TransactionNotificationRepository>()
                 .RegisterType<ITransactionRepository, TransactionRepository>()
                 .RegisterType<IUserFundGroupRepository, UserFundGroupRepository>()
                 .RegisterType<IUserRepository, UserRepository>()

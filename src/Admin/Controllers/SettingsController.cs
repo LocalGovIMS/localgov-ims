@@ -7,24 +7,15 @@ namespace Admin.Controllers
 {
     [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
     public class SettingsController : Controller
-    {
-        private readonly IMaintenanceService _maintenanceService;
-
-        public SettingsController(IMaintenanceService maintenanceService)
-        {
-            _maintenanceService = maintenanceService;
+    {        
+        public SettingsController()
+        {           
         }
 
         [NavigatablePageActionFilter(ClearNavigation = true)]
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult ProcessNotifications()
-        {
-            _maintenanceService.ProcessNotifications();
-            return View("Index");
         }
     }
 }

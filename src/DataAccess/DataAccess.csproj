@@ -189,6 +189,10 @@
     <Compile Include="Migrations\202207271522024_Remove_PendingTransaction_BatchReference.designer.cs">
       <DependentUpon>202207271522024_Remove_PendingTransaction_BatchReference.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208021440573_Remove_TransactionNotification.cs" />
+    <Compile Include="Migrations\202208021440573_Remove_TransactionNotification.designer.cs">
+      <DependentUpon>202208021440573_Remove_TransactionNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -223,7 +227,6 @@
     <Compile Include="Repositories\FundMessageRepository.cs" />
     <Compile Include="Repositories\TemplateRowRepository.cs" />
     <Compile Include="Repositories\TemplateRepository.cs" />
-    <Compile Include="Repositories\TransactionNotificationRepository.cs" />
     <Compile Include="Repositories\EReturnRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\UserFundGroupRepository.cs" />
@@ -319,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207271522024_Remove_PendingTransaction_BatchReference.resx">
       <DependentUpon>202207271522024_Remove_PendingTransaction_BatchReference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208021440573_Remove_TransactionNotification.resx">
+      <DependentUpon>202208021440573_Remove_TransactionNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

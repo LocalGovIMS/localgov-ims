@@ -36,9 +36,6 @@ namespace PaymentPortal.Security
                 Role.RefundsList,
                 Role.RefundsAuthorise,
 
-                Role.NotificationCreate,
-                Role.NotificationEdit,
-
                 Role.Payments,
             };
 

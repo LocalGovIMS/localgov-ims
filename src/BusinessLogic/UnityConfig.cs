@@ -39,8 +39,6 @@ namespace BusinessLogic
                 .RegisterType<IImportProcessingRuleActionService, ImportProcessingRuleActionService>()
                 .RegisterType<IImportProcessingRuleFieldService, ImportProcessingRuleFieldService>()
                 .RegisterType<IImportProcessingRuleOperatorService, ImportProcessingRuleOperatorService>()
-                .RegisterType<IMaintenanceService, MaintenanceService>()
-                .RegisterType<INotificationService, NotificationService>()
                 .RegisterType<IOfficeService, OfficeService>()
                 .RegisterType<IMethodOfPaymentService, MethodOfPaymentService>()
                 .RegisterType<IMethodOfPaymentMetadataService, MethodOfPaymentMetadataService>()

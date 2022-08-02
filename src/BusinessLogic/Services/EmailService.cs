@@ -63,23 +63,7 @@ namespace BusinessLogic.Services
             {
                 return new Result(e.Message);
             }
-        }
-
-        public IResult SendNotificationEmail(TransactionNotification notification)
-        {
-            try
-            {
-                var email = _dependencies.EmailFactory.CreateNotificationEmail(notification);
-
-                _smtpClient.Send(email.Email);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                return new Result(e.Message);
-            }
-        }
+        }     
 
         public IResult SendDuplicateTransactionEmail(List<ProcessedTransaction> transactions)
         {

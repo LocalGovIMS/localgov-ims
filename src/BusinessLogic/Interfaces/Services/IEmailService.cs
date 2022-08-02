@@ -10,7 +10,6 @@ namespace BusinessLogic.Interfaces.Services
     {
         IResult SendVatReceiptEmail(string recipientEmailAddress, Transaction pspReference);
         IResult SendEReturnDeletedEmail(string eReturnNumber, string deletedBy);
-        IResult SendNotificationEmail(TransactionNotification notification);
         IResult SendDuplicateTransactionEmail(List<ProcessedTransaction> transactions);
         IResult SendPasswordResetEmail(IdentityMessage message);
     }

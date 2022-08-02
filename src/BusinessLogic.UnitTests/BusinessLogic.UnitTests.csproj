@@ -98,7 +98,6 @@
     <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
     <Compile Include="Classes\RefundStatusTests.cs" />
     <Compile Include="Classes\RefundRequestTests.cs" />
-    <Compile Include="Classes\Smtp\NotificationEmailTests.cs" />
     <Compile Include="Classes\Strategies\SuspenseJournalAllocationStrategyTests.cs" />
     <Compile Include="Classes\Strategies\TransactionVatStrategyTests.cs" />
     <Compile Include="Classes\Strategies\ApproveEReturnsStrategyTests.cs" />
@@ -335,9 +334,6 @@
     <Compile Include="Services\MethodOfPayment\CreateTests.cs" />
     <Compile Include="Services\Office\UpdateTests.cs" />
     <Compile Include="Services\MethodOfPayment\UpdateTests.cs" />
-    <Compile Include="Services\Notification\BaseNotificationTest.cs" />
-    <Compile Include="Services\Notification\ProcessNotificationTests.cs" />
-    <Compile Include="Services\Notification\SaveNotificationTests.cs" />
     <Compile Include="Services\Office\CreateTests.cs" />
     <Compile Include="Services\Payment\BasePaymentTest.cs" />
     <Compile Include="Services\Payment\ProcessPaymentsTests.cs" />
@@ -361,7 +357,6 @@
     <Compile Include="Services\TransactionJournal\UndoTransferTests.cs" />
     <Compile Include="Services\TransactionTransfer\BaseTransactionTransferTest.cs" />
     <Compile Include="Services\TransactionTransfer\TransferTests.cs" />
-    <Compile Include="Services\Transaction\AuthoriseTransactionByNotificationTests.cs" />
     <Compile Include="Services\Transaction\AuthoriseRefundByNotificationTests.cs" />
     <Compile Include="Services\Transaction\BaseTransactionTest.cs" />
     <Compile Include="Services\Transaction\GetAmountForPendingTransactionByReferenceTests.cs" />
@@ -372,8 +367,6 @@
     <Compile Include="Services\Transaction\SearchTransactionsTests.cs" />
     <Compile Include="Services\Transaction\ReceiptIssuedTests.cs" />
     <Compile Include="Services\Transaction\MarkRefundsAsProcessedTests.cs" />
-    <Compile Include="Services\Transaction\MarkNotificationAsProcessedTests.cs" />
-    <Compile Include="Services\Transaction\GetUnprocessedNotificationsTests.cs" />
     <Compile Include="Services\Transaction\GetTransfersTests.cs" />
     <Compile Include="Services\Transaction\GetProcessedRefundsTests.cs" />
     <Compile Include="Services\Transaction\GetPendingRefundsTests.cs" />
@@ -381,7 +374,6 @@
     <Compile Include="Services\Transaction\GetTransactionsByInternalReferenceTests.cs" />
     <Compile Include="Services\Transaction\SuspendPendingTransactionTests.cs" />
     <Compile Include="Services\Transaction\FailPendingTransactionTests.cs" />
-    <Compile Include="Services\Transaction\SaveNotificationTests.cs" />
     <Compile Include="Services\Transaction\GetTransactionByAppReferenceTests.cs" />
     <Compile Include="Services\Transaction\GetPendingTransactionsByInternalReferenceTests.cs" />
     <Compile Include="Services\Base\GetNextReferenceIdTests.cs" />

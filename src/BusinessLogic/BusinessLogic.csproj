@@ -124,7 +124,6 @@
     <Compile Include="Classes\Smtp\Emails\BaseEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\DuplicateTransactionEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\PasswordResetEmail.cs" />
-    <Compile Include="Classes\Smtp\Emails\NotificationEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\EReturnDeletedEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\VatReceiptEmail.cs" />
     <Compile Include="Classes\Strategies\ApproveEReturnsStrategy.cs" />
@@ -177,7 +176,6 @@
     <Compile Include="Entities\SystemMessage.cs" />
     <Compile Include="Entities\Template.cs" />
     <Compile Include="Entities\TemplateRow.cs" />
-    <Compile Include="Entities\TransactionNotification.cs" />
     <Compile Include="Entities\PendingTransaction.cs" />
     <Compile Include="Entities\ProcessedTransaction.cs" />
     <Compile Include="Entities\TransactionStatus.cs" />
@@ -276,7 +274,6 @@
     <Compile Include="Interfaces\Repositories\ISystemMessageRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITemplateRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITemplateRowRepository.cs" />
-    <Compile Include="Interfaces\Repositories\ITransactionNotificationRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITransactionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserFundGroupRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserMethodOfPaymentRepository.cs" />
@@ -400,7 +397,6 @@
     <Compile Include="Models\Payments\DisabledReference.cs" />
     <Compile Include="Classes\Cryptography\MD5CryptographyService.cs" />
     <Compile Include="Security\Role.cs" />
-    <Compile Include="Classes\NotificationEvent.cs" />
     <Compile Include="Classes\PaymentAuthorisation.cs" />
     <Compile Include="Classes\PaymentDetails.cs" />
     <Compile Include="Classes\PaymentResponse.cs" />
@@ -416,8 +412,6 @@
     <Compile Include="Interfaces\Services\IAccountHolderService.cs" />
     <Compile Include="Interfaces\Services\IFundGroupService.cs" />
     <Compile Include="Interfaces\Services\IFundService.cs" />
-    <Compile Include="Interfaces\Services\IMaintenanceService.cs" />
-    <Compile Include="Interfaces\Services\INotificationService.cs" />
     <Compile Include="Interfaces\Services\IPaymentService.cs" />
     <Compile Include="Interfaces\Services\IRefundService.cs" />
     <Compile Include="Interfaces\Services\IRoleService.cs" />
@@ -441,8 +435,6 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\FundGroupService.cs" />
     <Compile Include="Services\FundService.cs" />
-    <Compile Include="Services\MaintenanceService.cs" />
-    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\RefundService.cs" />
     <Compile Include="Services\RoleService.cs" />

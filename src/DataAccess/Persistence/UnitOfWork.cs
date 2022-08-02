@@ -46,7 +46,6 @@ namespace DataAccess.Persistence
         public ITemplateRepository Templates { get; private set; }
         public ITemplateRowRepository TemplateRows { get; private set; }
         public ITransactionRepository Transactions { get; private set; }
-        public ITransactionNotificationRepository TransactionNotifications { get; private set; }
         public IUserRepository Users { get; private set; }
         public IUserFundGroupRepository UserFundGroups { get; private set; }
         public IUserRoleRepository UserRoles { get; private set; }
@@ -95,7 +94,6 @@ namespace DataAccess.Persistence
             ITemplateRepository templateRepository,
             ITemplateRowRepository templateRowRepository,
             ITransactionRepository transactionRepository,
-            ITransactionNotificationRepository transactionNotificationRepository,
             IUserRepository userRepository,
             IUserFundGroupRepository userFundGroupRepository,
             IUserRoleRepository userRoleRepository,
@@ -145,7 +143,6 @@ namespace DataAccess.Persistence
             Templates = templateRepository;
             TemplateRows = templateRowRepository;
             Transactions = transactionRepository;
-            TransactionNotifications = transactionNotificationRepository;
             Users = userRepository;
             UserFundGroups = userFundGroupRepository;
             UserRoles = userRoleRepository;
