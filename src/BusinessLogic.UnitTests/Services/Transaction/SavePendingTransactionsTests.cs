@@ -14,8 +14,6 @@ namespace BusinessLogic.UnitTests.Services.Transaction
     {
         private void SetupUnitOfWork(bool setVatRate)
         {
-            MockUnitOfWork.Setup(x => x.TransactionNotifications.Add(It.IsAny<TransactionNotification>()));
-
             MockUnitOfWork.Setup(x => x.PendingTransactions.AddRange(It.IsAny<IEnumerable<PendingTransaction>>()));
 
             var vat = new Entities.Vat()

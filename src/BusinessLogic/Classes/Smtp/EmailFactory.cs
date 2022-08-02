@@ -19,11 +19,6 @@ namespace BusinessLogic.Classes.Smtp
             return new EReturnDeletedEmail(eReturnNumber, deletedBy);
         }
 
-        public IEmail CreateNotificationEmail(TransactionNotification notification)
-        {
-            return new NotificationEmail(notification);
-        }
-
         public IEmail SendDuplicateTransactionEmail(List<ProcessedTransaction> transactions)
         {
             return new DuplicateTransactionEmail(transactions);

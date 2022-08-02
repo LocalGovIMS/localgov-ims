@@ -43,7 +43,6 @@ namespace DataAccess.Persistence
         public virtual DbSet<SystemMessage> SystemMessages { get; set; }
         public virtual DbSet<TemplateRow> TemplateRows { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
-        public virtual DbSet<TransactionNotification> TransactionNotifications { get; set; }
         public virtual DbSet<PendingTransaction> PendingTransactions { get; set; }
         public virtual DbSet<ProcessedTransaction> ProcessedTransactions { get; set; }
         public virtual DbSet<UserFundGroup> ImsUserFundGroups { get; set; }

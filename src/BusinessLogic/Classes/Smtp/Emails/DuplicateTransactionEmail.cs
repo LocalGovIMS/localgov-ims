@@ -11,7 +11,7 @@ namespace BusinessLogic.Classes.Smtp.Emails
     public class DuplicateTransactionEmail : BaseEmail<string>
     {
         private const string EmailRecipientSettingKey = "DuplicateTransaction.Email.Recipient";
-        public override EmailTypeEnum EmailType { get { return EmailTypeEnum.NotificationEmail; } }
+        public override EmailTypeEnum EmailType { get { return EmailTypeEnum.DuplicateTransaction; } }
 
         public DuplicateTransactionEmail(List<ProcessedTransaction> processedTransactions) : base(processedTransactions.First().InternalReference)
         {
