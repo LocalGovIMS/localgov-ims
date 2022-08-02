@@ -67,6 +67,9 @@
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select character type</div>
                 <div class="menu">
+                    <div class="item" data-value="">
+                        None
+                    </div>
                     @foreach (var item in Model.CharacterTypes.Items)
                     {
                         <div class="item" data-value="@item.Value">
@@ -87,6 +90,9 @@
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select check digit configuration</div>
                 <div class="menu">
+                    <div class="item" data-value="">
+                        None
+                    </div>
                     @foreach (var item in Model.CheckDigitConfigurations.Items)
                     {
                         <div class="item" data-value="@item.Value">
