@@ -375,7 +375,7 @@ namespace BusinessLogic.Services
                 pendingTransaction.InternalReference = referenceId;
                 pendingTransaction.StatusId = (int)Enums.TransactionStatus.Pending;
                 pendingTransaction.EntryDate = DateTime.Now;
-                pendingTransaction.OfficeCode = SecurityContext.OfficeCode;
+                pendingTransaction.OfficeCode = string.IsNullOrEmpty(pendingTransaction.OfficeCode) ? SecurityContext.OfficeCode : pendingTransaction.OfficeCode;
                 pendingTransaction.VatCode = vat.VatCode;
                 pendingTransaction.VatRate = decimal.ToSingle(vat.Percentage ?? 0);
 
