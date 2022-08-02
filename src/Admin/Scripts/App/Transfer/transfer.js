@@ -239,7 +239,7 @@ $(document).ready(function () {
         html.push('<ul>');
 
         if (!$('#SourceItem_FundCode').val()) {
-            html.push('<li>You must select a source fund</li>');
+            html.push('<li>You must select a source fund type</li>');
             result = false;
         }
 
@@ -276,7 +276,7 @@ $(document).ready(function () {
         html.push('<ul>');
 
         if (!$('#TransferItem_FundCode').val()) {
-            html.push('<li>You must select a fund</li>');
+            html.push('<li>You must select a fund type</li>');
             result = false;
         }
 

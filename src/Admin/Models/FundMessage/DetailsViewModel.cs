@@ -6,7 +6,7 @@ namespace Admin.Models.FundMessage
     {
         public int Id { get; set; }
 
-        [DisplayName("Fund")]
+        [DisplayName("Fund code")]
         public string FundCode { get; set; }
 
         [DisplayName("Fund")]

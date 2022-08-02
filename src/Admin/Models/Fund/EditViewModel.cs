@@ -6,7 +6,7 @@ namespace Admin.Models.Fund
 {
     public class EditViewModel
     {
-        [DisplayName("Fund")]
+        [DisplayName("Fund code")]
         [Required(ErrorMessage = "Fund is required")]
         [StringLength(2, ErrorMessage = "Fund cannot be longer than 2 characters")]
         public string FundCode { get; set; }

@@ -9,8 +9,8 @@ namespace Admin.Models.FundMessage
         [Required(ErrorMessage = "Id is required")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Fund is required")]
-        [DisplayName("Fund")]
+        [Required(ErrorMessage = "Fund type is required")]
+        [DisplayName("Fund type")]
         public string FundCode { get; set; }
 
         [DisplayName("Fund")]

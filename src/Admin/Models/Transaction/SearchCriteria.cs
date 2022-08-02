@@ -16,7 +16,7 @@ namespace Admin.Models.Transaction
 
         public DateTime? EndDate { get; set; }
 
-        [Display(Name = "Fund")]
+        [Display(Name = "Fund type")]
         public string FundCode { get; set; }
 
         [Display(Name = "User")]

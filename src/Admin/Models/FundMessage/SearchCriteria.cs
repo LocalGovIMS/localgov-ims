@@ -5,7 +5,7 @@ namespace Admin.Models.FundMessage
 {
     public class SearchCriteria
     {
-        [Display(Name = "Fund")]
+        [Display(Name = "Fund type")]
         public string FundCode { get; set; }
 
         public string Message { get; set; }

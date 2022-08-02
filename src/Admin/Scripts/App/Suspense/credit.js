@@ -139,7 +139,7 @@
         html.push("<ul>");
 
         if (!$("#CreditNote_FundCode").val()) {
-            html.push("<li>You must select a fund</li>");
+            html.push("<li>You must select a fund type</li>");
             result = false;
         }
 
