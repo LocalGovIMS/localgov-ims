@@ -19,21 +19,21 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             SetupStrategy();
 
             // Act
-            Strategy.Process(GetArgs());
+            Strategy.Process(GetArgs(CreatableTransaction()));
 
             // Assert
             MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>()), Times.Once);
         }
 
         [TestMethod]
-        public void Process_CallsTransactionServiceCreateProcessedTransactionOnce()
+        public void Process_WhenTheProcessedTransactionIsCreatable_CallsTransactionServiceCreateProcessedTransactionOnce()
         {
             // Arrange
             SetupDependencies();
             SetupStrategy();
 
             // Act
-            Strategy.Process(GetArgs());
+            Strategy.Process(GetArgs(CreatableTransaction()));
 
             // Assert
             MockTransactionService.Verify(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()), Times.Once);
@@ -42,14 +42,46 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
         [TestMethod]
         [DataRow("Test")]
         [DataRow("Another Test")]
-        public void Process_WhenCreateProcessedTransactionReturnsAnUnsuccessfulResult_ThrowsAnExceptionWithTheResultError(string errorMessage)
+        public void Process_WhenTheTransactionIsCreatableAndCreateProcessedTransactionReturnsAnUnsuccessfulResult_ThrowsAnExceptionWithTheResultError(string errorMessage)
         {
             // Arrange
             SetupDependenciesForFailure(errorMessage);
             SetupStrategy();
 
             // Act
-            Action action = () => Strategy.Process(GetArgs());
+            Action action = () => Strategy.Process(GetArgs(CreatableTransaction()));
+
+            // Assert
+            action.Should()
+                .Throw<ImportProcessingException>()
+                .WithMessage(errorMessage);
+        }
+
+        [TestMethod]
+        public void Process_WhenTheProcessedTransactionIsNotCreatable_CallsSuspenseServiceCreateOnce()
+        {
+            // Arrange
+            SetupDependencies();
+            SetupStrategy();
+
+            // Act
+            Strategy.Process(GetArgs(NonCreatableTransaction()));
+
+            // Assert
+            MockSuspenseService.Verify(x => x.Create(It.IsAny<CreateSuspenseArgs>()), Times.Once);
+        }
+
+        [TestMethod]
+        [DataRow("Test")]
+        [DataRow("Another Test")]
+        public void Process_WhenTheTransactionIsNotCreatableAndCreateSuspenseReturnsAnUnsuccessfulResult_ThrowsAnExceptionWithTheResultError(string errorMessage)
+        {
+            // Arrange
+            SetupDependenciesForFailure(errorMessage);
+            SetupStrategy();
+
+            // Act
+            Action action = () => Strategy.Process(GetArgs(NonCreatableTransaction()));
 
             // Assert
             action.Should()
