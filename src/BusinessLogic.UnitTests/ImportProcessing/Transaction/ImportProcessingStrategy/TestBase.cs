@@ -11,8 +11,9 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
     {
         protected readonly Mock<IRuleEngine> MockRuleEngine = new Mock<IRuleEngine>();
         protected readonly Mock<ITransactionService> MockTransactionService = new Mock<ITransactionService>();
+        protected readonly Mock<ISuspenseService> MockSuspenseService = new Mock<ISuspenseService>();
 
-        protected BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy Strategy;
+        protected TransactionImportProcessingStrategy Strategy;
 
         protected void SetupDependencies()
         {
@@ -21,6 +22,9 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
 
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()))
                 .Returns(new Result());
+
+            MockSuspenseService.Setup(x => x.Create(It.IsAny<CreateSuspenseArgs>()))
+               .Returns(new Result());
         }
 
         protected void SetupDependenciesForFailure(string errorMessage)
@@ -30,16 +34,20 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
 
             MockTransactionService.Setup(x => x.CreateProcessedTransaction(It.IsAny<CreateProcessedTransactionArgs>()))
                 .Returns(new Result(errorMessage));
+
+            MockSuspenseService.Setup(x => x.Create(It.IsAny<CreateSuspenseArgs>()))
+                .Returns(new Result(errorMessage));
         }
 
         protected void SetupStrategy()
         {
-            Strategy = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
+            Strategy = new TransactionImportProcessingStrategy(
                 MockRuleEngine.Object,
-                MockTransactionService.Object);
+                MockTransactionService.Object,
+                MockSuspenseService.Object);
         }
 
-        protected ImportProcessingStrategyArgs GetArgs()
+        protected ImportProcessingStrategyArgs GetArgs(ProcessedTransaction processedTransaction)
         {
             return new ImportProcessingStrategyArgs()
             {
@@ -56,10 +64,25 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
                 {
                     Id = 1,
                     ImportId = 1,
-                    Data = Newtonsoft.Json.JsonConvert.SerializeObject(new ProcessedTransaction())
+                    Data = Newtonsoft.Json.JsonConvert.SerializeObject(processedTransaction)
                 }
             };
         }
 
+        protected ProcessedTransaction CreatableTransaction()
+        {
+            return new ProcessedTransaction()
+            {
+                FundCode = "F1"
+            };
+        }
+
+        protected ProcessedTransaction NonCreatableTransaction()
+        {
+            return new ProcessedTransaction()
+            {
+                FundCode = null
+            };
+        }
     }
 }

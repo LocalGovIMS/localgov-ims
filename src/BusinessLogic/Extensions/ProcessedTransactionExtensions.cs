@@ -86,5 +86,26 @@ namespace BusinessLogic.Extensions
 
             return exportString.ToString();
         }
+
+        public static bool IsCreatable(this ProcessedTransaction transaction)
+        {
+            if (transaction == null) return false;
+            if (string.IsNullOrEmpty(transaction.FundCode)) return false;
+            if (string.IsNullOrWhiteSpace(transaction.FundCode)) return false;
+
+            return true;
+        }
+
+        public static Suspense ToSuspense(this ProcessedTransaction transaction)
+        {
+            return new Suspense()
+            {
+                AccountNumber = transaction.AccountReference,
+                Amount = transaction.Amount ?? 0,
+                CreatedAt = DateTime.Now,
+                Narrative = transaction.Narrative,
+                TransactionDate = transaction.TransactionDate ?? DateTime.Now
+            };
+        }
     }
 }

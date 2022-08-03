@@ -14,7 +14,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             {
                 var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
                     null, 
-                    MockTransactionService.Object);
+                    MockTransactionService.Object,
+                    MockSuspenseService.Object);
 
             }
             catch (Exception e)
@@ -30,7 +31,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             {
                 var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
                     null,
-                    MockTransactionService.Object);
+                    MockTransactionService.Object,
+                    MockSuspenseService.Object);
             }
             catch (ArgumentNullException exception)
             {
@@ -45,7 +47,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             {
                 var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
                     MockRuleEngine.Object,
-                    null);
+                    null,
+                    MockSuspenseService.Object);
 
             }
             catch (Exception e)
@@ -61,11 +64,45 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             {
                 var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
                     MockRuleEngine.Object,
-                    null);
+                    null,
+                    MockSuspenseService.Object);
             }
             catch (ArgumentNullException exception)
             {
                 exception.Message.Should().Be("Value cannot be null.\r\nParameter name: transactionService");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenSuspenseServiceIsNull()
+        {
+            try
+            {
+                var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
+                    MockRuleEngine.Object,
+                    MockTransactionService.Object,
+                    null);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionMessageWhenSuspenseServiceIsNull()
+        {
+            try
+            {
+                var instance = new BusinessLogic.ImportProcessing.TransactionImportProcessingStrategy(
+                    MockRuleEngine.Object,
+                    MockTransactionService.Object,
+                    null);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: suspenseService");
             }
         }
     }

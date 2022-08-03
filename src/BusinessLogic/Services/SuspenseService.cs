@@ -11,6 +11,7 @@ using BusinessLogic.Models.Suspense;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace BusinessLogic.Services
@@ -41,6 +42,33 @@ namespace BusinessLogic.Services
             {
                 Logger.Error(null, e);
                 return new Result("Unable to save Suspense");
+            }
+        }
+
+        public IResult Create(CreateSuspenseArgs args)
+        {
+            try
+            {
+                UnitOfWork.Suspenses.Add(args.Suspense);
+
+                if (args.SaveChanges)
+                {
+                    UnitOfWork.Complete(SecurityContext.UserId);
+                }
+
+                return new Result() { Data = args.Suspense };
+            }
+            catch (DbUpdateException ex)
+            {
+                Logger.Warn(null, ex);
+
+                return new Result(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(null, ex);
+
+                return new Result(ex.Message);
             }
         }
 
@@ -109,5 +137,11 @@ namespace BusinessLogic.Services
                 return new Result("Unable to update the suspense notes");
             }
         }
+    }
+
+    public class CreateSuspenseArgs
+    {
+        public Suspense Suspense { get; set; }
+        public bool SaveChanges { get; set; } = true;
     }
 }
