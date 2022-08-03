@@ -16,13 +16,17 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
     public class ValidateTests
     {
         private readonly Mock<IImportTypeService> _mockImportTypeService = new Mock<IImportTypeService>();
-        
+        private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
+
         private const int ValidImportTypeId = 2;
         private const int MismatchedImportTypeId = 1;
         private const int InvalidImportTypeId = 3;
 
         private const int ValidNumberOfRows = 2;
         private const int InvalidNumberOfRows = 3;
+
+        private const string ValidFundCode = "A1";
+        private const string InvalidFundCode = "B1";
 
         public ValidateTests()
         {
@@ -39,6 +43,21 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
             _mockImportTypeService.Setup(x => x.Get(InvalidImportTypeId))
                 .Returns<ImportType>(null);
+
+            _mockFundService.Setup(x => x.GetAllFunds())
+                .Returns(new List<Fund>() {
+                    new Fund()
+                    {
+                        FundCode = ValidFundCode
+                    }
+                });
+        }
+
+        private Validator GetValidator()
+        {
+            return new Validator(
+                _mockImportTypeService.Object,
+                _mockFundService.Object);
         }
 
         [TestMethod]
@@ -50,7 +69,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var import = GetImport();
             import.ImportTypeId = InvalidImportTypeId;
 
-            var validator = new Validator(_mockImportTypeService.Object);
+            var validator = GetValidator();
 
             // Act
             Action act = () => validator.Validate(import);
@@ -70,7 +89,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var import = GetImport();
             import.ImportTypeId = MismatchedImportTypeId;
 
-            var validator = new Validator(_mockImportTypeService.Object);
+            var validator = GetValidator();
 
             // Act
             Action act = () => validator.Validate(import);
@@ -89,8 +108,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
             var import = GetImport();
             import.NumberOfRows = InvalidNumberOfRows;
- 
-            var validator = new Validator(_mockImportTypeService.Object);
+
+            var validator = GetValidator();
 
             // Act
             Action act = () => validator.Validate(import);
@@ -100,7 +119,26 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
                 .Throw<ImportProcessingException>()
                 .WithMessage("The number of expected rows does not match the number of rows provided");
         }
-        
+
+        [TestMethod]
+        public void Validate_UnknownFundCode_ThrowsException()
+        {
+            // Arrange
+            SetupImportTypeService();
+
+            var import = GetImport(InvalidFundCode);
+
+            var validator = GetValidator();
+
+            // Act
+            Action act = () => validator.Validate(import);
+
+            // Assert
+            act.Should()
+                .Throw<ImportProcessingException>()
+                .WithMessage($"Fund code '{InvalidFundCode}' on row 1 not recognised");
+        }
+
         [TestMethod]
         public void Validate_WithValidData_Passes()
         {
@@ -109,7 +147,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
             var import = GetImport();
 
-            var validator = new Validator(_mockImportTypeService.Object);
+            var validator = GetValidator();
 
             // Act
             Action act = () => validator.Validate(import);
@@ -120,23 +158,28 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
         private Import GetImport()
         {
+            return GetImport(ValidFundCode);
+        }
+
+        private Import GetImport(string fundCode)
+        {
             return new Import()
             {
                 ImportTypeId = ValidImportTypeId,
                 NumberOfRows = ValidNumberOfRows,
                 Rows = new List<ImportRow>()
-                {   
-                    new ImportRow() { Data = GetTransactionData(10) },
-                    new ImportRow() { Data = GetTransactionData(20) }
+                {
+                    new ImportRow() { Data = GetAccountHolderData(fundCode) },
+                    new ImportRow() { Data = GetAccountHolderData(fundCode) }
                 }
             };
         }
 
-        private string GetTransactionData(decimal amount)
+        private string GetAccountHolderData(string fundCode)
         {
-            var transaction = new ProcessedTransaction() { Amount = amount };
+            var item = new Entities.AccountHolder() { FundCode = fundCode };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(item);
         }
     }
 }
