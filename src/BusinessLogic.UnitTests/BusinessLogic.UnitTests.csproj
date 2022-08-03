@@ -269,6 +269,9 @@
     <Compile Include="Services\Import\BaseTest.cs" />
     <Compile Include="Services\Import\GetTests.cs" />
     <Compile Include="Services\Import\SearchTests.cs" />
+    <Compile Include="Services\Suspense\CreateCreateSuspenseArgsTests.cs" />
+    <Compile Include="Services\Suspense\CreateSuspenseTests.cs" />
+    <Compile Include="Services\Suspense\TestBase.cs" />
     <Compile Include="Services\Transaction\UpdateCardDetailsTests.cs" />
     <Compile Include="Services\UserTemplate\BaseUserTemplateTest.cs" />
     <Compile Include="Services\UserTemplate\GetByUserIdTests.cs" />
@@ -400,6 +403,7 @@
     <Compile Include="Services\Vat\GetByFundCodeTests.cs" />
     <Compile Include="Services\Vat\GetByVatCodeTests.cs" />
     <Compile Include="Services\Vat\GetAllCodesTests.cs" />
+    <Compile Include="TestData\ProcessedTransaction.cs" />
     <Compile Include="Validators\AccountHolderFundMessage\BaseAccountHolderStopMessageTest.cs" />
     <Compile Include="Validators\AccountHolderFundMessage\ValidateTests.cs" />
     <Compile Include="Validators\AccountReference\BaseAccountReferenceValidatorTest.cs" />
