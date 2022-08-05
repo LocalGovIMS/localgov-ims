@@ -10,6 +10,7 @@ using BusinessLogic.Models.Import;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace BusinessLogic.ImportProcessing
@@ -81,16 +82,22 @@ namespace BusinessLogic.ImportProcessing
             _processingErrors = new List<string>();
             _numberOfSuccessfullyProcessedRows = 0;
         }
-        
+
         private void InitialiseImport()
         {
-            _args.Import.CreatedByUserId = _securityContext.UserId;
-            _args.Import.CreatedDate = DateTime.Now;
+            var rows = _args.Import.Rows;
+            _args.Import.Rows = null;
 
             _args.Import.Initialise(_securityContext.UserId);
 
-            _unitOfWork.Imports.Add(_args.Import) ;
-            _unitOfWork.Complete(_securityContext.UserId);
+            _unitOfWork.Imports.Add(_args.Import);
+            _unitOfWork.CompleteWithoutAudit(_securityContext.UserId);
+
+            rows.ToList().ForEach(c => c.ImportId = _args.Import.Id);
+
+            _unitOfWork.ImportRows.BulkInsert(rows);
+
+            _args.Import.Rows = _unitOfWork.ImportRows.Find(x => x.ImportId == _args.Import.Id).ToList();
         }
 
         private void Process()

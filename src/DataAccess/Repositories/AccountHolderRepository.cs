@@ -17,6 +17,13 @@ namespace DataAccess.Repositories
             context.Configuration.LazyLoadingEnabled = false;
         }
 
+        public AccountHolder GetByAccountReferenceSimple(string accountReference)
+        {
+            return IncomeDbContext.AccountHolders
+                .ApplyFilters(Filters)
+                .FirstOrDefault(x => x.AccountReference == accountReference);
+        }
+
         public AccountHolder GetByAccountReference(string accountReference)
         {
             return IncomeDbContext.AccountHolders

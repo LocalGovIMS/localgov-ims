@@ -445,7 +445,7 @@
     <Compile Include="Services\UserRoleService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VatService.cs" />
-    <Compile Include="Validators\AccountHolderCreationValidator.cs" />
+    <Compile Include="Validators\AccountHolderFundMessageValidator.cs" />
     <Compile Include="Interfaces\Validators\IPaymentValidationHandler.cs" />
     <Compile Include="Validators\Payment\CheckDigitStrategies\CheckDigitStrategyArgs.cs" />
     <Compile Include="Validators\Payment\CheckDigitStrategies\CheckDigitValidationException.cs" />

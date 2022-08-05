@@ -9,6 +9,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,11 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         {
             MockUnitOfWork.Setup(x => x.Imports.Add(It.IsAny<Import>()));
             MockUnitOfWork.Setup(x => x.Complete(It.IsAny<int>()));
+            MockUnitOfWork.Setup(x => x.ImportRows.BulkInsert(It.IsAny<IEnumerable<ImportRow>>()));
+
+            MockUnitOfWork.Setup(x => x.ImportRows.Find(It.IsAny<Expression<Func<ImportRow, bool>>>()))
+                .Returns(GetImportRows());
+
             MockUnitOfWork.Setup(x => x.ResetChanges());
             MockUnitOfWork.Setup(x => x.ImportTypes.Get(It.IsAny<int>()))
                 .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.Transaction });
@@ -69,6 +75,12 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
             Setup();
 
             var args = GetImportProcessorArgs();
+
+            //var import = args.Import;
+            //import.StatusHistories.Add(new ImportStatusHistory() { StatusId = 1 });
+
+            //MockUnitOfWork.Setup(x => x.Imports.Get(It.IsAny<int>()))
+            //    .Returns(import);
 
             // Act
             var result = _ImportProcessor.Process(args);
@@ -155,6 +167,12 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
 
             var args = GetImportProcessorArgsWithErrors();
 
+            //var import = args.Import;
+            //import.StatusHistories.Add(new ImportStatusHistory() { StatusId = 1 });
+
+            //MockUnitOfWork.Setup(x => x.Imports.Get(It.IsAny<int>()))
+            //    .Returns(import);
+
             // Act
             var result = _ImportProcessor.Process(args);
 
@@ -198,14 +216,19 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                 Import = new Import()
                 {
                     ImportTypeId = 1,
-                    Rows = new List<ImportRow>()
-                    {
-                       new ImportRow()
-                       {
-                           Data = GetTransactionData()
-                       }
-                    },
+                    Rows = GetImportRows(),
                     EventLogs = new List<ImportEventLog>()
+                }
+            };
+        }
+
+        private ICollection<ImportRow> GetImportRows()
+        {
+            return new List<ImportRow>()
+            {
+                new ImportRow()
+                {
+                    Data = GetTransactionData()
                 }
             };
         }

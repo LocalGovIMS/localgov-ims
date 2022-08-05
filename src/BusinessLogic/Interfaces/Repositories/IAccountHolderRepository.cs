@@ -6,6 +6,7 @@ namespace BusinessLogic.Interfaces.Repositories
 {
     public interface IAccountHolderRepository : IRepository<AccountHolder>
     {
+        AccountHolder GetByAccountReferenceSimple(string accountReference);
         AccountHolder GetByAccountReference(string accountReference);
         AccountHolder GetByAccountReference(string accountReference, string fundCode);
         List<AccountHolder> Search(SearchCriteria criteria);

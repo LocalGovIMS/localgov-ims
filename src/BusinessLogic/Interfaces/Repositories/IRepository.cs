@@ -15,5 +15,6 @@ namespace BusinessLogic.Interfaces.Repositories
         void AddRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+        void BulkInsert(IEnumerable<TEntity> entities);
     }
 }

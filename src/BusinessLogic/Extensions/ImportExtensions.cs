@@ -10,6 +10,9 @@ namespace BusinessLogic.Extensions
     {
         public static void Initialise(this Import item, int createdByUserId)
         {
+            item.CreatedByUserId = createdByUserId;
+            item.CreatedDate = DateTime.Now;
+
             item.SetStatus(createdByUserId, ImportStatusEnum.Received);
         }
 

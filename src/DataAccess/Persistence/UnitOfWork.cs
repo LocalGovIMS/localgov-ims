@@ -1,9 +1,11 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Authentication.Identity;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Repositories;
 using BusinessLogic.Interfaces.Security;
 using DataAccess.Interfaces;
 using log4net;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -61,6 +63,7 @@ namespace DataAccess.Persistence
         public IRepository<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; private set; }
         public IFileImportRepository FileImports { get; private set; }
         public IImportRepository Imports { get; private set; }
+        public IRepository<ImportRow> ImportRows { get; private set; }
         public IImportTypeRepository ImportTypes { get; private set; }
         public IImportTypeImportProcessingRuleRepository ImportTypeImportProcessingRules { get; private set; }
 
@@ -111,6 +114,7 @@ namespace DataAccess.Persistence
             IImportTypeRepository importTypes,
             IImportTypeImportProcessingRuleRepository importTypeImportProcessingRules,
             IImportRepository importsRepository,
+            IRepository<ImportRow> importRowRepository,
             IAuditLogger auditLogger,
             ILog log)
         {
@@ -160,6 +164,7 @@ namespace DataAccess.Persistence
             ImportTypes = importTypes;
             ImportTypeImportProcessingRules = importTypeImportProcessingRules;
             Imports = importsRepository;
+            ImportRows = importRowRepository;
 
             _auditLogger = auditLogger;
             _log = log;
@@ -178,6 +183,14 @@ namespace DataAccess.Persistence
                 _log.Error(e);
             }
 
+            // Note: Could we wrap this in a try catch and call ResetChanges if there is a problem?
+            // Means we don't have to handle it in the consuming code - it's all handled here.
+
+            return _context.SaveChanges();
+        }
+
+        public int CompleteWithoutAudit(int userId)
+        {
             // Note: Could we wrap this in a try catch and call ResetChanges if there is a problem?
             // Means we don't have to handle it in the consuming code - it's all handled here.
 

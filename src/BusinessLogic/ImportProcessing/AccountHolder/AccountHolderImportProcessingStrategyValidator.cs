@@ -17,7 +17,6 @@ namespace BusinessLogic.ImportProcessing
             IFundService fundService) : base(importTypeService)
         {
             _fundService = fundService ?? throw new ArgumentNullException("fundService");
-            
         }        
 
         protected override void OnValidate(Import import)
