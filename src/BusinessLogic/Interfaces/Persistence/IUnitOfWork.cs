@@ -1,5 +1,7 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Authentication.Identity;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BusinessLogic.Interfaces.Persistence
 {
@@ -46,10 +48,12 @@ namespace BusinessLogic.Interfaces.Persistence
         IRepository<ImportProcessingRuleOperator> ImportProcessingRuleOperators { get; }
         IFileImportRepository FileImports { get; }
         IImportRepository Imports { get; }
+        IRepository<ImportRow> ImportRows { get; }
         IImportTypeRepository ImportTypes { get; }
         IImportTypeImportProcessingRuleRepository ImportTypeImportProcessingRules { get; }
 
         int Complete(int userId);
+        int CompleteWithoutAudit(int userId);
         void ResetChanges();
     }
 }

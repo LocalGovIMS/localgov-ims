@@ -3,6 +3,7 @@ using DataAccess.Extensions;
 using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -74,6 +75,13 @@ namespace DataAccess.Repositories
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             IncomeDbContext.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public void BulkInsert(IEnumerable<TEntity> entities)
+        {
+            var bulkInsert = new Operations.BulkInsert(IncomeDbContext);
+
+            bulkInsert.Execute(entities);
         }
     }
 }

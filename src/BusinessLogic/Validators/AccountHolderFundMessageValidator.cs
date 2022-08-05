@@ -3,12 +3,16 @@ using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.Validators
 {
     public class AccountHolderFundMessageValidator : IAccountHolderFundMessageValidator
     {
         private readonly IFundMessageService _fundMessageService;
+        private List<int> _fundMessageIds = new List<int>();
+
         public AccountHolderFundMessageValidator(IFundMessageService fundMessageService)
         {
             _fundMessageService = fundMessageService;
@@ -16,18 +20,29 @@ namespace BusinessLogic.Validators
 
         public IResult Validate(AccountHolder accountHolder)
         {
-            if(!accountHolder.FundMessageId.HasValue) 
+            if (!accountHolder.FundMessageId.HasValue)
                 return new Result();
+
+            LoadFundMessages();
 
             var matchingFundMessage = _fundMessageService.GetById(accountHolder.FundMessageId.Value);
 
-            if (matchingFundMessage is null) 
+            if (matchingFundMessage is null)
                 return new Result("The fund message is not valid");
 
-            if (matchingFundMessage.FundCode != accountHolder.FundCode) 
+            if (matchingFundMessage.FundCode != accountHolder.FundCode)
                 return new Result("The fund message is not valid for the fund code specified");
 
             return new Result();
+        }
+
+        private void LoadFundMessages()
+        {
+            if (_fundMessageIds.Any()) return;
+
+            _fundMessageIds = _fundMessageService.GetAll()
+                .Select(x => x.Id)
+                .ToList();
         }
     }
 }

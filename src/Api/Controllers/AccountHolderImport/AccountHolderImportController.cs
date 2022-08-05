@@ -1,9 +1,4 @@
-﻿using Api.Controllers.ProcessedTransactions;
-using BusinessLogic.Entities;
-using BusinessLogic.Extensions;
-using BusinessLogic.ImportProcessing;
-using BusinessLogic.Interfaces.Persistence;
-using BusinessLogic.Interfaces.Services;
+﻿using BusinessLogic.ImportProcessing;
 using log4net;
 using Swashbuckle.Swagger.Annotations;
 using System;

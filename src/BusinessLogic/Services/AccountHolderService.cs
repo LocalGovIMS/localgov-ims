@@ -115,10 +115,10 @@ namespace BusinessLogic.Services
                 if (!validateAccountHolderFundMessageResult.Success)
                     return validateAccountHolderFundMessageResult;
 
-                var existingRecord = UnitOfWork.AccountHolders.GetByAccountReference(args.AccountHolder.AccountReference);
+                var existingRecord = UnitOfWork.AccountHolders.GetByAccountReferenceSimple(args.AccountHolder.AccountReference);
 
                 if (existingRecord == null)
-                    throw new NullReferenceException("Unable to find the Account Holder record to update");
+                    return new Result("Unable to find the Account Holder record to update");
 
                 existingRecord.Update(args.AccountHolder, SecurityContext);
 
@@ -128,11 +128,6 @@ namespace BusinessLogic.Services
                 }
 
                 return new Result() { Data = existingRecord };
-            }
-            catch (NullReferenceException ex)
-            {
-                Logger.Error(null, ex);
-                return new Result(ex.Message);
             }
             catch (Exception ex)
             {
