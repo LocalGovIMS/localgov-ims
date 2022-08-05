@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
@@ -9,13 +9,21 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
     [ExcludeFromCodeCoverage]
     public class ValidateTests : BaseAccountHolderFundMessageTest
     {
+        private const int ValidFundMessageId = 1;
+        private const int InvalidFundMessageId = 2;
+
+        private const string ValidFundCode = "F1";
+        private const string InvalidFundCode = "F2";
+
         private void SetupFundMessageService()
         {
-            MockFundMessageService.Setup(x => x.GetById(It.IsAny<int>()))
-                .Returns(new Entities.FundMessage()
+            MockFundMessageService.Setup(x => x.GetAll())
+                .Returns(new List<Entities.FundMessage>()
                     {
-                        Id = 1,
-                        FundCode = "F1"
+                        new Entities.FundMessage() {
+                            Id = ValidFundMessageId,
+                            FundCode = ValidFundCode
+                        }
                     }
                 );
         }
@@ -27,7 +35,7 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
             SetupFundMessageService();
 
             var validator = GetAccountHolderFundMessageValidator();
-            var accountHolder = new Entities.AccountHolder() { FundCode = "F1", FundMessageId = 1 };
+            var accountHolder = new Entities.AccountHolder() { FundCode = ValidFundCode, FundMessageId = ValidFundMessageId };
 
             // Act
             var result = validator.Validate(accountHolder);
@@ -40,9 +48,10 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
         public void WhenTheFundMessageIsNotFoundReturnAFailure()
         {
             // Arrange
+            SetupFundMessageService();
 
             var validator = GetAccountHolderFundMessageValidator();
-            var accountHolder = new Entities.AccountHolder() { FundCode = "F2", FundMessageId = 3 };
+            var accountHolder = new Entities.AccountHolder() { FundCode = ValidFundCode, FundMessageId = InvalidFundMessageId };
 
             // Act
             var result = validator.Validate(accountHolder);
@@ -59,7 +68,7 @@ namespace BusinessLogic.UnitTests.Validators.AccountHolderFundMessage
             SetupFundMessageService();
 
             var validator = GetAccountHolderFundMessageValidator();
-            var accountHolder = new Entities.AccountHolder() { FundCode = "F2", FundMessageId = 3 };
+            var accountHolder = new Entities.AccountHolder() { FundCode = InvalidFundCode, FundMessageId = ValidFundMessageId };
 
             // Act
             var result = validator.Validate(accountHolder);

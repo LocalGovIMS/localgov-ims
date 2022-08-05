@@ -11,7 +11,7 @@ namespace BusinessLogic.Validators
     public class AccountHolderFundMessageValidator : IAccountHolderFundMessageValidator
     {
         private readonly IFundMessageService _fundMessageService;
-        private List<int> _fundMessageIds = new List<int>();
+        private List<Entities.FundMessage> _fundMessages = new List<Entities.FundMessage>();
 
         public AccountHolderFundMessageValidator(IFundMessageService fundMessageService)
         {
@@ -25,7 +25,7 @@ namespace BusinessLogic.Validators
 
             LoadFundMessages();
 
-            var matchingFundMessage = _fundMessageService.GetById(accountHolder.FundMessageId.Value);
+            var matchingFundMessage = _fundMessages.FirstOrDefault(x => x.Id == accountHolder.FundMessageId.Value);
 
             if (matchingFundMessage is null)
                 return new Result("The fund message is not valid");
@@ -38,11 +38,9 @@ namespace BusinessLogic.Validators
 
         private void LoadFundMessages()
         {
-            if (_fundMessageIds.Any()) return;
+            if (_fundMessages.Any()) return;
 
-            _fundMessageIds = _fundMessageService.GetAll()
-                .Select(x => x.Id)
-                .ToList();
+            _fundMessages = _fundMessageService.GetAll().ToList();
         }
     }
 }

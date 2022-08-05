@@ -88,10 +88,16 @@ namespace BusinessLogic.ImportProcessing
             var rows = _args.Import.Rows;
             _args.Import.Rows = null;
 
+            _args.Import.Initialise(_securityContext.UserId);
+
             _unitOfWork.Imports.Add(_args.Import);
             _unitOfWork.CompleteWithoutAudit(_securityContext.UserId);
 
+            rows.ToList().ForEach(c => c.ImportId = _args.Import.Id);
+
             _unitOfWork.ImportRows.BulkInsert(rows);
+
+            _args.Import = _unitOfWork.Imports.Get(_args.Import.Id);
         }
 
         private void Process()

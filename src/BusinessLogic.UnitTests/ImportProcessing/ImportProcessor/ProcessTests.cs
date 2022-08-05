@@ -25,6 +25,9 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         {
             MockUnitOfWork.Setup(x => x.Imports.Add(It.IsAny<Import>()));
             MockUnitOfWork.Setup(x => x.Complete(It.IsAny<int>()));
+            MockUnitOfWork.Setup(x => x.ImportRows.BulkInsert(It.IsAny<IEnumerable<ImportRow>>()));
+            MockUnitOfWork.Setup(x => x.Imports.Get(It.IsAny<int>()))
+                .Returns(GetImportProcessorArgs().Import);
             MockUnitOfWork.Setup(x => x.ResetChanges());
             MockUnitOfWork.Setup(x => x.ImportTypes.Get(It.IsAny<int>()))
                 .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.Transaction });
