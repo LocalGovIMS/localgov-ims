@@ -97,7 +97,7 @@ namespace BusinessLogic.ImportProcessing
 
             _unitOfWork.ImportRows.BulkInsert(rows);
 
-            _args.Import = _unitOfWork.Imports.Get(_args.Import.Id);
+            _args.Import.Rows = _unitOfWork.ImportRows.Find(x => x.ImportId == _args.Import.Id).ToList();
         }
 
         private void Process()
