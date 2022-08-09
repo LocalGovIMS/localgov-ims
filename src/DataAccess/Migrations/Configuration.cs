@@ -1,4 +1,5 @@
 ﻿using DataAccess.SeedData;
+using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -11,7 +12,7 @@ namespace DataAccess.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["AutomaticMigrationsEnabled"]);
         }
 
         protected override void Seed(Persistence.IncomeDbContext context)
