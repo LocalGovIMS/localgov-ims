@@ -702,34 +702,86 @@ INSERT ([TransactionReference], [InternalReference], [EntryDate], [TransactionDa
 VALUES ([TransactionReference], [InternalReference], [EntryDate], [TransactionDate], [AccountReference], [UserCode], [FundCode], [MopCode], [Amount], [VatAmount], [VatCode], [Narrative], [VatRate], [EReturnId], [TemplateRowId], [StatusId]);
 
 DECLARE @ImportProcessingRuleId INT = 0;
-INSERT INTO ImportProcessingRules ([Name], [Description], [Disabled]) VALUES ('774952620 Transfer', 'Transfer £25.00 to 774952620', 0)
-SELECT @ImportProcessingRuleId = @@IDENTITY;
 
-INSERT INTO ImportProcessingRuleConditions ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator]) VALUES (@ImportProcessingRuleId, 0, 1, 7, 567749526, NULL)
-INSERT INTO ImportProcessingRuleConditions ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator]) VALUES (@ImportProcessingRuleId, 0, 2, 4, 2, 'AND')
-INSERT INTO ImportProcessingRuleConditions ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator]) VALUES (@ImportProcessingRuleId, 1, 3, 4, 22, NULL)
+MERGE INTO ImportProcessingRules AS [Target]
+USING (SELECT *
+		FROM (VALUES
+			('774952620 Transfer', 'Transfer £25.00 to 774952620', 0))
+	AS S ([Name], [Description], [Disabled])) AS [Source]
+ON [Target].[Name] = [Source].[Name] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Name], [Description], [Disabled])
+VALUES ([Name], [Description], [Disabled]);
 
-INSERT INTO ImportProcessingRuleActions ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value]) VALUES (@ImportProcessingRuleId, 3, 23)
-INSERT INTO ImportProcessingRuleActions ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value]) VALUES (@ImportProcessingRuleId, 1, 774952620)
+SELECT @ImportProcessingRuleId = Id FROM ImportProcessingRules WHERE Name = '774952620 Transfer';
+
+MERGE INTO ImportProcessingRuleConditions AS [Target]
+USING (SELECT *
+		FROM (VALUES
+			(@ImportProcessingRuleId, 0, 1, 7, 567749526, NULL),
+			(@ImportProcessingRuleId, 0, 2, 4, 2, 'AND'),
+			(@ImportProcessingRuleId, 1, 3, 4, 22, NULL))
+	AS S ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator])) AS [Source]
+ON [Target].[ImportProcessingRuleId] = [Source].[ImportProcessingRuleId] 
+	AND [Target].[Group] = [Source].[Group] 
+	AND [Target].[ImportProcessingRuleFieldId] = [Source].[ImportProcessingRuleFieldId] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator])
+VALUES ([ImportProcessingRuleId], [Group], [ImportProcessingRuleFieldId], [ImportProcessingRuleOperatorId], [Value], [LogicalOperator]);
+
+MERGE INTO ImportProcessingRuleActions AS [Target]
+USING (SELECT *
+		FROM (VALUES
+			(@ImportProcessingRuleId, 3, 23),
+			(@ImportProcessingRuleId, 1, 774952620))
+	AS S ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value])) AS [Source]
+ON [Target].[ImportProcessingRuleId] = [Source].[ImportProcessingRuleId] 
+	AND [Target].[ImportProcessingRuleFieldId] = [Source].[ImportProcessingRuleFieldId] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value])
+VALUES ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value]);
 
 
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -1, GETDATE()), GETDATE(), 'RF162 0645', 'EFC PAYMENT           RF162 0645', 1804284, NULL, '99988F662463')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507026510 J', 'DCLG                  1000 6507026510 J', 56096, NULL, '99988F752806')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507025624 J', 'DCLG                  1000 6507025624 J', 457655, NULL, '99988F742607')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507025114 J', 'DCLG                  1000 6507025114 J', 235172, NULL, '99988A560060')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -1, GETDATE()), GETDATE(), '414 527 616 428', 'TREE PLANTERS FLEET SER    414/527/616/428', 682.82, NULL, 'Sandra to contact the company')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -2, GETDATE()), GETDATE(), 'TD/', '06WENTWORTH QUEEN S    TD/', 800, NULL, 'Clearing query passed to DL and TJ 26.9 DC 99988D789145')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -2, GETDATE()), GETDATE(), 'CENTRAL', 'ALPHA ACADEMY TRU    CENTRAL', 4872.79, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -2, GETDATE()), GETDATE(), '700001', 'BIRDWELL FOOTBALL SC      700001', 826.07, NULL, 'Passed to Income Team 12.9 99988B120648')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -2, GETDATE()), GETDATE(), '230135771P - COMP', 'WORSBOROUGH COLLECTION    230135771P - COMP', 30, NULL, 'All previously woff. Sent to NG for woff approval DC 26.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -3, GETDATE()), GETDATE(), 'MILL GREEN PRIMARY', 'BRETON WARD          MILL GREEN PRIMARY', 480, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -3, GETDATE()), GETDATE(), '400204001', 'EASTPOINT PROP      400204001', 37.2, NULL, 'Email has been sent no date given on ssheet 99988A875001')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -3, GETDATE()), GETDATE(), 'ST MICHAELS PRIMARY', 'ST MICHAELS CURRENT     ST MICHAELS PRIMARY', 1626.27, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -4, GETDATE()), GETDATE(), '50037', 'THE MONKTON ALC        50037', 6888.95, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -4, GETDATE()), GETDATE(), '61894', 'SPRINGDALE PRIMARY    61894', 1911, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -4, GETDATE()), GETDATE(), '4894', 'SPRINGDALE PRIMARY    4894', 308, NULL, 'Passed to Income Team 12.9')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -5, GETDATE()), GETDATE(), 'B O DRONVALE METRO', 'METROPOLI    B/O DRONVALE METRO', 25222.88, NULL, 'Email to remits and income DC 6.3')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -7, GETDATE()), GETDATE(), '100650200484112', '100650200484112       000100650200484112', 1012.31, NULL, 'DWP no remit unable to process will be woff after 8 weeks 99988C913002')
-INSERT INTO Suspenses ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes]) VALUES (DATEADD(d, -7, GETDATE()), GETDATE(), 'HENDERSONS PORTFOLIO', 'HENDERSONS PORTFOLIO    HENDERSONS PORTFOLIO', 11.59, NULL, 'Called Hendersons, they will email remits over sg1409/Nothing on SAP DC 9.9 /// no remit or bb DC 8.9')
+-- setup import type
+MERGE INTO ImportTypes AS [Target]
+USING (SELECT *
+		FROM (VALUES
+			(1, 'Transaction Import', 'A transaction import', 'TT1', 0),
+			(1, 'Account Holder Import', 'An account holder import', 'TT2', 0))
+	AS S ([DataType], [Name], [Description], [ExternalReference], [IsReversible])) AS [Source]
+ON [Target].[Name] = [Source].[Name] 
+	AND [Target].[DataType] = [Source].[DataType] 
+	AND [Target].[ExternalReference] = [Source].[ExternalReference] 
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([DataType], [Name], [Description], [ExternalReference], [IsReversible])
+VALUES ([DataType], [Name], [Description], [ExternalReference], [IsReversible]);
+
+MERGE INTO Suspenses AS [Target]
+USING (SELECT *
+		FROM (VALUES
+			(DATEADD(d, -1, GETDATE()), GETDATE(), 'RF162 0645', 'EFC PAYMENT           RF162 0645', 1804284, NULL, '99988F662463', NULL),
+			(DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507026510 J', 'DCLG                  1000 6507026510 J', 56096, NULL, '99988F752806', NULL),
+			(DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507025624 J', 'DCLG                  1000 6507025624 J', 457655, NULL, '99988F742607', NULL),
+			(DATEADD(d, -1, GETDATE()), GETDATE(), '1000 6507025114 J', 'DCLG                  1000 6507025114 J', 235172, NULL, '99988A560060', NULL),
+			(DATEADD(d, -1, GETDATE()), GETDATE(), '414 527 616 428', 'TREE PLANTERS FLEET SER    414/527/616/428', 682.82, NULL, 'Sandra to contact the company', NULL),
+			(DATEADD(d, -2, GETDATE()), GETDATE(), 'TD/', '06WENTWORTH QUEEN S    TD/', 800, NULL, 'Clearing query passed to DL and TJ 26.9 DC 99988D789145', NULL),
+			(DATEADD(d, -2, GETDATE()), GETDATE(), 'CENTRAL', 'ALPHA ACADEMY TRU    CENTRAL', 4872.79, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -2, GETDATE()), GETDATE(), '700001', 'BIRDWELL FOOTBALL SC      700001', 826.07, NULL, 'Passed to Income Team 12.9 99988B120648', NULL),
+			(DATEADD(d, -2, GETDATE()), GETDATE(), '230135771P - COMP', 'WORSBOROUGH COLLECTION    230135771P - COMP', 30, NULL, 'All previously woff. Sent to NG for woff approval DC 26.9', NULL),
+			(DATEADD(d, -3, GETDATE()), GETDATE(), 'MILL GREEN PRIMARY', 'BRETON WARD          MILL GREEN PRIMARY', 480, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -3, GETDATE()), GETDATE(), '400204001', 'EASTPOINT PROP      400204001', 37.2, NULL, 'Email has been sent no date given on ssheet 99988A875001', NULL),
+			(DATEADD(d, -3, GETDATE()), GETDATE(), 'ST MICHAELS PRIMARY', 'ST MICHAELS CURRENT     ST MICHAELS PRIMARY', 1626.27, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -4, GETDATE()), GETDATE(), '50037', 'THE MONKTON ALC        50037', 6888.95, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -4, GETDATE()), GETDATE(), '61894', 'SPRINGDALE PRIMARY    61894', 1911, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -4, GETDATE()), GETDATE(), '4894', 'SPRINGDALE PRIMARY    4894', 308, NULL, 'Passed to Income Team 12.9', NULL),
+			(DATEADD(d, -5, GETDATE()), GETDATE(), 'B O DRONVALE METRO', 'METROPOLI    B/O DRONVALE METRO', 25222.88, NULL, 'Email to remits and income DC 6.3', NULL),
+			(DATEADD(d, -7, GETDATE()), GETDATE(), '100650200484112', '100650200484112       000100650200484112', 1012.31, NULL, 'DWP no remit unable to process will be woff after 8 weeks 99988C913002', NULL),
+			(DATEADD(d, -7, GETDATE()), GETDATE(), 'HENDERSONS PORTFOLIO', 'HENDERSONS PORTFOLIO    HENDERSONS PORTFOLIO', 11.59, NULL, 'Called Hendersons, they will email remits over sg1409/Nothing on SAP DC 9.9 /// no remit or bb DC 8.9', NULL))
+	AS S ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes], [ImportId])) AS [Source]
+ON [Target].[AccountNumber] = [Source].[AccountNumber] 
+	AND ISNULL([Target].[ImportId], 1) = ISNULL([Source].[ImportId], 1)
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes], [ImportId])
+VALUES ([TransactionDate], [CreatedAt], [AccountNumber], [Narrative], [Amount], [ProcessId], [Notes], [ImportId]);
 
 COMMIT TRAN
