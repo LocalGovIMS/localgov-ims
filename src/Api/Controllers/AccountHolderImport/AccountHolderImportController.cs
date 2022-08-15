@@ -9,7 +9,7 @@ namespace Api.Controllers.AccountHolderImport
     public class AccountHolderImportController : ApiController
     {
         private readonly ILog _log;
-        private readonly IImportProcessor _importProcessor;        
+        private readonly IImportProcessor _importProcessor;
 
         public AccountHolderImportController(
             ILog log,
@@ -27,9 +27,11 @@ namespace Api.Controllers.AccountHolderImport
         {
             try
             {
-                var import = model.GetImport();
-
-                var result = _importProcessor.Process(new ImportProcessorArgs() { Import = import });
+                var result = _importProcessor.Process(new ImportProcessorArgs()
+                {
+                    Import = model.GetImport(),
+                    ImportRows = model.GetImportRows()
+                });
 
                 if (result.Success)
                     return Ok(result.Data);

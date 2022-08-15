@@ -18,55 +18,55 @@ namespace BusinessLogic.UnitTests.Extensions.Import
 
         protected Entities.Import GetImportWithErrors()
         {
-            var Import = GetImport();
+            var import = GetImport();
 
-            Import.EventLogs.Add(new Entities.ImportEventLog()
+            import.EventLogs.Add(new Entities.ImportEventLog()
             {
                 Type = (byte)ImportEventLogTypeEnum.Error
             });
 
-            Import.EventLogs.Add(new Entities.ImportEventLog()
+            import.EventLogs.Add(new Entities.ImportEventLog()
             {
                 Type = (byte)ImportEventLogTypeEnum.Error
             });
 
-            return Import;
+            return import;
         }
 
         protected Entities.Import GetImportWithInfo()
         {
-            var Import = GetImport();
+            var import = GetImport();
 
-            Import.EventLogs.Add(new Entities.ImportEventLog()
+            import.EventLogs.Add(new Entities.ImportEventLog()
             {
                 Type = (byte)ImportEventLogTypeEnum.Info
             });
 
-            Import.EventLogs.Add(new Entities.ImportEventLog()
+            import.EventLogs.Add(new Entities.ImportEventLog()
             {
                 Type = (byte)ImportEventLogTypeEnum.Info
             });
 
-            return Import;
+            return import;
         }
 
         protected Entities.Import GetImportWithImportStatusHistories(ImportStatusEnum latestStatus)
         {
-            var Import = GetImport();
+            var import = GetImport();
 
-            Import.StatusHistories.Add(new Entities.ImportStatusHistory()
+            import.StatusHistories.Add(new Entities.ImportStatusHistory()
             {
                 CreatedDate = System.DateTime.Now.AddMinutes(-1),
                 StatusId = (int)ImportStatusEnum.Received
             });
 
-            Import.StatusHistories.Add(new Entities.ImportStatusHistory()
+            import.StatusHistories.Add(new Entities.ImportStatusHistory()
             {
                 CreatedDate = System.DateTime.Now,
                 StatusId = (int)latestStatus
             });
 
-            return Import;
+            return import;
         }
     }
 }

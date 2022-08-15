@@ -741,13 +741,12 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value])
 VALUES ([ImportProcessingRuleId], [ImportProcessingRuleFieldId], [Value]);
 
-
 -- setup import type
 MERGE INTO ImportTypes AS [Target]
 USING (SELECT *
 		FROM (VALUES
 			(1, 'Transaction Import', 'A transaction import', 'TT1', 0),
-			(1, 'Account Holder Import', 'An account holder import', 'TT2', 0))
+			(2, 'Account Holder Import', 'An account holder import', 'TT2', 0))
 	AS S ([DataType], [Name], [Description], [ExternalReference], [IsReversible])) AS [Source]
 ON [Target].[Name] = [Source].[Name] 
 	AND [Target].[DataType] = [Source].[DataType] 

@@ -17,13 +17,13 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void Complete_OnAImport_AddsAStatusHistoryEntry()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.Complete(Errors, TestUserId);
+            import.Complete(Errors, TestUserId);
 
             // Assert
-            Import.StatusHistories.Count()
+            import.StatusHistories.Count()
                 .Should()
                 .Be(1);
         }
@@ -32,30 +32,30 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void Revert_OnAImportWithErrors_AddsAStatusHistoryWithAStatusOfFailed()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.Complete(Errors, TestUserId);
+            import.Complete(Errors, TestUserId);
 
             // Assert
-            Import.StatusHistories.First().StatusId
+            import.StatusHistories.First().StatusId
                 .Should()
                 .Be((int)ImportStatusEnum.Failed);
         }
 
         [TestMethod]
-        public void Revert_OnAImportWithNoErrors_AddsAStatusHistoryWithAStatusOfCompleted()
+        public void Revert_OnAImportWithNoErrors_AddsAStatusHistoryWithAStatusOfSucceeded()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.Complete(NoErrors, TestUserId);
+            import.Complete(NoErrors, TestUserId);
 
             // Assert
-            Import.StatusHistories.First().StatusId
+            import.StatusHistories.First().StatusId
                 .Should()
-                .Be((int)ImportStatusEnum.Completed);
+                .Be((int)ImportStatusEnum.Succeeded);
         }
     }
 }

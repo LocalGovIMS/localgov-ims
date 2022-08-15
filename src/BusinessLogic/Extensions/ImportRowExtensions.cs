@@ -1,4 +1,8 @@
 ﻿using BusinessLogic.Entities;
+using MessagePack;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.Extensions
 {
@@ -6,12 +10,17 @@ namespace BusinessLogic.Extensions
     {
         public static ProcessedTransaction ToProcessedTransaction(this ImportRow item)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ProcessedTransaction>(item.Data);
+            return MessagePackSerializer.Deserialize<ProcessedTransaction>(Convert.FromBase64String(item.Data), MessagePack.Resolvers.ContractlessStandardResolver.Options);
         }
 
         public static AccountHolder ToAccountHolder(this ImportRow item)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<AccountHolder>(item.Data);
+            return MessagePackSerializer.Deserialize<AccountHolder>(Convert.FromBase64String(item.Data), MessagePack.Resolvers.ContractlessStandardResolver.Options);
+        }
+
+        public static void UpdateImportId(this IEnumerable<ImportRow> rows, int importId)
+        {
+            rows.ToList().ForEach(x => x.ImportId = importId);
         }
     }
 }

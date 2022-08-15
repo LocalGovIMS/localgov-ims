@@ -13,13 +13,13 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void Initialise_OnAImport_AddsAStatusHistoryEntry()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.Initialise(TestUserId);
+            import.Initialise(TestUserId);
 
             // Assert
-            Import.StatusHistories.Count()
+            import.StatusHistories.Count()
                 .Should()
                 .Be(1);
         }
@@ -28,13 +28,13 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void Initialise_OnAImport_AddsAStatusHistoryWithAStatusOfReceived()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.Initialise(TestUserId);
+            import.Initialise(TestUserId);
 
             // Assert
-            Import.StatusHistories.First().StatusId
+            import.StatusHistories.First().StatusId
                 .Should()
                 .Be((int)ImportStatusEnum.Received);
         }

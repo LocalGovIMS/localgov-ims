@@ -27,9 +27,11 @@ namespace Api.Controllers.TransactionImport
         {
             try
             {
-                var import = model.GetImport();
-
-                var result = _importProcessor.Process(new ImportProcessorArgs() { Import = import });
+                var result = _importProcessor.Process(new ImportProcessorArgs() 
+                { 
+                    Import = model.GetImport(), 
+                    ImportRows = model.GetImportRows()
+                });
 
                 if (result.Success)
                     return Ok(result.Data);

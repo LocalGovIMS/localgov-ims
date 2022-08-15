@@ -2,41 +2,42 @@
 using BusinessLogic.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic.UnitTests.Extensions.Import
 {
     [TestClass]
-    public class AddInfoTests : TestBase
+    public class AddErrorsTests : TestBase
     {
         [TestMethod]
-        public void AddInfo_OnATransaction_CreatesAnEventLog()
+        public void AddErrors_OnAnImport_CreatesTwoEventLogs()
         {
             // Arrange
             var import = GetImport();
 
             // Act
-            import.AddInfo("An error");
+            import.AddErrors(new List<string>() { "An error", "Another error" });
 
             // Assert
             import.EventLogs.Count()
                 .Should()
-                .Be(1);
+                .Be(2);
         }
 
         [TestMethod]
-        public void AddInfo_OnATransaction_CreatesAnEventLogOfTheCorrectType()
+        public void AddError_OnAnImport_CreatesAnEventLogsOfTheCorrectType()
         {
             // Arrange
             var import = GetImport();
 
             // Act
-            import.AddInfo("An error");
+            import.AddErrors(new List<string>() { "An error", "Another error" });
 
             // Assert
-            import.EventLogs.First().Type
+            import.EventLogs.All(x => x.Type == (byte)ImportEventLogTypeEnum.Error)
                 .Should()
-                .Be((byte)ImportEventLogTypeEnum.Info);
+                .BeTrue();
         }
     }
 }

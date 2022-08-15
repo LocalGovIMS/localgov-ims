@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using Tanneryd.BulkOperations.EF6;
+using Tanneryd.BulkOperations.EF6.Model;
 
 namespace DataAccess.Repositories
 {
@@ -79,9 +81,55 @@ namespace DataAccess.Repositories
 
         public void BulkInsert(IEnumerable<TEntity> entities)
         {
-            var bulkInsert = new Operations.BulkInsert(IncomeDbContext);
+            DbContextExtensions.BulkInsertAll(
+                IncomeDbContext,
+                new BulkInsertRequest<TEntity>
+                {
+                    Entities = entities.ToList(),
+                });
+        }
 
-            bulkInsert.Execute(entities);
+        public void BulkUpdate(IEnumerable<TEntity> entities)
+        {
+            var tableMetadata = IncomeDbContext.TableMetadataForEntityType(typeof(TEntity));
+
+            DbContextExtensions.BulkUpdateAll(
+                IncomeDbContext,
+                new BulkUpdateRequest()
+                {
+                    Entities = entities.ToList(),
+                    UpdatedColumnNames = tableMetadata.NonKeyFields.ToArray()
+                });
+        }
+
+        public void BulkUpdate(IEnumerable<TEntity> entities, IEnumerable<string> fieldExclusions)
+        {
+            var tableMetadata = IncomeDbContext.TableMetadataForEntityType(typeof(TEntity));
+
+            DbContextExtensions.BulkUpdateAll(
+                IncomeDbContext,
+                new BulkUpdateRequest()
+                {
+                    Entities = entities.ToList(),
+                    UpdatedColumnNames = tableMetadata.NonKeyFields.Except(fieldExclusions).ToArray()
+                });
+        }
+
+        public IEnumerable<TEntity> BulkSelectNotExisting(IEnumerable<TEntity> entities)
+        {
+            var tableMetadata = IncomeDbContext.TableMetadataForEntityType(typeof(TEntity));
+
+            return DbContextExtensions.BulkSelectNotExisting<TEntity, TEntity>(
+                IncomeDbContext,
+                new BulkSelectRequest<TEntity>()
+                {
+                    Items = entities.ToList(),
+                    KeyPropertyMappings = tableMetadata.Keys.Select(x => new KeyPropertyMapping()
+                    {
+                        EntityPropertyName = x,
+                        ItemPropertyName = x
+                    }).ToArray()
+                });
         }
     }
 }

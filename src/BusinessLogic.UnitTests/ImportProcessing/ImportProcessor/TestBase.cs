@@ -15,9 +15,9 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         protected readonly Mock<ISecurityContext> MockSecurityContext = new Mock<ISecurityContext>();
         protected readonly Mock<IUnitOfWork> MockUnitOfWork = new Mock<IUnitOfWork>();
         protected readonly Mock<Func<string, IImportProcessingStrategy>> MockImportProcessingStrategyFactory = new Mock<Func<string, IImportProcessingStrategy>>();
-        protected readonly Mock<Func<string, IValidator<Import>>> MockImportProcessingValidatorFactory = new Mock<Func<string, IValidator<Import>>>();
+        protected readonly Mock<Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>> MockImportProcessingValidatorFactory = new Mock<Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>>();
 
         protected readonly Mock<IImportProcessingStrategy> MockImportProcessingStrategy = new Mock<IImportProcessingStrategy>();
-        protected readonly Mock<IValidator<Import>> MockImportProcessingValidator = new Mock<IValidator<Import>>();
+        protected readonly Mock<IValidator<ImportProcessingStrategyValidatorArgs>> MockImportProcessingValidator = new Mock<IValidator<ImportProcessingStrategyValidatorArgs>>();
     }
 }

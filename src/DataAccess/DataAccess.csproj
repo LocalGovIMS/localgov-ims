@@ -88,6 +88,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tanneryd.BulkOperations.EF6, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tanneryd.BulkOperations.EF6.1.4.1\lib\net45\Tanneryd.BulkOperations.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
     </Reference>
@@ -98,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Classes\AuditLogger.cs" />
     <Compile Include="Classes\Caching\MemoryCache.cs" />
+    <Compile Include="Extensions\IncomeDbContextExtensions.cs" />
     <Compile Include="Extensions\IDbSetExtensions.cs" />
     <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="DatabaseInitialisers\CreateDatabaseIfNotExists.cs" />
@@ -195,8 +199,8 @@
       <DependentUpon>202208021440573_Remove_TransactionNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Operations\BulkInsert.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
+    <Compile Include="Persistence\TableMetadata.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountHolderRepository.cs" />

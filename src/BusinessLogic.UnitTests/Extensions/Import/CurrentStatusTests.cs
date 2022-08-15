@@ -9,16 +9,16 @@ namespace BusinessLogic.UnitTests.Extensions.Import
     public class CurrentStatusTests : TestBase
     {
         [TestMethod]
-        [DataRow(ImportStatusEnum.Completed)]
+        [DataRow(ImportStatusEnum.Succeeded)]
         [DataRow(ImportStatusEnum.Failed)]
         [DataRow(ImportStatusEnum.Reverted)]
         public void CurrentStatus_OnAImport_ReturnsTheLastestStatusHistoryStatus(ImportStatusEnum latestStatus)
         {
             // Arrange
-            var Import = GetImportWithImportStatusHistories(latestStatus);
+            var import = GetImportWithImportStatusHistories(latestStatus);
 
             // Act
-            var result = Import.CurrentStatus();
+            var result = import.CurrentStatus();
 
             // Assert
             result

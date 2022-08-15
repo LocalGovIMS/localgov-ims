@@ -1,13 +1,17 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Classes.Result;
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Services;
+using BusinessLogic.Interfaces.Validators;
 using FluentAssertions;
+using MessagePack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Validator = BusinessLogic.ImportProcessing.AccountHolderImportProcessingStrategyValidator;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessingStrategy
@@ -16,6 +20,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
     public class ValidateTests
     {
         private readonly Mock<IImportTypeService> _mockImportTypeService = new Mock<IImportTypeService>();
+        protected readonly Mock<IAccountHolderFundMessageValidator> _mockAccountHolderFundMessageValidator = new Mock<IAccountHolderFundMessageValidator>();
         private readonly Mock<IFundService> _mockFundService = new Mock<IFundService>();
 
         private const int ValidImportTypeId = 2;
@@ -30,19 +35,22 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
         public ValidateTests()
         {
-           
+
         }
 
         private void SetupImportTypeService()
         {
             _mockImportTypeService.Setup(x => x.Get(ValidImportTypeId))
-                .Returns(new ImportType() {  DataType = (byte)ImportDataTypeEnum.AccountHolder });
+                .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.AccountHolder });
 
             _mockImportTypeService.Setup(x => x.Get(MismatchedImportTypeId))
                 .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.Transaction });
 
             _mockImportTypeService.Setup(x => x.Get(InvalidImportTypeId))
                 .Returns<ImportType>(null);
+
+            _mockAccountHolderFundMessageValidator.Setup(x => x.Validate(It.IsAny<Entities.AccountHolder>()))
+                .Returns(new Result());
 
             _mockFundService.Setup(x => x.GetAllFunds())
                 .Returns(new List<Fund>() {
@@ -57,6 +65,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
         {
             return new Validator(
                 _mockImportTypeService.Object,
+                _mockAccountHolderFundMessageValidator.Object,
                 _mockFundService.Object);
         }
 
@@ -72,7 +81,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var validator = GetValidator();
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -92,7 +101,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var validator = GetValidator();
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -112,7 +121,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var validator = GetValidator();
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -131,7 +140,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var validator = GetValidator();
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -150,7 +159,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             var validator = GetValidator();
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             act.Should()
                 .NotThrow();
@@ -175,11 +184,20 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
             };
         }
 
+        private ImportProcessingStrategyValidatorArgs GetValidatorArgs(Import import)
+        {
+            return new ImportProcessingStrategyValidatorArgs()
+            {
+                Import = import,
+                ImportRows = import.Rows.ToList()
+            };
+        }
+
         private string GetAccountHolderData(string fundCode)
         {
             var item = new Entities.AccountHolder() { FundCode = fundCode };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(item);
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(item, MessagePack.Resolvers.ContractlessStandardResolver.Options));
         }
     }
 }

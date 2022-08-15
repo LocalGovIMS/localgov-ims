@@ -119,10 +119,9 @@ namespace BusinessLogic
                 .RegisterType<IImportProcessingStrategy, AccountHolderImportProcessingStrategy>(ImportDataTypeEnum.AccountHolder.ToString())
                 .RegisterFactory<Func<string, IImportProcessingStrategy>>(c => new Func<string, IImportProcessingStrategy>(name => c.Resolve<IImportProcessingStrategy>(name)))
 
-                .RegisterType<IValidator<Import>, TransactionImportProcessingStrategyValidator>(ImportDataTypeEnum.Transaction.ToString())
-                .RegisterType<IValidator<Import>, AccountHolderImportProcessingStrategyValidator>(ImportDataTypeEnum.AccountHolder.ToString())
-                .RegisterFactory<Func<string, IValidator<Import>>>(c => new Func<string, IValidator<Import>>(name => c.Resolve<IValidator<Import>>(name)))
-
+                .RegisterType<IValidator<ImportProcessingStrategyValidatorArgs>, TransactionImportProcessingStrategyValidator>(ImportDataTypeEnum.Transaction.ToString())
+                .RegisterType<IValidator<ImportProcessingStrategyValidatorArgs>, AccountHolderImportProcessingStrategyValidator>(ImportDataTypeEnum.AccountHolder.ToString())
+                .RegisterFactory<Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>>(c => new Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>(name => c.Resolve<IValidator<ImportProcessingStrategyValidatorArgs>>(name)))
             ;
         }
     }

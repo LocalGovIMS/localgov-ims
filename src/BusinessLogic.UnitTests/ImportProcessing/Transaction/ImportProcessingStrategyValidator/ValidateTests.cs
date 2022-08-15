@@ -4,10 +4,12 @@ using BusinessLogic.Extensions;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Services;
 using FluentAssertions;
+using MessagePack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Validator = BusinessLogic.ImportProcessing.TransactionImportProcessingStrategyValidator;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingStrategyValidator
@@ -16,7 +18,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
     public class ValidateTests
     {
         private readonly Mock<IImportTypeService> _mockImportTypeService = new Mock<IImportTypeService>();
-        
+
         private const int ValidImportTypeId = 1;
         private const int MismatchedImportTypeId = 2;
         private const int InvalidImportTypeId = 3;
@@ -26,13 +28,13 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
 
         public ValidateTests()
         {
-           
+
         }
 
         private void SetupImportTypeService()
         {
             _mockImportTypeService.Setup(x => x.Get(ValidImportTypeId))
-                .Returns(new ImportType() {  DataType = (byte)ImportDataTypeEnum.Transaction });
+                .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.Transaction });
 
             _mockImportTypeService.Setup(x => x.Get(MismatchedImportTypeId))
                 .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.AccountHolder });
@@ -53,7 +55,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             var validator = new Validator(_mockImportTypeService.Object);
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -73,7 +75,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             var validator = new Validator(_mockImportTypeService.Object);
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
@@ -89,18 +91,18 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
 
             var import = GetImport();
             import.NumberOfRows = InvalidNumberOfRows;
- 
+
             var validator = new Validator(_mockImportTypeService.Object);
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             // Assert
             act.Should()
                 .Throw<ImportProcessingException>()
                 .WithMessage("The number of expected rows does not match the number of rows provided");
         }
-        
+
         [TestMethod]
         public void Validate_WithValidData_Passes()
         {
@@ -112,7 +114,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             var validator = new Validator(_mockImportTypeService.Object);
 
             // Act
-            Action act = () => validator.Validate(import);
+            Action act = () => validator.Validate(GetValidatorArgs(import));
 
             act.Should()
                 .NotThrow();
@@ -125,10 +127,19 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
                 ImportTypeId = ValidImportTypeId,
                 NumberOfRows = ValidNumberOfRows,
                 Rows = new List<ImportRow>()
-                {   
+                {
                     new ImportRow() { Data = GetTransactionData(10) },
                     new ImportRow() { Data = GetTransactionData(20) }
                 }
+            };
+        }
+
+        private ImportProcessingStrategyValidatorArgs GetValidatorArgs(Import import)
+        {
+            return new ImportProcessingStrategyValidatorArgs()
+            {
+                Import = import,
+                ImportRows = import.Rows.ToList()
             };
         }
 
@@ -136,7 +147,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
         {
             var transaction = new ProcessedTransaction() { Amount = amount };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(transaction, MessagePack.Resolvers.ContractlessStandardResolver.Options));
         }
     }
 }

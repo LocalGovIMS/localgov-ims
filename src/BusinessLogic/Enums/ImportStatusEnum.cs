@@ -10,8 +10,8 @@ namespace BusinessLogic.Enums
         [Display(Name = "In Progess")]
         InProgress = 2,
 
-        [Display(Name = "Completed")]
-        Completed = 3,
+        [Display(Name = "Succeeded")]
+        Succeeded = 3,
 
         [Display(Name = "Failed")]
         Failed = 4,
