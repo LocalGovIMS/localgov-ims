@@ -10,31 +10,31 @@ namespace BusinessLogic.UnitTests.Extensions.Import
     public class AddErrorTests : TestBase
     {
         [TestMethod]
-        public void AddError_OnATransaction_CreatesAnEventLog()
+        public void AddError_OnAnImport_CreatesAnEventLog()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.AddError("An error");
+            import.AddError("An error");
 
             // Assert
-            Import.EventLogs.Count()
+            import.EventLogs.Count()
                 .Should()
                 .Be(1);
         }
 
         [TestMethod]
-        public void AddError_OnATransaction_CreatesAnEventLogOfTheCorrectType()
+        public void AddError_OnAnImport_CreatesAnEventLogOfTheCorrectType()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            Import.AddError("An error");
+            import.AddError("An error");
 
             // Assert
-            Import.EventLogs.First().Type
+            import.EventLogs.First().Type
                 .Should()
                 .Be((byte)ImportEventLogTypeEnum.Error);
         }

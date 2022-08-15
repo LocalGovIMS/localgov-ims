@@ -1,9 +1,9 @@
-﻿using BusinessLogic.ImportProcessing;
-using BusinessLogic.Services;
+﻿using BusinessLogic.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessingStrategy
 {
@@ -11,63 +11,63 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
     public class ProcessTests : TestBase
     {
         [TestMethod]
-        public void Process_WhenTheAccountHolderExists_CallsAccountHolderServiceUpdateOnce()
+        public void Process_WhenCalled_CallsAccountHolderServiceBulksSelectNotExisting_Once()
         {
             // Arrange
-            SetupDependenciesForExistingAccountHolder();
+            SetupDependencies();
             SetupStrategy();
 
             // Act
             Strategy.Process(GetArgs());
 
             // Assert
-            MockAccountHolderService.Verify(x => x.Update(It.IsAny<UpdateAccountHolderArgs>()), Times.Once);
+            MockAccountHolderRepository.Verify(x => x.BulkSelectNotExisting(It.IsAny<IEnumerable<Entities.AccountHolder>>()), Times.Once);
         }
 
         [TestMethod]
-        public void Process_WhenTheAccountHolderExists_DoesNotCallAccountHolderServiceCreate()
+        public void Process_WhenCalledWithRowsThatNeedInserting_CallsAccountHolderServiceBulksInsert_Once()
         {
             // Arrange
-            SetupDependenciesForExistingAccountHolder();
+            SetupDependencies();
             SetupStrategy();
 
             // Act
             Strategy.Process(GetArgs());
 
             // Assert
-            MockAccountHolderService.Verify(x => x.Create(It.IsAny<CreateAccountHolderArgs>()), Times.Never);
+            MockAccountHolderRepository.Verify(x => x.BulkInsert(It.IsAny<IEnumerable<Entities.AccountHolder>>()), Times.Once);
         }
 
         [TestMethod]
-        public void Process_WhenTheAccountHolderDoesNotExists_CallsAccountHolderServiceCreateOnce()
+        public void Process_WhenCalledWithRowsThatNeedUpdating_CallsAccountHolderServiceBulksUpdate_Once()
         {
             // Arrange
-            SetupDependenciesForNewAccountHolder();
+            SetupDependencies();
             SetupStrategy();
 
             // Act
             Strategy.Process(GetArgs());
 
             // Assert
-            MockAccountHolderService.Verify(x => x.Create(It.IsAny<CreateAccountHolderArgs>()), Times.Once);
+            MockAccountHolderRepository.Verify(x => x.BulkUpdate(It.IsAny<IEnumerable<Entities.AccountHolder>>(), It.IsAny<IEnumerable<string>>()), Times.Once);
         }
 
         [TestMethod]
-        [DataRow("Test")]
-        [DataRow("Another Test")]
-        public void Process_WhenAccountHolderCreationFails_ThrowsAnExceptionWithTheResultError(string errorMessage)
+        [DataRow("An error")]
+        [DataRow("Another error")]
+        public void Process_WhenInsertFails_AddsAnErrorToTheImport(string errorMessage)
         {
             // Arrange
-            SetupDependenciesForAccountHolderCreationFailure(errorMessage);
+            SetupDependenciesForFailure(errorMessage);
             SetupStrategy();
+            var args = GetArgs();
 
             // Act
-            Action action = () => Strategy.Process(GetArgs());
+            Strategy.Process(args);
 
             // Assert
-            action.Should()
-                .Throw<ImportProcessingException>()
-                .WithMessage(errorMessage);
+            args.Import.Errors().Count.Should().Be(1);
+            args.Import.Errors().First().Message.Should().Be(errorMessage);
         }
     }
 }

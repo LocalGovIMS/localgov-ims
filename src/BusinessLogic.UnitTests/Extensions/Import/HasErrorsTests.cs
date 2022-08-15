@@ -12,10 +12,10 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void HasErrors_OnAImportWithErrors_ReturnsTrue()
         {
             // Arrange
-            var Import = GetImportWithErrors();
+            var import = GetImportWithErrors();
 
             // Act
-            var result = Import.HasErrors();
+            var result = import.HasErrors();
 
             // Assert
             result
@@ -27,10 +27,10 @@ namespace BusinessLogic.UnitTests.Extensions.Import
         public void HasErrors_OnAImportWithoutErrors_ReturnsFalse()
         {
             // Arrange
-            var Import = GetImport();
+            var import = GetImport();
 
             // Act
-            var result = Import.HasErrors();
+            var result = import.HasErrors();
 
             // Assert
             result

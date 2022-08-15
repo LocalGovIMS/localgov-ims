@@ -1,6 +1,8 @@
 ﻿using Api.Controllers.AccountHolders;
 using BusinessLogic.Entities;
 using BusinessLogic.Enums;
+using MessagePack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,20 +25,24 @@ namespace Api.Controllers.AccountHolderImport
                 ImportTypeId = ImportTypeId,
                 Notes = Notes,
                 NumberOfRows = NumberOfRows,
-                Rows = GetImportRows(),  
                 EventLogs = GetImportEventLogs()
-            }; 
+            };
         }
 
-        private List<ImportRow> GetImportRows()
+        public List<ImportRow> GetImportRows()
         {
-            return Rows?.Select(x => new ImportRow() { Data = Newtonsoft.Json.JsonConvert.SerializeObject(x.GetAccountHolder()) })
+            return Rows?
+                .Select(x => new ImportRow()
+                {
+                    Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x, MessagePack.Resolvers.ContractlessStandardResolver.Options))
+                })
                 .ToList();
         }
 
         private List<ImportEventLog> GetImportEventLogs()
         {
-            return Errors?.Select(x => new ImportEventLog() { CreatedDate = System.DateTime.Now, Message = x, Type = (byte)ImportEventLogTypeEnum.Error })
+            return Errors?
+                .Select(x => new ImportEventLog() { CreatedDate = System.DateTime.Now, Message = x, Type = (byte)ImportEventLogTypeEnum.Error })
                 .ToList();
         }
     }

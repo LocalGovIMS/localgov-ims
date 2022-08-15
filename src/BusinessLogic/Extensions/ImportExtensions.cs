@@ -32,7 +32,7 @@ namespace BusinessLogic.Extensions
                 createdByUserId,
                 item.HasErrors()
                     ? ImportStatusEnum.Failed
-                    : ImportStatusEnum.Completed);
+                    : ImportStatusEnum.Succeeded);
         }
 
         public static void Revert(this Import item, int createdByUserId)
@@ -63,6 +63,11 @@ namespace BusinessLogic.Extensions
         public static void AddError(this Import item, string error)
         {
             item.AddEventLog(error, ImportEventLogTypeEnum.Error);
+        }
+
+        public static void AddErrors(this Import item, List<string> errors)
+        {
+            errors.ForEach(error => item.AddError(error));
         }
 
         public static void AddInfo(this Import item, string message)

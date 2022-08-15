@@ -4,14 +4,13 @@ using BusinessLogic.Enums;
 using BusinessLogic.Extensions;
 using BusinessLogic.ImportProcessing;
 using FluentAssertions;
+using MessagePack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
 {
@@ -35,7 +34,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
             MockUnitOfWork.Setup(x => x.ImportTypes.Get(It.IsAny<int>()))
                 .Returns(new ImportType() { DataType = (byte)ImportDataTypeEnum.Transaction });
 
-            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<Import>()));
+            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<ImportProcessingStrategyValidatorArgs>()));
 
             MockImportProcessingValidatorFactory.Setup(x => x.Invoke(It.IsAny<string>()))
                 .Returns(MockImportProcessingValidator.Object);
@@ -109,7 +108,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         }
 
         [TestMethod]
-        public void Process_ValidImport_CreatesACompletedStatusHistory()
+        public void Process_ValidImport_CreatesASucceededStatusHistory()
         {
             // Arrange
             Setup();
@@ -120,7 +119,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
             var result = _ImportProcessor.Process(args);
 
             // Assert
-            args.Import.StatusHistories.Any(x => x.StatusId == (int)ImportStatusEnum.Completed)
+            args.Import.StatusHistories.Any(x => x.StatusId == (int)ImportStatusEnum.Succeeded)
                 .Should()
                 .BeTrue();
         }
@@ -130,7 +129,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         {
             // Arrange
             Setup();
-            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<Import>()))
+            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<ImportProcessingStrategyValidatorArgs>()))
                 .Throws(new ImportProcessingException(ExceptionMessage));
 
             var args = GetImportProcessorArgs();
@@ -147,7 +146,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         {
             // Arrange
             Setup();
-            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<Import>()))
+            MockImportProcessingValidator.Setup(x => x.Validate(It.IsAny<ImportProcessingStrategyValidatorArgs>()))
                 .Throws(new NotImplementedException());
 
             var args = GetImportProcessorArgs();
@@ -160,6 +159,21 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         }
 
         [TestMethod]
+        public void Process_WhenErrorsSentInArgs_ShouldNotTryToValidateAnyRows()
+        {
+            // Arrange
+            Setup();
+
+            var args = GetImportProcessorArgsWithErrors();
+
+            // Act
+            var result = _ImportProcessor.Process(args);
+
+            // Assert
+            MockImportProcessingValidator.Verify(x => x.Validate(It.IsAny<ImportProcessingStrategyValidatorArgs>()), Times.Never);
+        }
+
+        [TestMethod]
         public void Process_WhenErrorsSentInArgs_ShouldNotTryToProcessAnyRows()
         {
             // Arrange
@@ -167,22 +181,15 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
 
             var args = GetImportProcessorArgsWithErrors();
 
-            //var import = args.Import;
-            //import.StatusHistories.Add(new ImportStatusHistory() { StatusId = 1 });
-
-            //MockUnitOfWork.Setup(x => x.Imports.Get(It.IsAny<int>()))
-            //    .Returns(import);
-
             // Act
             var result = _ImportProcessor.Process(args);
 
             // Assert
-            MockImportProcessingValidator.Verify(x => x.Validate(It.IsAny<Import>()), Times.Never);
             MockImportProcessingStrategy.Verify(x => x.Process(It.IsAny<ImportProcessingStrategyArgs>()), Times.Never);
         }
 
         [TestMethod]
-        public void Process_WhemRowProcessingFails_ProcessingCompletesAsAFailure()
+        public void Process_WhenRowProcessingFails_ProcessingCompletesAsAFailure()
         {
             // Arrange
             Setup();
@@ -216,13 +223,14 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                 Import = new Import()
                 {
                     ImportTypeId = 1,
-                    Rows = GetImportRows(),
+                    
                     EventLogs = new List<ImportEventLog>()
-                }
+                },
+                ImportRows = GetImportRows()
             };
         }
 
-        private ICollection<ImportRow> GetImportRows()
+        private List<ImportRow> GetImportRows()
         {
             return new List<ImportRow>()
             {
@@ -237,7 +245,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         {
             var transaction = new ProcessedTransaction() { };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(transaction, MessagePack.Resolvers.ContractlessStandardResolver.Options));
         }
     }
 }

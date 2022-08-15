@@ -3,7 +3,10 @@ using BusinessLogic.Entities;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Services;
+using MessagePack;
 using Moq;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingStrategy
 {
@@ -60,11 +63,14 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
                     Notes = "Notes",
                     NumberOfRows = 1
                 },
-                Row = new ImportRow()
+                ImportRows = new List<ImportRow>()
                 {
-                    Id = 1,
-                    ImportId = 1,
-                    Data = Newtonsoft.Json.JsonConvert.SerializeObject(processedTransaction)
+                    new ImportRow() 
+                    {
+                        Id = 1,
+                        ImportId = 1,
+                        Data = Convert.ToBase64String(MessagePackSerializer.Serialize(processedTransaction, MessagePack.Resolvers.ContractlessStandardResolver.Options))
+                    }
                 }
             };
         }

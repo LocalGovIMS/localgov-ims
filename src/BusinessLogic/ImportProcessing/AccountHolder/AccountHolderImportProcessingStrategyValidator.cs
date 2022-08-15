@@ -1,7 +1,10 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Enums;
+using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Services;
+using BusinessLogic.Interfaces.Validators;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic.ImportProcessing
@@ -11,33 +14,52 @@ namespace BusinessLogic.ImportProcessing
         protected override ImportDataTypeEnum DataType => ImportDataTypeEnum.AccountHolder;
 
         private readonly IFundService _fundService;
+        private readonly IAccountHolderFundMessageValidator _accountHolderFundMessageValidator;
+        private int _rowNumber = 1;
+        private List<Fund> _allFunds = new List<Fund>();
 
         public AccountHolderImportProcessingStrategyValidator(
             IImportTypeService importTypeService,
+            IAccountHolderFundMessageValidator accountHolderFundMessageValidator,
             IFundService fundService) : base(importTypeService)
         {
             _fundService = fundService ?? throw new ArgumentNullException("fundService");
+            _accountHolderFundMessageValidator = accountHolderFundMessageValidator ?? throw new ArgumentNullException("accountHolderFundMessageValidator");
         }        
 
-        protected override void OnValidate(Import import)
+        protected override void OnValidate(ImportProcessingStrategyValidatorArgs args)
         {
-            ValidateFundCodes(import);
+            Initialise();
+
+            foreach (var item in args.ImportRows)
+            {
+                var accountHolder = item.ToAccountHolder();
+
+                ValidateFundCode(accountHolder);
+                ValidateFundMessage(accountHolder);
+
+                _rowNumber++;
+            }
         }
 
-        private void ValidateFundCodes(Import import)
+        private void Initialise()
         {
-            var allFunds = _fundService.GetAllFunds();
-            var rowNumber = 1;
+            _rowNumber = 1;
+            _allFunds = _fundService.GetAllFunds();
+        }
 
-            foreach(var item in import.Rows)
-            {
-                var accountHolder = Newtonsoft.Json.JsonConvert.DeserializeObject<AccountHolder>(item.Data);
+        private void ValidateFundCode(AccountHolder accountHolder)
+        {
+            if (!_allFunds.Any(x => x.FundCode == accountHolder.FundCode))
+                throw new ImportProcessingException($"Fund code '{accountHolder.FundCode}' on row {_rowNumber} not recognised");
+        }
 
-                if (!allFunds.Any(x => x.FundCode == accountHolder.FundCode))
-                    throw new ImportProcessingException($"Fund code '{accountHolder.FundCode}' on row {rowNumber} not recognised");
+        private void ValidateFundMessage(AccountHolder accountHolder)
+        {
+            var result = _accountHolderFundMessageValidator.Validate(accountHolder);
 
-                rowNumber++;
-            }
+            if(!result.Success)
+                throw new ImportProcessingException($"Fund message '{accountHolder.FundMessageId}' on row {_rowNumber} not recognised");
         }
     }
 }

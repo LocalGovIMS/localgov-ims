@@ -10,6 +10,7 @@ using BusinessLogic.Models.Import;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 
@@ -21,19 +22,18 @@ namespace BusinessLogic.ImportProcessing
         private readonly ISecurityContext _securityContext;
         private readonly IUnitOfWork _unitOfWork;
         private readonly Func<string, IImportProcessingStrategy> _importProcessingStrategyFactory;
-        private readonly Func<string, IValidator<Import>> _importProcessingValidatorFactory;
+        private readonly Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> _importProcessingValidatorFactory;
 
         private ImportProcessorArgs _args;
         private List<string> _processingErrors = new List<string>();
-        private int _numberOfSuccessfullyProcessedRows = 0;
-        private IValidator<Import> _importProcessingValidator;
+        private IValidator<ImportProcessingStrategyValidatorArgs> _importProcessingStrategyValidator;
         private IImportProcessingStrategy _importProcessingStrategy;
 
         public ImportProcessor(ILog log
             , ISecurityContext securityContext
             , IUnitOfWork unitOfWork
             , Func<string, IImportProcessingStrategy> importProcessingStrategyFactory
-            , Func<string, IValidator<Import>> importProcessingValidatorFactory)
+            , Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> importProcessingValidatorFactory)
         {
             _log = log ?? throw new ArgumentNullException("log");
             _securityContext = securityContext ?? throw new ArgumentNullException("securityContext");
@@ -48,75 +48,101 @@ namespace BusinessLogic.ImportProcessing
             {
                 _args = args;
 
-                InitialiseClassVariables();
+                InitialiseImportProcessor();
 
                 InitialiseImport();
 
-                Process();
+                SaveRawData();
 
-                End();
+                Validate();
+
+                Process();
 
                 return CreateResult();
             }
             catch (ImportProcessingException ex)
             {
+                _processingErrors.Add(ex.Message);
+
                 _log.Error(null, ex);
 
                 return new Result(ex.Message);
             }
             catch (Exception ex)
             {
+                _processingErrors.Add(ex.Message);
+
                 _log.Error(null, ex);
 
                 return new Result("The import is not valid");
             }
+            finally
+            {
+                _args.Import.Complete(_processingErrors, _securityContext.UserId);
+                _unitOfWork.Complete(_securityContext.UserId);
+            }
         }
 
-        public void InitialiseClassVariables()
+        public void InitialiseImportProcessor()
         {
-            var importDataType = (ImportDataTypeEnum)_unitOfWork.ImportTypes.Get(_args.Import.ImportTypeId).DataType;
+            try
+            {
+                var importDataType = (ImportDataTypeEnum)_unitOfWork.ImportTypes.Get(_args.Import.ImportTypeId).DataType;
 
-            _importProcessingValidator = _importProcessingValidatorFactory(importDataType.ToString());
-            _importProcessingStrategy = _importProcessingStrategyFactory(importDataType.ToString());
+                _importProcessingStrategyValidator = _importProcessingValidatorFactory(importDataType.ToString());
+                _importProcessingStrategy = _importProcessingStrategyFactory(importDataType.ToString());
+            }
+            catch (Exception ex)
+            {
+                _log.Error(null, ex);
 
-            _processingErrors = new List<string>();
-            _numberOfSuccessfullyProcessedRows = 0;
+                throw new ImportProcessingException("Unable to initialise the Import. Please check the ImportTypeId is set correctly.");
+            }
         }
 
-        private void InitialiseImport()
+        public void InitialiseImport()
         {
-            var rows = _args.Import.Rows;
-            _args.Import.Rows = null;
-
             _args.Import.Initialise(_securityContext.UserId);
+        }
 
-            _unitOfWork.Imports.Add(_args.Import);
-            _unitOfWork.CompleteWithoutAudit(_securityContext.UserId);
+        private void SaveRawData()
+        {
+            try
+            {
+                _unitOfWork.Imports.Add(_args.Import);
+                _unitOfWork.Complete(_securityContext.UserId);
 
-            rows.ToList().ForEach(c => c.ImportId = _args.Import.Id);
+                _args.ImportRows.ForEach(x => x.ImportId = _args.Import.Id);
 
-            _unitOfWork.ImportRows.BulkInsert(rows);
+                foreach (var batch in _args.ImportRows.Batch(Convert.ToInt32(ConfigurationManager.AppSettings["Import.BatchSize"])))
+                {
+                    _unitOfWork.ImportRows.BulkInsert(batch);
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(null, ex);
 
-            _args.Import.Rows = _unitOfWork.ImportRows.Find(x => x.ImportId == _args.Import.Id).ToList();
+                throw new ImportProcessingException($"Unable to save the Import and Import Row data. {ex.Message}");
+            }
+        }
+
+        private void Validate()
+        {
+            if (_args.Import.HasErrors()) return;
+
+            _importProcessingStrategyValidator.Validate(new ImportProcessingStrategyValidatorArgs() { Import = _args.Import, ImportRows = _args.ImportRows });
         }
 
         private void Process()
         {
             if (_args.Import.HasErrors()) return;
 
-            Validate();
-
             Start();
 
             ProcessRows();
 
-            Save();
-        }
-
-
-        private void Validate()
-        {
-            _importProcessingValidator.Validate(_args.Import);
+            Finish();
         }
 
         private void Start()
@@ -127,53 +153,11 @@ namespace BusinessLogic.ImportProcessing
 
         private void ProcessRows()
         {
-            var rowNumber = 1;
-
-            foreach (var row in _args.Import.Rows)
-            {
-                ProcessRow(row, rowNumber);
-
-                rowNumber++;
-            }
+            _importProcessingStrategy.Process(new ImportProcessingStrategyArgs() { Import = _args.Import, ImportRows = _args.ImportRows });
         }
 
-        private void ProcessRow(ImportRow row, int rowNumber)
+        private void Finish()
         {
-            try
-            {
-                _importProcessingStrategy.Process(new ImportProcessingStrategyArgs() { Import = _args.Import, Row = row });
-
-                _numberOfSuccessfullyProcessedRows++;
-            }
-            catch (Exception ex)
-            {
-                _log.Error($"Row {rowNumber} - {ex.Message}", ex);
-                _processingErrors.Add($"Row {rowNumber} - {ex.Message}");
-            }
-        }
-
-        private void Save()
-        {
-            try
-            {
-                if (_processingErrors.Any()) 
-                    throw new ImportProcessingException("Errors exist in the import data");
-
-                _unitOfWork.Complete(_securityContext.UserId);
-            }
-            catch(Exception ex)
-            {
-                _log.Error($"Error saving import: {ex.Message}", ex);
-
-                _processingErrors.Add("The import is not valid");
-
-                _unitOfWork.ResetChanges();
-            }
-        }
-
-        private void End()
-        {
-            _args.Import.Complete(_processingErrors, _securityContext.UserId);
             _unitOfWork.Complete(_securityContext.UserId);
         }
 
@@ -186,7 +170,7 @@ namespace BusinessLogic.ImportProcessing
 
             result.SetData(new ProcessResult()
             {
-                NumberOfRowsImported = _numberOfSuccessfullyProcessedRows
+                NumberOfRowsImported = _importProcessingStrategy.NumberOfSuccessfullyProcessedRows
             });
 
             return result;
@@ -196,5 +180,6 @@ namespace BusinessLogic.ImportProcessing
     public class ImportProcessorArgs
     {
         public Import Import { get; set; }
+        public List<ImportRow> ImportRows { get; set; }
     }
 }
