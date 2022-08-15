@@ -240,7 +240,6 @@
     <Compile Include="ImportProcessing\BaseImportProcessingStrategyValidator.cs" />
     <Compile Include="ImportProcessing\AccountHolder\AccountHolderImportProcessingStrategy.cs" />
     <Compile Include="ImportProcessing\AccountHolder\AccountHolderImportProcessingStrategyValidator.cs" />
-    <Compile Include="ImportProcessing\BulkImportProcessor1.cs" />
     <Compile Include="ImportProcessing\Enums\OperationType.cs" />
     <Compile Include="ImportProcessing\ImportProcessingStrategyArgs.cs" />
     <Compile Include="ImportProcessing\Interfaces\IImportProcessor.cs" />
