@@ -7,7 +7,7 @@
         <div class="ui form">
             <div class="six fields">
                 <div class="field">
-                    <label>Data type</label>
+                    @Html.LabelFor(m => m.DataType)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.DataType, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Import type</label>
+                    @Html.LabelFor(m => m.ImportTypeId)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.ImportTypeId, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Current status</label>
+                    @Html.LabelFor(m => m.StatusId)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.StatusId, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -64,14 +64,14 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Start date</label>
+                    @Html.LabelFor(m => m.StartDate)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
                     </div>
                 </div>
                 <div class="field">
-                    <label>End date</label>
+                    @Html.LabelFor(m => m.EndDate)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
