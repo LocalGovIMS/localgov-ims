@@ -206,26 +206,6 @@ tr.selected td {
     cursor: pointer;
 }
 
-.version {
-    position: fixed;
-    left: 1rem;
-    bottom: 1rem;
-    z-index: 999;
-    color: #555;
-    font-size: 0.9rem;
-    line-height: 0.9rem;
-}
-
-.version span {
-    font-size:0.8rem;
-}
-
-@media print {
-    .version {
-        display:none !important;
-    }
-}
-
 .environment {
     display: inline-block;
     padding: 0 4px;

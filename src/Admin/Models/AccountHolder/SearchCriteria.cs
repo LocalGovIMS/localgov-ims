@@ -8,16 +8,17 @@ namespace Admin.Models.AccountHolder
         [Display(Name = "Account reference")]
         public string AccountReference { get; set; }
 
-        [Display(Name = "House No")]
+        [Display(Name = "House number/name")]
         public string HouseNumberName { get; set; }
 
         public string Street { get; set; }
 
-        [Display(Name = "Post Code")]
+        [Display(Name = "Postcode")]
         public string PostCode { get; set; }
 
         public string Surname { get; set; }
 
+        [Display(Name = "Fund type")]
         public string FundCode { get; set; }
 
         public bool IsAPaymentSearch { get; set; }

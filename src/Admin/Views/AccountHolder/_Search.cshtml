@@ -8,17 +8,17 @@
         <div class="ui form">
             <div class="four fields">
                 <div class="field">
-                    <label>Account reference</label>
+                    @Html.LabelFor(m => m.AccountReference)
                     @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Enter account reference" })
                 </div>
                 <div class="field">
-                    <label>Surname</label>
+                    @Html.LabelFor(m => m.Surname)
                     @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Enter surname" })
                 </div>
                 <div class="field">
                     @if (!Model.IsAPaymentSearch)
                     {
-                        <label>Fund type</label>
+                        @Html.LabelFor(m => m.FundCode)
                         <div class="ui fluid search selection dropdown fund">
                             @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                             <i class="dropdown icon"></i>
@@ -44,15 +44,15 @@
             </div>
             <div class="four fields">
                 <div class="field">
-                    <label>Postcode</label>
+                    @Html.LabelFor(m => m.PostCode)
                     @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Enter postcode" })
                 </div>
                 <div class="field">
-                    <label>House number/name</label>
+                    @Html.LabelFor(m => m.HouseNumberName)
                     @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "Enter house number/name" })
                 </div>
                 <div class="field">
-                    <label>Street</label>
+                    @Html.LabelFor(m => m.Street)
                     @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Enter street" })
                 </div>
                 <div class="field">
