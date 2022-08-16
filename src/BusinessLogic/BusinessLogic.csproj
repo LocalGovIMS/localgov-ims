@@ -219,6 +219,7 @@
     <Compile Include="Enums\TransactionStatus.cs" />
     <Compile Include="Extensions\AccountHolderExtensions.cs" />
     <Compile Include="Extensions\CheckDigitConfigurationExtensions.cs" />
+    <Compile Include="Extensions\BooleanExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
