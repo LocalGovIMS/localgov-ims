@@ -54,10 +54,10 @@
     </div>
 
     <div class="ui vertical segment">
-        <h3 style="padding-bottom:10px;">
+        <h2 style="padding-bottom:10px;">
             Metadata
             @Html.ActionLink("Add metadata", "Create", "FundMessageMetadata", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        </h3>
+        </h2>
         @Html.Action("_EditListForFundMessage", "FundMessageMetadata", new { id = Model.Id })
 
     </div>
