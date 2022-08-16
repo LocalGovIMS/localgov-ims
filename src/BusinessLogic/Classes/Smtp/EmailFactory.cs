@@ -28,5 +28,10 @@ namespace BusinessLogic.Classes.Smtp
         {
             return new PasswordResetEmail(message);
         }
+
+        public IEmail CreateNewUserRegistrationEmail(string newUserEmailAddress)
+        {
+            return new NewUserRegistrationEmail(newUserEmailAddress);
+        }
     }
 }

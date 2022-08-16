@@ -6,6 +6,7 @@
         NonVatReceipt = 2,
         EReturnDeleted = 3,
         DuplicateTransaction = 4,
-        PasswordReset = 5
+        PasswordReset = 5,
+        NewUserRegistration = 6
     }
 }

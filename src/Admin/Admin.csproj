@@ -1741,6 +1741,7 @@
     <Content Include="Views\Import\Details.cshtml" />
     <Content Include="Views\Import\_StatusHistoryList.cshtml" />
     <Content Include="Views\Import\_EventLogList.cshtml" />
+    <Content Include="Views\Account\RegistrationConfirmation.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
