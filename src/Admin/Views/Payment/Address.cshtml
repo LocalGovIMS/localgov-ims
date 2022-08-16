@@ -1,6 +1,6 @@
 ﻿@model Admin.Models.Payment.Address
 @{
-    ViewBag.Title = "Address";    
+    ViewBag.Title = "Address";
 }
 
 @section Header {
@@ -12,8 +12,8 @@
     </h1>
 }
 
-    <div>
-        @if (Model.Message != null)
+<div>
+    @if (Model.Message != null)
     {
         <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
             <div class="header">
@@ -21,21 +21,21 @@
             </div>
             <p>@Model.Message.Text</p>
         </div>
-}
+    }
 
-        @if (!string.IsNullOrWhiteSpace(ViewBag.CallRecordingMsg))
+    @if (!string.IsNullOrWhiteSpace(ViewBag.CallRecordingMsg))
     {
         <div class="message message--warn message--flash">
             <strong>@ViewBag.CallRecordingMsg</strong>
         </div>
-}
-    </div>
+    }
+</div>
 
 @using (Html.BeginForm("Address", "Payment", FormMethod.Post))
 {
     <div class="ui form">
         <div class="ten wide column">
-            <h4 class="ui header">Billing address</h4>
+            <h2 class="ui header">Billing address</h2>
             <div class="three wide field">
                 @Html.LabelFor(m => m.PayeeName)
                 @Html.TextBoxFor(m => m.PayeeName, new { maxlength = "50" })
@@ -64,14 +64,13 @@
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.City)
             </div>
-            <div class=" two wide field">                
+            <div class=" two wide field">
                 @Html.LabelFor(m => m.PostCode)
-                @Html.TextBoxFor(m => m.PostCode, new { maxlength = "10" })                                
+                @Html.TextBoxFor(m => m.PostCode, new { maxlength = "10" })
             </div>
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.PostCode)
             </div>
-
             <div style="margin-top: 0.5rem;">
                 @Html.ActionLink("Cancel", "Cancel", null, new { @class = "ui button" })
                 <button value="SaveAddress" name="action" type="submit" class="ui primary button">Next</button>
@@ -79,9 +78,6 @@
         </div>
     </div>
 }
-
-       
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/payment")
