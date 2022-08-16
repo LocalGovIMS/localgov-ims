@@ -63,10 +63,10 @@
                         @if (Model.Pages > 1)
                         {
                             @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                        {
-                            page = page,
-                            name = Model.SearchCriteria.Name
-                        }))
+                            {
+                                page = page,
+                                name = Model.SearchCriteria.Name
+                            }))
                         }
                     </div>
                 </th>
