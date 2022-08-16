@@ -3,17 +3,29 @@
 @if (Model.Items != null && Model.Items.Any())
 {
     <table class="ui celled table striped teal">
-        @foreach (var item in Model.Items)
-        {
+        <thead>
             <tr>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @item.Value
-                </td>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Value
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else
