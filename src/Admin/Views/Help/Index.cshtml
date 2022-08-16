@@ -9,7 +9,7 @@
 }
 
 <div class="ui styled fluid accordion">
-    <div class="title">
+    <div class="title" tabindex="100">
         <i class="dropdown icon"></i>
         How do I process a refund?
     </div>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="title">
+    <div class="title" tabindex="110">
         <i class="dropdown icon"></i>
         What if my refund fails?
     </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="title">
+    <div class="title" tabindex="120">
         <i class="dropdown icon"></i>
         How do I take a payment?
     </div>
@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <div class="title">
+    <div class="title" tabindex="130">
         <i class="dropdown icon"></i>
         How do I process a journal?
     </div>
@@ -149,7 +149,7 @@
         </div>
     </div>
 
-    <div class="title">
+    <div class="title" tabindex="140">
         <i class="dropdown icon"></i>
         How do I process a transfer?
     </div>
@@ -208,14 +208,15 @@
 <h2 class="ui header">Troubleshooting</h2>
 
 <div class="ui styled fluid accordion">
-    <div class="title">
+    <div class="title" tabindex="150">
         <i class="dropdown icon"></i>
         Why am I seeing an unauthorised message?
     </div>
     <div class="content">
         <p class="transition hidden">You don't have permission to access that section of Income Management. If you believe you should have access please ask your system administrator.</p>
     </div>
-    <div class="title">
+
+    <div class="title" tabindex="160">
         <i class="dropdown icon"></i>
         Why can't I find a transaction?
     </div>
@@ -227,5 +228,12 @@
 <script>
     // todo: move to bundle
     $('.ui.accordion')
-        .accordion();
+        .accordion({ on: 'click' });
+
+    $('.title').keyup(function (e) {
+        if (!(e.keyCode == 16 || e.keyCode == 9)) {
+            document.activeElement.click();
+        }
+    });
+
 </script>
