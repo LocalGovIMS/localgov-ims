@@ -70,7 +70,7 @@
             </div>
 
             <div class="inline field">
-                <label>must</label>
+                <label for="ImportProcessingRuleOperatorId">must</label>
                 <div class="ui search selection dropdown fields-dropdown">
                     @Html.HiddenFor(x => x.ImportProcessingRuleOperatorId)
                     <i class="dropdown icon"></i>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="inline field">
-                <label>value</label>
+                <label for="Value">value</label>
                 @Html.EditorFor(m => m.Value)
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.Value)
