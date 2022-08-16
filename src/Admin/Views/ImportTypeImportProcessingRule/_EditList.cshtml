@@ -3,21 +3,36 @@
 @if (Model.Items != null && Model.Items.Any())
 {
     <table class="ui celled table striped teal">
-        @foreach (var item in Model.Items)
-        {
+        <thead>
             <tr>
-                <td>
-                    @item.ImportProcessingRule.Name
-                </td>
-                <td>
-                    @item.ImportProcessingRule.Description
-                </td>
-                <td style="width:20%;">
-                    @Html.ActionLink("Edit", "Edit", "ImportTypeImportProcessingRule", new { id = item.Id }, new { @class = "ui button" })
-                    @Html.ActionLink("Delete", "Delete", "ImportTypeImportProcessingRule", new { id = item.Id, ImportTypeId = item.ImportTypeId }, new { @class = "ui button delete-import-type-import-processing-rule" })
-                </td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.ImportProcessingRule.Name
+                    </td>
+                    <td>
+                        @item.ImportProcessingRule.Description
+                    </td>
+                    <td style="width:20%;">
+                        @Html.ActionLink("Edit", "Edit", "ImportTypeImportProcessingRule", new { id = item.Id }, new { @class = "ui button" })
+                        @Html.ActionLink("Delete", "Delete", "ImportTypeImportProcessingRule", new { id = item.Id, ImportTypeId = item.ImportTypeId }, new { @class = "ui button delete-import-type-import-processing-rule" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else
