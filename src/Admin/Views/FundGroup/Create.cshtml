@@ -53,7 +53,7 @@
                             @Html.HiddenFor(x => funds[i].Id)
                             @Html.HiddenFor(x => funds[i].Text)
                             @Html.CheckBoxFor(x => funds[i].IsChecked)
-                            @Html.DisplayFor(x => funds[i].Text)
+                            @Html.Label(funds[i].Text, new { @for= "funds_" + i + "__IsChecked" })
                         </td>
                     </tr>
                 }
@@ -62,7 +62,7 @@
             {
                 <tr>
                     <td>
-                        No available funds!
+                        No available funds
                     </td>
                 </tr>
             }
