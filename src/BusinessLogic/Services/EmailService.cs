@@ -96,5 +96,21 @@ namespace BusinessLogic.Services
                 return new Result(e.Message);
             }
         }
+
+        public IResult SendNewUserRegistrationEmail(string newUserEmailAddress)
+        {
+            try
+            {
+                var email = _dependencies.EmailFactory.CreateNewUserRegistrationEmail(newUserEmailAddress);
+
+                _smtpClient.Send(email.Email);
+
+                return new Result();
+            }
+            catch (Exception e)
+            {
+                return new Result(e.Message);
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace BusinessLogic.Interfaces.Smtp
         IEmail CreateEReturnDeletedEmail(string eReturnNumber, string deletedBy);
         IEmail SendDuplicateTransactionEmail(List<ProcessedTransaction> transactions);
         IEmail SendPasswordResetEmail(IdentityMessage message);
+        IEmail CreateNewUserRegistrationEmail(string newUserEmailAddress);
     }
 }

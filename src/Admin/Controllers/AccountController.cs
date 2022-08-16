@@ -17,14 +17,18 @@ namespace Admin.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
 
         public AccountController()
         {
         }
 
-        public AccountController(IUserService userService)
+        public AccountController(
+            IUserService userService,
+            IEmailService emailService)
         {
             _userService = userService;
+            _emailService = emailService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -154,9 +158,20 @@ namespace Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = new PaymentsUser { UserName = model.Email, Email = model.Email };
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
+                    var userAuthorisationDetails = _userService.GetUser(model.Email);
+                    if (userAuthorisationDetails == null)
+                    {
+                        // We only want to be notified of new users that we haven't already setup a user account for
+                        _emailService.SendNewUserRegistrationEmail(model.Email);
+
+                        return RedirectToAction("RegistrationConfirmation");
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -172,6 +187,14 @@ namespace Admin.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegistrationConfirmation()
+        {
+            return View();
         }
 
         //

@@ -12,5 +12,6 @@ namespace BusinessLogic.Interfaces.Services
         IResult SendEReturnDeletedEmail(string eReturnNumber, string deletedBy);
         IResult SendDuplicateTransactionEmail(List<ProcessedTransaction> transactions);
         IResult SendPasswordResetEmail(IdentityMessage message);
+        IResult SendNewUserRegistrationEmail(string newUserEmailAddress);
     }
 }
