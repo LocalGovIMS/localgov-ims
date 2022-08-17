@@ -20,7 +20,6 @@ namespace DataAccess.Repositories
         public Import Get(int id)
         {
             var item = IncomeDbContext.Imports
-                .Include(x => x.Rows)
                 .Include(x => x.EventLogs)
                 .Include(x => x.ImportType)
                 .Include(x => x.StatusHistories)
@@ -37,7 +36,6 @@ namespace DataAccess.Repositories
         public List<Import> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.Imports
-                .Include(x => x.Rows)
                 .Include(x => x.EventLogs)
                 .Include(x => x.ImportType)
                 .Include(x => x.StatusHistories)
