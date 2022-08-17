@@ -7,11 +7,11 @@
         <div class="ui form">
             <div class="three fields">
                 <div class="field">
-                    <label>User name</label>
+                    @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName, new { size = 50, placeholder = "Enter username" })
                 </div>
                 <div class="field">
-                    <label>Display name</label>
+                    @Html.LabelFor(m => m.DisplayName)
                     @Html.TextBoxFor(m => m.DisplayName, new { size = 50, placeholder = "Enter display name" })
                 </div>
                 <div class="field">

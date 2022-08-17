@@ -53,22 +53,22 @@
     </div>
 
     <div class="ui vertical segment">
-        <h3>User roles</h3>
+        <h2>User roles</h2>
         @Html.Action("_ListForUser", "UserRole", new { id = Model.UserId })
     </div>
 
     <div class="ui vertical segment">
-        <h3>User fund groups</h3>
+        <h2>User fund groups</h2>
         @Html.Action("_ListForUser", "UserFundGroup", new { id = Model.UserId })
     </div>
 
     <div class="ui vertical segment">
-        <h3>User templates</h3>
+        <h2>User templates</h2>
         @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
     </div>
 
     <div class="ui vertical segment">
-        <h3>User methods of payment</h3>
+        <h2>User methods of payment</h2>
         @Html.Action("_ListForUser", "UserMethodOfPayment", new { id = Model.UserId })
     </div>
 
