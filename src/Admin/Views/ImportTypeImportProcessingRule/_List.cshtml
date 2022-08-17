@@ -3,17 +3,29 @@
 @if (Model.Items != null && Model.Items.Any())
 {
     <table class="ui celled table striped teal">
-        @foreach (var item in Model.Items)
-        {
+        <thead>
             <tr>
-                <td>
-                    @item.ImportProcessingRule.Name
-                </td>
-                <td>
-                    @item.ImportProcessingRule.Description
-                </td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.ImportProcessingRule.Name
+                    </td>
+                    <td>
+                        @item.ImportProcessingRule.Description
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else

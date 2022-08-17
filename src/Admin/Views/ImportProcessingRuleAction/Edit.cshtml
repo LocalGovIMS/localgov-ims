@@ -24,7 +24,7 @@
         <div class="fields">
 
             <div class="inline field">
-                <label>Set</label>
+                <label for="ImportProcessingRuleFieldId">Set field</label>
                 <div class="ui search selection dropdown fields-dropdown">
                     @Html.HiddenFor(x => x.ImportProcessingRuleFieldId, new { size = 4 })
                     <i class="dropdown icon"></i>
@@ -46,7 +46,7 @@
             </div>
 
             <div class="inline field">
-                <label>to</label>
+                <label for="Value">to value</label>
                 @Html.EditorFor(m => m.Value)
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.Value)

@@ -3,21 +3,36 @@
 @if (Model.Items != null && Model.Items.Any())
 {
     <table class="ui celled table striped teal">
-        @foreach (var item in Model.Items)
-        {
+        <thead>
             <tr>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @item.Value
-                </td>
-                <td style="width:20%;">
-                    @Html.ActionLink("Edit", "Edit", "FundMetadata", new { id = item.Id }, new { @class = "ui button" })
-                    @Html.ActionLink("Delete", "Delete", "FundMetadata", new { id = item.Id, mopCode = item.ParentCode }, new { @class = "ui button delete-action" })
-                </td>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Value
+                </th>
+                <th>
+
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                    <td style="width:20%;">
+                        @Html.ActionLink("Edit", "Edit", "FundMetadata", new { id = item.Id }, new { @class = "ui button" })
+                        @Html.ActionLink("Delete", "Delete", "FundMetadata", new { id = item.Id, mopCode = item.ParentCode }, new { @class = "ui button delete-action" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else

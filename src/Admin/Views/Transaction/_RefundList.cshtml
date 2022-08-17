@@ -35,7 +35,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @if (Model.Transaction.ProcessedRefunds != null && Model.Transaction.ProcessedRefunds.Any())
                 {
                     foreach (var transaction in Model.Transaction.ProcessedRefunds)
@@ -98,8 +97,6 @@
                         </tr>
                     }
                 }
-
-
             </tbody>
         </table>
     }

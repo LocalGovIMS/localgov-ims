@@ -7,7 +7,7 @@
         <div class="ui form">
             <div class="four fields">
                 <div class="field">
-                    <label>Fund type</label>
+                    @Html.LabelFor(m => m.FundCode)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Message</label>
+                    @Html.LabelFor(m => m.Message)
                     @Html.TextBoxFor(m => m.Message, new { size = 50, placeholder = "Enter message" })
                 </div>
                 <div class="field">

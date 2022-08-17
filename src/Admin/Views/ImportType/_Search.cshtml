@@ -7,15 +7,15 @@
         <div class="ui form">
             <div class="four fields">
                 <div class="field">
-                    <label>Data type</label>
+                    @Html.LabelFor(m => m.DataType)
                     @Html.EnumDropDownListFor(m => m.DataType)
                 </div>
                 <div class="field">
-                    <label>Name</label>
+                    @Html.LabelFor(m => m.Name)
                     @Html.TextBoxFor(m => m.Name, new { size = 50, placeholder = "Enter name" })
                 </div>
                 <div class="field">
-                    <label>External reference</label>
+                    @Html.LabelFor(m => m.ExternalReference)
                     @Html.TextBoxFor(m => m.ExternalReference, new { size = 50, placeholder = "Enter external reference" })
                 </div>
                 <div class="field">

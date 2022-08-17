@@ -49,29 +49,29 @@
         </div>
 
         <div class="ui vertical segment">
-            <h3 style="padding-bottom:10px;">
+            <h2 style="padding-bottom:10px;">
                 Rules
                 @Html.ActionLink("Add a rule", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Id }, new { @class = "ui blue button right floated" })
-            </h3>
+            </h2>
             @Html.Action("_EditListForImportProcessingRule", "ImportProcessingRuleCondition", new { id = Model.Id })
         </div>
 
         <div class="ui vertical segment">
-            <h3 style="padding-bottom:10px;">
+            <h2 style="padding-bottom:10px;">
                 Actions
                 @Html.ActionLink("Add an action", "Create", "ImportProcessingRuleAction", new { importProcessingRuleId = Model.Id }, new { @class = "ui blue button right floated" })
-            </h3>
+            </h2>
             @Html.Action("_EditListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
         </div>
 
         <div class="ui vertical segment">
-            <h3 style="padding-bottom:10px;">
+            <h2 style="padding-bottom:10px;">
                 Transaction import types
                 @if (Model.ImportTypesAreAvailableToAdd)
                 {
                     @Html.ActionLink("Add a import type", "Create", "ImportProcessingRuleImportType", new { id = Model.Id }, new { @class = "ui blue button right floated" })
                 }
-            </h3>
+            </h2>
             @Html.Action("_EditList", "ImportProcessingRuleImportType", new { id = Model.Id })
         </div>
 

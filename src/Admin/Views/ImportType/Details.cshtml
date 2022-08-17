@@ -42,13 +42,13 @@
 
     <div class="four wide field">
         @Html.LabelFor(m => m.IsReversible)
-        @Html.DisplayFor(m => m.IsReversible)
+        @Model.IsReversible.ToYesNoString()
     </div>
 
     <div class="ui vertical segment">
-        <h3>
+        <h2>
             Import processing rules
-        </h3>
+        </h2>
         @Html.Action("_List", "ImportTypeImportProcessingRule", new { id = Model.Id })
     </div>
 

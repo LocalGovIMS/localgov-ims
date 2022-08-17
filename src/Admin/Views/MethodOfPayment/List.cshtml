@@ -39,31 +39,33 @@
                 </th>
             </tr>
         </thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.MaximumAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.MinimumAmount)
-                </td>
-                <td>
-                    @Html.Label(item.IsDisabled ? "Disabled" : "Active")
-                </td>
-                <td>
-                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })  
-                    
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
-                </td>
-            </tr>
-        }
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.MaximumAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.MinimumAmount)
+                    </td>
+                    <td>
+                        @Html.Label(item.IsDisabled ? "Disabled" : "Active")
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 
 }

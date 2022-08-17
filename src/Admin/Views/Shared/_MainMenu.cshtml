@@ -48,8 +48,4 @@
         }
         <a id="menu__help" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")"><i class="help icon"></i> Help</a>
     </div>
-    <div class="version">
-        Build date<br/>
-        <span>@File.GetCreationTime(ViewContext.Controller.GetType().Assembly.Location)</span>
-    </div>
 </div>

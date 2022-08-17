@@ -5,7 +5,7 @@
 
 @section Header {
     <h1 class="ui header">
-        @Model.DisplayName
+        @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName )
         @Html.ActionLink("Edit", "Edit", new { id = Model.FundCode }, new { @class = "ui blue button right floated" })
         <div class="sub header">
             Fund details
@@ -68,9 +68,9 @@
     </div>
 
     <div class="ui vertical segment">
-        <h3>
+        <h2>
             Metadata
-        </h3>
+        </h2>
         @Html.Action("_ListForFund", "FundMetadata", new { id = Model.FundCode })
     </div>
 

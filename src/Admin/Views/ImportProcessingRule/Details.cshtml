@@ -36,23 +36,23 @@
     </div>
 
     <div class="ui vertical segment">
-        <h3>
+        <h2>
             Conditions
-        </h3>
+        </h2>
         @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleCondition", new { id = Model.Id })
     </div>
 
     <div class="ui vertical segment">
-        <h3>
+        <h2>
             Actions
-        </h3>
+        </h2>
         @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
     </div>
 
     <div class="ui vertical segment">
-        <h3>
+        <h2>
             Import types
-        </h3>
+        </h2>
         @Html.Action("_List", "ImportProcessingRuleImportType", new { id = Model.Id })
     </div>
 

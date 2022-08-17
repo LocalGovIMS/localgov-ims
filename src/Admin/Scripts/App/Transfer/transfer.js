@@ -55,6 +55,7 @@ $(document).ready(function () {
 
     addTransaction = function (transactionRow, transactionArray, validator, messageContainerSelector) {
 
+        console.log(messageContainerSelector);
 
         var text = $(messageContainerSelector);
         var message = validator();
@@ -76,6 +77,9 @@ $(document).ready(function () {
                 datatype: "JSON",
                 contentType: "application/json; charset=utf-8",
                 success: function (returnData) {
+
+                    console.log(returnData);
+
                     if (returnData.ok) {
                         paymentsAdmin.services.accountHolder.lookup(transactionRow,
                             function () {
@@ -94,23 +98,23 @@ $(document).ready(function () {
                                 $('#TransferItem_Amount').val("");
                                 $('#TransferItem_Narrative').val("");
 
-                                $(messageContainerSelector).hide();
+                                clearError();
                             });
                     }
                     else {
                         if (returnData.message.length > 0) {
-                            showSubmitError(returnData.message);
+                            showError(returnData.message, messageContainerSelector);
                         }
                         else {
-                            showSubmitError('An unknown error occured whilst saving the transfer');
+                            showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                         }
                     }
                 },
                 failure: function () {
-                    showSubmitError('An unknown error occured whilst saving the transfer');
+                    showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                 },
                 error: function () {
-                    showSubmitError('An unknown error occured whilst saving the transfer');
+                    showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                 }
 
             });
@@ -214,8 +218,11 @@ $(document).ready(function () {
         });
 
     function clearError() {
-        $(".transfer-error").empty();
-        $(".transfer-error").hide();
+        $(".source-message-text").empty();
+        $(".source-message").hide();
+
+        $(".transfer-message-text").empty();
+        $(".transfer-message").hide();
     }
 
     function clearForm() {
@@ -224,8 +231,7 @@ $(document).ready(function () {
         $('#TransferItem_AccountReference').val('');
         $('#TransferItem_Amount').val('');
 
-        //var text = $('.transfer-message-text');
-        //text.empty();
+        $('.source-message').hide();
         $('.transfer-message').hide();
 
         renderUI();
@@ -348,6 +354,25 @@ $(document).ready(function () {
         text.append(html.join(''));
 
         $('.transfer-message').show();
+        $("#transfer-dialog").modal('refresh');
+    }
+
+    function showError(message, selector) {
+
+        console.log(selector + '-text');
+
+        var text = $(selector + '-text');
+
+        var html = [];
+
+        html.push('<ul>');
+        html.push('<li>' + message + '</li>');
+        html.push('</ul>');
+
+        text.empty();
+        text.append(html.join(''));
+
+        $(selector).show();
         $("#transfer-dialog").modal('refresh');
     }
 

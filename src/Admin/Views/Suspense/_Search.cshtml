@@ -9,7 +9,7 @@
             <div class="six fields">
 
                 <div class="field">
-                    <label>Start date</label>
+                    @Html.LabelFor(m => m.TransactionDateFrom)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.TransactionDateFrom, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="field">
-                    <label>End date</label>
+                    @Html.LabelFor(m => m.TransactionDateTo)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.TransactionDateTo, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
@@ -25,17 +25,17 @@
                 </div>
 
                 <div class="field">
-                    <label>Amount</label>
+                    @Html.LabelFor(m => m.Amount)
                     @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Enter amount", @class = "monetary-amount" })
                 </div>
 
                 <div class="field">
-                    <label>Narrative</label>
+                    @Html.LabelFor(m => m.Narrative)
                     @Html.TextBoxFor(m => m.Narrative, new { size = 10, placeholder = "Enter narrative" })
                 </div>
 
                 <div class="field">
-                    <label>Show all</label>
+                    @Html.LabelFor(m => m.ShowAll)
                     <div class="ui toggle checkbox">
                         @Html.CheckBoxFor(m => m.ShowAll)
                     </div>
@@ -57,5 +57,4 @@
     $('.ui.dropdown').dropdown({
         match: 'both'
     });
-
 </script>

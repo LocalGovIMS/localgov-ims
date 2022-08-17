@@ -36,28 +36,38 @@
 <div class="ui vertical segment grid stackable">
     <div class="four wide column">
         <div class="ui vertical segment">
-            <strong>Date</strong><br><span class="ui-date"> @Model.CreatedAt.ToShortDateString()</span>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment"><strong>Amount</strong><br><span class="ui-total-amount">&pound;@Html.ToCurrency(Model.Amount)</span></div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            <strong>Narrative</strong><br><span class="ui-vat-amount">@Model.Narrative</span>
+            @Html.LabelFor(m => m.CreatedAt)
+            <br />
+            <span class="ui-date"> @Model.CreatedAt.ToShortDateString()</span>
         </div>
     </div>
     <div class="four wide column">
         <div class="ui vertical segment">
-            <strong>Notes</strong><br><pre class="ui-vat-amount">@Model.Notes</pre>
+            @Html.LabelFor(m => m.Amount)
+            <br />
+            <span class="ui-total-amount">&pound;@Html.ToCurrency(Model.Amount)</span>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Narrative)
+            <br />
+            <span class="ui-vat-amount">@Model.Narrative</span>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Notes)
+            <br />
+            <pre class="ui-vat-amount">@Model.Notes</pre>
         </div>
     </div>
 </div>
 
 <div class="ui vertical segment">
-    <h3>
+    <h2>
         Notes
-    </h3>
+    </h2>
     @Html.Action("_ListForSuspense", "SuspenseNote", new { id = Model.SuspenseId })
 </div>
 

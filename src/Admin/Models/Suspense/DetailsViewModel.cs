@@ -8,10 +8,10 @@ namespace Admin.Models.Suspense
     {
         public int? SuspenseId { get; set; }
 
-        [DisplayName("Created Date")]
+        [DisplayName("Created date")]
         public DateTime CreatedAt { get; set; }
 
-        [DisplayName("Account Number")]
+        [DisplayName("Account number")]
         public string AccountNumber { get; set; }
 
         [DisplayName("Narrative")]
@@ -22,10 +22,10 @@ namespace Admin.Models.Suspense
 
         public decimal? Amount { get; set; }
 
-        [DisplayName("Amount Remaining")]
+        [DisplayName("Amount remaining")]
         public decimal? AmountRemaining { get; set; }
 
-        [DisplayName("Amount Allocated")]
+        [DisplayName("Amount allocated")]
         public decimal? AmountAllocated { get; set; }
 
         public List<BusinessLogic.Entities.SuspenseProcessedTransaction> AllocatedPayments { get; set; }

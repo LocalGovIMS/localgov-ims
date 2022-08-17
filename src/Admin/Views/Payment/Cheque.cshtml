@@ -17,13 +17,12 @@
 {
     <div class="ui form">
         <div class="ten wide column">
-            <h4 class="ui header">Cheque details</h4>
+            <h2 class="ui header">Cheque details</h2>
 
             <div class="four wide field">
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m => m.Name, new { maxlength = "100" })
             </div>
-
             <div class="four wide field">
                 @Html.LabelFor(m => m.ChequeNumber)
                 @Html.TextBoxFor(m => m.ChequeNumber, new { maxlength = "50" })
@@ -32,21 +31,15 @@
                 @Html.ValidationMessageFor(m => m.ChequeNumber)
             </div>
             <div class="two wide field">
-
                 @Html.LabelFor(m => m.SortCode)
                 @Html.TextBoxFor(m => m.SortCode, new { maxlength = "8" })
-
-
             </div>
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.SortCode)
             </div>
             <div class="four wide field">
-
                 @Html.LabelFor(m => m.BankAccountNo)
                 @Html.TextBoxFor(m => m.BankAccountNo, new { maxlength = "50" })
-
-
             </div>
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.BankAccountNo)
