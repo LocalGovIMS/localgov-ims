@@ -2,6 +2,7 @@
 using BusinessLogic.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace BusinessLogic.Models
@@ -31,17 +32,21 @@ namespace BusinessLogic.Models
             }
         }
 
+        [Display(Name = "PSP reference")]
         public string PspReference
         {
             get { return TransactionLines.FirstOrDefault().PspReference; }
         }
+
         public string ParentPspReference { get; private set; }
 
+        [Display(Name = "Entry date")]
         public DateTime? EntryDate
         {
             get { return TransactionLines.FirstOrDefault().EntryDate; }
         }
 
+        [Display(Name = "Last updated date")]
         public DateTime? LastUpdatedDate
         {
             get
@@ -50,39 +55,49 @@ namespace BusinessLogic.Models
             }
         }
 
+        [Display(Name = "Authorisation code")]
         public string AuthorisationCode
         {
             get { return TransactionLines.FirstOrDefault().AuthorisationCode; }
         }
 
+        [Display(Name = "Method of payment")]
         public string MopName
         {
             get { return string.Format("{0} ({1})", TransactionLines.FirstOrDefault().Mop.MopName, TransactionLines.FirstOrDefault().Mop.MopCode); }
         }
 
+        [Display(Name = "Premises number")]
         public string PremiseNumber
         {
             get { return TransactionLines.FirstOrDefault().CardHolderPremiseNumber; }
         }
 
+        [Display(Name = "Street")]
         public string Street
         {
             get { return TransactionLines.FirstOrDefault().CardHolderStreet; }
         }
+
+        [Display(Name = "Town")]
         public string Town
         {
             get { return TransactionLines.FirstOrDefault().CardHolderTown; }
         }
+
+        [Display(Name = "Postcode")]
         public string PostCode
         {
             get { return TransactionLines.FirstOrDefault().CardHolderPostCode; }
         }
 
+        [Display(Name = "Internal reference")]
         public string InternalReference
         {
             get { return TransactionLines.FirstOrDefault().InternalReference; }
         }
 
+        [Display(Name = "Payee name")]
         public string PayeeName
         {
             get
@@ -92,12 +107,14 @@ namespace BusinessLogic.Models
                     : TransactionLines.FirstOrDefault().CardHolderName;
             }
         }
-
+        
+        [Display(Name = "Created by")]
         public string CreatedBy
         {
             get { return User != null ? User.DisplayName : "System / Customer"; }
         }
 
+        [Display(Name = "User")]
         public Entities.User User
         {
             get { return TransactionLines.FirstOrDefault().User; }
@@ -118,6 +135,7 @@ namespace BusinessLogic.Models
             get { return TransactionLines.Sum(x => x.Amount).ToTwoDecimalPlaces(); }
         }
 
+        [Display(Name = "Total VAT")]
         public decimal TotalVat
         {
             get { return TransactionLines.Sum(x => x.VatAmount).ToTwoDecimalPlaces(); }
@@ -206,6 +224,7 @@ namespace BusinessLogic.Models
                 .All(x => x.TransferRollbackGuid == null);
         }
 
+        [Display(Name = "Address")]
         public string FormattedAddress
         {
             get

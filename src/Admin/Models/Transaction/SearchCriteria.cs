@@ -27,11 +27,13 @@ namespace Admin.Models.Transaction
 
         public string Narrative { get; set; }
 
+        [Display(Name = "Internal reference")]
         public string InternalReference { get; set; }
 
         [Display(Name = "Receipt number")]
         public string ReceiptNumber { get; set; }
 
+        [Display(Name = "Start date")]
         public DateTime? StartDate { get; set; }
 
         public int? ImportId { get; set; }

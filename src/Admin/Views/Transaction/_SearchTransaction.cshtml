@@ -13,7 +13,7 @@
             </div>
             <div class="six fields">
                 <div class="field">
-                    <label>Fund type</label>
+                    @Html.LabelFor(m => m.FundCode)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>MOP code</label>
+                    @Html.LabelFor(m => m.MopCode)
                     <div class="ui fluid search selection dropdown">
                         @Html.HiddenFor(x => x.MopCode, new { size = 4 })
                         <i class="dropdown icon"></i>
@@ -51,51 +51,51 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>Start date</label>
+                    @Html.LabelFor(m => m.StartDate)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
                     </div>
                 </div>
                 <div class="field">
-                    <label>End date</label>
+                    @Html.LabelFor(m => m.EndDate)
                     <div class="ui input left icon" style="min-width: 160px;">
                         <i class="calendar icon"></i>
                         @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
                     </div>
                 </div>
                 <div class="field">
-                    <label>Card prefix</label>
+                    @Html.LabelFor(m => m.CardPrefix)
                     @Html.TextBoxFor(m => m.CardPrefix, new { size = 6, placeholder = "Enter card prefix" })
                 </div>
                 <div class="field">
-                    <label>Card suffix</label>
+                    @Html.LabelFor(m => m.CardSuffix)
                     @Html.TextBoxFor(m => m.CardSuffix, new { size = 4, placeholder = "Enter card suffix" })
                 </div>
             </div>
             <div class="six fields">
                 <div class="field">
-                    <label>Account reference</label>
+                    @Html.LabelFor(m => m.AccountReference)
                     @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Enter account reference" })
                     @Html.CheckBoxFor(m => m.WildSearchAccountReference)
                 </div>
                 <div class="field">
-                    <label>Receipt number</label>
+                    @Html.LabelFor(m => m.ReceiptNumber)
                     @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Enter receipt number" })
                 </div>
                 <div class="field">
-                    <label>Amount</label>
+                    @Html.LabelFor(m => m.Amount)
                     @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Enter amount", @class = "monetary-amount" })
                 </div>
 
                 @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.SystemAdmin))
                 {
                     <div class="field">
-                        <label>Internal reference</label>
+                        @Html.LabelFor(m => m.InternalReference)
                         @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Enter internal reference" })
                     </div>
                     <div class="field">
-                        <label>User</label>
+                        @Html.LabelFor(m => m.UserId)
                         <div class="ui fluid search selection dropdown">
 
                             @Html.HiddenFor(x => x.UserId, new { size = 4 })
@@ -115,10 +115,9 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label>Narrative</label>
+                        @Html.LabelFor(m => m.Narrative)
                         @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Enter narrative" })
                     </div>
-
                 }
                 <div class="field">
                     <label>&nbsp;</label>

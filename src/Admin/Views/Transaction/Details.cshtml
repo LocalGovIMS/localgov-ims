@@ -8,7 +8,6 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-
 @section Header {
     <h1 class="ui header">
         <span class="ui-psp-reference">@Model.Transaction.PspReference</span>
@@ -19,7 +18,7 @@
 
         @if (Model.Transaction.SuspenseId.HasValue)
         {
-            @Html.ActionLink("View suspense", "Details","Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
+            @Html.ActionLink("View suspense", "Details", "Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
         }
 
         @if (User.IsInRole(Role.TransactionRefund) && Model.IsRefund == false)
@@ -51,59 +50,76 @@
 
 @Html.HiddenFor(m => m.Transaction.PspReference)
 
-    <div class="ui grid stackable">
-        <div class="three wide column">
-            <div class="ui vertical segment">
-                <strong>Date and time</strong><br><span class="ui-date">@Model.Transaction.EntryDate</span>
-            </div>
-            <div class="ui vertical segment">
-                <strong>Created by</strong><br>@Model.Transaction.CreatedBy
-            </div>
+<div class="ui grid stackable">
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.EntryDate)
+            <br />
+            <span class="ui-date">@Model.Transaction.EntryDate</span>
         </div>
-
-        <div class="three wide column">
-            <div class="ui vertical segment"><strong>Total</strong><br><span class="ui-total-amount">&pound;@Model.Transaction.Total</span></div>
-            <div class="ui vertical segment">
-                <strong>Auth code</strong><br><span class="ui-auth-code">@(Model.Transaction.AuthorisationCode ?? "Unknown")</span>
-            </div>
-        </div>
-        <div class="three wide column">
-            <div class="ui vertical segment">
-                <strong>VAT</strong><br><span class="ui-vat-amount">&pound;@Model.Transaction.TotalVat</span>
-            </div>
-            <div class="ui vertical segment">
-                <strong>Method of payment</strong><br><span class="ui-mop">@Model.Transaction.MopName</span>
-            </div>
-        </div>
-        <div class="three wide column">
-            <div class="ui vertical segment">
-                <strong>PSP reference</strong><br><span class="ui-psp-ref">@Model.Transaction.PspReference</span>
-            </div>
-            <div class="ui vertical segment">
-                <strong>Internal reference</strong><br><span class="ui-internal-ref">@Model.Transaction.InternalReference</span>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui vertical segment">
-                <strong>Address</strong><br />
-                @if(!string.IsNullOrEmpty(Model.Transaction.PayeeName))
-                {
-                    @Model.Transaction.PayeeName<br />
-                }
-                @if (Model.Transaction.Town.IsNullOrWhiteSpace())
-                {
-                    <div>No address specified</div>
-                }
-                else
-                {
-                    @Model.Transaction.PremiseNumber<br />
-                    @Model.Transaction.Street<br />
-                    @Model.Transaction.Town<br />
-                    @Model.Transaction.PostCode<br />
-                }
-            </div>
+        <div class="ui vertical segment">
+            <strong>Created by</strong><br>@Model.Transaction.CreatedBy
         </div>
     </div>
+
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.Total)
+            <br />
+            <span class="ui-total-amount">&pound;@Model.Transaction.Total</span>
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.AuthorisationCode)
+            <br />
+            <span class="ui-auth-code">@(Model.Transaction.AuthorisationCode ?? "Unknown")</span>
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.TotalVat)
+            <br />
+            <span class="ui-vat-amount">&pound;@Model.Transaction.TotalVat</span>
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.MopName)
+            <br />
+            <span class="ui-mop">@Model.Transaction.MopName</span>
+        </div>
+    </div>
+    <div class="three wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.PspReference)
+            <br />
+            <span class="ui-psp-ref">@Model.Transaction.PspReference</span>
+        </div>
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.InternalReference)
+            <br />
+            <span class="ui-internal-ref">@Model.Transaction.InternalReference</span>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui vertical segment">
+            @Html.LabelFor(m => m.Transaction.FormattedAddress)
+            <br />
+            @if (!string.IsNullOrEmpty(Model.Transaction.PayeeName))
+            {
+                @Model.Transaction.PayeeName<br />
+            }
+            @if (Model.Transaction.Town.IsNullOrWhiteSpace())
+            {
+                <div>No address specified</div>
+            }
+            else
+            {
+                @Model.Transaction.PremiseNumber<br />
+                @Model.Transaction.Street<br />
+                @Model.Transaction.Town<br />
+                @Model.Transaction.PostCode<br />
+            }
+        </div>
+    </div>
+</div>
 
 
 @{ Html.RenderPartial("_PaymentsList", Model); }
