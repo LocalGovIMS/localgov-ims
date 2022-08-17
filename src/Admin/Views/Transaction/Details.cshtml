@@ -130,8 +130,6 @@
 
 @{ Html.RenderPartial("_EmailReceipt", new Admin.Models.Transaction.EmailReceiptViewModel()); }
 
-@Html.Action("_Activity")
-
 @if (User.IsInRole(Role.TransactionRefund) && Model.Transaction.RefundEnabled)
 {
     Html.RenderPartial("_Refund", Model.Refund);
