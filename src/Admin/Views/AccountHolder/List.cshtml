@@ -47,21 +47,16 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var item in Model.Items)
             {
                 <tr>
                     <td>@item.AccountReference</td>
                     <td>@item.FullNameAndTitle()</td>
                     <td>@item.Address()</td>
-                    <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0)
-                                                        {
-                                                            @Html.Raw("td--negative")
-                                                        }">
+                    <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0) { @Html.Raw("td--negative") }">
                         @Html.ToCurrency(item.CurrentBalance)
                     </td>
                     <td style="text-align: center;">
-
                         @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "ui button" })
                         @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "ui button" })
 

@@ -5,16 +5,21 @@
     @Html.HiddenFor(x => x.IsAPaymentSearch)
 
     <div class="ui segment">
+
         <div class="ui form">
+
             <div class="four fields">
+
                 <div class="field">
                     @Html.LabelFor(m => m.AccountReference)
                     @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Enter account reference" })
                 </div>
+
                 <div class="field">
                     @Html.LabelFor(m => m.Surname)
                     @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Enter surname" })
                 </div>
+
                 <div class="field">
                     @if (!Model.IsAPaymentSearch)
                     {
@@ -41,27 +46,36 @@
                         @Html.HiddenFor(x => x.FundCode, new { size = 4 })
                     }
                 </div>
+
             </div>
+
             <div class="four fields">
+
                 <div class="field">
                     @Html.LabelFor(m => m.PostCode)
                     @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Enter postcode" })
                 </div>
+
                 <div class="field">
                     @Html.LabelFor(m => m.HouseNumberName)
                     @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "Enter house number/name" })
                 </div>
+
                 <div class="field">
                     @Html.LabelFor(m => m.Street)
                     @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Enter street" })
                 </div>
+
                 <div class="field">
                     <label>&nbsp;</label>
                     <button class="ui icon blue button" tabindex="0" type="submit">
                         <i class="search icon"></i> Search
                     </button>
                 </div>
+
             </div>
+
         </div>
+
     </div>
 }
