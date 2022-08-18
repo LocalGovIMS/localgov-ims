@@ -65,13 +65,13 @@
         <table class="ui table">
             <thead>
                 <tr>
-                    <th>Reference</th>
-                    <th>Reference override</th>
-                    <th>Description</th>
-                    <th>Description override</th>
-                    <th>VAT code</th>
-                    <th>VAT override</th>
-                    <th></th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Reference override</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Description override</th>
+                    <th scope="col">VAT code</th>
+                    <th scope="col">VAT override</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="template-rows">
@@ -108,11 +108,11 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th><input id="reference" class="trim-pasted-data" /></th>
-                    <th><input id="reference_override" type="checkbox" value="true" /></th>
-                    <th><input id="description" /></th>
-                    <th><input id="description_override" type="checkbox" value="true" /></th>
-                    <th>
+                    <th scope="col"><input id="reference" class="trim-pasted-data" /></th>
+                    <th scope="col"><input id="reference_override" type="checkbox" value="true" /></th>
+                    <th scope="col"><input id="description" /></th>
+                    <th scope="col"><input id="description_override" type="checkbox" value="true" /></th>
+                    <th scope="col">
                         <select id="vat_code">
                             @foreach (var vatCode in Model.VatList)
                             {
@@ -120,8 +120,8 @@
                             }
                         </select>
                     </th>
-                    <th><input id="vat_override" type="checkbox" value="true" /></th>
-                    <th><a id="add-row" class="ui button blue">Add</a></th>
+                    <th scope="col"><input id="vat_override" type="checkbox" value="true" /></th>
+                    <th scope="col"><a id="add-row" class="ui button blue">Add</a></th>
                 </tr>
             </tfoot>
         </table>

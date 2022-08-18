@@ -41,13 +41,13 @@
         <table class="ui celled table striped table-fixed">
             <thead>
                 <tr>
-                    <th style="width: 5%"></th>
-                    <th style="width: 15%">Date and time</th>
-                    <th>Narrative</th>
-                    <th>Latest note</th>
-                    <th>Account number</th>
-                    <th style="width: 10%">Amount (£)</th>
-                    <th style="width: 20%"></th>
+                    <th scope="col" style="width: 5%"></th>
+                    <th scope="col" style="width: 15%">Date and time</th>
+                    <th scope="col">Narrative</th>
+                    <th scope="col">Latest note</th>
+                    <th scope="col">Account number</th>
+                    <th scope="col" style="width: 10%">Amount (£)</th>
+                    <th scope="col" style="width: 20%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -100,7 +100,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="7">
+                    <td colspan="7">
                         <div class="ui pagination menu">
                             @if (Model.Pages > 1)
                             {
@@ -116,7 +116,7 @@
                                 }))
                             }
                         </div>
-                    </th>
+                    </td>
                 </tr>
             </tfoot>
         </table>

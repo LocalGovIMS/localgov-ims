@@ -19,22 +19,22 @@
     <table class="ui celled table striped">
         <thead>
             <tr>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().Code)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().Name)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().MaximumAmount)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().MinimumAmount)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().IsDisabled)
                 </th>
-                <th>
+                <th scope="col">
 
                 </th>
             </tr>

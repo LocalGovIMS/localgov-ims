@@ -27,15 +27,15 @@
             @using (Html.BeginForm("", "", FormMethod.Post))
             {
                 <div class="flex__container">
-
                     <div class="panel panel--details">
                         <fieldset>
                             @if (Model.BasketItems.Count <= 0)
                             {
                                 <legend>Payment details</legend>
                                 <div class="message message--info message--flash">
-                                    Please tell us what you’d like to pay, your payment reference and how much you’re paying.<br /><br />
-
+                                    Please tell us what you’d like to pay, your payment reference and how much you’re paying.
+                                    <br />
+                                    <br />
                                     You can pay by:
                                     <ul>
                                         <li>
@@ -78,7 +78,6 @@
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.PaymentType)
                             </div>
-
                             <div>
                                 @Html.LabelFor(m => m.PaymentReference)
                                 <div class="form__element form__element--paymentmessage">
@@ -89,7 +88,6 @@
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.PaymentReference)
                             </div>
-                            
                             <div>
                                 @Html.LabelFor(m => m.Amount)
                                 @Html.TextBoxFor(m => m.Amount, new { @type = "number", @step = "0.01" })
@@ -97,11 +95,9 @@
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.Amount)
                             </div>
-
                             <div>
                                 <button value="Card" name="action" type="submit" class="button button--default button--primary">Pay with Card (add to basket)</button>
                             </div>
-
                             <div class="form__element--error" style="margin-top:1em">
                                 @Html.ValidationMessageFor(m => m.BasketItems)
                             </div>
@@ -123,7 +119,7 @@
                                                         @Html.Raw("panel--basket--empty")
                                                     }">
                         <h1 class="panel__heading">Basket </h1>
-                        
+
                         <div>
                             @if (Model.BasketItems.Count <= 0)
                             {
@@ -134,10 +130,10 @@
                                 <table style="margin-bottom: 1rem;">
                                     <thead>
                                         <tr>
-                                            <td>Description</td>
-                                            <td>Reference</td>
-                                            <td>Amount</td>
-                                            <td>Remove</td>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Remove</th>
                                         </tr>
                                     </thead>
                                     @for (int i = 0; i < Model.BasketItems.Count; i++)
@@ -164,7 +160,6 @@
                     </div>
                     <div class="panel panel--payment-info">
                         <div class="well">
-
                             <p>You can pay using the following methods:</p>
                             <div class="paymentlogos">
                                 <img src="~/Content/images/logo-mastercard.png" alt="Mastercard" />
