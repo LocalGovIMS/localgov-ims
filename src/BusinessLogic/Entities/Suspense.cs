@@ -18,7 +18,6 @@ namespace BusinessLogic.Entities
 
         public DateTime CreatedAt { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string AccountNumber { get; set; }
 
