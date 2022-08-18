@@ -23,7 +23,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
             Strategy.Process(GetArgs(CreatableTransaction()));
 
             // Assert
-            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>()), Times.Once);
+            MockRuleEngine.Verify(x => x.Process(It.IsAny<ProcessedTransaction>(), It.IsAny<int>()), Times.Once);
         }
 
         [TestMethod]

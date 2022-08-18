@@ -13,6 +13,7 @@ namespace BusinessLogic.ImportProcessing
         private readonly IRuleEngine _ruleEngine;
         private readonly ITransactionService _transactionService;
         private readonly ISuspenseService _suspenseService;
+        private ImportProcessingStrategyArgs _args;
         private decimal _totalAmountImported = 0;
         private List<string> _errors = new List<string>();
 
@@ -30,6 +31,8 @@ namespace BusinessLogic.ImportProcessing
         {
             try
             {
+                _args = args;
+
                 foreach (var transaction in args.ImportRows.Select(x => x.ToProcessedTransaction()))
                 {
                     transaction.ImportId = args.Import.Id;
@@ -57,7 +60,7 @@ namespace BusinessLogic.ImportProcessing
                 // change the amount, and we're only interested in the original value.
                 _totalAmountImported += transaction.Amount ?? 0;
 
-                _ruleEngine.Process(transaction);
+                _ruleEngine.Process(transaction, _args.Import.ImportTypeId);
 
                 if (transaction.IsCreatable())
                 {

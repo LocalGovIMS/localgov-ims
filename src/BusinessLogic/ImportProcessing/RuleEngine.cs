@@ -79,6 +79,12 @@ namespace BusinessLogic.ImportProcessing
 
         private void CheckTheRule(ImportProcessingRule rule)
         {
+            if(rule.Conditions.IsNullOrEmpty())
+            {
+                _processRuleActions = true;
+                return;
+            }
+
             foreach (var group in rule.Groups())
             {
                 InitialiseGroupProcessing();
