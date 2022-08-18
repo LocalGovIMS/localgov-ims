@@ -5,18 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panels">    
+<div class="panels">
     <div class="grid grid--gutters">
         <div class="container container--page">
-        @using (Html.BeginForm("Address", "Payment", FormMethod.Post))
-        {
-            <div class="flex__container">
-
+            @using (Html.BeginForm("Address", "Payment", FormMethod.Post))
+            {
+                <div class="flex__container">
                     <div class="panel panel--details">
                         <fieldset>
-                        
-                            <legend>Billing Address</legend>                        
-                        
+                            <legend>Billing Address</legend>
                             <div>
                                 @Html.LabelFor(m => m.PayeeName)
                                 @Html.TextBoxFor(m => m.PayeeName, new { maxlength = "50", size = "20" })
@@ -24,17 +21,16 @@
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.PayeeName)
                             </div>
-
                             <div>
                                 @Html.LabelFor(m => m.HouseNumberOrName)
-                                @Html.TextBoxFor(m => m.HouseNumberOrName, new { maxlength = "50", size="20" })
+                                @Html.TextBoxFor(m => m.HouseNumberOrName, new { maxlength = "50", size = "20" })
                             </div>
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.HouseNumberOrName)
                             </div>
                             <div>
                                 @Html.LabelFor(m => m.Street)
-                                @Html.TextBoxFor(m => m.Street, new { maxlength = "50", size="40" })
+                                @Html.TextBoxFor(m => m.Street, new { maxlength = "50", size = "40" })
                             </div>
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.Street)
@@ -53,16 +49,15 @@
                             <div class="form__element--error">
                                 @Html.ValidationMessageFor(m => m.PostCode)
                             </div>
-
                             <div>
                                 <button id="Cancel" value="Cancel" name="action" type="submit" class="button button--default">Cancel</button>
                                 <button id="Next" value="SaveAddress" name="action" type="submit" class="button button--default button--primary">Next</button>
                             </div>
                         </fieldset>
                     </div>
-                <div style="clear: both;"></div>
-            </div>
-        }
+                    <div style="clear: both;"></div>
+                </div>
+            }
         </div>
     </div>
 </div>

@@ -30,19 +30,19 @@
             <table id="source-table" class="ui celled table striped">
                 <thead>
                 <tr>
-                    <th style="width: 8%;">Fund type</th>
-                    <th>Account</th>
-                    <th>Name</th>
-                    <th>Outstanding balance (£)</th>
-                    <th style="width: 7%">VAT code</th>
-                    <th style="width: 25%;">Amount (£)</th>
-                    <th style="width: 1%;"></th>
+                    <th scope="col" style="width: 8%;">Fund type</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Outstanding balance (£)</th>
+                    <th scope="col" style="width: 7%">VAT code</th>
+                    <th scope="col" style="width: 25%;">Amount (£)</th>
+                    <th scope="col" style="width: 1%;"></th>
                 </tr>
                 </thead>
                 <tbody id="source-table-body"></tbody>
                 <tfoot>
                 <tr>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui fluid search selection dropdown sourceItem">
                                 @Html.Hidden("SourceItem_FundCode")
@@ -61,7 +61,7 @@
                         </div>
                     </th>
 
-                    <th colspan="3">
+                    <th scope="col" colspan="3">
                         <div class="ui fluid field">
                             <div class="ui input">
                                 @Html.TextBoxFor(m => m.SourceItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui fluid search selection dropdown sourceVat">
                                 @Html.Hidden("SourceItem_VatCode")
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui labeled input">
                                 <label class="ui label" for="amount">£</label>
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <button class="ui right blue button add-source">
                                 Add
@@ -130,20 +130,20 @@
             <table id="transfer-table" class="ui celled table striped">
                 <thead>
                 <tr>
-                    <th style="width: 8%;">Fund type</th>
-                    <th>Account</th>
-                    <th>Name</th>
-                    <th>Outstanding balance (£)</th>
-                    <th style="width: 7%">VAT code</th>
-                    <th style="width: 25%;">Amount (£)</th>
-                    <th style="width: 10%;">Narrative</th>
-                    <th style="width: 1%;"></th>
+                    <th scope="col" style="width: 8%;">Fund type</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Outstanding balance (£)</th>
+                    <th scope="col" style="width: 7%">VAT code</th>
+                    <th scope="col" style="width: 25%;">Amount (£)</th>
+                    <th scope="col" style="width: 10%;">Narrative</th>
+                    <th scope="col" style="width: 1%;"></th>
                 </tr>
                 </thead>
                 <tbody id="transfer-table-body"></tbody>
                 <tfoot>
                 <tr>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui fluid search selection dropdown targetItem">
                                 @Html.Hidden("TransferItem_FundCode")
@@ -162,7 +162,7 @@
                         </div>
                     </th>
 
-                    <th colspan="3">
+                    <th scope="col" colspan="3">
                         <div class="ui fluid field">
                             <div class="ui input">
                                 @Html.TextBoxFor(m => m.TransferItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui fluid search selection dropdown targetVat">
                                 @Html.Hidden("TransferItem_VatCode")
@@ -187,7 +187,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui labeled input">
                                 <label class="ui label" for="amount">£</label>
@@ -196,7 +196,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <div class="ui input">
                                 @Html.TextBoxFor(m => m.TransferItem.Narrative, null, new { @placeholder = "Enter narrative" })
@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th scope="col">
                         <div class="ui fluid field">
                             <button class="ui right blue button add-transfer">
                                 Add

@@ -19,19 +19,19 @@
     <table class="ui celled table striped">
         <thead>
             <tr>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().StartDate)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().EndDate)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().Severity)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.LabelFor(m => Model.FirstOrDefault().Message)
                 </th>
-                <th>
+                <th scope="col">
 
                 </th>
             </tr>

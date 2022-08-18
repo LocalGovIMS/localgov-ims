@@ -22,16 +22,16 @@
     <table class="ui celled table striped">
         <thead>
             <tr>
-                <th>
+                <th scope="col">
                     Name
                 </th>
-                <th>
+                <th scope="col">
                     Description
                 </th>
-                <th>
+                <th scope="col">
                     Status
                 </th>
-                <th>
+                <th scope="col">
 
                 </th>
             </tr>
@@ -58,7 +58,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="4">
+                <td colspan="4">
                     <div class="ui pagination menu">
                         @if (Model.Pages > 1)
                         {
@@ -69,7 +69,7 @@
                             }))
                         }
                     </div>
-                </th>
+                </td>
             </tr>
         </tfoot>
     </table>

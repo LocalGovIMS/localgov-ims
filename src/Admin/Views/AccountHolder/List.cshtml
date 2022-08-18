@@ -39,11 +39,11 @@
     <table class="ui celled table striped">
         <thead>
             <tr>
-                <th>Account reference</th>
-                <th>Account name</th>
-                <th>Address</th>
-                <th>Balance (£)</th>
-                <th style="width: 280px;"></th>
+                <th scope="col">Account reference</th>
+                <th scope="col">Account name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Balance (£)</th>
+                <th scope="col" style="width: 280px;"></th>
             </tr>
         </thead>
         <tbody>
@@ -70,7 +70,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="5">
+                <td colspan="5">
                     <div class="ui pagination menu">
                         @if (Model.Pages > 1)
                         {
@@ -86,7 +86,7 @@
                             }))
                         }
                     </div>
-                </th>
+                </td>
             </tr>
         </tfoot>
     </table>
