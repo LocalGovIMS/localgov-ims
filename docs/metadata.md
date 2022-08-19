@@ -15,7 +15,7 @@ There are two types of metadata:
 This is metadata that either the Admin or Payment Portal applications need to function effectively.
 Examples are: BackgroundColour - allowing the user to specify a background colour where a Method of Payment is displayed.
 
-Various entities have system metadata:
+Various entities have system metadata, such as:
 
 * [Fund Code Metadata](metadata-fund.md)
 * [Method of Payment Metadata](metadata-method-of-payment.md)
@@ -26,5 +26,3 @@ Various entities have system metadata:
 This is metadata which can be created by the user to attach new meaning and capabilities.
 At present there is no UI for this.
 An example of this would be adding a new key/value to describe the export functionality of a Fund - such as the SAP general ledger code it relates to.
-
-

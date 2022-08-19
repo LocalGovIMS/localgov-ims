@@ -6,6 +6,8 @@
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
+|Environment|Demo|This value is used when seeding the database. 'Demo' will run scripts to create some demo data - transactions, suspense records etc. 'UITest' will create data that is reference in UI tests - allowing us to set the system into a known state ready for the tests to run|
+|AutomaticMigrationsEnabled|TRUE/FALSE|A value indicating if automatic migrations can be used when migrating the database|
 |PortalPaymentsURL||Your Payment Portal URL here|
 |FinishURL||The URL you want to see at the end of the payment process|
 |ApplicationEventLogSourceName|PaymentPortal|TODO: Is this even needed?|
@@ -59,14 +61,22 @@
 |SeedData.DemoData.FundMetadata.Value1|TRUE||
 |SeedData.DemoData.FundMetadata.FundCode1|F1||
 
+## UI Test Seed Data
+
+|Key|Example Value|Description|
+|---|-------------|-----------|
+|SeedData.UITestData.PaymentIntegration.Name|Integration||
+|SeedData.UITestData.PaymentIntegration.BaseUri|https://www.your-payment-integration.com/Payment||
+
 # Admin
 
 ## General Settings
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
-|ReferenceSalt||The salt used when creating transaction references|
 |FileImport.UploadDirectory|~/Uploads/|The directory that any imports files which are uploaded will be saved to|
+|User.Default.ExpiryDays|90|The default number of days after which an account will expire (become locked)|
+|ReferenceSalt||The salt used when creating transaction references|
 
 ## Email
 
@@ -79,6 +89,7 @@
 |EReturnDeletion.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of notifications for when an eReturn is deleted|
 |Notification.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of any system notifications|
 |DuplicateTransaction.Email.Recipient|webmaster@your-organisation.com|The email address for the recipient of the duplicate transaction alert email|
+|NewUserRegistration.Email.Recipient|webmaster@your-organisation.com|When new users register theie what they are authorised to see needs configuring through the Admin portal. An email is sent to this address to notify someone that an account has registered so that authorisation settings can be configured|
 
 ## Organisation
 
@@ -106,4 +117,5 @@
 
 |Key|Example Value|Description|
 |---|-------------|-----------|
+|Import.BatchSize|30000|For bulk imports the insert/update statements will be batched for performance reasons|
 |ReferenceSalt||The salt used when creating transaction references|
