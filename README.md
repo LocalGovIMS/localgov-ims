@@ -21,8 +21,7 @@ An API allowing other services to integrate with the IMS
 [Database Initialisation & Seed Data](/docs/database-initialisation-and-seed-data.md)  
 [Database Migrations](/docs/database-migrations.md)  
 [Setting Up a User Account](/docs/setting-up-a-user-account.md)  
-[Adding a Payment Integration](/docsadding-a-payment-integration.md)  
-[System Settings](/docs/system-settings.md)
+[Adding a Payment Integration](/docs/adding-a-payment-integration.md)  
 
 # Build and Run
 
