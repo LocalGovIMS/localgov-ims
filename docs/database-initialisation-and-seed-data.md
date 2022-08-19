@@ -50,9 +50,6 @@ The following environments are supported:
 
 * Demo
 * UI Test
-* Development 
-* Test
-* Live
 
 # Seed Data
 

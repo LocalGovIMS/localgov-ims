@@ -45,8 +45,3 @@ Read about how to [package your API client](packaging-your-api-client.md) as a N
 # Previous Steps
 
 Read about how to [create an OpenAPI specification](generating-an-openapi-spec-for-the-localgov-ims-api.md) for your API
-
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-

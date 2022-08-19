@@ -1,17 +1,5 @@
 # Introduction 
-This is an open, collaborative local authority project funded by the Ministry of Housing, Communities and Local Government (MCHLG) Local Digital Fund, and led by Barnsley Metropolitan Borough Council (BMBC) & Partners.
-
-# Solution Architecture
-
-The solution is made up of a mixture of web applications and microservices.
-This repository contains the two main UIs for running the Income Management System (IMS), and an API providing access to core IMS data.
-
-# Projects
-
-The code in this repository targets .NET Framework 4.8.
-It follows a clean architecture style: the business logic sits at the core and the dependencies from the data access and web projects flow into it.
-
-There are three web applications:
+This solution contains the core applications for running the Income Management System (IMS):
 
 1. PaymentPortal (MVC)
 2. Admin (MVC)
@@ -62,7 +50,3 @@ Before running any tests:
 To run UI tests you will need to open two instances of Visual Studio.
 The first will be used to run the application you are wanting to test. 
 The second will be used to run the tests via the Test Explorer window.
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
