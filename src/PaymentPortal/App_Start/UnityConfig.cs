@@ -48,11 +48,9 @@ namespace PaymentPortal
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
 
-            container
-                .RegisterType<IUnitOfWork, UnitOfWork>()
-                .RegisterType<ISecurityContext, SecurityContext>()
-                .RegisterType<IncomeDbContext>(new PerRequestLifetimeManager())
-                .RegisterType<IUserStore, UserStore>(new PerRequestLifetimeManager());
+            container.RegisterType<ISecurityContext, SecurityContext>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserStore, UserStore>(new PerRequestLifetimeManager());
+            container.RegisterType<IncomeDbContext>(new PerRequestLifetimeManager());
 
             RegisterControllerDependencies(container);
 

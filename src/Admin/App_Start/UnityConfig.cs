@@ -64,10 +64,9 @@ namespace Admin
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager())
-                .RegisterType<ISecurityContext, SecurityContext>(new PerRequestLifetimeManager())
-                .RegisterType<IUserStore, UserStore>(new PerRequestLifetimeManager())
-                .RegisterType<IncomeDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<ISecurityContext, SecurityContext>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserStore, UserStore>(new PerRequestLifetimeManager());
+            container.RegisterType<IncomeDbContext>(new PerRequestLifetimeManager());
 
             container.RegisterType<ApplicationUserManager>(new PerRequestLifetimeManager());
             container.RegisterType<ApplicationSignInManager>(new PerRequestLifetimeManager());
