@@ -61,7 +61,7 @@ namespace DataAccess
                 ;
 
             container
-                .RegisterType<IUnitOfWork, UnitOfWork>(new PerThreadLifetimeManager());
+                .RegisterType<IUnitOfWork, UnitOfWork>();
         }
     }
 }

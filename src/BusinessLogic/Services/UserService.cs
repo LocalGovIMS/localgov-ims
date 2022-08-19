@@ -231,7 +231,7 @@ namespace BusinessLogic.Services
                 }
                 else
                 {
-                    Logger.DebugFormat("Checking to se eif user is disabled: {0}", userName);
+                    Logger.DebugFormat("Checking to see if user is disabled: {0}", userName);
 
                     var result = UnitOfWork.Users.IsDisabled(userName);
 
