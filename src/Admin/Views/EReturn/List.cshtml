@@ -15,17 +15,18 @@
             <a class="ui button green right floated approve" id="approve">
                 <i class="add outline icon"></i> Approve <span class="approve-button-value"></span>
             </a>
-            <a class="ui button right floated clear-selected" id="clear">
-                <i class="undo icon"></i> Reset
-            </a>
         }
         @if (User.IsInRole(Role.EReturns))
         {
             @Html.ActionLink("Create eReturn", "Create", new { }, new { @class = "ui blue button right floated", @id = "CreateButton" })
-            <div class="sub header">
-                Cash, cheque and PDQ returns
-            </div>
+
         }
+        <a href="@Url.Action("Search", "EReturn")" class="ui button right floated" id="reset">
+            <i class="undo icon"></i> Reset
+        </a>
+        <div class="sub header">
+            Cash, cheque and PDQ returns
+        </div>
     </h1>
 }
 
