@@ -19,6 +19,8 @@ namespace DataAccess.Repositories
         {
             var item = IncomeDbContext.FileImports
                 .Include(x => x.Rows)
+                .Include(x => x.Import)
+                .Include(x => x.Import.Rows)
                 .AsQueryable()
                 .Where(x => x.ImportId == importId)
                 .ApplyFilters(Filters)

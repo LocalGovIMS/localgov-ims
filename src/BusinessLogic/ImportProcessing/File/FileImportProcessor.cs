@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
+using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
@@ -20,10 +21,12 @@ namespace BusinessLogic.ImportProcessing
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRuleEngine _ruleEngine;
         private readonly ITransactionService _transactionService;
+        private readonly ISuspenseService _suspenseService;
         private readonly IProcessedTransactionModelBuilder _processedTransactionModelBuilder;
 
         private FileImport _fileImport;
         private decimal _totalAmountImported = 0M;
+        private int _rowNumber = 0;
         private List<string> _errors = new List<string>();
 
         public FileImportProcessor(ILog log
@@ -31,6 +34,7 @@ namespace BusinessLogic.ImportProcessing
             , IUnitOfWork unitOfWork
             , IRuleEngine ruleEngine
             , ITransactionService transactionService
+            , ISuspenseService suspenseService
             , IProcessedTransactionModelBuilder processedTransactionModelBuilder)
         {
             _log = log ?? throw new ArgumentNullException("log");
@@ -38,60 +42,83 @@ namespace BusinessLogic.ImportProcessing
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException("unitOfWork");
             _ruleEngine = ruleEngine ?? throw new ArgumentNullException("ruleEngine");
             _transactionService = transactionService ?? throw new ArgumentNullException("transactionService");
+            _suspenseService = suspenseService ?? throw new ArgumentNullException("suspenseService");
             _processedTransactionModelBuilder = processedTransactionModelBuilder ?? throw new ArgumentNullException("processedTransactionModelBuilder");
         }
 
         public IResult Process(FileImportProcessorArgs args)
         {
-            LoadImport(args.ImportId);
+            try
+            {
+                LoadImport(args.FileImportId);
 
-            ProcessImport();
+                Start();
 
-            Save();
+                ProcessImport();
 
-            return CreateResult();
+                Save();
+
+                return CreateResult();
+            }
+            catch (Exception ex)
+            {
+                _errors.Add(ex.Message);
+
+                _log.Error(null, ex);
+
+                return new Result("The import is not valid");
+            }
+            finally
+            {
+                _fileImport.Import.Complete(_errors, _securityContext.UserId);
+                _unitOfWork.Complete(_securityContext.UserId);
+            }
         }
 
-        private void LoadImport(int importId)
+        private void LoadImport(int fileImportId)
         {
-            _fileImport = _unitOfWork.FileImports.GetByImportId(importId);
+            _fileImport = _unitOfWork.FileImports.GetByImportId(fileImportId);
+        }
+
+        private void Start()
+        {
+            _fileImport.Import.Start(_securityContext.UserId);
+            _unitOfWork.Complete(_securityContext.UserId);
         }
 
         private void ProcessImport()
         {
-            var rowNumber = 1;
+            _rowNumber = 1;
 
-            foreach (var row in _fileImport.Rows)
+            foreach (var row in _fileImport.Import.Rows)
             {
                 if (_errors.Count >= 10) return;
 
-                ProcessRow(row, rowNumber);
+                ProcessRow(row);
 
-                rowNumber++;
+                _rowNumber++;
             }
         }
-        private void ProcessRow(FileImportRow row, int rowNumber)
+        private void ProcessRow(ImportRow row)
         {
             try
             {
-                var processedTransactionToCreate = BuildProcessedTransaction(row.RowData);
+                var transaction = BuildProcessedTransaction(row.Data);
 
-                _ruleEngine.Process(processedTransactionToCreate);
+                _ruleEngine.Process(transaction);
 
-                var result = _transactionService.CreateProcessedTransaction(processedTransactionToCreate, false);
-
-                if (result.Success)
+                if (transaction.IsCreatable())
                 {
-                    _totalAmountImported += processedTransactionToCreate.Amount ?? 0;
+                    CreateTransaction(transaction);
                 }
                 else
                 {
-                    _errors.Add($"Row {rowNumber} - {result.Error}");
+                    CreateSuspense(transaction);
                 }
             }
             catch (Exception ex)
             {
-                _errors.Add($"Row {rowNumber} - {ex.Message}");
+                _errors.Add($"Row {_rowNumber} - {ex.Message}");
             }
         }
 
@@ -102,10 +129,39 @@ namespace BusinessLogic.ImportProcessing
             return processedTransactionModel.GetProcessedTransaction();
         }
 
+        private void CreateTransaction(ProcessedTransaction transaction)
+        {
+            var result = _transactionService.CreateProcessedTransaction(new Services.CreateProcessedTransactionArgs()
+            {
+                GenerateNewReference = true,
+                SaveChanges = false,
+                ProcessedTransaction = transaction
+            });
+
+            if (!result.Success)
+                _errors.Add($"Row {_rowNumber} - {result.Error}");
+        }
+
+        private void CreateSuspense(ProcessedTransaction transaction)
+        {
+            var result = _suspenseService.Create(new Services.CreateSuspenseArgs()
+            {
+                SaveChanges = false,
+                Suspense = transaction.ToSuspense()
+            });
+
+            if (!result.Success)
+                _errors.Add($"Row {_rowNumber} - {result.Error}");
+        }
+
         private void Save()
         {
-            if (_errors.Any()) return;
-
+            if (_errors.Any())
+            {
+                _unitOfWork.ResetChanges();
+                return;
+            }
+            
             _unitOfWork.Complete(_securityContext.UserId);
         }
 
@@ -119,7 +175,7 @@ namespace BusinessLogic.ImportProcessing
             result.SetData(new ProcessResult()
             {
                 FileImport = _fileImport,
-                NumberOfRowsImported = _fileImport.Rows.Count
+                NumberOfRowsImported = _errors.Any() ? 0 : _fileImport.Import.NumberOfRows
             });
 
             return result;
@@ -128,6 +184,6 @@ namespace BusinessLogic.ImportProcessing
 
     public class FileImportProcessorArgs
     {
-        public int ImportId { get; set; }
+        public int FileImportId { get; set; }
     }
 }

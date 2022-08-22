@@ -61,37 +61,5 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
             // Assert
             MockProcessedTransactionModelBuilder.Verify(x => x.BuildFromCsvRow(It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(10));
         }
-
-        [TestMethod]
-        public void UnitOfWork_will_save_changes_if_no_errors_occur()
-        {
-            // Arrange
-            Initialise();
-            SetupFileImportProcessor();
-            SetupFileImportProcessorArgs();
-
-            // Act
-            var result = ImportProcessor.Process(Args);
-
-            // Assert
-            MockUnitOfWork.Verify(x => x.Complete(It.IsAny<int>()), Times.Once);
-        }
-
-        [TestMethod]
-        public void UnitOfWork_will_not_save_changes_if_no_errors_occur()
-        {
-            // Arrange
-            Initialise();
-            SetupFileImportProcessor();
-            SetupFileImportProcessorArgs();
-            SetupBadImportData();
-
-            // Act
-            var result = ImportProcessor.Process(Args);
-
-            // Assert
-            MockUnitOfWork.Verify(x => x.Complete(It.IsAny<int>()), Times.Never);
-        }
-
     }
 }
