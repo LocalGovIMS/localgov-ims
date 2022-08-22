@@ -11,6 +11,7 @@ namespace BusinessLogic.Entities
             ApprovedEReturns = new HashSet<EReturn>();
             CreatedEReturns = new HashSet<EReturn>();
             SubmittedEReturns = new HashSet<EReturn>();
+            EReturnNotes = new HashSet<EReturnNote>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
             SuspenseNotes = new HashSet<SuspenseNote>();
@@ -54,6 +55,8 @@ namespace BusinessLogic.Entities
         public virtual ICollection<EReturn> CreatedEReturns { get; set; }
 
         public virtual ICollection<EReturn> SubmittedEReturns { get; set; }
+
+        public virtual ICollection<EReturnNote> EReturnNotes { get; set; }
 
         public virtual ICollection<PendingTransaction> PendingTransactions { get; set; }
 

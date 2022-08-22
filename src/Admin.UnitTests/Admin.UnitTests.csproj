@@ -183,6 +183,7 @@
     <Compile Include="Classes\Commands\ImportProcessingRuleImportType\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturnNote\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\CreateCsvFileForExportCommandTests.cs" />
     <Compile Include="Classes\Commands\UserMethodOfPayment\EditCommandTests.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnNote\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilderTests.cs" />
@@ -455,10 +457,14 @@
     <Compile Include="Controllers\PaymentIntegration\Edit\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\Edit\Post.cs" />
     <Compile Include="Controllers\PaymentIntegration\List\Get.cs" />
+    <Compile Include="Controllers\EReturnNote\ConstructorTests.cs" />
+    <Compile Include="Controllers\EReturnNote\Create\Get.cs" />
+    <Compile Include="Controllers\EReturnNote\Create\Post.cs" />
+    <Compile Include="Controllers\EReturnNote\ListForEReturn\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\ConstructorTests.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
-    <Compile Include="Controllers\SuspenseNote\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\SuspenseNote\ListForSuspense\Get.cs" />
     <Compile Include="Controllers\Import\Search\Get.cs" />
     <Compile Include="Controllers\Import\_List\Get.cs" />
     <Compile Include="Controllers\Transaction\Origin\Get.cs" />

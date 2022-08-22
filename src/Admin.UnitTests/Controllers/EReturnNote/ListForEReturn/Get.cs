@@ -13,7 +13,7 @@ using ControllerDependencies = Admin.Controllers.SuspenseNoteControllerDependenc
 using EditViewModel = Admin.Models.SuspenseNote.EditViewModel;
 using ListViewModel = Admin.Models.SuspenseNote.ListViewModel;
 
-namespace Admin.UnitTests.Controllers.SuspenseNote.ListForImportProcessingRule
+namespace Admin.UnitTests.Controllers.SuspenseNote.ListForEReturn
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

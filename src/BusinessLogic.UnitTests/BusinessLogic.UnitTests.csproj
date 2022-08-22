@@ -279,6 +279,9 @@
     <Compile Include="Services\PaymentIntegration\GetAllTests.cs" />
     <Compile Include="Services\PaymentIntegration\GetTests.cs" />
     <Compile Include="Services\PaymentIntegration\UpdateTests.cs" />
+    <Compile Include="Services\EReturnNote\BaseTest.cs" />
+    <Compile Include="Services\EReturnNote\CreateTests.cs" />
+    <Compile Include="Services\EReturnNote\GetTests.cs" />
     <Compile Include="Services\SuspenseNote\BaseSuspenseNoteTest.cs" />
     <Compile Include="Services\SuspenseNote\CreateTests.cs" />
     <Compile Include="Services\SuspenseNote\GetTests.cs" />

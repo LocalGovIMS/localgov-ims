@@ -1,7 +1,5 @@
-﻿using BusinessLogic.Authentication.Identity;
-using BusinessLogic.Entities;
+﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Repositories;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BusinessLogic.Interfaces.Persistence
 {
@@ -16,6 +14,7 @@ namespace BusinessLogic.Interfaces.Persistence
         IEReturnChequeRepository EReturnCheques { get; }
         IEReturnStatusRepository EReturnStatuses { get; }
         IEReturnTypeRepository EReturnTypes { get; }
+        IRepository<EReturnNote> EReturnNotes { get; }
         IFundRepository Funds { get; }
         IFundMetadataRepository FundMetadatas { get; }
         IFundGroupRepository FundGroups { get; }

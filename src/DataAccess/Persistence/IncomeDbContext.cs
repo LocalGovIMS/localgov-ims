@@ -29,6 +29,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<EReturnCheque> EReturnCheques { get; set; }
         public virtual DbSet<EReturnStatus> EReturnStatus { get; set; }
         public virtual DbSet<EReturnType> EReturnTypes { get; set; }
+        public virtual DbSet<EReturnNote> EReturnNotes { get; set; }
         public virtual DbSet<FundGroup> FundGroups { get; set; }
         public virtual DbSet<FundGroupFund> FundGroupFunds { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
@@ -125,6 +126,11 @@ namespace DataAccess.Persistence
 
             modelBuilder.Entity<EReturn>()
                 .HasMany(e => e.EReturnCheques)
+                .WithRequired(e => e.EReturn)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<EReturn>()
+                .HasMany(e => e.Notes)
                 .WithRequired(e => e.EReturn)
                 .WillCascadeOnDelete(false);
 
@@ -267,6 +273,12 @@ namespace DataAccess.Persistence
                 .HasMany(e => e.SubmittedEReturns)
                 .WithOptional(e => e.SubmittedByUser)
                 .HasForeignKey(e => e.SubmittedByUserId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.EReturnNotes)
+                .WithRequired(e => e.CreatedByUser)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.ProcessedTransactions)

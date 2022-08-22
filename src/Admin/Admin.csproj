@@ -221,6 +221,7 @@
     <Compile Include="Classes\Commands\ImportTypeImportProcessingRule\EditCommand.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\CreateCommand.cs" />
     <Compile Include="Classes\Commands\PaymentIntegration\EditCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnNote\CreateCommand.cs" />
     <Compile Include="Classes\Commands\SuspenseNote\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\CreateCommand.cs" />
     <Compile Include="Classes\Commands\AccountHolder\EditCommand.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\AccountHolder\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Import\DetailsViewModelBuilder.cs" />
@@ -370,12 +372,14 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IFileImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportTypeImportProcessingRuleControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IPaymentIntegrationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IEReturnNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\FileImportControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IUserMethodOfPaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IFundMessageMetadataControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportTypeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\PaymentIntegrationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\EReturnNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SuspenseNoteControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\UserMethodOfPaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\FundMessageMetadataControllerDependencies.cs" />
@@ -477,6 +481,7 @@
     <Compile Include="Controllers\ImportTypeImportProcessingRuleController.cs" />
     <Compile Include="Controllers\PaymentIntegrationController.cs" />
     <Compile Include="Controllers\FileImportController.cs" />
+    <Compile Include="Controllers\EReturnNoteController.cs" />
     <Compile Include="Controllers\SuspenseNoteController.cs" />
     <Compile Include="Controllers\UserMethodOfPaymentController.cs" />
     <Compile Include="Controllers\FundMessageMetadataController.cs" />
@@ -568,6 +573,8 @@
     <Compile Include="Models\Import\ConfirmViewModel.cs" />
     <Compile Include="Models\PaymentIntegration\DetailsViewModel.cs" />
     <Compile Include="Models\PaymentIntegration\EditViewModel.cs" />
+    <Compile Include="Models\EReturnNote\EditViewModel.cs" />
+    <Compile Include="Models\EReturnNote\ListViewModel.cs" />
     <Compile Include="Models\SuspenseNote\EditViewModel.cs" />
     <Compile Include="Models\SuspenseNote\ListViewModel.cs" />
     <Compile Include="Models\ImportType\ListViewModel.cs" />
@@ -1741,6 +1748,9 @@
     <Content Include="Views\Import\_StatusHistoryList.cshtml" />
     <Content Include="Views\Import\_EventLogList.cshtml" />
     <Content Include="Views\Account\RegistrationConfirmation.cshtml" />
+    <Content Include="Views\EReturnNote\_List.cshtml" />
+    <Content Include="Views\EReturnNote\Create.cshtml" />
+    <Content Include="Views\EReturnNote\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

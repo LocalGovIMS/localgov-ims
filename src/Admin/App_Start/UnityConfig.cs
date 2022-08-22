@@ -117,6 +117,9 @@ namespace Admin
                 .RegisterType<IModelCommand<int>, Commands.EReturn.SubmitCommand>("EReturn.Command.Submit")
                 .RegisterType<IModelCommand<ViewModels.EReturn.ApproveViewModel>, Commands.EReturn.ApproveCommand>()
 
+                .RegisterType<IModelBuilder<ViewModels.EReturnNote.ListViewModel, int>, ViewModelBuilders.EReturnNote.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.EReturnNote.EditViewModel>, Commands.EReturnNote.CreateCommand>()
+
                 .RegisterType<IModelBuilder<ViewModels.Fund.DetailsViewModel, string>, ViewModelBuilders.Fund.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Fund.EditViewModel, string>, ViewModelBuilders.Fund.EditViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Fund.ListViewModel, ViewModels.Fund.SearchCriteria>, ViewModelBuilders.Fund.ListViewModelBuilder>()
@@ -336,6 +339,7 @@ namespace Admin
                 .RegisterType<IHomeControllerDependencies, HomeControllerDependencies>()
                 .RegisterType<IFundGroupControllerDependencies, FundGroupControllerDependencies>()
                 .RegisterType<IEReturnControllerDependencies, EReturnControllerDependencies>()
+                .RegisterType<IEReturnNoteControllerDependencies, EReturnNoteControllerDependencies>()
                 .RegisterType<IMethodOfPaymentControllerDependencies, MethodOfPaymentControllerDependencies>()
                 .RegisterType<IMethodOfPaymentMetadataControllerDependencies, MethodOfPaymentMetadataControllerDependencies>()
                 .RegisterType<IPaymentControllerDependencies, PaymentControllerDependencies>()

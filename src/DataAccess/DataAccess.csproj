@@ -202,6 +202,10 @@
     <Compile Include="Migrations\202208181438133_Made_Suspense_AccountNumber_field_nullable.designer.cs">
       <DependentUpon>202208181438133_Made_Suspense_AccountNumber_field_nullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208221420278_Added_EReturnNote_entity.cs" />
+    <Compile Include="Migrations\202208221420278_Added_EReturnNote_entity.designer.cs">
+      <DependentUpon>202208221420278_Added_EReturnNote_entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -338,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208181438133_Made_Suspense_AccountNumber_field_nullable.resx">
       <DependentUpon>202208181438133_Made_Suspense_AccountNumber_field_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208221420278_Added_EReturnNote_entity.resx">
+      <DependentUpon>202208221420278_Added_EReturnNote_entity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
