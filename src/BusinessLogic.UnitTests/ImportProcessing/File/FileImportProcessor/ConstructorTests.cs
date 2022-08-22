@@ -18,6 +18,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
 
             }
@@ -38,6 +39,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
             }
             catch (ArgumentNullException exception)
@@ -57,6 +59,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
 
             }
@@ -77,6 +80,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
             }
             catch (ArgumentNullException exception)
@@ -96,6 +100,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     null,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
 
             }
@@ -116,6 +121,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     null,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
             }
             catch (ArgumentNullException exception)
@@ -135,6 +141,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     null,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
 
             }
@@ -155,6 +162,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     null,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
             }
             catch (ArgumentNullException exception)
@@ -174,6 +182,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     null,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
 
             }
@@ -194,11 +203,53 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     null,
+                    MockSuspenseService.Object,
                     MockProcessedTransactionModelBuilder.Object);
             }
             catch (ArgumentNullException exception)
             {
                 exception.Message.Should().Be("Value cannot be null.\r\nParameter name: transactionService");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenSuspenseServiceIsNull()
+        {
+            try
+            {
+                var fileImportProcessor = new BusinessLogic.ImportProcessing.FileImportProcessor(
+                    MockLogger.Object,
+                    MockSecurityContext.Object,
+                    MockUnitOfWork.Object,
+                    MockRuleEngine.Object,
+                    MockTransactionService.Object,
+                    null,
+                    MockProcessedTransactionModelBuilder.Object);
+
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionMessageWhenSuspenseServiceIsNull()
+        {
+            try
+            {
+                var fileImportProcessor = new BusinessLogic.ImportProcessing.FileImportProcessor(
+                    MockLogger.Object,
+                    MockSecurityContext.Object,
+                    MockUnitOfWork.Object,
+                    MockRuleEngine.Object,
+                    MockTransactionService.Object,
+                    null,
+                    MockProcessedTransactionModelBuilder.Object);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: suspenseService");
             }
         }
 
@@ -213,6 +264,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     null);
 
             }
@@ -233,6 +285,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImportProcessor
                     MockUnitOfWork.Object,
                     MockRuleEngine.Object,
                     MockTransactionService.Object,
+                    MockSuspenseService.Object,
                     null);
             }
             catch (ArgumentNullException exception)

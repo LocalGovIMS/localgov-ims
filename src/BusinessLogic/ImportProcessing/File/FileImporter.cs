@@ -1,11 +1,13 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
+using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Models.Import;
 using log4net;
 using System;
+using System.Collections.Generic;
 using System.IO.Abstractions;
 
 namespace BusinessLogic.ImportProcessing
@@ -35,8 +37,6 @@ namespace BusinessLogic.ImportProcessing
         {
             CreateImport(args);
 
-            CreateImportRows(args);
-
             SaveImport();
 
             return CreateResult();
@@ -44,22 +44,30 @@ namespace BusinessLogic.ImportProcessing
 
         private void CreateImport(FileImporterArgs args)
         {
+            var rows = CreateImportRows(args);
+
             _fileImport = new FileImport()
             {
                 Import = new Import()
                 {
                     ImportTypeId = args.ImportTypeId,
-                    Notes = "TODO: Get from UI",
+                    Notes = string.Empty,
                     CreatedDate = DateTime.Now,
-                    CreatedByUserId = _securityContext.UserId
+                    CreatedByUserId = _securityContext.UserId,
+                    Rows = rows,
+                    NumberOfRows = rows.Count
                 },
                 OriginalFilename = args.Path, // TODO: Sort this out...
                 WorkingFilename = args.Path // TODO: Sort this out...
             };
+
+            _fileImport.Import.Initialise(_securityContext.UserId);
         }
 
-        private void CreateImportRows(FileImporterArgs args)
+        private List<ImportRow> CreateImportRows(FileImporterArgs args)
         {
+            var importRows = new List<ImportRow>();
+
             using (var sr = _fileSystem.File.OpenText(args.Path))
             {
                 string line;
@@ -70,12 +78,14 @@ namespace BusinessLogic.ImportProcessing
 
                     _rowCount++;
 
-                    _fileImport.Rows.Add(new FileImportRow
+                    importRows.Add(new ImportRow
                     {
-                        RowData = line
+                        Data = line
                     });
                 }
             }
+
+            return importRows;
         }
 
         private void SaveImport()

@@ -55,7 +55,7 @@ namespace BusinessLogic.Services
             {
                 return _fileImportProcessor.Process(new FileImportProcessorArgs()
                 {
-                    ImportId = importId,
+                    FileImportId = importId,
                 });
             }
             catch (Exception e)
