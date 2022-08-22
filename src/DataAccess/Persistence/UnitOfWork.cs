@@ -1,11 +1,9 @@
-﻿using BusinessLogic.Authentication.Identity;
-using BusinessLogic.Entities;
+﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Repositories;
 using BusinessLogic.Interfaces.Security;
 using DataAccess.Interfaces;
 using log4net;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -31,6 +29,7 @@ namespace DataAccess.Persistence
         public IEReturnChequeRepository EReturnCheques { get; private set; }
         public IEReturnStatusRepository EReturnStatuses { get; private set; }
         public IEReturnTypeRepository EReturnTypes { get; private set; }
+        public IRepository<EReturnNote> EReturnNotes { get; private set; }
         public IFundRepository Funds { get; private set; }
         public IFundMetadataRepository FundMetadatas { get; private set; }
         public IFundGroupRepository FundGroups { get; private set; }
@@ -80,6 +79,7 @@ namespace DataAccess.Persistence
             IEReturnChequeRepository eReturnChequesRepository,
             IEReturnStatusRepository eReturnStatusRepository,
             IEReturnTypeRepository eReturnTypeRepository,
+            IRepository<EReturnNote> eReturnNotesRepository,
             IFundRepository fundRepository,
             IFundMetadataRepository fundMetadataRepository,
             IFundGroupRepository fundGroupRepository,
@@ -130,6 +130,7 @@ namespace DataAccess.Persistence
             EReturnCheques = eReturnChequesRepository;
             EReturnStatuses = eReturnStatusRepository;
             EReturnTypes = eReturnTypeRepository;
+            EReturnNotes = eReturnNotesRepository;
             Funds = fundRepository;
             FundMetadatas = fundMetadataRepository;
             FundGroups = fundGroupRepository;

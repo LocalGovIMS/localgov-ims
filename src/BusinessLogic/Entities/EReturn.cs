@@ -12,6 +12,7 @@ namespace BusinessLogic.Entities
             EReturnCheques = new HashSet<EReturnCheque>();
             PendingTransactions = new HashSet<PendingTransaction>();
             ProcessedTransactions = new HashSet<ProcessedTransaction>();
+            Notes = new HashSet<EReturnNote>();
         }
 
         public int Id { get; set; }
@@ -59,5 +60,7 @@ namespace BusinessLogic.Entities
         public virtual ICollection<PendingTransaction> PendingTransactions { get; set; }
 
         public virtual ICollection<ProcessedTransaction> ProcessedTransactions { get; set; }
+
+        public virtual ICollection<EReturnNote> Notes { get; set; }
     }
 }

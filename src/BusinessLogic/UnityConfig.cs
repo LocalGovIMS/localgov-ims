@@ -30,6 +30,7 @@ namespace BusinessLogic
                 .RegisterType<IEReturnService, EReturnService>()
                 .RegisterType<IEReturnStatusService, EReturnStatusService>()
                 .RegisterType<IEReturnTypeService, EReturnTypeService>()
+                .RegisterType<IEReturnNoteService, EReturnNoteService>()
                 .RegisterType<IFundGroupService, FundGroupService>()
                 .RegisterType<IFundService, FundService>()
                 .RegisterType<IFundMetadataService, FundMetadataService>()

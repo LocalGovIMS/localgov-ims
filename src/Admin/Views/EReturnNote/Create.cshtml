@@ -1,0 +1,39 @@
+﻿@model Admin.Models.EReturnNote.EditViewModel
+@{
+    ViewBag.Title = "Create eReturn note";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create eReturn note
+        <div class="sub header">
+            eReturn note details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "EReturnNote", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.EReturnId)
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Note)
+            @Html.TextAreaFor(m => m.Note, new { @rows = 5 })
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Note)
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="ui primary button" />
+            @Html.ActionLink("Back", "Back", "EReturnNote", null, new { @class = "ui button" })
+        </div>
+
+    </div>
+}

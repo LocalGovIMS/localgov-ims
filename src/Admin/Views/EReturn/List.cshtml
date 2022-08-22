@@ -125,6 +125,7 @@
                         {
                             @Html.ActionLink("View", "Details", new { id = item.EReturn.Id }, new { @class = "ui button" })
                         }
+                        @Html.ActionLink("View notes", "List", "EReturnNote", new { id = item.EReturn.Id }, new { @class = "ui button" })
                     </td>
                 </tr>
             }
