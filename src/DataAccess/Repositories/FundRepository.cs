@@ -62,17 +62,25 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.FundName.Contains(criteria.FundName));
             }
 
-            if (criteria.PageSize == 0) criteria.PageSize = 20;
-            if (criteria.Page == 0) criteria.Page = 1;
+            if (criteria.IsDisabled.HasValue)
+            {
+                items = items.Where(x => x.Disabled == criteria.IsDisabled.Value);
+            }
 
             items = items.ApplyFilters(Filters);
 
             resultCount = items.Count();
 
-            items = items
-                .OrderBy(x => x.FundCode)
-                .Skip((criteria.Page - 1) * criteria.PageSize)
-                .Take(criteria.PageSize);
+            if (criteria.ApplyPaging)
+            {
+                if (criteria.PageSize == 0) criteria.PageSize = 20;
+                if (criteria.Page == 0) criteria.Page = 1;
+
+                items = items
+                    .OrderBy(x => x.FundCode)
+                    .Skip((criteria.Page - 1) * criteria.PageSize)
+                    .Take(criteria.PageSize);
+            }
 
             return items.ToList();
         }

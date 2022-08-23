@@ -156,6 +156,7 @@
     <Compile Include="Controllers\AccountHolders\AccountHoldersController.cs" />
     <Compile Include="Controllers\FundMetadata\FundMetadataController.cs" />
     <Compile Include="Controllers\FundMetadata\FundMetadataModel.cs" />
+    <Compile Include="Controllers\Funds\SearchCriteriaModel.cs" />
     <Compile Include="Controllers\MethodOfPayments\MethodOfPaymentModel.cs" />
     <Compile Include="Controllers\MethodOfPayments\MethodOfPaymentsController.cs" />
     <Compile Include="Controllers\Funds\FundsController.cs" />

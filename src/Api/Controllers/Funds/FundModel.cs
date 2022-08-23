@@ -1,4 +1,8 @@
-﻿namespace Api.Controllers.Funds
+﻿using Api.Controllers.FundMetadata;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Api.Controllers.Funds
 {
     public class FundModel
     {
@@ -6,16 +10,13 @@
 
         public string FundName { get; set; }
 
-        public bool UseGeneralLedgerCode { get; set; }
-
-        public string GeneralLedgerCode { get; set; }
-
-        public bool IsGeneralLedgerDetail { get; set; }
+        public List<FundMetadataModel> Metadata { get; set; }
 
         public FundModel(BusinessLogic.Entities.Fund source)
         {
             FundCode = source.FundCode;
             FundName = source.FundName;
+            Metadata = source.Metadata?.Select(x => new FundMetadataModel(x)).ToList();
         }
     }
 }
