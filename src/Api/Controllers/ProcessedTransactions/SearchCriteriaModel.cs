@@ -31,7 +31,8 @@ namespace Api.Controllers.ProcessedTransactions
                 MopCodes = MopCodes,
                 UserId = null,
                 Narrative = Narrative,
-                InternalReference = InternalReference
+                InternalReference = InternalReference,
+                ApplyPaging = false
             };
         }
     }
