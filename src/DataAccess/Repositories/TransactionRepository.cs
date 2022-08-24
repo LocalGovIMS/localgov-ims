@@ -185,18 +185,26 @@ namespace DataAccess.Repositories
                 transactions = transactions.Where(x => x.CardSuffix.StartsWith(criteria.CardSuffix));
             }
 
-            if (criteria.PageSize == 0) criteria.PageSize = 20;
-            if (criteria.Page == 0) criteria.Page = 1;
+            
 
             transactions = transactions.ApplyFilters(Filters);
 
             resultCount = transactions.Count();
 
-            transactions = transactions
-                .OrderByDescending(x => x.EntryDate)
-                .Skip((criteria.Page - 1) * criteria.PageSize)
-                .Take(criteria.PageSize)
-                .Include(x => x.Fund);
+            if (criteria.ApplyPaging)
+            {
+
+                if (criteria.PageSize == 0) criteria.PageSize = 20;
+                if (criteria.Page == 0) criteria.Page = 1;
+
+                transactions = transactions
+                    .OrderByDescending(x => x.EntryDate)
+                    .Skip((criteria.Page - 1) * criteria.PageSize)
+                    .Take(criteria.PageSize);
+            }
+
+            // TODO: Is this needed? We load the funds separately below
+            transactions = transactions.Include(x => x.Fund);
 
             var returnVal = transactions.Select(x =>
                new
