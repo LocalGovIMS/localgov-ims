@@ -72,12 +72,12 @@ namespace BusinessLogic.Services
                     if (refundRequest.RefundAmount <= 0) continue;
 
                     var transaction = _transactionService.GetTransaction(refundRequest.TransactionReference);
-                    var transctionHeader = _transactionService.GetTransactionByPspReference(transaction.PspReference);
+                    var transactionHeader = _transactionService.GetTransactionByPspReference(transaction.PspReference);
                     internalReference = transaction.InternalReference;
                     transactionDate = transaction.TransactionDate ?? new DateTime();
                     mopCode = transaction.MopCode;
 
-                    var remainingAmount = transctionHeader.AmountAvailableToTransferOrRefundForTransactionLine(refundRequest.TransactionReference);
+                    var remainingAmount = transactionHeader.AmountAvailableToTransferOrRefundForTransactionLine(refundRequest.TransactionReference);
                     if (refundRequest.RefundAmount > remainingAmount)
                     {
                         return RefundStatus.ErrorStatus("Refund amount is greater than remaining transaction amount");
@@ -147,14 +147,15 @@ namespace BusinessLogic.Services
                     return RefundStatus.AcceptedStatus(totalRefundAmount);
                 }
 
-                // TODO: if we fail or have an exception we need to mark those as processed.
                 _transactionService.MarkRefundsAsFailed(internalReference, reason);
 
-                return RefundStatus.FailStatus(string.Empty); // HIGH: Sort this out - return refundResponse.response?
+                return RefundStatus.FailStatus(refundResponse.Message);
             }
             catch (Exception e)
             {
+                // TODO: What if an exception occurs before the the refund(s) (pending transaction(s)) have been created?
                 _transactionService.MarkRefundsAsFailed(internalReference, reason);
+
                 return RefundStatus.ErrorStatus(e.Message);
             }
         }
