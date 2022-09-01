@@ -395,7 +395,6 @@ namespace BusinessLogic.Services
 
                 return new PaymentResponse()
                 {
-                    // HIGH: Get the correct payment integration URL associated with the MOP Code relating to this transaction
                     ResponseId = result.PaymentId,
                     ResponseUrl = string.Format("{0}/{1}/{2}"
                         , paymentIntegration.BaseUri

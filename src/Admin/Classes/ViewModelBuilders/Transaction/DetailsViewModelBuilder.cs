@@ -32,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
 
             if (transaction.ProcessedRefunds != null)
             {
-                refund.RefundItems = transaction.TransactionLines
+                refund.RefundItems = transaction.RefundableTransactionLines
                     .Select(x => new RefundItem()
                     {
                         Transaction = x,

@@ -32,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
 
             if (existingRefunds != null)
             {
-                foreach (var transactionLine in transaction.TransactionLines)
+                foreach (var transactionLine in transaction.RefundableTransactionLines)
                 {
                     var remainingAmount = transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference);
 

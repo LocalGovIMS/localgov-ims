@@ -13,7 +13,7 @@ namespace BusinessLogic.Models
         private decimal TransactionLinesTotal { get { return TransactionLines.Sum(x => x.Amount).ToTwoDecimalPlaces(); } }
         private decimal PendingRefundsTotal { get { return PendingRefunds.Sum(x => x.Amount).ToTwoDecimalPlaces(); } }
         private decimal ProcessedRefundsTotal { get { return ProcessedRefunds.Sum(x => x.Amount).ToTwoDecimalPlaces(); } }
-        private decimal TransfersTotal { get { return Transfers.Sum(x => x.Amount).ToTwoDecimalPlaces(); } }
+        private decimal TransfersTotal { get { return Transfers.Where(x => x.Mop.IsAJournal()).Sum(x => x.Amount).ToTwoDecimalPlaces(); } }
         #endregion
 
         public int? SuspenseId
@@ -121,6 +121,7 @@ namespace BusinessLogic.Models
         }
 
         public List<ProcessedTransaction> TransactionLines { get; private set; }
+        public List<ProcessedTransaction> RefundableTransactionLines { get; private set; }
         public List<PendingTransaction> PendingRefunds { get; private set; }
         public List<PendingTransaction> FailedRefunds { get; private set; }
         public List<ProcessedTransaction> ProcessedRefunds { get; private set; }
@@ -147,7 +148,7 @@ namespace BusinessLogic.Models
             {
                 return !PendingRefunds.Any()
                        && AmountAvailableToTransferOrRefund > 0
-                       && TransactionLines.Any(x => x.IsRefundable());
+                       && RefundableTransactionLines.Any();
             }
         }
 
@@ -155,11 +156,10 @@ namespace BusinessLogic.Models
         {
             get
             {
-                return decimal.Round(TransactionLinesTotal
-                    - PendingRefundsTotal
-                    - ProcessedRefundsTotal
-                    - TransfersTotal
-                    , 2);
+                return (TransactionLinesTotal
+                    - Math.Abs(PendingRefundsTotal)
+                    - Math.Abs(ProcessedRefundsTotal)
+                    - Math.Abs(TransfersTotal)).ToTwoDecimalPlaces();
             }
         }
 
@@ -189,6 +189,7 @@ namespace BusinessLogic.Models
             ProcessedRefunds = processedRefunds;
             Transfers = transfers;
             TransactionLines = processedTransactions.Where(x => !x.IsACreditNote()).ToList();
+            RefundableTransactionLines = processedTransactions.Where(x => x.IsRefundable()).ToList();
             CreditNotes = processedTransactions.Where(x => x.IsACreditNote()).ToList();
             ParentPspReference = parentPspReference;
             FormattedTransfers = FormatTransfers(transfers);

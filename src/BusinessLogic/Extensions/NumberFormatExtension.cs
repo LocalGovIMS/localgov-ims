@@ -17,8 +17,8 @@
             string amount = value.ToString();
             if (value < 0)
             {
-                var nosigh = value * -1;
-                amount = nosigh + "-";
+                var nosign = value * -1;
+                amount = nosign + "-";
             }
             return amount;
         }
