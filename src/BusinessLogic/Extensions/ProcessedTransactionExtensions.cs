@@ -104,7 +104,8 @@ namespace BusinessLogic.Extensions
                 Amount = transaction.Amount ?? 0,
                 CreatedAt = DateTime.Now,
                 Narrative = transaction.Narrative,
-                TransactionDate = transaction.TransactionDate ?? DateTime.Now
+                TransactionDate = transaction.TransactionDate ?? DateTime.Now,
+                ImportId = transaction.ImportId
             };
         }
     }
