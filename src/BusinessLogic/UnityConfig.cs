@@ -2,7 +2,6 @@
 using BusinessLogic.Classes.Dependencies;
 using BusinessLogic.Classes.Smtp;
 using BusinessLogic.Classes.Strategies;
-using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Dependencies;
@@ -12,6 +11,7 @@ using BusinessLogic.Interfaces.Smtp;
 using BusinessLogic.Interfaces.Strategies;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Services;
+using BusinessLogic.Suspense.JournalAllocation;
 using BusinessLogic.Validators;
 using BusinessLogic.Validators.Payment;
 using System;
@@ -48,6 +48,7 @@ namespace BusinessLogic
                 .RegisterType<IRefundService, RefundService>()
                 .RegisterType<IRoleService, RoleService>()
                 .RegisterType<ISuspenseService, SuspenseService>()
+                .RegisterType<ISuspenseJournalService, SuspenseJournalService>()
                 .RegisterType<ISuspenseNoteService, SuspenseNoteService>()
                 .RegisterType<IFundMessageService, FundMessageService>()
                 .RegisterType<IFundMessageMetadataService, FundMessageMetadataService>()
@@ -86,7 +87,7 @@ namespace BusinessLogic
                 .RegisterType<IRollbackTransactionJournalValidator, RollbackTransactionJournalValidator>()
 
                 .RegisterType<ITransactionVatStrategy, TransactionVatStrategy>()
-                .RegisterType<IJournalAllocationStrategy, SuspenseJournalAllocationStrategy>()
+                .RegisterType<IJournalAllocationStrategy, CombinedTransactionJournalAllocationStrategy>()
                 .RegisterType<IApproveEReturnsStrategy, ApproveEReturnsStrategy>()
 
                 .RegisterType<Clients.PaymentIntegrationClient.IClient, Clients.PaymentIntegrationClient.Client>()

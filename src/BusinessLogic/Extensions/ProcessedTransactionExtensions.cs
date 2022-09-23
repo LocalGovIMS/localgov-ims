@@ -96,9 +96,9 @@ namespace BusinessLogic.Extensions
             return true;
         }
 
-        public static Suspense ToSuspense(this ProcessedTransaction transaction)
+        public static Entities.Suspense ToSuspense(this ProcessedTransaction transaction)
         {
-            return new Suspense()
+            return new Entities.Suspense()
             {
                 AccountNumber = transaction.AccountReference,
                 Amount = transaction.Amount ?? 0,

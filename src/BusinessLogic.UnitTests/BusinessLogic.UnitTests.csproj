@@ -123,7 +123,9 @@
     <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
     <Compile Include="Classes\RefundStatusTests.cs" />
     <Compile Include="Classes\RefundRequestTests.cs" />
-    <Compile Include="Classes\Strategies\SuspenseJournalAllocationStrategyTests.cs" />
+    <Compile Include="Suspense\JournalAllocation\BaseTest.cs" />
+    <Compile Include="Suspense\JournalAllocation\CombinedTransactionJournalAllocationStrategyTests.cs" />
+    <Compile Include="Suspense\JournalAllocation\DistinctTransactionJournalAllocationStrategyTests.cs" />
     <Compile Include="Classes\Strategies\TransactionVatStrategyTests.cs" />
     <Compile Include="Classes\Strategies\ApproveEReturnsStrategyTests.cs" />
     <Compile Include="Enums\LogicalOperationTypeTests.cs" />
@@ -434,6 +436,7 @@
     <Compile Include="Services\Vat\GetByFundCodeTests.cs" />
     <Compile Include="Services\Vat\GetByVatCodeTests.cs" />
     <Compile Include="Services\Vat\GetAllCodesTests.cs" />
+    <Compile Include="Suspense\JournalAllocation\JournalAllocationStrategyValidator\ValidateTests.cs" />
     <Compile Include="TestData\ProcessedTransaction.cs" />
     <Compile Include="Validators\AccountHolderFundMessage\BaseAccountHolderStopMessageTest.cs" />
     <Compile Include="Validators\AccountHolderFundMessage\ValidateTests.cs" />

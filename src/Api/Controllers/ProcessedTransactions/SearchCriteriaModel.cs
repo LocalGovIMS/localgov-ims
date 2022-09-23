@@ -32,6 +32,7 @@ namespace Api.Controllers.ProcessedTransactions
                 UserId = null,
                 Narrative = Narrative,
                 InternalReference = InternalReference,
+                PspReference = PspReference,
                 ApplyPaging = false
             };
         }

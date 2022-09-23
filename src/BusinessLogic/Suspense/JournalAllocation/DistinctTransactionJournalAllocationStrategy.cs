@@ -1,10 +1,10 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Classes.Result;
+using BusinessLogic.Entities;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Interfaces.Strategies;
 using BusinessLogic.Models;
 using BusinessLogic.Models.Suspense;
 using log4net;
@@ -12,15 +12,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BusinessLogic.Classes.Strategies
+namespace BusinessLogic.Suspense.JournalAllocation
 {
-    public class SuspenseJournalAllocationStrategy : IJournalAllocationStrategy
+    public class DistinctTransactionJournalAllocationStrategy : IJournalAllocationStrategy
     {
         private readonly ILog _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISecurityContext _securityContext;
         private readonly ITransactionJournalService _transactionJournalService;
-        private readonly IFundService _fundService;
+        private readonly IJournalAllocationStrategyValidator _journalAllocationStrategyValidator;
 
         private readonly Guid _processId;
 
@@ -28,18 +28,18 @@ namespace BusinessLogic.Classes.Strategies
         private readonly string _journalVatCode;
         private readonly string _journalFundCode;
 
-        public SuspenseJournalAllocationStrategy(
+        public DistinctTransactionJournalAllocationStrategy(
             ILog logger
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext
             , ITransactionJournalService transactionJournalService
-            , IFundService fundService)
+            , IJournalAllocationStrategyValidator journalAllocationStrategyValidator)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
             _securityContext = securityContext;
             _transactionJournalService = transactionJournalService;
-            _fundService = fundService;
+            _journalAllocationStrategyValidator = journalAllocationStrategyValidator;
 
             _creditMopCode = GetCreditNoteMopCode();
             _journalVatCode = GetJournalVatCode();
@@ -73,15 +73,20 @@ namespace BusinessLogic.Classes.Strategies
 
                 var suspenses = GetSuspenseItems();
 
-                var validationResult = Validate(suspenses, journalItems, creditNotes);
-                if (!validationResult.Success) return validationResult;
+                Validate(suspenses, journalItems, creditNotes);
 
                 Distribute(suspenses, journalItems, creditNotes);
             }
-            catch (Exception e)
+            catch (SuspenseJournalAllocationException ex)
             {
-                _logger.Error(e);
-                return new Result.Result("Unable to journal the items");
+                _logger.Error(ex);
+
+                return new Result(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                return new Result("Unable to journal the items");
             }
             finally
             {
@@ -95,7 +100,7 @@ namespace BusinessLogic.Classes.Strategies
                 }
             }
 
-            return new Result.Result();
+            return new Result();
         }
 
         private void Lock(List<int> suspenseItems)
@@ -119,47 +124,14 @@ namespace BusinessLogic.Classes.Strategies
                 .ToList();
         }
 
-        private IResult Validate(List<SuspenseWrapper> suspenses, List<Journal> journalItems, List<CreditNote> creditNotes)
+        private void Validate(List<SuspenseWrapper> suspenses, List<Journal> journalItems, List<CreditNote> creditNotes)
         {
-            if (!suspenses.Any())
+            _journalAllocationStrategyValidator.Validate(new JournalAllocationStrategyValidatorArgs()
             {
-                return new Result.Result("You must choose some suspense items");
-            }
-
-            if (suspenses.Sum(x => x.AmountRemaining) <= 0)
-            {
-                return new Result.Result("Value of chosen suspense items must be greater than zero");
-            }
-
-            var creditNoteTotal = creditNotes == null || !creditNotes.Any()
-                ? 0
-                : creditNotes.Sum(c => c.Amount);
-
-            if (journalItems.Sum(x => x.Amount) != (suspenses.Sum(x => x.AmountRemaining) + creditNoteTotal))
-            {
-                return new Result.Result("Value of chosen suspense items and credit notes must match amount to be journalled");
-            }
-
-            if (journalItems.Any(x => x.FundCode == "01"))
-            {
-                return new Result.Result("You cannot journal a suspense item back to suspense");
-            }
-
-            if (creditNotes != null)
-            {
-                var creditNoteFunds = _fundService.GetCreditNoteFunds().Select(x => x.FundCode).ToList();
-
-                var excludeList = creditNotes.Where(i => creditNoteFunds.Contains(i.FundCode));
-                if (excludeList == null) return new Result.Result("Credit notes exist with invalid funds");
-
-                var filteredList = creditNotes.Except(excludeList);
-                if (filteredList != null && filteredList.Any())
-                {
-                    return new Result.Result("Credit notes exist with invalid funds");
-                }
-            }
-
-            return new Result.Result();
+                Suspenses = suspenses,
+                JournalItems = journalItems,
+                CreditNotes = creditNotes
+            });
         }
 
         private void Distribute(List<SuspenseWrapper> suspenses, List<Journal> journalItems, List<CreditNote> creditNotes)

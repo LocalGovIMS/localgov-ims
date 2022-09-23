@@ -1,11 +1,12 @@
-﻿using BusinessLogic.Models.Suspense;
+﻿using BusinessLogic.Interfaces.Result;
+using BusinessLogic.Models.Suspense;
 using System.Collections.Generic;
 
-namespace BusinessLogic.Interfaces.Strategies
+namespace BusinessLogic.Suspense.JournalAllocation
 {
     public interface IJournalAllocationStrategy
     {
-        Result.IResult Execute(List<int> suspenseItems
+        IResult Execute(List<int> suspenseItems
             , List<Journal> journalItems
             , List<CreditNote> creditNotes);
     }
