@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Security;
-using BusinessLogic.Interfaces.Strategies;
+using BusinessLogic.Suspense.JournalAllocation;
 using log4net;
 using Moq;
 using System.Diagnostics.CodeAnalysis;

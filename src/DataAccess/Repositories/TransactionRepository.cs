@@ -185,7 +185,10 @@ namespace DataAccess.Repositories
                 transactions = transactions.Where(x => x.CardSuffix.StartsWith(criteria.CardSuffix));
             }
 
-            
+            if (!string.IsNullOrWhiteSpace(criteria.PspReference))
+            {
+                transactions = transactions.Where(x => x.PspReference == criteria.PspReference);
+            }
 
             transactions = transactions.ApplyFilters(Filters);
 

@@ -1,13 +1,12 @@
 using BusinessLogic.Classes.Result;
-using BusinessLogic.Entities;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Interfaces.Strategies;
 using BusinessLogic.Models.Shared;
 using BusinessLogic.Models.Suspense;
+using BusinessLogic.Suspense.JournalAllocation;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace BusinessLogic.Services
             _journalAllocationStrategy = journalAllocationStrategy;
         }
 
-        public IResult Create(Suspense suspense)
+        public IResult Create(Entities.Suspense suspense)
         {
             try
             {
@@ -141,7 +140,7 @@ namespace BusinessLogic.Services
 
     public class CreateSuspenseArgs
     {
-        public Suspense Suspense { get; set; }
+        public Entities.Suspense Suspense { get; set; }
         public bool SaveChanges { get; set; } = true;
     }
 }

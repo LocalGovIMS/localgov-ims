@@ -19,6 +19,7 @@ namespace BusinessLogic.Models.Transactions
         public int? ImportId { get; set; }
         public string CardPrefix { get; set; }
         public string CardSuffix { get; set; }
+        public string PspReference { get; set; }
 
         public SearchCriteria() : base()
         {
