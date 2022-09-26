@@ -3,6 +3,8 @@ using BusinessLogic.Extensions;
 using BusinessLogic.ImportProcessing;
 using BusinessLogic.Services;
 using FluentAssertions;
+using MessagePack;
+using MessagePack.Resolvers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -12,6 +14,16 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
     [TestClass]
     public class ProcessTests : TestBase
     {
+        public ProcessTests()
+        {
+            MessagePackSerializer.DefaultOptions = new MessagePackSerializerOptions(CompositeResolver.Create(new IFormatterResolver[]
+            {
+                // This can solve DateTime time zone problem
+                NativeDateTimeResolver.Instance,
+                ContractlessStandardResolver.Instance
+            }));
+        }
+
         [TestMethod]
         public void Process_CallsRuleEngineProcessOnce()
         {

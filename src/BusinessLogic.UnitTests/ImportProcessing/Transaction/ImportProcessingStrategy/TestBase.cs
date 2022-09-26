@@ -69,7 +69,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
                     {
                         Id = 1,
                         ImportId = 1,
-                        Data = Convert.ToBase64String(MessagePackSerializer.Serialize(processedTransaction, MessagePack.Resolvers.ContractlessStandardResolver.Options))
+                        Data = Convert.ToBase64String(MessagePackSerializer.Serialize(processedTransaction))
                     }
                 }
             };

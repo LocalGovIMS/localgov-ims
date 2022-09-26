@@ -62,7 +62,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
                     { 
                         Id = 1,
                         ImportId = 1,
-                        Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x, MessagePack.Resolvers.ContractlessStandardResolver.Options))
+                        Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x))
                     }).ToList()
             };
         }

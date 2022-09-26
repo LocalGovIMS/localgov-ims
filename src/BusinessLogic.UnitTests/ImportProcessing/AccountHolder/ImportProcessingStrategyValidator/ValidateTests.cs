@@ -7,6 +7,7 @@ using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
 using FluentAssertions;
 using MessagePack;
+using MessagePack.Resolvers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -35,7 +36,12 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
 
         public ValidateTests()
         {
-
+            MessagePackSerializer.DefaultOptions = new MessagePackSerializerOptions(CompositeResolver.Create(new IFormatterResolver[]
+            {
+                // This can solve DateTime time zone problem
+                NativeDateTimeResolver.Instance,
+                ContractlessStandardResolver.Instance
+            }));
         }
 
         private void SetupImportTypeService()
@@ -197,7 +203,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
         {
             var item = new Entities.AccountHolder() { FundCode = fundCode };
 
-            return Convert.ToBase64String(MessagePackSerializer.Serialize(item, MessagePack.Resolvers.ContractlessStandardResolver.Options));
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(item));
         }
     }
 }

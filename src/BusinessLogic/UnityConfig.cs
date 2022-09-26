@@ -88,6 +88,7 @@ namespace BusinessLogic
 
                 .RegisterType<ITransactionVatStrategy, TransactionVatStrategy>()
                 .RegisterType<IJournalAllocationStrategy, CombinedTransactionJournalAllocationStrategy>()
+                .RegisterType<IJournalAllocationStrategyValidator, JournalAllocationStrategyValidator>()
                 .RegisterType<IApproveEReturnsStrategy, ApproveEReturnsStrategy>()
 
                 .RegisterType<Clients.PaymentIntegrationClient.IClient, Clients.PaymentIntegrationClient.Client>()

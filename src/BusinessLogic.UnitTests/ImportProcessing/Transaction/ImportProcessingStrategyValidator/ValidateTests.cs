@@ -5,6 +5,7 @@ using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Services;
 using FluentAssertions;
 using MessagePack;
+using MessagePack.Resolvers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -28,7 +29,12 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
 
         public ValidateTests()
         {
-
+            MessagePackSerializer.DefaultOptions = new MessagePackSerializerOptions(CompositeResolver.Create(new IFormatterResolver[]
+            {
+                // This can solve DateTime time zone problem
+                NativeDateTimeResolver.Instance,
+                ContractlessStandardResolver.Instance
+            }));
         }
 
         private void SetupImportTypeService()
@@ -147,7 +153,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.Transaction.ImportProcessingS
         {
             var transaction = new ProcessedTransaction() { Amount = amount };
 
-            return Convert.ToBase64String(MessagePackSerializer.Serialize(transaction, MessagePack.Resolvers.ContractlessStandardResolver.Options));
+            return Convert.ToBase64String(MessagePackSerializer.Serialize(transaction));
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Extensions;
 using FluentAssertions;
+using MessagePack;
+using MessagePack.Resolvers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -10,6 +12,16 @@ namespace BusinessLogic.UnitTests.ImportProcessing.AccountHolder.ImportProcessin
     [TestClass]
     public class ProcessTests : TestBase
     {
+        public ProcessTests()
+        {
+            MessagePackSerializer.DefaultOptions = new MessagePackSerializerOptions(CompositeResolver.Create(new IFormatterResolver[]
+            {
+                // This can solve DateTime time zone problem
+                NativeDateTimeResolver.Instance,
+                ContractlessStandardResolver.Instance
+            }));
+        }
+
         [TestMethod]
         public void Process_WhenCalled_CallsAccountHolderServiceBulksSelectNotExisting_Once()
         {
