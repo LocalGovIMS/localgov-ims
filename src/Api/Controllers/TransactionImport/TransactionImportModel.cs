@@ -33,7 +33,7 @@ namespace Api.Controllers.TransactionImport
         {
             return Rows?.Select(x => new ImportRow() 
                 { 
-                    Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x.GetProcessedTransaction(), MessagePack.Resolvers.ContractlessStandardResolver.Options)) 
+                    Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x.GetProcessedTransaction())) 
                 })
                 .ToList();
         }

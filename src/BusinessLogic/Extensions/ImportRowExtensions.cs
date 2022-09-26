@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Entities;
 using MessagePack;
+using MessagePack.Resolvers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,12 @@ namespace BusinessLogic.Extensions
     {
         public static ProcessedTransaction ToProcessedTransaction(this ImportRow item)
         {
-            return MessagePackSerializer.Deserialize<ProcessedTransaction>(Convert.FromBase64String(item.Data), MessagePack.Resolvers.ContractlessStandardResolver.Options);
+            return MessagePackSerializer.Deserialize<ProcessedTransaction>(Convert.FromBase64String(item.Data));
         }
 
         public static AccountHolder ToAccountHolder(this ImportRow item)
         {
-            return MessagePackSerializer.Deserialize<AccountHolder>(Convert.FromBase64String(item.Data), MessagePack.Resolvers.ContractlessStandardResolver.Options);
+            return MessagePackSerializer.Deserialize<AccountHolder>(Convert.FromBase64String(item.Data));
         }
 
         public static void UpdateImportId(this IEnumerable<ImportRow> rows, int importId)

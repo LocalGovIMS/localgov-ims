@@ -34,7 +34,7 @@ namespace Api.Controllers.AccountHolderImport
             return Rows?
                 .Select(x => new ImportRow()
                 {
-                    Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x, MessagePack.Resolvers.ContractlessStandardResolver.Options))
+                    Data = Convert.ToBase64String(MessagePackSerializer.Serialize(x))
                 })
                 .ToList();
         }
