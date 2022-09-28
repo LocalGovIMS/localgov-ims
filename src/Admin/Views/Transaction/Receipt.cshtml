@@ -7,7 +7,7 @@
 
 <h1 class="ui vertical segment header">
     <div style="float: right;">
-        <img src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo.Printable"])" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) logo" />
+        <img style="max-height: 75px; max-width: 200px;" src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo.Printable"])" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) logo" />
     </div>
     @Model.Transaction.PspReference
     <div class="sub header">
