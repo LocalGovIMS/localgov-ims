@@ -54,10 +54,20 @@ namespace DataAccess.Repositories
                 data = data.Where(x => x.Amount == criteria.Amount.Value);
             }
 
-            if (!criteria.ShowAll) // If we don't want to show all, we just show unallocated
+            if (criteria.Status == BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated)
             {
                 data = data.Where(x => x.Amount - x.SuspenseProcessedTransactions.Sum(y => y.Amount) > 0 || x.SuspenseProcessedTransactions.Any() == false);
             }
+
+            if (criteria.Status == BusinessLogic.Enums.SuspenseAllocationStatusEnum.Allocated)
+            {
+                data = data.Where(x => x.Amount - x.SuspenseProcessedTransactions.Sum(y => y.Amount) == 0 && x.SuspenseProcessedTransactions.Any() == true);
+            }
+
+            //if (!criteria.ShowAll) // If we don't want to show all, we just show unallocated
+            //{
+            //    data = data.Where(x => x.Amount - x.SuspenseProcessedTransactions.Sum(y => y.Amount) > 0 || x.SuspenseProcessedTransactions.Any() == false);
+            //}
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;

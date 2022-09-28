@@ -144,6 +144,7 @@
     <Compile Include="Classes\Smtp\Emails\EReturnDeletedEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\VatReceiptEmail.cs" />
     <Compile Include="Classes\Strategies\ApproveEReturnsStrategy.cs" />
+    <Compile Include="Enums\SuspenseAllocationStatus.cs" />
     <Compile Include="Suspense\JournalAllocation\CombinedTransactionJournalAllocationStrategy.cs" />
     <Compile Include="Suspense\JournalAllocation\DistinctTransactionJournalAllocationStrategy.cs" />
     <Compile Include="Classes\Strategies\TransactionVatStrategy.cs" />
