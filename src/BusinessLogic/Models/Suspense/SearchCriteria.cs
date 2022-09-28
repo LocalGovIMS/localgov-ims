@@ -10,7 +10,7 @@ namespace BusinessLogic.Models.Suspense
         public string Narrative { get; set; }
         public int? ImportId { get; set; }
         public decimal? Amount { get; set; }
-        public bool ShowAll { get; set; }
+        public Enums.SuspenseAllocationStatusEnum Status { get; set; }
 
         public SearchCriteria() : base()
         {

@@ -20,8 +20,10 @@ namespace Admin.Classes.ViewModelBuilders.Suspense
 
         protected override ListViewModel OnBuild()
         {
-            var searchCriteria = new SearchCriteria();
-            var criteria = new BusinessLogic.Models.Suspense.SearchCriteria();
+            var searchCriteria = new SearchCriteria()
+                { Status = BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated };
+            var criteria = new BusinessLogic.Models.Suspense.SearchCriteria()
+                { Status = BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated };
             var searchResult = _suspenseService.Search(criteria);
 
             return new ListViewModel()
@@ -43,7 +45,7 @@ namespace Admin.Classes.ViewModelBuilders.Suspense
                 AccountNumber = searchCriteria.AccountNumber,
                 Amount = searchCriteria.Amount,
                 Narrative = searchCriteria.Narrative,
-                ShowAll = searchCriteria.ShowAll,
+                Status = searchCriteria.Status,
                 Page = searchCriteria.Page,
                 PageSize = 6
             };
