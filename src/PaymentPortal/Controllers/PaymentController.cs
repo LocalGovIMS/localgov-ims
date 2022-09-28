@@ -359,7 +359,7 @@ namespace PaymentPortal.Controllers
                 });
             }
 
-            ViewBag.PaymentTypes = listItems;
+            ViewBag.PaymentTypes = listItems.OrderBy(l => l.Text).ToList();
         }
 
         [HttpPost]
