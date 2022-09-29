@@ -77,6 +77,11 @@ namespace BusinessLogic.Extensions
             return IsA(item, MopMetadataKeys.IsACentralChargeFee);
         }
 
+        public static bool IsAPaymentReversal(this Mop item)
+        {
+            return IsA(item, MopMetadataKeys.IsAPaymentReversal);
+        }
+
         private static bool IsA(this Mop item, string key)
         {
             if (item == null) return false;
