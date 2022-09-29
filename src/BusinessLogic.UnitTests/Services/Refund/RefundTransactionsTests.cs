@@ -244,7 +244,10 @@ namespace BusinessLogic.UnitTests.Services.Refund
                     {
                         new MopMetadata()
                         {
-                            Key = MopMetadataKeys.IsARefundablePayment,
+                            MopMetadataKey = new MopMetadataKey()
+                            {
+                                Name = MopMetadataKeys.IsARefundablePayment
+                            },
                             Value = isRefundableMop.ToString(),
                             MopCode = RefundableMopCode
                         }

@@ -10,13 +10,16 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
 {
     public class CreateViewModelBuilder : BaseViewModelBuilder<EditViewModel, CreateViewModelBuilderArgs>
     {
-        private readonly IMethodOfPaymentMetadataService _service;
+        private readonly IMethodOfPaymentMetadataService _methodOfPaymentMetadataService;
+        private readonly IMethodOfPaymentMetadataKeyService _methodOfPaymentMetadataKeyService;
 
         public CreateViewModelBuilder(ILog log
-            , IMethodOfPaymentMetadataService methodOfPaymentMetadataService)
+            , IMethodOfPaymentMetadataService methodOfPaymentMetadataService
+            , IMethodOfPaymentMetadataKeyService methodOfPaymentMetadataKeyService)
             : base(log)
         {
-            _service = methodOfPaymentMetadataService;
+            _methodOfPaymentMetadataService = methodOfPaymentMetadataService;
+            _methodOfPaymentMetadataKeyService = methodOfPaymentMetadataKeyService;
         }
 
         protected override EditViewModel OnBuild()
@@ -29,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             var model = new EditViewModel();
 
             model.MopCode = args.MopCode;
-            model.Keys = GetKeyList();
+            model.MopMetadataKeys = GetMopMetadataKeysList(args.MopCode);
 
             return model;
         }        
@@ -38,25 +41,35 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         {
             base.OnRebuild(model);
 
-            model.Keys = GetKeyList();
+            model.MopMetadataKeys = GetMopMetadataKeysList(model.MopCode);
 
             return model;
         }
 
-        private SelectList GetKeyList()
+        private SelectList GetMopMetadataKeysList(string mopCode)
         {
             var selectListItems = new List<SelectListItem>();
 
-            foreach (var item in _service.GetMetadata().OrderBy(x => x.Description))
+            foreach (var item in GetAvailableMopMetadataKeys(mopCode).OrderBy(x => x.Description))
             {
                 selectListItems.Add(new SelectListItem()
                 {
-                    Value = item.Key.ToString(),
+                    Value = item.Id.ToString(),
                     Text = item.Description
                 });
             }
 
             return new SelectList(selectListItems, false);
+        }
+
+        private IList<BusinessLogic.Entities.MopMetadataKey> GetAvailableMopMetadataKeys(string mopCode)
+        {
+            var allKeys = _methodOfPaymentMetadataKeyService.GetAll();
+            var allUsedKeyIds = _methodOfPaymentMetadataService.Search(new BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria() { MopCode = mopCode })
+                .Items.Select(x => x.MopMetadataKeyId);
+            var allUsedKeys = allKeys.Where(x => allUsedKeyIds.Contains(x.Id));
+
+            return allKeys.Except(allUsedKeys).ToList();
         }
     }
 

@@ -115,3 +115,35 @@ ON [Target].[Name] = [Source].[Name]
 WHEN NOT MATCHED BY TARGET THEN
 INSERT ([Name], [DisplayName], [Type], [DisplayOrder])
 VALUES ([Name], [DisplayName], [Type], [DisplayOrder]);
+
+MERGE INTO MopMetadataKeys AS [Target]
+USING (SELECT * 
+		FROM (VALUES
+			('IsACashPayment', 'Is a cash payment', 1),
+			('IsAnEReturnChequePayment', 'Is an eReturn cheque payment', 1),
+			('IsAJournal', 'Is a journal', 1),
+			('IsAJournalReallocation', 'Is a journal reallocation', 1),
+			('IsATransferOut', 'Is a transfer out', 1),
+			('IsATransferIn', 'Is a transfer in', 1),
+			('IsACardSelfServicePayment', 'Is a card self-service payment', 1),
+			('IsACardPaymentFee', 'Is a card payment fee', 1),
+			('IsACardAtpPayment', 'Is a card ATP payment', 1),
+			('IsACardViaStaffPayment', 'Is a card via staff payment', 1),
+			('IsAChequePayment', 'Is a cheque payment', 1),
+			('IsARefundablePayment', 'Is a refundable payment', 1),
+			('BackgroundColour', 'Background colour', 1),
+			('TextColour', 'Text colour', 1),
+			('IncursAFee', 'Incurs a fee', 1),
+			('IsARechargeFee', 'Is a recharge fee', 1),
+			('IsACentralChargeFee', 'Is a central charge fee', 1),
+			('FeeAccountReference', 'Fee account reference', 1),
+			('FeeFundCode', 'Fee fund code', 1),
+			('PaymentIntegrationId', 'Payment integration ID', 1),
+			('IsAPaymentReversal', 'Is a payment reversal', 1)) 
+	AS S ([Name], [Description], [Type])) AS [Source]
+ON [Target].[Name] = [Source].[Name]
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Name], [Description], [Type])
+VALUES ([Name], [Description], [Type])
+WHEN MATCHED AND TARGET.[Description] <> SOURCE.[Description]
+THEN UPDATE SET TARGET.[Description] = SOURCE.[Description];

@@ -163,69 +163,87 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled])
 VALUES ([MopCode], [MopName], [MaximumAmount], [MinimumAmount], [Disabled]);
 
+DECLARE @PaymentId VARCHAR(100) = (SELECT CAST(Id AS VARCHAR(100)) FROM PaymentIntegrations WHERE [Name] = '[[SeedData.DemoData.PaymentIntegration.Name]]');
+
+DECLARE @IsAJournal_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsAJournal');
+DECLARE @IsAJournalReallocation_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsAJournalReallocation');
+DECLARE @IsATransferOut_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsATransferOut');
+DECLARE @IsACardSelfServicePayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsACardSelfServicePayment');
+DECLARE @IsARefundablePayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsARefundablePayment');
+DECLARE @IsATransferIn_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsATransferIn');
+DECLARE @IsACardAtpPayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsACardAtpPayment');
+DECLARE @IsAChequePayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsAChequePayment');
+DECLARE @IsACardViaStaffPayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsACardViaStaffPayment');
+DECLARE @IsACashPayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsACashPayment');
+DECLARE @IsAnEReturnChequePayment_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsAnEReturnChequePayment');
+DECLARE @PaymentIntegrationId_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'PaymentIntegrationId');
+DECLARE @BackgroundColour_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'BackgroundColour');
+DECLARE @TextColour_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'TextColour');
+DECLARE @IncursAFee_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IncursAFee');
+DECLARE @IsACardPaymentFee_MopMetadataKeyId INT = (SELECT Id FROM MopMetadataKeys WHERE [Name] = 'IsACardPaymentFee');
+
 MERGE INTO MopMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('IsAJournal', 'TRUE', 'JN'),
-			('IsAJournalReallocation', 'TRUE', 'JR'),
-			('IsATransferOut', 'TRUE', '11'),
-			('IsACardSelfServicePayment', 'TRUE', '90'),
-			('IsRefundable', 'TRUE', '90'),
-			('IsRefundable', 'TRUE', '91'),
-			('IsRefundable', 'TRUE', '92'),
-			('IsATransferIn', 'TRUE', '10'),
-			('IsACardAtpPayment', 'TRUE', '91'),
-			('IsAChequePayment', 'TRUE', '24'),
-			('IsACardViaStaffPayment', 'TRUE', '92'),
-			('IsACashPayment', 'TRUE', '1'),
-			('IsAnEReturnChequePayment', 'TRUE', '2'),
-			('PaymentIntegrationId', '1', '90'),
-			('BackgroundColour', '#21ba45', 'JN'),
-			('BackgroundColour', '#21ba45', 'JR'),
-			('BackgroundColour', '#b5cc18', '10'),
-			('BackgroundColour', '#b5cc18', '11'),
-			('BackgroundColour', '#a333c8', '28'),
-			('BackgroundColour', '#fbbd08', '15'),
-			('BackgroundColour', '#fbbd08', '16'),
-			('BackgroundColour', '#fbbd08', '17'),
-			('BackgroundColour', '#fbbd08', '18'),
-			('BackgroundColour', '#fbbd08', '19'),
-			('BackgroundColour', '#fbbd08', '20'),
-			('BackgroundColour', '#fbbd08', '21'),
-			('BackgroundColour', '#2185d0', '90'),
-			('BackgroundColour', '#2185d0', '91'),
-			('BackgroundColour', '#2185d0', '92'),
-			('BackgroundColour', '#a5673f', '24'),
-			('TextColour', '#fff', 'JN'),
-			('TextColour', '#fff', 'JR'),
-			('TextColour', '#fff', '10'),
-			('TextColour', '#fff', '11'),
-			('TextColour', '#fff', '28'),
-			('TextColour', '#fff', '15'),
-			('TextColour', '#fff', '16'),
-			('TextColour', '#fff', '17'),
-			('TextColour', '#fff', '18'),
-			('TextColour', '#fff', '19'),
-			('TextColour', '#fff', '20'),
-			('TextColour', '#fff', '21'),
-			('TextColour', '#fff', '90'),
-			('TextColour', '#fff', '91'),
-			('TextColour', '#fff', '92'),
-			('TextColour', '#fff', '24'),
-			('PaymentIntegrationId', '1', '90'),
-			('PaymentIntegrationId', '1', '91'),
-			('PaymentIntegrationId', '1', '92'),
-			('IncursAFee', 'TRUE', '90'),
-			('IncursAFee', 'TRUE', '91'),
-			('IncursAFee', 'TRUE', '92'),
-			('IsACardPaymentFee', 'TRUE', 'PF')
+			(@IsAJournal_MopMetadataKeyId, 'TRUE', 'JN'),
+			(@IsAJournalReallocation_MopMetadataKeyId, 'TRUE', 'JR'),
+			(@IsATransferOut_MopMetadataKeyId, 'TRUE', '11'),
+			(@IsACardSelfServicePayment_MopMetadataKeyId, 'TRUE', '90'),
+			(@IsARefundablePayment_MopMetadataKeyId, 'TRUE', '90'),
+			(@IsARefundablePayment_MopMetadataKeyId, 'TRUE', '91'),
+			(@IsARefundablePayment_MopMetadataKeyId, 'TRUE', '92'),
+			(@IsATransferIn_MopMetadataKeyId, 'TRUE', '10'),
+			(@IsACardAtpPayment_MopMetadataKeyId, 'TRUE', '91'),
+			(@IsAChequePayment_MopMetadataKeyId, 'TRUE', '24'),
+			(@IsACardViaStaffPayment_MopMetadataKeyId, 'TRUE', '92'),
+			(@IsACashPayment_MopMetadataKeyId, 'TRUE', '1'),
+			(@IsAnEReturnChequePayment_MopMetadataKeyId, 'TRUE', '2'),
+			(@BackgroundColour_MopMetadataKeyId, '#21ba45', 'JN'),
+			(@BackgroundColour_MopMetadataKeyId, '#21ba45', 'JR'),
+			(@BackgroundColour_MopMetadataKeyId, '#b5cc18', '10'),
+			(@BackgroundColour_MopMetadataKeyId, '#b5cc18', '11'),
+			(@BackgroundColour_MopMetadataKeyId, '#a333c8', '28'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '15'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '16'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '17'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '18'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '19'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '20'),
+			(@BackgroundColour_MopMetadataKeyId, '#fbbd08', '21'),
+			(@BackgroundColour_MopMetadataKeyId, '#2185d0', '90'),
+			(@BackgroundColour_MopMetadataKeyId, '#2185d0', '91'),
+			(@BackgroundColour_MopMetadataKeyId, '#2185d0', '92'),
+			(@BackgroundColour_MopMetadataKeyId, '#a5673f', '24'),
+			(@TextColour_MopMetadataKeyId, '#fff', 'JN'),
+			(@TextColour_MopMetadataKeyId, '#fff', 'JR'),
+			(@TextColour_MopMetadataKeyId, '#fff', '10'),
+			(@TextColour_MopMetadataKeyId, '#fff', '11'),
+			(@TextColour_MopMetadataKeyId, '#fff', '28'),
+			(@TextColour_MopMetadataKeyId, '#fff', '15'),
+			(@TextColour_MopMetadataKeyId, '#fff', '16'),
+			(@TextColour_MopMetadataKeyId, '#fff', '17'),
+			(@TextColour_MopMetadataKeyId, '#fff', '18'),
+			(@TextColour_MopMetadataKeyId, '#fff', '19'),
+			(@TextColour_MopMetadataKeyId, '#fff', '20'),
+			(@TextColour_MopMetadataKeyId, '#fff', '21'),
+			(@TextColour_MopMetadataKeyId, '#fff', '90'),
+			(@TextColour_MopMetadataKeyId, '#fff', '91'),
+			(@TextColour_MopMetadataKeyId, '#fff', '92'),
+			(@TextColour_MopMetadataKeyId, '#fff', '24'),
+			(@PaymentIntegrationId_MopMetadataKeyId, @PaymentId, '90'),
+			(@PaymentIntegrationId_MopMetadataKeyId, @PaymentId, '91'),
+			(@PaymentIntegrationId_MopMetadataKeyId, @PaymentId, '92'),
+			(@IncursAFee_MopMetadataKeyId, 'TRUE', '90'),
+			(@IncursAFee_MopMetadataKeyId, 'TRUE', '91'),
+			(@IncursAFee_MopMetadataKeyId, 'TRUE', '92'),
+			(@IsACardPaymentFee_MopMetadataKeyId, 'TRUE', 'PF')
 			) 
-	AS S ([Key], [Value], [MopCode])) AS [Source]
+	AS S ([MopMetadataKeyId], [Value], [MopCode])) AS [Source]
 ON [Target].[MopCode] = [Source].[MopCode] 
-	AND [Target].[Key] = [Source].[Key] 
+	AND [Target].[MopMetadataKeyId] = [Source].[MopMetadataKeyId] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Key], [Value], [MopCode])
-VALUES ([Key], [Value], [MopCode]);
+INSERT ([MopMetadataKeyId], [Value], [MopCode])
+VALUES ([MopMetadataKeyId], [Value], [MopCode]);
 
 MERGE INTO Vat AS [Target]
 USING (SELECT * 

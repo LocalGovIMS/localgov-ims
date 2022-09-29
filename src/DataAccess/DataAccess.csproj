@@ -206,6 +206,10 @@
     <Compile Include="Migrations\202208221420278_Added_EReturnNote_entity.designer.cs">
       <DependentUpon>202208221420278_Added_EReturnNote_entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209291344585_Added_MopMetadataKey_entity.cs" />
+    <Compile Include="Migrations\202209291344585_Added_MopMetadataKey_entity.designer.cs">
+      <DependentUpon>202209291344585_Added_MopMetadataKey_entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -221,6 +225,7 @@
     <Compile Include="Repositories\FileImportRepository.cs" />
     <Compile Include="Repositories\FundMessageMetadataRepository.cs" />
     <Compile Include="Repositories\ImportTypeImportProcessingRuleRepository.cs" />
+    <Compile Include="Repositories\MethodOfPaymentMetadataKeyRepository.cs" />
     <Compile Include="Repositories\VatMetadataRepository.cs" />
     <Compile Include="Repositories\FundMetadataRepository.cs" />
     <Compile Include="Repositories\MethodOfPaymentMetadataRepository.cs" />
@@ -345,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208221420278_Added_EReturnNote_entity.resx">
       <DependentUpon>202208221420278_Added_EReturnNote_entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209291344585_Added_MopMetadataKey_entity.resx">
+      <DependentUpon>202209291344585_Added_MopMetadataKey_entity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

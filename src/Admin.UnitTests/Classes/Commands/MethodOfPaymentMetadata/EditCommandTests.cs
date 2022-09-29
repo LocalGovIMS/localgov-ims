@@ -21,7 +21,7 @@ namespace Admin.UnitTests.Classes.Commands.MethodOfPaymentMetadata
             return new ViewModel()
             {
                 Id = 1,
-                Key = "Test key",
+                MopMetadataKeyName = "Test key",
                 Value = "Test value"
             };
         }

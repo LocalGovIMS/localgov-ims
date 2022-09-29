@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Repositories;
-using BusinessLogic.Models.MethodOfPaymentMetadata;
+using BusinessLogic.Models.MethodOfPaymentMetadataKey;
 using DataAccess.Extensions;
 using DataAccess.Persistence;
 using System.Collections.Generic;
@@ -9,21 +9,28 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class MethodOfPaymentMetadataRepository : Repository<MopMetadata>, IMethodOfPaymentMetadataRepository
+    public class MethodOfPaymentMetadataKeyRepository : Repository<MopMetadataKey>, IMethodOfPaymentMetadataKeyRepository
     {
-        public MethodOfPaymentMetadataRepository(IncomeDbContext context) : base(context)
+        public MethodOfPaymentMetadataKeyRepository(IncomeDbContext context) : base(context)
         {
             IncomeDbContext.Configuration.ProxyCreationEnabled = false;
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public IEnumerable<MopMetadata> Search(SearchCriteria criteria, out int resultCount)
+        public IEnumerable<MopMetadataKey> Search(SearchCriteria criteria, out int resultCount)
         {
-            var items = IncomeDbContext.MopMetadata
-                .Include(x => x.MopMetadataKey)
+            var items = IncomeDbContext.MopMetadataKeys
                 .AsQueryable();
 
-            items = items.Where(x => x.MopCode == criteria.MopCode);
+            if (!string.IsNullOrEmpty(criteria.Name))
+            {
+                items = items.Where(x => x.Name == criteria.Name);
+            }
+
+            if(criteria.Type.HasValue)
+            {
+                items = items.Where(x => x.Type == (byte)criteria.Type);
+            }
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;
@@ -40,10 +47,9 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public MopMetadata Get(int id)
+        public MopMetadataKey Get(int id)
         {
-            var item = IncomeDbContext.MopMetadata
-                .Include(x => x.MopMetadataKey)
+            var item = IncomeDbContext.MopMetadataKeys
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -52,17 +58,16 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public void Update(MopMetadata entity)
+        public void Update(MopMetadataKey entity)
         {
-            var item = IncomeDbContext.MopMetadata
+            var item = IncomeDbContext.MopMetadataKeys
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 
-            item.MopCode = entity.MopCode;
-            item.MopMetadataKeyId = entity.MopMetadataKeyId;
-            item.Value = entity.Value;
+            item.Name = entity.Name;
+            item.Description = entity.Description;
         }
     }
 }

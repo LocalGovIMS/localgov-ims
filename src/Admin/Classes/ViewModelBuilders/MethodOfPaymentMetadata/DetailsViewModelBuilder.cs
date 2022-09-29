@@ -29,9 +29,10 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             return new DetailsViewModel()
             {
                 Id = data.Id,
-                Key = data.Key,
-                Value = data.Value,
-                Description = _service.GetMetadata().FirstOrDefault(y => y.Key == data.Key)?.Description ?? "Unknown",
+                MopMetadataKeyId = data.MopMetadataKeyId,
+                MopMetadataKeyName = data.MopMetadataKey.Name,
+                MopMetadataKeyDescription = data.MopMetadataKey.Description,
+                Value = data.Value
             };
         }
     }

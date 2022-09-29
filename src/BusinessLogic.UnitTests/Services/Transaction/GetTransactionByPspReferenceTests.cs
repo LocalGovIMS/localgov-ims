@@ -37,7 +37,10 @@ namespace BusinessLogic.UnitTests.Services.Transaction
                                     {
                                         new MopMetadata
                                         {
-                                            Key = mopMetadataKey,
+                                            MopMetadataKey = new MopMetadataKey()
+                                            {
+                                                Name = mopMetadataKey
+                                            },
                                             Value = mopMetadataValue,
                                             MopCode = transactionMopCode
                                         }

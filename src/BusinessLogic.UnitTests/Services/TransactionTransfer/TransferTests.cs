@@ -33,7 +33,10 @@ namespace BusinessLogic.UnitTests.Services.TransactionTransfer
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsATransferIn,
+                                MopMetadataKey = new MopMetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsATransferIn
+                                },
                                 Value = "True"
                             }
                         }
@@ -45,7 +48,10 @@ namespace BusinessLogic.UnitTests.Services.TransactionTransfer
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsATransferOut,
+                                MopMetadataKey = new MopMetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsATransferOut
+                                },
                                 Value = "True"
                             }
                         }

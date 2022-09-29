@@ -15,6 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentMetadataService> _mockMethodOfPaymentMetadataService = new Mock<IMethodOfPaymentMetadataService>();
+        private readonly Mock<IMethodOfPaymentMetadataKeyService> _mockMethodOfPaymentMetadataKeyService = new Mock<IMethodOfPaymentMetadataKeyService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -23,7 +24,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         {
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockMethodOfPaymentMetadataService.Object);
+                _mockMethodOfPaymentMetadataService.Object,
+                _mockMethodOfPaymentMetadataKeyService.Object);
 
         }
 
@@ -33,7 +35,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 new BusinessLogic.Entities.MopMetadata()
                 {
                     Id = 1,
-                    Key = "Test key",
+                    MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                    {
+                        Name = "Test key"
+                    },
                     Value = "Test value",
                     MopCode = "M1"
                 });
@@ -55,7 +60,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             // Arrange
             var editViewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockMethodOfPaymentMetadataService.Object);
+                _mockMethodOfPaymentMetadataService.Object,
+                _mockMethodOfPaymentMetadataKeyService.Object);
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -113,7 +119,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.Key.Should().Be("Test key");
+            result.MopMetadataKeyName.Should().Be("Test key");
         }
 
         [TestMethod]

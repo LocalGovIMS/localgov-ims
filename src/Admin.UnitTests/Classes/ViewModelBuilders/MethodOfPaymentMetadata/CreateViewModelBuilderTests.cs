@@ -15,6 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentMetadataService> _mockMethodOfPaymentMetadataService = new Mock<IMethodOfPaymentMetadataService>();
+        private readonly Mock<IMethodOfPaymentMetadataKeyService> _mockMethodOfPaymentMetadataKeyService = new Mock<IMethodOfPaymentMetadataKeyService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -23,7 +24,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         {
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockMethodOfPaymentMetadataService.Object);
+                _mockMethodOfPaymentMetadataService.Object,
+                _mockMethodOfPaymentMetadataKeyService.Object);
         }
 
         private void SetupServices()

@@ -21,9 +21,11 @@ namespace Admin.Classes.Commands.MethodOfPaymentMetadata
             {
                 Id = model.Id,
                 MopCode = model.MopCode,
-                Key = model.Key,
+                MopMetadataKeyId = model.MopMetadataKeyId,
                 Value = model.Value
             };
+
+            return new CommandResult(false, "Fail");
 
             var result = _service.Update(item);
 

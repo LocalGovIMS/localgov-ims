@@ -16,7 +16,14 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         {
             // Arrange
             var mop = new Entities.Mop() { Metadata = new List<Entities.MopMetadata>() };
-            mop.Metadata.Add(new Entities.MopMetadata() { Key = MopMetadataKeys.IsATransferOut, Value = value.ToString() });
+            mop.Metadata.Add(new Entities.MopMetadata()
+            {
+                MopMetadataKey = new Entities.MopMetadataKey()
+                {
+                    Name = MopMetadataKeys.IsATransferOut
+                },
+                Value = value.ToString()
+            });
 
             // Act
             var result = mop.IsATransferOut();
