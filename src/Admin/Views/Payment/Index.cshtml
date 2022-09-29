@@ -142,6 +142,18 @@
                     </div>
                 </div>
                 <div class="eight wide field">
+                    <div class="ui icon large info message payment-reversal-warning" style="display:none;">
+                        <i class="info icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                Check amount
+                            </div>
+                            <p>A negative amount is expected for a write back MOP.</p>
+                            <p>Please check your input before continuing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="eight wide field">
                     @Html.LabelFor(m => m.Amount)
                     <div class="ui labeled input">
                         <div class="ui label">
@@ -158,6 +170,7 @@
                     <button value="Card" name="action" type="submit" class="ui green button add-to-basket">Add to basket</button>
                 </div>
             </div>
+
         </div>
 
         <div class="six wide column">

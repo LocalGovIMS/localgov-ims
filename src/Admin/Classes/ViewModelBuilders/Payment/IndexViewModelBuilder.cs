@@ -1,5 +1,6 @@
 ﻿using Admin.Models.Payment;
 using BusinessLogic.Entities;
+using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models.Payments;
@@ -113,7 +114,8 @@ namespace Admin.Classes.ViewModelBuilders.Payment
                     var dataAttributes = new List<ValuePair>
                     {
                         new ValuePair() { Key = "mop-minimum-amount", Value = item.Mop.MinimumAmount.ToString() },
-                        new ValuePair() { Key = "mop-maximum-amount", Value = item.Mop.MaximumAmount.ToString() }
+                        new ValuePair() { Key = "mop-maximum-amount", Value = item.Mop.MaximumAmount.ToString() },
+                        new ValuePair() { Key = "mop-is-a-payment-reversal", Value = item.Mop.IsAPaymentReversal().ToString() }
                     };
 
                     selectListItems.Add(new SelectListItem()
@@ -131,7 +133,8 @@ namespace Admin.Classes.ViewModelBuilders.Payment
                 var dataAttributes = new List<ValuePair>
                 {
                     new ValuePair() { Key = "mop-minimum-amount", Value = mop.MinimumAmount.ToString() },
-                    new ValuePair() { Key = "mop-maximum-amount", Value = mop.MaximumAmount.ToString() }
+                    new ValuePair() { Key = "mop-maximum-amount", Value = mop.MaximumAmount.ToString() },
+                    new ValuePair() { Key = "mop-is-a-payment-reversal", Value = mop.IsAPaymentReversal().ToString() }
                 };
 
                 selectListItems.Add(new SelectListItem()

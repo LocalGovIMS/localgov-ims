@@ -18,11 +18,21 @@
 $('.mop-dropdown').dropdown({
     onChange: function (e) {
         setTimeout(function () {
+
             var minVal = $(".mop-dropdown .selected").data("mop-minimum-amount");
             var maxVal = $(".mop-dropdown .selected").data("mop-maximum-amount");
+            var isAPaymentReversal = $(".mop-dropdown .selected").data("mop-is-a-payment-reversal").toLowerCase() === 'true';
+
+            if (isAPaymentReversal) {
+                $('.payment-reversal-warning').css('display', 'flex');
+            }
+            else {
+                $('.payment-reversal-warning').css('display', 'none');
+            }
 
             $('#MopCode').data('mop-minimum-amount', minVal);
             $('#MopCode').data('mop-maximum-amount', maxVal);
+
         }, 50);
     }
 });
