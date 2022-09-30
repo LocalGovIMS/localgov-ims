@@ -58,23 +58,13 @@ namespace Admin.UnitTests.Controllers.MetadataKey.Delete
         }
 
         [TestMethod]
-        public void RedirectsToTheCorrectController()
-        {
-            var result = GetResult() as RedirectToRouteResult;
-
-            Assert.IsNotNull(result);
-
-            Assert.AreEqual(result.RouteValues["controller"], "MetadataKey");
-        }
-
-        [TestMethod]
         public void RedirectsToTheCorrectAction()
         {
             var result = GetResult() as RedirectToRouteResult;
 
             Assert.IsNotNull(result);
 
-            Assert.AreEqual(result.RouteValues["action"], "Edit");
+            Assert.AreEqual(result.RouteValues["action"], "List");
         }
     }
 }
