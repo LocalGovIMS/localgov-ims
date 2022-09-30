@@ -36,6 +36,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<FundMetadata> FundMetadata { get; set; }
         public virtual DbSet<Mop> MOPs { get; set; }
         public virtual DbSet<MopMetadata> MopMetadata { get; set; }
+        public virtual DbSet<MetadataKey> MetadataKeys { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<Role> ImsRoles { get; set; }
         public virtual DbSet<Suspense> Suspenses { get; set; }
@@ -491,6 +492,14 @@ namespace DataAccess.Persistence
 
             modelBuilder.Entity<ImportTypeImportProcessingRule>()
                 .HasIndex(s => new { s.ImportTypeId, s.ImportProcessingRuleId })
+                .IsUnique(true);
+
+            modelBuilder.Entity<MetadataKey>()
+                .HasIndex(s => new { s.Name, s.EntityType })
+                .IsUnique(true);
+
+            modelBuilder.Entity<MopMetadata>()
+                .HasIndex(s => new { s.MopCode, s.MetadataKeyId })
                 .IsUnique(true);
         }
 

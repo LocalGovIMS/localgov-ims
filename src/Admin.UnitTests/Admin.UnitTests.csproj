@@ -163,6 +163,9 @@
     <Compile Include="Classes\Commands\CheckDigitConfiguration\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundMessage\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\FundMessage\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\FundGroup\DeleteCommandTests.cs" />
@@ -241,6 +244,9 @@
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\ListViewModelBuilderTests.cs" />
@@ -294,7 +300,17 @@
     <Compile Include="Classes\ViewModelBuilders\Office\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
+    <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
+    <Compile Include="Controllers\MetadataKey\Create\Get.cs" />
+    <Compile Include="Controllers\MetadataKey\Create\Post.cs" />
+    <Compile Include="Controllers\MetadataKey\Delete\Get.cs" />
+    <Compile Include="Controllers\MetadataKey\Details\Get.cs" />
+    <Compile Include="Controllers\MetadataKey\Edit\Get.cs" />
+    <Compile Include="Controllers\MetadataKey\Edit\Post.cs" />
+    <Compile Include="Controllers\MetadataKey\List\Get.cs" />
     <Compile Include="Controllers\Import\BaseTest.cs" />
     <Compile Include="Controllers\Import\ConstructorTests.cs" />
     <Compile Include="Controllers\Import\Details\Get.cs" />

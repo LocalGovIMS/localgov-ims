@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Classes.Commands.MethodOfPaymentMetadata
         {
             return new ViewModel()
             {
-                Key = "Test key",
+                MetadataKeyName = "Test key",
                 Value = "Test value"
             };
         }

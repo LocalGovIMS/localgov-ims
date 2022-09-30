@@ -54,9 +54,9 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 { 
                     Id = x.Id,
                     ParentCode = x.MopCode,
-                    Key = x.Key,
-                    Value = x.Value,
-                    Description = _service.GetMetadata().FirstOrDefault(y => y.Key == x.Key)?.Description ?? "Unknown"
+                    Key = x.MetadataKey.Name,
+                    Description = x.MetadataKey.Description,
+                    Value = x.Value
                 }),
                 searchResult.Page,
                 searchResult.PageSize,

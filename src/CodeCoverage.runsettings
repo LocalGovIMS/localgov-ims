@@ -39,6 +39,7 @@ Included items must then not match any entries in the exclude list to remain inc
                 <ModulePath>.*\Omu.ValueInjecter.dll$</ModulePath>
                 <ModulePath>.*\moq.dll$</ModulePath>
 				<ModulePath>.*\Unity.Abstractions.dll$</ModulePath>
+				<ModulePath>.*\Microsoft.Owin.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
 

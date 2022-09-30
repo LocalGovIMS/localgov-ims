@@ -209,4 +209,18 @@
             </a>
         </div>
     }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "MetadataKey")">
+                <div class="content">
+                    <div class="header">Metadata Keys</div>
+                    <div class="description">
+                        <p>Metadata Keys</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
 </div>

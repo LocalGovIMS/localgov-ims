@@ -30,6 +30,7 @@ namespace DataAccess
                 .RegisterType<IFundMetadataRepository, FundMetadataRepository>()
                 .RegisterType<IMethodOfPaymentRepository, MethofOfPaymentRepository>()
                 .RegisterType<IMethodOfPaymentMetadataRepository, MethodOfPaymentMetadataRepository>()
+                .RegisterType<IMetadataKeyRepository, MetadataKeyRepository>()
                 .RegisterType<IOfficeRepository, OfficeRepository>()
                 .RegisterType<IPendingTransactionRepository, PendingTransactionRepository>()
                 .RegisterType<IRoleRepository, RoleRepository>()

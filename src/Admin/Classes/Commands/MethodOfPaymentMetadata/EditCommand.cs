@@ -21,7 +21,7 @@ namespace Admin.Classes.Commands.MethodOfPaymentMetadata
             {
                 Id = model.Id,
                 MopCode = model.MopCode,
-                Key = model.Key,
+                MetadataKeyId = model.MetadataKeyId,
                 Value = model.Value
             };
 

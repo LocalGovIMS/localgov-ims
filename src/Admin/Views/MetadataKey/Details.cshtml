@@ -1,0 +1,42 @@
+﻿@model Admin.Models.MetadataKey.DetailsViewModel
+@{
+    ViewBag.Title = "Metadata key";
+}
+
+@section Header {
+    <h1 class="ui header">
+        @Model.Name
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+        <div class="sub header">
+            Metadata key details
+        </div>
+    </h1>
+}
+
+<div class="ui form">
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.Description)
+        @Html.DisplayFor(m => m.Description)
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.IsASystemType)
+        @Model.IsASystemType.ToYesNoString()
+    </div>
+
+    <div class="four wide field">
+        @Html.LabelFor(m => m.EntityType)
+        @Html.DisplayFor(m => m.EntityType)
+    </div>
+
+    <br />
+
+    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+
+</div>

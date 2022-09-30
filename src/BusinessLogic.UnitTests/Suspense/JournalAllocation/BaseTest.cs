@@ -34,7 +34,10 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsAJournalReallocation,
+                                MetadataKey = new MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsAJournalReallocation
+                                },
                                 Value = "True"
                             }
                         }

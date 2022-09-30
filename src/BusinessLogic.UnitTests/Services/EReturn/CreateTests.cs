@@ -74,7 +74,10 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                         {
                             new Entities.MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsACashPayment,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsACashPayment
+                                },
                                 Value = "True"
                             }
                         }
@@ -86,7 +89,10 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                         {
                             new Entities.MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsAnEReturnChequePayment,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsAnEReturnChequePayment
+                                },
                                 Value = "True"
                             }
                         }

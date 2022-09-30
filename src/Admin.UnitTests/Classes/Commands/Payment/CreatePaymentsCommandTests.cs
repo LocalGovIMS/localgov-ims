@@ -56,7 +56,10 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsACardViaStaffPayment,
+                                MetadataKey = new BusinessLogic.Entities.MetadataKey 
+                                {
+                                    Name = MopMetadataKeys.IsACardViaStaffPayment
+                                },
                                 Value = "True"
                             }
                         }

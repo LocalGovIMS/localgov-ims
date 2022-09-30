@@ -1,0 +1,28 @@
+﻿@model Admin.Models.MetadataKey.SearchCriteria
+
+@using (Html.BeginForm("Search", "MetadataKey", FormMethod.Get))
+{
+
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="four fields">
+                <div class="field">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { size = 50, placeholder = "Enter name" })
+                </div>
+                <div class="field">
+                    @Html.LabelFor(m => m.EntityType)
+                    @Html.EnumDropDownListFor(m => m.EntityType)
+                </div>
+                <div class="field">
+                    <label>&nbsp;</label>
+                    <button class="ui icon blue button" tabindex="0" type="submit">
+                        <i class="search icon"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -33,7 +33,7 @@ namespace DataAccess.Repositories
 
             if (!string.IsNullOrWhiteSpace(criteria.Type))
             {
-                mops = mops.Where(x => x.Metadata.Any(y => y.Key == criteria.Type && y.Value == "TRUE"));
+                mops = mops.Where(x => x.Metadata.Any(y => y.MetadataKey.Name == criteria.Type && y.Value == "TRUE"));
             }
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;

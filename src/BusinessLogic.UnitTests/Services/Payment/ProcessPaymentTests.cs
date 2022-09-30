@@ -33,7 +33,10 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsACardSelfServicePayment,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsACardSelfServicePayment
+                                },
                                 Value = "True"
                             }
                         }
@@ -45,7 +48,10 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsACardPaymentFee,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsACardPaymentFee
+                                },
                                 Value = "True"
                             }
                         }
@@ -54,22 +60,28 @@ namespace BusinessLogic.UnitTests.Services.Payment
 
             MockUnitOfWork.Setup(x => x.Mops.GetMop(It.IsAny<string>()))
                 .Returns(new Mop()
-                    {
-                        MopCode = "90",
-                        Metadata = new List<MopMetadata>()
+                {
+                    MopCode = "90",
+                    Metadata = new List<MopMetadata>()
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsACardSelfServicePayment,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsACardSelfServicePayment
+                                },
                                 Value = "True"
                             },
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IncursAFee,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IncursAFee
+                                },
                                 Value = _incursAFee
                             }
                         }
-                    }
+                }
                 );
         }
 

@@ -18,7 +18,14 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         {
             // Arrange
             var mop = new Entities.Mop() { Metadata = new List<Entities.MopMetadata>() };
-            mop.Metadata.Add(new Entities.MopMetadata() { Key = MopMetadataKeys.TextColour, Value = value });
+            mop.Metadata.Add(new Entities.MopMetadata()
+            {
+                MetadataKey = new Entities.MetadataKey()
+                {
+                    Name = MopMetadataKeys.TextColour
+                },
+                Value = value
+            });
 
             // Act
             var result = mop.GetMopMetadataValue(MopMetadataKeys.TextColour);

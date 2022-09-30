@@ -88,7 +88,7 @@ namespace BusinessLogic.Extensions
 
             if (item.Metadata == null || !item.Metadata.Any()) return false;
 
-            var metaData = item.Metadata.FirstOrDefault(x => x.Key == key && Convert.ToBoolean(x.Value).Equals(true));
+            var metaData = item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key && Convert.ToBoolean(x.Value).Equals(true));
 
             return metaData != null;
         }
@@ -117,7 +117,7 @@ namespace BusinessLogic.Extensions
         {
             if (item.Metadata == null) return defaultValue;
 
-            return item.Metadata.FirstOrDefault(x => x.Key == key)?.Value ?? defaultValue;
+            return item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key)?.Value ?? defaultValue;
         }
 
         public static T GetMopMetadataValue<T>(this Mop item, string key)
@@ -129,9 +129,9 @@ namespace BusinessLogic.Extensions
         {
             if (item.Metadata == null) return defaultValue;
 
-            return item.Metadata.FirstOrDefault(x => x.Key == key)?.Value == null
+            return item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key)?.Value == null
                 ? defaultValue
-                : (T)Convert.ChangeType(item.Metadata.FirstOrDefault(x => x.Key == key)?.Value, typeof(T));
+                : (T)Convert.ChangeType(item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key)?.Value, typeof(T));
         }
     }
 }

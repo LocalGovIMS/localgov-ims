@@ -57,7 +57,10 @@ namespace BusinessLogic.UnitTests.Classes.Smtp
                         {
                             new MopMetadata()
                             {
-                                Key = MopMetadataKeys.IsARefundablePayment,
+                                MetadataKey = new MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsARefundablePayment
+                                },
                                 Value = "True"
                             }
                         }

@@ -20,7 +20,7 @@ namespace Admin.Classes.Commands.MethodOfPaymentMetadata
             var item = new BusinessLogic.Entities.MopMetadata()
             {
                 MopCode = model.MopCode,
-                Key = model.Key,                
+                MetadataKeyId = model.MetadataKeyId,                
                 Value = model.Value
             };
 

@@ -119,19 +119,22 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
             service.Setup(x => x.GetAllMops(It.IsAny<bool>())).Returns(
                 new List<BusinessLogic.Entities.Mop>()
                 {
-                   new BusinessLogic.Entities.Mop()
-                   {
-                       MopCode="JR",
-                       MopName="Journal Reallocation",
-                       Metadata = new List<BusinessLogic.Entities.MopMetadata>()
-                       {
-                           new BusinessLogic.Entities.MopMetadata()
-                           {
-                               Key = MopMetadataKeys.IsAJournalReallocation,
-                               Value = "true"
-                           }
-                       }
-                   }
+                    new BusinessLogic.Entities.Mop()
+                    {
+                        MopCode="JR",
+                        MopName="Journal Reallocation",
+                        Metadata = new List<BusinessLogic.Entities.MopMetadata>()
+                        {
+                            new BusinessLogic.Entities.MopMetadata()
+                            {
+                                MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsAJournalReallocation
+                                },
+                                Value = "true"
+                            }
+                        }
+                    }
                 });
         }
 

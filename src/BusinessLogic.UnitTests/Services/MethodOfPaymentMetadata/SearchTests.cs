@@ -21,7 +21,7 @@ namespace BusinessLogic.UnitTests.Services.MethodOfPaymentMetadata
                         new Entities.MopMetadata()
                         {
                             Id = 1,
-                            Key = "Key",
+                            MetadataKeyId = 1,
                             Value = "Test"
                         }
                     }

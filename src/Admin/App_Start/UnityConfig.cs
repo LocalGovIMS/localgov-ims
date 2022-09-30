@@ -328,6 +328,12 @@ namespace Admin
                 .RegisterType<IModelBuilder<ViewModels.Import.DetailsViewModel, int>, ViewModelBuilders.Import.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Import.ListViewModel, ViewModels.Import.SearchCriteria>, ViewModelBuilders.Import.ListViewModelBuilder>()
 
+                .RegisterType<IModelBuilder<ViewModels.MetadataKey.DetailsViewModel, int>, ViewModelBuilders.MetadataKey.DetailsViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.MetadataKey.EditViewModel, int>, ViewModelBuilders.MetadataKey.EditViewModelBuilder>()
+                .RegisterType<IModelBuilder<ViewModels.MetadataKey.ListViewModel, ViewModels.MetadataKey.SearchCriteria>, ViewModelBuilders.MetadataKey.ListViewModelBuilder>()
+                .RegisterType<IModelCommand<ViewModels.MetadataKey.EditViewModel>, Commands.MetadataKey.CreateCommand>("Create")
+                .RegisterType<IModelCommand<ViewModels.MetadataKey.EditViewModel>, Commands.MetadataKey.EditCommand>("Edit")
+                .RegisterType<IModelCommand<int>, Commands.MetadataKey.DeleteCommand>("MetadataKey.Command.Delete")
                 ;
         }
 
@@ -371,7 +377,8 @@ namespace Admin
                 .RegisterType<IImportTypeControllerDependencies, ImportTypeControllerDependencies>()
                 .RegisterType<IImportTypeImportProcessingRuleControllerDependencies, ImportTypeImportProcessingRuleControllerDependencies>()
                 .RegisterType<IImportProcessingRuleImportTypeControllerDependencies, ImportProcessingRuleImportTypeControllerDependencies>()
-                .RegisterType<IImportControllerDependencies, ImportControllerDependencies>();
+                .RegisterType<IImportControllerDependencies, ImportControllerDependencies>()
+                .RegisterType<IMetadataKeyControllerDependencies, MetadataKeyControllerDependencies>();
         }
 
         private static void RegisterOther(IUnityContainer container)

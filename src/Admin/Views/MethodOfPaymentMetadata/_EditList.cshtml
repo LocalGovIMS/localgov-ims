@@ -11,10 +11,13 @@
                 <th scope="col">
                     Value
                 </th>
+                <th scope="col">
+
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Items)
+            @foreach (var item in Model.Items.OrderBy(x => x.Description))
             {
                 <tr>
                     <td>
