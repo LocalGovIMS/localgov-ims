@@ -158,7 +158,7 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                         {
                             new Entities.MopMetadata()
                             {
-                                MopMetadataKey = new Entities.MopMetadataKey()
+                                MetadataKey = new Entities.MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournalReallocation
                                 },
@@ -189,7 +189,7 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                         {
                             new Entities.MopMetadata()
                             {
-                                MopMetadataKey = new Entities.MopMetadataKey()
+                                MetadataKey = new Entities.MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournalReallocation
                                 },
@@ -214,7 +214,7 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                         {
                             new Entities.MopMetadata()
                             {
-                                MopMetadataKey = new Entities.MopMetadataKey()
+                                MetadataKey = new Entities.MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournalReallocation
                                 },

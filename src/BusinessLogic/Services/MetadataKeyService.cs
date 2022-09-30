@@ -5,8 +5,7 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
-using BusinessLogic.Models.MethodOfPaymentMetadataKey;
+using BusinessLogic.Models.MetadataKey;
 using BusinessLogic.Models.Shared;
 using log4net;
 using System;
@@ -15,22 +14,22 @@ using System.Linq;
 
 namespace BusinessLogic.Services
 {
-    public class MethodOfPaymentMetadataKeyService : BaseService, IMethodOfPaymentMetadataKeyService
+    public class MetadataKeyService : BaseService, IMetadataKeyService
     {
-        public MethodOfPaymentMetadataKeyService(ILog logger
+        public MetadataKeyService(ILog logger
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext)
             : base(logger, unitOfWork, securityContext)
         {
         }
 
-        public SearchResult<MopMetadataKey> Search(SearchCriteria criteria)
+        public SearchResult<MetadataKey> Search(SearchCriteria criteria)
         {
             try
             {
-                var items = UnitOfWork.MopMetadataKeys.Search(criteria, out int itemsCount).ToList();
+                var items = UnitOfWork.MetadataKeys.Search(criteria, out int itemsCount).ToList();
 
-                return new SearchResult<MopMetadataKey>()
+                return new SearchResult<MetadataKey>()
                 {
                     Count = itemsCount,
                     Items = items,
@@ -45,11 +44,11 @@ namespace BusinessLogic.Services
             }
         }
 
-        public MopMetadataKey Get(int id)
+        public MetadataKey Get(int id)
         {
             try
             {
-                return UnitOfWork.MopMetadataKeys.Get(id);
+                return UnitOfWork.MetadataKeys.Get(id);
             }
             catch (Exception e)
             {
@@ -58,11 +57,11 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<MopMetadataKey> GetAll()
+        public List<MetadataKey> GetAll()
         {
             try
             {
-                return UnitOfWork.MopMetadataKeys.GetAll().ToList();
+                return UnitOfWork.MetadataKeys.GetAll().ToList();
             }
             catch (Exception e)
             {
@@ -71,14 +70,14 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult Create(MopMetadataKey item)
+        public IResult Create(MetadataKey item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
 
             try
             {
-                UnitOfWork.MopMetadataKeys.Add(item);
+                UnitOfWork.MetadataKeys.Add(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -86,18 +85,18 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to create the MOP Metadata Key record");
+                return new Result("Unable to create the Metadata Key record");
             }
         }
 
-        public IResult Update(MopMetadataKey item)
+        public IResult Update(MetadataKey item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
                 && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
 
             try
             {
-                UnitOfWork.MopMetadataKeys.Update(item);
+                UnitOfWork.MetadataKeys.Update(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -105,7 +104,7 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to update this MOP Metadata Key record");
+                return new Result("Unable to update this Metadata Key record");
             }
         }
 
@@ -116,12 +115,12 @@ namespace BusinessLogic.Services
 
             try
             {
-                var item = UnitOfWork.MopMetadataKeys.Get(id);
+                var item = UnitOfWork.MetadataKeys.Get(id);
 
-                if (item.Type == (byte)MopMetadataKeyType.System)
-                    return new Result("Cannot delete a system metadata key");
+                if (item.SystemType)
+                    return new Result("Cannot delete a system Metadata Key");
 
-                UnitOfWork.MopMetadataKeys.Remove(item);
+                UnitOfWork.MetadataKeys.Remove(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 return new Result();
@@ -129,7 +128,7 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return new Result("Unable to delete this MOP Metadata Key record");
+                return new Result("Unable to delete this Metadata Key record");
             }
         }
     }

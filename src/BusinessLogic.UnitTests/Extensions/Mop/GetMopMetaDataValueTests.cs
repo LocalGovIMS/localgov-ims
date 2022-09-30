@@ -20,7 +20,7 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
             var mop = new Entities.Mop() { Metadata = new List<Entities.MopMetadata>() };
             mop.Metadata.Add(new Entities.MopMetadata()
             {
-                MopMetadataKey = new Entities.MopMetadataKey()
+                MetadataKey = new Entities.MetadataKey()
                 {
                     Name = MopMetadataKeys.TextColour
                 },

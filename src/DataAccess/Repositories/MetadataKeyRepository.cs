@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Repositories;
-using BusinessLogic.Models.MethodOfPaymentMetadataKey;
+using BusinessLogic.Models.MetadataKey;
 using DataAccess.Extensions;
 using DataAccess.Persistence;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    public class MethodOfPaymentMetadataKeyRepository : Repository<MopMetadataKey>, IMethodOfPaymentMetadataKeyRepository
+    public class MetadataKeyRepository : Repository<MetadataKey>, IMetadataKeyRepository
     {
-        public MethodOfPaymentMetadataKeyRepository(IncomeDbContext context) : base(context)
+        public MetadataKeyRepository(IncomeDbContext context) : base(context)
         {
             IncomeDbContext.Configuration.ProxyCreationEnabled = false;
             IncomeDbContext.Configuration.LazyLoadingEnabled = false;
         }
 
-        public IEnumerable<MopMetadataKey> Search(SearchCriteria criteria, out int resultCount)
+        public IEnumerable<MetadataKey> Search(SearchCriteria criteria, out int resultCount)
         {
-            var items = IncomeDbContext.MopMetadataKeys
+            var items = IncomeDbContext.MetadataKeys
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(criteria.Name))
@@ -27,9 +27,14 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.Name == criteria.Name);
             }
 
-            if(criteria.Type.HasValue)
+            if (criteria.SystemType.HasValue)
             {
-                items = items.Where(x => x.Type == (byte)criteria.Type);
+                items = items.Where(x => x.SystemType == criteria.SystemType.Value);
+            }
+
+            if (criteria.EntityType.HasValue)
+            {
+                items = items.Where(x => x.EntityType == (byte)criteria.EntityType);
             }
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
@@ -47,9 +52,9 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public MopMetadataKey Get(int id)
+        public MetadataKey Get(int id)
         {
-            var item = IncomeDbContext.MopMetadataKeys
+            var item = IncomeDbContext.MetadataKeys
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -58,9 +63,9 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public void Update(MopMetadataKey entity)
+        public void Update(MetadataKey entity)
         {
-            var item = IncomeDbContext.MopMetadataKeys
+            var item = IncomeDbContext.MetadataKeys
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
                 .ApplyFilters(Filters)

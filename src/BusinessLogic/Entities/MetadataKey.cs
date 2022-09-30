@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLogic.Entities
 {
-    public partial class MopMetadataKey
+    public partial class MetadataKey
     {
         public int Id { get; set; }
 
@@ -13,6 +13,8 @@ namespace BusinessLogic.Entities
         [Required]
         public string Description { get; set; }
 
-        public byte Type { get; set; }
+        public bool SystemType { get; set; }
+
+        public byte EntityType { get; set; }
     }
 }

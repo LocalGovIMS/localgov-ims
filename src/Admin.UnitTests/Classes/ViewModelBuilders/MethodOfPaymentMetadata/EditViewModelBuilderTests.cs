@@ -15,7 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentMetadataService> _mockMethodOfPaymentMetadataService = new Mock<IMethodOfPaymentMetadataService>();
-        private readonly Mock<IMethodOfPaymentMetadataKeyService> _mockMethodOfPaymentMetadataKeyService = new Mock<IMethodOfPaymentMetadataKeyService>();
+        private readonly Mock<IMetadataKeyService> _mockMethodOfPaymentMetadataKeyService = new Mock<IMetadataKeyService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -35,7 +35,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 new BusinessLogic.Entities.MopMetadata()
                 {
                     Id = 1,
-                    MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                    MetadataKey = new BusinessLogic.Entities.MetadataKey()
                     {
                         Name = "Test key"
                     },
@@ -43,27 +43,30 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                     MopCode = "M1"
                 });
 
-            _mockMethodOfPaymentMetadataKeyService.Setup(x => x.GetAll())
-                .Returns(new List<BusinessLogic.Entities.MopMetadataKey>()
+            _mockMethodOfPaymentMetadataKeyService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MetadataKey.SearchCriteria>()))
+                .Returns(new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MetadataKey>()
                 {
-                        new BusinessLogic.Entities.MopMetadataKey()
+                    Items = new List<BusinessLogic.Entities.MetadataKey>()
+                    {
+                        new BusinessLogic.Entities.MetadataKey()
                         {
                             Id = 1,
                             Name = "Key1",
                             Description = "A description"
                         },
-                        new BusinessLogic.Entities.MopMetadataKey()
+                        new BusinessLogic.Entities.MetadataKey()
                         {
                             Id = 4,
                             Name = "Key2",
                             Description = "A description"
                         },
-                        new BusinessLogic.Entities.MopMetadataKey()
+                        new BusinessLogic.Entities.MetadataKey()
                         {
                             Id = 3,
                             Name = "Key3",
                             Description = "A description"
                         }
+                    }
                 });
 
             _mockMethodOfPaymentMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria>()))
@@ -74,7 +77,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                         new BusinessLogic.Entities.MopMetadata()
                         {
                             Id = 1,
-                            MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
                             {
                                 Id = 1,
                                 Name = "Key1",
@@ -84,7 +87,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                         new BusinessLogic.Entities.MopMetadata()
                         {
                             Id = 2,
-                            MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
                             {
                                 Id = 2,
                                 Name = "Key2",
@@ -160,7 +163,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.MopMetadataKeyName.Should().Be("Test key");
+            result.MetadataKeyName.Should().Be("Test key");
         }
 
         [TestMethod]

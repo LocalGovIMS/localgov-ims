@@ -42,7 +42,7 @@ namespace BusinessLogic.UnitTests.Services.TransactionJournal
                         {
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournalReallocation
                                 },
@@ -57,7 +57,7 @@ namespace BusinessLogic.UnitTests.Services.TransactionJournal
                         {
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournal
                                 },

@@ -413,7 +413,7 @@ namespace BusinessLogic.Services
         {
             var mop = UnitOfWork.Mops.GetMop(mopCode);
 
-            var paymentIntegrationId = Convert.ToInt32(mop.Metadata.First(x => x.MopMetadataKey.Name == MopMetadataKeys.PaymentIntegrationId).Value);
+            var paymentIntegrationId = Convert.ToInt32(mop.Metadata.First(x => x.MetadataKey.Name == MopMetadataKeys.PaymentIntegrationId).Value);
 
             return UnitOfWork.PaymentIntegrations.SingleOrDefault(x => x.Id == paymentIntegrationId);
         }

@@ -54,8 +54,8 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 { 
                     Id = x.Id,
                     ParentCode = x.MopCode,
-                    Key = x.MopMetadataKey.Name,
-                    Description = x.MopMetadataKey.Description,
+                    Key = x.MetadataKey.Name,
+                    Description = x.MetadataKey.Description,
                     Value = x.Value
                 }),
                 searchResult.Page,

@@ -10,13 +10,13 @@ namespace Admin.Models.MethodOfPaymentMetadata
         public string Description { get; set; }
 
         [DisplayName("Key")]
-        public int MopMetadataKeyId { get; set; }
+        public int MetadataKeyId { get; set; }
 
         [DisplayName("Key")]
-        public string MopMetadataKeyName { get; set; }
+        public string MetadataKeyName { get; set; }
 
         [DisplayName("Description")]
-        public string MopMetadataKeyDescription { get; set; }
+        public string MetadataKeyDescription { get; set; }
 
         [DisplayName("Value")]
         public string Value { get; set; }

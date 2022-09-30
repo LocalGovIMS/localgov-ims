@@ -127,7 +127,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Journal
                         {
                             new BusinessLogic.Entities.MopMetadata()
                             {
-                                MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                                MetadataKey = new BusinessLogic.Entities.MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsAJournalReallocation
                                 },

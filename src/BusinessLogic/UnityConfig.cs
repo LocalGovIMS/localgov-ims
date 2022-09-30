@@ -43,7 +43,7 @@ namespace BusinessLogic
                 .RegisterType<IOfficeService, OfficeService>()
                 .RegisterType<IMethodOfPaymentService, MethodOfPaymentService>()
                 .RegisterType<IMethodOfPaymentMetadataService, MethodOfPaymentMetadataService>()
-                .RegisterType<IMethodOfPaymentMetadataKeyService, MethodOfPaymentMetadataKeyService>()
+                .RegisterType<IMetadataKeyService, MetadataKeyService>()
                 .RegisterType<IPaymentService, PaymentService>()
                 .RegisterType<IPaymentIntegrationService, PaymentIntegrationService>()
                 .RegisterType<IRefundService, RefundService>()

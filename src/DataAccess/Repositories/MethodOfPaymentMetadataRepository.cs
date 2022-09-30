@@ -20,7 +20,7 @@ namespace DataAccess.Repositories
         public IEnumerable<MopMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.MopMetadata
-                .Include(x => x.MopMetadataKey)
+                .Include(x => x.MetadataKey)
                 .AsQueryable();
 
             items = items.Where(x => x.MopCode == criteria.MopCode);
@@ -43,7 +43,7 @@ namespace DataAccess.Repositories
         public MopMetadata Get(int id)
         {
             var item = IncomeDbContext.MopMetadata
-                .Include(x => x.MopMetadataKey)
+                .Include(x => x.MetadataKey)
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -61,7 +61,7 @@ namespace DataAccess.Repositories
                 .FirstOrDefault();
 
             item.MopCode = entity.MopCode;
-            item.MopMetadataKeyId = entity.MopMetadataKeyId;
+            item.MetadataKeyId = entity.MetadataKeyId;
             item.Value = entity.Value;
         }
     }

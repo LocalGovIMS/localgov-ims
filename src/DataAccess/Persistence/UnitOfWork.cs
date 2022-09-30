@@ -36,7 +36,7 @@ namespace DataAccess.Persistence
         public IFundGroupFundRepository FundGroupFunds { get; private set; }
         public IMethodOfPaymentRepository Mops { get; private set; }
         public IMethodOfPaymentMetadataRepository MopMetadatas { get; private set; }
-        public IMethodOfPaymentMetadataKeyRepository MopMetadataKeys { get; private set; }
+        public IMetadataKeyRepository MetadataKeys { get; private set; }
         public IOfficeRepository Offices { get; private set; }
         public IPendingTransactionRepository PendingTransactions { get; private set; }
         public IRoleRepository Roles { get; private set; }
@@ -87,7 +87,7 @@ namespace DataAccess.Persistence
             IFundGroupFundRepository fundGroupFundRepository,
             IMethodOfPaymentRepository mopRepository,
             IMethodOfPaymentMetadataRepository mopMetadataRepository,
-            IMethodOfPaymentMetadataKeyRepository mopMetadataKeyRepository,
+            IMetadataKeyRepository mopMetadataKeyRepository,
             IOfficeRepository officeRepository,
             IPendingTransactionRepository pendingTransactionRepository,
             IRoleRepository roleRepository,
@@ -139,7 +139,7 @@ namespace DataAccess.Persistence
             FundGroupFunds = fundGroupFundRepository;
             Mops = mopRepository;
             MopMetadatas = mopMetadataRepository;
-            MopMetadataKeys = mopMetadataKeyRepository;
+            MetadataKeys = mopMetadataKeyRepository;
             Offices = officeRepository;
             PendingTransactions = pendingTransactionRepository;
             Roles = roleRepository;

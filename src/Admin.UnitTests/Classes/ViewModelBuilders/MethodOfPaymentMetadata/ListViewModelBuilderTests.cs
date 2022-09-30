@@ -35,7 +35,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                         new BusinessLogic.Entities.MopMetadata()
                         {
                             Id = 1,
-                            MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
                             {
                                 Name = "Test key"
                             },

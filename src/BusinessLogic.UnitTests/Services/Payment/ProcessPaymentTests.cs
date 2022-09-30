@@ -33,7 +33,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         {
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsACardSelfServicePayment
                                 },
@@ -48,7 +48,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         {
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsACardPaymentFee
                                 },
@@ -66,7 +66,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
                         {
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IsACardSelfServicePayment
                                 },
@@ -74,7 +74,7 @@ namespace BusinessLogic.UnitTests.Services.Payment
                             },
                             new MopMetadata()
                             {
-                                MopMetadataKey = new MopMetadataKey()
+                                MetadataKey = new MetadataKey()
                                 {
                                     Name = MopMetadataKeys.IncursAFee
                                 },

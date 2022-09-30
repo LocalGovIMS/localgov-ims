@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Added_MopMetadataKey_entity : IMigrationMetadata
+    public sealed partial class Added_MetadataKey_entity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Added_MopMetadataKey_entity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Added_MetadataKey_entity));
         
         string IMigrationMetadata.Id
         {
-            get { return "202209291344585_Added_MopMetadataKey_entity"; }
+            get { return "202209300952362_Added_MetadataKey_entity"; }
         }
         
         string IMigrationMetadata.Source

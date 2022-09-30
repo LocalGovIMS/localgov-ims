@@ -13,13 +13,13 @@ namespace Admin.Models.MethodOfPaymentMetadata
 
         [DisplayName("Key")]
         [Required]
-        public int MopMetadataKeyId { get; set; }
+        public int MetadataKeyId { get; set; }
 
         [DisplayName("Key")]
-        public string MopMetadataKeyName { get; set; }
+        public string MetadataKeyName { get; set; }
 
         [DisplayName("Description")]
-        public string MopMetadataKeyDescription { get; set; }
+        public string MetadataKeyDescription { get; set; }
 
         [DisplayName("Value")]
         [Required]
@@ -28,6 +28,6 @@ namespace Admin.Models.MethodOfPaymentMetadata
         [DisplayName("MOP Code")]
         public string MopCode { get; set; }
 
-        public SelectList MopMetadataKeys { get; set; }
+        public SelectList MetadataKeys { get; set; }
     }
 }
