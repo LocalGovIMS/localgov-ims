@@ -25,8 +25,6 @@ namespace Admin.Classes.Commands.MethodOfPaymentMetadata
                 Value = model.Value
             };
 
-            return new CommandResult(false, "Fail");
-
             var result = _service.Update(item);
 
             return new CommandResult(result);

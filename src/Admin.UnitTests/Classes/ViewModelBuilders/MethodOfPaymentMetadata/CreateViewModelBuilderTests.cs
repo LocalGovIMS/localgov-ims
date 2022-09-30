@@ -30,14 +30,55 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
 
         private void SetupServices()
         {
-            _mockMethodOfPaymentMetadataService.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
+            _mockMethodOfPaymentMetadataKeyService.Setup(x => x.GetAll())
+                .Returns(new List<BusinessLogic.Entities.MopMetadataKey>()
                 {
-                        new BusinessLogic.Models.Metadata()
+                        new BusinessLogic.Entities.MopMetadataKey()
                         {
-                            Key = "A key",
+                            Id = 1,
+                            Name = "Key1",
+                            Description = "A description"
+                        },
+                        new BusinessLogic.Entities.MopMetadataKey()
+                        {
+                            Id = 4,
+                            Name = "Key2",
+                            Description = "A description"
+                        },
+                        new BusinessLogic.Entities.MopMetadataKey()
+                        {
+                            Id = 3,
+                            Name = "Key3",
                             Description = "A description"
                         }
+                });
+
+            _mockMethodOfPaymentMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria>()))
+                .Returns(new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MopMetadata>()
+                {
+                    Items = new List<BusinessLogic.Entities.MopMetadata>()
+                    {
+                        new BusinessLogic.Entities.MopMetadata()
+                        {
+                            Id = 1,
+                            MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                            {
+                                Id = 1,
+                                Name = "Key1",
+                                Description = "A description"
+                            }
+                        },
+                        new BusinessLogic.Entities.MopMetadata()
+                        {
+                            Id = 2,
+                            MopMetadataKey = new BusinessLogic.Entities.MopMetadataKey()
+                            {
+                                Id = 2,
+                                Name = "Key2",
+                                Description = "A description"
+                            }
+                        }
+                    }
                 });
         }
 
