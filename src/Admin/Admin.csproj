@@ -209,6 +209,9 @@
     <Compile Include="Classes\Commands\CheckDigitConfiguration\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\CreateCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommand.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\MetadataKey\EditCommand.cs" />
     <Compile Include="Classes\Commands\FundMessage\CreateCommand.cs" />
     <Compile Include="Classes\Commands\FundMessage\EditCommand.cs" />
     <Compile Include="Classes\Commands\FileImport\ProcessCommand.cs" />
@@ -301,6 +304,9 @@
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\MetadataKey\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\FundMessage\ListViewModelBuilder.cs" />
@@ -360,7 +366,9 @@
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\AccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\CheckDigitConfigurationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\FundMessageControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IMetadataKeyControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleImportTypeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\ImportProcessingRuleImportTypeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IImportControllerDependencies.cs" />
@@ -475,6 +483,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
     <Compile Include="Controllers\CheckDigitConfigurationController.cs" />
+    <Compile Include="Controllers\MetadataKeyController.cs" />
     <Compile Include="Controllers\FundMessageController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportTypeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
@@ -560,6 +569,10 @@
     <Compile Include="Models\CheckDigitConfiguration\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
+    <Compile Include="Models\MetadataKey\DetailsViewModel.cs" />
+    <Compile Include="Models\MetadataKey\EditViewModel.cs" />
+    <Compile Include="Models\MetadataKey\ListViewModel.cs" />
+    <Compile Include="Models\MetadataKey\SearchCriteria.cs" />
     <Compile Include="Models\FundMessage\ListViewModel.cs" />
     <Compile Include="Models\FundMessage\SearchCriteria.cs" />
     <Compile Include="Models\ImportProcessingRuleImportType\DetailsViewModel.cs" />
@@ -1751,6 +1764,11 @@
     <Content Include="Views\EReturnNote\_List.cshtml" />
     <Content Include="Views\EReturnNote\Create.cshtml" />
     <Content Include="Views\EReturnNote\List.cshtml" />
+    <Content Include="Views\MetadataKey\_Search.cshtml" />
+    <Content Include="Views\MetadataKey\Create.cshtml" />
+    <Content Include="Views\MetadataKey\Details.cshtml" />
+    <Content Include="Views\MetadataKey\Edit.cshtml" />
+    <Content Include="Views\MetadataKey\List.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

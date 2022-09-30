@@ -15,7 +15,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMethodOfPaymentMetadataService> _mockMethodOfPaymentMetadataService = new Mock<IMethodOfPaymentMetadataService>();
-        private readonly Mock<IMetadataKeyService> _mockMethodOfPaymentMetadataKeyService = new Mock<IMetadataKeyService>();
+        private readonly Mock<IMetadataKeyService> _mockMetadataKeyService = new Mock<IMetadataKeyService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -25,7 +25,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
                 _mockMethodOfPaymentMetadataService.Object,
-                _mockMethodOfPaymentMetadataKeyService.Object);
+                _mockMetadataKeyService.Object);
 
         }
 
@@ -43,7 +43,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                     MopCode = "M1"
                 });
 
-            _mockMethodOfPaymentMetadataKeyService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MetadataKey.SearchCriteria>()))
+            _mockMetadataKeyService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MetadataKey.SearchCriteria>()))
                 .Returns(new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MetadataKey>()
                 {
                     Items = new List<BusinessLogic.Entities.MetadataKey>()
@@ -105,7 +105,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
             var editViewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
                 _mockMethodOfPaymentMetadataService.Object,
-                _mockMethodOfPaymentMetadataKeyService.Object);
+                _mockMetadataKeyService.Object);
 
             // Act
             var result = _viewModelBuilder.Build();

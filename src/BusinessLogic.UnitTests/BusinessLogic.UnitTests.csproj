@@ -123,6 +123,13 @@
     <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
     <Compile Include="Classes\RefundStatusTests.cs" />
     <Compile Include="Classes\RefundRequestTests.cs" />
+    <Compile Include="Services\MetadataKey\BaseMetadataKeyTest.cs" />
+    <Compile Include="Services\MetadataKey\CreateTests.cs" />
+    <Compile Include="Services\MetadataKey\DeleteTests.cs" />
+    <Compile Include="Services\MetadataKey\GetAllTests.cs" />
+    <Compile Include="Services\MetadataKey\GetTests.cs" />
+    <Compile Include="Services\MetadataKey\SearchTests.cs" />
+    <Compile Include="Services\MetadataKey\UpdateTests.cs" />
     <Compile Include="Suspense\JournalAllocation\BaseTest.cs" />
     <Compile Include="Suspense\JournalAllocation\CombinedTransactionJournalAllocationStrategyTests.cs" />
     <Compile Include="Suspense\JournalAllocation\DistinctTransactionJournalAllocationStrategyTests.cs" />

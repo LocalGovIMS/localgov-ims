@@ -24,12 +24,7 @@ namespace DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(criteria.Name))
             {
-                items = items.Where(x => x.Name == criteria.Name);
-            }
-
-            if (criteria.SystemType.HasValue)
-            {
-                items = items.Where(x => x.SystemType == criteria.SystemType.Value);
+                items = items.Where(x => x.Name.Contains(criteria.Name));
             }
 
             if (criteria.EntityType.HasValue)
@@ -37,17 +32,21 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.EntityType == (byte)criteria.EntityType);
             }
 
-            if (criteria.PageSize == 0) criteria.PageSize = 20;
-            if (criteria.Page == 0) criteria.Page = 1;
-
             items = items.ApplyFilters(Filters);
 
             resultCount = items.Count();
 
-            items = items
-                .OrderBy(x => x.Id)
-                .Skip((criteria.Page - 1) * criteria.PageSize)
-                .Take(criteria.PageSize);
+            if (criteria.ApplyPaging)
+            {
+
+                if (criteria.PageSize == 0) criteria.PageSize = 20;
+                if (criteria.Page == 0) criteria.Page = 1;
+
+                items = items
+                    .OrderBy(x => x.Id)
+                    .Skip((criteria.Page - 1) * criteria.PageSize)
+                    .Take(criteria.PageSize);
+            }
 
             return items.ToList();
         }

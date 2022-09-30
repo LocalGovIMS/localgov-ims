@@ -1,0 +1,61 @@
+﻿@model Admin.Models.MetadataKey.EditViewModel
+@{
+    ViewBag.Title = "Create metadata key";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header {
+    <h1 class="ui header">
+        Create metadata key
+        <div class="sub header">
+            Metadata key details
+        </div>
+    </h1>
+}
+
+@using (Html.BeginForm("Create", "MetadataKey", FormMethod.Post))
+{
+
+    <div class="ui form">
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.Description)
+            @Html.EditorFor(m => m.Description)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+
+        <div class="four wide field">
+            @Html.LabelFor(m => m.EntityType)
+            @Html.EnumDropDownListFor(m => m.EntityType)
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.EntityType)
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="ui primary button" />
+        @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+
+    </div>
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown({
+            match: 'both'
+        });
+    </script>
+}

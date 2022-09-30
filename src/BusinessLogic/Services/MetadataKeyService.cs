@@ -66,7 +66,7 @@ namespace BusinessLogic.Services
             catch (Exception e)
             {
                 Logger.Error(null, e);
-                return null;
+                return new List<MetadataKey>();
             }
         }
 
@@ -96,6 +96,8 @@ namespace BusinessLogic.Services
 
             try
             {
+                // TODO: Should we be able to update system metadata keys? Maybe only the description?
+
                 UnitOfWork.MetadataKeys.Update(item);
                 UnitOfWork.Complete(SecurityContext.UserId);
 
