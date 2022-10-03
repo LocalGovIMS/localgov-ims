@@ -10,7 +10,7 @@ namespace BusinessLogic.Extensions
         {
             if (metaData == null || !metaData.Any()) return string.Empty;
 
-            var item = metaData.FirstOrDefault(x => x.Key == key);
+            var item = metaData.FirstOrDefault(x => x.MetadataKey.Name == key);
 
             return (item == null)
                 ? string.Empty

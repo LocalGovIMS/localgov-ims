@@ -35,7 +35,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
                         new BusinessLogic.Entities.FundMetadata()
                         {
                             Id = 1,
-                            Key = "Test key",
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                            {
+                                Name = "Test key"
+                            },
                             Value = "Test value",
                         }
                     },

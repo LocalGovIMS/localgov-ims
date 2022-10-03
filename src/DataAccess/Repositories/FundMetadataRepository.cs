@@ -54,7 +54,7 @@ namespace DataAccess.Repositories
         {
             var item = IncomeDbContext.FundMetadata
                 .AsQueryable()
-                .Where(x => x.FundCode == fundCode && x.Key == key)
+                .Where(x => x.FundCode == fundCode && x.MetadataKey.Name == key)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 
@@ -70,7 +70,7 @@ namespace DataAccess.Repositories
                 .FirstOrDefault();
 
             item.FundCode = entity.FundCode;
-            item.Key = entity.Key;
+            item.MetadataKeyId = entity.MetadataKeyId;
             item.Value = entity.Value;
         }
     }

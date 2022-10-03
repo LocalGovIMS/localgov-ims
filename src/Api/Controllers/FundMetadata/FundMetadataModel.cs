@@ -11,7 +11,7 @@
         public FundMetadataModel(BusinessLogic.Entities.FundMetadata source)
         {
             FundCode = source.FundCode;
-            Key = source.Key;
+            Key = source.MetadataKey.Name;
             Value = source.Value;
         }
     }

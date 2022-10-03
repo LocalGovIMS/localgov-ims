@@ -66,7 +66,10 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                         {
                             new Entities.FundMetadata()
                             {
-                                Key = FundMetadataKeys.IsAnEReturnDefaultFund,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = FundMetadataKeys.IsAnEReturnDefaultFund
+                                },
                                 Value = "True"
                             }
                         }

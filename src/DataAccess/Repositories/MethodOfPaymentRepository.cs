@@ -19,6 +19,7 @@ namespace DataAccess.Repositories
         {
             var item = IncomeDbContext.MOPs
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.MopCode == id)
                 .ApplyFilters(Filters)
@@ -54,7 +55,6 @@ namespace DataAccess.Repositories
         public void Update(Mop entity)
         {
             var item = IncomeDbContext.MOPs
-                .Include(x => x.Metadata)
                 .AsQueryable()
                 .Where(x => x.MopCode == entity.MopCode)
                 .ApplyFilters(Filters)
@@ -72,12 +72,14 @@ namespace DataAccess.Repositories
             {
                 return IncomeDbContext.MOPs
                     .Include(x => x.Metadata)
+                    .Include(x => x.Metadata.Select(y => y.MetadataKey))
                     .AsQueryable()
                     .ApplyFilters(Filters).ToList();
             }
 
             return IncomeDbContext.MOPs
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)

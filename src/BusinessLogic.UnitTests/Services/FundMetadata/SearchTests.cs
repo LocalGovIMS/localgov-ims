@@ -21,7 +21,10 @@ namespace BusinessLogic.UnitTests.Services.FundMetadata
                         new Entities.FundMetadata()
                         {
                             Id = 1,
-                            Key = "Key",
+                            MetadataKey = new Entities.MetadataKey()
+                            {
+                                Name = "Key"
+                            },
                             Value = "Test"
                         }
                     }

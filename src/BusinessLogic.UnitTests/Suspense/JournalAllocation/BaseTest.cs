@@ -69,7 +69,10 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                         {
                             new FundMetadata()
                             {
-                                Key = FundMetadataKeys.IsASuspenseJournalFund,
+                                MetadataKey = new MetadataKey()
+                                {
+                                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                                },
                                 Value = "True"
                             }
                         }

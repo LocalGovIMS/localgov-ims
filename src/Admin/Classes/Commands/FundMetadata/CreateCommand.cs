@@ -20,7 +20,7 @@ namespace Admin.Classes.Commands.FundMetadata
             var item = new BusinessLogic.Entities.FundMetadata()
             {
                 FundCode = model.FundCode,
-                Key = model.Key,                
+                MetadataKeyId = model.MetadataKeyId,
                 Value = model.Value
             };
 

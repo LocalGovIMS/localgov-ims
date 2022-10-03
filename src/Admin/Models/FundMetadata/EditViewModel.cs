@@ -13,7 +13,13 @@ namespace Admin.Models.FundMetadata
 
         [DisplayName("Key")]
         [Required]
-        public string Key { get; set; }
+        public int MetadataKeyId { get; set; }
+
+        [DisplayName("Key")]
+        public string MetadataKeyName { get; set; }
+
+        [DisplayName("Description")]
+        public string MetadataKeyDescription { get; set; }
 
         [DisplayName("Value")]
         [Required]
@@ -22,6 +28,6 @@ namespace Admin.Models.FundMetadata
         [DisplayName("Fund code")]
         public string FundCode { get; set; }
 
-        public SelectList Keys { get; set; }
+        public SelectList MetadataKeys { get; set; }
     }
 }

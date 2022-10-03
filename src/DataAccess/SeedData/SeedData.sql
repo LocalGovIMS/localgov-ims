@@ -119,6 +119,8 @@ VALUES ([Name], [DisplayName], [Type], [DisplayOrder]);
 MERGE INTO MetadataKeys AS [Target]
 USING (SELECT * 
 		FROM (VALUES
+
+			-- MOP
 			('IsACashPayment', 'Is a cash payment', 1, 1),
 			('IsAnEReturnChequePayment', 'Is an eReturn cheque payment', 1, 1),
 			('IsAJournal', 'Is a journal', 1, 1),
@@ -139,7 +141,18 @@ USING (SELECT *
 			('FeeAccountReference', 'Fee account reference', 1, 1),
 			('FeeFundCode', 'Fee fund code', 1, 1),
 			('PaymentIntegrationId', 'Payment integration ID', 1, 1),
-			('IsAPaymentReversal', 'Is a payment reversal', 1, 1)) 
+			('IsAPaymentReversal', 'Is a payment reversal', 1, 1),
+
+			-- Fund
+			('IsACreditNoteEnabledFund', 'Is a credit note enabled fund', 1, 2),
+			('IsAnEReturnDefaultFund', 'Is an eReturn default fund', 1, 2),
+			('IsASuspenseJournalFund', 'Is a suspense journal fund', 1, 2),
+			('IsABasketFund', 'Is a basket fund', 1, 2),
+			('Basket.ReferenceFieldLabel', 'Basket reference field label', 1, 2),
+			('Basket.ReferenceFieldMessage', 'Basket reference field message', 1, 2)
+			
+
+			) 
 	AS S ([Name], [Description], [SystemType], [EntityType])) AS [Source]
 ON [Target].[Name] = [Source].[Name] 
 	AND [Target].[EntityType] = [Source].[EntityType]

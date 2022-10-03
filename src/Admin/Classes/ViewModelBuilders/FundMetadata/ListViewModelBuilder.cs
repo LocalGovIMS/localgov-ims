@@ -54,9 +54,9 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
                 { 
                     Id = x.Id,
                     ParentCode = x.FundCode,
-                    Key = x.Key,
-                    Value = x.Value,
-                    Description = _service.GetMetadata().FirstOrDefault(y => y.Key == x.Key)?.Description ?? "Unknown"
+                    Key = x.MetadataKey.Name,
+                    Description = x.MetadataKey.Description,
+                    Value = x.Value
                 }),
                 searchResult.Page,
                 searchResult.PageSize,

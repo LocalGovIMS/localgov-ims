@@ -33,7 +33,10 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation.JournalAllocationSt
                         {
                             new Entities.FundMetadata()
                             {
-                                Key = FundMetadataKeys.IsASuspenseJournalFund,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                                },
                                 Value = "True",
                                 FundCode = SuspenseJournalFundCode
                             }
@@ -46,7 +49,10 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation.JournalAllocationSt
                         {
                             new Entities.FundMetadata()
                             {
-                                Key = FundMetadataKeys.IsACreditNoteEnabledFund,
+                                MetadataKey = new Entities.MetadataKey()
+                                {
+                                    Name = FundMetadataKeys.IsACreditNoteEnabledFund
+                                },
                                 Value = "True",
                                 FundCode = CreditNoteEnabledFundCode
                             }
