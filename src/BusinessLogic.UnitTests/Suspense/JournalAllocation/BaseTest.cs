@@ -53,7 +53,10 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                         {
                             new VatMetadata()
                             {
-                                Key = VatMetadataKeys.IsASuspenseJournalVatCode,
+                                MetadataKey = new MetadataKey()
+                                {
+                                    Name = VatMetadataKeys.IsASuspenseJournalVatCode
+                                },
                                 Value = "True"
                             }
                         }

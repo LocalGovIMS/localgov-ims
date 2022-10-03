@@ -25,9 +25,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
                 _mockVatMetadataService.Object);
         }
 
-        private void SetupService(Mock<IVatMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.VatMetadata.SearchCriteria>())).Returns(
+            _mockVatMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.VatMetadata.SearchCriteria>())).Returns(
                 new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.VatMetadata>()
                 {
                     Items = new System.Collections.Generic.List<BusinessLogic.Entities.VatMetadata>()
@@ -35,7 +35,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
                         new BusinessLogic.Entities.VatMetadata()
                         {
                             Id = 1,
-                            Key = "Test key",
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                            {
+                                Name = "Test key"
+                            },
                             Value = "Test value",
                         }
                     },
@@ -43,23 +46,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
                     Page = 1,
                     PageSize = 20
                 });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
-                });
         }
 
         [TestMethod]
         public void Build_without_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockVatMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -73,7 +66,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         public void Build_with_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockVatMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(new Models.VatMetadata.SearchCriteria());

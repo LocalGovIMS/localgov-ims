@@ -16,21 +16,23 @@
                 </th>
             </tr>
         </thead>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @item.Value
-                </td>
-                <td style="width:20%;">
-                    @Html.ActionLink("Edit", "Edit", "VatMetadata", new { id = item.Id }, new { @class = "ui button" })
-                    @Html.ActionLink("Delete", "Delete", "VatMetadata", new { id = item.Id, vatCode = item.ParentCode }, new { @class = "ui button delete-action" })
-                </td>
-            </tr>
-        }
+        <tbody>
+            @foreach (var item in Model.Items.OrderBy(x => x.Description))
+            {
+                <tr>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                    <td style="width:20%;">
+                        @Html.ActionLink("Edit", "Edit", "VatMetadata", new { id = item.Id }, new { @class = "ui button" })
+                        @Html.ActionLink("Delete", "Delete", "VatMetadata", new { id = item.Id, vatCode = item.ParentCode }, new { @class = "ui button delete-action" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else

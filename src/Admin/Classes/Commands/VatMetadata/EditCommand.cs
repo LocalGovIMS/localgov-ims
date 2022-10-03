@@ -21,7 +21,7 @@ namespace Admin.Classes.Commands.VatMetadata
             {
                 Id = model.Id,
                 VatCode = model.VatCode,
-                Key = model.Key,
+                MetadataKeyId = model.MetadataKeyId,
                 Value = model.Value
             };
 

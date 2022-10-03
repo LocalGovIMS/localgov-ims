@@ -11,22 +11,21 @@
                 <th scope="col">
                     Value
                 </th>
-                <th scope="col">
-
-                </th>
             </tr>
         </thead>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @item.Value
-                </td>
-            </tr>
-        }
+        <tbody>
+            @foreach (var item in Model.Items.OrderBy(x => x.Description))
+            {
+                <tr>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else

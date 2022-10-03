@@ -20,6 +20,7 @@ namespace DataAccess.Repositories
         public IEnumerable<VatMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.VatMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable();
 
             items = items.Where(x => x.VatCode == criteria.VatCode);
@@ -42,6 +43,7 @@ namespace DataAccess.Repositories
         public VatMetadata Get(int id)
         {
             var item = IncomeDbContext.VatMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -59,7 +61,7 @@ namespace DataAccess.Repositories
                 .FirstOrDefault();
 
             item.VatCode = entity.VatCode;
-            item.Key = entity.Key;
+            item.MetadataKeyId = entity.MetadataKeyId;
             item.Value = entity.Value;
         }
     }

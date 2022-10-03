@@ -259,16 +259,18 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([VatCode], [Percentage], [Disabled])
 VALUES ([VatCode], [Percentage], [Disabled]);
 
+DECLARE @IsASuspenseJournalVatCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseJournalVatCode' AND [EntityType] = 4);
+
 MERGE INTO VatMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('IsASuspenseJournalVatCode', 'True', 'M0')) 
-	AS S ([Key], [Value], [VatCode])) AS [Source]
+			(@IsASuspenseJournalVatCode_MetadataKeyId, 'True', 'M0')) 
+	AS S ([MetadataKeyId], [Value], [VatCode])) AS [Source]
 ON [Target].[VatCode] = [Source].[VatCode] 
-	AND [Target].[Key] = [Source].[Key] 
+	AND [Target].[MetadataKeyId] = [Source].[MetadataKeyId] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Key], [Value], [VatCode])
-VALUES ([Key], [Value], [VatCode]);
+INSERT ([MetadataKeyId], [Value], [VatCode])
+VALUES ([MetadataKeyId], [Value], [VatCode]);
 
 MERGE INTO MetadataKeys AS [Target]
 USING (SELECT * 

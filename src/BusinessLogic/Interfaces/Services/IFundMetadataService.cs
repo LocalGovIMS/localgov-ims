@@ -1,9 +1,7 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Result;
-using BusinessLogic.Models;
 using BusinessLogic.Models.FundMetadata;
 using BusinessLogic.Models.Shared;
-using System.Collections.Generic;
 
 namespace BusinessLogic.Interfaces.Services
 {
@@ -15,6 +13,5 @@ namespace BusinessLogic.Interfaces.Services
         SearchResult<FundMetadata> Search(SearchCriteria criteria);
         IResult Update(FundMetadata item);
         IResult Delete(int id);
-        List<Metadata> GetMetadata();
     }
 }

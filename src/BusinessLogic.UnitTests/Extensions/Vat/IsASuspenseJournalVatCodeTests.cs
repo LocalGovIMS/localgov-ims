@@ -16,7 +16,14 @@ namespace BusinessLogic.UnitTests.Extensions.Mop
         {
             // Arrange
             var vat = new Entities.Vat() { Metadata = new List<Entities.VatMetadata>() };
-            vat.Metadata.Add(new Entities.VatMetadata() { Key = VatMetadataKeys.IsASuspenseJournalVatCode, Value = value.ToString() });
+            vat.Metadata.Add(new Entities.VatMetadata()
+            {
+                MetadataKey = new Entities.MetadataKey()
+                {
+                    Name = VatMetadataKeys.IsASuspenseJournalVatCode
+                },
+                Value = value.ToString()
+            });
 
             // Act
             var result = vat.IsASuspenseJournalVatCode();

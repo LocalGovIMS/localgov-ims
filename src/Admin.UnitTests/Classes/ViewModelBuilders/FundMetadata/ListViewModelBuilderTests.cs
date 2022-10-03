@@ -25,12 +25,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
                 _mockFundMetadataService.Object);
         }
 
-        private void SetupService(Mock<IFundMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMetadata.SearchCriteria>())).Returns(
+            _mockFundMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMetadata.SearchCriteria>())).Returns(
                 new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.FundMetadata>()
                 {
-                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.FundMetadata>()
+                    Items = new List<BusinessLogic.Entities.FundMetadata>()
                     {
                         new BusinessLogic.Entities.FundMetadata()
                         {
@@ -46,23 +46,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
                     Page = 1,
                     PageSize = 20
                 });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
-                });
         }
 
         [TestMethod]
         public void Build_without_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockFundMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -76,7 +66,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
         public void Build_with_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockFundMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(new Models.FundMetadata.SearchCriteria());

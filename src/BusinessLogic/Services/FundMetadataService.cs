@@ -4,12 +4,10 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
 using BusinessLogic.Models.FundMetadata;
 using BusinessLogic.Models.Shared;
 using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic.Services
@@ -127,19 +125,6 @@ namespace BusinessLogic.Services
                 Logger.Error(null, e);
                 return new Result("Unable to delete this Fund Metadata record");
             }
-        }
-
-        public List<Metadata> GetMetadata()
-        {
-            return new List<Metadata>()
-            {
-                new Metadata() { Key = "IsACreditNoteEnabledFund", Description = "Is A Credit Note Enabled Fund" },
-                new Metadata() { Key = "IsAnEReturnDefaultFund", Description = "Is An EReturn Default Fund" },
-                new Metadata() { Key = "IsASuspenseJournalFund", Description = "Is A Suspense Journal Fund" },
-                new Metadata() { Key = "IsABasketFund", Description = "Is A Basket Fund" },
-                new Metadata() { Key = "Basket.ReferenceFieldLabel", Description = "Basket Reference Field Label" },
-                new Metadata() { Key = "Basket.ReferenceFieldMessage", Description = "Basket Reference Field Message" }
-            };
         }
     }
 }

@@ -10,13 +10,16 @@ namespace Admin.Classes.ViewModelBuilders.VatMetadata
 {
     public class CreateViewModelBuilder : BaseViewModelBuilder<EditViewModel, CreateViewModelBuilderArgs>
     {
-        private readonly IVatMetadataService _service;
+        private readonly IVatMetadataService _vatMetadataService;
+        private readonly IMetadataKeyService _metadataKeyService;
 
         public CreateViewModelBuilder(ILog log
-            , IVatMetadataService fundMetadataService)
+            , IVatMetadataService vatMetadataService
+            , IMetadataKeyService metadataKeyService)
             : base(log)
         {
-            _service = fundMetadataService;
+            _vatMetadataService = vatMetadataService;
+            _metadataKeyService = metadataKeyService;
         }
 
         protected override EditViewModel OnBuild()
@@ -29,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.VatMetadata
             var model = new EditViewModel();
 
             model.VatCode = args.VatCode;
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(model.VatCode);
 
             return model;
         }        
@@ -38,25 +41,35 @@ namespace Admin.Classes.ViewModelBuilders.VatMetadata
         {
             base.OnRebuild(model);
 
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(model.VatCode);
 
             return model;
         }
 
-        private SelectList GetKeyList()
+        private SelectList GetMetadataKeysList(string mopCode)
         {
             var selectListItems = new List<SelectListItem>();
 
-            foreach (var item in _service.GetMetadata().OrderBy(x => x.Description))
+            foreach (var item in GetAvailableMetadataKeys(mopCode).OrderBy(x => x.Description))
             {
                 selectListItems.Add(new SelectListItem()
                 {
-                    Value = item.Key.ToString(),
+                    Value = item.Id.ToString(),
                     Text = item.Description
                 });
             }
 
             return new SelectList(selectListItems, false);
+        }
+
+        private IList<BusinessLogic.Entities.MetadataKey> GetAvailableMetadataKeys(string vatCode)
+        {
+            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { ApplyPaging = false, EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Vat });
+            var allUsedKeyIds = _vatMetadataService.Search(new BusinessLogic.Models.VatMetadata.SearchCriteria() { VatCode = vatCode })
+                .Items.Select(x => x.MetadataKeyId);
+            var allUsedKeys = allKeys.Items.Where(x => allUsedKeyIds.Contains(x.Id));
+
+            return allKeys.Items.Except(allUsedKeys).ToList();
         }
     }
 

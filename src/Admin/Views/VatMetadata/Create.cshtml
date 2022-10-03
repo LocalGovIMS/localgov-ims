@@ -18,18 +18,19 @@
 
 @using (Html.BeginForm("Create", "VatMetadata", FormMethod.Post))
 {
+    @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.VatCode)
 
     <div class="ui form">
 
         <div class="four wide field">
-            @Html.LabelFor(m => m.Key)
+            @Html.LabelFor(m => m.MetadataKeyId)
             <div class="ui search selection dropdown keys-dropdown">
-                @Html.HiddenFor(x => x.Key, new { size = 4 })
+                @Html.HiddenFor(x => x.MetadataKeyId)
                 <i class="dropdown icon"></i>
                 <div class="default text no-overflow">Select key</div>
                 <div class="menu">
-                    @foreach (var item in Model.Keys.Items)
+                    @foreach (var item in Model.MetadataKeys.Items.OrderBy(x => x.Text))
                     {
                         <div class="item" data-value="@item.Value">
                             @item.Text
@@ -38,7 +39,7 @@
                 </div>
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Key)
+                @Html.ValidationMessageFor(m => m.MetadataKeyId)
             </div>
         </div>
 

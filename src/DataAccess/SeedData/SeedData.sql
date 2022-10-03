@@ -149,8 +149,10 @@ USING (SELECT *
 			('IsASuspenseJournalFund', 'Is a suspense journal fund', 1, 2),
 			('IsABasketFund', 'Is a basket fund', 1, 2),
 			('Basket.ReferenceFieldLabel', 'Basket reference field label', 1, 2),
-			('Basket.ReferenceFieldMessage', 'Basket reference field message', 1, 2)
+			('Basket.ReferenceFieldMessage', 'Basket reference field message', 1, 2),
 			
+			-- VAT
+			('IsASuspenseJournalVatCode', 'Is a suspense journal VAT code', 1, 4)		
 
 			) 
 	AS S ([Name], [Description], [SystemType], [EntityType])) AS [Source]

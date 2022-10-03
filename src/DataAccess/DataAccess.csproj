@@ -214,6 +214,10 @@
     <Compile Include="Migrations\202210030955563_Update_FundMetadata_to_use_MetadataKeys.designer.cs">
       <DependentUpon>202210030955563_Update_FundMetadata_to_use_MetadataKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210031527595_Update_VatMetadata_to_use_MetadataKeys.cs" />
+    <Compile Include="Migrations\202210031527595_Update_VatMetadata_to_use_MetadataKeys.designer.cs">
+      <DependentUpon>202210031527595_Update_VatMetadata_to_use_MetadataKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210030955563_Update_FundMetadata_to_use_MetadataKeys.resx">
       <DependentUpon>202210030955563_Update_FundMetadata_to_use_MetadataKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210031527595_Update_VatMetadata_to_use_MetadataKeys.resx">
+      <DependentUpon>202210031527595_Update_VatMetadata_to_use_MetadataKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

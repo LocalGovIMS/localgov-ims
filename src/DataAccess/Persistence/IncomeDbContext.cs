@@ -505,6 +505,10 @@ namespace DataAccess.Persistence
             modelBuilder.Entity<FundMetadata>()
                 .HasIndex(s => new { s.FundCode, s.MetadataKeyId })
                 .IsUnique(true);
+
+            modelBuilder.Entity<VatMetadata>()
+                .HasIndex(s => new { s.VatCode, s.MetadataKeyId })
+                .IsUnique(true);
         }
 
         private void SetupComputedColumns(DbModelBuilder modelBuilder)

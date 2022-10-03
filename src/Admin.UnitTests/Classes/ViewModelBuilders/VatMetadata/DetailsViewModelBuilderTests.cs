@@ -25,25 +25,18 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
                 _mockVatMetadataService.Object);
         }
 
-        private void SetupService(Mock<IVatMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Get(It.IsAny<int>())).Returns(
+            _mockVatMetadataService.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new BusinessLogic.Entities.VatMetadata()
                 {
                     Id = 1,
-                    Key = "Test key",
+                    MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                    {
+                        Name = "Test key"
+                    },
                     Value = "Test value",
                     VatCode = "M1"
-                });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
                 });
         }
 
@@ -63,7 +56,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.VatMetadata
         public void Build_with_an_Id_returns_a_view_model()
         {
             // Arrange
-            SetupService(_mockVatMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(1);

@@ -65,9 +65,9 @@
         <div class="ui vertical segment">
             <h2 style="padding-bottom:10px;">
                 Metadata
-                @Html.ActionLink("Add metadata", "Create", "MethodOfPaymentMetadata", new { id = Model.Code }, new { @class = "ui blue button right floated" })
+                @Html.ActionLink("Add metadata", "Create", "MethodOfPaymentMetadata", new { mopCode = Model.Code }, new { @class = "ui blue button right floated" })
             </h2>
-            @Html.Action("_EditListForMethodOfPayment", "MethodOfPaymentMetadata", new { id = Model.Code })
+            @Html.Action("_EditListForMethodOfPayment", "MethodOfPaymentMetadata", new { mopCode = Model.Code })
 
         </div>
 
