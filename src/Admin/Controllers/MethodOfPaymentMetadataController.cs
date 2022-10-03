@@ -16,17 +16,17 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult _ListForMethodOfPayment(string id)
+        public ActionResult _ListForMethodOfPayment(string mopCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = mopCode });
 
             return PartialView("_List", model);
         }
 
         [ChildActionOnly]
-        public ActionResult _EditListForMethodOfPayment(string id)
+        public ActionResult _EditListForMethodOfPayment(string mopCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { MopCode = mopCode });
 
             return PartialView("_EditList", model);
         }
@@ -34,11 +34,11 @@ namespace Admin.Controllers
         [NavigatablePageActionFilter(DisplayText = "Create Metadata")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Create(string id)
+        public ActionResult Create(string mopCode)
         {
             var model = Dependencies.CreateViewModelBuilder.Build(new CreateViewModelBuilderArgs()
             {
-                MopCode = id
+                MopCode = mopCode
             });
 
             return View(model);

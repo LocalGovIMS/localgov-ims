@@ -21,7 +21,7 @@ namespace Admin.UnitTests.Classes.Commands.VatMetadata
             return new ViewModel()
             {
                 Id = 1,
-                Key = "Test key",
+                MetadataKeyName = "Test key",
                 Value = "Test value"
             };
         }

@@ -4,12 +4,10 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
 using BusinessLogic.Models.VatMetadata;
 using BusinessLogic.Models.Shared;
 using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic.Services
@@ -114,14 +112,6 @@ namespace BusinessLogic.Services
                 Logger.Error(null, e);
                 return new Result("Unable to delete this VAT Metadata record");
             }
-        }
-
-        public List<Metadata> GetMetadata()
-        {
-            return new List<Metadata>()
-            {
-                new Metadata() { Key = "IsASuspenseJournalVatCode", Description = "Is A Suspense Journal Vat Code" }
-            };
         }
     }
 }

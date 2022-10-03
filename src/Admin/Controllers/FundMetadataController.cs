@@ -16,17 +16,17 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult _ListForFund(string id)
+        public ActionResult _ListForFund(string fundCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = fundCode });
 
             return PartialView("_List", model);
         }
 
         [ChildActionOnly]
-        public ActionResult _EditListForFund(string id)
+        public ActionResult _EditListForFund(string fundCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { FundCode = fundCode });
 
             return PartialView("_EditList", model);
         }
@@ -34,11 +34,11 @@ namespace Admin.Controllers
         [NavigatablePageActionFilter(DisplayText = "Create Metadata")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Create(string id)
+        public ActionResult Create(string fundCode)
         {
             var model = Dependencies.CreateViewModelBuilder.Build(new CreateViewModelBuilderArgs()
             {
-                FundCode = id
+                FundCode = fundCode
             });
 
             return View(model);

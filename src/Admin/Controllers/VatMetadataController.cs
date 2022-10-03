@@ -16,17 +16,17 @@ namespace Admin.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult _ListForVat(string id)
+        public ActionResult _ListForVat(string vatCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = vatCode });
 
             return PartialView("_List", model);
         }
 
         [ChildActionOnly]
-        public ActionResult _EditListForVat(string id)
+        public ActionResult _EditListForVat(string vatCode)
         {
-            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = id });
+            var model = Dependencies.ListViewModelBuilder.Build(new SearchCriteria() { VatCode = vatCode });
 
             return PartialView("_EditList", model);
         }
@@ -34,11 +34,11 @@ namespace Admin.Controllers
         [NavigatablePageActionFilter(DisplayText = "Create Metadata")]
         [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
-        public ActionResult Create(string id)
+        public ActionResult Create(string vatCode)
         {
             var model = Dependencies.CreateViewModelBuilder.Build(new CreateViewModelBuilderArgs()
             {
-                VatCode = id
+                VatCode = vatCode,
             });
 
             return View(model);
@@ -48,6 +48,8 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Create(EditViewModel model)
         {
+            ModelState.Remove("Id");
+
             return BaseCreate(model, Dependencies.CreateCommand);
         }
 

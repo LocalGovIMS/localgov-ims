@@ -3,7 +3,6 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using ViewModel = Admin.Models.FundMetadata.DetailsViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.FundMetadata.DetailsViewModelBuilder;
 
@@ -25,9 +24,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
                 _mockFundMetadataService.Object);
         }
 
-        private void SetupService(Mock<IFundMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Get(It.IsAny<int>())).Returns(
+            _mockFundMetadataService.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new BusinessLogic.Entities.FundMetadata()
                 {
                     Id = 1,
@@ -37,16 +36,6 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
                     },
                     Value = "Test value",
                     FundCode = "M1"
-                });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
                 });
         }
 
@@ -66,7 +55,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMetadata
         public void Build_with_an_Id_returns_a_view_model()
         {
             // Arrange
-            SetupService(_mockFundMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(1);

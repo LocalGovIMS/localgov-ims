@@ -25,12 +25,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 _mockMethodOfPaymentMetadataService.Object);
         }
 
-        private void SetupService(Mock<IMethodOfPaymentMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria>())).Returns(
+            _mockMethodOfPaymentMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria>())).Returns(
                 new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MopMetadata>()
                 {
-                    Items = new System.Collections.Generic.List<BusinessLogic.Entities.MopMetadata>()
+                    Items = new List<BusinessLogic.Entities.MopMetadata>()
                     {
                         new BusinessLogic.Entities.MopMetadata()
                         {
@@ -46,23 +46,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                     Page = 1,
                     PageSize = 20
                 });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
-                });
         }
 
         [TestMethod]
         public void Build_without_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockMethodOfPaymentMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -76,7 +66,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         public void Build_with_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockMethodOfPaymentMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(new Models.MethodOfPaymentMetadata.SearchCriteria());

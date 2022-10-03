@@ -25,9 +25,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                 _mockMethodOfPaymentMetadataService.Object);
         }
 
-        private void SetupService(Mock<IMethodOfPaymentMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Get(It.IsAny<int>())).Returns(
+            _mockMethodOfPaymentMetadataService.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new BusinessLogic.Entities.MopMetadata()
                 {
                     Id = 1,
@@ -37,16 +37,6 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
                     },
                     Value = "Test value",
                     MopCode = "M1"
-                });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
                 });
         }
 
@@ -66,7 +56,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.MethodOfPaymentMetadata
         public void Build_with_an_Id_returns_a_view_model()
         {
             // Arrange
-            SetupService(_mockMethodOfPaymentMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(1);

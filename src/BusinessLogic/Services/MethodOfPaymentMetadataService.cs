@@ -4,12 +4,10 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
 using BusinessLogic.Models.MethodOfPaymentMetadata;
 using BusinessLogic.Models.Shared;
 using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic.Services
@@ -114,31 +112,6 @@ namespace BusinessLogic.Services
                 Logger.Error(null, e);
                 return new Result("Unable to delete this MOP Metadata record");
             }
-        }
-
-        public List<Metadata> GetMetadata()
-        {
-            return new List<Metadata>()
-            {
-                new Metadata() { Key = "IsAJournal", Description = "Is a journal" },
-                new Metadata() { Key = "IsAJournalReallocation", Description = "Is a journal reallocation" },
-                new Metadata() { Key = "IsATransferOut", Description = "Is a transfer out" },
-                new Metadata() { Key = "IsACardSelfServicePayment", Description = "Is a card self-service payment" },
-                new Metadata() { Key = "IsRefundable", Description = "Is refundable" },
-                new Metadata() { Key = "IsATransferIn", Description = "Is a transfer in" },
-                new Metadata() { Key = "IsACardAtpPayment", Description = "Is a card ATP payment" },
-                new Metadata() { Key = "IsAChequePayment", Description = "Is a cheque payment" },
-                new Metadata() { Key = "IsACardViaStaffPayment", Description = "Is a card via staff payment" },
-                new Metadata() { Key = "IsACashPayment", Description = "Is a cash payment" },
-                new Metadata() { Key = "IsAnEReturnChequePayment", Description = "Is an eReturn cheque payment" },
-                new Metadata() { Key = "PaymentIntegrationId", Description = "Payment integration" },
-                new Metadata() { Key = "BackgroundColour", Description = "Background colour" },
-                new Metadata() { Key = "TextColour", Description = "Text colour" },
-                new Metadata() { Key = "IsACardPaymentFee", Description = "Is a card payment fee" },
-                new Metadata() { Key = "IncursAFee", Description = "Incurs a fee" },
-                new Metadata() { Key = "IsACardPaymentFee", Description = "Is a card payment fee" },
-                new Metadata() { Key = "IsAPaymentReversal", Description = "Is a payment reversal" }
-            };
         }
     }
 }

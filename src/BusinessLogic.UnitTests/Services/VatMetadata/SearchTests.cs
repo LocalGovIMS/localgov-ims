@@ -21,7 +21,10 @@ namespace BusinessLogic.UnitTests.Services.VatMetadata
                         new Entities.VatMetadata()
                         {
                             Id = 1,
-                            Key = "Key",
+                            MetadataKey = new Entities.MetadataKey()
+                            {
+                                Name = "Key"
+                            },
                             Value = "Test"
                         }
                     }

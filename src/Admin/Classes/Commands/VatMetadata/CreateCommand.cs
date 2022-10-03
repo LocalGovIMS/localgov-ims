@@ -20,7 +20,7 @@ namespace Admin.Classes.Commands.VatMetadata
             var item = new BusinessLogic.Entities.VatMetadata()
             {
                 VatCode = model.VatCode,
-                Key = model.Key,                
+                MetadataKeyId = model.MetadataKeyId,
                 Value = model.Value
             };
 
