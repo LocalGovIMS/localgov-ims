@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Classes.Commands.FundMetadata
         {
             return new ViewModel()
             {
-                Key = "Test key",
+                MetadataKeyName = "Test key",
                 Value = "Test value"
             };
         }

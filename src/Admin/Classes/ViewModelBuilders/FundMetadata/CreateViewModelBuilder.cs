@@ -10,13 +10,16 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
 {
     public class CreateViewModelBuilder : BaseViewModelBuilder<EditViewModel, CreateViewModelBuilderArgs>
     {
-        private readonly IFundMetadataService _service;
+        private readonly IFundMetadataService _fundMetadataService;
+        private readonly IMetadataKeyService _metadataKeyService;
 
         public CreateViewModelBuilder(ILog log
-            , IFundMetadataService fundMetadataService)
+            , IFundMetadataService fundMetadataService
+            , IMetadataKeyService metadataKeyService)
             : base(log)
         {
-            _service = fundMetadataService;
+            _fundMetadataService = fundMetadataService;
+            _metadataKeyService = metadataKeyService;
         }
 
         protected override EditViewModel OnBuild()
@@ -29,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
             var model = new EditViewModel();
 
             model.FundCode = args.FundCode;
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(args.FundCode);
 
             return model;
         }        
@@ -38,25 +41,35 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
         {
             base.OnRebuild(model);
 
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(model.FundCode);
 
             return model;
         }
 
-        private SelectList GetKeyList()
+        private SelectList GetMetadataKeysList(string fundCode)
         {
             var selectListItems = new List<SelectListItem>();
 
-            foreach (var item in _service.GetMetadata().OrderBy(x => x.Description))
+            foreach (var item in GetAvailableMetadataKeys(fundCode).OrderBy(x => x.Description))
             {
                 selectListItems.Add(new SelectListItem()
                 {
-                    Value = item.Key.ToString(),
+                    Value = item.Id.ToString(),
                     Text = item.Description
                 });
             }
 
             return new SelectList(selectListItems, false);
+        }
+
+        private IList<BusinessLogic.Entities.MetadataKey> GetAvailableMetadataKeys(string fundCode)
+        {
+            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { ApplyPaging = false, EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Fund });
+            var allUsedKeyIds = _fundMetadataService.Search(new BusinessLogic.Models.FundMetadata.SearchCriteria() { FundCode = fundCode })
+                .Items.Select(x => x.MetadataKeyId);
+            var allUsedKeys = allKeys.Items.Where(x => allUsedKeyIds.Contains(x.Id));
+
+            return allKeys.Items.Except(allUsedKeys).ToList();
         }
     }
 

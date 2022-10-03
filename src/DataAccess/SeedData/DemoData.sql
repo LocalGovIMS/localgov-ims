@@ -270,6 +270,26 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([Key], [Value], [VatCode])
 VALUES ([Key], [Value], [VatCode]);
 
+MERGE INTO MetadataKeys AS [Target]
+USING (SELECT * 
+		FROM (VALUES
+
+			-- Fund
+			('ExportToLedger', 'Export to ledger', 0, 2),
+			('UseGeneralLedgerCode', 'Use general ledger code', 0, 2),
+			('GeneralLedgerCode', 'General ledger code', 0, 2),
+			('[[SeedData.DemoData.FundMetadata.Key1]]', '[[SeedData.DemoData.FundMetadata.Key1]]', 0, 2)
+			
+			) 
+	AS S ([Name], [Description], [SystemType], [EntityType])) AS [Source]
+ON [Target].[Name] = [Source].[Name] 
+	AND [Target].[EntityType] = [Source].[EntityType]
+WHEN NOT MATCHED BY TARGET THEN
+INSERT ([Name], [Description], [SystemType], [EntityType])
+VALUES ([Name], [Description], [SystemType], [EntityType])
+WHEN MATCHED AND TARGET.[Description] <> SOURCE.[Description]
+THEN UPDATE SET TARGET.[Description] = SOURCE.[Description];
+
 MERGE INTO Funds AS [Target]
 USING (SELECT * 
 		FROM (VALUES
@@ -298,107 +318,118 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled])
 VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [AccountExist], [AquireAddress], [DisplayName], [VatOverride], [Disabled]);
 
+DECLARE @IsACreditNoteEnabledFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsACreditNoteEnabledFund' AND [EntityType] = 2);
+DECLARE @IsAnEReturnDefaultFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsAnEReturnDefaultFund' AND [EntityType] = 2);
+DECLARE @IsASuspenseJournalFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseJournalFund' AND [EntityType] = 2);
+DECLARE @IsABasketFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsABasketFund' AND [EntityType] = 2);
+DECLARE @BasketReferenceFieldLabel_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'Basket.ReferenceFieldLabel' AND [EntityType] = 2);
+DECLARE @BasketReferenceFieldMessage_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'Basket.ReferenceFieldMessage' AND [EntityType] = 2);
+DECLARE @ExportToLedger_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'ExportToLedger' AND [EntityType] = 2);
+DECLARE @UseGeneralLedgerCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'UseGeneralLedgerCode' AND [EntityType] = 2);
+DECLARE @GeneralLedgerCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'GeneralLedgerCode' AND [EntityType] = 2);
+DECLARE @Custom1_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = '[[SeedData.DemoData.FundMetadata.Key1]]' AND [EntityType] = 2);
+
 MERGE INTO FundMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('IsACreditNoteEnabledFund', 'True', '19'),
-			('IsACreditNoteEnabledFund', 'True', '20'),
-			('IsACreditNoteEnabledFund', 'True', '5'),
-			('IsACreditNoteEnabledFund', 'True', '23'),
-			('IsACreditNoteEnabledFund', 'True', '24'),
-			('IsACreditNoteEnabledFund', 'True', '25'),
-			('IsACreditNoteEnabledFund', 'True', '13'),
-			('IsACreditNoteEnabledFund', 'True', '11'),
-			('IsAnEReturnDefaultFund', 'True', '13'),
-			('IsASuspenseJournalFund', 'True', '1'),
-			('IsABasketFund', 'True', '25'),
-			('Basket.ReferenceFieldLabel', 'Benefit overpayment reference', '25'),
-			('IsABasketFund', 'True', '19'),
-			('Basket.ReferenceFieldLabel', 'Invoice reference', '19'),
-			('IsABasketFund', 'True', '20'),
-			('Basket.ReferenceFieldLabel', 'Invoice reference', '20'),
-			('IsABasketFund', 'True', '24'),
-			('Basket.ReferenceFieldLabel', 'Business rates reference', '24'),
-			('IsABasketFund', 'True', '23'),
-			('Basket.ReferenceFieldLabel', 'Council Tax reference', '23'),
-			('IsABasketFund', 'True', '11'),
-			('Basket.ReferenceFieldLabel', 'Parking fine reference', '11'),
-			('IsABasketFund', 'True', '2R'),
-			('Basket.ReferenceFieldLabel', 'Fixed penalty notice reference', '2R'),
-			('IsABasketFund', 'True', '3U'),
-			('Basket.ReferenceFieldLabel', 'Landlord accreditation service reference', '3U'),
-			('IsABasketFund', 'True', '5M'),
-			('Basket.ReferenceFieldLabel', 'Library card reference', '5M'),
-			('Basket.ReferenceFieldMessage', 'If the charge is on a child''s card please enter the child''s reference', '5M'),
-			('IsABasketFund', 'True', '31'),
-			('Basket.ReferenceFieldLabel', 'Parking fine reference', '31'),
-			('IsABasketFund', 'True', '32'),
-			('Basket.ReferenceFieldLabel', 'Parking fine reference', '32'),
-			('IsABasketFund', 'True', '52'),
-			('Basket.ReferenceFieldLabel', 'Traders reference and surname', '52'),
-			('Basket.ReferenceFieldMessage', 'Please enter your 4 digit reference followed by your surname', '52'),
-			('IsABasketFund', 'True', '5'),
-			('Basket.ReferenceFieldLabel', 'Housing rents reference', '5'), 
-			('ExportToLedger', 'True', '5M'),
-			('UseGeneralLedgerCode', 'True', '5M'),
-			('GeneralLedgerCode', '72100710220', '5M'),
-			('ExportToLedger', 'True', '52'),
-			('UseGeneralLedgerCode', 'True', '52'),
-			('GeneralLedgerCode', '72200850079', '52'),
-			('ExportToLedger', 'True', '2R'),
-			('UseGeneralLedgerCode', 'True', '2R'),
-			('GeneralLedgerCode', '72100021754', '2R'),
-			('ExportToLedger', 'True', '3U'),
-			('UseGeneralLedgerCode', 'True', '3U'),
-			('GeneralLedgerCode', '72101580438', '3U'),
-			('ExportToLedger', 'True', '1Z'),
-			('UseGeneralLedgerCode', 'True', '1Z'),
-			('GeneralLedgerCode', '72101920227', '1Z'),
-			('ExportToLedger', 'False', 'ZZ'),
-			('UseGeneralLedgerCode', 'False', 'ZZ'),
-			('ExportToLedger', 'True', '1'),
-			('UseGeneralLedgerCode', 'True', '1'),
-			('GeneralLedgerCode', '964024', '1'),
-			('ExportToLedger', 'True', '5'),
-			('UseGeneralLedgerCode', 'True', '5'),
-			('GeneralLedgerCode', '964104', '5'),
-			('ExportToLedger', 'True', '13'),
-			('UseGeneralLedgerCode', 'False', '13'),
-			('ExportToLedger', 'True', 'SP'),
-			('UseGeneralLedgerCode', 'True', 'SP'),
-			('GeneralLedgerCode', '964023', 'SP'),
-			('ExportToLedger', 'False', 'XT'),
-			('UseGeneralLedgerCode', 'False', 'XT'),
-			('ExportToLedger', 'False', '19'),
-			('UseGeneralLedgerCode', 'False', '19'),
-			('ExportToLedger', 'False', '20'),
-			('UseGeneralLedgerCode', 'False', '20'),
-			('ExportToLedger', 'True', '11'),
-			('UseGeneralLedgerCode', 'True', '11'),
-			('GeneralLedgerCode', '72104021624', '11'),
-			('ExportToLedger', 'True', '24'),
-			('UseGeneralLedgerCode', 'True', '24'),
-			('GeneralLedgerCode', '964102', '24'),
-			('ExportToLedger', 'True', '23'),
-			('UseGeneralLedgerCode', 'True', '23'),
-			('GeneralLedgerCode', '964101', '23'),
-			('ExportToLedger', 'True', '25'),
-			('UseGeneralLedgerCode', 'True', '25'),
-			('GeneralLedgerCode', '72320550287', '25'),
-			('ExportToLedger', 'True', '32'),
-			('UseGeneralLedgerCode', 'True', '32'),
-			('GeneralLedgerCode', '72101750163', '32'),
-			('ExportToLedger', 'True', '31'),
-			('UseGeneralLedgerCode', 'True', '31'),
-			('GeneralLedgerCode', '72101750164', '31'),
-			('[[SeedData.DemoData.FundMetadata.Key1]]', '[[SeedData.DemoData.FundMetadata.Value1]]', '[[SeedData.DemoData.FundMetadata.FundCode1]]')
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '19'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '20'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '5'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '23'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '24'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '25'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '13'),
+			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '11'),
+			(@IsAnEReturnDefaultFund_MetadataKeyId, 'True', '13'),
+			(@IsASuspenseJournalFund_MetadataKeyId, 'True', '1'),
+			(@IsABasketFund_MetadataKeyId, 'True', '25'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Benefit overpayment reference', '25'),
+			(@IsABasketFund_MetadataKeyId, 'True', '19'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Invoice reference', '19'),
+			(@IsABasketFund_MetadataKeyId, 'True', '20'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Invoice reference', '20'),
+			(@IsABasketFund_MetadataKeyId, 'True', '24'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Business rates reference', '24'),
+			(@IsABasketFund_MetadataKeyId, 'True', '23'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Council Tax reference', '23'),
+			(@IsABasketFund_MetadataKeyId, 'True', '11'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Parking fine reference', '11'),
+			(@IsABasketFund_MetadataKeyId, 'True', '2R'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Fixed penalty notice reference', '2R'),
+			(@IsABasketFund_MetadataKeyId, 'True', '3U'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Landlord accreditation service reference', '3U'),
+			(@IsABasketFund_MetadataKeyId, 'True', '5M'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Library card reference', '5M'),
+			(@BasketReferenceFieldMessage_MetadataKeyId, 'If the charge is on a child''s card please enter the child''s reference', '5M'),
+			(@IsABasketFund_MetadataKeyId, 'True', '31'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Parking fine reference', '31'),
+			(@IsABasketFund_MetadataKeyId, 'True', '32'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Parking fine reference', '32'),
+			(@IsABasketFund_MetadataKeyId, 'True', '52'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Traders reference and surname', '52'),
+			(@BasketReferenceFieldMessage_MetadataKeyId, 'Please enter your 4 digit reference followed by your surname', '52'),
+			(@IsABasketFund_MetadataKeyId, 'True', '5'),
+			(@BasketReferenceFieldLabel_MetadataKeyId, 'Housing rents reference', '5'), 
+			(@ExportToLedger_MetadataKeyId, 'True', '5M'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '5M'),
+			(@GeneralLedgerCode_MetadataKeyId, '72100710220', '5M'),
+			(@ExportToLedger_MetadataKeyId, 'True', '52'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '52'),
+			(@GeneralLedgerCode_MetadataKeyId, '72200850079', '52'),
+			(@ExportToLedger_MetadataKeyId, 'True', '2R'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '2R'),
+			(@GeneralLedgerCode_MetadataKeyId, '72100021754', '2R'),
+			(@ExportToLedger_MetadataKeyId, 'True', '3U'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '3U'),
+			(@GeneralLedgerCode_MetadataKeyId, '72101580438', '3U'),
+			(@ExportToLedger_MetadataKeyId, 'True', '1Z'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '1Z'),
+			(@GeneralLedgerCode_MetadataKeyId, '72101920227', '1Z'),
+			(@ExportToLedger_MetadataKeyId, 'False', 'ZZ'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'False', 'ZZ'),
+			(@ExportToLedger_MetadataKeyId, 'True', '1'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '1'),
+			(@GeneralLedgerCode_MetadataKeyId, '964024', '1'),
+			(@ExportToLedger_MetadataKeyId, 'True', '5'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '5'),
+			(@GeneralLedgerCode_MetadataKeyId, '964104', '5'),
+			(@ExportToLedger_MetadataKeyId, 'True', '13'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'False', '13'),
+			(@ExportToLedger_MetadataKeyId, 'True', 'SP'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', 'SP'),
+			(@GeneralLedgerCode_MetadataKeyId, '964023', 'SP'),
+			(@ExportToLedger_MetadataKeyId, 'False', 'XT'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'False', 'XT'),
+			(@ExportToLedger_MetadataKeyId, 'False', '19'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'False', '19'),
+			(@ExportToLedger_MetadataKeyId, 'False', '20'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'False', '20'),
+			(@ExportToLedger_MetadataKeyId, 'True', '11'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '11'),
+			(@GeneralLedgerCode_MetadataKeyId, '72104021624', '11'),
+			(@ExportToLedger_MetadataKeyId, 'True', '24'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '24'),
+			(@GeneralLedgerCode_MetadataKeyId, '964102', '24'),
+			(@ExportToLedger_MetadataKeyId, 'True', '23'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '23'),
+			(@GeneralLedgerCode_MetadataKeyId, '964101', '23'),
+			(@ExportToLedger_MetadataKeyId, 'True', '25'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '25'),
+			(@GeneralLedgerCode_MetadataKeyId, '72320550287', '25'),
+			(@ExportToLedger_MetadataKeyId, 'True', '32'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '32'),
+			(@GeneralLedgerCode_MetadataKeyId, '72101750163', '32'),
+			(@ExportToLedger_MetadataKeyId, 'True', '31'),
+			(@UseGeneralLedgerCode_MetadataKeyId, 'True', '31'),
+			(@GeneralLedgerCode_MetadataKeyId, '72101750164', '31'),
+			(@Custom1_MetadataKeyId, '[[SeedData.DemoData.FundMetadata.Value1]]', '[[SeedData.DemoData.FundMetadata.FundCode1]]')
 			)
-	AS S ([Key], [Value], [FundCode])) AS [Source]
+	AS S ([MetadataKeyId], [Value], [FundCode])) AS [Source]
 ON [Target].[FundCode] = [Source].[FundCode] 
-	AND [Target].[Key] = [Source].[Key] 
+	AND [Target].[MetadataKeyId] = [Source].[MetadataKeyId] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Key], [Value], [FundCode])
-VALUES ([Key], [Value], [FundCode]);
+INSERT ([MetadataKeyId], [Value], [FundCode])
+VALUES ([MetadataKeyId], [Value], [FundCode]);
 
 DECLARE @CheckDigitConfigurationId_ParkingFines INT = 1;
 DECLARE @CheckDigitConfigurationId_AcademyCtax INT = 2;

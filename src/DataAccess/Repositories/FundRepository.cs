@@ -23,6 +23,7 @@ namespace DataAccess.Repositories
             {
                 return IncomeDbContext.Funds
                     .Include(x => x.Metadata)
+                    .Include(x => x.Metadata.Select(y => y.MetadataKey))
                     .AsQueryable()
                     .ApplyFilters(Filters)
                     .ToList();
@@ -30,6 +31,7 @@ namespace DataAccess.Repositories
 
             return IncomeDbContext.Funds
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)
@@ -40,6 +42,7 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.Funds
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .Include(s => s.Vat)
                 .Include(s => s.AccountReferenceValidator)
                 .ApplyFilters(Filters)
@@ -50,6 +53,7 @@ namespace DataAccess.Repositories
         {
             var items = IncomeDbContext.Funds
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(criteria.FundCode))

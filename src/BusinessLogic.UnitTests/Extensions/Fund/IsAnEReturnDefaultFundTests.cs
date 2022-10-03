@@ -16,7 +16,14 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
         {
             // Arrange
             var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
-            fund.Metadata.Add(new Entities.FundMetadata() { Key = FundMetadataKeys.IsAnEReturnDefaultFund, Value = value.ToString() });
+            fund.Metadata.Add(new Entities.FundMetadata()
+            {
+                MetadataKey = new Entities.MetadataKey()
+                {
+                    Name = FundMetadataKeys.IsAnEReturnDefaultFund
+                },
+                Value = value.ToString()
+            });
 
             // Act
             var result = fund.IsAnEReturnDefaultFund();

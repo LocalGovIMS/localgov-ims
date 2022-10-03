@@ -2,7 +2,6 @@
 using BusinessLogic.Interfaces.Services;
 using log4net;
 using System;
-using System.Linq;
 
 namespace Admin.Classes.ViewModelBuilders.FundMetadata
 {
@@ -29,9 +28,10 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
             return new DetailsViewModel()
             {
                 Id = data.Id,
-                Key = data.Key,
+                MetadataKeyId = data.MetadataKeyId,
+                MetadataKeyName = data.MetadataKey.Name,
+                MetadataKeyDescription = data.MetadataKey.Description,
                 Value = data.Value,
-                Description = _service.GetMetadata().FirstOrDefault(y => y.Key == data.Key)?.Description ?? "Unknown",
             };
         }
     }

@@ -21,7 +21,7 @@ namespace Admin.Classes.Commands.FundMetadata
             {
                 Id = model.Id,
                 FundCode = model.FundCode,
-                Key = model.Key,
+                MetadataKeyId = model.MetadataKeyId,
                 Value = model.Value
             };
 
