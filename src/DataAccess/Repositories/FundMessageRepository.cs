@@ -19,6 +19,7 @@ namespace DataAccess.Repositories
         {
             var items = IncomeDbContext.FundMessages
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .Include(x => x.Fund)
                 .AsQueryable();
 
@@ -51,6 +52,7 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.FundMessages
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .Include(x => x.Fund)
                 .AsQueryable()
                 .ApplyFilters(Filters)
@@ -61,6 +63,7 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.FundMessages
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .Include(x => x.Fund)
                 .ApplyFilters(Filters)
                 .FirstOrDefault(x => x.Id == id);

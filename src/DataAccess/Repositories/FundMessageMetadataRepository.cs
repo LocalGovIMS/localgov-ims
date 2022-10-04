@@ -20,9 +20,10 @@ namespace DataAccess.Repositories
         public IEnumerable<FundMessageMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.FundMessageMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable();
 
-            items = items.Where(x => x.FundMessageId == criteria.Id);
+            items = items.Where(x => x.FundMessageId == criteria.FundMessageId);
 
             if (criteria.PageSize == 0) criteria.PageSize = 20;
             if (criteria.Page == 0) criteria.Page = 1;
@@ -42,6 +43,7 @@ namespace DataAccess.Repositories
         public FundMessageMetadata Get(int id)
         {
             var item = IncomeDbContext.FundMessageMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -59,7 +61,7 @@ namespace DataAccess.Repositories
                 .FirstOrDefault();
 
             item.FundMessageId = entity.FundMessageId;
-            item.Key = entity.Key;
+            item.MetadataKeyId = entity.MetadataKeyId;
             item.Value = entity.Value;
         }
     }

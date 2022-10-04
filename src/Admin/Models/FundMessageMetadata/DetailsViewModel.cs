@@ -10,7 +10,13 @@ namespace Admin.Models.FundMessageMetadata
         public string Description { get; set; }
 
         [DisplayName("Key")]
-        public string Key { get; set; }
+        public int MetadataKeyId { get; set; }
+
+        [DisplayName("Key")]
+        public string MetadataKeyName { get; set; }
+
+        [DisplayName("Description")]
+        public string MetadataKeyDescription { get; set; }
 
         [DisplayName("Value")]
         public string Value { get; set; }

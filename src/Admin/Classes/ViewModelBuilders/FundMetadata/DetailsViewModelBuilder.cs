@@ -31,7 +31,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
                 MetadataKeyId = data.MetadataKeyId,
                 MetadataKeyName = data.MetadataKey.Name,
                 MetadataKeyDescription = data.MetadataKey.Description,
-                Value = data.Value,
+                Value = data.Value
             };
         }
     }

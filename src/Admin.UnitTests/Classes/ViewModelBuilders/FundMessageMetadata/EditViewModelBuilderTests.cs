@@ -14,6 +14,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IFundMessageMetadataService> _mockFundMessageMetadataService = new Mock<IFundMessageMetadataService>();
+        private readonly Mock<IMetadataKeyService> _mockMetadataKeyService = new Mock<IMetadataKeyService>();
 
         private ViewModelBuilder _viewModelBuilder;
 
@@ -22,7 +23,8 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
         {
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockFundMessageMetadataService.Object);
+                _mockFundMessageMetadataService.Object,
+                _mockMetadataKeyService.Object);
         }
 
         private void SetupServices()
@@ -31,20 +33,67 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
                 new BusinessLogic.Entities.FundMessageMetadata()
                 {
                     Id = 1,
-                    Key = "Test key",
+                    MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                    {
+                        Name = "Test key"
+                    },
                     Value = "Test value",
                     FundMessageId = 1
                 });
 
-            _mockFundMessageMetadataService.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
+            _mockMetadataKeyService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.MetadataKey.SearchCriteria>()))
+                .Returns(new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.MetadataKey>()
                 {
-                    new BusinessLogic.Models.Metadata()
+                    Items = new List<BusinessLogic.Entities.MetadataKey>()
                     {
-                        Key = "A key",
-                        Description = "A description"
+                        new BusinessLogic.Entities.MetadataKey()
+                        {
+                            Id = 1,
+                            Name = "Key1",
+                            Description = "A description"
+                        },
+                        new BusinessLogic.Entities.MetadataKey()
+                        {
+                            Id = 4,
+                            Name = "Key2",
+                            Description = "A description"
+                        },
+                        new BusinessLogic.Entities.MetadataKey()
+                        {
+                            Id = 3,
+                            Name = "Key3",
+                            Description = "A description"
+                        }
                     }
                 });
+
+            _mockFundMessageMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMessageMetadata.SearchCriteria>()))
+               .Returns(new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.FundMessageMetadata>()
+               {
+                   Items = new List<BusinessLogic.Entities.FundMessageMetadata>()
+                   {
+                        new BusinessLogic.Entities.FundMessageMetadata()
+                        {
+                            Id = 1,
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                            {
+                                Id = 1,
+                                Name = "Key1",
+                                Description = "A description"
+                            }
+                        },
+                        new BusinessLogic.Entities.FundMessageMetadata()
+                        {
+                            Id = 2,
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                            {
+                                Id = 2,
+                                Name = "Key2",
+                                Description = "A description"
+                            }
+                        }
+                   }
+               });
         }
 
         [TestMethod]
@@ -108,7 +157,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
             var result = _viewModelBuilder.Build(1);
 
             // Assert
-            result.Key.Should().Be("Test key");
+            result.MetadataKeyName.Should().Be("Test key");
         }
 
         [TestMethod]

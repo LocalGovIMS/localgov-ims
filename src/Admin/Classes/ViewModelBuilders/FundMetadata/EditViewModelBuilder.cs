@@ -65,7 +65,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMetadata
 
         private IList<BusinessLogic.Entities.MetadataKey> GetAvailableMetadataKeys(BusinessLogic.Entities.FundMetadata fundMetadata)
         {
-            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Fund });
+            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { ApplyPaging = false, EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Fund });
             var allUsedKeyIds = _fundMetadataService.Search(new BusinessLogic.Models.FundMetadata.SearchCriteria() { FundCode = fundMetadata.FundCode })
                 .Items.Select(x => x.MetadataKeyId);
             var allUsedKeys = allKeys.Items.Where(x => allUsedKeyIds.Contains(x.Id) && x.Id != fundMetadata.MetadataKeyId);

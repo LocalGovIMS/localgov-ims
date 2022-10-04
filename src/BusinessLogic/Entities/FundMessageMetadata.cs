@@ -9,8 +9,9 @@ namespace BusinessLogic.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Key { get; set; }
+        public int MetadataKeyId { get; set; }
+
+        public virtual MetadataKey MetadataKey { get; set; }
 
         [Required]
         public string Value { get; set; }

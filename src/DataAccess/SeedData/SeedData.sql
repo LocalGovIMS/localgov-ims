@@ -151,6 +151,11 @@ USING (SELECT *
 			('Basket.ReferenceFieldLabel', 'Basket reference field label', 1, 2),
 			('Basket.ReferenceFieldMessage', 'Basket reference field message', 1, 2),
 			
+			-- Fund Message
+			('IsOnStopForAdmin', 'Is on stop for Admin portal', 1, 3),
+			('IsOnStopForPaymentPortal', 'Is on stop for payment portal', 1, 3),
+			('ExternalCode', 'External code', 1, 3),
+
 			-- VAT
 			('IsASuspenseJournalVatCode', 'Is a suspense journal VAT code', 1, 4)		
 

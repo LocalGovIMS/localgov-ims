@@ -10,13 +10,16 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
 {
     public class CreateViewModelBuilder : BaseViewModelBuilder<EditViewModel, CreateViewModelBuilderArgs>
     {
-        private readonly IFundMessageMetadataService _service;
+        private readonly IFundMessageMetadataService _fundMessageMetadataService;
+        private readonly IMetadataKeyService _metadataKeyService;
 
         public CreateViewModelBuilder(ILog log
-            , IFundMessageMetadataService fundMetadataService)
+            , IFundMessageMetadataService fundMessageMetadataService
+            , IMetadataKeyService metadataKeyService)
             : base(log)
         {
-            _service = fundMetadataService;
+            _fundMessageMetadataService = fundMessageMetadataService;
+            _metadataKeyService = metadataKeyService;
         }
 
         protected override EditViewModel OnBuild()
@@ -29,7 +32,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
             var model = new EditViewModel();
 
             model.FundMessageId = args.FundMessageId;
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(model.FundMessageId);
 
             return model;
         }        
@@ -38,25 +41,35 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
         {
             base.OnRebuild(model);
 
-            model.Keys = GetKeyList();
+            model.MetadataKeys = GetMetadataKeysList(model.FundMessageId);
 
             return model;
         }
 
-        private SelectList GetKeyList()
+        private SelectList GetMetadataKeysList(int fundMessageId)
         {
             var selectListItems = new List<SelectListItem>();
 
-            foreach (var item in _service.GetMetadata().OrderBy(x => x.Description))
+            foreach (var item in GetAvailableMetadataKeys(fundMessageId).OrderBy(x => x.Description))
             {
                 selectListItems.Add(new SelectListItem()
                 {
-                    Value = item.Key.ToString(),
+                    Value = item.Id.ToString(),
                     Text = item.Description
                 });
             }
 
             return new SelectList(selectListItems, false);
+        }
+
+        private IList<BusinessLogic.Entities.MetadataKey> GetAvailableMetadataKeys(int fundMessageId)
+        {
+            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { ApplyPaging = false, EntityType = BusinessLogic.Enums.MetadataKeyEntityType.FundMessage });
+            var allUsedKeyIds = _fundMessageMetadataService.Search(new BusinessLogic.Models.FundMessageMetadata.SearchCriteria() { FundMessageId = fundMessageId })
+                .Items.Select(x => x.MetadataKeyId);
+            var allUsedKeys = allKeys.Items.Where(x => allUsedKeyIds.Contains(x.Id));
+
+            return allKeys.Items.Except(allUsedKeys).ToList();
         }
     }
 

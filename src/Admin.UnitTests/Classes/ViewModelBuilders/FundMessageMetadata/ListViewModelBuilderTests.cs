@@ -3,7 +3,6 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using ViewModel = Admin.Models.FundMessageMetadata.ListViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.FundMessageMetadata.ListViewModelBuilder;
 
@@ -25,9 +24,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
                 _mockFundMessageMetadataService.Object);
         }
 
-        private void SetupService(Mock<IFundMessageMetadataService> service)
+        private void SetupService()
         {
-            service.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMessageMetadata.SearchCriteria>())).Returns(
+            _mockFundMessageMetadataService.Setup(x => x.Search(It.IsAny<BusinessLogic.Models.FundMessageMetadata.SearchCriteria>())).Returns(
                 new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.FundMessageMetadata>()
                 {
                     Items = new System.Collections.Generic.List<BusinessLogic.Entities.FundMessageMetadata>()
@@ -35,7 +34,10 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
                         new BusinessLogic.Entities.FundMessageMetadata()
                         {
                             Id = 1,
-                            Key = "Test key",
+                            MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                            {
+                                Name = "Test key"
+                            },
                             Value = "Test value",
                         }
                     },
@@ -43,23 +45,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
                     Page = 1,
                     PageSize = 20
                 });
-
-            service.Setup(x => x.GetMetadata())
-                .Returns(new List<BusinessLogic.Models.Metadata>()
-                {
-                    new BusinessLogic.Models.Metadata()
-                    {
-                        Key = "A key",
-                        Description = "A description"
-                    }
-                });
         }
 
         [TestMethod]
         public void Build_without_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockFundMessageMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build();
@@ -73,7 +65,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.FundMessageMetadata
         public void Build_with_search_criteria_returns_the_expected_result()
         {
             // Arrange
-            SetupService(_mockFundMessageMetadataService);
+            SetupService();
 
             // Act
             var result = _viewModelBuilder.Build(new Models.FundMessageMetadata.SearchCriteria());

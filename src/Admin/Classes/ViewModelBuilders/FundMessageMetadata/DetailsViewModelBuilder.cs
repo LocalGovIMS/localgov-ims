@@ -29,9 +29,10 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
             return new DetailsViewModel()
             {
                 Id = data.Id,
-                Key = data.Key,
-                Value = data.Value,
-                Description = _service.GetMetadata().FirstOrDefault(y => y.Key == data.Key)?.Description ?? "Unknown",
+                MetadataKeyId = data.MetadataKeyId,
+                MetadataKeyName = data.MetadataKey.Name,
+                MetadataKeyDescription = data.MetadataKey.Description,
+                Value = data.Value
             };
         }
     }

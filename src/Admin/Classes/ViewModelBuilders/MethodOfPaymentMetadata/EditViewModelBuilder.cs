@@ -65,7 +65,7 @@ namespace Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata
 
         private IList<BusinessLogic.Entities.MetadataKey> GetAvailableMetadataKeys(BusinessLogic.Entities.MopMetadata mopMetadata)
         {
-            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Mop });
+            var allKeys = _metadataKeyService.Search(new BusinessLogic.Models.MetadataKey.SearchCriteria() { ApplyPaging = false, EntityType = BusinessLogic.Enums.MetadataKeyEntityType.Mop });
             var allUsedKeyIds = _methodOfPaymentMetadataService.Search(new BusinessLogic.Models.MethodOfPaymentMetadata.SearchCriteria() { MopCode = mopMetadata.MopCode })
                 .Items.Select(x => x.MetadataKeyId);
             var allUsedKeys = allKeys.Items.Where(x => allUsedKeyIds.Contains(x.Id) && x.Id != mopMetadata.MetadataKeyId);
