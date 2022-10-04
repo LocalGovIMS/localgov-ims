@@ -5,7 +5,6 @@ using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models;
 using BusinessLogic.Models.Import;
 using log4net;
 using System;
@@ -25,7 +24,6 @@ namespace BusinessLogic.ImportProcessing
         private readonly IProcessedTransactionModelBuilder _processedTransactionModelBuilder;
 
         private FileImport _fileImport;
-        private decimal _totalAmountImported = 0M;
         private int _rowNumber = 0;
         private List<string> _errors = new List<string>();
 
