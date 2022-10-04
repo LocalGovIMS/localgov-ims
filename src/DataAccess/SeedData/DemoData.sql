@@ -586,36 +586,40 @@ VALUES ([Id], [FundCode], [Message]);
 
 SET IDENTITY_INSERT FundMessages OFF;
 
+DECLARE @IsOnStopForAdmin_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsOnStopForAdmin' AND [EntityType] = 3);
+DECLARE @IsOnStopForPaymentPortal_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsOnStopForPaymentPortal' AND [EntityType] = 3);
+DECLARE @ExternalCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'ExternalCode' AND [EntityType] = 3);
+
 MERGE INTO FundMessageMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_Squatter),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptPayment),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_AcceptPayment),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_DoNotAcceptCheques),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_Bailiff),
-			('IsOnStopForAdmin', 'TRUE', @FundMessageId_RequiresConsultation),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_Squatter),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptPayment),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_AcceptPayment),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_DoNotAcceptCheques),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_Bailiff),
-			('IsOnStopForPaymentPortal', 'TRUE', @FundMessageId_RequiresConsultation),
-			('ExternalCode', '62', @FundMessageId_Squatter),
-			('ExternalCode', '63', @FundMessageId_DoNotAcceptPayment),
-			('ExternalCode', '64', @FundMessageId_AcceptPayment),
-			('ExternalCode', '65', @FundMessageId_DoNotAcceptCheques),
-			('ExternalCode', '66', @FundMessageId_ReferToBerneslaiHomes),
-			('ExternalCode', '67', @FundMessageId_Bailiff),
-			('ExternalCode', '66', @FundMessageId_RequiresConsultation)) 
-	AS S ([Key], [Value], [FundMessageId])) AS [Source]
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_Squatter),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_AcceptPayment),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_Bailiff),
+			(@IsOnStopForAdmin_MetadataKeyId, 'TRUE', @FundMessageId_RequiresConsultation),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_Squatter),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_DoNotAcceptPayment),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_AcceptPayment),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_DoNotAcceptCheques),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_ReferToBerneslaiHomes),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_Bailiff),
+			(@IsOnStopForPaymentPortal_MetadataKeyId, 'TRUE', @FundMessageId_RequiresConsultation),
+			(@ExternalCode_MetadataKeyId, '62', @FundMessageId_Squatter),
+			(@ExternalCode_MetadataKeyId, '63', @FundMessageId_DoNotAcceptPayment),
+			(@ExternalCode_MetadataKeyId, '64', @FundMessageId_AcceptPayment),
+			(@ExternalCode_MetadataKeyId, '65', @FundMessageId_DoNotAcceptCheques),
+			(@ExternalCode_MetadataKeyId, '66', @FundMessageId_ReferToBerneslaiHomes),
+			(@ExternalCode_MetadataKeyId, '67', @FundMessageId_Bailiff),
+			(@ExternalCode_MetadataKeyId, '66', @FundMessageId_RequiresConsultation)) 
+	AS S ([MetadataKeyId], [Value], [FundMessageId])) AS [Source]
 ON [Target].[FundMessageId] = [Source].[FundMessageId] 
-	AND [Target].[Key] = [Source].[Key] 
+	AND [Target].[MetadataKeyId] = [Source].[MetadataKeyId] 
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Key], [Value], [FundMessageId])
-VALUES ([Key], [Value], [FundMessageId]);
+INSERT ([MetadataKeyId], [Value], [FundMessageId])
+VALUES ([MetadataKeyId], [Value], [FundMessageId]);
 
 BEGIN TRAN
 

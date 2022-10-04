@@ -22,6 +22,9 @@
     <div class="ui form">
 
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Name)
+        @Html.HiddenFor(m => m.IsASystemType)
+        @Html.HiddenFor(m => m.EntityType)
 
         <div class="four wide field">
             @Html.LabelFor(m => m.Name)

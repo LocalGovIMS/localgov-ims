@@ -48,8 +48,6 @@ namespace Admin.Controllers
         [HttpPost]
         public ActionResult Create(EditViewModel model)
         {
-            ModelState.Remove("Id");
-
             return BaseCreate(model, Dependencies.CreateCommand);
         }
 

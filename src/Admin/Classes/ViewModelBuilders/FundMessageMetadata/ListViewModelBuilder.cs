@@ -29,7 +29,7 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
         {
             var criteria = new BusinessLogic.Models.FundMessageMetadata.SearchCriteria()
             {
-                Id = searchCriteria.FundMessageId,
+                FundMessageId = searchCriteria.FundMessageId,
                 Page = searchCriteria.Page,
                 PageSize = 20
             };
@@ -54,9 +54,9 @@ namespace Admin.Classes.ViewModelBuilders.FundMessageMetadata
                 { 
                     Id = x.Id,
                     ParentCode = x.FundMessageId.ToString(),
-                    Key = x.Key,
-                    Value = x.Value,
-                    Description = _service.GetMetadata().FirstOrDefault(y => y.Key == x.Key)?.Description ?? "Unknown"
+                    Key = x.MetadataKey.Name,
+                    Description = x.MetadataKey.Description,
+                    Value = x.Value
                 }),
                 searchResult.Page,
                 searchResult.PageSize,

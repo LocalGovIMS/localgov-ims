@@ -275,7 +275,6 @@
     <Compile Include="Services\FundMessageMetadata\BaseFundMetadataTest.cs" />
     <Compile Include="Services\FundMessageMetadata\CreateTests.cs" />
     <Compile Include="Services\FundMessageMetadata\DeleteTests.cs" />
-    <Compile Include="Services\FundMessageMetadata\GetMetadataTests.cs" />
     <Compile Include="Services\FundMessageMetadata\GetTests.cs" />
     <Compile Include="Services\FundMessageMetadata\SearchTests.cs" />
     <Compile Include="Services\FundMessageMetadata\UpdateTests.cs" />

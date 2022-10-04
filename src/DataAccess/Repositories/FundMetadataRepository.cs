@@ -20,6 +20,7 @@ namespace DataAccess.Repositories
         public IEnumerable<FundMetadata> Search(SearchCriteria criteria, out int resultCount)
         {
             var items = IncomeDbContext.FundMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable();
 
             items = items.Where(x => x.FundCode == criteria.FundCode);
@@ -42,6 +43,7 @@ namespace DataAccess.Repositories
         public FundMetadata Get(int id)
         {
             var item = IncomeDbContext.FundMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -53,6 +55,7 @@ namespace DataAccess.Repositories
         public FundMetadata Get(string fundCode, string key)
         {
             var item = IncomeDbContext.FundMetadata
+                .Include(x => x.MetadataKey)
                 .AsQueryable()
                 .Where(x => x.FundCode == fundCode && x.MetadataKey.Name == key)
                 .ApplyFilters(Filters)

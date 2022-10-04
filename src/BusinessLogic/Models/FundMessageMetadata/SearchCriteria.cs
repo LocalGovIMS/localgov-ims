@@ -2,7 +2,7 @@
 {
     public class SearchCriteria : BaseSearchCriteria
     {
-        public int Id { get; set; }
+        public int FundMessageId { get; set; }
 
         public SearchCriteria() : base()
         {
