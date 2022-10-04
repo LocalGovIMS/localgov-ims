@@ -71,7 +71,7 @@ namespace Admin
             container.RegisterType<ApplicationUserManager>(new PerRequestLifetimeManager());
             container.RegisterType<ApplicationSignInManager>(new PerRequestLifetimeManager());
             container.RegisterType<IUserStore<PaymentsUser>, UserStore<PaymentsUser>>(new PerRequestLifetimeManager());
-            container.RegisterType<IAuthenticationManager>(new InjectionFactory(x => HttpContext.Current.GetOwinContext().Authentication));
+            container.RegisterFactory<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication);
             container.RegisterType<IRoleStore<IdentityRole, string>, RoleStore<IdentityRole>>(new InjectionConstructor(typeof(IncomeDbContext)));
 
             RegisterBuildersAndCommands(container);
