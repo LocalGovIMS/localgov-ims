@@ -154,20 +154,6 @@ namespace BusinessLogic.UnitTests.Services.Transaction
         }
 
         [TestMethod]
-        public void ReturnsNullIfMopCodeIsJournalReAllocation()
-        {
-            // Arrange
-            SetupUnitOfWork(true, JournalReallocationMopCode, MopMetadataKeys.IsAJournalReallocation, "True");
-            SetupSecurityContext(true);
-            var service = GetService();
-
-            // Act
-            var result = service.GetTransactionByPspReference("Test");
-
-            Assert.IsNull(result);
-        }
-
-        [TestMethod]
         public void ReturnsNullIfMopCodeIsJournal()
         {
             // Arrange
