@@ -475,12 +475,6 @@ namespace BusinessLogic.Services
 
                 var transactions = UnitOfWork.Transactions.GetByPspReference(pspReference).ToList();
 
-                if (transactions.IsATransferTransaction())
-                {
-                    Logger.WarnFormat("Tried to load just a transfer trasaction for PSP Reference: '{0}'", pspReference);
-                    return null;
-                }
-
                 var processedTransactions = transactions.GetProcessedTransactions();
                 var internalReference = processedTransactions.First().InternalReference;
                 var pendingRefunds = GetPendingRefunds(internalReference);
