@@ -340,7 +340,7 @@ namespace BusinessLogic.Services
                 item.ApprovedAt = DateTime.Now;
                 item.ApprovedByUserId = SecurityContext.UserId;
 
-                if (item.StatusId == (int)Enums.EReturnStatus.Deleted) _emailService.SendEReturnDeletedEmail(item.EReturnNo, SecurityContext.UserName);
+                if (item.StatusId == (int)Enums.EReturnStatus.Deleted) _emailService.SendEReturnDeletedEmail(item.EReturnNo, SecurityContext.Username);
 
                 UnitOfWork.Complete(SecurityContext.UserId);
 

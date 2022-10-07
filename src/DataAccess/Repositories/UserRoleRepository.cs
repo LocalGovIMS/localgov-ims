@@ -30,7 +30,7 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public List<string> GetByUsername(string userName, bool track = true)
+        public List<string> GetByUsername(string username, bool track = true)
         {
             var userRoles = new List<UserRole>();
 
@@ -39,7 +39,7 @@ namespace DataAccess.Repositories
                 .AsNoTracking(track)
                 .Include(x => x.Role)
                 .Include(x => x.User)
-                .Where(x => x.User.UserName == @userName)
+                .Where(x => x.User.UserName == @username)
                 .ApplyFilters(Filters)
                 .ToList();
 

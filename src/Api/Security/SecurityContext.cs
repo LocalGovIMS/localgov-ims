@@ -10,7 +10,7 @@ namespace Api.Security
         {
         }
 
-        public string UserName
+        public string Username
         {
             get
             {

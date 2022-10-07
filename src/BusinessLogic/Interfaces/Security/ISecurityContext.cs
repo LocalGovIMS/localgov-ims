@@ -2,7 +2,7 @@
 {
     public interface ISecurityContext
     {
-        string UserName { get; }
+        string Username { get; }
 
         int UserId { get; }
 

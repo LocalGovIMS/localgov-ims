@@ -13,7 +13,7 @@ namespace Admin.Classes.Security
             _userStore = userStore;
         }
 
-        public string UserName
+        public string Username
         {
             get
             {
@@ -23,7 +23,7 @@ namespace Admin.Classes.Security
 
         public int UserId
         {
-            get { return _userStore.GetUser(UserName).UserId; }
+            get { return _userStore.GetUser(Username).UserId; }
         }
 
         public bool IsInRole(string role)
@@ -51,7 +51,7 @@ namespace Admin.Classes.Security
         {
             get
             {
-                return _userStore.GetUserFunds(UserName);
+                return _userStore.GetUserFunds(Username);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Admin.Classes.Security
         {
             get
             {
-                return _userStore.GetUserTemplates(UserName);
+                return _userStore.GetUserTemplates(Username);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Admin.Classes.Security
         {
             get
             {
-                return _userStore.GetUser(UserName).OfficeCode;
+                return _userStore.GetUser(Username).OfficeCode;
             }
         }
     }

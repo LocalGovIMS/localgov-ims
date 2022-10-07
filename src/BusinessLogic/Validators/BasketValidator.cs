@@ -1,7 +1,6 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
-using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models.Payments;
 using log4net;
@@ -13,22 +12,16 @@ namespace BusinessLogic.Validators
     public class BasketValidator : IBasketValidator
     {
         private readonly ILog _logger;
-        private readonly IFundService _fundService;
-        private readonly IAccountHolderService _accountHolderService;
         private readonly IPaymentValidationHandler _paymentValidationHandler;
         private readonly ISecurityContext _securityContext;
 
         private const string DefaultErrorMessage = "There is an error with the basket";
 
         public BasketValidator(ILog logger
-            , IFundService fundService
-            , IAccountHolderService accountHolderService
             , IPaymentValidationHandler paymentValidationHandler
             , ISecurityContext securityContext)
         {
             _logger = logger;
-            _fundService = fundService;
-            _accountHolderService = accountHolderService;
             _paymentValidationHandler = paymentValidationHandler;
             _securityContext = securityContext;
         }

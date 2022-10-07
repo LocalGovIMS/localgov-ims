@@ -91,8 +91,6 @@ namespace Web.UnitTests.Mvc
             var navigationItem1 = new NavigationItem() { Url = "Test1", Path = "Test" };
             var navigationItem2 = new NavigationItem() { Url = "Test2", Path = "Test" };
 
-            var navigationItem = new NavigationItem();
-
             // Act
             navigationManager.Push(navigationItem1, false);
             navigationManager.Push(navigationItem2, false);

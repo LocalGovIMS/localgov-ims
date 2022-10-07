@@ -7,12 +7,12 @@ namespace BusinessLogic.Interfaces.Repositories
     public interface IUserRepository : IRepository<User>
     {
         List<User> Search(SearchCriteria criteria, out int resultCount);
-        User GetUser(string userName);
+        User GetUser(string username);
         User GetUser(int id);
         void Update(User entity);
-        void RecordLogin(string userName);
-        void DisableUser(string userName);
-        bool IsDisabled(string userName);
-        List<string> GetUserAccessibleFunds(string userName);
+        void RecordLogin(string username);
+        void DisableUser(string username);
+        bool IsDisabled(string username);
+        List<string> GetUserAccessibleFunds(string username);
     }
 }

@@ -43,17 +43,17 @@ namespace Admin
                     return;
                 }
 
-                var userName = HttpContext.Current.User.Identity.Name;
+                var username = HttpContext.Current.User.Identity.Name;
 
-                LogInfo(string.Format("Starting Session for user: {0}", userName ?? "Unknown"));
+                LogInfo(string.Format("Starting Session for user: {0}", username ?? "Unknown"));
 
-                var user = userService.GetUser(userName);
+                var user = userService.GetUser(username);
 
                 LogDebug(string.Format("Found user account?: {0}", user != null));
 
                 if (user == null)
                 {
-                    LogError(string.Format("Unable to load the user account: {0}", userName ?? "Unknown User"));
+                    LogError(string.Format("Unable to load the user account: {0}", username ?? "Unknown User"));
                     return;
                 }
 
@@ -65,15 +65,15 @@ namespace Admin
 
                 if (userService.DoesUserAccountNeedDisabling(user))
                 {
-                    LogInfo(string.Format("Disabling user: {0}", userName));
+                    LogInfo(string.Format("Disabling user: {0}", username));
 
-                    userService.DisableUser(userName);
+                    userService.DisableUser(username);
                 }
                 else
                 {
-                    LogInfo(string.Format("Recording login for user: {0}", userName));
+                    LogInfo(string.Format("Recording login for user: {0}", username));
 
-                    userService.RecordLogin(userName);
+                    userService.RecordLogin(username);
                 }
             }
             catch (Exception ex)

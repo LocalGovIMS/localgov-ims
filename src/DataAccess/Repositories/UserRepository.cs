@@ -46,11 +46,11 @@ namespace DataAccess.Repositories
             return items.ToList();
         }
 
-        public User GetUser(string userName)
+        public User GetUser(string username)
         {
             var item = IncomeDbContext.ImsUsers
                 .AsQueryable()
-                .Where(x => x.UserName == @userName)
+                .Where(x => x.UserName == @username)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 
@@ -87,25 +87,25 @@ namespace DataAccess.Repositories
             item.LastEnabledAt = entity.LastEnabledAt;
         }
 
-        public void RecordLogin(string userName)
+        public void RecordLogin(string username)
         {
-            var item = GetUser(userName);
+            var item = GetUser(username);
 
             item.LastLogin = DateTime.Now;
         }
 
-        public void DisableUser(string userName)
+        public void DisableUser(string username)
         {
-            var item = GetUser(userName);
+            var item = GetUser(username);
 
             item.Disabled = true;
         }
 
-        public bool IsDisabled(string userName)
+        public bool IsDisabled(string username)
         {
             var item = IncomeDbContext.ImsUsers
                 .AsQueryable()
-                .Where(x => x.UserName == @userName)
+                .Where(x => x.UserName == @username)
                 .ApplyFilters(Filters)
                 .Select(x => x.Disabled)
                 .FirstOrDefault();
@@ -113,12 +113,12 @@ namespace DataAccess.Repositories
             return item;
         }
 
-        public List<string> GetUserAccessibleFunds(string userName)
+        public List<string> GetUserAccessibleFunds(string username)
         {
             var item = IncomeDbContext.ImsUsers
                 .Include(x => x.UserFundGroups)
                 .Include(x => x.UserFundGroups.Select(y => y.FundGroup))
-                .Where(x => x.UserName == @userName)
+                .Where(x => x.UserName == @username)
                 .ApplyFilters(Filters)
                 .SelectMany(x => x.UserFundGroups.SelectMany(y => y.FundGroup.FundGroupFunds.Select(z => z.FundCode)))
                 .ToList();

@@ -13,7 +13,7 @@ namespace PaymentPortal.Security
             _userStore = userStore;
         }
 
-        public string UserName
+        public string Username
         {
             get
             {
