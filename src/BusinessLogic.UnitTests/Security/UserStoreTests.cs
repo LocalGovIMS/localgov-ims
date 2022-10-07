@@ -125,9 +125,9 @@ namespace BusinessLogic.UnitTests.Security
         {
             // Arrange
             _mockUserTemplateRepository.Setup(x => x.GetByUsername(It.IsAny<string>()))
-                .Returns(new List<string>()
+                .Returns(new List<int>()
                 {
-                    "Template1", "Template2"
+                    1, 2
                 });
             var userStore = GetUserStore();
 
@@ -136,7 +136,7 @@ namespace BusinessLogic.UnitTests.Security
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(string[]));
+            Assert.IsInstanceOfType(result, typeof(int[]));
         }
     }
 }

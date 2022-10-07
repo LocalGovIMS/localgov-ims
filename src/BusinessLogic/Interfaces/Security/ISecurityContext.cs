@@ -13,7 +13,7 @@
         bool IsPublicUser { get; }
 
         string[] AccessibleFundCodes { get; }
-        string[] AccessibleTemplates { get; }
+        int[] AccessibleTemplates { get; }
 
         string OfficeCode { get; }
     }

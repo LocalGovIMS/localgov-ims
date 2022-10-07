@@ -97,7 +97,7 @@ namespace BusinessLogic.Security
             }
         }
 
-        public string[] GetUserTemplates(string userName)
+        public int[] GetUserTemplates(string userName)
         {
             var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserTemplates)}::{userName}";
 

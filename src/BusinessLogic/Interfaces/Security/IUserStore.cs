@@ -6,7 +6,7 @@ namespace BusinessLogic.Interfaces.Security
     {
         string[] GetUserRoles(string userName);
         string[] GetUserFunds(string userName);
-        string[] GetUserTemplates(string userName);
+        int[] GetUserTemplates(string userName);
         string[] GetFundsForOrigin(string origin);
         User GetUser(string userName);
     }

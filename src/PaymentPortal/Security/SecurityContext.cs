@@ -66,11 +66,11 @@ namespace PaymentPortal.Security
             }
         }
 
-        public string[] AccessibleTemplates
+        public int[] AccessibleTemplates
         {
             get
             {
-                return new string[] { };
+                return new int[] { };
             }
         }
 

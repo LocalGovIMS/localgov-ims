@@ -55,7 +55,7 @@ namespace Admin.Classes.Security
             }
         }
 
-        public string[] AccessibleTemplates
+        public int[] AccessibleTemplates
         {
             get
             {
