@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Caching;
 
-namespace DataAccess.Classes.Caching
+namespace BusinessLogic.Classes.Caching
 {
     public static class MemoryCache
     {
@@ -9,10 +9,10 @@ namespace DataAccess.Classes.Caching
 
         public static T GetCachedData<T>(string cacheKey, Func<T> function)
         {
-            return GetCachedData(cacheKey, function, 5); // TODO: Pickup the lifespanInMinutes from web.config
+            return GetCachedData(cacheKey, function, 300); // TODO: Pickup the lifespanInMinutes from web.config
         }
 
-        public static T GetCachedData<T>(string cacheKey, Func<T> function, int lifespanInMinutes)
+        public static T GetCachedData<T>(string cacheKey, Func<T> function, int lifespanInSeconds)
         {
             // Returns null if the value does not exist.
             // Prevents a race condition where the cache invalidates between the 
@@ -40,7 +40,7 @@ namespace DataAccess.Classes.Caching
 
                 CacheItemPolicy cip = new CacheItemPolicy()
                 {
-                    AbsoluteExpiration = new DateTimeOffset(DateTime.Now.AddMinutes(lifespanInMinutes))
+                    AbsoluteExpiration = new DateTimeOffset(DateTime.Now.AddSeconds(lifespanInSeconds))
                 };
 
                 System.Runtime.Caching.MemoryCache.Default.Set(cacheKey, dataToCache, cip);

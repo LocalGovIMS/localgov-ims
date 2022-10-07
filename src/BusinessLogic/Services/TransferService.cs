@@ -16,9 +16,6 @@ namespace BusinessLogic.Services
 {
     public class TransferService : BaseService, ITransferService
     {
-        private readonly string _transferInMopCode;
-        private readonly string _transferOutMopCode;
-
         private readonly IFundService _fundService;
         private readonly IVatService _vatService;
         private ITransactionTransferValidator _transactionTransferValidator;
@@ -34,9 +31,6 @@ namespace BusinessLogic.Services
             _fundService = fundService;
             _vatService = vatService;
             _transactionTransferValidator = transactionTransferValidator;
-
-            _transferInMopCode = GetTransferInMopCode();
-            _transferOutMopCode = GetTransferOutMopCode();
         }
 
         private string GetTransferInMopCode()
@@ -116,6 +110,8 @@ namespace BusinessLogic.Services
         {
             var transaction = new ProcessedTransaction();
             var targetFund = _fundService.GetByFundCode(transferItem.FundCode);
+            var transferOutMopCode = GetTransferOutMopCode();
+            var transferInMopCode = GetTransferInMopCode();
 
             var vatCode = targetFund.VatCode;
             var vatRate = decimal.ToSingle(targetFund.Vat.Percentage ?? 0);
@@ -143,12 +139,12 @@ namespace BusinessLogic.Services
             if (debit)
             {
                 transaction.Amount = -transferItem.Amount;
-                transaction.MopCode = _transferOutMopCode;
+                transaction.MopCode = transferOutMopCode;
             }
             else
             {
                 transaction.Amount = transferItem.Amount;
-                transaction.MopCode = _transferInMopCode;
+                transaction.MopCode = transferInMopCode;
             }
 
             transaction.VatCode = vatCode;

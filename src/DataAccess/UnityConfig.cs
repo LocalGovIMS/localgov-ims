@@ -62,7 +62,7 @@ namespace DataAccess
                 ;
 
             container
-                .RegisterType<IUnitOfWork, UnitOfWork>();
+                .RegisterType<IUnitOfWork, UnitOfWork>(new PerResolveLifetimeManager());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Classes.Caching;
+using BusinessLogic.Entities;
 using BusinessLogic.Extensions;
 using BusinessLogic.Interfaces.Repositories;
 using BusinessLogic.Interfaces.Security;
@@ -8,11 +9,11 @@ namespace BusinessLogic.Security
 {
     public class UserStore : IUserStore
     {
-        private IUserRoleRepository _userRoleRepository;
-        private IUserRepository _userRepository;
-        private IFundGroupFundRepository _fundGroupFundRepository;
-        private IUserTemplateRepository _userTemplateRepository;
-        private IFundRepository _fundRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IFundGroupFundRepository _fundGroupFundRepository;
+        private readonly IUserTemplateRepository _userTemplateRepository;
+        private readonly IFundRepository _fundRepository;
 
         public UserStore(IUserRoleRepository userRoleRepository
             , IUserRepository userRepository
@@ -29,7 +30,16 @@ namespace BusinessLogic.Security
 
         public User GetUser(string userName)
         {
-            return _userRepository.GetUser(userName);
+            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUser)}::{userName}";
+
+            var output = MemoryCache.GetCachedData(
+                cacheKey,
+                () =>
+                {
+                    return _userRepository.GetUser(userName);
+                }, 10);
+
+            return output;
         }
 
         public string[] GetUserRoles(string userName)
@@ -41,12 +51,16 @@ namespace BusinessLogic.Security
         {
             try
             {
-                var userId = _userRepository.GetUser(userName).UserId;
-                var userAccessibleFunds = _fundGroupFundRepository.GetAllExtended()
-                    .Where(x => x.FundGroup.UserFundGroups.Any(y => y.UserId == userId))
-                    .Select(f => f.Fund.FundCode);
+                var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserFunds)}::{userName}";
 
-                return userAccessibleFunds.ToArray();
+                var output = MemoryCache.GetCachedData(
+                    cacheKey,
+                    () =>
+                    {
+                        return _userRepository.GetUserAccessibleFunds(userName).ToArray();
+                    });
+
+                return output;
             }
             catch
             {
@@ -60,10 +74,19 @@ namespace BusinessLogic.Security
             {
                 if (origin.Equals("basket"))
                 {
-                    return _fundRepository.GetAll(true)
-                        .Where(x => x.IsABasketFund())
-                        .Select(x => x.FundCode)
-                        .ToArray();
+                    var cacheKey = $"{nameof(UserStore)}::{nameof(GetFundsForOrigin)}::basket";
+
+                    var output = MemoryCache.GetCachedData(
+                        cacheKey,
+                        () =>
+                        {
+                            return _fundRepository.GetAll(true)
+                                .Where(x => x.IsABasketFund())
+                                .Select(x => x.FundCode)
+                                .ToArray();
+                        });
+
+                    return output;
                 }
 
                 return new string[] { };
@@ -76,7 +99,16 @@ namespace BusinessLogic.Security
 
         public string[] GetUserTemplates(string userName)
         {
-            return _userTemplateRepository.GetByUsername(userName).ToArray();
+            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserTemplates)}::{userName}";
+
+            var output = MemoryCache.GetCachedData(
+                cacheKey,
+                () =>
+                {
+                    return _userTemplateRepository.GetByUsername(userName).ToArray();
+                });
+
+            return output;
         }
     }
 }
