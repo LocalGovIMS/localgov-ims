@@ -10,7 +10,7 @@ namespace Api.Security
         {
         }
 
-        public string UserName
+        public string Username
         {
             get
             {
@@ -59,11 +59,11 @@ namespace Api.Security
             }
         }
 
-        public string[] AccessibleTemplates
+        public int[] AccessibleTemplates
         {
             get
             {
-                return new string[] { };
+                return new int[] { };
             }
         }
 

@@ -36,14 +36,14 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<string> GetByUserRole(string userName)
+        public List<string> GetByUserRole(string username)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
                && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<string>();
 
             try
             {
-                return UnitOfWork.UserRoles.GetByUsername(userName, true);
+                return UnitOfWork.UserRoles.GetByUsername(username, true);
             }
             catch (Exception e)
             {

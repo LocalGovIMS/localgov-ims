@@ -13,7 +13,7 @@ namespace PaymentPortal.Security
             _userStore = userStore;
         }
 
-        public string UserName
+        public string Username
         {
             get
             {
@@ -66,11 +66,11 @@ namespace PaymentPortal.Security
             }
         }
 
-        public string[] AccessibleTemplates
+        public int[] AccessibleTemplates
         {
             get
             {
-                return new string[] { };
+                return new int[] { };
             }
         }
 

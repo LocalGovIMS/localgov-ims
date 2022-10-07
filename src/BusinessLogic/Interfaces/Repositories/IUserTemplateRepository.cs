@@ -6,7 +6,7 @@ namespace BusinessLogic.Interfaces.Repositories
     public interface IUserTemplateRepository : IRepository<UserTemplate>
     {
         List<UserTemplate> GetByUserId(int id);
-        List<string> GetByUsername(string userName);
+        List<int> GetByUsername(string username);
         void Update(List<UserTemplate> items, int userId);
     }
 }

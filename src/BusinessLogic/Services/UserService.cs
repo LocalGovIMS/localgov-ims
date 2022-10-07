@@ -78,11 +78,11 @@ namespace BusinessLogic.Services
             }
         }
 
-        public User GetUser(string userName)
+        public User GetUser(string username)
         {
             try
             {
-                var result = UnitOfWork.Users.GetUser(userName);
+                var result = UnitOfWork.Users.GetUser(username);
                 return result;
             }
             catch (Exception e)
@@ -150,18 +150,18 @@ namespace BusinessLogic.Services
         // That's why we have it really - it means we're very specific about what we're updating,
         // in this case just a time stamp, rather than reusing the Update method - which gives us
         // access to update all fields.
-        public IResult RecordLogin(string userName)
+        public IResult RecordLogin(string username)
         {
             try
             {
-                var user = UnitOfWork.Users.GetUser(userName);
+                var user = UnitOfWork.Users.GetUser(username);
                 if (user == null)
                 {
                     return new Result("Unable to record Login");
                 }
                 else
                 {
-                    UnitOfWork.Users.RecordLogin(userName);
+                    UnitOfWork.Users.RecordLogin(username);
                     UnitOfWork.Complete(user.UserId);
 
                     return new Result();
@@ -169,7 +169,7 @@ namespace BusinessLogic.Services
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format("Unable to record login for user: {0}", userName), e);
+                Logger.Error(string.Format("Unable to record login for user: {0}", username), e);
                 return new Result("Unable to record Login");
             }
         }
@@ -196,17 +196,17 @@ namespace BusinessLogic.Services
             }
         }
 
-        public IResult DisableUser(string userName)
+        public IResult DisableUser(string username)
         {
             try
             {
-                if (UnitOfWork.Users.GetUser(userName) == null)
+                if (UnitOfWork.Users.GetUser(username) == null)
                 {
                     return new Result("Unable to disabled user");
                 }
                 else
                 {
-                    UnitOfWork.Users.DisableUser(userName);
+                    UnitOfWork.Users.DisableUser(username);
                     UnitOfWork.Complete(SecurityContext.UserId);
 
                     return new Result();
@@ -214,26 +214,26 @@ namespace BusinessLogic.Services
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format("Unable to disable user: {0}", userName), e);
+                Logger.Error(string.Format("Unable to disable user: {0}", username), e);
                 return new Result("Unable to disabled user");
             }
         }
 
-        public IResult IsUserDisabled(string userName)
+        public IResult IsUserDisabled(string username)
         {
             try
             {
-                if (UnitOfWork.Users.GetUser(userName) == null)
+                if (UnitOfWork.Users.GetUser(username) == null)
                 {
-                    Logger.InfoFormat("User not found in the system: {0}", userName);
+                    Logger.InfoFormat("User not found in the system: {0}", username);
 
                     return new Result("Error getting disabled status") { Data = false };
                 }
                 else
                 {
-                    Logger.DebugFormat("Checking to see if user is disabled: {0}", userName);
+                    Logger.DebugFormat("Checking to see if user is disabled: {0}", username);
 
-                    var result = UnitOfWork.Users.IsDisabled(userName);
+                    var result = UnitOfWork.Users.IsDisabled(username);
 
                     Logger.DebugFormat("Is user disabled?: {0}", result);
 
@@ -242,7 +242,7 @@ namespace BusinessLogic.Services
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format("Unable to get user disable status: {0}", userName), e);
+                Logger.Error(string.Format("Unable to get user disable status: {0}", username), e);
                 return new Result("Error getting disabled status") { Data = false };
             }
         }

@@ -33,9 +33,9 @@ namespace BusinessLogic.Extensions
 
             if (item.Metadata == null || !item.Metadata.Any()) return false;
 
-            var metaData = item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key && Convert.ToBoolean(x.Value).Equals(true));
+            var metadata = item.Metadata.FirstOrDefault(x => x.MetadataKey.Name == key && Convert.ToBoolean(x.Value).Equals(true));
 
-            return metaData != null;
+            return metadata != null;
         }
     }
 }

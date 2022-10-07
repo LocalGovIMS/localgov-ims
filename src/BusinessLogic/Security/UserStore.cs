@@ -28,36 +28,36 @@ namespace BusinessLogic.Security
             _fundRepository = fundRepository;
         }
 
-        public User GetUser(string userName)
+        public User GetUser(string username)
         {
-            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUser)}::{userName}";
+            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUser)}::{username}";
 
             var output = MemoryCache.GetCachedData(
                 cacheKey,
                 () =>
                 {
-                    return _userRepository.GetUser(userName);
+                    return _userRepository.GetUser(username);
                 }, 10);
 
             return output;
         }
 
-        public string[] GetUserRoles(string userName)
+        public string[] GetUserRoles(string username)
         {
-            return _userRoleRepository.GetByUsername(userName, false).ToArray();
+            return _userRoleRepository.GetByUsername(username, false).ToArray();
         }
 
-        public string[] GetUserFunds(string userName)
+        public string[] GetUserFunds(string username)
         {
             try
             {
-                var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserFunds)}::{userName}";
+                var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserFunds)}::{username}";
 
                 var output = MemoryCache.GetCachedData(
                     cacheKey,
                     () =>
                     {
-                        return _userRepository.GetUserAccessibleFunds(userName).ToArray();
+                        return _userRepository.GetUserAccessibleFunds(username).ToArray();
                     });
 
                 return output;
@@ -97,15 +97,15 @@ namespace BusinessLogic.Security
             }
         }
 
-        public string[] GetUserTemplates(string userName)
+        public int[] GetUserTemplates(string username)
         {
-            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserTemplates)}::{userName}";
+            var cacheKey = $"{nameof(UserStore)}::{nameof(GetUserTemplates)}::{username}";
 
             var output = MemoryCache.GetCachedData(
                 cacheKey,
                 () =>
                 {
-                    return _userTemplateRepository.GetByUsername(userName).ToArray();
+                    return _userTemplateRepository.GetByUsername(username).ToArray();
                 });
 
             return output;

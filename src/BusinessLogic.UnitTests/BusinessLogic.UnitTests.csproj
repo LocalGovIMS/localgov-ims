@@ -314,7 +314,6 @@
     <Compile Include="Services\Transaction\UpdateCardDetailsTests.cs" />
     <Compile Include="Services\UserTemplate\BaseUserTemplateTest.cs" />
     <Compile Include="Services\UserTemplate\GetByUserIdTests.cs" />
-    <Compile Include="Services\UserTemplate\GetByUsernameTests.cs" />
     <Compile Include="Services\UserTemplate\UpdateTests.cs" />
     <Compile Include="Services\UserMethodOfPayment\BaseUserRoleTest.cs" />
     <Compile Include="Services\UserMethodOfPayment\GetByUserIdTests.cs" />

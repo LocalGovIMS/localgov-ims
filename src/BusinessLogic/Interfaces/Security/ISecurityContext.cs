@@ -2,7 +2,7 @@
 {
     public interface ISecurityContext
     {
-        string UserName { get; }
+        string Username { get; }
 
         int UserId { get; }
 
@@ -13,7 +13,7 @@
         bool IsPublicUser { get; }
 
         string[] AccessibleFundCodes { get; }
-        string[] AccessibleTemplates { get; }
+        int[] AccessibleTemplates { get; }
 
         string OfficeCode { get; }
     }

@@ -77,11 +77,11 @@ namespace Admin.UnitTests.Classes.Security
             var securityContext = new SecurityContext(_mockUserStore.Object);
 
             // Act
-            var userName = securityContext.UserName;
+            var result = securityContext.Username;
 
             // Assert
-            Assert.IsNotNull(userName);
-            Assert.AreEqual(userName, "User");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result, "User");
         }
 
         [TestMethod]

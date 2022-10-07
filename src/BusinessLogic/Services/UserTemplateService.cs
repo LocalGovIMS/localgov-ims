@@ -36,22 +36,6 @@ namespace BusinessLogic.Services
             }
         }
 
-        public List<string> GetByUsername(string userName)
-        {
-            if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))
-               && (!SecurityContext.IsInRole(Security.Role.ServiceDesk))) return new List<string>();
-
-            try
-            {
-                return UnitOfWork.UserTemplates.GetByUsername(userName);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new List<string>();
-            }
-        }
-
         public IResult Update(List<UserTemplate> items, int userId)
         {
             if ((!SecurityContext.IsInRole(Security.Role.SystemAdmin))

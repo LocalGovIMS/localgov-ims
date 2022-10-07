@@ -26,17 +26,17 @@ namespace DataAccess.Repositories
             return results;
         }
 
-        public List<string> GetByUsername(string userName)
+        public List<int> GetByUsername(string username)
         {
             var results = IncomeDbContext.ImsUserTemplates
                 .AsQueryable()
                 .Include(x => x.Template)
                 .Include(x => x.User)
-                .Where(x => x.User.UserName == @userName)
+                .Where(x => x.User.UserName == @username)
                 .ApplyFilters(Filters)
                 .ToList();
 
-            return results.Select(x => x.Template.Id.ToString()).ToList();
+            return results.Select(x => x.Template.Id).ToList();
         }
 
         public void Update(List<UserTemplate> items, int userId)
