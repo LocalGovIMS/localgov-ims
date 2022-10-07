@@ -112,7 +112,7 @@ namespace BusinessLogic.UnitTests.Security
             var userStore = GetUserStore();
 
             // Act
-            var result = userStore.GetUserFunds("A user");
+            var result = userStore.GetUserFunds("a user to fail");
 
             // Assert
             Assert.IsNotNull(result);
