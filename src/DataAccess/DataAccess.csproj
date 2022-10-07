@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AuditLogger.cs" />
-    <Compile Include="Classes\Caching\MemoryCache.cs" />
     <Compile Include="Extensions\IncomeDbContextExtensions.cs" />
     <Compile Include="Extensions\IDbSetExtensions.cs" />
     <Compile Include="Extensions\IQueryableExtensions.cs" />

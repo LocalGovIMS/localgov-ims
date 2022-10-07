@@ -6,6 +6,7 @@ using DataAccess.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 
 namespace DataAccess.Repositories
@@ -108,6 +109,19 @@ namespace DataAccess.Repositories
                 .ApplyFilters(Filters)
                 .Select(x => x.Disabled)
                 .FirstOrDefault();
+
+            return item;
+        }
+
+        public List<string> GetUserAccessibleFunds(string userName)
+        {
+            var item = IncomeDbContext.ImsUsers
+                .Include(x => x.UserFundGroups)
+                .Include(x => x.UserFundGroups.Select(y => y.FundGroup))
+                .Where(x => x.UserName == @userName)
+                .ApplyFilters(Filters)
+                .SelectMany(x => x.UserFundGroups.SelectMany(y => y.FundGroup.FundGroupFunds.Select(z => z.FundCode)))
+                .ToList();
 
             return item;
         }

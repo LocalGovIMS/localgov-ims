@@ -243,7 +243,7 @@ namespace DataAccess.Persistence
 
             // We only need to get this data once...
             var userAccessibleFunds = _securityContext.AccessibleFundCodes;
-            var userAccessibleTemplates = _securityContext.AccessibleTemplates;
+            var userAccessibleTemplates = _securityContext.AccessibleTemplates.Select(x => Convert.ToInt32(x));
 
             // Now apply restrictions.
             // This idea here is that we're not repeating the restrictions in several places.
@@ -258,8 +258,8 @@ namespace DataAccess.Persistence
             if (!_securityContext.IsInRole(BusinessLogic.Security.Role.Finance) &&
                 !_securityContext.IsInRole(BusinessLogic.Security.Role.ChequeProcess))
             {
-                Templates.AddFilter(x => userAccessibleTemplates.Contains(x.Id.ToString()));
-                EReturns.AddFilter(x => userAccessibleTemplates.Contains(x.Template.Id.ToString()));
+                Templates.AddFilter(x => userAccessibleTemplates.Contains(x.Id));
+                EReturns.AddFilter(x => userAccessibleTemplates.Contains(x.Template.Id));
             }
         }
 

@@ -13,5 +13,6 @@ namespace BusinessLogic.Interfaces.Repositories
         void RecordLogin(string userName);
         void DisableUser(string userName);
         bool IsDisabled(string userName);
+        List<string> GetUserAccessibleFunds(string userName);
     }
 }

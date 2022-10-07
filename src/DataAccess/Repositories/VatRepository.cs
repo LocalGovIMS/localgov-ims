@@ -18,6 +18,7 @@ namespace DataAccess.Repositories
         {
             return IncomeDbContext.Vat
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .Single(x => x.VatCode == vatCode);
         }
@@ -26,6 +27,7 @@ namespace DataAccess.Repositories
         {
             var item = IncomeDbContext.Vat
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.VatCode == entity.VatCode)
                 .ApplyFilters(Filters)
@@ -41,6 +43,7 @@ namespace DataAccess.Repositories
             {
                 return IncomeDbContext.Vat
                     .Include(x => x.Metadata)
+                    .Include(x => x.Metadata.Select(y => y.MetadataKey))
                     .AsQueryable()
                     .ApplyFilters(Filters)
                     .ToList();
@@ -48,6 +51,7 @@ namespace DataAccess.Repositories
 
             return IncomeDbContext.Vat
                 .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.Disabled == false)
                 .ApplyFilters(Filters)

@@ -1,6 +1,6 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Classes.Caching;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Repositories;
-using DataAccess.Classes.Caching;
 using DataAccess.Extensions;
 using DataAccess.Persistence;
 using System;

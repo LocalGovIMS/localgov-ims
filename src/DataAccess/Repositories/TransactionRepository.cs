@@ -34,6 +34,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Fund)
                 .Include(x => x.Mop)
                 .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .Include(x => x.Vat)
                 .Include(x => x.User)
                 .Include(x => x.SuspenseProcessedTransactions)
@@ -58,6 +59,7 @@ namespace DataAccess.Repositories
                 .Include(x => x.Fund)
                 .Include(x => x.Mop)
                 .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .Include(x => x.Vat)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();

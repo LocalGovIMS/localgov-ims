@@ -88,35 +88,12 @@ namespace BusinessLogic.UnitTests.Security
         public void CanGetUserFunds()
         {
             // Arrange
-            _mockUserRepository.Setup(x => x.GetUser(It.IsAny<string>()))
-               .Returns(new Entities.User()
+            _mockUserRepository.Setup(x => x.GetUserAccessibleFunds(It.IsAny<string>()))
+               .Returns(new List<string> ()
                {
-                   UserId = 1
+                   "F1", "A1"
                });
 
-            _mockFundGroupFundRepository.Setup(x => x.GetAllExtended())
-                .Returns(new List<Entities.FundGroupFund>()
-                {
-                    {
-                        new Entities.FundGroupFund()
-                        {
-                            FundGroupFundId = 1,
-                            FundGroup = new Entities.FundGroup() {
-                                UserFundGroups = new List<Entities.UserFundGroup>()
-                                {
-                                    new Entities.UserFundGroup()
-                                    {
-                                        UserId = 1
-                                    }
-                                }
-                            },
-                            Fund = new Entities.Fund()
-                            {
-                                FundCode = "F1"
-                            }
-                        }
-                    }
-                });
             var userStore = GetUserStore();
 
             // Act
@@ -125,7 +102,7 @@ namespace BusinessLogic.UnitTests.Security
             // Assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string[]));
-            Assert.IsTrue(result.Length == 1);
+            Assert.IsTrue(result.Length == 2);
         }
 
         [TestMethod]
@@ -135,7 +112,7 @@ namespace BusinessLogic.UnitTests.Security
             var userStore = GetUserStore();
 
             // Act
-            var result = userStore.GetUserFunds("A user");
+            var result = userStore.GetUserFunds("a user to fail");
 
             // Assert
             Assert.IsNotNull(result);

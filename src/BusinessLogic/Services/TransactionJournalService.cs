@@ -18,9 +18,6 @@ namespace BusinessLogic.Services
 {
     public class TransactionJournalService : BaseService, ITransactionJournalService
     {
-        private readonly string _creditMopCode;
-        private readonly string _debitMopCode;
-
         private ITransactionJournalValidator _transactionJournalValidator;
         private IRollbackTransactionJournalValidator _rollbackTransactionJournalValidator;
         private ITransactionService _transactionService;
@@ -39,9 +36,6 @@ namespace BusinessLogic.Services
             _rollbackTransactionJournalValidator = rollbackTransactionJournalValidator;
             _transactionService = transactionService;
             _vatStrategy = vatStrategy;
-
-            _creditMopCode = GetCreditMopCode();
-            _debitMopCode = GetDebitMopCode();
         }
 
         private string GetCreditMopCode()
@@ -84,6 +78,8 @@ namespace BusinessLogic.Services
         private void CreateTransfer(TransferItem transferItem, string transctionReference)
         {
             var creditSource = UnitOfWork.Transactions.GetByTransactionReference(transctionReference);
+            var creditMopCode = GetCreditMopCode();
+            var debitMopCode = GetDebitMopCode();
 
             var entryDate = DateTime.Now;
             var parentTransactionReference = creditSource.TransactionReference;
@@ -101,7 +97,7 @@ namespace BusinessLogic.Services
                 FundCode = transferItem.FundCode,
                 AccountReference = transferItem.AccountReference,
                 Amount = transferItem.Amount,
-                MopCode = transferItem.MopCode ?? _creditMopCode,
+                MopCode = transferItem.MopCode ?? creditMopCode,
                 VatCode = transferItem.VatCode,
                 Narrative = string.IsNullOrWhiteSpace(transferItem.Narrative) ? "Journal" : transferItem.Narrative,
                 UserCode = SecurityContext.UserId,
@@ -126,7 +122,7 @@ namespace BusinessLogic.Services
                 EntryDate = entryDate,
                 FundCode = debitSource.FundCode,
                 Amount = -transferItem.Amount,
-                MopCode = _debitMopCode,
+                MopCode = debitMopCode,
                 VatCode = debitSource.VatCode,
                 AccountReference = debitSource.AccountReference,
                 Narrative = string.IsNullOrWhiteSpace(transferItem.Narrative) ? "Journal" : transferItem.Narrative,
@@ -150,6 +146,7 @@ namespace BusinessLogic.Services
             var transferGuid = Guid.NewGuid();
             var pspReference = GetNextReferenceId();
             var internalReference = GetNextReferenceId();
+            var debitMopCode = GetDebitMopCode();
 
             ProcessedTransaction credit = null;
             ProcessedTransaction debit = null;
@@ -191,7 +188,7 @@ namespace BusinessLogic.Services
                     EntryDate = entryDate,
                     FundCode = transferOut.FundCode,
                     Amount = transferOut.Amount,
-                    MopCode = _debitMopCode,
+                    MopCode = debitMopCode,
                     VatCode = transferOut.VatCode,
                     AccountReference = transferOut.AccountReference,
                     Narrative = transferOut.Narrative,

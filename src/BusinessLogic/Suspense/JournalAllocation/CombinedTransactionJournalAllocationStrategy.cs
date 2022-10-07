@@ -25,10 +25,9 @@ namespace BusinessLogic.Suspense.JournalAllocation
 
         private readonly Guid _processId;
 
-        private readonly string _creditMopCode;
-        private readonly string _debitMopCode;
-        private readonly string _journalVatCode;
-        private readonly string _journalFundCode;
+        private string _debitMopCode;
+        private string _journalVatCode;
+        private string _journalFundCode;
 
         public CombinedTransactionJournalAllocationStrategy(
             ILog logger
@@ -42,12 +41,7 @@ namespace BusinessLogic.Suspense.JournalAllocation
             _securityContext = securityContext;
             _suspenseJournalService = suspenseJournalService;
             _journalAllocationStrategyValidator = journalAllocationStrategyValidator;
-
-            _creditMopCode = GetCreditNoteMopCode();
-            _debitMopCode = GetCreditNoteMopCode();
-            _journalVatCode = GetJournalVatCode();
-            _journalFundCode = GetJournalFundCode();
-
+        
             _processId = Guid.NewGuid();
         }
 
@@ -157,6 +151,10 @@ namespace BusinessLogic.Suspense.JournalAllocation
             _pspReference = _suspenseJournalService.GetPspReference();
             _suspenseTransactionDate = suspense.Item.CreatedAt;
 
+            _debitMopCode = GetCreditNoteMopCode();
+            _journalVatCode = GetJournalVatCode();
+            _journalFundCode = GetJournalFundCode();
+
             var suspenseTransaction = CreateSuspenseTransaction(suspense);
 
             foreach (var journal in journalItems)
@@ -254,6 +252,8 @@ namespace BusinessLogic.Suspense.JournalAllocation
         {
             if (creditNotes.IsNullOrEmpty()) return;
 
+            var creditMopCode = GetCreditNoteMopCode();
+
             foreach (var creditNote in creditNotes)
             {
 
@@ -262,7 +262,7 @@ namespace BusinessLogic.Suspense.JournalAllocation
                     AccountReference = creditNote.AccountReference,
                     Amount = -creditNote.Amount,
                     FundCode = creditNote.FundCode,
-                    MopCode = _creditMopCode,
+                    MopCode = creditMopCode,
                     Narrative = suspense.Item.Narrative,
                     ImportId = suspense.Item.ImportId.Value,
                     VatCode = creditNote.VatCode
