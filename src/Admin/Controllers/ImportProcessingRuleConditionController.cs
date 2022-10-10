@@ -7,7 +7,7 @@ using Web.Mvc.Navigation;
 
 namespace Admin.Controllers
 {
-    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
+    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin + "," + Role.ServiceDesk + "," + Role.Finance)]
     public class ImportProcessingRuleConditionController : BaseController<IImportProcessingRuleConditionControllerDependencies>
     {
         public ImportProcessingRuleConditionController(IImportProcessingRuleConditionControllerDependencies dependecies)
@@ -32,7 +32,6 @@ namespace Admin.Controllers
         }
 
         [NavigatablePageActionFilter(DisplayText = "Create Condition")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult Create(int importProcessingRuleId, int? group)
         {
@@ -45,7 +44,6 @@ namespace Admin.Controllers
             return View(model);
         }
 
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpPost]
         public ActionResult Create(EditViewModel model)
         {
@@ -53,7 +51,6 @@ namespace Admin.Controllers
         }
 
         [NavigatablePageActionFilter(DisplayText = "Edit Condition")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -62,14 +59,12 @@ namespace Admin.Controllers
             return View(model);
         }
 
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpPost]
         public ActionResult Edit(EditViewModel model)
         {
             return BaseEdit(model, Dependencies.EditCommand);
         }
 
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult Delete(int id, int importProcessingRuleId)
         {

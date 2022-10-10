@@ -7,7 +7,7 @@ using Web.Mvc.Navigation;
 
 namespace Admin.Controllers
 {
-    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
+    [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin + "," + Role.ServiceDesk + "," + Role.Finance)]
     public class ImportProcessingRuleController : BaseController<ImportProcessingRuleControllerDependencies>
     {
         public ImportProcessingRuleController(ImportProcessingRuleControllerDependencies dependecies)
@@ -16,7 +16,6 @@ namespace Admin.Controllers
         }
 
         [NavigatablePageActionFilter(DisplayText = "Import Rules")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [HttpGet]
         public ActionResult List()
         {
@@ -26,7 +25,6 @@ namespace Admin.Controllers
         }
 
         [NavigatablePageActionFilter(DisplayText = "Import Rules")]
-        [Classes.Security.Attributes.Authorize(Roles = Role.SystemAdmin)]
         [AcceptVerbs("GET", "POST")]
         public ActionResult Search(SearchCriteria criteria)
         {

@@ -58,7 +58,9 @@ namespace BusinessLogic.Services
         public IResult Create(ImportProcessingRuleAction item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
-                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
+                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)
+                && !SecurityContext.IsInRole(Security.Role.Finance)) 
+                return new Result("You do not have permission to perform the requested action");
 
             try
             {
@@ -77,7 +79,9 @@ namespace BusinessLogic.Services
         public IResult Update(ImportProcessingRuleAction item)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
-                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
+                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)
+                && !SecurityContext.IsInRole(Security.Role.Finance)) 
+                return new Result("You do not have permission to perform the requested action");
 
             try
             {
@@ -96,7 +100,9 @@ namespace BusinessLogic.Services
         public IResult Delete(int id)
         {
             if (!SecurityContext.IsInRole(Security.Role.SystemAdmin)
-                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)) return new Result("You do not have permission to perform the requested action");
+                && !SecurityContext.IsInRole(Security.Role.ServiceDesk)
+                && !SecurityContext.IsInRole(Security.Role.Finance)) 
+                return new Result("You do not have permission to perform the requested action");
 
             try
             {

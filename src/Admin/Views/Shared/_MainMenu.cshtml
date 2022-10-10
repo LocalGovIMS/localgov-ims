@@ -38,6 +38,10 @@
         {
             <a id="menu__suspense" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "Suspense" ? "active" : "")" href="@Url.Action("List", "Suspense")"><i class="flag icon"></i> Suspense</a>
         }
+        @if (User.IsInRole(Role.Finance))
+        {
+            <a id="menu__import_rules" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "ImportProcessingRules" ? "active" : "")" href="@Url.Action("List", "ImportProcessingRule")"><i class="forward icon"></i> Rules</a>
+        }
         @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ServiceDesk))
         {
             <a id="menu__users" class="item @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" href="@Url.Action("List", "User")"><i class="users icon"></i> Users</a>
