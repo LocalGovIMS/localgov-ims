@@ -69,7 +69,7 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRuleAction.Create
         [TestMethod]
         public void HasCorrectNumberOfCustomAttributes()
         {
-            Assert.AreEqual(2, GetMethod().CustomAttributes.Count());
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Count());
         }
 
         [TestMethod]
