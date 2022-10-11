@@ -501,7 +501,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public SearchResult<ProcessedTransaction> SearchTransactions(SearchCriteria criteria)
+        public SearchResult<SearchResultItem> SearchTransactions(SearchCriteria criteria)
         {
             if (!SecurityContext.IsInRole(Security.Role.TransactionList)) return null;
 
@@ -509,7 +509,7 @@ namespace BusinessLogic.Services
             {
                 var result = UnitOfWork.Transactions.Search(criteria.TrimStringProperties(), out int resultCount);
 
-                return new SearchResult<ProcessedTransaction>()
+                return new SearchResult<SearchResultItem>()
                 {
                     Count = resultCount,
                     Items = result,

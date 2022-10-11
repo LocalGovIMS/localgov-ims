@@ -149,9 +149,11 @@
     <Compile Include="Entities\MetadataKey.cs" />
     <Compile Include="Enums\MetadataKeyEntityType.cs" />
     <Compile Include="Enums\SuspenseAllocationStatus.cs" />
+    <Compile Include="Extensions\SearchResultItemExtensions.cs" />
     <Compile Include="Interfaces\Repositories\IMetadataKeyRepository.cs" />
     <Compile Include="Interfaces\Services\IMetadataKeyService.cs" />
     <Compile Include="Models\MetadataKey\SearchCriteria.cs" />
+    <Compile Include="Models\Transactions\SearchResultItem.cs" />
     <Compile Include="Services\MetadataKeyService.cs" />
     <Compile Include="Suspense\JournalAllocation\CombinedTransactionJournalAllocationStrategy.cs" />
     <Compile Include="Suspense\JournalAllocation\DistinctTransactionJournalAllocationStrategy.cs" />

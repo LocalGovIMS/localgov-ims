@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
 
-namespace BusinessLogic.UnitTests.Extensions.ProcessedTransaction
+namespace BusinessLogic.UnitTests.Extensions.SearchResultItem
 {
     [TestClass]
     public class ToExportStringTests
@@ -16,18 +16,18 @@ namespace BusinessLogic.UnitTests.Extensions.ProcessedTransaction
         public void ToExportString_returns_the_expected_result(string delimiter)
         {
             // Arrange
-            var processedTransaction = GetProcessedTransaction();
+            var searchResultItem = GetSearchResultItem();
             var expectedResult = GetExpectedResult(delimiter);
             // Act
-            var result = processedTransaction.ToExportString(delimiter);
+            var result = searchResultItem.ToExportString(delimiter);
 
             // Assert
             result.Should().Be(expectedResult);
         }
 
-        private Entities.ProcessedTransaction GetProcessedTransaction()
+        private BusinessLogic.Models.Transactions.SearchResultItem GetSearchResultItem()
         {
-            return new Entities.ProcessedTransaction()
+            return new BusinessLogic.Models.Transactions.SearchResultItem()
             {
                 TransactionReference = "ABC123",
                 InternalReference = "DEF456",

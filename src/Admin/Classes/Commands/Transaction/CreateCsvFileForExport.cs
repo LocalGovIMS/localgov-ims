@@ -38,6 +38,6 @@ namespace Admin.Classes.Commands.Transaction
     public class CreateCsvFileForExportCommandArgs
     {
         [JsonIgnore]
-        public List<ProcessedTransaction> Transactions { get; set; }
+        public List<BusinessLogic.Models.Transactions.SearchResultItem> Transactions { get; set; }
     }
 }

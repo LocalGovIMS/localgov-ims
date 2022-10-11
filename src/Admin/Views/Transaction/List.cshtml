@@ -54,6 +54,7 @@
                 <th scope="col" style="width: 20%">Type</th>
                 <th scope="col" style="width: 15%">Account</th>
                 <th scope="col" style="width: 15%">Narrative</th>
+                <th scope="col" style="width: 10%">Has Transfers?</th>
                 <th scope="col" style="width: 10%">Amount (£)</th>
             </tr>
         </thead>
@@ -89,8 +90,8 @@
                         <div class="sub">@transaction.CardHolderPremiseNumber @transaction.CardHolderStreet @transaction.CardHolderTown @transaction.CardHolderPostCode</div>
                     </td>
                     <td>@transaction.AccountReference</td>
-
                     <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
+                    <td>@transaction.HasTransfers.ToYesNoString()</td>
                     <td style="text-align: right" class="@if (transaction.Amount < 0)
                                             {
                                                 @Html.Raw("td--negative")

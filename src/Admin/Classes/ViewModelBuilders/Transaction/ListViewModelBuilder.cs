@@ -149,10 +149,10 @@ namespace Admin.Classes.ViewModelBuilders.Transaction
             return new SelectList(selectListItems, true);
         }
 
-        private StaticPagedList<ProcessedTransaction> GetSearchResultAsPagedList(
-            SearchResult<ProcessedTransaction> searchResult)
+        private StaticPagedList<BusinessLogic.Models.Transactions.SearchResultItem> GetSearchResultAsPagedList(
+            SearchResult<BusinessLogic.Models.Transactions.SearchResultItem> searchResult)
         {
-            return new StaticPagedList<ProcessedTransaction>(
+            return new StaticPagedList<BusinessLogic.Models.Transactions.SearchResultItem>(
                 searchResult.Items,
                 searchResult.Page,
                 searchResult.PageSize,

@@ -48,7 +48,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<ProcessedTransaction>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<SearchResultItem>));
         }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<ProcessedTransaction>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<SearchResultItem>));
             Assert.AreEqual(result.Page, 1);
         }
 
@@ -81,7 +81,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SearchResult<ProcessedTransaction>));
+            Assert.IsInstanceOfType(result, typeof(SearchResult<SearchResultItem>));
             Assert.AreEqual(result.PageSize, 20);
         }
 
@@ -132,7 +132,7 @@ namespace BusinessLogic.UnitTests.Services.Transaction
 
                     // Assert
                     Assert.IsNotNull(result);
-                    Assert.IsInstanceOfType(result, typeof(SearchResult<ProcessedTransaction>));
+                    Assert.IsInstanceOfType(result, typeof(SearchResult<SearchResultItem>));
 
                 },
                 () =>

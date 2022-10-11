@@ -35,7 +35,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Export
         {
             MockListViewModelBuilder.Setup(x => x.Build(
                 It.IsAny<SearchCriteria>()))
-                .Returns(new ListViewModel() { Transactions = new StaticPagedList<ProcessedTransaction>(new List<ProcessedTransaction>(), 1, 1, 1) });
+                .Returns(new ListViewModel() { Transactions = new StaticPagedList<BusinessLogic.Models.Transactions.SearchResultItem>(new List<BusinessLogic.Models.Transactions.SearchResultItem>(), 1, 1, 1) });
 
             MockCreateCsvFileForExportCommand.Setup(x => x.Execute(
                 It.IsAny<CreateCsvFileForExportCommandArgs>()))
