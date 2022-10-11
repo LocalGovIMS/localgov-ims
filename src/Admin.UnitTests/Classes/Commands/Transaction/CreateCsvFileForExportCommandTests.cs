@@ -22,7 +22,7 @@ namespace Admin.UnitTests.Classes.Commands.Transaction
             // Arrange
             var args = new CreateCsvFileForExportCommandArgs()
             {
-                Transactions = new List<BusinessLogic.Entities.ProcessedTransaction>()
+                Transactions = new List<BusinessLogic.Models.Transactions.SearchResultItem>()
             };
 
             var command = new Command(_mockLogger.Object);
@@ -41,7 +41,7 @@ namespace Admin.UnitTests.Classes.Commands.Transaction
             // Arrange
             var args = new CreateCsvFileForExportCommandArgs()
             {
-                Transactions = new List<BusinessLogic.Entities.ProcessedTransaction>()
+                Transactions = new List<BusinessLogic.Models.Transactions.SearchResultItem>()
             };
 
             var command = new Command(_mockLogger.Object);

@@ -20,7 +20,7 @@ namespace BusinessLogic.Interfaces.Services
         IResult SuspendPendingTransaction(string reference, string pspReference, string authResult);
         List<ProcessedTransaction> GetTransactionsByInternalReference(string internalReference);
         ProcessedTransaction GetTransaction(string transactionReference);
-        SearchResult<ProcessedTransaction> SearchTransactions(SearchCriteria criteria);
+        SearchResult<SearchResultItem> SearchTransactions(SearchCriteria criteria);
         List<PendingTransaction> GetPendingRefunds(string transactionReference);
         List<ProcessedTransaction> GetProcessedRefunds(string transactionReference);
         List<ProcessedTransaction> GetTransfers(string transferGuid);

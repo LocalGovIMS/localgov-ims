@@ -34,12 +34,12 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
         private void SetupTransactionService(Mock<ITransactionService> service, int page)
         {
             service.Setup(x => x.SearchTransactions(It.IsAny<BusinessLogic.Models.Transactions.SearchCriteria>())).Returns(
-                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Entities.ProcessedTransaction>()
+                new BusinessLogic.Models.Shared.SearchResult<BusinessLogic.Models.Transactions.SearchResultItem>()
                 {
                     Count = 0,
                     Page = page == 0 ? 1 : page,
                     PageSize = 20,
-                    Items = new List<BusinessLogic.Entities.ProcessedTransaction>()
+                    Items = new List<BusinessLogic.Models.Transactions.SearchResultItem>()
                 });
         }
 

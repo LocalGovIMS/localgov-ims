@@ -106,7 +106,19 @@ namespace DataAccess.Repositories
             return items;
         }
 
-        public List<ProcessedTransaction> Search(SearchCriteria criteria, out int resultCount)
+        public List<string> GetJournalsForTransactions(string[] transactionReferences)
+        {
+            var items = IncomeDbContext.ProcessedTransactions
+                .Where(x => transactionReferences.Contains(x.TransferReference))
+                .ApplyFilters(Filters)
+                .Select(x => x.TransferReference)
+                .Distinct()
+                .ToList();
+
+            return items;
+        }
+
+        public List<SearchResultItem> Search(SearchCriteria criteria, out int resultCount)
         {
             var transactions = IncomeDbContext.ProcessedTransactions.AsQueryable();
 
@@ -233,14 +245,16 @@ namespace DataAccess.Repositories
                    UserCode = x.UserCode,
                    VatCode = x.VatCode,
                    VatRate = x.VatRate,
-                   VatAmount = x.VatAmount
+                   VatAmount = x.VatAmount,
+                   ImportId = x.ImportId
                }).ToList();
 
             var funds = IncomeDbContext.Funds.ToList();
             var mops = IncomeDbContext.MOPs.ToList();
-
+            var journals = GetJournalsForTransactions(returnVal.Select(x => x.TransactionReference).ToArray());
+                
             return returnVal.Select(x =>
-                new ProcessedTransaction
+                new SearchResultItem
                 {
                     TransactionReference = x.TransactionReference,
                     AccountReference = x.AccountReference ?? string.Empty,
@@ -263,11 +277,13 @@ namespace DataAccess.Repositories
                     UserCode = x.UserCode,
                     VatCode = x.VatCode,
                     VatRate = x.VatRate,
-                    VatAmount = x.VatAmount
+                    VatAmount = x.VatAmount,
+                    ImportId = x.ImportId,
+                    HasTransfers = journals.Contains(x.TransactionReference)
                 }).ToList();
         }
 
-        public List<ProcessedTransaction> Search(SearchCriteria criteria)
+        public List<SearchResultItem> Search(SearchCriteria criteria)
         {
             int resultCount;
 

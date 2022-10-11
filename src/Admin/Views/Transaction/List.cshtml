@@ -50,11 +50,12 @@
             <tr>
                 <th scope="col" style="width: 10%">Date and time</th>
                 <th scope="col" style="width: 5%">MOP</th>
-                <th scope="col" style="width: 15%">Receipt</th>
+                <th scope="col" style="width: 10%">Receipt</th>
                 <th scope="col" style="width: 20%">Type</th>
                 <th scope="col" style="width: 15%">Account</th>
-                <th scope="col" style="width: 15%">Narrative</th>
-                <th scope="col" style="width: 10%">Amount (£)</th>
+                <th scope="col" style="width: 26%">Narrative</th>
+                <th scope="col" style="width: 7%">Reallocated</th>
+                <th scope="col" style="width: 7%">Amount (£)</th>
             </tr>
         </thead>
         <tbody>
@@ -89,8 +90,8 @@
                         <div class="sub">@transaction.CardHolderPremiseNumber @transaction.CardHolderStreet @transaction.CardHolderTown @transaction.CardHolderPostCode</div>
                     </td>
                     <td>@transaction.AccountReference</td>
-
                     <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
+                    <td><span class="ui tiny label mop" style="background-color:@(transaction.HasTransfers ? "#21ba45" : "#2185d0"); color: white">@transaction.HasTransfers.ToYesNoString()</span></td>
                     <td style="text-align: right" class="@if (transaction.Amount < 0)
                                             {
                                                 @Html.Raw("td--negative")

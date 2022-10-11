@@ -161,7 +161,7 @@
     <Compile Include="Extensions\Mop\IsARechargeFeeTests.cs" />
     <Compile Include="Extensions\Mop\IsACardPaymentFeeTests.cs" />
     <Compile Include="Extensions\PendingTransactions\ToFeeTransactionTests.cs" />
-    <Compile Include="Extensions\ProcessedTransactions\ToExportStringTests.cs" />
+    <Compile Include="Extensions\SearchResultItem\ToExportStringTests.cs" />
     <Compile Include="Extensions\Mop\TextColourTests.cs" />
     <Compile Include="Extensions\Mop\IsAJournalReallocationTests.cs" />
     <Compile Include="Extensions\Mop\IsACardSelfServicePaymentTests.cs" />

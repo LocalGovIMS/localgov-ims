@@ -43,6 +43,26 @@ namespace Api.Controllers.ProcessedTransactions
             ImportId = source.ImportId;
         }
 
+        public ProcessedTransactionModel(BusinessLogic.Models.Transactions.SearchResultItem source)
+        {
+            Reference = source.TransactionReference;
+            InternalReference = source.InternalReference;
+            PspReference = source.PspReference;
+            OfficeCode = source.OfficeCode;
+            EntryDate = source.EntryDate;
+            TransactionDate = source.TransactionDate;
+            AccountReference = source.AccountReference;
+            UserCode = source.UserCode;
+            FundCode = source.FundCode;
+            MopCode = source.MopCode;
+            Amount = source.Amount;
+            VatCode = source.VatCode;
+            VatRate = source.VatRate;
+            VatAmount = source.VatAmount;
+            Narrative = source.Narrative;
+            ImportId = source.ImportId;
+        }
+
         public BusinessLogic.Entities.ProcessedTransaction GetProcessedTransaction()
         {
             return new BusinessLogic.Entities.ProcessedTransaction()
