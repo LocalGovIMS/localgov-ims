@@ -9,7 +9,7 @@
 
 @section Header {
     <h1 class="ui header">
-        @Model.DisplayName
+        @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName )
         <div class="sub header">
             Fund details
         </div>
