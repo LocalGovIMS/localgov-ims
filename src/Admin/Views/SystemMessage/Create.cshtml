@@ -46,7 +46,7 @@
 
         <div class="four wide field">
             @Html.LabelFor(m => m.StartDate)
-            @Html.TextBoxFor(m => m.StartDate)
+            @Html.TextBoxFor(m => m.StartDate, new { type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.StartDate)
             </div>
@@ -54,8 +54,7 @@
 
         <div class="four wide field">
             @Html.LabelFor(m => m.EndDate)
-            @Html.TextBoxFor(m => m.EndDate)
-
+            @Html.TextBoxFor(m => m.EndDate, new { type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.EndDate)
             </div>
