@@ -16,6 +16,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     null,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -34,6 +35,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     null,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -52,6 +54,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     null,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -69,7 +72,8 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                 var instance = new BusinessLogic.ImportProcessing.ImportProcessor(
                     MockLog.Object,
                     null,
-                    MockUnitOfWork.Object,
+                    MockUnitOfWork.Object, 
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -88,6 +92,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     null,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -106,12 +111,51 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     null,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     MockImportProcessingValidatorFactory.Object);
             }
             catch (ArgumentNullException exception)
             {
                 exception.Message.Should().Be("Value cannot be null.\r\nParameter name: unitOfWork");
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenImportInitialisationStrategyFactoryIsNull()
+        {
+            try
+            {
+                var instance = new BusinessLogic.ImportProcessing.ImportProcessor(
+                    MockLog.Object,
+                    MockSecurityContext.Object,
+                    MockUnitOfWork.Object,
+                    null,
+                    MockImportProcessingStrategyFactory.Object,
+                    MockImportProcessingValidatorFactory.Object);
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionMessageWhenImportInitialisationStrategyFactoryIsNull()
+        {
+            try
+            {
+                var instance = new BusinessLogic.ImportProcessing.ImportProcessor(
+                    MockLog.Object,
+                    MockSecurityContext.Object,
+                    MockUnitOfWork.Object,
+                    null,
+                    MockImportProcessingStrategyFactory.Object,
+                    MockImportProcessingValidatorFactory.Object);
+            }
+            catch (ArgumentNullException exception)
+            {
+                exception.Message.Should().Be("Value cannot be null.\r\nParameter name: importInitialisationStrategyFactory");
             }
         }
 
@@ -124,6 +168,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     null,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -142,6 +187,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     null,
                     MockImportProcessingValidatorFactory.Object);
             }
@@ -160,6 +206,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     null);
             }
@@ -178,6 +225,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                     MockLog.Object,
                     MockSecurityContext.Object,
                     MockUnitOfWork.Object,
+                    MockImportInitialisationStrategyFactory.Object,
                     MockImportProcessingStrategyFactory.Object,
                     null);
             }

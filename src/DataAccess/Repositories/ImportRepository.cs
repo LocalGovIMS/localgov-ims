@@ -25,6 +25,8 @@ namespace DataAccess.Repositories
                 .Include(x => x.StatusHistories)
                 .Include(x => x.StatusHistories.Select(y => y.CreatedByUser))
                 .Include(x => x.CreatedByUser)
+                .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -39,6 +41,8 @@ namespace DataAccess.Repositories
                 .Include(x => x.EventLogs)
                 .Include(x => x.ImportType)
                 .Include(x => x.StatusHistories)
+                .Include(x => x.Metadata)
+                .Include(x => x.Metadata.Select(y => y.MetadataKey))
                 .AsQueryable();
 
             if (criteria.DataType.HasValue)

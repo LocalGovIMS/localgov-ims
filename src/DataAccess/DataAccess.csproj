@@ -221,6 +221,10 @@
     <Compile Include="Migrations\202210040915558_Update_FundMessageMetadata_to_use_MetadataKeys.designer.cs">
       <DependentUpon>202210040915558_Update_FundMessageMetadata_to_use_MetadataKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210181329378_Added_ImportMetadata_entity.cs" />
+    <Compile Include="Migrations\202210181329378_Added_ImportMetadata_entity.designer.cs">
+      <DependentUpon>202210181329378_Added_ImportMetadata_entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -373,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210040915558_Update_FundMessageMetadata_to_use_MetadataKeys.resx">
       <DependentUpon>202210040915558_Update_FundMessageMetadata_to_use_MetadataKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210181329378_Added_ImportMetadata_entity.resx">
+      <DependentUpon>202210181329378_Added_ImportMetadata_entity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

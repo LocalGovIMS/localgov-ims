@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Entities;
-using BusinessLogic.ImportProcessing;
+﻿using BusinessLogic.ImportProcessing;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Validators;
@@ -14,6 +13,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
         protected readonly Mock<ILog> MockLog = new Mock<ILog>();
         protected readonly Mock<ISecurityContext> MockSecurityContext = new Mock<ISecurityContext>();
         protected readonly Mock<IUnitOfWork> MockUnitOfWork = new Mock<IUnitOfWork>();
+        protected readonly Mock<Func<string, IImportInitialisationStrategy>> MockImportInitialisationStrategyFactory = new Mock<Func<string, IImportInitialisationStrategy>>();
         protected readonly Mock<Func<string, IImportProcessingStrategy>> MockImportProcessingStrategyFactory = new Mock<Func<string, IImportProcessingStrategy>>();
         protected readonly Mock<Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>> MockImportProcessingValidatorFactory = new Mock<Func<string, IValidator<ImportProcessingStrategyValidatorArgs>>>();
 

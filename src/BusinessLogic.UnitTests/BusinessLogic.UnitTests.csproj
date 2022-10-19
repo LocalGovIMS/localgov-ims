@@ -123,6 +123,9 @@
     <Compile Include="Classes\Dependencies\EmailServiceDependenciesTests.cs" />
     <Compile Include="Classes\RefundStatusTests.cs" />
     <Compile Include="Classes\RefundRequestTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\ConstructorTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\InitialisationTests.cs" />
+    <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\TestBase.cs" />
     <Compile Include="Services\MetadataKey\BaseMetadataKeyTest.cs" />
     <Compile Include="Services\MetadataKey\CreateTests.cs" />
     <Compile Include="Services\MetadataKey\DeleteTests.cs" />

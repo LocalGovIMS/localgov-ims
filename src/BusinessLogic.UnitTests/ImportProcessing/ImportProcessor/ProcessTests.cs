@@ -59,6 +59,7 @@ namespace BusinessLogic.UnitTests.ImportProcessing.ImportProcessor
                 MockLog.Object,
                 MockSecurityContext.Object,
                 MockUnitOfWork.Object,
+                MockImportInitialisationStrategyFactory.Object,
                 MockImportProcessingStrategyFactory.Object,
                 MockImportProcessingValidatorFactory.Object);
         }

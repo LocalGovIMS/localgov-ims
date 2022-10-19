@@ -14,7 +14,6 @@ namespace BusinessLogic.ImportProcessing
         private readonly ITransactionService _transactionService;
         private readonly ISuspenseService _suspenseService;
         private ImportProcessingStrategyArgs _args;
-        private decimal _totalAmountImported = 0;
         private List<string> _errors = new List<string>();
 
         public TransactionImportProcessingStrategy(
@@ -56,10 +55,6 @@ namespace BusinessLogic.ImportProcessing
         {
             try
             {
-                // We need to do this before the rule engine runs, as a rule could
-                // change the amount, and we're only interested in the original value.
-                _totalAmountImported += transaction.Amount ?? 0;
-
                 _ruleEngine.Process(transaction, _args.Import.ImportTypeId);
 
                 if (transaction.IsCreatable())
