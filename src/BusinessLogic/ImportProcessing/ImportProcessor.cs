@@ -66,7 +66,9 @@ namespace BusinessLogic.ImportProcessing
             }
             catch (ImportProcessingException ex)
             {
-                _processingErrors.Add(ex.Message);
+                _unitOfWork.ResetChanges();
+
+                _processingErrors.Add(ex.ToString());
 
                 _log.Error(null, ex);
 
@@ -74,7 +76,9 @@ namespace BusinessLogic.ImportProcessing
             }
             catch (Exception ex)
             {
-                _processingErrors.Add(ex.Message);
+                _unitOfWork.ResetChanges();
+
+                _processingErrors.Add(ex.ToString());
 
                 _log.Error(null, ex);
 
