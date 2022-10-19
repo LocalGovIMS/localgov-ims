@@ -119,6 +119,9 @@ namespace BusinessLogic
 
                 .RegisterType<IImportProcessor, ImportProcessor>()
 
+                .RegisterType<IImportInitialisationStrategy, TransactionImportInitialisationStrategy>(ImportDataTypeEnum.Transaction.ToString())
+                .RegisterFactory<Func<string, IImportInitialisationStrategy>>(c => new Func<string, IImportInitialisationStrategy>(name => c.Resolve<IImportInitialisationStrategy>(name)))
+
                 .RegisterType<IImportProcessingStrategy, TransactionImportProcessingStrategy>(ImportDataTypeEnum.Transaction.ToString())
                 .RegisterType<IImportProcessingStrategy, AccountHolderImportProcessingStrategy>(ImportDataTypeEnum.AccountHolder.ToString())
                 .RegisterFactory<Func<string, IImportProcessingStrategy>>(c => new Func<string, IImportProcessingStrategy>(name => c.Resolve<IImportProcessingStrategy>(name)))

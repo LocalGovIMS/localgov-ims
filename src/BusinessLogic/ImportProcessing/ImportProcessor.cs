@@ -21,25 +21,29 @@ namespace BusinessLogic.ImportProcessing
         private readonly ILog _log;
         private readonly ISecurityContext _securityContext;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly Func<string, IImportInitialisationStrategy> _importInitialisationStrategyFactory;
         private readonly Func<string, IImportProcessingStrategy> _importProcessingStrategyFactory;
-        private readonly Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> _importProcessingValidatorFactory;
+        private readonly Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> _importProcessingStrategyValidatorFactory;
 
         private ImportProcessorArgs _args;
         private List<string> _processingErrors = new List<string>();
+        private IImportInitialisationStrategy _importInitialisationStrategy;
         private IValidator<ImportProcessingStrategyValidatorArgs> _importProcessingStrategyValidator;
         private IImportProcessingStrategy _importProcessingStrategy;
 
         public ImportProcessor(ILog log
             , ISecurityContext securityContext
             , IUnitOfWork unitOfWork
+            , Func<string, IImportInitialisationStrategy> importInitialisationStrategyFactory
             , Func<string, IImportProcessingStrategy> importProcessingStrategyFactory
-            , Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> importProcessingValidatorFactory)
+            , Func<string, IValidator<ImportProcessingStrategyValidatorArgs>> importProcessingStrategyValidatorFactory)
         {
             _log = log ?? throw new ArgumentNullException("log");
             _securityContext = securityContext ?? throw new ArgumentNullException("securityContext");
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException("unitOfWork");
+            _importInitialisationStrategyFactory = importInitialisationStrategyFactory ?? throw new ArgumentNullException("importInitialisationStrategyFactory");
             _importProcessingStrategyFactory = importProcessingStrategyFactory ?? throw new ArgumentNullException("importProcessingStrategyFactory");
-            _importProcessingValidatorFactory = importProcessingValidatorFactory ?? throw new ArgumentNullException("importProcessingValidatorFactory");
+            _importProcessingStrategyValidatorFactory = importProcessingStrategyValidatorFactory ?? throw new ArgumentNullException("importProcessingValidatorFactory");
         }
 
         public IResult Process(ImportProcessorArgs args)
@@ -89,8 +93,9 @@ namespace BusinessLogic.ImportProcessing
             {
                 var importDataType = (ImportDataTypeEnum)_unitOfWork.ImportTypes.Get(_args.Import.ImportTypeId).DataType;
 
-                _importProcessingStrategyValidator = _importProcessingValidatorFactory(importDataType.ToString());
+                _importInitialisationStrategy = _importInitialisationStrategyFactory(importDataType.ToString());
                 _importProcessingStrategy = _importProcessingStrategyFactory(importDataType.ToString());
+                _importProcessingStrategyValidator = _importProcessingStrategyValidatorFactory(importDataType.ToString());
             }
             catch (Exception ex)
             {
@@ -103,6 +108,11 @@ namespace BusinessLogic.ImportProcessing
         public void InitialiseImport()
         {
             _args.Import.Initialise(_securityContext.UserId);
+
+            if(!(_importInitialisationStrategy is null))
+            {
+                _importInitialisationStrategy.Initialise(new ImportInitialisationStrategyArgs { Import = _args.Import, ImportRows = _args.ImportRows });
+            }
         }
 
         private void SaveRawData()

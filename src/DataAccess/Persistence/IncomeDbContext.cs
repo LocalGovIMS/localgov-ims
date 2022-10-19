@@ -68,6 +68,7 @@ namespace DataAccess.Persistence
         public virtual DbSet<FileImportRow> FileImportRows { get; set; }
         public virtual DbSet<Import> Imports { get; set; }
         public virtual DbSet<ImportRow> ImportRows { get; set; }
+        public virtual DbSet<ImportMetadata> ImportMetadata { get; set; }
         public virtual DbSet<ImportType> ImportTypes { get; set; }
         public virtual DbSet<ImportTypeImportProcessingRule> ImportTypeImportProcessingRules { get; set; }
 
@@ -512,6 +513,10 @@ namespace DataAccess.Persistence
 
             modelBuilder.Entity<FundMessageMetadata>()
                 .HasIndex(s => new { s.FundMessageId, s.MetadataKeyId })
+                .IsUnique(true);
+
+            modelBuilder.Entity<ImportMetadata>()
+                .HasIndex(s => new { s.ImportId, s.MetadataKeyId })
                 .IsUnique(true);
         }
 

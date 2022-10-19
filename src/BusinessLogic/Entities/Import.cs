@@ -15,6 +15,7 @@ namespace BusinessLogic.Entities
             FileImports = new HashSet<FileImport>();
             StatusHistories = new HashSet<ImportStatusHistory>();
             EventLogs = new HashSet<ImportEventLog>();
+            Metadata = new HashSet<ImportMetadata>();
         }
 
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -42,5 +43,6 @@ namespace BusinessLogic.Entities
         public virtual ICollection<FileImport> FileImports { get; set; }
         public virtual ICollection<ImportStatusHistory> StatusHistories { get; set; }
         public virtual ICollection<ImportEventLog> EventLogs { get; set; }
+        public virtual ICollection<ImportMetadata> Metadata { get; set; }
     }
 }

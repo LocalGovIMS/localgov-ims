@@ -146,10 +146,15 @@
     <Compile Include="Classes\Smtp\Emails\EReturnDeletedEmail.cs" />
     <Compile Include="Classes\Smtp\Emails\VatReceiptEmail.cs" />
     <Compile Include="Classes\Strategies\ApproveEReturnsStrategy.cs" />
+    <Compile Include="Entities\ImportMetadata.cs" />
     <Compile Include="Entities\MetadataKey.cs" />
     <Compile Include="Enums\MetadataKeyEntityType.cs" />
     <Compile Include="Enums\SuspenseAllocationStatus.cs" />
+    <Compile Include="Enums\ImportMetadataKeys.cs" />
     <Compile Include="Extensions\SearchResultItemExtensions.cs" />
+    <Compile Include="ImportProcessing\ImportInitialisationStrategyArgs.cs" />
+    <Compile Include="ImportProcessing\Interfaces\IImportInitialisationStrategy.cs" />
+    <Compile Include="ImportProcessing\Transaction\TransactionImportInitialisationStrategy.cs" />
     <Compile Include="Interfaces\Repositories\IMetadataKeyRepository.cs" />
     <Compile Include="Interfaces\Services\IMetadataKeyService.cs" />
     <Compile Include="Models\MetadataKey\SearchCriteria.cs" />

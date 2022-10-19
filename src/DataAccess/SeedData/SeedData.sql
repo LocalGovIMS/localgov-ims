@@ -157,7 +157,10 @@ USING (SELECT *
 			('ExternalCode', 'External code', 1, 3),
 
 			-- VAT
-			('IsASuspenseJournalVatCode', 'Is a suspense journal VAT code', 1, 4)		
+			('IsASuspenseJournalVatCode', 'Is a suspense journal VAT code', 1, 4),
+			
+			-- Import
+			('TotalImportValue', 'Total import value', 1, 5)
 
 			) 
 	AS S ([Name], [Description], [SystemType], [EntityType])) AS [Source]

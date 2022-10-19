@@ -17,6 +17,10 @@
                 <th scope="col">
                     Status
                 </th>
+                @foreach(var metadata in Model.Items.First().Metadata)
+                {
+                    <th>@metadata.MetadataKey.Description</th>
+                } 
             </tr>
         </thead>
         <tbody>
@@ -40,6 +44,10 @@
                             <span>(@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
                         }
                     </td>
+                    @foreach (var metadata in item.Metadata)
+                    {
+                        <td>@metadata.Value</td>
+                    }
                 </tr>
             }
         </tbody>
