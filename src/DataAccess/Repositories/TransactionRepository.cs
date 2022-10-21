@@ -48,6 +48,9 @@ namespace DataAccess.Repositories
             return IncomeDbContext.ProcessedTransactions
                 .Where(x => x.TransactionReference == reference)
                 .Include(x => x.Fund)
+                .Include(x => x.Mop)
+                .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
         }
@@ -76,6 +79,9 @@ namespace DataAccess.Repositories
                 .Where(x => array.Contains(x.RefundReference))
                 .Include(x => x.Fund)
                 .Include(x => x.User)
+                .Include(x => x.Mop)
+                .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .ToList();
         }
@@ -86,6 +92,9 @@ namespace DataAccess.Repositories
                 .Where(x => x.TransferGuid == transferGuid)
                 .Include(x => x.Fund)
                 .Include(x => x.User)
+                .Include(x => x.Mop)
+                .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .ToList();
         }
@@ -100,6 +109,9 @@ namespace DataAccess.Repositories
                 .Where(x => trans.Contains(x.TransferReference))
                 .Include(x => x.Fund)
                 .Include(x => x.User)
+                .Include(x => x.Mop)
+                .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .ToList();
 
@@ -110,6 +122,9 @@ namespace DataAccess.Repositories
         {
             var items = IncomeDbContext.ProcessedTransactions
                 .Where(x => transactionReferences.Contains(x.TransferReference))
+                .Include(x => x.Mop)
+                .Include(x => x.Mop.Metadata)
+                .Include(x => x.Mop.Metadata.Select(y => y.MetadataKey))
                 .ApplyFilters(Filters)
                 .Select(x => x.TransferReference)
                 .Distinct()
