@@ -87,7 +87,7 @@
                     </td>
                     <td>
                         @(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")
-                        <div class="sub">@transaction.CardHolderPremiseNumber @transaction.CardHolderStreet @transaction.CardHolderTown @transaction.CardHolderPostCode</div>
+                        <div class="sub">@transaction.CardHolderAddressLine1 @transaction.CardHolderAddressLine2 @transaction.CardHolderAddressLine3 @transaction.CardHolderAddressLine4 @transaction.CardHolderPostCode</div>
                     </td>
                     <td>@transaction.AccountReference</td>
                     <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>

@@ -93,9 +93,10 @@ namespace PaymentPortal.Controllers
                         FailUrl = currentUrl + "/payment/fail",
                         SuccessUrl = currentUrl + "/payment/success",
                         Source = "basket",
-                        HouseNumber = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.HouseNumberOrName,
-                        Street = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.Street,
-                        Town = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.City,
+                        AddressLine1 = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.AddressLine1,
+                        AddressLine2 = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.AddressLine2,
+                        AddressLine3 = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.AddressLine3,
+                        AddressLine4 = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.AddressLine4,
                         Postcode = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.PostCode,
                         PayeeName = model.PaymentAddressDetails == null ? string.Empty : model.PaymentAddressDetails.PayeeName,
                     });

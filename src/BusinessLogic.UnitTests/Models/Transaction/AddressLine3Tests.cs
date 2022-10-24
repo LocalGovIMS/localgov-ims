@@ -4,19 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BusinessLogic.UnitTests.Models.Transaction
 {
     [TestClass]
-    public class TownTests : TestBase
+    public class AddressLine3Tests : TestBase
     {
         [TestMethod]
-        public void Town_returns_the_expected_value()
+        public void AddressLine3_returns_the_expected_value()
         {
             // Arrange
             var transaction = GetTransaction();
 
             // Act
-            var value = transaction.Town;
+            var value = transaction.AddressLine3;
 
             // Assert
-            value.Should().Be(CardHolderTown);
+            value.Should().Be(CardHolderAddressLine3);
         }
     }
 }

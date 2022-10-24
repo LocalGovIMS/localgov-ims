@@ -15,9 +15,10 @@ namespace BusinessLogic.Classes
         public string MopCode { get; set; }
         public string Narrative { get; set; }
         public bool IsLegacy { get; set; }
-        public string HouseNumber { get; set; }
-        public string Street { get; set; }
-        public string Town { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+        public string AddressLine4 { get; set; }
         public string Postcode { get; set; }
         public string VatCode { get; set; }
         public DateTime? ExpiryDate { get; set; }

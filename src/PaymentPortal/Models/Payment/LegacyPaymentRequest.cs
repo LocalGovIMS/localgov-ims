@@ -94,27 +94,26 @@ namespace PaymentPortal.Models.Payment
             paymentDetails.Narrative = paymentFragments[4];
             if (paymentFragments.Length < 6)
             {
-                paymentDetails.HouseNumber = "";
-                paymentDetails.Street = "";
-                paymentDetails.Town = "";
+                paymentDetails.AddressLine1 = "";
+                paymentDetails.AddressLine2 = "";
+                paymentDetails.AddressLine3 = "";
+                paymentDetails.AddressLine4 = "";
                 paymentDetails.Postcode = "";
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(paymentDetails.HouseNumber)
-                    && string.IsNullOrWhiteSpace(paymentDetails.Street)
-                    && string.IsNullOrWhiteSpace(paymentDetails.Town)
-                    && string.IsNullOrWhiteSpace(paymentDetails.Postcode)
-                )
+                if (string.IsNullOrWhiteSpace(paymentDetails.AddressLine1)
+                    && string.IsNullOrWhiteSpace(paymentDetails.AddressLine2)
+                    && string.IsNullOrWhiteSpace(paymentDetails.AddressLine3)
+                    && string.IsNullOrWhiteSpace(paymentDetails.AddressLine4)
+                    && string.IsNullOrWhiteSpace(paymentDetails.Postcode))
                 {
-                    paymentDetails.HouseNumber = string.IsNullOrWhiteSpace(paymentFragments[7])
-                    ? paymentFragments[6] : paymentFragments[7];
-                    paymentDetails.Street = paymentFragments[8];
-                    paymentDetails.Town = paymentFragments[10];
+                    paymentDetails.AddressLine1 = string.IsNullOrWhiteSpace(paymentFragments[7]) ? paymentFragments[6] : paymentFragments[7];
+                    paymentDetails.AddressLine2 = paymentFragments[8];
+                    paymentDetails.AddressLine3 = paymentFragments[10];
                     paymentDetails.Postcode = paymentFragments[12];
 
-                    HouseNameOrNumber = string.IsNullOrWhiteSpace(paymentFragments[7])
-                        ? paymentFragments[6] : paymentFragments[7];
+                    HouseNameOrNumber = string.IsNullOrWhiteSpace(paymentFragments[7]) ? paymentFragments[6] : paymentFragments[7];
                     Street = paymentFragments[8];
                     Town = paymentFragments[10];
                     PostCode = paymentFragments[12];

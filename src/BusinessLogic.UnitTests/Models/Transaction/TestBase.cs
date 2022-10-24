@@ -13,11 +13,12 @@ namespace BusinessLogic.UnitTests.Models.Transaction
         protected const string AuthorisationCode = "AuthCode";
         protected const string MopCode = "MC";
         protected const string MopName = "MopName";
-        protected const string CardHolderPremiseNumber = "1";
-        protected const string CardHolderStreet = "CardHolderStreet";
-        protected const string CardHolderTown = "CardHolderTown";
-        protected const string CardHolderPostCode = "CardHolderPostCode";
         protected const string CardHolderName = "CardHolderName";
+        protected const string CardHolderAddressLine1 = "CardHolderAddressLine1";
+        protected const string CardHolderAddressLine2 = "CardHolderAddressLine2";
+        protected const string CardHolderAddressLine3 = "CardHolderAddressLine3";
+        protected const string CardHolderAddressLine4 = "CardHolderAddressLine4";
+        protected const string CardHolderPostCode = "CardHolderPostCode";
         protected const string Username = "Username";
         protected const bool ReceiptIssued = true;
 
@@ -81,11 +82,13 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                         MopCode = MopCode
                     },
                     MopCode = MopCode,
-                    CardHolderPremiseNumber = CardHolderPremiseNumber,
-                    CardHolderStreet = CardHolderStreet,
-                    CardHolderTown = CardHolderTown,
-                    CardHolderPostCode = CardHolderPostCode,
                     CardHolderName = CardHolderName,
+                    CardHolderAddressLine1 = CardHolderAddressLine1,
+                    CardHolderAddressLine2 = CardHolderAddressLine2,
+                    CardHolderAddressLine3 = CardHolderAddressLine3,
+                    CardHolderAddressLine4 = CardHolderAddressLine4,
+                    CardHolderPostCode = CardHolderPostCode,
+                    
                     User = username == null ? null : new Entities.User()
                     {
                         DisplayName = username
@@ -167,11 +170,12 @@ namespace BusinessLogic.UnitTests.Models.Transaction
                         }
                     },
                     MopCode = MopCode,
-                    CardHolderPremiseNumber = CardHolderPremiseNumber,
-                    CardHolderStreet = CardHolderStreet,
-                    CardHolderTown = CardHolderTown,
-                    CardHolderPostCode = CardHolderPostCode,
                     CardHolderName = CardHolderName,
+                    CardHolderAddressLine1 = CardHolderAddressLine1,
+                    CardHolderAddressLine2 = CardHolderAddressLine2,
+                    CardHolderAddressLine3 = CardHolderAddressLine3,
+                    CardHolderAddressLine4 = CardHolderAddressLine4,
+                    CardHolderPostCode = CardHolderPostCode,
                     User = new Entities.User()
                     {
                         DisplayName = "Username"

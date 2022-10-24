@@ -48,11 +48,12 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                 {
                     CallRecordingMsg = string.Empty,
                     CallRecordingMsgShown = false,
-                    City = string.Empty,
-                    HouseNumberOrName = string.Empty,
-                    Message = null,
+                    AddressLine1 = string.Empty,
+                    AddressLine2 = string.Empty,
+                    AddressLine3 = string.Empty,
+                    AddressLine4 = string.Empty,
                     PostCode = string.Empty,
-                    Street = string.Empty
+                    Message = null
                 },
                 AddressReviewed = false,
                 Amount = 1,

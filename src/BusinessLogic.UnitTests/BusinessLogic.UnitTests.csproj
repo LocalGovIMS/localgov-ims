@@ -161,6 +161,7 @@
     <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\ConstructorTests.cs" />
     <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\InitialisationTests.cs" />
     <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\TestBase.cs" />
+    <Compile Include="Models\Transaction\AddressLine4Tests.cs" />
     <Compile Include="Services\MetadataKey\BaseMetadataKeyTest.cs" />
     <Compile Include="Services\MetadataKey\CreateTests.cs" />
     <Compile Include="Services\MetadataKey\DeleteTests.cs" />
@@ -259,9 +260,9 @@
     <Compile Include="Models\Transaction\PostCodeTests.cs" />
     <Compile Include="Models\Transaction\AmountAvailableToTransferOrRefundTests.cs" />
     <Compile Include="Models\Transaction\ReceiptIssuedTests.cs" />
-    <Compile Include="Models\Transaction\TownTests.cs" />
-    <Compile Include="Models\Transaction\StreetTests.cs" />
-    <Compile Include="Models\Transaction\PremiseNumberTests.cs" />
+    <Compile Include="Models\Transaction\AddressLine3Tests.cs" />
+    <Compile Include="Models\Transaction\AddressLine2Tests.cs" />
+    <Compile Include="Models\Transaction\AddressLine1Tests.cs" />
     <Compile Include="Models\Transaction\MopNameTests.cs" />
     <Compile Include="Models\Transaction\ConstructorTests.cs" />
     <Compile Include="Models\Transaction\AuthorisatonCodeTests.cs" />

@@ -106,16 +106,13 @@
             {
                 @Model.Transaction.PayeeName<br />
             }
-            @if (Model.Transaction.Town.IsNullOrWhiteSpace())
+            @if (Model.Transaction.AddressLine1.IsNullOrWhiteSpace())
             {
                 <div>No address specified</div>
             }
             else
             {
-                @Model.Transaction.PremiseNumber<br />
-                @Model.Transaction.Street<br />
-                @Model.Transaction.Town<br />
-                @Model.Transaction.PostCode<br />
+                @Html.Raw(Model.Transaction.FormattedAddress.Replace(",", ",<br />"))
             }
         </div>
     </div>

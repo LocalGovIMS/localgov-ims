@@ -11,20 +11,23 @@ namespace PaymentPortal.Models.Payment
         [MaxLength(50, ErrorMessage = "Payee Name cannot be longer than 50 characters")]
         public string PayeeName { get; set; }
 
-        [Required(ErrorMessage = "House Number/Name is required")]
-        [Display(Name = "House Number/Name")]
-        [MaxLength(50, ErrorMessage = "House Number/Name cannot be longer than 50 characters")]
-        public string HouseNumberOrName { get; set; }
+        [Required(ErrorMessage = "Address line 1 is required")]
+        [Display(Name = "Address line 1")]
+        [MaxLength(50, ErrorMessage = "Address line 1 cannot be longer than 50 characters")]
+        public string AddressLine1 { get; set; }
 
-        [Required(ErrorMessage = "Street is required")]
-        [Display(Name = "Street")]
-        [MaxLength(50, ErrorMessage = "Street cannot be longer than 50 characters")]
-        public string Street { get; set; }
+        [Display(Name = "Address line 2")]
+        [MaxLength(50, ErrorMessage = "Address line 2 cannot be longer than 50 characters")]
+        public string AddressLine2 { get; set; }
 
-        [Required(ErrorMessage = "Town/City is required")]
-        [Display(Name = "Town/City")]
-        [MaxLength(50, ErrorMessage = "Town/City cannot be longer than 50 characters")]
-        public string City { get; set; }
+        [Required(ErrorMessage = "Town or City is required")]
+        [Display(Name = "Town or City")]
+        [MaxLength(50, ErrorMessage = "Town or City cannot be longer than 50 characters")]
+        public string AddressLine3 { get; set; }
+
+        [Display(Name = "County")]
+        [MaxLength(50, ErrorMessage = "County cannot be longer than 50 characters")]
+        public string AddressLine4 { get; set; }
 
         [Required(ErrorMessage = "Postal Code is required")]
         [Display(Name = "Postal Code")]
