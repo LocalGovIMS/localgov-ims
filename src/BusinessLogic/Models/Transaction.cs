@@ -67,22 +67,28 @@ namespace BusinessLogic.Models
             get { return string.Format("{0} ({1})", TransactionLines.FirstOrDefault().Mop.MopName, TransactionLines.FirstOrDefault().Mop.MopCode); }
         }
 
-        [Display(Name = "Premises number")]
-        public string PremiseNumber
+        [Display(Name = "Address line 1")]
+        public string AddressLine1
         {
-            get { return TransactionLines.FirstOrDefault().CardHolderPremiseNumber; }
+            get { return TransactionLines.FirstOrDefault().CardHolderAddressLine1; }
         }
 
-        [Display(Name = "Street")]
-        public string Street
+        [Display(Name = "Address line 1")]
+        public string AddressLine2
         {
-            get { return TransactionLines.FirstOrDefault().CardHolderStreet; }
+            get { return TransactionLines.FirstOrDefault().CardHolderAddressLine2; }
         }
 
-        [Display(Name = "Town")]
-        public string Town
+        [Display(Name = "Town or City")]
+        public string AddressLine3
         {
-            get { return TransactionLines.FirstOrDefault().CardHolderTown; }
+            get { return TransactionLines.FirstOrDefault().CardHolderAddressLine3; }
+        }
+
+        [Display(Name = "County")]
+        public string AddressLine4
+        {
+            get { return TransactionLines.FirstOrDefault().CardHolderAddressLine4; }
         }
 
         [Display(Name = "Postcode")]
@@ -232,7 +238,8 @@ namespace BusinessLogic.Models
             {
                 var transaction = TransactionLines.FirstOrDefault();
 
-                return $@"{transaction.CardHolderPremiseNumber?.Trim()}, {transaction.CardHolderStreet?.Trim()}, {transaction.CardHolderTown?.Trim()}, {transaction.CardHolderPostCode?.Trim()}"
+                return $@"{transaction.CardHolderAddressLine1?.Trim()}, {transaction.CardHolderAddressLine2?.Trim()}, {transaction.CardHolderAddressLine3?.Trim()}, {transaction.CardHolderAddressLine4?.Trim()}, {transaction.CardHolderPostCode?.Trim()}"
+                    .Replace(", , , , ,", "")
                     .Replace(", , , ,", "")
                     .Replace(", , ,", ",")
                     .Replace(", ,", ",")

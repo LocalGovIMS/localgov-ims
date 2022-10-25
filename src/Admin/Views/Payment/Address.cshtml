@@ -44,25 +44,32 @@
                 @Html.ValidationMessageFor(m => m.PayeeName)
             </div>
             <div class="three wide field">
-                @Html.LabelFor(m => m.HouseNumberOrName)
-                @Html.TextBoxFor(m => m.HouseNumberOrName, new { maxlength = "50" })
+                @Html.LabelFor(m => m.AddressLine1)
+                @Html.TextBoxFor(m => m.AddressLine1, new { maxlength = "50" })
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.HouseNumberOrName)
+                @Html.ValidationMessageFor(m => m.AddressLine1)
             </div>
             <div class="six wide field">
-                @Html.LabelFor(m => m.Street)
-                @Html.TextBoxFor(m => m.Street, new { maxlength = "50" })
+                @Html.LabelFor(m => m.AddressLine2)
+                @Html.TextBoxFor(m => m.AddressLine2, new { maxlength = "50" })
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Street)
+                @Html.ValidationMessageFor(m => m.AddressLine2)
             </div>
             <div class=" four wide field">
-                @Html.LabelFor(m => m.City)
-                @Html.TextBoxFor(m => m.City, new { maxlength = "50" })
+                @Html.LabelFor(m => m.AddressLine3)
+                @Html.TextBoxFor(m => m.AddressLine3, new { maxlength = "50" })
             </div>
             <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.AddressLine3)
+            </div>
+            <div class=" four wide field">
+                @Html.LabelFor(m => m.AddressLine4)
+                @Html.TextBoxFor(m => m.AddressLine4, new { maxlength = "50" })
+            </div>
+            <div class="form__element--error">
+                @Html.ValidationMessageFor(m => m.AddressLine4)
             </div>
             <div class=" two wide field">
                 @Html.LabelFor(m => m.PostCode)

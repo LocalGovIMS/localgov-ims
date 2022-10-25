@@ -23,9 +23,10 @@ namespace BusinessLogic.Models.Transactions
         public string VatCode { get; set; }
         public float VatRate { get; set; }
         public decimal? VatAmount { get; set; }
-        public string CardHolderPremiseNumber { get; set; }
-        public string CardHolderStreet { get; set; }
-        public string CardHolderTown { get; set; }
+        public string CardHolderAddressLine1 { get; set; }
+        public string CardHolderAddressLine2 { get; set; }
+        public string CardHolderAddressLine3 { get; set; }
+        public string CardHolderAddressLine4 { get; set; }
         public string CardHolderPostCode { get; set; }
         public bool HasTransfers { get; set; }
         public int? ImportId { get; set; }

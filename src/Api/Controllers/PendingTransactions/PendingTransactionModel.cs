@@ -47,26 +47,17 @@ namespace Api.Controllers.PendingTransactions
         [StringLength(50)]
         public string PayeeName { get; set; }
 
-        [StringLength(100)]
-        public string PayeeBusinessName { get; set; }
+        [StringLength(50)]
+        public string PayeeAddressLine1 { get; set; }
 
         [StringLength(50)]
-        public string PayeePremiseNumber { get; set; }
-
-        [StringLength(100)]
-        public string PayeePremiseName { get; set; }
+        public string PayeeAddressLine2 { get; set; }
 
         [StringLength(50)]
-        public string PayeeStreet { get; set; }
+        public string PayeeAddressLine3 { get; set; }
 
         [StringLength(50)]
-        public string PayeeArea { get; set; }
-
-        [StringLength(50)]
-        public string PayeeTown { get; set; }
-
-        [StringLength(50)]
-        public string PayeeCounty { get; set; }
+        public string PayeeAddressLine4 { get; set; }
 
         [StringLength(10)]
         public string PayeePostCode { get; set; }
@@ -104,13 +95,10 @@ namespace Api.Controllers.PendingTransactions
             Narrative = source.Narrative;
             ExternalReference = source.AppReference;
             PayeeName = source.CardHolderName;
-            PayeeBusinessName = source.CardHolderBusinessName;
-            PayeePremiseNumber = source.CardHolderPremiseNumber;
-            PayeePremiseName = source.CardHolderPremiseName;
-            PayeeStreet = source.CardHolderStreet;
-            PayeeArea = source.CardHolderArea;
-            PayeeTown = source.CardHolderTown;
-            PayeeCounty = source.CardHolderCounty;
+            PayeeAddressLine1 = source.CardHolderAddressLine1;
+            PayeeAddressLine2 = source.CardHolderAddressLine2;
+            PayeeAddressLine3 = source.CardHolderAddressLine3;
+            PayeeAddressLine4 = source.CardHolderAddressLine4;
             PayeePostCode = source.CardHolderPostCode;
             SuccessUrl = source.SuccessUrl;
             CancelUrl = source.CancelUrl;
@@ -135,13 +123,10 @@ namespace Api.Controllers.PendingTransactions
                 Narrative = Narrative,
                 AppReference = ExternalReference,
                 CardHolderName = PayeeName,
-                CardHolderBusinessName = PayeeBusinessName,
-                CardHolderPremiseNumber = PayeePremiseNumber,
-                CardHolderPremiseName = PayeePremiseName,
-                CardHolderStreet = PayeeStreet,
-                CardHolderArea = PayeeArea,
-                CardHolderTown = PayeeTown,
-                CardHolderCounty = PayeeCounty,
+                CardHolderAddressLine1 = PayeeAddressLine1,
+                CardHolderAddressLine2 = PayeeAddressLine2,
+                CardHolderAddressLine3 = PayeeAddressLine3,
+                CardHolderAddressLine4 = PayeeAddressLine4,
                 CardHolderPostCode = PayeePostCode,
                 SuccessUrl = SuccessUrl,
                 CancelUrl = CancelUrl,

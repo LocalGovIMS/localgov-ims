@@ -42,9 +42,10 @@ namespace BusinessLogic.UnitTests.Classes.Smtp
                         VatCode = "test code",
                         Percentage = 0
                     },
-                    CardHolderPremiseNumber = "12",
-                    CardHolderStreet = "test road",
-                    CardHolderTown = "new town",
+                    CardHolderAddressLine1 = "12 test road",
+                    CardHolderAddressLine2 = "test road",
+                    CardHolderAddressLine3 = "new town",
+                    CardHolderAddressLine4 = string.Empty,
                     CardHolderPostCode = "S12 2SA",
                     Fund = new Fund()
                     {

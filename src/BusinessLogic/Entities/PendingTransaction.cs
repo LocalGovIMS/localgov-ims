@@ -42,9 +42,6 @@ namespace BusinessLogic.Entities
         [StringLength(100)]
         public string Narrative { get; set; }
 
-        [StringLength(30)]
-        public string MerchantNumber { get; set; }
-
         [StringLength(15)]
         public string AuthorisationCode { get; set; }
 
@@ -54,26 +51,17 @@ namespace BusinessLogic.Entities
         [StringLength(50)]
         public string CardHolderName { get; set; }
 
-        [StringLength(100)]
-        public string CardHolderBusinessName { get; set; }
+        [StringLength(50)]
+        public string CardHolderAddressLine1 { get; set; }
 
         [StringLength(50)]
-        public string CardHolderPremiseNumber { get; set; }
-
-        [StringLength(100)]
-        public string CardHolderPremiseName { get; set; }
+        public string CardHolderAddressLine2 { get; set; }
 
         [StringLength(50)]
-        public string CardHolderStreet { get; set; }
+        public string CardHolderAddressLine3 { get; set; }
 
         [StringLength(50)]
-        public string CardHolderArea { get; set; }
-
-        [StringLength(50)]
-        public string CardHolderTown { get; set; }
-
-        [StringLength(50)]
-        public string CardHolderCounty { get; set; }
+        public string CardHolderAddressLine4 { get; set; }
 
         [StringLength(10)]
         public string CardHolderPostCode { get; set; }

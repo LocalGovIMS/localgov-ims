@@ -44,21 +44,16 @@ namespace Admin.Classes.Commands.Payment
                 MoveUp(accountHolder.AddressLine2, accountHolder.AddressLine3);
                 MoveUp(accountHolder.AddressLine3, accountHolder.AddressLine4);
 
-                if (!string.IsNullOrEmpty(accountHolder.AddressLine1))
+                model.Address = new Address()
                 {
-                    model.Address = new Address()
-                    {
-                        PayeeName = string.Format("{0} {1}", accountHolder.Forename, accountHolder.Surname).Trim(),
-                        HouseNumberOrName = string.Empty,
-                        Street = accountHolder.AddressLine1,
-                        City = string.Format("{0}, {1}, {2}"
-                            , accountHolder.AddressLine2
-                            , accountHolder.AddressLine3
-                            , accountHolder.AddressLine4)
-                            .Trim().Replace(", , ,", ",").Replace(", ,", ",").TrimEnd(','),
-                        PostCode = accountHolder.Postcode
-                    };
-                }
+                    PayeeName = string.Format("{0} {1}", accountHolder.Forename, accountHolder.Surname).Trim(),
+                    AddressLine1 = accountHolder.AddressLine1,
+                    AddressLine2 = accountHolder.AddressLine2,
+                    AddressLine3 = accountHolder.AddressLine3,
+                    AddressLine4 = accountHolder.AddressLine4,
+                    PostCode = accountHolder.Postcode
+                };
+                
             }
 
             return new CommandResult(true) { Data = model };
