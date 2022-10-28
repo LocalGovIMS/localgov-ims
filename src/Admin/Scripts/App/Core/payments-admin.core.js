@@ -27,6 +27,32 @@
                 (match[1] ? match[1].length : 0)
                 // Adjust for scientific notation.
                 - (match[2] ? +match[2] : 0));
+        },
+
+        preventMultipleFormSubmissions: function () {
+            $('.one-click-submit-button').each(function () {
+                var $theButton = $(this);
+                var $theForm = $theButton.closest('form');
+                
+                // Hide the button and submit the form
+                function tieButtonToForm() {
+                    $theButton.one('click', function () {
+                        $theButton.prop('disabled', true);
+                        $theForm.submit();
+                    });
+                }
+
+                tieButtonToForm();
+
+                // This handler will re-wire the event when the form is invalid.
+                $theForm.submit(function (event) {
+                    if (!$(this).valid()) {
+                        $theButton.prop('disabled', false);
+                        event.preventDefault();
+                        tieButtonToForm();
+                    }
+                });
+            });
         }
     },
 
@@ -77,3 +103,5 @@
         }
     }
 };
+
+paymentsAdmin.core.preventMultipleFormSubmissions();
