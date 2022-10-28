@@ -8,9 +8,10 @@
             Create refund
         </div>
 
-        <div class="content ui basic segment">
-            @using (Html.BeginForm("Refund", "Transaction", new { }, FormMethod.Post, new { id = "refund-form" }))
-            {
+        @using (Html.BeginForm("Refund", "Transaction", new { }, FormMethod.Post, new { id = "refund-form" }))
+        {
+            <div class="content ui basic segment">
+
                 <div class="ui info message">
                     <div class="header">
                         Remember
@@ -75,17 +76,18 @@
                 </div>
 
                 @Html.HiddenFor(x => x.Reference)
-            }
-        </div>
 
-        <div class="actions">
-            <div class="ui black deny button">
-                Cancel
             </div>
-            <button type="submit" class="ui positive right labeled icon button" id="refund-submit">
-                Submit refund
-                <i class="checkmark icon"></i>
-            </button>
-        </div>
+
+            <div class="actions">
+                <div class="ui black deny button">
+                    Cancel
+                </div>
+                <button type="submit" class="ui positive right labeled icon button one-click-submit-button" id="refund-submit">
+                    Submit refund
+                    <i class="checkmark icon"></i>
+                </button>
+            </div>
+        }
     </div>
 }
