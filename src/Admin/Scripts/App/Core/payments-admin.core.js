@@ -65,6 +65,12 @@
         }
     },
 
+    controls: {
+        autocomplete: {
+            downarrow: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="autocomplete__dropdown-arrow-down" focusable="false"><g stroke="none" fill="outline" fill-rule="evenodd"><polygon fill="#000000" points="0 0 10 0 5 8"></polygon></g></svg>'
+        }
+    },
+
     services: {
         accountHolder: {
             lookup: function(transferItem, onCompleteCallback) {

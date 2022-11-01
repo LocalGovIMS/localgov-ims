@@ -383,3 +383,95 @@ pre {
 .ui.vertical.segment label:first-of-type {
     font-weight:bold;
 }
+
+.visuallyhidden,
+.no-display {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+    &.focusable
+    {
+        &:active, &:focus
+        {
+            clip: auto;
+            clip-path: none;
+            height: auto;
+            margin: 0;
+            overflow: visible;
+            position: static;
+            width: auto;
+            white-space: inherit;
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+@media (min-width: 992px) {
+    .collapse:not(.show) {
+        display: block;
+    }
+}
+
+a.nav-item {
+    width: 100%;
+    padding: 0.92857143em 1.14285714em;
+}
+
+a.nav-link i.icon {
+    width: 1.18em;
+    float: right;
+    margin: 0 15px;
+}
+
+a.nav-link:before {
+    background: rgba(255,255,255,.08);
+}
+
+a.nav-link.active {
+    background: #111;
+    border-left: 5px solid #bf2e5d;
+    padding-left: 10px !important;
+}
+
+a.nav-link:not(.active) {
+    padding-left: 15px !important;
+}
+
+.autocomplete__input {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.autocomplete__input--show-all-values.autocomplete__input--focused +
+.autocomplete__dropdown-arrow-down {
+    z-index: 0;
+}
+
+.autocomplete__dropdown-arrow-down {
+    top: 15px;
+    right: 0;
+}

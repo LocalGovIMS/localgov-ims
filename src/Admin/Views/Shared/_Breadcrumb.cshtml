@@ -1,0 +1,26 @@
+﻿@model System.Collections.Generic.Stack<Web.Mvc.Navigation.NavigationItem>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+        <li class="breadcrumb-item"><a href="@HttpContext.Current.Request.ApplicationPath">Home</a></li>
+
+        @foreach (var item in Model.Reverse())
+        {
+            var isLastItem = Model.First().Equals(item);
+            var displayText = item.DisplayText ?? item.Url.Replace("/", "").TrimStart();
+            <li class="breadcrumb-item @(isLastItem ? "active" : String.Empty)"
+                aria-current="@(isLastItem ? "page" : String.Empty)">
+                @if (isLastItem)
+                {
+                    @displayText
+                }
+                else
+                {
+                    <a href="@item.Url">@displayText</a>
+                }
+            </li>
+        }
+
+    </ol>
+</nav>

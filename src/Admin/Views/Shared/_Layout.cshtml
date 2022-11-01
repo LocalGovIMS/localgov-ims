@@ -22,54 +22,52 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryunobtrusive")
     @Scripts.Render("~/bundles/lodash")
-    @Scripts.Render("~/bundles/semantic")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/accessible-autocomplete")
 
     <script type="text/javascript" language="javascript">
-            rootUrl = "@Context.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~")";
+        rootUrl = "@Context.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~")";
     </script>
 </head>
 
-<body cz-shortcut-listen="true">
+<body>
 
-    @{ Html.RenderPartial("_MainMenu"); }
+    <div class="container-fluid min-vh-100">
+        <div class="row row-cols-1 row-cols-lg-2 min-vh-100">
 
-    <div class="main" style="margin-left: 11rem;">
-
-        <div class="nav" style="background-color: #fff; color: #333; box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem; padding: 1rem; z-index:2">
-            <div style="float: right;">
-                @*<strong><i class="user icon"></i> @User.Identity.Name</strong>*@
-                @{ Html.RenderPartial("_Login"); }
-                @if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//localhost"))
-                {
-                    <div class="environment environment--local">LOCAL</div>
-                }
-                else if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//intranetdev"))
-                {
-                    <div class="environment environment--dev">DEV</div>
-                }
-                else if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//intranettest"))
-                {
-                    <div class="environment environment--test">TEST</div>
-                }
-
+            <div class="col-12 col-lg-2 col-xxxl-1 gx-0" style="background-color:black">
+                @{ Html.RenderPartial("_MainMenu"); }
             </div>
-            <div>@Html.Breadcrumb(new NavigationManager().NavigationItems)</div>
 
-        </div>
-        @{ Html.RenderAction("GetSystemMessages", "Home");}
-        <div class="ui vertical segment" style="padding: 0 2rem; padding-bottom: 0; margin:2rem 0">
-            <div>
-                @RenderSection("Messages", required: false)
-                <div class="inner-page">
-                    <div class="introduction" style="margin-bottom: 1em;">
-                        @RenderSection("Header", required: false)
-                    </div>
-                    <main>
-                        <div>
-                            @RenderBody()
+            <div class="col-12 col-lg-10 col-xxxl-11">
+                <main>
+                    <div class="d-flex flex-wrap-reverse bd-highlight">
+                        <div class="me-auto pt-2 pe-2 pb-2 bd-highlight">
+                            @{ Html.RenderPartial("_Breadcrumb", new NavigationManager().NavigationItems); }
                         </div>
-                    </main>
-                </div>
+                        <div class="order-lg-2 pt-2 pb-2 bd-highlight">
+                            @{ Html.RenderPartial("_Login"); }
+                        </div>
+                    </div>
+                    @{ Html.RenderAction("GetSystemMessages", "Home");}
+                    @RenderSection("Messages", required: false)
+                    <div class="d-flex flex-wrap bd-highlight mb-3">
+                        <div class="me-auto p-0 bd-highlight">
+                            <h1>
+                                @RenderSection("Header", required: false)
+                            </h1>
+                            <h2>
+                                @RenderSection("Subheader", required: false)
+                            </h2>
+                        </div>
+                        <div class="order-lg-2 p-0 bd-highlight">
+                            @RenderSection("Actions", required: false)
+                        </div>
+                    </div>
+                    <div class="pt-2 pb-2">
+                        @RenderBody()
+                    </div>
+                </main>
             </div>
         </div>
     </div>
@@ -77,5 +75,13 @@
     @Scripts.Render("~/bundles/App/Core")
     @Scripts.Render("~/bundles/App/Shared")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#main-menu-toggle').on('click', function () {
+                $('#main-menu').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 </html>
