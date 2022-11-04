@@ -1,42 +1,34 @@
 ﻿@using PagedList.Mvc
 @using BusinessLogic.Extensions
-
 @model Admin.Models.AccountHolder.ListViewModel
+
 @{
     ViewBag.Title = "Account holders";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Account holders
-        @Html.ActionLink("Create account holder", "Create", new { }, new { @class = "ui blue button right floated" })
-        @{
-            var queryString = string.Empty;
+@section Header { Account holders }
 
-            if (Model.SearchCriteria.IsAPaymentSearch)
-            {
-                queryString = "?IsAPaymentSearch=True&FundCode=" + Model.SearchCriteria.FundCode;
-            }
-
-            <a href="@Url.Action(Model.SearchCriteria.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder")@queryString" class="ui button right floated" id="reset">
-                <i class="undo icon"></i> Reset search
-            </a>
-        }
-        <div class="sub header">
-            Find an account holder
-            @if (!string.IsNullOrEmpty(Model.FundName))
-            {
-                <span>within fund '@Model.FundName'</span>
-            }
-        </div>
-    </h1>
+@section Subheader {
+    Find an account holder
+    @if (!string.IsNullOrEmpty(Model.FundName))
+    {
+        <span>within fund '@Model.FundName'</span>
+    }
 }
 
-@Html.Partial("_Search", Model.SearchCriteria)
+@section Actions {
+
+    @Html.ActionLink("Create account holder", "Create", new { }, new { @class = "btn btn-secondary" })
+    
+}
+
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped">
+    <table class="table table-striped table-bordered table-hover mt-2">
         <thead>
             <tr>
                 <th scope="col">Account reference</th>
@@ -56,13 +48,13 @@
                     <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0) { @Html.Raw("td--negative") }">
                         @Html.ToCurrency(item.CurrentBalance)
                     </td>
-                    <td style="text-align: center;">
-                        @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "ui button" })
-                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "ui button" })
+                    <td style="text-align: right;">
+                        @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "btn btn-secondary" })
 
                         @if (Model.SearchCriteria.IsAPaymentSearch)
                         {
-                            @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = item.AccountReference }, new { @class = "ui green button" })
+                            @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = item.AccountReference }, new { @class = "btn btn-secondary " })
                         }
                     </td>
                 </tr>
@@ -79,9 +71,8 @@
                                 page = page,
                                 FundCode = Model.SearchCriteria.FundCode,
                                 AccountReference = Model.SearchCriteria.AccountReference,
-                                HouseNumberName = Model.SearchCriteria.HouseNumberName,
+                                HouseNumberName = Model.SearchCriteria.Address,
                                 PostCode = Model.SearchCriteria.PostCode,
-                                Street = Model.SearchCriteria.Street,
                                 Surname = Model.SearchCriteria.Surname,
                             }))
                         }
@@ -104,13 +95,5 @@ else
 }
 
 @section Scripts {
-    <script type="text/javascript">
-        $('.ui.dropdown').dropdown({
-            match: 'both'
-        });
-
-        $(document).ready(function () {
-            console.log($('#FundCode').val());
-        });
-    </script>
+    @Scripts.Render("~/bundles/app/account-holders")
 }

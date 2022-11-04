@@ -3,76 +3,65 @@
 @using (Html.BeginForm(Model.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder", FormMethod.Get))
 {
     @Html.HiddenFor(x => x.IsAPaymentSearch)
+    
+    <div>
 
-    <div class="ui segment">
+        <div class="row">
 
-        <div class="ui form">
-
-            <div class="four fields">
-
-                <div class="field">
-                    @Html.LabelFor(m => m.AccountReference)
-                    @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Enter account reference" })
-                </div>
-
-                <div class="field">
-                    @Html.LabelFor(m => m.Surname)
-                    @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Enter surname" })
-                </div>
-
-                <div class="field">
-                    @if (!Model.IsAPaymentSearch)
-                    {
-                        @Html.LabelFor(m => m.FundCode)
-                        <div class="ui fluid search selection dropdown fund">
-                            @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                            <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
-                            <div class="menu">
-                                <div class="item" data-value="">
-                                    None
-                                </div>
-                                @foreach (var item in Model.Funds.Items)
-                                {
-                                    <div class="item" data-value="@item.Value">
-                                        @item.Text
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                    }
-                </div>
-
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.AccountReference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AccountReference, new { size = 50, placeholder = "Enter account reference", @class = "form-control" })
             </div>
 
-            <div class="four fields">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
+                @Html.LabelFor(m => m.Surname, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Surname, new { size = 30, placeholder = "Enter surname", @class = "form-control" })
+            </div>
 
-                <div class="field">
-                    @Html.LabelFor(m => m.PostCode)
-                    @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Enter postcode" })
-                </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
+                @if (!Model.IsAPaymentSearch)
+                {
+                    @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                    <select id="FundCode" name="FundCode">
+                        <option value="">None</option>
+                        @foreach (var item in Model.Funds.Items)
+                        {
+                            <option class="item" value="@item.Value" @(!Model.FundCode.IsNullOrEmpty() && Model.FundCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    @Html.HiddenFor(x => x.FundCode, new { size = 4 })
+                }
+            </div>
 
-                <div class="field">
-                    @Html.LabelFor(m => m.HouseNumberName)
-                    @Html.TextBoxFor(m => m.HouseNumberName, new { size = 60, placeholder = "Enter house number/name" })
-                </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.PostCode, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PostCode, new { size = 8, placeholder = "Enter postcode", @class = "form-control" })
+            </div>
 
-                <div class="field">
-                    @Html.LabelFor(m => m.Street)
-                    @Html.TextBoxFor(m => m.Street, new { size = 30, placeholder = "Enter street" })
-                </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
+                @Html.LabelFor(m => m.Address, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Address, new { size = 60, placeholder = "Enter address", @class = "form-control" })
+            </div>
 
-                <div class="field">
-                    <label>&nbsp;</label>
-                    <button class="ui icon blue button" tabindex="0" type="submit">
-                        <i class="search icon"></i> Search
-                    </button>
-                </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-3 offset-lg-6 offset-xl-6 offset-xxl-0 align-self-end d-grid gap-2 d-md-flex justify-content-end">
+                <button class="btn btn-primary search" tabindex="0" type="submit">
+                    <i class="search icon"></i> Search
+                </button>
+                @{
+                    var queryString = string.Empty;
 
+                    if (Model.IsAPaymentSearch)
+                    {
+                        queryString = "?IsAPaymentSearch=True&FundCode=" + Model.FundCode;
+                    }
+
+                    <a href="@Url.Action(Model.IsAPaymentSearch ? "PaymentSearch" : "Search", "AccountHolder")@queryString" class="btn btn-secondary" id="reset">
+                        <i class="undo icon"></i> Reset search
+                    </a>
+                }
             </div>
 
         </div>

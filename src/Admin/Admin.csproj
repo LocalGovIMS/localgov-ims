@@ -758,6 +758,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\accessible-autocomplete.min.js" />
+    <Content Include="Scripts\App\AccountHolder\search.js" />
     <Content Include="Scripts\App\AccountHolder\edit.js" />
     <Content Include="Scripts\App\Core\payments-admin.core.js" />
     <Content Include="Scripts\App\EReturn\0_shared.js" />

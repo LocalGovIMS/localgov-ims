@@ -64,25 +64,17 @@ namespace DataAccess.Repositories
                 items = items.Where(x => x.FundCode == searchCriteria.FundCode);
             }
 
-            if (!string.IsNullOrWhiteSpace(searchCriteria.HouseNumberName))
+            if (!string.IsNullOrWhiteSpace(searchCriteria.Address))
             {
-                items = items.Where(x => x.AddressLine1.Contains(searchCriteria.HouseNumberName)
-                    || x.AddressLine2.Contains(searchCriteria.HouseNumberName)
-                    || x.AddressLine3.Contains(searchCriteria.HouseNumberName)
-                    || x.AddressLine4.Contains(searchCriteria.HouseNumberName));
+                items = items.Where(x => x.AddressLine1.Contains(searchCriteria.Address)
+                    || x.AddressLine2.Contains(searchCriteria.Address)
+                    || x.AddressLine3.Contains(searchCriteria.Address)
+                    || x.AddressLine4.Contains(searchCriteria.Address));
             }
 
             if (!string.IsNullOrWhiteSpace(searchCriteria.PostCode))
             {
                 items = items.Where(x => x.Postcode.Contains(searchCriteria.PostCode));
-            }
-
-            if (!string.IsNullOrWhiteSpace(searchCriteria.Street))
-            {
-                items = items.Where(x => x.AddressLine1.Contains(searchCriteria.Street)
-                    || x.AddressLine2.Contains(searchCriteria.Street)
-                    || x.AddressLine3.Contains(searchCriteria.Street)
-                    || x.AddressLine4.Contains(searchCriteria.Street));
             }
 
             if (!string.IsNullOrWhiteSpace(searchCriteria.Surname))

@@ -62,6 +62,9 @@
                 searchAction: null,
                 searchEnabledFundCodes: []
             }
+        },
+        accountHolder: {
+            fundMessageOptions: []
         }
     },
 

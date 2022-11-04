@@ -1,34 +1,21 @@
 ﻿@using Microsoft.Ajax.Utilities
 @model Admin.Models.Transaction.DetailsViewModel
+
 @{
     ViewBag.Title = "Home";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Dashboard
-        <div class="sub header">
-            System overview
-        </div>
-    </h1>
-}
+@section Header { Dashboard }
 
-<div class="ui grid stackable">
+@section Subheader { System overview }
 
-    <div class="six wide column">
-
-        <h2>Latest transaction imports</h2>
-        <div>
-            @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.Transaction })
-        </div>
-
+<div class="row">
+    <div class="col">
+        <h3>Latest transaction imports</h3>
+        @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.Transaction })
     </div>
-    <div class="six wide column">
-
-        <h2>Latest account holder imports</h2>
-        <div>
-            @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.AccountHolder })
-        </div>
-
+    <div class="col">
+        <h3>Latest account holder imports</h3>
+        @Html.Action("_Search", "Import", new { pageSize = 5, DataType = ImportDataTypeEnum.AccountHolder })
     </div>
 </div>
