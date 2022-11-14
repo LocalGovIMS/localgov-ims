@@ -1057,6 +1057,7 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Shared\_Breadcrumb.cshtml" />
     <Content Include="Views\Shared\_Environment.cshtml" />
+    <Content Include="Views\Shared\_NoResultsMessage.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

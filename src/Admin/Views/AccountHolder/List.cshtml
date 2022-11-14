@@ -17,9 +17,7 @@
 }
 
 @section Actions {
-
     @Html.ActionLink("Create account holder", "Create", new { }, new { @class = "btn btn-secondary" })
-
 }
 
 <div class="border border-1 rounded p-2">
@@ -46,10 +44,10 @@
                         <td>@item.AccountReference</td>
                         <td>@item.FullNameAndTitle()</td>
                         <td>@item.Address()</td>
-                        <td style="text-align: right" class="@if ((item.CurrentBalance ?? 0) < 0) { @Html.Raw("td--negative") }">
+                        <td class="text-end @if ((item.CurrentBalance ?? 0) < 0) { @Html.Raw("td--negative") }">
                             @Html.ToCurrency(item.CurrentBalance)
                         </td>
-                        <td style="text-align: right;">
+                        <td class="text-end">
                             @Html.ActionLink("View", "Details", new { id = item.AccountReference }, new { @class = "btn btn-secondary" })
                             @Html.ActionLink("Edit", "Edit", new { id = item.AccountReference }, new { @class = "btn btn-secondary" })
 
@@ -86,14 +84,7 @@
 }
 else
 {
-    <div class="ui info message">
-        <div class="header">
-            We couldn't find any matching account holders
-        </div>
-        <p>
-            Please try again with different search criteria
-        </p>
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "account holders");
 }
 
 @section Scripts {

@@ -17,6 +17,34 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "AccountReferenceValidator")">
+                <div class="content">
+                    <div class="header">Account Reference Validators</div>
+                    <div class="description">
+                        <p>Account reference validators</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "CheckDigitConfiguration")">
+                <div class="content">
+                    <div class="header">Check Digit Configurations</div>
+                    <div class="description">
+                        <p>Check digit configurations</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
             <a class="ui card" href="@Url.Action("List", "MethodOfPayment")">
                 <div class="content">
                     <div class="header">MOP Codes</div>
@@ -148,34 +176,6 @@
                     <div class="header">Payment Integrations</div>
                     <div class="description">
                         <p>Payment integrations</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "AccountReferenceValidator")">
-                <div class="content">
-                    <div class="header">Account Reference Validators</div>
-                    <div class="description">
-                        <p>Account reference validators</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "CheckDigitConfiguration")">
-                <div class="content">
-                    <div class="header">Check Digit Configurations</div>
-                    <div class="description">
-                        <p>Check digit configurations</p>
                     </div>
                 </div>
             </a>

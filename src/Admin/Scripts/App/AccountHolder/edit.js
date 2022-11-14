@@ -32,8 +32,6 @@
 
 function configureFundMessage(fundCode, fundMessageId) {
 
-    console.log(fundCode, fundMessageId);
-
     // 1. Clear the fund message dropdown - we've changed something, or are loading the page, so reset.
     $('#FundMessageIdAccessibleAutocompleteWrapper').empty();
 
@@ -81,8 +79,6 @@ function configureFundMessage(fundCode, fundMessageId) {
                 const option = paymentsAdmin.pages.accountHolder.fundMessageOptions.find(
                     (o) => o.text === val
                 );
-
-                console.log(option);
 
                 if (option) {
                     $('#FundMessageId').val(option.id);

@@ -2,114 +2,107 @@
 @{
     ViewBag.Title = "Edit account reference validator";
 }
+
 @section Messages {
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        <div class="sub header">
-            Account reference validator details
-        </div>
-    </h1>
-}
+@section Header { @Model.Name }
+
+@section Subheader { Account reference validator details }
 
 @using (Html.BeginForm("Edit", "AccountReferenceValidator", FormMethod.Post))
 {
-
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Name)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MinLength)
-            @Html.EditorFor(m => m.MinLength)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MinLength)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.MinLength, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.MinLength, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MinLength)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaxLength)
-            @Html.EditorFor(m => m.MaxLength)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MaxLength)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.MaxLength, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.MaxLength, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MaxLength)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Regex)
-            @Html.EditorFor(m => m.Regex)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Regex)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Regex, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Regex, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Regex)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.InputMask)
-            @Html.EditorFor(m => m.InputMask)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.InputMask)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.InputMask, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.InputMask, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.InputMask)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.CharacterType)
-            <div class="ui selection dropdown character-type-dropdown">
-                @Html.HiddenFor(x => x.CharacterType)
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select character type</div>
-                <div class="menu">
-                    <div class="item" data-value="">
-                        None
-                    </div>
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.CharacterType, new { @class = "form-label" })
+                <select id="CharacterType" name="CharacterType">
+                    <option value="">None</option>
                     @foreach (var item in Model.CharacterTypes.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(Model.CharacterType.HasValue && Model.CharacterType.Value.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.CharacterType)
                 </div>
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.CharacterType)
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.CheckDigitConfigurationId)
-            <div class="ui selection dropdown check-digit-configuration-dropdown">
-                @Html.HiddenFor(x => x.CheckDigitConfigurationId)
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select check digit configuration</div>
-                <div class="menu">
-                    <div class="item" data-value="">
-                        None
-                    </div>
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.CheckDigitConfigurationId, new { @class = "form-label" })
+                <select id="CheckDigitConfigurationId" name="CheckDigitConfigurationId">
+                    <option value="">None</option>
                     @foreach (var item in Model.CheckDigitConfigurations.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(Model.CheckDigitConfigurationId.HasValue && Model.CheckDigitConfigurationId.Value.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.CheckDigitConfigurationId)
                 </div>
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.CheckDigitConfigurationId)
             </div>
         </div>
 
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "AccountReferenceValidator", null, new { @class = "ui button" })
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "AccountReferenceValidator", null, new { @class = "btn btn-secondary" })
+        </div>
 
     </div>
 }
@@ -117,8 +110,31 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.character-type-dropdown').dropdown();
-            $('.check-digit-configuration-dropdown').dropdown();
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select character type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#CharacterType')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select character type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#CheckDigitConfigurationId')
+            });
+
         });
     </script>
 }
