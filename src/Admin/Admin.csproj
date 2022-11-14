@@ -1058,6 +1058,7 @@
     <Content Include="Views\Shared\_Breadcrumb.cshtml" />
     <Content Include="Views\Shared\_Environment.cshtml" />
     <Content Include="Views\Shared\_NoResultsMessage.cshtml" />
+    <Content Include="Views\Shared\_NothingSpecified.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

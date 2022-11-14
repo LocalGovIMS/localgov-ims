@@ -72,7 +72,7 @@
                     <option value="">None</option>
                     @foreach (var item in Model.CharacterTypes.Items)
                     {
-                        <option class="item" value="@item.Value" @(Model.CharacterType.HasValue && Model.CharacterType.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                        <option class="item" value="@item.Value" @(Model.CharacterType.HasValue && Model.CharacterType.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
                 </select>
                 <div class="form__element--error">
@@ -88,7 +88,7 @@
                     <option value="">None</option>
                     @foreach (var item in Model.CheckDigitConfigurations.Items)
                     {
-                        <option class="item" value="@item.Value" @(Model.CheckDigitConfigurationId.HasValue && Model.CheckDigitConfigurationId.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                        <option class="item" value="@item.Value" @(Model.CheckDigitConfigurationId.HasValue && Model.CheckDigitConfigurationId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
                 </select>
                 <div class="form__element--error">
@@ -129,7 +129,7 @@
                 showAllValues: true,
                 defaultValue: '',
                 preserveNullOptions: true,
-                placeholder: 'Select character type',
+                placeholder: 'Select check digit configuration',
                 dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
                 selectElement: document.querySelector('#CheckDigitConfigurationId')
             });

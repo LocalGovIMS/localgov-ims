@@ -45,11 +45,11 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "MethodOfPayment")">
+            <a class="ui card" href="@Url.Action("List", "Fund")">
                 <div class="content">
-                    <div class="header">MOP Codes</div>
+                    <div class="header">Funds</div>
                     <div class="description">
-                        <p>Manage MOP codes</p>
+                        <p>Manage funds</p>
                     </div>
                 </div>
             </a>
@@ -73,67 +73,11 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Role")">
+            <a class="ui card" href="@Url.Action("List", "FundMessage")">
                 <div class="content">
-                    <div class="header">Roles</div>
+                    <div class="header">Fund Messages</div>
                     <div class="description">
-                        <p>Manage system roles</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Template")">
-                <div class="content">
-                    <div class="header">Templates</div>
-                    <div class="description">
-                        <p>Manage eReturn templates</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Vat")">
-                <div class="content">
-                    <div class="header">Vat Codes</div>
-                    <div class="description">
-                        <p>Manage VAT codes</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Fund")">
-                <div class="content">
-                    <div class="header">Funds</div>
-                    <div class="description">
-                        <p>Manage funds</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "SystemMessage")">
-                <div class="content">
-                    <div class="header">System Messages</div>
-                    <div class="description">
-                        <p>Manage system messages</p>
+                        <p>Fund messages</p>
                     </div>
                 </div>
             </a>
@@ -148,6 +92,48 @@
                     <div class="header">Import Processing Rules</div>
                     <div class="description">
                         <p>Manage import processing rules</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "ImportType")">
+                <div class="content">
+                    <div class="header">Import Types</div>
+                    <div class="description">
+                        <p>Import types</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "MetadataKey")">
+                <div class="content">
+                    <div class="header">Metadata Keys</div>
+                    <div class="description">
+                        <p>Metadata Keys</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "MethodOfPayment")">
+                <div class="content">
+                    <div class="header">MOP Codes</div>
+                    <div class="description">
+                        <p>Manage MOP codes</p>
                     </div>
                 </div>
             </a>
@@ -185,11 +171,11 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "FundMessage")">
+            <a class="ui card" href="@Url.Action("List", "Role")">
                 <div class="content">
-                    <div class="header">Fund Messages</div>
+                    <div class="header">Roles</div>
                     <div class="description">
-                        <p>Fund messages</p>
+                        <p>Manage system roles</p>
                     </div>
                 </div>
             </a>
@@ -199,11 +185,11 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "ImportType")">
+            <a class="ui card" href="@Url.Action("List", "SystemMessage")">
                 <div class="content">
-                    <div class="header">Import Types</div>
+                    <div class="header">System Messages</div>
                     <div class="description">
-                        <p>Import types</p>
+                        <p>Manage system messages</p>
                     </div>
                 </div>
             </a>
@@ -213,11 +199,25 @@
     @if (User.IsInRole(Role.SystemAdmin))
     {
         <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "MetadataKey")">
+            <a class="ui card" href="@Url.Action("List", "Template")">
                 <div class="content">
-                    <div class="header">Metadata Keys</div>
+                    <div class="header">Templates</div>
                     <div class="description">
-                        <p>Metadata Keys</p>
+                        <p>Manage eReturn templates</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <div class="four wide column">
+            <a class="ui card" href="@Url.Action("List", "Vat")">
+                <div class="content">
+                    <div class="header">Vat Codes</div>
+                    <div class="description">
+                        <p>Manage VAT codes</p>
                     </div>
                 </div>
             </a>
