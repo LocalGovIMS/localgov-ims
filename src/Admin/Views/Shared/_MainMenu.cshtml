@@ -1,80 +1,78 @@
 ﻿<nav class="navbar navbar-dark bg-black">
-
     <a class="navbar-brand ps-2" href="#">Local Gov IMS</a>
     <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="navbar-collapse collapse show-lg" id="navbarSupportedContent">
         <ul class="navbar-nav">
             @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Dashboard))
             {
                 <li class="nav-item">
-                    <a id="menu__home" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")" href="@Url.Action("Index", "Home")">Dashboard<i class="icon fa fa-fw fa-home"></i></a>
+                    <a id="menu__home" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")" href="@Url.Action("Index", "Home")">Dashboard<i class="icon fa fa-fw fa-home pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.TransactionList))
             {
                 <li class="nav-item">
-                    <a id="menu__transactions" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Transaction" ? "active" : "")" href="@Url.Action("List", "Transaction")">Transactions<i class="icon fa fa-fw fa-th-list"></i></a>
+                    <a id="menu__transactions" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Transaction" ? "active" : "")" href="@Url.Action("List", "Transaction")">Transactions<i class="icon fa fa-fw fa-th-list pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.Transfer))
             {
                 <li class="nav-item">
-                    <a id="menu__transfer" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Transfer" ? "active" : "")" href="@Url.Action("Index", "Transfer")">Transfer<i class="icon fa fa-fw fa-exchange"></i></a>
+                    <a id="menu__transfer" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Transfer" ? "active" : "")" href="@Url.Action("Index", "Transfer")">Transfer<i class="icon fa fa-fw fa-exchange pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Payments) || User.IsInRole(Role.ChequeProcess) || User.IsInRole(Role.PostPayment))
             {
                 <li class="nav-item">
-                    <a id="menu__payment" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Payment" ? "active" : "")" href="@Url.Action("Index", "Payment")">Payment<i class="icon fa fa-fw fa-shopping-cart"></i></a>
+                    <a id="menu__payment" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Payment" ? "active" : "")" href="@Url.Action("Index", "Payment")">Payment<i class="icon fa fa-fw fa-shopping-cart pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.EReturns) || User.IsInRole(Role.EReturnAuthoriser))
             {
                 <li class="nav-item">
-                    <a id="menu__ereturns" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "EReturn" ? "active" : "")" href="@Url.Action("List", "EReturn")">eReturns<i class="icon fa fa-fw fa-money"></i></a>
+                    <a id="menu__ereturns" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "EReturn" ? "active" : "")" href="@Url.Action("List", "EReturn")">eReturns<i class="icon fa fa-fw fa-money pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Finance))
             {
                 <li class="nav-item">
-                    <a id="menu__imports" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Import" ? "active" : "")" href="@Url.Action("List", "Import")">Imports<i class="icon fa fa-fw fa-upload"></i></a>
+                    <a id="menu__imports" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Import" ? "active" : "")" href="@Url.Action("List", "Import")">Imports<i class="icon fa fa-fw fa-upload pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.Finance))
             {
                 <li class="nav-item">
-                    <a id="menu__account_holders" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "AccountHolder" ? "active" : "")" href="@Url.Action("List", "AccountHolder")">Accounts<i class="icon fa fa-fw fa-briefcase"></i></a>
+                    <a id="menu__account_holders" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "AccountHolder" ? "active" : "")" href="@Url.Action("List", "AccountHolder")">Accounts<i class="icon fa fa-fw fa-briefcase pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.Reporting))
             {
                 <li class="nav-item">
-                    <a id="menu__suspense" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Suspense" ? "active" : "")" href="@Url.Action("List", "Suspense")">Suspense<i class="icon fa fa-fw fa-flag"></i></a>
+                    <a id="menu__suspense" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Suspense" ? "active" : "")" href="@Url.Action("List", "Suspense")">Suspense<i class="icon fa fa-fw fa-flag pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.Finance))
             {
                 <li class="nav-item">
-                    <a id="menu__import_rules" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "ImportProcessingRules" ? "active" : "")" href="@Url.Action("List", "ImportProcessingRule")">Rules<i class="icon fa fa-fw fa-forward"></i></a>
+                    <a id="menu__import_rules" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "ImportProcessingRules" ? "active" : "")" href="@Url.Action("List", "ImportProcessingRule")">Rules<i class="icon fa fa-fw fa-forward pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ServiceDesk))
             {
                 <li class="nav-item">
-                    <a id="menu__users" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" href="@Url.Action("List", "User")">Users<i class="icon fa fa-fw fa-users"></i></a>
+                    <a id="menu__users" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")" href="@Url.Action("List", "User")">Users<i class="icon fa fa-fw fa-users pt-1"></i></a>
                 </li>
             }
             @if (User.IsInRole(Role.SystemAdmin))
             {
                 <li class="nav-item">
-                    <a id="menu__settings" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Settings" ? "active" : "")" href="@Url.Action("Index", "Settings")">Settings<i class="icon fa fa-fw fa-cog"></i></a>
+                    <a id="menu__settings" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Settings" ? "active" : "")" href="@Url.Action("Index", "Settings")">Settings<i class="icon fa fa-fw fa-cog pt-1"></i></a>
                 </li>
             }
             <li class="nav-item">
-                <a id="menu__help" class="nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")">Help<i class="icon fa fa-fw fa-question"></i></a>
+                <a id="menu__help" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")">Help<i class="icon fa fa-fw fa-question pt-1"></i></a>
             </li>
         </ul>
     </div>

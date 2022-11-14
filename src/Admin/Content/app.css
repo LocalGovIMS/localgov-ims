@@ -424,6 +424,11 @@ pre {
     }
 }
 
+
+.navbar-brand {
+    min-height:48px;
+}
+
 a.nav-item {
     width: 100%;
     padding: 0.92857143em 1.14285714em;
@@ -442,11 +447,11 @@ a.nav-link:before {
 a.nav-link.active {
     background: #111;
     border-left: 5px solid #bf2e5d;
-    padding-left: 10px !important;
+    padding-left: 15px !important;
 }
 
 a.nav-link:not(.active) {
-    padding-left: 15px !important;
+    padding-left: 20px !important;
 }
 
 .autocomplete__input {
