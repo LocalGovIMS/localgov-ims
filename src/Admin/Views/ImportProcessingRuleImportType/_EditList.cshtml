@@ -2,38 +2,40 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped teal">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Name
-                </th>
-                <th scope="col">
-                    Description
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @item.ImportType.Name
-                    </td>
-                    <td>
-                        @item.ImportType.Description
-                    </td>
-                    <td style="width:20%;">
-                        @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleImportType", new { id = item.Id }, new { @class = "ui button" })
-                        @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleImportType", new { id = item.Id, importProcessingRuleId = item.ImportProcessingRuleId }, new { @class = "ui button delete-import-type-import-processing-rule" })
-                    </td>
+                    <th scope="col">
+                        Name
+                    </th>
+                    <th scope="col">
+                        Description
+                    </th>
+                    <th scope="col">
+
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.ImportType.Name
+                        </td>
+                        <td>
+                            @item.ImportType.Description
+                        </td>
+                        <td style="width:20%;" class="text-end">
+                            @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleImportType", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleImportType", new { id = item.Id, importProcessingRuleId = item.ImportProcessingRuleId }, new { @class = "btn btn-secondary delete-import-type-import-processing-rule" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {

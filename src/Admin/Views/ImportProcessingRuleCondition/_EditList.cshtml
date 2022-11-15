@@ -10,35 +10,45 @@
         {
             <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">Or</div>
         }
-        <table class="ui celled table blue">
-            @{ var conditionCount = 0; }
-            @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
-            {
-                conditionCount++;
+        <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+                @{ var conditionCount = 0; }
+                @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
+                {
+                    conditionCount++;
 
-                <tr>
-                    <td style="width:5%;">
-                        @if (conditionCount > 1)
-                        {
-                            <span>@(string.IsNullOrEmpty(condition.LogicalOperator) ? string.Empty : condition.LogicalOperator.ToSentenceCase())</span>
-                        }
-                        else
-                        {
-                            <span>Where</span>
-                        }
-                        </td>
-                        <td><span class="condition ui label blue">@condition.DisplaySummary()</span></td>
-                        <td style="width:35%;">
-                            @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleCondition", new { id = condition.Id }, new { @class = "ui button" })
-                            @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleCondition", new { id = condition.Id, importProcessingRuleId = condition.ImportProcessingRuleId }, new { @class = "ui button delete-condition" })
-                            @if (conditionCount == Model.Items.Where(x => x.Group == group).Count())
+                    <tr>
+                        <td style="width:5%;" class="align-middle">
+                            @if (conditionCount > 1)
                             {
-                                @Html.ActionLink("Add another condition", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Items.First().ImportProcessingRuleId, group = group }, new { @class = "ui button" })
+                                <span>@(string.IsNullOrEmpty(condition.LogicalOperator) ? string.Empty : condition.LogicalOperator.ToSentenceCase())</span>
+                            }
+                            else
+                            {
+                                <span>Where</span>
                             }
                         </td>
+                        <td class="align-middle">
+                            <span class="rounded-1 p-2 bg-primary bg-opacity-75 fw-normal text-white">@condition.DisplaySummary()</span>
+                        </td>
+                        <td style="width:35%;" class="text-end">
+                            @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleCondition", new { id = condition.Id }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleCondition", new { id = condition.Id, importProcessingRuleId = condition.ImportProcessingRuleId }, new { @class = "btn btn-secondary delete-condition" })
+
+                        </td>
                     </tr>
+                    if (conditionCount == Model.Items.Where(x => x.Group == group).Count())
+                    {
+                        <tr>
+                            <td colspan="3" class="text-end">
+                                @Html.ActionLink("Add another condition", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Items.First().ImportProcessingRuleId, group = group }, new { @class = "btn btn-secondary" })
+                            </td>
+                        </tr>
+                        
+                    }
                 }
-        </table>
+            </table>
+        </div>
     }
 }
 else

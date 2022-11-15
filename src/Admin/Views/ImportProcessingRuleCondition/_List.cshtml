@@ -9,9 +9,9 @@
 
         if (groupCount > 1)
         {
-            <div class="logical-operator" style="font-weight:bold; padding: 1em 0;">Or</div>
+            <div class="my-2">Or</div>
         }
-        <div class="ui tertiary inverted blue compact segment" style="padding:1em;">
+        <div class="d-inline-flex rounded-1 p-2 bg-primary bg-opacity-50">
             @{ var conditionCount = 0; }
             @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
             {
@@ -20,10 +20,10 @@
                 {
                     if (!string.IsNullOrEmpty(condition.LogicalOperator))
                     {
-                        <span class="logical-operator" style="font-weight:bold; margin: 0 1em">@condition.LogicalOperator.ToLower()</span>
+                        <span class="mx-2 p-2 text-white">@condition.LogicalOperator.ToLower()</span>
                     }
                 }
-                <span class="condition ui label blue">
+                <span class="rounded-1 p-2 bg-primary bg-opacity-75 fw-normal text-white">
                     @condition.DisplaySummary()
                 </span>
             }
@@ -32,8 +32,6 @@
 }
 else
 {
-    <div class="ui info message">
-        There are no conditions specified
-    </div>
+    Html.RenderPartial("_NothingSpecified", "conditions");
 }
 

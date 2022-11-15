@@ -3,60 +3,75 @@
     ViewBag.Title = "Import processing rule";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Import processing rule details
-        </div>
-    </h1>
+@section Header { @Model.Name }
+
+@section Subheader { Import processing rule details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui vertical segment">
-        <div class="wide field">
-            @Html.LabelFor(m => m.Description)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Description, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Description)
         </div>
-
-        <div class="wide field">
-            @Html.LabelFor(m => m.Status)
-            @Html.DisplayFor(m => m.Status)
-        </div>
-
-        <div class="wide field">
-            @Html.LabelFor(m => m.Scope)
-            @Html.DisplayFor(m => m.Scope)
-        </div>
-
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Conditions
-        </h2>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Status, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Status)
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Scope, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Scope)
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Conditions
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleCondition", new { id = Model.Id })
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Actions
-        </h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Actions
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForImportProcessingRule", "ImportProcessingRuleAction", new { id = Model.Id })
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Import types
-        </h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Import types
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_List", "ImportProcessingRuleImportType", new { id = Model.Id })
     </div>
 
-    <br />
-    @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "btn btn-secondary" })
 
 </div>
