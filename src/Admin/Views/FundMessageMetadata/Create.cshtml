@@ -7,51 +7,44 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create fund message metadata
-        <div class="sub header">
-            Fund message metadata details
-        </div>
-    </h1>
-}
+@section Header { Create fund message metadata }
+
+@section Subheader { Fund message metadata details }
 
 @using (Html.BeginForm("Create", "FundMessageMetadata", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.FundMessageId)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MetadataKeyId)
-            <div class="ui search selection dropdown keys-dropdown">
-                @Html.HiddenFor(x => x.MetadataKeyId)
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select key</div>
-                <div class="menu">
-                    @foreach (var item in Model.MetadataKeys.Items.OrderBy(x => x.Text))
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.MetadataKeyId, new { @class = "form-label" })
+                <select id="MetadataKeyId" name="MetadataKeyId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.MetadataKeys.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(Model.MetadataKeyId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MetadataKeyId)
                 </div>
             </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MetadataKeyId)
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Value, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Value, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Value)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Value)
-            @Html.EditorFor(m => m.Value)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Value)
-            </div>
-        </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "FundMessageMetadata", null, new { @class = "ui button" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "FundMessageMetadata", null, new { @class = "btn btn-secondary" })
 
     </div>
 
@@ -62,7 +55,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('.keys-dropdown').dropdown();
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select metadata key',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#MetadataKeyId')
+            });
 
         });
     </script>

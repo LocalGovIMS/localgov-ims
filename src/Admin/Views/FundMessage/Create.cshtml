@@ -7,50 +7,45 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create fund message
-        <div class="sub header">
-            Fund message details
-        </div>
-    </h1>
-}
+@section Header { Create fund message }
+
+@section Subheader { Fund message details }
 
 @using (Html.BeginForm("Create", "FundMessage", FormMethod.Post))
 {
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.FundCode)
-            <div class="ui selection dropdown fund-dropdown">
-                @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select fund type</div>
-                <div class="menu">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                <select id="FundCode" name="FundCode">
+                    <option value="">None</option>
                     @foreach (var item in Model.Funds.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.FundCode) && Model.FundCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundCode)
                 </div>
             </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundCode)
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Message, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Message, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Message)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Message)
-            @Html.EditorFor(m => m.Message)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Message)
-            </div>
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "btn btn-secondary" })
         </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
 
     </div>
 
@@ -58,8 +53,20 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $('.ui.dropdown').dropdown({
-            match: 'both'
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select fund type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#FundCode')
+            });
+
         });
     </script>
 }

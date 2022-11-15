@@ -15,161 +15,161 @@
 {
     @Html.HiddenFor(m => m.FundCode)
 
-<div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.FundCode, new { @class = "form-control" })
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundCode)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.FundName, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.FundName, new { @class = "form-control" })
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundName)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.DisplayName)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.AccountReferenceValidatorId, new { @class = "form-label" })
-            <select id="AccountReferenceValidatorId" name="AccountReferenceValidatorId">
-                <option value="">None</option>
-                @foreach (var item in Model.AccountReferenceValidators.Items)
-                {
-                    <option class="item" value="@item.Value" @(Model.AccountReferenceValidatorId.HasValue && Model.AccountReferenceValidatorId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
-                }
-            </select>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AccountReferenceValidatorId)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.VatCode, new { @class = "form-label" })
-            <select id="VatCode" name="VatCode">
-                <option value="">None</option>
-                @foreach (var item in Model.VatCodes.Items)
-                {
-                    <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.VatCode) && Model.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
-                }
-            </select>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.VatCode)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.MaximumAmount, new { @class = "form-control" })
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MaximumAmount)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.OverPayAccount, new { @class = "form-label" })
-            <div class="form-check form-switch">
-                @Html.CheckBoxFor(m => m.OverPayAccount, new { @class = "form-check-input", role = "switch" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.OverPayAccount)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.AccountExist, new { @class = "form-label" })
-            <div class="form-check form-switch">
-                @Html.CheckBoxFor(m => m.AccountExist, new { @class = "form-check-input", role = "switch" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AccountExist)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.AquireAddress, new { @class = "form-label" })
-            <div class="form-check form-switch">
-                @Html.CheckBoxFor(m => m.AquireAddress, new { @class = "form-check-input", role = "switch" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AquireAddress)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.VatOverride, new { @class = "form-label" })
-            <div class="form-check form-switch">
-                @Html.CheckBoxFor(m => m.VatOverride, new { @class = "form-check-input", role = "switch" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.VatOverride)
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col col-sm-6 col-md-5 col-lg-4">
-            @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
-            <div class="form-check form-switch">
-                @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex flex-wrap mb-3">
-        <div class="me-auto p-0">
-            <h1>
-                Metadata
-            </h1>
-        </div>
-        <div class="order-lg-2 p-0">
-            @Html.ActionLink("Add metadata", "Create", "FundMetadata", new { fundCode = Model.FundCode }, new { @class = "btn btn-primary" })
-        </div>
-    </div>
-
-    <div class="mb-3">
-        @Html.Action("_EditListForFund", "FundMetadata", new { fundCode = Model.FundCode })
-    </div>
-
     <div>
-        <input type="submit" value="Save" class="btn btn-primary" />
-        @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
-    </div>
 
-</div>
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.FundCode, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundCode)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.FundName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundName)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AccountReferenceValidatorId, new { @class = "form-label" })
+                <select id="AccountReferenceValidatorId" name="AccountReferenceValidatorId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.AccountReferenceValidators.Items)
+                    {
+                        <option class="item" value="@item.Value" @(Model.AccountReferenceValidatorId.HasValue && Model.AccountReferenceValidatorId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AccountReferenceValidatorId)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatCode, new { @class = "form-label" })
+                <select id="VatCode" name="VatCode">
+                    <option value="">None</option>
+                    @foreach (var item in Model.VatCodes.Items)
+                    {
+                        <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.VatCode) && Model.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatCode)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.MaximumAmount, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MaximumAmount)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.OverPayAccount, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.OverPayAccount, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.OverPayAccount)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AccountExist, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AccountExist, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AccountExist)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AquireAddress, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AquireAddress, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AquireAddress)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatOverride, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.VatOverride, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatOverride)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsDisabled)
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap mb-3">
+            <div class="me-auto p-0">
+                <h2>
+                    Metadata
+                </h2>
+            </div>
+            <div class="order-lg-2 p-0">
+                @Html.ActionLink("Add metadata", "Create", "FundMetadata", new { fundCode = Model.FundCode }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            @Html.Action("_EditListForFund", "FundMetadata", new { fundCode = Model.FundCode })
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
+        </div>
+
+    </div>
 
 }
 
