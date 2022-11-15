@@ -7,69 +7,67 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create fund group
-        <div class="sub header">
-            Fund groups details
-        </div>
-    </h1>
-}
+@section Header { Create fund group }
+
+@section Subheader { Fund group details }
 
 @using (Html.BeginForm("Create", "FundGroup", FormMethod.Post))
 {
 
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.FundGroupName)
-            @Html.EditorFor(m => m.FundGroupName)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundGroupName)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundGroupName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.FundGroupName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundGroupName)
+                </div>
             </div>
         </div>
 
-        <table class="ui celled table striped">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        Funds
-                    </th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Funds
+                        </th>
+                    </tr>
+                </thead>
 
-            @if (Model.Funds != null && Model.Funds.Any())
-            {
-                // This is view logic, but it kind of stinks a bit.
-                // TODO - There must be a better way to creae a checkbox list.
-                // I also don't like the fact we're using tables.
-                var funds = Model.Funds.OrderBy(x => x.Text).ToList();
-                for (var i = 0; i < funds.Count(); i++)
+                @if (Model.Funds != null && Model.Funds.Any())
+                {
+                    var funds = Model.Funds.OrderBy(x => x.Text).ToList();
+                    for (var i = 0; i < funds.Count(); i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(x => funds[i].Id)
+                                @Html.HiddenFor(x => funds[i].Text)
+                                <div class="form-check form-switch">
+                                    @Html.CheckBoxFor(x => funds[i].IsChecked, new { @class = "form-check-input", role = "switch" })
+                                    @Html.Label(funds[i].Text, new { @for = "funds_" + i + "__IsChecked", @class = "form-check-label" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
                         <td>
-                            @Html.HiddenFor(x => funds[i].Id)
-                            @Html.HiddenFor(x => funds[i].Text)
-                            @Html.CheckBoxFor(x => funds[i].IsChecked)
-                            @Html.Label(funds[i].Text, new { @for= "funds_" + i + "__IsChecked" })
+                            No available funds
                         </td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td>
-                        No available funds
-                    </td>
-                </tr>
-            }
-        </table>
+            </table>
+        </div>
 
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "FundGroup", null, new { @class = "ui button" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "FundGroup", null, new { @class = "btn btn-secondary" })
 
     </div>
 
