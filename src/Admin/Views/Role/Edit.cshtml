@@ -7,37 +7,35 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.DisplayName
-        <div class="sub header">
-            Role details
-        </div>
-    </h1>
-}
+@section Header { @Model.DisplayName }
+
+@section Subheader { Role details }
+
 
 @using (Html.BeginForm("Edit", "Role", FormMethod.Post))
 {
-
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.DisplayFor(m => m.Name)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
         </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DisplayName)
-            @Html.EditorFor(m => m.DisplayName)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.DisplayName)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </div>
             </div>
         </div>
 
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "Role", null, new { @class = "ui button" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "Role", null, new { @class = "btn btn-secondary" })
 
     </div>
 
