@@ -3,58 +3,56 @@
     ViewBag.Title = "VAT";
 }
 
-@section Header {
-    <h1 class="ui header">
-        VAT Codes
-        @Html.ActionLink("Create VAT code", "Create", new { }, new { @class = "btn btn-secondary" })
-        <div class="sub header">
-            VAT codes within the system
-        </div>
-    </h1>
+@section Header { VAT Codes }
+
+@section Subheader { VAT codes within the system }
+
+@section Actions {
+    @Html.ActionLink("Create VAT code", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
 @if (Model != null)
 {
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    @Html.LabelFor(m => Model.FirstOrDefault().Code)
-                </th>
-                <th scope="col">
-                    @Html.LabelFor(m => Model.FirstOrDefault().Percentage)
-                </th>
-                <th scope="col">
-                    @Html.LabelFor(m => Model.FirstOrDefault().Status)
-                </th>
-                <th scope="col">
-                    
-                </th>
-            </tr>
-        </thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.Percentage)
-                </td>
-                <td>
-                    @Html.Label(item.IsDisabled ? "Disabled" : "Active")
-                </td>
-                <td>
-                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
-                </td>
-            </tr>
-        }
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.LabelFor(m => Model.FirstOrDefault().Code)
+                    </th>
+                    <th scope="col">
+                        @Html.LabelFor(m => Model.FirstOrDefault().Percentage)
+                    </th>
+                    <th scope="col">
+                        @Html.LabelFor(m => Model.FirstOrDefault().Status)
+                    </th>
+                    <th scope="col">
+
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Percentage)
+                    </td>
+                    <td>
+                        @Html.Label(item.IsDisabled ? "Disabled" : "Active")
+                    </td>
+                    <td class="text-end">
+                        @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "btn btn-secondary" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 else
 {
-    <div class="panels">
-        There are no VAT entries in the system!
-    </div>
+    Html.RenderPartial("_NothingSpecified", "VAT codes");
 }
