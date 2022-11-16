@@ -65,11 +65,9 @@
                     <tr>
                         <td>@transaction.EntryDate</td>
                         <td style="text-align: center;">
-                            <span class="ui tiny label mop"
+                            <div class="px-2 py-1 rounded-1 d-inline-flex"
                                   title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
-                                  style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">
-                                @(transaction.Mop != null ? transaction.Mop.MopCode : "")
-                            </span>
+                                  style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">@(transaction.Mop != null ? transaction.Mop.MopCode : "")</div>
                         </td>
                         <td>
                             @if (User.IsInRole(Role.TransactionDetails))

@@ -51,6 +51,7 @@ namespace Admin.Models.Transaction
         public SelectList Mops { get; set; }
         public SelectList Users { get; set; }
 
+        [Display(Name = "Wildcard search")]
         public bool WildSearchAccountReference { get; set; }
 
         public int PageSize { get; set; } = 20;

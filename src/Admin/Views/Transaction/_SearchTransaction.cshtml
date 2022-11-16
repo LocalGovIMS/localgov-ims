@@ -56,7 +56,13 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
                 @Html.LabelFor(m => m.AccountReference, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Enter account reference", @class = "form-control" })
-                @Html.CheckBoxFor(m => m.WildSearchAccountReference)
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.WildSearchAccountReference, new { @class = "form-check-input", role = "switch" })
+                    <small>
+                        @Html.LabelFor(m => m.WildSearchAccountReference, new { @class = "form-check-label" })
+                    </small>
+                </div>
+                
             </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
                 @Html.LabelFor(m => m.ReceiptNumber, new { @class = "form-label" })
