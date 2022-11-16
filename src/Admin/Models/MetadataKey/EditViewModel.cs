@@ -23,5 +23,7 @@ namespace Admin.Models.MetadataKey
         [DisplayName("Entity type")]
         [Required(ErrorMessage = "Entity type is required")]
         public MetadataKeyEntityType EntityType { get; set; }
+
+        public SelectList EntityTypes { get; set; }
     }
 }

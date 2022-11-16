@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Enums;
 using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.MetadataKey
 {
@@ -11,5 +12,7 @@ namespace Admin.Models.MetadataKey
         public MetadataKeyEntityType? EntityType { get; set; }
 
         public int Page { get; set; }
+
+        public SelectList EntityTypes { get; set; }
     }
 }

@@ -7,54 +7,59 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        <div class="sub header">
-            Metadata key details
-        </div>
-    </h1>
-}
+@section Header { @Model.Name }
+
+@section Subheader { Metadata key details }
 
 @using (Html.BeginForm("Edit", "MetadataKey", FormMethod.Post))
 {
 
-    <div class="ui form">
+    <div>
 
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.Name)
         @Html.HiddenFor(m => m.IsASystemType)
         @Html.HiddenFor(m => m.EntityType)
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.DisplayFor(m => m.Name)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Description)
-            @Html.EditorFor(m => m.Description)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Description)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsASystemType)
-            @Model.IsASystemType.ToYesNoString()
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+            </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.EntityType)
-            @Html.DisplayFor(m => m.EntityType)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsASystemType, new { @class = "form-label" })
+                <div class="form-label">
+                    @Model.IsASystemType.ToYesNoString()
+                </div>
+            </div>
         </div>
+
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.EntityType, new { @class = "form-label" })
+                <div class="form-label">
+                    @Html.DisplayFor(m => m.EntityType, new { @class = "form-label" })
+                </div>
+            </div>
+        </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    @Html.ActionLink("Back", "Back", "MetadataKey", null, new { @class = "btn btn-secondary" })
 
     </div>
-
-    <br />
-
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "MetadataKey", null, new { @class = "ui button" })
 
 }
 
