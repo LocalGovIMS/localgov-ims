@@ -3,32 +3,31 @@
     ViewBag.Title = "Payment integration";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Payment integration details
-        </div>
-    </h1>
+
+@section Header { @Model.Name }
+
+@section Subheader { Payment integration details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="ui vertical segment">
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Name)
-        </div>
-
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.BaseUri)
-            @Html.DisplayFor(m => m.BaseUri)
         </div>
     </div>
 
-    <br />
-
-    @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "ui button" })
+    <div class="mb-3">
+        @Html.LabelFor(m => m.BaseUri, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.BaseUri)
+        </div>
+    </div>
+    
+    @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "btn btn-secondary" })
 
 </div>
