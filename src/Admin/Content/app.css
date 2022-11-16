@@ -208,25 +208,23 @@ tr.selected td {
 
 .environment {
     display: inline-block;
-    padding: 0 4px;
+    padding: 4px 12px;
     margin-left: 4px;
     border-radius: 4px;
     font-size: 0.8rem;
+    color: #fff;
 }
 
 .environment--test {
     background-color: #bf2e5d;
-    color: #fff;    
 }
 
 .environment--dev {
-    background-color: #2683b9;
-    color: #fff;   
+    background-color: #0241c9;
 }
 
 .environment--local {
-    background-color: #4c9c5d;
-    color: #fff;   
+    background-color: #007518;
 }
 
 @media print {
