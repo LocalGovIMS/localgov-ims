@@ -5,7 +5,7 @@ using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Web.Http;
 
-namespace Api.Controllers.AccountHolders
+namespace Api.Controllers.Payments
 {
     public class PaymentsController : ApiController
     {
