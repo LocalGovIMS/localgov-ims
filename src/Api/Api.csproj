@@ -160,6 +160,9 @@
     <Compile Include="Controllers\Funds\FundsController.cs" />
     <Compile Include="Controllers\Funds\FundModel.cs" />
     <Compile Include="Controllers\MethodOfPayments\SearchCriteriaModel.cs" />
+    <Compile Include="Controllers\Payments\PaymentModel.cs" />
+    <Compile Include="Controllers\Payments\PaymentsController.cs" />
+    <Compile Include="Controllers\Payments\PaymentResponseModel.cs" />
     <Compile Include="Controllers\PendingTransactions\ProcessPaymentModel.cs" />
     <Compile Include="Controllers\PendingTransactions\AuthoriseModel.cs" />
     <Compile Include="Controllers\PendingTransactions\PendingTransactionsController.cs" />
