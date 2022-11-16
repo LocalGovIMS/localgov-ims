@@ -12,11 +12,17 @@
         }
         <div class="table-responsive">
             <table class="table table-bordered mt-2">
+                <thead>
+                    <tr class="visually-hidden">
+                        <th scope="col">Logical operator</th>
+                        <th scope="col">Condition summary</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
                 @{ var conditionCount = 0; }
                 @foreach (var condition in Model.Items.Where(x => x.Group == group).OrderBy(x => x.Id))
                 {
                     conditionCount++;
-
                     <tr>
                         <td style="width:5%;" class="align-middle">
                             @if (conditionCount > 1)
@@ -29,12 +35,11 @@
                             }
                         </td>
                         <td class="align-middle">
-                            <span class="rounded-1 p-2 bg-primary bg-opacity-75 fw-normal text-white">@condition.DisplaySummary()</span>
+                            <span class="rounded-1 p-2 bg-primary fw-normal text-white">@condition.DisplaySummary()</span>
                         </td>
                         <td style="width:35%;" class="text-end">
                             @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleCondition", new { id = condition.Id }, new { @class = "btn btn-secondary" })
                             @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleCondition", new { id = condition.Id, importProcessingRuleId = condition.ImportProcessingRuleId }, new { @class = "btn btn-secondary delete-condition" })
-
                         </td>
                     </tr>
                     if (conditionCount == Model.Items.Where(x => x.Group == group).Count())
@@ -44,7 +49,6 @@
                                 @Html.ActionLink("Add another condition", "Create", "ImportProcessingRuleCondition", new { importProcessingRuleId = Model.Items.First().ImportProcessingRuleId, group = group }, new { @class = "btn btn-secondary" })
                             </td>
                         </tr>
-                        
                     }
                 }
             </table>

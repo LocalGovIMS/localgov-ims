@@ -4,6 +4,13 @@
 {
     <div class="table-responsive">
         <table class="table table-bordered mt-2">
+            <thead>
+                <tr class="visually-hidden">
+                    <th scope="col">Operation</th>
+                    <th scope="col">Action summary</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
             @{ var actionCount = 0;}
             @foreach (var action in Model.Items)
             {
@@ -13,7 +20,7 @@
                         <span>@(actionCount == 1 ? "Set" : "And")</span>
                     </td>
                     <td class="align-middle">
-                        <span class="rounded-1 p-2 bg-success bg-opacity-75 fw-normal mb-2 text-left text-white">
+                        <span class="rounded-1 p-2 bg-success fw-normal mb-2 text-left text-white">
                             @action.DisplaySummary()
                         </span>
                     </td>

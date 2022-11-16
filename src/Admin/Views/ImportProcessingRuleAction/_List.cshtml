@@ -2,10 +2,10 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <div class="d-inline-flex flex-column rounded-1 px-2 pt-2 bg-success bg-opacity-50">
+    <div class="d-inline-flex flex-column rounded-1 px-2 pt-2 bg-success bg-opacity-75">
         @foreach (var action in Model.Items)
         {
-            <div class="rounded-1 p-2 bg-success bg-opacity-75 fw-normal mb-2 text-left text-white">
+            <div class="rounded-1 p-2 bg-success fw-normal mb-2 text-left text-white">
                 @action.DisplaySummary()
             </div>
         }
