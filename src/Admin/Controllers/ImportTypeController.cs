@@ -60,6 +60,7 @@ namespace Admin.Controllers
         public ActionResult Create()
         {
             var model = new EditViewModel();
+            model = Dependencies.EditViewModelBuilder.Rebuild(model);
 
             return View(model);
         }

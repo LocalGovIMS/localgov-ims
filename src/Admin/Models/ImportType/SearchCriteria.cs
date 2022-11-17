@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Enums;
 using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.ImportType
 {
@@ -14,5 +15,7 @@ namespace Admin.Models.ImportType
         public string ExternalReference { get; set; }
 
         public int Page { get; set; }
+        
+        public SelectList ImportTypes { get; set; }
     }
 }

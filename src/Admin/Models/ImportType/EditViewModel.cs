@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.ImportType
 {
@@ -24,5 +25,7 @@ namespace Admin.Models.ImportType
         public bool IsReversible { get; set; }
 
         public bool ImportProcessingRulesAreAvailableToAdd { get; set; }
+
+        public SelectList ImportTypes { get; set; }
     }
 }

@@ -7,80 +7,108 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        <div class="sub header">
-            Import type details
-        </div>
-    </h1>
-}
+@section Header { @Model.Name }
+
+@section Subheader { Import type details }
+
 
 @using (Html.BeginForm("Edit", "ImportType", FormMethod.Post))
 {
+<div>
 
-    <div class="ui form">
+    @Html.HiddenFor(m => m.Id)
 
-        @Html.HiddenFor(m => m.Id)
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DataType)
-            @Html.EnumDropDownListFor(m => m.DataType)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.DataType, new { @class = "form-label" })
+            <select id="ImportType" name="ImportType">
+                @foreach (var item in Model.ImportTypes.Items)
+                {
+                    <option class="item" value="@item.Value" @(Model.DataType.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                }
+            </select>
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.DataType)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Name)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Description)
-            @Html.EditorFor(m => m.Description)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Description)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.ExternalReference)
-            @Html.EditorFor(m => m.ExternalReference)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.ExternalReference, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.ExternalReference, new { @class = "form-control" })
         </div>
+    </div>
 
-        <div class="field">
-            @Html.LabelFor(m => m.IsReversible)
-            <div class="ui toggle checkbox">
-                @Html.CheckBoxFor(m => m.IsReversible)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.IsReversible, new { @class = "form-label" })
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.IsReversible, new { @class = "form-check-input", role = "switch" })
             </div>
         </div>
-
     </div>
 
-    <div class="ui vertical segment">
-        <h2 style="padding-bottom:10px;">
-            Import processing rules
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Import processing rules
+            </h2>
+        </div>
+        <div class="order-lg-2 p-0">
             @if (Model.ImportProcessingRulesAreAvailableToAdd)
             {
-                @Html.ActionLink("Add an import processing rule", "Create", "ImportTypeImportProcessingRule", new { id = Model.Id }, new { @class = "ui blue button right floated" })
+                @Html.ActionLink("Add an import processing rule", "Create", "ImportTypeImportProcessingRule", new { id = Model.Id }, new { @class = "btn btn-primary" })
             }
-        </h2>
+        </div>
+    </div>
+        
+    <div class="row mb-3">
         @Html.Action("_EditList", "ImportTypeImportProcessingRule", new { id = Model.Id })
     </div>
+        
+    <input type="submit" value="Save" class="btn btn-primary" />
+    @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "btn btn-secondary" })    
 
-    <br />
-
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "ui button" })
-
+</div>
 }
+
 
 @section Scripts {
     <script type="text/javascript">
-        $('.ui.checkbox').checkbox({});
+        $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select import type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#ImportType')
+            });
+
+        });
     </script>
 }
