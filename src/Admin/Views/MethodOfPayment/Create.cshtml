@@ -7,61 +7,66 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create Method of Payment
-        <div class="sub header">
-            Method of Payment details
-        </div>
-    </h1>
-}
+@section Header { Create Method of Payment }
+
+@section Subheader { Method of Payment details }
+
 
 @using (Html.BeginForm("Create", "MethodOfPayment", FormMethod.Post))
 {
-    <div class="ui form">
+<div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Code)
-            @Html.EditorFor(m => m.Code)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Code, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Code)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Name)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaximumAmount)
-            @Html.EditorFor(m => m.MaximumAmount)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.MaximumAmount, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.MaximumAmount)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MinimumAmount)
-            @Html.EditorFor(m => m.MinimumAmount)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.MinimumAmount, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.MinimumAmount, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.MinimumAmount)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsDisabled)
-            @Html.EditorFor(m => m.IsDisabled)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
             </div>
         </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
-
     </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "btn btn-secondary" })
+
+</div>
 }

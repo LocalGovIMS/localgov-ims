@@ -56,14 +56,14 @@
         </div>
     </div>
 
-        <div class="mb-3">
-            <h2>
-                Import processing rules
-            </h2>
-            @Html.Action("_List", "ImportTypeImportProcessingRule", new { id = Model.Id })
-        </div>
-
-
-        @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "btn btn-secondary" })
-
+    <div class="mb-3">
+        <h2>
+            Import processing rules
+        </h2>
+        @Html.Action("_List", "ImportTypeImportProcessingRule", new { id = Model.Id })
     </div>
+
+
+    @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "btn btn-secondary" })
+
+</div>
