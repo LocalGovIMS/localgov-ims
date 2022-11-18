@@ -7,54 +7,54 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        User roles
-        <div class="sub header">
-            Roles selection
-        </div>
-    </h1>
-}
+@section Header { User roles }
+
+@section Subheader { Role selection }
 
 @using (Html.BeginForm("Edit", "UserRole", FormMethod.Post))
 {
+
     @Html.HiddenFor(m => m.UserId)
 
     if (Model.Roles != null && Model.Roles.Any())
     {
-        <table class="ui celled table striped teal">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        Roles
-                    </th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Roles
+                        </th>
+                    </tr>
+                </thead>
 
-            @{ var roles = Model.Roles.ToList(); }
+                @{ var roles = Model.Roles.ToList(); }
 
-            @for (var i = 0; i < roles.Count(); i++)
-            {
-                <tr>
-                    <td>
-                        @Html.HiddenFor(x => roles[i].Id)
-                        @Html.HiddenFor(x => roles[i].Text)
-                        @Html.CheckBoxFor(x => roles[i].IsChecked)
-                        @Html.DisplayFor(x => roles[i].Text)
-                    </td>
-                </tr>
-            }
+                @for (var i = 0; i < roles.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(x => roles[i].Id)
+                            @Html.HiddenFor(x => roles[i].Text)
+                            <div class="form-check form-switch">
+                                @Html.CheckBoxFor(x => roles[i].IsChecked, new { @class = "form-check-input", role = "switch" })
+                                @Html.Label(roles[i].Text, new { @for = "roles_" + i + "__IsChecked", @class = "form-check-label" })
+                            </div>
+                        </td>
+                    </tr>
+                }
 
-        </table>
+            </table>
+        </div>
     }
     else
     {
-        <div class="ui info message">
-            No available roles
-        </div>
+        Html.RenderPartial("_NothingSpecified", "roles");
     }
 
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "UserRole", null, new { @class = "ui button" })
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "UserRole", null, new { @class = "btn btn-secondary" })
+    </div>
 
 }

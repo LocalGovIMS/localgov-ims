@@ -7,54 +7,53 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        User templates
-        <div class="sub header">
-            Template selection
-        </div>
-    </h1>
-}
+@section Header { User templates }
+
+@section Subheader { Template selection }
 
 @using (Html.BeginForm("Edit", "UserTemplate", FormMethod.Post))
 {
+
     @Html.HiddenFor(m => m.UserId)
 
     if (Model.Templates != null && Model.Templates.Any())
     {
-        <table class="ui celled table striped teal">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        Templates
-                    </th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Templates
+                        </th>
+                    </tr>
+                </thead>
 
-            @{ var templates = Model.Templates.ToList(); }
+                @{ var templates = Model.Templates.ToList(); }
 
-            @for (var i = 0; i < templates.Count(); i++)
-            {
-                <tr>
-                    <td>
-                        @Html.HiddenFor(x => templates[i].Id)
-                        @Html.HiddenFor(x => templates[i].Text)
-                        @Html.CheckBoxFor(x => templates[i].IsChecked)
-                        @Html.DisplayFor(x => templates[i].Text)
-                    </td>
-                </tr>
-            }
+                @for (var i = 0; i < templates.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(x => templates[i].Id)
+                            @Html.HiddenFor(x => templates[i].Text)
+                            <div class="form-check form-switch">
+                                @Html.CheckBoxFor(x => templates[i].IsChecked, new { @class = "form-check-input", role = "switch" })
+                                @Html.Label(templates[i].Text, new { @for = "templates_" + i + "__IsChecked", @class = "form-check-label" })
+                            </div>
+                        </td>
+                    </tr>
+                }
 
-        </table>
+            </table>
+        </div>
     }
     else
     {
-        <div class="ui info message">
-            No available templates
-        </div>
+        Html.RenderPartial("_NothingSpecified", "templates");
     }
 
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "UserTemplate", null, new { @class = "ui button" })
-
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "UserTemplate", null, new { @class = "btn btn-secondary" })
+    </div>
 }
