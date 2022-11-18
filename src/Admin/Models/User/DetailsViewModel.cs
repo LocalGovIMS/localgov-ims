@@ -8,7 +8,7 @@ namespace Admin.Models.User
     {
         public int UserId { get; set; }
 
-        [DisplayName("User name")]
+        [DisplayName("Username")]
         public string UserName { get; set; }
 
         [DisplayName("Last login date and time")]

@@ -3,24 +3,21 @@
     ViewBag.Title = "User";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.UserName
-        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            User details
-        </div>
-    </h1>
+@section Header { @Model.UserName }
+
+@section Subheader { User details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
     @Html.HiddenFor(m => m.UserId)
 
-    <div class="ui vertical segment">
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.LastLogin)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.LastLogin, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @if (Model.LastLogin.HasValue)
             {
                 @Html.DisplayFor(m => m.LastLogin)
@@ -30,51 +27,86 @@
                 <span>The user has never logged in</span>
             }
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DisplayName)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.DisplayName, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.DisplayName)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.ExpiryDays)
-            @Html.DisplayFor(m => m.ExpiryDays)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.OfficeCode)
-            @Html.DisplayFor(m => m.OfficeCode)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Disabled)
-            @Html.DisplayFor(m => m.Disabled)
         </div>
     </div>
 
-    <div class="ui vertical segment">
-        <h2>User roles</h2>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.ExpiryDays, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.ExpiryDays)
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.OfficeCode, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.OfficeCode)
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Disabled, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.Disabled, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                User roles
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForUser", "UserRole", new { id = Model.UserId })
     </div>
 
-    <div class="ui vertical segment">
-        <h2>User fund groups</h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                User fund groups
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForUser", "UserFundGroup", new { id = Model.UserId })
     </div>
 
-    <div class="ui vertical segment">
-        <h2>User templates</h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                User templates
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForUser", "UserTemplate", new { id = Model.UserId })
     </div>
 
-    <div class="ui vertical segment">
-        <h2>User methods of payment</h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                User methods of payment
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForUser", "UserMethodOfPayment", new { id = Model.UserId })
     </div>
 
+    @Html.ActionLink("Back", "Back", "User", null, new { @class = "btn btn-secondary" })
+
 </div>
-
-<br />
-
-@Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
-

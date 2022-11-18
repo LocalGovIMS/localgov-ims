@@ -888,7 +888,7 @@
     <Content Include="Views\MethodOfPayment\Details.cshtml" />
     <Content Include="Views\MethodOfPayment\Edit.cshtml" />
     <Content Include="Views\MethodOfPayment\List.cshtml" />
-    <Content Include="Views\User\_SearchUser.cshtml" />
+    <Content Include="Views\User\_Search.cshtml" />
     <Content Include="Views\Payment\Cheque.cshtml" />
     <Content Include="Views\UserTemplate\Edit.cshtml" />
     <Content Include="Views\Vat\Details.cshtml" />

@@ -7,90 +7,99 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create user
-        <div class="sub header">
-            User details
-        </div>
-    </h1>
-}
+@section Header { Create user }
+
+@section Subheader { User details }
 
 @using (Html.BeginForm("Create", "User", FormMethod.Post))
 {
-    <div class="ui form">
-        @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.UserId)
 
-        <div class="six wide field">
-            @Html.LabelFor(m => m.UserName)
-            @Html.EditorFor(m => m.UserName)
-        </div>
+    <div>
 
-        <div class="six wide field">
-            @Html.ValidationMessageFor(m => m.UserName)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DisplayName)
-            @Html.EditorFor(m => m.DisplayName)
-        </div>
-
-        <div class="four wide field">
-            @Html.ValidationMessageFor(m => m.DisplayName)
-        </div>
-
-        <div class="six wide field">
-            @Html.LabelFor(m => m.OfficeCode)
-            <div class="ui search selection dropdown mop-dropdown">
-                @Html.HiddenFor(x => x.OfficeCode)
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select office code</div>
-                <div class="menu">
-                    @foreach (var item in Model.Offices.Items)
-                    {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
-                    }
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.UserName)
                 </div>
             </div>
         </div>
-        <div class="eight wide field">
-            @Html.ValidationMessageFor(m => m.OfficeCode)
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </div>
+            </div>
         </div>
 
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.LastLogin)
-            @Html.DisplayFor(m => m.LastLogin)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.OfficeCode, new { @class = "form-label" })
+                <select id="OfficeCode" name="OfficeCode">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Offices.Items)
+                    {
+                        <option class="item" value="@item.Value" @(!string.IsNullOrEmpty(Model.OfficeCode) && Model.OfficeCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.OfficeCode)
+                </div>
+            </div>
         </div>
 
-        <div class="eight wide field">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ExpiryDays, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ExpiryDays, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ExpiryDays)
+                </div>
+            </div>
         </div>
 
-        <div class="two wide field">
-            @Html.LabelFor(m => m.ExpiryDays)
-            @Html.EditorFor(m => m.ExpiryDays)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Disabled, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.Disabled, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Disabled)
+                </div>
+            </div>
         </div>
 
-        <div class="form__element--error">
-            @Html.ValidationMessageFor(m => m.ExpiryDays)
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "User", null, new { @class = "btn btn-secondary" })
         </div>
-
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.Disabled)
-            @Html.EditorFor(m => m.Disabled)
-        </div>
-
-        <div class="form__element--error">
-            @Html.ValidationMessageFor(m => m.Disabled)
-        </div>
-        
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "User", null, new { @class = "ui button" })
 
     </div>
+}
 
+
+@section Scripts {
     <script type="text/javascript">
-        $(".ui.dropdown").dropdown();
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select office code',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#OfficeCode')
+            });
+
+        });
     </script>
 }
