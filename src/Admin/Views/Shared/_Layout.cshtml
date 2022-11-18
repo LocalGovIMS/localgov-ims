@@ -53,12 +53,18 @@
                     @RenderSection("Messages", required: false)
                     <div class="d-flex flex-wrap mb-3">
                         <div class="me-auto p-0">
-                            <h1>
-                                @RenderSection("Header", required: false)
-                            </h1>
-                            <h2>
-                                @RenderSection("Subheader", required: false)
-                            </h2>
+                            @if (IsSectionDefined("Header"))
+                            {
+                                <h1>
+                                    @RenderSection("Header", required: false)
+                                </h1>
+                            }
+                            @if (IsSectionDefined("Subheader"))
+                            { 
+                                <h2>
+                                    @RenderSection("Subheader", required: false)
+                                </h2>
+                            }
                         </div>
                         <div class="order-lg-2 p-0">
                             @RenderSection("Actions", required: false)
