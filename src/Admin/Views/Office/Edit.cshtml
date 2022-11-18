@@ -7,7 +7,7 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header { @Model.Code }
+@section Header { @Model.Name }
 
 @section Subheader { Office details }
 

@@ -39,7 +39,7 @@
     <div class="row mb-3">
         <div class="col-12 col-sm-6 col-md-5 col-lg-4">
             @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", type = "datetime-local" })
+            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.StartDate)
             </div>
@@ -48,7 +48,7 @@
     <div class="row mb-3">
         <div class="col-12 col-sm-6 col-md-5 col-lg-4">
             @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", type = "datetime-local" })
+            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.EndDate)
             </div>
