@@ -3,88 +3,57 @@
 @using (Html.BeginForm("Search", "Import", FormMethod.Get))
 {
 
-    <div class="ui segment">
-        <div class="ui form">
-            <div class="six fields">
-                <div class="field">
-                    @Html.LabelFor(m => m.DataType)
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.DataType, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select import type</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.DataTypes.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.ImportTypeId)
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.ImportTypeId, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select import type</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.ImportTypes.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.StatusId)
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.StatusId, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select current status</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Statuses.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.StartDate)
-                    <div class="ui input left icon" style="min-width: 160px;">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.EndDate)
-                    <div class="ui input left icon" style="min-width: 160px;">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
-                    </div>
-                </div>
-                <div class="field">
-                    <label>&nbsp;</label>
-                    <button class="ui icon blue button" tabindex="0" type="submit">
-                        <i class="search icon"></i> Search
-                    </button>
-                </div>
-            </div>
+<div>
+
+    <div class="row">
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">            
+            @Html.LabelFor(m => m.DataType, new { @class = "form-label" })
+            <select id="DataType" name="DataType">
+                <option value="">None</option>
+                @foreach (var item in Model.DataTypes.Items)
+                {
+                    <option class="item" value="@item.Value" @(Model.DataType.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.ImportTypeId, new { @class = "form-label" })
+            <select id="ImportTypeId" name="ImportTypeId">
+                <option value="">None</option>
+                @foreach (var item in Model.ImportTypes.Items)
+                {
+                    <option class="item" value="@item.Value" @(Model.ImportTypeId.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.StatusId, new { @class = "form-label" })
+            <select id="StatusId" name="StatusId">
+                <option value="">None</option>
+                @foreach (var item in Model.Statuses.Items)
+                {
+                    <option class="item" value="@item.Value" @(Model.StatusId.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", size = 10, placeholder = "Start date", type = "date" })
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", size = 10, placeholder = "End date", type = "date" })
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-xxl-6 pt-3 offset-md-8 offset-xxl-0 gap-2 d-flex align-self-end justify-content-end">
+            <button class="btn btn-primary search" tabindex="0" type="submit">
+                <i class="search icon"></i> Search
+            </button>
+            <a href="@Url.Action("Search", "Import")" class="btn btn-secondary" id="reset">
+                <i class="undo icon"></i> Reset search
+            </a>
         </div>
     </div>
+</div>
 
 }

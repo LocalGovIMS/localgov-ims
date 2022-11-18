@@ -98,18 +98,17 @@ else
 
 @section Scripts {
     <script type="text/javascript">$(document).ready(function () {
+        accessibleAutocomplete.enhanceSelectElement({
+            displayMenu: 'overlay',
+            autoSelect: false,
+            confirmOnBlur: false,
+            showAllValues: true,
+            defaultValue: '',
+            preserveNullOptions: true,
+            placeholder: 'Select import type',
+            dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+            selectElement: document.querySelector('#ImportType')
+        });
 
-            accessibleAutocomplete.enhanceSelectElement({
-                displayMenu: 'overlay',
-                autoSelect: false,
-                confirmOnBlur: false,
-                showAllValues: true,
-                defaultValue: '',
-                preserveNullOptions: true,
-                placeholder: 'Select import type',
-                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-                selectElement: document.querySelector('#ImportType')
-            });
-
-        });</script>
+    });</script>
 }
