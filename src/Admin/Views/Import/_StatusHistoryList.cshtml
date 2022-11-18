@@ -2,37 +2,39 @@
 
 @if (Model.Any())
 {
-    <table class="ui celled table striped teal">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Created date
-                </th>
-                <th scope="col">
-                    Created by
-                </th>
-                <th scope="col">
-                    Status
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.CreatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.CreatedByUserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.Status)
-                    </td>
+                    <th scope="col">
+                        Created date
+                    </th>
+                    <th scope="col">
+                        Created by
+                    </th>
+                    <th scope="col">
+                        Status
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.CreatedByUserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Status)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {

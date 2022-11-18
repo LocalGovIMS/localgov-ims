@@ -56,7 +56,7 @@
                                 <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
                             }
                         </td>
-                        <td>
+                        <td class="text-end">
                             @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "btn btn-secondary" })
                         </td>
                     </tr>

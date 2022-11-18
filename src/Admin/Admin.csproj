@@ -1002,7 +1002,6 @@
     <Content Include="Views\FundMessage\Edit.cshtml" />
     <Content Include="Views\FundMessage\List.cshtml" />
     <Content Include="Views\FundMessage\_Search.cshtml" />
-    <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\ImportType\Create.cshtml" />
     <Content Include="Views\ImportType\Details.cshtml" />
     <Content Include="Views\ImportType\Edit.cshtml" />

@@ -3,90 +3,105 @@
     ViewBag.Title = "Import";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.ImportTypeName - @Model.CreatedDate
-        @if (Model.DataType == ImportDataTypeEnum.Transaction)
-        {
-            @Html.ActionLink("Transactions", "ListForTransactionImport", "Transaction", new { ImportId = Model.Id }, new { @class = "ui button blue right floated" })
-        }
-        <div class="sub header">
-            Transaction import details
-        </div>
-    </h1>
+
+@section Header { @Model.ImportTypeName - @Model.CreatedDate }
+
+@section Subheader { Transaction import details }
+
+@section Actions {
+    @if (Model.DataType == ImportDataTypeEnum.Transaction)
+    {
+        @Html.ActionLink("Transactions", "ListForTransactionImport", "Transaction", new { ImportId = Model.Id }, new { @class = "btn btn-secondary" })
+    }
 }
 
-<div class="ui grid stackable">
+<div>
 
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.DataType)
-            <br />
-            @Html.DisplayTextFor(m => m.DataType)
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.DataType, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.DataType)
+            </div>
         </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.ImportTypeName)
-            <br />
-            @Html.DisplayFor(m => m.ImportTypeName)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.ImportTypeName, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.ImportTypeName)
+            </div>
         </div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.CreatedDate)
-            <br />
-            @Html.DisplayFor(m => m.CreatedDate)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.CreatedDate, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CreatedDate)
+            </div>
         </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.CreatedByUserName)
-            <br />
-            @Html.DisplayFor(m => m.CreatedByUserName)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.CreatedByUserName, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CreatedByUserName)
+            </div>
         </div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Notes)
-            <br />
-            @Html.DisplayFor(m => m.Notes)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.NumberOfRows, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.NumberOfRows)
+            </div>
         </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.NumberOfRows)
-            <br />
-            @Html.DisplayFor(m => m.NumberOfRows)
-        </div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.CurrentStatus)
-            <br />
-            @Html.DisplayFor(m => m.CurrentStatus)
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            @Html.LabelFor(m => m.CurrentStatus, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CurrentStatus)
+            </div>
         </div>
         @if (Model.ReversedDate.HasValue)
         {
-            <div class="ui vertical segment">
-                @Html.LabelFor(m => m.ReversedDate)
-                <br />
-                @Html.DisplayFor(m => m.ReversedDate)
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.ReversedDate, new { @class = "form-label fw-bold" })
+                <div class="form-label">
+                    @Html.DisplayFor(m => m.ReversedDate)
+                </div>
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Notes))
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.Notes, new { @class = "form-label fw-bold" })
+                <div class="form-label">
+                    @Html.DisplayFor(m => m.Notes)
+                </div>
             </div>
         }
     </div>
 
 </div>
-<div class="ui vertical segment">
-    <h3>
-        Status History
-    </h3>
+
+<div class="d-flex flex-wrap mb-3">
+    <div class="me-auto p-0">
+        <h2>
+            Status history
+        </h2>
+    </div>
+</div>
+
+<div class="mb-3">
     @Html.Partial("_StatusHistoryList", Model.StatusHistories)
 </div>
 
-<div class="ui vertical segment">
-    <h3>
-        Event Log
-    </h3>
+<div class="d-flex flex-wrap mb-3">
+    <div class="me-auto p-0">
+        <h2>
+            Event Log
+        </h2>
+    </div>
+</div>
+
+<div class="mb-3">
     @Html.Partial("_EventLogList", Model.EventLogs)
 </div>
 
-<br />
-
-@Html.ActionLink("Back", "Back", "Import", null, new { @class = "ui button" })
+<div>
+    @Html.ActionLink("Back", "Back", "Import", null, new { @class = "btn btn-secondary" })
+</div>
 
 

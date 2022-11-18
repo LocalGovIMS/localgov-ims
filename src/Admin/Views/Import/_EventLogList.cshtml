@@ -2,37 +2,39 @@
 
 @if (Model.Any())
 {
-    <table class="ui celled table striped teal">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Created date
-                </th>
-                <th scope="col">
-                    Type
-                </th>
-                <th scope="col">
-                    Message
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @item.CreatedDate
-                    </td>
-                    <td>
-                        @item.Type
-                    </td>
-                    <td>
-                        @item.Message
-                    </td>
+                    <th scope="col">
+                        Created date
+                    </th>
+                    <th scope="col">
+                        Type
+                    </th>
+                    <th scope="col">
+                        Message
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="min-width:175px;">
+                            @item.CreatedDate
+                        </td>
+                        <td>
+                            @item.Type
+                        </td>
+                        <td>
+                            @item.Message
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
