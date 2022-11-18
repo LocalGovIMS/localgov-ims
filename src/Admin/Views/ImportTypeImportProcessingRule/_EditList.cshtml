@@ -27,7 +27,7 @@
                         <td>
                             @item.ImportProcessingRule.Description
                         </td>
-                        <td style="width:20%;" class="text-end">
+                        <td class="text-end">
                             @Html.ActionLink("Edit", "Edit", "ImportTypeImportProcessingRule", new { id = item.Id }, new { @class = "btn btn-secondary" })
                             @Html.ActionLink("Delete", "Delete", "ImportTypeImportProcessingRule", new { id = item.Id, ImportTypeId = item.ImportTypeId }, new { @class = "btn btn-secondary delete-import-type-import-processing-rule" })
                         </td>
