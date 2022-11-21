@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Web.Mvc;
 
 namespace Admin.Models.Suspense
 {
@@ -20,6 +21,8 @@ namespace Admin.Models.Suspense
         public decimal? Amount { get; set; }
 
         public SuspenseAllocationStatusEnum Status { get; set; }
+
+        public SelectList Statuses { get; set; }
 
         public int Page { get; set; }
     }

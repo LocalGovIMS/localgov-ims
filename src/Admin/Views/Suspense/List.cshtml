@@ -147,5 +147,19 @@ else
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/app/suspense")
+<script type="text/javascript">
+    $(document).ready(function () {
+        accessibleAutocomplete.enhanceSelectElement({
+            displayMenu: 'overlay',
+            autoSelect: false,
+            confirmOnBlur: false,
+            showAllValues: true,
+            defaultValue: '',
+            preserveNullOptions: true,
+            placeholder: 'Select status',
+            dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+            selectElement: document.querySelector('#Status')
+        });
+
+    });</script>
 }
