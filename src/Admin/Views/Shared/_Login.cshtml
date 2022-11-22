@@ -1,17 +1,16 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        <div>
-            @Html.AntiForgeryToken()
-            <div class="float-start me-3 fw-bold">
-                @User.Identity.Name
-            </div>
-            <div class="float-start me-3">
-                <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
-            </div>
-            @{Html.RenderPartial("_Environment");}
+    <div>
+        @Html.AntiForgeryToken()
+        <div class="float-start me-3 fw-bold">
+            @User.Identity.Name
         </div>
-    }
+        <div class="float-start me-3">
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+        </div>
+        @{Html.RenderPartial("_Environment");}
+    </div>
 }
+

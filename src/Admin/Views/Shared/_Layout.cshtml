@@ -41,14 +41,17 @@
 
             <div class="col-12 col-lg-10 col-xxxl-11">
                 <main>
-                    <div class="d-flex flex-wrap-reverse">
-                        <div class="me-auto pt-2 pe-2 pb-2">
-                            @{ Html.RenderPartial("_Breadcrumb", new NavigationManager().NavigationItems); }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="d-flex flex-wrap-reverse">
+                            <div class="me-auto pt-2 pe-2 pb-2">
+                                @{ Html.RenderPartial("_Breadcrumb", new NavigationManager().NavigationItems); }
+                            </div>
+                            <div class="order-lg-2 pt-2 pb-2">
+                                @{ Html.RenderPartial("_Login"); }
+                            </div>
                         </div>
-                        <div class="order-lg-2 pt-2 pb-2">
-                            @{ Html.RenderPartial("_Login"); }
-                        </div>
-                    </div>
+                    }
                     @{ Html.RenderAction("GetSystemMessages", "Home");}
                     @RenderSection("Messages", required: false)
                     <div class="d-flex flex-wrap mb-3">
@@ -60,7 +63,7 @@
                                 </h1>
                             }
                             @if (IsSectionDefined("Subheader"))
-                            { 
+                            {
                                 <h2>
                                     @RenderSection("Subheader", required: false)
                                 </h2>
