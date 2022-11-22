@@ -3,51 +3,56 @@
 @model Admin.Models.Suspense.ListViewModel
 @{
     ViewBag.Title = "Suspense";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Suspense
-        <div class="sub header">
-            Unallocated suspense transactions
-        </div>
-    </h1>
-}
+@section Header { Suspense }
 
-<div class="page-actions page-actions--fix">
+@section Subheader { Suspense transactions }
+
+@section Actions {
     @if (User.IsInRole(Role.Finance))
     {
-        <a class="ui button blue right floated journal" id="journal">
+        <a class="btn btn-primary journal" id="journal">
             <i class="exchange outline icon"></i> Create journal <span class="journal-button-value"></span>
         </a>
-        <a class="ui button green right floated credit-notes" id="credit-notes">
+        <a class="btn btn-primary credit-notes" id="credit-notes">
             <i class="add outline icon"></i> Add credit notes <span class="credit-button-value"></span>
         </a>
     }
-    <a href="@Url.Action("Search", "Suspense")" class="ui button right floated" id="reset">
-        <i class="undo icon"></i> Reset
-    </a>
-</div>
+}
 
-@Html.Partial("_Search", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    @*TODO: Remove Inline styling.
-        I don't like this inline styling - need sortng with CSS really.
-        It's here to mimik the Transction Search, whose results are shown in a table, rather than a div, and the table provides a margin *@
-    <div class="ui form" style="margin-top:1em;">
-        <table class="ui celled table striped table-fixed">
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
             <thead>
                 <tr>
-                    <th scope="col" style="width: 5%"></th>
-                    <th scope="col" style="width: 15%">Date and time</th>
-                    <th scope="col">Narrative</th>
-                    <th scope="col">Latest note</th>
-                    <th scope="col">Account number</th>
-                    <th scope="col" style="width: 10%">Amount (£)</th>
-                    <th scope="col" style="width: 20%"></th>
+                    <th scope="col">
+                        <span class="visually-hidden">Select</span>
+                    </th>
+                    <th scope="col">
+                        Date and time
+                    </th>
+                    <th scope="col">
+                        Narrative
+                    </th>
+                    <th scope="col">
+                        Latest note
+                    </th>
+                    <th scope="col">
+                        Account number
+                    </th>
+                    <th scope="col">
+                        Amount (£)
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -87,11 +92,11 @@
                         <td style="text-align: right">
                             @Html.ToCurrency(item.Item.Amount)
                         </td>
-                        <td style="text-align: center;">
-                            @Html.ActionLink("View details", "Details", "Suspense", new { id = item.Item.Id }, new { @class = "ui button" })
+                        <td class="text-end">
+                            @Html.ActionLink("View details", "Details", "Suspense", new { id = item.Item.Id }, new { @class = "btn btn-secondary" })
                             @if (User.IsInRole(Role.Finance))
                             {
-                                @Html.ActionLink("View notes", "List", "SuspenseNote", new { id = item.Item.Id }, new { @class = "ui button" })
+                                @Html.ActionLink("View notes", "List", "SuspenseNote", new { id = item.Item.Id }, new { @class = "btn btn-secondary" })
                             }
                         </td>
                     </tr>
@@ -147,19 +152,19 @@ else
 }
 
 @section Scripts {
-<script type="text/javascript">
-    $(document).ready(function () {
-        accessibleAutocomplete.enhanceSelectElement({
-            displayMenu: 'overlay',
-            autoSelect: false,
-            confirmOnBlur: false,
-            showAllValues: true,
-            defaultValue: '',
-            preserveNullOptions: true,
-            placeholder: 'Select status',
-            dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-            selectElement: document.querySelector('#Status')
-        });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select status',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#Status')
+            });
 
-    });</script>
+        });</script>
 }

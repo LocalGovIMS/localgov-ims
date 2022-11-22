@@ -11,7 +11,9 @@
     @Html.ActionLink("Create user", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
-@Html.Partial("_Search", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
