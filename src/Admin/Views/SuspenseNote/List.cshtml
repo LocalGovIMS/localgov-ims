@@ -3,49 +3,34 @@
     ViewBag.Title = "Suspense notes";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Suspense notes
-        @Html.ActionLink("Create note", "Create", new { id = Model.SuspenseId }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            All notes
-        </div>
-    </h1>
+@section Header { Suspense notes }
+
+@section Subheader { All notes }
+
+@section Actions {
+    @Html.ActionLink("Create note", "Create", new { id = Model.SuspenseId }, new { @class = "btn btn-primary" })
 }
 
 @if (Model.Items != null && Model.Items.Count > 0)
 {
-    <div class="ui feed">
-
+    <ol class="list-group mb-3">
         @foreach (var item in Model.Items.OrderByDescending(x => x.CreatedAt))
         {
-            <div class="event">
-                <div class="content">
-                    <div class="summary">
-                        @item.CreatedByUser.DisplayName added a note on
-                        <div class="date">
-                            @item.CreatedAt
-                        </div>
-                    </div>
-                    <div class="extra text">
-                        @item.Note
-                    </div>
+            <li class="list-group-item align-items-start">
+                <div class="w-100 mb-2">
+                    <span class="me-2 fw-bold">@item.CreatedByUser.DisplayName</span>
+                    <small>@item.CreatedAt</small>
                 </div>
-            </div>
+                <p class="mb-1">@item.Note</p>
+            </li>
         }
-
-    </div>
+    </ol>
 }
 else
 {
-    <div class="ui info message">
-        <div class="header">
-            No notes
-        </div>
-        <p>
-            There are no notes for this suspense item
-        </p>
-    </div>
+    Html.RenderPartial("_NothingSpecified", "notes");
 }
 
-@Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "ui button" })
+<div>
+    @Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "btn btn-secondary" })
+</div>
