@@ -286,8 +286,6 @@
     <Compile Include="Classes\Commands\Vat\CreateCommand.cs" />
     <Compile Include="Classes\Commands\Vat\EditCommand.cs" />
     <Compile Include="Classes\Commands\Role\EditCommand.cs" />
-    <Compile Include="Classes\Commands\Template\CreateCommand.cs" />
-    <Compile Include="Classes\Commands\Template\EditCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\EmailReceiptCommand.cs" />
     <Compile Include="Classes\Commands\Validation\ValidateTransferItemCommand.cs" />
     <Compile Include="Classes\Commands\Transaction\UndoTransferCommand.cs" />
@@ -422,7 +420,6 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IImportProcessingRuleControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IOfficeControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\SystemMessageControllerDependencies.cs" />
-    <Compile Include="Controllers\Dependencies\TemplateControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\PaymentControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\RoleControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\AccountHolderControllerDependencies.cs" />
@@ -472,8 +469,6 @@
     <Compile Include="Classes\ViewModelBuilders\Role\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Role\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Role\ListViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\Template\EditViewModelBuilder.cs" />
-    <Compile Include="Classes\ViewModelBuilders\Template\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Transaction\RefundViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Transaction\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\Transaction\ListViewModelBuilder.cs" />
@@ -526,7 +521,6 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SystemMessageController.cs" />
-    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\FundController.cs" />
@@ -548,7 +542,6 @@
     <Compile Include="Controllers\Dependencies\Interfaces\IRoleControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IAccountHolderControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ISystemMessageControllerDependencies.cs" />
-    <Compile Include="Controllers\Dependencies\Interfaces\ITemplateControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IEReturnControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ITransactionControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\ITransferControllerDependencies.cs" />
@@ -798,7 +791,6 @@
     <Content Include="Scripts\App\Suspense\journal.js" />
     <Content Include="Scripts\App\Suspense\list.js" />
     <Content Include="Scripts\App\Suspense\0_shared.js" />
-    <Content Include="Scripts\App\Template\edit.js" />
     <Content Include="Scripts\App\Transaction\email-receipt.js" />
     <Content Include="Scripts\App\Transaction\email-receipt.min.js">
       <DependentUpon>email-receipt.js</DependentUpon>
@@ -902,9 +894,6 @@
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Transaction\_PaymentsListPrint.cshtml" />
     <Content Include="Views\Transfer\Index.cshtml" />
-    <Content Include="Views\Template\List.cshtml" />
-    <Content Include="Views\Template\Create.cshtml" />
-    <Content Include="Views\Template\Edit.cshtml" />
     <Content Include="Views\Home\AccountDisabled.cshtml" />
     <Content Include="Views\EReturn\List.cshtml" />
     <Content Include="Views\EReturn\Create.cshtml" />

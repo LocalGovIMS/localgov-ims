@@ -49,9 +49,6 @@ namespace Admin
             bundles.Add(new ScriptBundle("~/bundles/app/payment")
                 .IncludeDirectory("~/Scripts/App/Payment/", "*.js", true));
 
-            bundles.Add(new ScriptBundle("~/bundles/app/template")
-                .IncludeDirectory("~/Scripts/App/Template/", "*.js", true));
-
             bundles.Add(new ScriptBundle("~/bundles/app/suspense")
                 .IncludeDirectory("~/Scripts/App/Suspense/", "*.js", true));
 

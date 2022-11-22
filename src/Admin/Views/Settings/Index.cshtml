@@ -19,12 +19,7 @@
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <a href="@Url.Action("List", "Template")" class="list-group-item list-group-item-action">eReturn templates</a>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <a href="@Url.Action("List", "EReturnTemplate")" class="list-group-item list-group-item-action">eReturn templates - New</a>
+        <a href="@Url.Action("List", "EReturnTemplate")" class="list-group-item list-group-item-action">eReturn templates</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))

@@ -260,8 +260,6 @@
     <Compile Include="Classes\Commands\Role\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Suspense\JournalCommandTests.cs" />
     <Compile Include="Classes\Commands\Suspense\SaveNoteCommandTests.cs" />
-    <Compile Include="Classes\Commands\Template\CreateCommandTests.cs" />
-    <Compile Include="Classes\Commands\Template\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\EmailReceiptCommandTests.cs" />
     <Compile Include="Classes\Commands\Transaction\RefundCommandTests.cs" />
     <Compile Include="Classes\Commands\Validation\ValidateTransferItemCommandTests.cs" />
@@ -428,7 +426,6 @@
     <Compile Include="Controllers\Dependencies\UserFundGroupControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\UserControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\TransactionControllerDependenciesTests.cs" />
-    <Compile Include="Controllers\Dependencies\TemplateControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\RoleControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\PaymentControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\FundGroupControllerDependenciesTests.cs" />
@@ -655,12 +652,6 @@
     <Compile Include="Controllers\Suspense\List\Get.cs" />
     <Compile Include="Controllers\Suspense\Search\Get.cs" />
     <Compile Include="Controllers\Suspense\SubmitTransfers\Post.cs" />
-    <Compile Include="Controllers\Template\Create\Get.cs" />
-    <Compile Include="Controllers\Template\Create\Post.cs" />
-    <Compile Include="Controllers\Template\Edit\Get.cs" />
-    <Compile Include="Controllers\Template\Edit\Post.cs" />
-    <Compile Include="Controllers\Template\List\Get.cs" />
-    <Compile Include="Controllers\Template\ConstructorTests.cs" />
     <Compile Include="Controllers\Transaction\Activity\Get.cs" />
     <Compile Include="Controllers\Transaction\ConstructorTests.cs" />
     <Compile Include="Controllers\Transaction\EmailReceipt\Post.cs" />

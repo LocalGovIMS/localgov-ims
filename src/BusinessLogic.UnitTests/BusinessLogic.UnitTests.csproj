@@ -436,10 +436,8 @@
     <Compile Include="Services\Role\GetAllRolesTests.cs" />
     <Compile Include="Services\Role\UpdateTests.cs" />
     <Compile Include="Services\Template\BaseTest.cs" />
-    <Compile Include="Services\Template\CreateTests.cs" />
     <Compile Include="Services\Template\GetAllTemplatesTests.cs" />
     <Compile Include="Services\Template\GetTemplateTests.cs" />
-    <Compile Include="Services\Template\UpdateTests.cs" />
     <Compile Include="Services\TransactionJournal\BaseTransactionJournalTest.cs" />
     <Compile Include="Services\TransactionJournal\CreateJournalTests.cs" />
     <Compile Include="Services\TransactionJournal\TransferTests.cs" />

@@ -207,11 +207,6 @@ namespace Admin
                 .RegisterType<IModelCommand<ViewModels.SystemMessage.EditViewModel>, Commands.SystemMessage.CreateCommand>("Create")
                 .RegisterType<IModelCommand<ViewModels.SystemMessage.EditViewModel>, Commands.SystemMessage.EditCommand>("Edit")
 
-                .RegisterType<IModelBuilder<ViewModels.Template.ListViewModel, int>, ViewModelBuilders.Template.ListViewModelBuilder>()
-                .RegisterType<IModelBuilder<ViewModels.Template.EditViewModel, int>, ViewModelBuilders.Template.EditViewModelBuilder>()
-                .RegisterType<IModelCommand<ViewModels.Template.EditViewModel>, Commands.Template.CreateCommand>("Create")
-                .RegisterType<IModelCommand<ViewModels.Template.EditViewModel>, Commands.Template.EditCommand>("Edit")
-
                 .RegisterType<IModelBuilder<ViewModels.Transaction.ListViewModel, ViewModels.Transaction.SearchCriteria>, ViewModelBuilders.Transaction.ListViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Transaction.DetailsViewModel, string>, ViewModelBuilders.Transaction.DetailsViewModelBuilder>()
                 .RegisterType<IModelBuilder<ViewModels.Transaction.TransferViewModel, string>, ViewModelBuilders.Transaction.TransferViewModelBuilder>()
@@ -369,7 +364,6 @@ namespace Admin
                 .RegisterType<ISuspenseControllerDependencies, SuspenseControllerDependencies>()
                 .RegisterType<ISuspenseNoteControllerDependencies, SuspenseNoteControllerDependencies>()
                 .RegisterType<ISystemMessageControllerDependencies, SystemMessageControllerDependencies>()
-                .RegisterType<ITemplateControllerDependencies, TemplateControllerDependencies>()
                 .RegisterType<ITransactionControllerDependencies, TransactionControllerDependencies>()
                 .RegisterType<ITransferControllerDependencies, TransferControllerDependencies>()
                 .RegisterType<IUserControllerDependencies, UserControllerDependencies>()
