@@ -208,6 +208,11 @@
     <Compile Include="Classes\Commands\CheckDigitConfiguration\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\CreateCommand.cs" />
     <Compile Include="Classes\Commands\CheckDigitConfiguration\EditCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnTemplate\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnTemplate\EditCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnTemplateRow\CreateCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnTemplateRow\DeleteCommand.cs" />
+    <Compile Include="Classes\Commands\EReturnTemplateRow\EditCommand.cs" />
     <Compile Include="Classes\Commands\MetadataKey\CreateCommand.cs" />
     <Compile Include="Classes\Commands\MetadataKey\DeleteCommand.cs" />
     <Compile Include="Classes\Commands\MetadataKey\EditCommand.cs" />
@@ -303,6 +308,13 @@
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\CheckDigitConfiguration\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplate\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplate\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplate\ListViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplateRow\CreateViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplateRow\DetailsViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplateRow\EditViewModelBuilder.cs" />
+    <Compile Include="Classes\ViewModelBuilders\EReturnTemplateRow\ListViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\MetadataKey\DetailsViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\MetadataKey\EditViewModelBuilder.cs" />
     <Compile Include="Classes\ViewModelBuilders\MetadataKey\ListViewModelBuilder.cs" />
@@ -365,6 +377,10 @@
     <Compile Include="Controllers\Dependencies\BaseControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\AccountReferenceValidatorControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\CheckDigitConfigurationControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\EReturnTemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\EReturnTemplateRowControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IEReturnTemplateControllerDependencies.cs" />
+    <Compile Include="Controllers\Dependencies\Interfaces\IEReturnTemplateRowControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\FundMessageControllerDependencies.cs" />
     <Compile Include="Controllers\Dependencies\Interfaces\IMetadataKeyControllerDependencies.cs" />
@@ -482,6 +498,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EReturnController.cs" />
     <Compile Include="Controllers\CheckDigitConfigurationController.cs" />
+    <Compile Include="Controllers\EReturnTemplateController.cs" />
+    <Compile Include="Controllers\EReturnTemplateRowController.cs" />
     <Compile Include="Controllers\MetadataKeyController.cs" />
     <Compile Include="Controllers\FundMessageController.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportTypeController.cs" />
@@ -566,8 +584,16 @@
     <Compile Include="Models\EReturn\SearchCriteria.cs" />
     <Compile Include="Models\CheckDigitConfiguration\DetailsViewModel.cs" />
     <Compile Include="Models\CheckDigitConfiguration\EditViewModel.cs" />
+    <Compile Include="Models\EReturnTemplate\DetailsViewModel.cs" />
+    <Compile Include="Models\EReturnTemplate\EditViewModel.cs" />
+    <Compile Include="Models\EReturnTemplate\ListViewModel.cs" />
+    <Compile Include="Models\EReturnTemplate\SearchCriteria.cs" />
     <Compile Include="Models\FundGroup\EditViewModel.cs" />
     <Compile Include="Models\FundGroup\DetailsViewModel.cs" />
+    <Compile Include="Models\EReturnTemplateRow\DetailsViewModel.cs" />
+    <Compile Include="Models\EReturnTemplateRow\EditViewModel.cs" />
+    <Compile Include="Models\EReturnTemplateRow\ListViewModel.cs" />
+    <Compile Include="Models\EReturnTemplateRow\SearchCriteria.cs" />
     <Compile Include="Models\MetadataKey\DetailsViewModel.cs" />
     <Compile Include="Models\MetadataKey\EditViewModel.cs" />
     <Compile Include="Models\MetadataKey\ListViewModel.cs" />
@@ -1058,6 +1084,15 @@
     <Content Include="Views\Shared\_Environment.cshtml" />
     <Content Include="Views\Shared\_NoResultsMessage.cshtml" />
     <Content Include="Views\Shared\_NothingSpecified.cshtml" />
+    <Content Include="Views\EReturnTemplate\_Search.cshtml" />
+    <Content Include="Views\EReturnTemplate\Create.cshtml" />
+    <Content Include="Views\EReturnTemplate\Details.cshtml" />
+    <Content Include="Views\EReturnTemplate\Edit.cshtml" />
+    <Content Include="Views\EReturnTemplate\List.cshtml" />
+    <Content Include="Views\EReturnTemplateRow\_EditList.cshtml" />
+    <Content Include="Views\EReturnTemplateRow\_List.cshtml" />
+    <Content Include="Views\EReturnTemplateRow\Create.cshtml" />
+    <Content Include="Views\EReturnTemplateRow\Edit.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

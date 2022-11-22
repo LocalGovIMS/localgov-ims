@@ -1,0 +1,88 @@
+﻿@model Admin.Models.EReturnTemplate.EditViewModel
+@{
+    ViewBag.Title = "Edit eReturn template";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header { @Model.Name }
+
+@section Subheader { eReturn template details }
+
+@using (Html.BeginForm("Edit", "EReturnTemplate", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AllowCash, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AllowCash, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AllowCash)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AllowCheque, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AllowCheque, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AllowCheque)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AllowPdq, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AllowPdq, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AllowPdq)
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap mb-3">
+            <div class="me-auto p-0">
+                <h2>
+                    Rows
+                </h2>
+            </div>
+            <div class="order-lg-2 p-0">
+                @Html.ActionLink("Add row", "Create", "EReturnTemplateRow", new { eReturnTemplateId = Model.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            @Html.Action("_EditListForEReturnTemplate", "EReturnTemplateRow", new { id = Model.Id })
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
+        </div>
+
+    </div>
+
+}

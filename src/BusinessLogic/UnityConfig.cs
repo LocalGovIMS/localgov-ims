@@ -29,6 +29,8 @@ namespace BusinessLogic
                 .RegisterType<IAccountHolderService, AccountHolderService>()
                 .RegisterType<IEReturnService, EReturnService>()
                 .RegisterType<IEReturnStatusService, EReturnStatusService>()
+                .RegisterType<IEReturnTemplateService, EReturnTemplateService>()
+                .RegisterType<IEReturnTemplateRowService, EReturnTemplateRowService>()
                 .RegisterType<IEReturnTypeService, EReturnTypeService>()
                 .RegisterType<IEReturnNoteService, EReturnNoteService>()
                 .RegisterType<IFundGroupService, FundGroupService>()

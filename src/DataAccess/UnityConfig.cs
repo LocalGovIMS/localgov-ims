@@ -23,6 +23,8 @@ namespace DataAccess
                 .RegisterType<IEReturnCashRepository, EReturnCashRepository>()
                 .RegisterType<IEReturnChequeRepository, EReturnChequeRepository>()
                 .RegisterType<IEReturnStatusRepository, EReturnStatusRepository>()
+                .RegisterType<IEReturnTemplateRepository, EReturnTemplateRepository>()
+                .RegisterType<IEReturnTemplateRowRepository, EReturnTemplateRowRepository>()
                 .RegisterType<IEReturnTypeRepository, EReturnTypeRepository>()
                 .RegisterType<IFundGroupFundRepository, FundGroupFundRepository>()
                 .RegisterType<IFundGroupRepository, FundGroupRepository>()

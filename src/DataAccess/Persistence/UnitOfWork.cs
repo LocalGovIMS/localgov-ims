@@ -28,6 +28,8 @@ namespace DataAccess.Persistence
         public IEReturnCashRepository EReturnCashes { get; private set; }
         public IEReturnChequeRepository EReturnCheques { get; private set; }
         public IEReturnStatusRepository EReturnStatuses { get; private set; }
+        public IEReturnTemplateRepository EReturnTemplates { get; private set; }
+        public IEReturnTemplateRowRepository EReturnTemplateRows { get; private set; }
         public IEReturnTypeRepository EReturnTypes { get; private set; }
         public IRepository<EReturnNote> EReturnNotes { get; private set; }
         public IFundRepository Funds { get; private set; }
@@ -79,6 +81,8 @@ namespace DataAccess.Persistence
             IEReturnCashRepository eReturnCashesRepository,
             IEReturnChequeRepository eReturnChequesRepository,
             IEReturnStatusRepository eReturnStatusRepository,
+            IEReturnTemplateRepository eReturnTemplates,
+            IEReturnTemplateRowRepository eReturnTemplateRows,
             IEReturnTypeRepository eReturnTypeRepository,
             IRepository<EReturnNote> eReturnNotesRepository,
             IFundRepository fundRepository,
@@ -131,6 +135,8 @@ namespace DataAccess.Persistence
             EReturnCashes = eReturnCashesRepository;
             EReturnCheques = eReturnChequesRepository;
             EReturnStatuses = eReturnStatusRepository;
+            EReturnTemplates = eReturnTemplates;
+            EReturnTemplateRows = eReturnTemplateRows;
             EReturnTypes = eReturnTypeRepository;
             EReturnNotes = eReturnNotesRepository;
             Funds = fundRepository;
