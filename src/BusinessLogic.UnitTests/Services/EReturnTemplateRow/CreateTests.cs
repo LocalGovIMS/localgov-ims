@@ -92,7 +92,7 @@ namespace BusinessLogic.UnitTests.Services.EReturnTemplateRow
         public void CheckPermissions()
         {
             // Arrange
-            var roles = new List<string>() { BusinessLogic.Security.Role.SystemAdmin, BusinessLogic.Security.Role.ServiceDesk };
+            var roles = new List<string>() { BusinessLogic.Security.Role.SystemAdmin };
             var service = GetService();
             SetupUnitOfWork();
 
