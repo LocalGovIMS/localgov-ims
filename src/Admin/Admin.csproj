@@ -1081,6 +1081,7 @@
     <Content Include="Views\EReturnTemplateRow\_List.cshtml" />
     <Content Include="Views\EReturnTemplateRow\Create.cshtml" />
     <Content Include="Views\EReturnTemplateRow\Edit.cshtml" />
+    <Content Include="Views\Payment\_Basket.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

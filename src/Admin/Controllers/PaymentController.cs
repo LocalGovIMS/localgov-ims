@@ -61,6 +61,12 @@ namespace Admin.Controllers
             model.Basket = existingModel.Basket;
             model.Address = existingModel.Address;
 
+            if (!ModelState.IsValid)
+            {
+                _dependencies.IndexViewModelBuilder.Build(model);
+                return View("Index", model);
+            }
+
             var result = _dependencies.AddCommand.Execute(model);
             HttpContext.Session[PaymentModelSessionKey] = model;
 

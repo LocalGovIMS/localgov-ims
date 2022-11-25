@@ -4,50 +4,63 @@
     ViewBag.Title = "Cheque";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Payment
-        <div class="sub header">
-            Add Cheque Details
-        </div>
-    </h1>
-}
+@section Header { Payment }
+
+@section Subheader { Add cheque details }
 
 @using (Html.BeginForm("Cheque", "Payment", FormMethod.Post))
 {
-    <div class="ui form">
-        <div class="ten wide column">
-            <h2 class="ui header">Cheque details</h2>
 
-            <div class="four wide field">
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name, new { maxlength = "100" })
-            </div>
-            <div class="four wide field">
-                @Html.LabelFor(m => m.ChequeNumber)
-                @Html.TextBoxFor(m => m.ChequeNumber, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.ChequeNumber)
-            </div>
-            <div class="two wide field">
-                @Html.LabelFor(m => m.SortCode)
-                @Html.TextBoxFor(m => m.SortCode, new { maxlength = "8" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.SortCode)
-            </div>
-            <div class="four wide field">
-                @Html.LabelFor(m => m.BankAccountNo)
-                @Html.TextBoxFor(m => m.BankAccountNo, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.BankAccountNo)
-            </div>
-            <div style="margin-top: 0.5rem;">
-                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "ui button" })
-                <button value="SaveAddress" name="action" type="submit" class="ui primary button">Next</button>
+    <div>
+
+        <h3>
+            Cheque details
+        </h3>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", maxlength = "100" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
             </div>
         </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.ChequeNumber, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ChequeNumber, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ChequeNumber)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-3 col-lg-2">
+                @Html.LabelFor(m => m.SortCode, new { @class = "form-label", })
+                @Html.TextBoxFor(m => m.SortCode, new { @class = "form-control", maxlength = "6" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.SortCode)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.BankAccountNo, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.BankAccountNo)
+                </div>
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Cancel", "Cancel", null, new { @class = "btn btn-secondary" })
+            <button name="action" type="submit" class="btn btn-primary">Next</button>
+        </div>
+
     </div>
 }

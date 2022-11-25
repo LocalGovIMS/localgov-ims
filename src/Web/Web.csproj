@@ -86,6 +86,7 @@
     <Compile Include="Mvc\SelectList.cs" />
     <Compile Include="Mvc\SelectListItem.cs" />
     <Compile Include="Mvc\ValuePair.cs" />
+    <Compile Include="Mvc\ViewHelpers\DisplayExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

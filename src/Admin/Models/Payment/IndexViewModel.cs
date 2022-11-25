@@ -2,6 +2,7 @@
 using BusinessLogic.Models.Payments;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using Web.Mvc;
 
 namespace Admin.Models.Payment
@@ -32,7 +33,7 @@ namespace Admin.Models.Payment
 
         [Display(Name = "Amount")]
         [Required(ErrorMessage = "Amount is required")]
-        //[Range(0.01, int.MaxValue, ErrorMessage = "The amount specified is not valid")]
+        [RegexStringValidator("^-?(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:(\\.)\\d{2})?$")]
         public decimal Amount { get; set; }
 
         public Basket Basket { get; set; }

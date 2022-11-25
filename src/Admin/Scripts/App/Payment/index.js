@@ -1,86 +1,132 @@
-﻿$('.funds-dropdown').dropdown({
-    onChange: function (e) {
+﻿// Run this before the dropdowns are generated - it will ensure the MOP is preselected
+if ($('#MopCode').length > 0 && $(".basket__mop").length > 0) {
+    $('#MopCode').val($(".basket__mop").first().data("mop"));
+}
 
-        var text = $('.account-reference-validator');
-        text.empty();
+$(document).ready(function () {
 
-        $('#AccountReference').val('');
-        $('.account-reference-search').attr('href', paymentsAdmin.pages.payment.index.searchAction + "/" + e);
+    accessibleAutocomplete.enhanceSelectElement({
+        displayMenu: 'overlay',
+        autoSelect: false,
+        confirmOnBlur: false,
+        showAllValues: true,
+        defaultValue: '',
+        preserveNullOptions: true,
+        placeholder: 'Select fund type',
+        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+        selectElement: document.querySelector('#FundCode'),
+        onConfirm: (val) => {
+            handleFundTypeChange(val);
+        }
+    });
 
-        showHideSearchButton(e);
+    accessibleAutocomplete.enhanceSelectElement({
+        displayMenu: 'overlay',
+        autoSelect: false,
+        confirmOnBlur: false,
+        showAllValues: true,
+        defaultValue: '',
+        preserveNullOptions: true,
+        placeholder: 'Select MOP code',
+        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+        selectElement: document.querySelector('#MopCode'),
+        onConfirm: (val) => {
+            handleMopCodeChange(val);
+        }
+    });
 
-        setTimeout(function () { showHideVatOptions(); }, 50);
-
-    }
+    accessibleAutocomplete.enhanceSelectElement({
+        displayMenu: 'overlay',
+        autoSelect: false,
+        confirmOnBlur: false,
+        showAllValues: true,
+        defaultValue: '',
+        preserveNullOptions: true,
+        placeholder: 'Select VAT code',
+        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+        selectElement: document.querySelector('#VatCode')
+    });
 
 });
 
-$('.mop-dropdown').dropdown({
-    onChange: function (e) {
-        setTimeout(function () {
+function handleFundTypeChange(val) {
 
-            var minVal = $(".mop-dropdown .selected").data("mop-minimum-amount");
-            var maxVal = $(".mop-dropdown .selected").data("mop-maximum-amount");
-            var isAPaymentReversal = $(".mop-dropdown .selected").data("mop-is-a-payment-reversal").toLowerCase() === 'true';
+    // Get the selected option
+    var option = getSelectedAccessibleAutocompleteOption('#FundCode', val);
 
-            if (isAPaymentReversal) {
-                $('.payment-reversal-warning').css('display', 'flex');
-            }
-            else {
-                $('.payment-reversal-warning').css('display', 'none');
-            }
+    // Clear account reference validator
+    var text = $('.account-reference-validator');
+    text.empty();
 
-            $('#MopCode').data('mop-minimum-amount', minVal);
-            $('#MopCode').data('mop-maximum-amount', maxVal);
+    // Clear account reference
+    $('#AccountReference').val('');
 
-        }, 50);
-    }
-});
+    // Toggle search button visibility
+    showHideSearchButton(option.value);
+
+    setTimeout(function () { showHideVatOptions(option.dataset.vatOverride === "True", option.dataset.vatDefaultCode); }, 50);
+
+    $('#FundCode-select').val(option.value);
+
+    loadAccountDetails();
+}
+
+function handleMopCodeChange(val) {
+
+    setTimeout(function () {
+
+        var option = getSelectedAccessibleAutocompleteOption('#MopCode', val);
+
+        var minVal = option.dataset.mopMinimumAmount;
+        var maxVal = option.dataset.mopMaximumAmount;
+        var isAPaymentReversal = option.dataset.mopIsAPaymentReversal.toLowerCase() === 'true';
+
+        if (isAPaymentReversal) {
+            $('.payment-reversal-warning').css('display', 'flex');
+        }
+        else {
+            $('.payment-reversal-warning').css('display', 'none');
+        }
+
+        $('#MopCode').data('mop-minimum-amount', minVal);
+        $('#MopCode').data('mop-maximum-amount', maxVal);
+
+        $('#MopCode-select').val(option.value);
+
+        var errorMessage = validateAmount(null);
+        showAmountErrorMessage(errorMessage);
+
+    }, 50);
+
+}
 
 function showHideSearchButton(fundCode) {
-
     if ($.inArray(fundCode.toString(), paymentsAdmin.pages.payment.index.searchEnabledFundCodes) === -1) {
         $('.account-reference-search').hide()
-        $('.account-reference-wrapper').removeClass('action');
+        $('.account-reference-wrapper').removeClass('input-group');
     }
     else {
         $('.account-reference-search').show()
-        $('.account-reference-wrapper').addClass('action');
+        $('.account-reference-wrapper').addClass('input-group');
     }
-
 }
 
-function showHideVatOptions() {
+function showHideVatOptions(allowVatOverride, defaultVatCode) {
 
-    if ($('.funds-dropdown .selected').data('vat-override') === "True") {
+    if (allowVatOverride) {
         $('.vat-option').show();
-        $('.vat-dropdown').dropdown("clear");
+        $('#VatCode-select').val('');
     }
     else {
         $('.vat-option').hide();
-        $('.vat-dropdown').dropdown("set selected", $(".funds-dropdown .selected").data("vat-default-code"));
+        if (defaultVatCode) {
+
+            console.log('Here we set the default VAT code - but this does not work', defaultVatCode);
+            $('#VatCode-select').val(defaultVatCode);
+            $('#VatCode').val(defaultVatCode);
+        }
     }
 }
-
-$('#FundCode, #AccountReference').change(function() {        
-    var lookupItem = {
-        fundCode: $('.ui.dropdown.funds-dropdown').dropdown('get value'),
-        accountReference: $.trim($('#AccountReference').val())
-    }
-    
-    if (lookupItem.fundCode.length == 0 || lookupItem.accountReference.length == 0) return;
-
-    paymentsAdmin.services.accountHolder.lookup(lookupItem,
-        function() {
-            if (lookupItem.name) {
-                $("#AccountName").html("<strong>Name</strong> " + lookupItem.name);
-                $("#AccountBalance").html("<strong>Outs. Balance</strong> £" + lookupItem.outstandingBalance);
-            } else {
-                $("#AccountName").html("");
-                $("#AccountBalance").html("");
-            }
-        });
-});
 
 $('.account-reference-search').click(function (e) {
 
@@ -102,8 +148,7 @@ $('.account-reference-search').click(function (e) {
         return false;
     }
 
-
-    var url = paymentsAdmin.pages.payment.index.searchAction + "?fundCode=" + fundCode;
+    var url = paymentsAdmin.pages.payment.index.searchAction + "?fundCode=" + getSelectedAccessibleAutocompleteOptionValue('#FundCode', fundCode);
 
     if (accountReference !== '') {
         url = url + "&accountReference=" + encodeURIComponent(accountReference.trim())
@@ -113,73 +158,69 @@ $('.account-reference-search').click(function (e) {
 
 })
 
-$('#Amount').blur(function (e) {
-    var message = validateInput();
-
-    var text = $('.amount-validator');
-
-    text.empty();
-
-    if (message.length != 0) {
-        text.empty();
-        text.append(message);
-        text.addClass('field-validation-error');
-        text.removeClass('field-validation-valid');
-        $('.message').show();
-        e.preventDefault();
-        $('#Amount').addClass('input-validation-error');
-        return false;
-    }
-    else {
-
-        text.removeClass('field-validation-error');
-        text.addClass('field-validation-valid');
-        $('#Amount').removeClass('input-validation-error');
-    }
+$('#AccountReference').change(function () {
+    loadAccountDetails();
 });
 
-$.validator.setDefaults({ ignore: null });
+function loadAccountDetails() {
 
+    var lookupItem = {
+        fundCode: getSelectedAccessibleAutocompleteOptionValue('#FundCode', $('#FundCode').val()),
+        accountReference: $.trim($('#AccountReference').val())
+    }
+
+    if (lookupItem.fundCode.length == 0 || lookupItem.accountReference.length == 0) return;
+
+    paymentsAdmin.services.accountHolder.lookup(lookupItem,
+        function () {
+            if (lookupItem.name) {
+                $("#AccountNameWrapper").html('<small><label class="fw-bold" for="AccountName">Name:</label> <span id="AccountName">' + lookupItem.name + '</span></small>');
+                $("#AccountBalanceWrapper").html('<small><label class="fw-bold" for="OutstandingBalance">Outstanding balance:</label> £<span id="OutstandingBalance">' + lookupItem.outstandingBalance + '</span></small>');
+            } else {
+                $("#AccountNameWrapper").html("");
+                $("#AccountBalanceWrapper").html("");
+            }
+        });
+}
+
+$('#Amount').blur(function (e) {
+
+    var errorMessage = validateAmount(e);
+    showAmountErrorMessage(errorMessage);
+
+    if (errorMessage.length != 0) {
+        e.preventDefault();
+        return false;
+    }
+
+});
 
 $(".add-to-basket").click(function (e) {
 
-    var message = validateInput();
+    var errorMessage = validateAmount(e);
+    showAmountErrorMessage(errorMessage);
 
-    var text = $('.amount-validator');
+    console.log(errorMessage);
 
-    text.empty();
-
-    if (message.length != 0) {
-        text.empty();
-        text.append(message);
-        text.addClass('field-validation-error');
-        text.removeClass('field-validation-valid');
-        $('.message').show();
+    if (errorMessage.length != 0) {
         e.preventDefault();
         return false;
     }
-    else {
 
-        text.removeClass('field-validation-error');
-        text.addClass('field-validation-valid');
-    }
 });
 
-if ($(".mop-dropdown").length > 0 && $(".basket__mop").length > 0) {
-    $(".mop-dropdown").dropdown("set selected", $(".basket__mop").first().data("mop"));
-}
-
-function validateInput(message) {
+function validateAmount() {
     var result = true;
+    var amount = $('#Amount').val();
 
     var html = [];
 
-    if (parseFloat($('#Amount').val()) < parseFloat($("#MopCode").data("mop-minimum-amount"))) {
+    if (parseFloat(amount) < parseFloat($("#MopCode").data("mop-minimum-amount"))) {
         html.push('You must enter an amount greater than £' + $("#MopCode").data("mop-minimum-amount"));
         result = false;
     }
 
-    if (parseFloat($('#Amount').val()) > parseFloat($("#MopCode").data("mop-maximum-amount"))) {
+    if (parseFloat(amount) > parseFloat($("#MopCode").data("mop-maximum-amount"))) {
         html.push('You must enter an amount less than £' + $("#MopCode").data("mop-maximum-amount"));
         result = false;
     }
@@ -189,6 +230,28 @@ function validateInput(message) {
     }
     else {
         return html.join('');
+    }
+}
+
+function showAmountErrorMessage(errorMessage) {
+
+    var text = $('.amount-validator');
+    text.empty();
+
+    if (errorMessage.length != 0) {
+        text.append(errorMessage);
+        text.addClass('field-validation-error');
+        text.removeClass('field-validation-valid');
+        $('.message').show();
+        $('#Amount').addClass('input-validation-error');
+        return false;
+    }
+    else {
+        text.removeClass('field-validation-error');
+        text.addClass('field-validation-valid');
+        if ($('#Amount-error').length == 0) {
+            $('#Amount').removeClass('input-validation-error');
+        }
     }
 }
 
@@ -203,10 +266,38 @@ $(".post-payment").on("click",
         }
     });
 
-$(window).on('scroll', function() {
-    if ($(window).scrollTop() >= 70) {
-        $(".page-actions--fix").addClass("page-actions--fixed");
-    } else {
-        $(".page-actions--fix").removeClass("page-actions--fixed");
+$.validator.setDefaults({ ignore: null });
+
+
+
+// New generic methods
+
+function getSelectedAccessibleAutocompleteOption(querySelector, selectedText) {
+    const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+        (o) => o.innerText === selectedText
+    );
+
+    return option;
+}
+
+function getSelectedAccessibleAutocompleteOptionValue(querySelector, selectedText) {
+    const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+        (o) => o.innerText === selectedText
+    );
+
+    if (option) {
+        return option.value;
     }
-})
+    else {
+        return '';
+    }
+}
+
+function getAccessibleAutocompleteOptionByValue(querySelector, value) {
+
+    const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+        (o) => o.value === value.toString()
+    );
+
+    return option;
+}

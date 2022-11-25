@@ -7,21 +7,21 @@ namespace Admin.Models.Payment
     public class Cheques
     {
         [Required(ErrorMessage = "Bank account number is required")]
-        [Display(Name = "Bank Account Number")]
-        [MaxLength(8, ErrorMessage = "Account number must be 8 digits")]
-        [MinLength(8, ErrorMessage = "Account number must be 8 digits")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Account number must be numeric")]
+        [Display(Name = "Bank account number")]
+        [MaxLength(8, ErrorMessage = "Bank account number must be 8 digits")]
+        [MinLength(8, ErrorMessage = "Bank account number must be 8 digits")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Bank account number must be numeric")]
         public string BankAccountNo { get; set; }
 
         [Required(ErrorMessage = "Sort code is required")]
-        [Display(Name = "Sort Code")]
+        [Display(Name = "Sort code")]
         [MaxLength(6, ErrorMessage = "Sort code must be 6 digits")]
         [MinLength(6, ErrorMessage = "Sort code must be 6 digits")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Sort code must be numeric")]
         public string SortCode { get; set; }
 
         [Required(ErrorMessage = "Cheque number is required")]
-        [Display(Name = "Cheque Number")]
+        [Display(Name = "Cheque number")]
         [MaxLength(6, ErrorMessage = "Cheque number must be 6 digits")]
         [MinLength(6, ErrorMessage = "Cheque number must be 6 digits")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Cheque number must be numeric")]
