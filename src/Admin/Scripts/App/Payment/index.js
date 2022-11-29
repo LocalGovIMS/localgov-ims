@@ -175,7 +175,7 @@ function loadAccountDetails() {
         function () {
             if (lookupItem.name) {
                 $("#AccountNameWrapper").html('<small><label class="fw-bold" for="AccountName">Name:</label> <span id="AccountName">' + lookupItem.name + '</span></small>');
-                $("#AccountBalanceWrapper").html('<small><label class="fw-bold" for="OutstandingBalance">Outstanding balance:</label> £<span id="OutstandingBalance">' + lookupItem.outstandingBalance + '</span></small>');
+                $("#AccountBalanceWrapper").html('<small><label class="fw-bold" for="OutstandingBalance">Outstanding balance:</label> £<span id="OutstandingBalance">' + lookupItem.outstandingBalance.toFixed(2) + '</span></small>');
             } else {
                 $("#AccountNameWrapper").html("");
                 $("#AccountBalanceWrapper").html("");

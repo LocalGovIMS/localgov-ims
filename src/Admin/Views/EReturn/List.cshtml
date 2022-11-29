@@ -6,166 +6,211 @@
     ViewBag.Title = "eReturns";
 }
 
-@section Header {
-    <h1 class="ui header">
-        eReturns
-
-        @if (User.IsInRole(Role.EReturnAuthoriser))
-        {
-            <a class="ui button green right floated approve" id="approve">
-                <i class="add outline icon"></i> Approve <span class="approve-button-value"></span>
-            </a>
-        }
-        @if (User.IsInRole(Role.EReturns))
-        {
-            @Html.ActionLink("Create eReturn", "Create", new { }, new { @class = "ui blue button right floated", @id = "CreateButton" })
-
-        }
-        <a href="@Url.Action("Search", "EReturn")" class="ui button right floated" id="reset">
-            <i class="undo icon"></i> Reset
-        </a>
-        <div class="sub header">
-            Cash, cheque and PDQ returns
-        </div>
-    </h1>
-}
-
 @section Messages {
-    <div>
-        @if (Model.Message != null)
-        {
-            <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
-                <div class="header">
-                    @Model.Message.Title
-                </div>
-                <p>@Model.Message.Text</p>
-            </div>
-        }
-    </div>
+    @if (Model.Message != null) { Html.RenderPartial("_Message", Model.Message); }
 }
 
-@Html.Partial("_SearchEReturns", Model.SearchCriteria)
+@section Header { eReturns }
 
+@section Subheader { Cash, cheque and PDQ returns }
 
+@section Actions {
+
+    @if (User.IsInRole(Role.EReturnAuthoriser))
+    {
+        <button id="approve" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
+            Approve <span class="approve-button-value"></span>
+        </button>
+    }
+    @if (User.IsInRole(Role.EReturns))
+    {
+        @Html.ActionLink("Create eReturn", "Create", new { }, new { @class = "btn btn-primary", @id = "CreateButton" })
+
+    }
+}
+
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_SearchEReturns", Model.SearchCriteria)
+</div>
 
 @if (Model.EReturns != null && Model.EReturns.Any())
 {
-    <table class="ui celled table striped table-fixed clickable selectable" id="ResultTable">
-        <thead>
-            <tr>
-                <th scope="col" style="width: 5%"></th>
-                <th scope="col" style="width: 15%">Date and time</th>
-                <th scope="col" style="width: 10%">Status</th>
-                <th scope="col" style="width: 15%">eReturn number</th>
-                <th scope="col" style="width: 10%">Type</th>
-                <th scope="col" style="width: 15%">Template</th>
-                <th scope="col" style="width: 10%">Submitted by</th>
-                <th scope="col" style="width: 10%">Approved by</th>
-                <th scope="col" style="width: 10%">Amount (£)</th>
-                <th scope="col" style="width: 10%"> </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.EReturns)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2" id="ResultTable">
+            <thead>
                 <tr>
+                    <th scope="col" style="width: 5%"><span class="visually-hidden">Select</span></th>
+                    <th scope="col" style="width: 15%">Date and time</th>
+                    <th scope="col" style="width: 10%">Status</th>
+                    <th scope="col" style="width: 15%">eReturn number</th>
+                    <th scope="col" style="width: 10%">Type</th>
+                    <th scope="col" style="width: 15%">Template</th>
+                    <th scope="col" style="width: 10%">Submitted by</th>
+                    <th scope="col" style="width: 10%">Approved by</th>
+                    <th scope="col" style="width: 10%">Amount (£)</th>
+                    <th scope="col" style="width: 10%"><span class="visually-hidden">Actions</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.EReturns.Count; i++)
+                {
+                    <tr>
 
-                    <td>
-                        @if (User.IsInRole(Role.EReturnAuthoriser) && item.EReturn.EReturnStatus.Id == 3)
-                        {
-                            <div class="inline field">
-                                <div class="ui checkbox" data-id="@item.EReturn.Id" data-value="@item.Amount" data-type="@item.EReturn.EReturnType.DisplayName" data-num="@item.EReturn.EReturnNo" data-template="@item.EReturn.Template.Name" data-submittedBy="@item.EReturn.SubmittedByUser.DisplayName">
-                                    <input type="checkbox" tabindex="0" value="@item.EReturn.Id">
+                        <td>
+                            @if (User.IsInRole(Role.EReturnAuthoriser) && Model.EReturns[i].EReturn.EReturnStatus.Id == 3)
+                            {
+                                <div class="form-check form-switch">
+                                    @Html.CheckBox("EReturn_" + i, new { @class = "form-check-input", role = "switch", data_id = Model.EReturns[i].EReturn.Id, data_value = Model.EReturns[i].Amount, @data_type = Model.EReturns[i].EReturn.EReturnType.DisplayName, @data_num = Model.EReturns[i].EReturn.EReturnNo, @data_template = Model.EReturns[i].EReturn.Template.Name, @data_submittedBy = Model.EReturns[i].EReturn.SubmittedByUser.DisplayName })
+                                    @Html.Label("Select", new { @for = "EReturn_" + i, @class = "form-check-label visually-hidden" })
                                 </div>
-                            </div>
-                        }
-                    </td>
+                            }
+                        </td>
 
-                    <td>@item.EReturn.CreatedAt</td>
-                    <td class="center"><span class="ui label--ereturn-@item.EReturn.EReturnStatus.Id label">@item.EReturn.EReturnStatus.DisplayName</span></td>
-                    <td>
-                        @item.EReturn.EReturnNo
-                    </td>
-                    <td>@item.EReturn.EReturnType.DisplayName</td>
-                    <td>@item.EReturn.Template.Name</td>
+                        <td>@Model.EReturns[i].EReturn.CreatedAt</td>
+                        <td class="center">
+                            <span class="px-2 py-1 rounded-1 d-inline-flex label--ereturn-@Model.EReturns[i].EReturn.EReturnStatus.Id label">@Model.EReturns[i].EReturn.EReturnStatus.DisplayName</span>
+                        </td>
+                        <td>
+                            @Model.EReturns[i].EReturn.EReturnNo
+                        </td>
+                        <td>@Model.EReturns[i].EReturn.EReturnType.DisplayName</td>
+                        <td>@Model.EReturns[i].EReturn.Template.Name</td>
 
-                    @if (item.EReturn.SubmittedByUser != null && item.EReturn.SubmittedByUser.DisplayName != null)
-                    {
-                        <td>@item.EReturn.SubmittedByUser.DisplayName</td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
-
-                    @if (item.EReturn.ApprovedByUser != null && item.EReturn.ApprovedByUser.DisplayName != null)
-                    {
-                        <td>@item.EReturn.ApprovedByUser.DisplayName</td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
-
-                    <td style="text-align: right">
-                        @item.Amount.ToTwoDecimalPlaces()
-                    </td>
-
-                    <td class="center">
-                        @if (item.EReturn.EReturnStatus.Id < 3)
+                        @if (Model.EReturns[i].EReturn.SubmittedByUser != null && Model.EReturns[i].EReturn.SubmittedByUser.DisplayName != null)
                         {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.EReturn.Id }, new { @class = "ui button" })
-                        }
-                        else if ((EReturnStatus)item.EReturn.EReturnStatus.Id == EReturnStatus.Submitted
-                          && User.IsInRole(Role.EReturnAuthoriser))
-                        {
-                            @Html.ActionLink("Edit", "Approve", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                            <td>@Model.EReturns[i].EReturn.SubmittedByUser.DisplayName</td>
                         }
                         else
                         {
-                            @Html.ActionLink("View", "Details", new { id = item.EReturn.Id }, new { @class = "ui button" })
+                            <td></td>
                         }
-                        @Html.ActionLink("View notes", "List", "EReturnNote", new { id = item.EReturn.Id }, new { @class = "ui button" })
+
+                        @if (Model.EReturns[i].EReturn.ApprovedByUser != null && Model.EReturns[i].EReturn.ApprovedByUser.DisplayName != null)
+                        {
+                            <td>@Model.EReturns[i].EReturn.ApprovedByUser.DisplayName</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                        <td class="text-end">
+                            @Model.EReturns[i].Amount.ToTwoDecimalPlaces()
+                        </td>
+
+                        <td class="text-end" style="min-width:200px;">
+                            @if (Model.EReturns[i].EReturn.EReturnStatus.Id < 3)
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.EReturns[i].EReturn.Id }, new { @class = "btn btn-secondary" })
+                            }
+                            else if ((EReturnStatus)Model.EReturns[i].EReturn.EReturnStatus.Id == EReturnStatus.Submitted
+                              && User.IsInRole(Role.EReturnAuthoriser))
+                            {
+                                @Html.ActionLink("Edit", "Approve", new { id = Model.EReturns[i].EReturn.Id }, new { @class = "btn btn-secondary" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("View", "Details", new { id = Model.EReturns[i].EReturn.Id }, new { @class = "btn btn-secondary" })
+                            }
+                            @Html.ActionLink("View notes", "List", "EReturnNote", new { id = Model.EReturns[i].EReturn.Id }, new { @class = "btn btn-secondary" })
+                        </td>
+                    </tr>
+                }
+
+                @*@foreach (var item in Model.EReturns)
+                    {
+                        <tr>
+
+                            <td>
+                                @if (User.IsInRole(Role.EReturnAuthoriser) && item.EReturn.EReturnStatus.Id == 3)
+                                {
+                                    <div class="form-check form-switch">
+                                        @Html.CheckBox(@item.EReturn.Id.ToString(), new { @class = "form-check-input", role = "switch", data_id = @item.EReturn.Id, data_value = @item.Amount, @data_type = @item.EReturn.EReturnType.DisplayName, @data_num = @item.EReturn.EReturnNo, @data_template = @item.EReturn.Template.Name, @data_submittedBy = @item.EReturn.SubmittedByUser.DisplayName })
+                                        @Html.LabelFor(m => item.EReturn.Id, new { @class = "form-check-label" })
+                                    </div>
+                                }
+                            </td>
+
+                            <td>@item.EReturn.CreatedAt</td>
+                            <td class="center">
+                                <span class="px-2 py-1 rounded-1 d-inline-flex label--ereturn-@item.EReturn.EReturnStatus.Id label">@item.EReturn.EReturnStatus.DisplayName</span>
+                            </td>
+                            <td>
+                                @item.EReturn.EReturnNo
+                            </td>
+                            <td>@item.EReturn.EReturnType.DisplayName</td>
+                            <td>@item.EReturn.Template.Name</td>
+
+                            @if (item.EReturn.SubmittedByUser != null && item.EReturn.SubmittedByUser.DisplayName != null)
+                            {
+                                <td>@item.EReturn.SubmittedByUser.DisplayName</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                            @if (item.EReturn.ApprovedByUser != null && item.EReturn.ApprovedByUser.DisplayName != null)
+                            {
+                                <td>@item.EReturn.ApprovedByUser.DisplayName</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                            <td class="text-end">
+                                @item.Amount.ToTwoDecimalPlaces()
+                            </td>
+
+                            <td class="text-end" style="min-width:200px;">
+                                @if (item.EReturn.EReturnStatus.Id < 3)
+                                {
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.EReturn.Id }, new { @class = "btn btn-secondary" })
+                                }
+                                else if ((EReturnStatus)item.EReturn.EReturnStatus.Id == EReturnStatus.Submitted
+                                  && User.IsInRole(Role.EReturnAuthoriser))
+                                {
+                                    @Html.ActionLink("Edit", "Approve", new { id = item.EReturn.Id }, new { @class = "btn btn-secondary" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("View", "Details", new { id = item.EReturn.Id }, new { @class = "btn btn-secondary" })
+                                }
+                                @Html.ActionLink("View notes", "List", "EReturnNote", new { id = item.EReturn.Id }, new { @class = "btn btn-secondary" })
+                            </td>
+                        </tr>
+                    }*@
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10">
+                        <div class="ui pagination menu">
+                            @if (Model.Pages > 1)
+                            {
+                                @Html.PagedListPager(Model.EReturns, page => Url.Action("Search", new
+                                {
+                                    page = page,
+                                    amount = Model.SearchCriteria.Amount,
+                                    templateId = Model.SearchCriteria.TemplateId,
+                                    reference = Model.SearchCriteria.Reference,
+                                    startDate = Model.SearchCriteria.StartDate,
+                                    endDate = Model.SearchCriteria.EndDate,
+                                    statusId = Model.SearchCriteria.StatusId,
+                                    EReturnType = string.IsNullOrEmpty(Model.SearchCriteria.EReturnType.ToString()) ? Model.SearchCriteria.EReturnType.ToString() : ((int)Model.SearchCriteria.EReturnType).ToString()
+                                }))
+                            }
+                        </div>
                     </td>
                 </tr>
-            }
-
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="10">
-                    <div class="ui pagination menu">
-                        @if (Model.Pages > 1)
-                        {
-                            @Html.PagedListPager(Model.EReturns, page => Url.Action("Search", new
-                            {
-                                page = page,
-                                amount = Model.SearchCriteria.Amount,
-                                templateId = Model.SearchCriteria.TemplateId,
-                                reference = Model.SearchCriteria.Reference,
-                                startDate = Model.SearchCriteria.StartDate,
-                                endDate = Model.SearchCriteria.EndDate,
-                                statusId = Model.SearchCriteria.StatusId,
-                                EReturnType = string.IsNullOrEmpty(Model.SearchCriteria.EReturnType.ToString()) ? Model.SearchCriteria.EReturnType.ToString() : ((int)Model.SearchCriteria.EReturnType).ToString()
-                            }))
-                        }
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </tfoot>
+        </table>
+    </div>
 }
 else
 {
-
-    <div class="ui info message">
-        <div class="header">
-            We couldn't find any matching eReturns
-        </div>
-        <p>
-            Please try again with different search criteria
-        </p>
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "eReturns");
 }
 
 <div id="approval-details">
@@ -174,4 +219,48 @@ else
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/ereturn")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select template',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#TemplateId')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select status',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#StatusId')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select eReturn type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#EReturnType')
+            });
+
+        });
+
+    </script>
 }

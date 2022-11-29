@@ -5,27 +5,22 @@
     ViewBag.Title = "Edit eReturn";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.EReturn.EReturn.EReturnNo
-        <div class="sub header">
-            View / edit eReturn information
-        </div>
-    </h1>
+@section Messages {
+    @if (Model.Message != null) { Html.RenderPartial("_Message", Model.Message); }
 }
 
-@section Messages {
-    <div>
-        @if (Model.Message != null)
-        {
-            <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
-                <div class="header">
-                    @Model.Message.Title
-                </div>
-                <p>@Model.Message.Text</p>
-            </div>
-        }
-    </div>
+@section Header { @Model.EReturn.EReturn.EReturnNo }
+
+@section Subheader { View / edit eReturn details }
+
+@section Actions {
+
+    <button type="submit" value="Approve" name="action" class="btn btn-primary submit-button"><i class="ui save icon"></i> Save</button>
+    @if (User.IsInRole(Role.EReturnDelete))
+    {
+        @Html.ActionLink("Delete", "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "btn btn-danger delete-ereturn" })
+    }
+
 }
 
 @Html.Partial("_Header")
@@ -42,13 +37,15 @@
             @((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? "Cash analysis" : "Cheque analysis")
             <br />
             <div class="ui massive label analysis-total">
-                £@((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? Model.Cash.Total.ToTwoDecimalPlaces() : Model.Cheques.Sum(x => x.Amount).ToTwoDecimalPlaces())
+                £@((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? Model.Cash.Total.ToTwoDecimalPlaces() : Model.Cheques == null ? 0 : Model.Cheques.Sum(x => x.Amount).ToTwoDecimalPlaces())
             </div>
         </a>
     </div>
 
     @Html.HiddenFor(m => m.EReturn.EReturn.Id)
     @Html.HiddenFor(m => m.EReturn.EReturn.TypeId)
+    @Html.HiddenFor(m => m.EReturn.EReturn.TypeId)
+    @Html.HiddenFor(m => m.EReturn.EReturn.StatusId)
 
     <div class="ui form">
         <div class="ui active tab" data-tab="ereturn-tab">
@@ -199,14 +196,6 @@
                 @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "ui large button" })
             </div>
         </div>
-    </div>
-
-    <div class="page-actions">
-        <button type="submit" value="Approve" name="action" class="ui right floated primary labeled icon button submit-button"><i class="ui save icon"></i> Save</button>
-        @if (User.IsInRole(Role.EReturnDelete))
-        {
-            @Html.ActionLink("Delete", "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
-        }
     </div>
 
 }

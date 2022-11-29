@@ -5,16 +5,15 @@
     ViewBag.Title = "eReturn Details";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.EReturn.EReturn.EReturnNo
-        <div class="sub header">
-            eReturn details
-        </div>
-    </h1>
+@section Header { @Model.EReturn.EReturn.EReturnNo }
+
+@section Subheader { eReturn details }
+
+@section Actions {
+    <button type="button" name="action" id="reprint" class="btn btn-primary print"><i class="print outline icon"></i> Print</button>
 }
 
-@Html.Partial("_Header")
+@Html.Partial("_Header", Model)
 
 <div class="ui fluid two item menu">
     <a class="active item" data-tab="ereturn-tab">
@@ -35,150 +34,148 @@
 
 <div class="ui form">
     <div class="ui active tab" data-tab="ereturn-tab">
-        <table class="ui table">
-            <thead>
-                <tr>
-                    <th scope="col">Reference</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">VAT code</th>
-                </tr>
-            </thead>
-            <tbody id="template-rows">
-                @if (Model.Transactions.Any())
-                {
-                    for (int i = 0; i < Model.Transactions.Count; i++)
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">VAT code</th>
+                    </tr>
+                </thead>
+                <tbody id="template-rows">
+                    @if (Model.Transactions.Any())
                     {
-                        <tr>
-                            <td>
-                                @Html.HiddenFor(m => m.Transactions[i].Id)
-                                @Html.DisplayFor(m => m.Transactions[i].Reference)
-                            </td>
-                            <td>@Model.Transactions[i].Description</td>
-                            <td>
-                                @Html.DisplayFor(m => m.Transactions[i].Amount, new { @class = "transaction-value" })
-                            </td>
-                            <td>
-                                @Html.DisplayFor(x => x.Transactions[i].VatCode)
-                            </td>
-                        </tr>
+                        for (int i = 0; i < Model.Transactions.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(m => m.Transactions[i].Id)
+                                    @Html.DisplayFor(m => m.Transactions[i].Reference)
+                                </td>
+                                <td>@Model.Transactions[i].Description</td>
+                                <td>
+                                    @Html.DisplayFor(m => m.Transactions[i].Amount, new { @class = "transaction-value" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => x.Transactions[i].VatCode)
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash)
     {
         @Html.HiddenFor(m => m.Cash.Id)
         <div class="ui tab" data-tab="analysis-tab">
-            <table class="ui table">
-                <thead>
-                    <tr>
-                        <th scope="col">Denomination</th>
-                        <th scope="col">Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Bag number</td>
-                        <td>@Html.DisplayFor(m => m.Cash.BagNumber)</td>
-                    </tr>
-                    <tr>
-                        <td>£50</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds50, new { @class = "analysis-value monetary-value", @data_step = "50" })</td>
-                    </tr>
-                    <tr>
-                        <td>£20</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds20, new { @class = "analysis-value monetary-value", @data_step = "20" })</td>
-                    </tr>
-                    <tr>
-                        <td>£10</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds10, new { @class = "analysis-value monetary-value", @data_step = "10" })</td>
-                    </tr>
-                    <tr>
-                        <td>£5</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds5, new { @class = "analysis-value monetary-value", @data_step = "5" })</td>
-                    </tr>
-                    <tr>
-                        <td>£2</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds2, new { @class = "analysis-value monetary-value", @data_step = "2" })</td>
-                    </tr>
-                    <tr>
-                        <td>£1</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pounds1, new { @class = "analysis-value monetary-value", @data_step = "1" })</td>
-                    </tr>
-                    <tr>
-                        <td>50p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence50, new { @class = "analysis-value monetary-value", @data_step = "0.50" })</td>
-                    </tr>
-                    <tr>
-                        <td>20p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence20, new { @class = "analysis-value monetary-value", @data_step = "0.20" })</td>
-                    </tr>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Denomination</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bag number</td>
+                            <td>@Html.DisplayFor(m => m.Cash.BagNumber)</td>
+                        </tr>
+                        <tr>
+                            <td>£50</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds50, new { @class = "analysis-value monetary-value", @data_step = "50" })</td>
+                        </tr>
+                        <tr>
+                            <td>£20</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds20, new { @class = "analysis-value monetary-value", @data_step = "20" })</td>
+                        </tr>
+                        <tr>
+                            <td>£10</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds10, new { @class = "analysis-value monetary-value", @data_step = "10" })</td>
+                        </tr>
+                        <tr>
+                            <td>£5</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds5, new { @class = "analysis-value monetary-value", @data_step = "5" })</td>
+                        </tr>
+                        <tr>
+                            <td>£2</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds2, new { @class = "analysis-value monetary-value", @data_step = "2" })</td>
+                        </tr>
+                        <tr>
+                            <td>£1</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pounds1, new { @class = "analysis-value monetary-value", @data_step = "1" })</td>
+                        </tr>
+                        <tr>
+                            <td>50p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence50, new { @class = "analysis-value monetary-value", @data_step = "0.50" })</td>
+                        </tr>
+                        <tr>
+                            <td>20p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence20, new { @class = "analysis-value monetary-value", @data_step = "0.20" })</td>
+                        </tr>
 
-                    <tr>
-                        <td>10p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence10, new { @class = "analysis-value monetary-value", @data_step = "0.10" })</td>
-                    </tr>
-                    <tr>
-                        <td>5p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence5, new { @class = "analysis-value monetary-value", @data_step = "0.05" })</td>
-                    </tr>
-                    <tr>
-                        <td>2p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence2, new { @class = "analysis-value monetary-value", @data_step = "0.02" })</td>
-                    </tr>
-                    <tr>
-                        <td>1p</td>
-                        <td>@Html.DisplayFor(m => m.Cash.Pence1, new { @class = "analysis-value monetary-value", @data_step = "0.01" })</td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <td>10p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence10, new { @class = "analysis-value monetary-value", @data_step = "0.10" })</td>
+                        </tr>
+                        <tr>
+                            <td>5p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence5, new { @class = "analysis-value monetary-value", @data_step = "0.05" })</td>
+                        </tr>
+                        <tr>
+                            <td>2p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence2, new { @class = "analysis-value monetary-value", @data_step = "0.02" })</td>
+                        </tr>
+                        <tr>
+                            <td>1p</td>
+                            <td>@Html.DisplayFor(m => m.Cash.Pence1, new { @class = "analysis-value monetary-value", @data_step = "0.01" })</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 
     @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cheque)
     {
         <div class="ui tab" data-tab="analysis-tab">
-            <table class="ui table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name on cheque</th>
-                        <th scope="col">Value</th>
-                    </tr>
-                </thead>
-                <tbody id="template-rows">
-                    @for (int i = 0; i < Model.Cheques.Count; i++)
-                    {
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover mt-2">
+                    <thead>
                         <tr>
-                            <td>@Html.DisplayFor(m => m.Cheques[i].Name)</td>
-                            <td>@Html.DisplayFor(m => m.Cheques[i].Amount, new { @class = "analysis-value monetary-value" })</td>
+                            <th scope="col">Name on cheque</th>
+                            <th scope="col">Value</th>
                         </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col" colspan="2">
-                            <a id="add-row" class="ui button blue add-cheque">Add row</a>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody id="template-rows">
+                        @for (int i = 0; i < Model.Cheques.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => m.Cheques[i].Name)</td>
+                                <td>@Html.DisplayFor(m => m.Cheques[i].Amount, new { @class = "analysis-value monetary-value" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" colspan="2">
+                                <a id="add-row" class="ui button blue add-cheque">Add row</a>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     }
 
-
-
-    <div class="page-actions--footer">
-        <div class="field">
-            @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "ui large button" })
-        </div>
+    <div>
+        @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "btn btn-secondary" })
     </div>
-</div>
-
-<div class="page-actions">    
-    <button type="button" name="action" id="reprint" class="ui right floated primary labeled icon button print"><i class="print outline icon"></i> Print</button>
 </div>
 
 

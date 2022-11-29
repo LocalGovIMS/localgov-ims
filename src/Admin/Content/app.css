@@ -149,11 +149,6 @@ tr.selected td {
     color: #fff !important;
 }
 
-
-.print {
-    padding: 2rem;
-}
-
 .icon.print {
     padding: 0;
 }
@@ -288,12 +283,12 @@ tr.selected td {
 }
 
 .label--ereturn-1 {
-    background-color: #00b5ad !important;
+    background-color: #01837d !important;
     color: #fff !important;
 }
 
 .label--ereturn-2 {
-    background-color: #2185d0 !important;
+    background-color: #0d6efd !important;
     color: #fff !important;
 }
 
@@ -303,7 +298,7 @@ tr.selected td {
 }
 
 .label--ereturn-4 {
-    background-color: #21ba45 !important;
+    background-color: #198754 !important;
     color: #fff !important;
 }
 

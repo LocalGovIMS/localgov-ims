@@ -65,6 +65,11 @@
         },
         accountHolder: {
             fundMessageOptions: []
+        },
+        eReturn: {
+            create: {
+                types: []
+            }
         }
     },
 

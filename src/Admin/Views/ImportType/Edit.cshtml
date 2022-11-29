@@ -24,7 +24,7 @@
             <select id="ImportType" name="ImportType">
                 @foreach (var item in Model.ImportTypes.Items)
                 {
-                    <option class="item" value="@item.Value" @(Model.DataType.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    <option class="item" value="@item.Value" @(Model.DataType.Equals((ImportDataTypeEnum)(Convert.ToInt32(item.Value))) ? "selected" : String.Empty)>@item.Text</option>
                 }
             </select>
             <div class="form__element--error">

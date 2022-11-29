@@ -1,7 +1,4 @@
-﻿$('.ui.dropdown').dropdown({});
-$('.ui.checkbox').checkbox({});
-
-var Model = {
+﻿var Model = {
     eReturns: []
 }
 

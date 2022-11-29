@@ -51,7 +51,7 @@ function configureFundMessage(fundCode, fundMessageId) {
     else {
         $('.fund-message-selector').show();
 
-        availableOptions.unshift('None');
+        availableOptions.unshift('None'); // Add a 'None' option to the start
 
         let defaultValue = '';
         if (fundMessageId) {

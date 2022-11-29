@@ -5,17 +5,28 @@
     ViewBag.Title = "Edit EReturn";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.EReturn.EReturn.EReturnNo
-        <div class="sub header">
-            View / edit eReturn information
-        </div>
-    </h1>
-}
-
 @section Messages {
     @if (Model.Message != null) { Html.RenderPartial("_Message", Model.Message); }
+}
+
+@section Header { @Model.EReturn.EReturn.EReturnNo }
+
+@section Subheader { View / edit eReturn details }
+
+@section Actions {
+
+    <button type="submit" id="submitprint" value="Submit" name="action" class="btn btn-secondary print submit-button"><i class="ui thumbs up icon"></i> Print & submit</button>
+    <button type="submit" value="Edit" name="action" class="btn btn-primary save-button"><i class="ui save icon"></i>Save draft</button>
+    @if (User.IsInRole(Role.EReturnDelete))
+    {
+        var deleteLinkText =
+             ((EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.New
+             || (EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.InProgress)
+             ? "Void"
+             : "Delete";
+
+        @Html.ActionLink(deleteLinkText, "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "btn btn-danger delete-ereturn" })
+    }
 }
 
 @Html.Partial("_Header")
@@ -109,9 +120,9 @@
         </div>
 
         @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash)
-            {
-                @Html.HiddenFor(m => m.Cash.Id)
-                <div class="ui tab" data-tab="analysis-tab">
+        {
+            @Html.HiddenFor(m => m.Cash.Id)
+            <div class="ui tab" data-tab="analysis-tab">
                 <table class="ui table">
                     <thead>
                         <tr>
@@ -120,65 +131,65 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Bag number</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.BagNumber, new { @class = "bag-number", @maxlength = "50" })</td>
-                    </tr>
-                    <tr>
-                        <td>£50</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "50", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£20</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "20", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£10</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "10", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£5</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "5", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£2</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "2", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>£1</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "1", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>50p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.50", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>20p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.20", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>10p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.10", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>5p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.05", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>2p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.02", @maxlength = "18" })</td>
-                    </tr>
-                    <tr>
-                        <td>1p</td>
-                        <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.01", @maxlength = "18" })</td>
-                    </tr>
+                        <tr>
+                            <td>Bag number</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.BagNumber, new { @class = "bag-number", @maxlength = "50" })</td>
+                        </tr>
+                        <tr>
+                            <td>£50</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "50", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£20</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "20", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£10</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "10", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£5</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "5", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£2</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "2", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>£1</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "1", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>50p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.50", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>20p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.20", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>10p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.10", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>5p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.05", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>2p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.02", @maxlength = "18" })</td>
+                        </tr>
+                        <tr>
+                            <td>1p</td>
+                            <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.01", @maxlength = "18" })</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         }
 
         @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cheque)
-            {
+        {
             <div class="ui tab" data-tab="analysis-tab">
                 <table class="ui table">
                     <thead>
@@ -189,7 +200,7 @@
                         </tr>
                     </thead>
                     <tbody id="cheque-rows">
-                        @if(Model.Cheques != null)
+                        @if (Model.Cheques != null)
                         {
                             for (int i = 0; i < Model.Cheques.Count; i++)
                             {
@@ -224,20 +235,7 @@
         </div>
     </div>
 
-    <div class="page-actions">
-        <button type="submit" id="submitprint" value="Submit" name="action" class="ui right floated positive labeled icon button print submit-button"><i class="ui thumbs up icon"></i> Print & submit</button>
-        <button type="submit" value="Edit" name="action" class="ui right floated primary labeled icon button save-button"><i class="ui save icon"></i>Save draft</button>
-        @if (User.IsInRole(Role.EReturnDelete))
-        {
-            var deleteLinkText =
-                 ((EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.New
-                 || (EReturnStatus)Model.EReturn.EReturn.StatusId == EReturnStatus.InProgress)
-                 ? "Void"
-                 : "Delete";
 
-            @Html.ActionLink(deleteLinkText, "Delete", "EReturn", new { id = Model.EReturn.EReturn.Id }, new { @class = "ui right floated red button delete-ereturn" })
-        }
-    </div>
 
 }
 @section Scripts {

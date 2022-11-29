@@ -2,9 +2,6 @@
 var totalTransactionValue = 0;
 var dirty = false;
 
-$('.ui.dropdown').dropdown({});
-$('.ui.fluid.two.item.menu .item').tab();
-
 calculateAnalysisValue();
 calculateTransactionValue();
 renderStatusColours();
