@@ -130,7 +130,7 @@
     <value>Success</value>
   </data>
   <data name="DefaultMessageTypeError" xml:space="preserve">
-    <value>error</value>
+    <value>danger</value>
     <comment>This is the name of the css class used to style the message box for an error</comment>
   </data>
   <data name="DefaultMessageTypeSuccess" xml:space="preserve">

@@ -3,8 +3,6 @@ highlightActiveRows();
 
 function highlightActiveRows() {
 
-    console.log(Model.eReturns);
-
     _.each($("tr"),
         function (item) {
 

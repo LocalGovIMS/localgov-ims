@@ -15,8 +15,8 @@
 
 @section Actions {
 
-    <button type="submit" id="submitprint" value="Submit" name="action" class="btn btn-secondary print submit-button"><i class="ui thumbs up icon"></i> Print & submit</button>
-    <button type="submit" value="Edit" name="action" class="btn btn-primary save-button"><i class="ui save icon"></i>Save draft</button>
+    <button type="submit" id="submitprint" value="Submit" name="action" class="btn btn-secondary print submit-button">Print & submit</button>
+    <button type="submit" value="Edit" name="action" class="btn btn-primary save-button one-click-submit-button">Save draft</button>
     @if (User.IsInRole(Role.EReturnDelete))
     {
         var deleteLinkText =
@@ -34,210 +34,233 @@
 @using (Html.BeginForm("Edit", "EReturn", FormMethod.Post))
 {
 
-    <div class="ui fluid two item menu">
-        <a class="active item" data-tab="ereturn-tab">
-            eReturn details<br />
-            <div class="ui massive label transaction-total">£@Model.EReturn.Amount.ToTwoDecimalPlaces()</div>
-        </a>
-        <a class="item" data-tab="analysis-tab">
-            @((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? "Cash analysis" : "Cheque analysis")
-            <br />
-            <div class="ui massive label analysis-total">
-                £@((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? Model.Cash.Total.ToTwoDecimalPlaces() : Model.Cheques == null ? 0 : Model.Cheques.Sum(x => x.Amount).ToTwoDecimalPlaces())
-            </div>
-        </a>
-    </div>
-
     @Html.HiddenFor(m => m.EReturn.EReturn.Id)
     @Html.HiddenFor(m => m.EReturn.EReturn.EReturnNo)
     @Html.HiddenFor(m => m.EReturn.EReturn.TypeId)
     @Html.HiddenFor(m => m.EReturn.EReturn.StatusId)
 
-    <div class="ui form">
-        <div class="ui active tab" data-tab="ereturn-tab">
-            <table class="ui table">
-                <thead>
-                    <tr>
-                        <th scope="col">Reference</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">VAT code</th>
-                    </tr>
-                </thead>
-                <tbody id="template-rows">
-                    @if (Model.Transactions.Any())
-                    {
-                        for (int i = 0; i < Model.Transactions.Count; i++)
-                        {
-                            var templateRow = Model.EReturn.EReturn.Template.TemplateRows.FirstOrDefault(x => x.Id == Model.Transactions[i].TemplateRowId);
-
-                            <tr>
-                                <td>
-                                    @Html.HiddenFor(m => m.Transactions[i].Id)
-                                    @Html.HiddenFor(m => m.Transactions[i].TemplateRowId)
-                                    @Html.EReturnTemplateRowReferenceEditor(templateRow, Model.Transactions[i].Reference, i)
-                                </td>
-                                <td>
-                                    @if (templateRow.DescriptionOverride)
-                                    {
-                                        @Html.TextBoxFor(m => m.Transactions[i].Description, new { @maxlength = "100" })
-                                    }
-                                    else
-                                    {
-                                        @Model.Transactions[i].Description
-                                        @Html.HiddenFor(m => m.Transactions[i].Description)
-                                    }
-                                </td>
-                                <td>
-                                    @Html.TextBoxFor(m => Model.Transactions[i].Amount, "{0:F2}", new { @class = "transaction-value monetary-amount", @maxlength = "18" })
-                                </td>
-                                <td>
-                                    @if (templateRow.VatOverride)
-                                    {
-                                        <div class="ui fluid search selection dropdown sourceVat">
-                                            @Html.HiddenFor(m => m.Transactions[i].VatCode)
-                                            <i class="dropdown icon"></i>
-                                            <div class="default text no-overflow">Select VAT code</div>
-                                            <div class="menu">
-                                                @foreach (var vatCodeItem in Model.VatCodes.Items)
-                                                {
-                                                    <div class="item" data-value="@vatCodeItem.Value">@vatCodeItem.Text</div>
-                                                }
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        @Model.Transactions[i].VatCode
-                                        @Html.HiddenFor(m => m.Transactions[i].VatCode)
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+    <nav class="mt-2 ereturn-tab-wrapper">
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <button class="nav-link active fw-bold" id="nav-ereturn-details-tab" data-bs-toggle="tab" data-bs-target="#nav-ereturn-details" type="button" role="tab" aria-controls="nav-ereturn-details" aria-selected="true">
+                eReturn details <span class="badge text-bg-success fs-3 py-2 px-3 ms-1 transaction-total">£@Model.EReturn.Amount.ToTwoDecimalPlaces()</span>
+            </button>
+            <button class="nav-link fw-bold" id="nav-analysis-tab" data-bs-toggle="tab" data-bs-target="#nav-analysis" type="button" role="tab" aria-controls="nav-analysis" aria-selected="false">
+                @((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? "Cash analysis" : "Cheque analysis") <span class="badge text-bg-success fs-3 py-2 px-3 ms-1 analysis-total">£@((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash ? Model.Cash.Total.ToTwoDecimalPlaces() : Model.Cheques == null ? 0 : Model.Cheques.Sum(x => x.Amount).ToTwoDecimalPlaces())</span>
+            </button>
         </div>
+    </nav>
 
-        @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash)
-        {
-            @Html.HiddenFor(m => m.Cash.Id)
-            <div class="ui tab" data-tab="analysis-tab">
-                <table class="ui table">
+    <div class="tab-content border border-top-0 p-2" id="nav-tabContent">
+        <div class="tab-pane show active" id="nav-ereturn-details" role="tabpanel" aria-labelledby="nav-ereturn-details-tab" tabindex="0">
+            <div class="table-responsive-sm">
+                <table class="table table-striped table-bordered mt-2">
                     <thead>
                         <tr>
-                            <th scope="col">Denomination</th>
-                            <th scope="col">Value</th>
+                            <th scope="col" id="Reference">Reference</th>
+                            <th scope="col" id="Description">Description</th>
+                            <th scope="col" id="Amount">Amount</th>
+                            <th scope="col" id="VatCode" style="min-width:200px">VAT code</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Bag number</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.BagNumber, new { @class = "bag-number", @maxlength = "50" })</td>
-                        </tr>
-                        <tr>
-                            <td>£50</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "50", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>£20</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "20", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>£10</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "10", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>£5</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "5", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>£2</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "2", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>£1</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "1", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>50p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.50", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>20p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.20", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>10p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.10", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>5p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.05", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>2p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.02", @maxlength = "18" })</td>
-                        </tr>
-                        <tr>
-                            <td>1p</td>
-                            <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount", @data_step = "0.01", @maxlength = "18" })</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        }
-
-        @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cheque)
-        {
-            <div class="ui tab" data-tab="analysis-tab">
-                <table class="ui table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name on cheque</th>
-                            <th scope="col">Value</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="cheque-rows">
-                        @if (Model.Cheques != null)
+                    <tbody id="template-rows">
+                        @if (Model.Transactions.Any())
                         {
-                            for (int i = 0; i < Model.Cheques.Count; i++)
+                            for (int i = 0; i < Model.Transactions.Count; i++)
                             {
+                                var templateRow = Model.EReturn.EReturn.Template.TemplateRows.FirstOrDefault(x => x.Id == Model.Transactions[i].TemplateRowId);
+
                                 <tr>
-                                    <td>@Html.TextBoxFor(m => m.Cheques[i].Name, new { @maxlength = "100" })</td>
-                                    <td>@Html.TextBoxFor(m => m.Cheques[i].Amount, "{0:F2}", new { @class = "analysis-value monetary-amount", @maxlength = "18" })</td>
                                     <td>
-                                        <a class="ui red icon button remove-cheque" data-remove="@i">
-                                            <i class="ui trash icon"></i>
-                                        </a>
+                                        @Html.HiddenFor(m => m.Transactions[i].Id)
+                                        @Html.HiddenFor(m => m.Transactions[i].TemplateRowId)
+                                        @Html.EReturnTemplateRowReferenceEditor(templateRow, Model.Transactions[i].Reference, i)
+                                    </td>
+                                    <td>
+                                        @if (templateRow.DescriptionOverride)
+                                        {
+                                            @Html.TextBoxFor(m => m.Transactions[i].Description, new { @maxlength = "100", @class = "form-control", aria_labelledby = "Description" });
+                                        }
+                                        else
+                                        {
+                                            @Model.Transactions[i].Description
+                                            @Html.HiddenFor(m => m.Transactions[i].Description)
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => Model.Transactions[i].Amount, "{0:F2}", new { @class = "transaction-value monetary-amount form-control", @maxlength = "18", aria_labelledby = "Amount" })
+                                    </td>
+                                    <td>
+                                        @if (templateRow.VatOverride)
+                                        {
+                                            @Html.LabelFor(m => Model.Transactions[i].VatCode, new { @class = "form-label visually-hidden" })
+                                            <select id="@("Transactions[" + i + "].VatCode")" name="@("Transactions[" + i + "].VatCode")" aria_labelledby="VatCode">
+                                                @foreach (var item in Model.VatCodes.Items)
+                                                {
+                                                    <option class="item" value="@item.Value" @(!string.IsNullOrEmpty(Model.Transactions[i].VatCode) && Model.Transactions[i].VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                                }
+                                            </select>
+                                            <div class="form__element--error">
+                                                @Html.ValidationMessageFor(m => m.Transactions[i].VatCode)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @Model.Transactions[i].VatCode
+                                            @Html.HiddenFor(m => m.Transactions[i].VatCode)
+                                        }
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th scope="col" colspan="3">
-                                <a id="add-row" class="ui button blue add-cheque">Add row</a>
-                            </th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
-        }
+        </div>
+        <div class="tab-pane" id="nav-analysis" role="tabpanel" aria-labelledby="nav-analysis-tab" tabindex="0">
+            <div class="table-responsive-sm">
+                <table class="table table-striped table-bordered mt-2">
+                    
+                    @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cash)
+                    {
+                        @Html.HiddenFor(m => m.Cash.Id)
 
+                        <thead>
+                            <tr>
+                                <th scope="col">Denomination</th>
+                                <th scope="col" id="CashValue">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="BagNumber">Bag number</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.BagNumber, new { @class = "bag-number form-control", @maxlength = "50", aria_labelledby = "BagNumber" })</td>
+                            </tr>
+                            <tr>
+                                <td id="50Pounds">£50</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds50, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "50", @maxlength = "18", aria_labelledby = "50Pounds CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="20Pounds">£20</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds20, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "20", @maxlength = "18", aria_labelledby = "20Pounds CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="10Pounds">£10</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds10, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "10", @maxlength = "18", aria_labelledby = "10Pounds CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="5Pounds">£5</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds5, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "5", @maxlength = "18", aria_labelledby = "5Pounds CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="2Pounds">£2</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds2, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "2", @maxlength = "18", aria_labelledby = "2Pounds CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="1Pound">£1</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pounds1, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "1", @maxlength = "18", aria_labelledby = "1Pound CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="50Pence">50p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence50, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.50", @maxlength = "18", aria_labelledby = "50Pence CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="20Pence">20p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence20, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.20", @maxlength = "18", aria_labelledby = "20Pence CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="10Pence">10p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence10, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.10", @maxlength = "18", aria_labelledby = "10Pence CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="5Pence">5p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence5, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.05", @maxlength = "18", aria_labelledby = "5Pence CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="2Pence">2p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence2, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.02", @maxlength = "18", aria_labelledby = "2Pence CashValue" })</td>
+                            </tr>
+                            <tr>
+                                <td id="1Pence">1p</td>
+                                <td>@Html.TextBoxFor(m => m.Cash.Pence1, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @data_step = "0.01", @maxlength = "18", aria_labelledby = "1Pence CashValue" })</td>
+                            </tr>
+                        </tbody>
+                    }
 
-        <div class="page-actions--footer">
-            <div class="field">
-                @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "ui large button" })
+                    @if ((EReturnType)Model.EReturn.EReturn.TypeId == EReturnType.Cheque)
+                    {
+                        <thead>
+                            <tr>
+                                <th scope="col" id="ChequeName">Name on cheque</th>
+                                <th scope="col" id="ChequeValue">Value</th>
+                                <th scope="col" class="cheque-actions"><span class="visually-hidden">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cheque-rows">
+                            @if (Model.Cheques != null)
+                            {
+                                for (int i = 0; i < Model.Cheques.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@Html.TextBoxFor(m => m.Cheques[i].Name, new { @maxlength = "100", @class = "form-control", aria_labelledby="ChequeName" })</td>
+                                        <td>@Html.TextBoxFor(m => m.Cheques[i].Amount, "{0:F2}", new { @class = "analysis-value monetary-amount form-control", @maxlength = "18", aria_labelledby="ChequeValue" })</td>
+                                        <td class="text-end cheque-actions">
+                                            <a class="btn btn-danger remove-cheque" data-remove="@i">Remove</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <a id="add-row" class="btn btn-primary add-cheque">Add row</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    }
+
+                </table>
             </div>
         </div>
     </div>
-
-
+    
+    <div class="mt-2">
+        @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "btn btn-secondary" })
+    </div>
 
 }
 @section Scripts {
     @Scripts.Render("~/bundles/app/ereturn")
+
+    @if (Model.Transactions.Any())
+    {
+        for (int i = 0; i < Model.Transactions.Count; i++)
+        {
+            var templateRow = Model.EReturn.EReturn.Template.TemplateRows.FirstOrDefault(x => x.Id == Model.Transactions[i].TemplateRowId);
+
+            if (templateRow.VatOverride)
+            {
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        accessibleAutocomplete.enhanceSelectElement({
+                            displayMenu: 'overlay',
+                            autoSelect: false,
+                            confirmOnBlur: false,
+                            showAllValues: true,
+                            defaultValue: '',
+                            preserveNullOptions: true,
+                            placeholder: 'Select VAT code',
+                            dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                            selectElement: document.querySelector('#Transactions\\[' + @i + '\\]\\.VatCode')
+                        });
+
+                        $('#Transactions\\[' + @i + '\\]\\.VatCode').attr('aria-labelledby', 'VatCode');
+                    });
+                </script>
+
+            }
+        }
+    }
+
 }

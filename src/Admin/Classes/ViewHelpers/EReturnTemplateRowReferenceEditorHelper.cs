@@ -43,7 +43,7 @@ namespace Admin.Classes.ViewHelpers
                 output.Append(hidden.ToString(TagRenderMode.Normal));
 
                 var label = new TagBuilder("div");
-                label.MergeAttribute("class", "ui label");
+                label.MergeAttribute("class", "form-label");
                 label.InnerHtml = reference.Substring(0, wildcardPosition);
                 output.Append(label.ToString(TagRenderMode.Normal));
 
@@ -53,9 +53,10 @@ namespace Admin.Classes.ViewHelpers
                 input.MergeAttribute("data-index", item.ToString());
                 input.MergeAttribute("size", wildcardLength.ToString());
                 input.MergeAttribute("max-length", wildcardLength.ToString());
-                input.MergeAttribute("class", "wildcard-value");
+                input.MergeAttribute("class", "wildcard-value form-control");
                 input.MergeAttribute("data-minlength", wildcardLength.ToString());
                 input.MergeAttribute("value", reference.Substring(wildcardPosition));
+                input.MergeAttribute("aria-labelledby", "Reference"); // TODO: Should pass this in as a parameter
 
                 output.Append(input.ToString(TagRenderMode.Normal));
 
@@ -72,7 +73,10 @@ namespace Admin.Classes.ViewHelpers
                 input.MergeAttribute("id", string.Format("Transactions_{0}__Reference", item));
                 input.MergeAttribute("type", "text");
                 input.MergeAttribute("max-length", "11");
+                input.MergeAttribute("class", "form-control");
                 input.MergeAttribute("value", reference);
+                input.MergeAttribute("aria-labelledby", "Reference"); // TODO: Should pass this in as a parameter
+
                 input.InnerHtml = output.ToString();
 
                 return new MvcHtmlString(input.ToString());

@@ -35,7 +35,7 @@
     <div class="container-fluid min-vh-100">
         <div class="row row-cols-1 row-cols-lg-2 min-vh-100">
 
-            <div class="col-12 col-lg-2 col-xxxl-1 gx-0" style="background-color:black">
+            <div class="col-12 col-lg-2 col-xxxl-1 gx-0 nav-bar-wrapper" style="background-color:black">
                 @{ Html.RenderPartial("_MainMenu"); }
             </div>
 
@@ -43,7 +43,7 @@
                 <main>
                     @if (Request.IsAuthenticated)
                     {
-                        <div class="d-flex flex-wrap-reverse">
+                        <div class="d-flex flex-wrap-reverse page-header">
                             <div class="me-auto pt-2 pe-2 pb-2">
                                 @{ Html.RenderPartial("_Breadcrumb", new NavigationManager().NavigationItems); }
                             </div>

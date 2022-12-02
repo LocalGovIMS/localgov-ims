@@ -10,7 +10,7 @@
     @if (!string.IsNullOrEmpty(@Model.PspReference))
     {
         <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
-            @Html.Label("PSP Reference", new { @class = "form-label fw-bold" })
+            @Html.Label("PSP reference", new { @class = "form-label fw-bold" })
             <div class="form-label">
                 @Html.DisplayFor(m => m.PspReference, new { @class = "form-label mb-0" })
             </div>
@@ -29,15 +29,18 @@
         </div>
     </div>
     <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
-        @Html.Label("Create by", new { @class = "form-label fw-bold" })
+        @Html.Label("Created by", new { @class = "form-label fw-bold" })
         <div class="form-label">
             @Html.DisplayFor(m => m.EReturn.EReturn.CreatedByUser.DisplayName, new { @class = "form-label mb-0" })
         </div>
     </div>
-    <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
-        @Html.Label("Approved by", new { @class = "form-label fw-bold" })
-        <div class="form-label">
-            @Html.DisplayFor(m => m.EReturn.EReturn.ApprovedByUser.DisplayName, new { @class = "form-label mb-0" })
+    @if (Model.EReturn.EReturn.ApprovedByUserId.HasValue)
+    {
+        <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+            @Html.Label("Approved by", new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.EReturn.EReturn.ApprovedByUser.DisplayName, new { @class = "form-label mb-0" })
+            </div>
         </div>
-    </div>
+    }
 </div>

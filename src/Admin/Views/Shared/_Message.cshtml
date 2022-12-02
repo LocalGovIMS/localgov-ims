@@ -2,12 +2,10 @@
 
 @if (Model != null)
 {
-    <div>
-        <div class="alert alert-@Model.Type mb-0">
-            <div class="header">
-                @Model.Title
-            </div>
-            <p>@Model.Text</p>
+    <div class="alert alert-@Model.Type mb-3">
+        <div class="fw-bold pb-1">
+            @Model.Title
         </div>
+        <p class="mb-0">@Model.Text</p>
     </div>
 }

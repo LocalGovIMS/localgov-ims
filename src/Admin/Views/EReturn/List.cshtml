@@ -59,9 +59,11 @@
                         <td>
                             @if (User.IsInRole(Role.EReturnAuthoriser) && Model.EReturns[i].EReturn.EReturnStatus.Id == 3)
                             {
-                                <div class="form-check form-switch">
-                                    @Html.CheckBox("EReturn_" + i, new { @class = "form-check-input", role = "switch", data_id = Model.EReturns[i].EReturn.Id, data_value = Model.EReturns[i].Amount, @data_type = Model.EReturns[i].EReturn.EReturnType.DisplayName, @data_num = Model.EReturns[i].EReturn.EReturnNo, @data_template = Model.EReturns[i].EReturn.Template.Name, @data_submittedBy = Model.EReturns[i].EReturn.SubmittedByUser.DisplayName })
-                                    @Html.Label("Select", new { @for = "EReturn_" + i, @class = "form-check-label visually-hidden" })
+                                <div class="text-center">
+                                    <div class="form-check form-switch">
+                                        @Html.CheckBox("EReturn_" + i, new { @class = "form-check-input", role = "switch", data_id = Model.EReturns[i].EReturn.Id, data_value = Model.EReturns[i].Amount, @data_type = Model.EReturns[i].EReturn.EReturnType.DisplayName, @data_num = Model.EReturns[i].EReturn.EReturnNo, @data_template = Model.EReturns[i].EReturn.Template.Name, @data_submittedBy = Model.EReturns[i].EReturn.SubmittedByUser.DisplayName })
+                                        @Html.Label("Select", new { @for = "EReturn_" + i, @class = "form-check-label visually-hidden" })
+                                    </div>
                                 </div>
                             }
                         </td>

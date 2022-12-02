@@ -153,23 +153,6 @@ tr.selected td {
     padding: 0;
 }
 
-@media print {
-    @page {
-        size: auto; /* auto is the initial value */
-        margin: 0mm; /* this affects the margin in the printer settings */
-    }
-
-    html, body {
-        height: 90% !important;
-    }
-
-    a[href]:after { content: none !important; }
-    img[src]:after { content: none !important; }
-
-}
-
-
-
 .ui.inverted.menu .active.item {
     background: #111;
     color: #fff !important;
@@ -223,29 +206,43 @@ tr.selected td {
 }
 
 @media print {
-    .nav {
+
+    @page {
+        size: auto; /* auto is the initial value */
+        margin: 0mm; /* this affects the margin in the printer settings */
+    }
+
+    html, body {
+        height: 90% !important;
+    }
+
+    a[href]:after {
+        content: none !important;
+    }
+
+    img[src]:after {
+        content: none !important;
+    }
+
+    .nav-bar-wrapper, .btn, .alert {
+        display: none !important;
+    }
+    
+    .page-header {
         display: none !important;
     }
 
-    .ui.left.fixed.inverted.vertical.menu {
+    .cheque-actions {
         display: none !important;
     }
 
-    .main {
-        margin-left: 0 !important;
+    main {
+        margin:20px;
     }
 
-    .ui.button {
-        display: none !important;
-    }
-
-    .ui.message {
-        display: none !important;
-    }   
-
-    body:last-child{
+    /*body:last-child{
         page-break-after: auto !important;
-    }
+    }*/
 }
 
 .mop {    
