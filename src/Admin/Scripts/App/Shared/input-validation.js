@@ -20,11 +20,13 @@
 
 $('.monetary-amount').on('paste', function (e) {
 
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text');
+    let pastedData = (event.clipboardData || window.clipboardData).getData('text');
 
     var value = this.value;
-    return paymentsAdmin.core.isValidMonetaryValue(value.substring(0, this.selectionStart) + pastedData + value.substring(this.selectionStart));
+
+    console.log(window.getSelection().toString());
+
+    return paymentsAdmin.core.isValidMonetaryValue(value.substring(0, this.selectionStart) + pastedData + value.substring(this.selectionStart + window.getSelection().toString().length));
 
 });
 

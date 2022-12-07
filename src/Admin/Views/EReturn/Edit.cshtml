@@ -93,7 +93,7 @@
                                         @if (templateRow.VatOverride)
                                         {
                                             @Html.LabelFor(m => Model.Transactions[i].VatCode, new { @class = "form-label visually-hidden" })
-                                            <select id="@("Transactions[" + i + "].VatCode")" name="@("Transactions[" + i + "].VatCode")" aria_labelledby="VatCode">
+                                            <select id="@("Transactions[" + i + "].VatCode")" name="@("Transactions[" + i + "].VatCode")" aria-labelledby="VatCode">
                                                 @foreach (var item in Model.VatCodes.Items)
                                                 {
                                                     <option class="item" value="@item.Value" @(!string.IsNullOrEmpty(Model.Transactions[i].VatCode) && Model.Transactions[i].VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>

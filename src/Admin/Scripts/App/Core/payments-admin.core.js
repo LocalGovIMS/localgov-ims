@@ -33,7 +33,7 @@
             $('.one-click-submit-button').each(function () {
                 var $theButton = $(this);
                 var $theForm = $theButton.closest('form');
-                
+
                 // Hide the button and submit the form
                 function tieButtonToForm() {
                     $theButton.one('click', function () {
@@ -53,6 +53,53 @@
                     }
                 });
             });
+        },
+
+        accessibleAutoComplete: {
+            getSelectedOption: function (querySelector, selectedText) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.innerText === selectedText
+                );
+
+                return option;
+            },
+
+            getSelectedOptionValue: function (querySelector, selectedText) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.innerText === selectedText
+                );
+
+                if (option) {
+                    return option.value;
+                }
+                else {
+                    return '';
+                }
+            },
+
+            getSelectedOptionByValue: function (querySelector, value) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.value === value.toString()
+                );
+
+                return option;
+            },
+
+            setSelectedOption: function (querySelector, defaultValue, dropdown) {
+
+                var option = paymentsAdmin.core.accessibleAutoComplete.getSelectedOptionByValue(querySelector, defaultValue);
+                $(querySelector + '-select').val(defaultValue);
+
+                dropdown.props.onConfirm(option)
+                dropdown.setState({
+                    focused: -1,
+                    hovered: null,
+                    menuOpen: false,
+                    query: dropdown.templateInputValue(option.text),
+                    selected: -1,
+                    validChoiceMade: true
+                });
+            }
         }
     },
 
@@ -81,7 +128,7 @@
 
     services: {
         accountHolder: {
-            lookup: function(transferItem, onCompleteCallback) {
+            lookup: function (transferItem, onCompleteCallback) {
                 $.ajax({
                     type: "POST",
                     url: rootUrl + "/AccountHolder/Lookup",

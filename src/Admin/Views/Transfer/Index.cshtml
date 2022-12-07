@@ -4,229 +4,161 @@
     ViewBag.Title = "Transfer";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Transfer
-        <div class="sub header">
-            Move money between funds and accounts
+@section Header { Transfer }
+
+@section Subheader { Move money between funds and accounts }
+
+<div>
+
+    <div class="alert alert-danger mb-3 source-message" style="display:none">
+        <div class="fw-bold pb-1 source-message-header">
+            Unable to add the source transaction
         </div>
-    </h1>
-}
+        <p id="source-message-text" class="mb-0 source-message-text"></p>
+    </div>
 
-
-
-<div class="content ui" style="margin-top: 3rem;">
-
-
-    <div class="ui form">
-        
-        <div class="ui error message source-message" style="margin: 1rem 0; display:none;">
-            <div class="header source-message-header">Unable to add the source transaction</div>
-            <p class="header source-message-text"></p>
-        </div>
-
-        <div class="ui raised segment">
-            <h4 class="ui header">Source transactions</h4>
-            <table id="source-table" class="ui celled table striped">
+    <div class="border rounded p-2 mb-3">
+        <h3>Source transactions</h3>
+        <div class="table-responsive-sm">
+            <table id="source-table" class="table table-striped table-bordered mt-2">
                 <thead>
-                <tr>
-                    <th scope="col" style="width: 8%;">Fund type</th>
-                    <th scope="col">Account</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Outstanding balance (£)</th>
-                    <th scope="col" style="width: 7%">VAT code</th>
-                    <th scope="col" style="width: 25%;">Amount (£)</th>
-                    <th scope="col" style="width: 1%;"></th>
-                </tr>
+                    <tr>
+                        <th scope="col" id="SourceItemFundCode">Fund type</th>
+                        <th scope="col">Account</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Outstanding balance (£)</th>
+                        <th scope="col" id="SourceItemVatCode">VAT code</th>
+                        <th scope="col">Amount (£)</th>
+                        <th scope="col"><span class="visually-hidden">Actions</span></th>
+                    </tr>
                 </thead>
                 <tbody id="source-table-body"></tbody>
                 <tfoot>
-                <tr>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui fluid search selection dropdown sourceItem">
-                                @Html.Hidden("SourceItem_FundCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 160px;">Select fund type</div>
-                                <div class="menu">                                    
-                                    @foreach (var item in Model.Funds.Items)
-                                    {
-                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
-                                        <div class="item" data-value="@item.Value" @dataAttributes>
-                                            @item.Text
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </th>
+                    <tr>
+                        <td>
+                            <select id="SourceItem_FundCode" name="SourceItem_FundCode" aria-labelledby="SourceFundCode">
+                                <option value="">None</option>
+                                @foreach (var item in Model.Funds.Items)
+                                {
+                                    var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                    <th scope="col" colspan="3">
-                        <div class="ui fluid field">
-                            <div class="ui input">
-                                @Html.TextBoxFor(m => m.SourceItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
-                                @Html.ValidationMessageFor(x => x.SourceItem.AccountReference)
-                            </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui fluid search selection dropdown sourceVat">
-                                @Html.Hidden("SourceItem_VatCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
-                                <div class="menu">
+                                    <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.FundCode.IsNullOrEmpty() && Model.SourceItem.FundCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                                }
+                            </select>
+                        </td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.SourceItem.AccountReference, new { @placeholder = "Enter account reference", @class = "form-control", @maxlength = 32 })
+                            @Html.ValidationMessageFor(x => x.SourceItem.AccountReference)
+                        </td>
+                        <td>
+                            <div class="vat-option">
+                                <select id="SourceItem_VatCode" name="SourceItem_VatCode" aria-labelledby="SourceVatCode">
+                                    <option value="">None</option>
                                     @foreach (var item in Model.VatCodes.Items)
                                     {
-                                        <div class="item" data-value="@item.Value">
-                                            @item.Text
-                                        </div>
+                                        <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.VatCode.IsNullOrEmpty() && Model.SourceItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                                     }
-                                </div>
+                                </select>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui labeled input">
-                                <label class="ui label" for="amount">£</label>
-                                @Html.TextBoxFor(m => m.SourceItem.Amount, null, new {@placeholder = "0.00", @class = "monetary-amount"})
-                                @Html.ValidationMessageFor(x => x.SourceItem.Amount)
-                            </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <button class="ui right blue button add-source">
-                                Add
-                            </button>
-                        </div>
-                    </th>
-                </tr>
-
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.SourceItem.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
+                            @Html.ValidationMessageFor(x => x.SourceItem.Amount)
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-primary add-source">Add</button>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
+    </div>
 
-        <div style="text-align: center; font-size: 3rem; color: #2185d0">
-            <i class="large long arrow down icon"></i>
-        </div>
+    <div class="text-center mb-3">
+        <i class="icon fa fa-long-arrow-down fa-5x"></i>
+    </div>
 
-        <div class="ui info message remaining-balance hidden">
-            <div class="header">
-                Remaining balance
-            </div>
-            <p>
-                You still have <strong id="amount-available-to-transfer">£0.00</strong> left to allocate
-            </p>
+    <div class="alert alert-info mb-3">
+        <div class="fw-bold pb-1">
+            Remaining balance
         </div>
+        <p class="mb-0">You still have <strong id="amount-available-to-transfer">£0.00</strong> left to allocate</p>
+    </div>
 
-        <div class="ui error message transfer-message" style="margin: 1rem 0; display: none;">
-            <div class="header transfer-message-header">Unable to add the target transaction</div>
-            <p class="header transfer-message-text"></p>
+    <div class="alert alert-danger mb-3 transfer-message" style="display:none">
+        <div class="fw-bold pb-1 transfer-message-header">
+            Unable to add the target transaction
         </div>
-        <div class="ui raised segment">
-            <h4 class="ui header">Target transactions</h4>
-            <table id="transfer-table" class="ui celled table striped">
+        <p id="transfer-message-text" class="mb-0 transfer-message-text"></p>
+    </div>
+
+    <div class="border rounded p-2 mb-3">
+        <h3>Target transactions</h3>
+        <div class="table-responsive-sm">
+            <table id="transfer-table" class="table table-striped table-bordered mt-2">
                 <thead>
-                <tr>
-                    <th scope="col" style="width: 8%;">Fund type</th>
-                    <th scope="col">Account</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Outstanding balance (£)</th>
-                    <th scope="col" style="width: 7%">VAT code</th>
-                    <th scope="col" style="width: 25%;">Amount (£)</th>
-                    <th scope="col" style="width: 10%;">Narrative</th>
-                    <th scope="col" style="width: 1%;"></th>
-                </tr>
+                    <tr>
+                        <th scope="col" id="TransferItemFundCode">Fund type</th>
+                        <th scope="col">Account</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Outstanding balance (£)</th>
+                        <th scope="col" id="TransferItemVatCode">VAT code</th>
+                        <th scope="col">Amount (£)</th>
+                        <th scope="col">Narrative</th>
+                        <th scope="col"><span class="visually-hidden">Actions</span></th>
+                    </tr>
                 </thead>
                 <tbody id="transfer-table-body"></tbody>
                 <tfoot>
-                <tr>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui fluid search selection dropdown targetItem">
-                                @Html.Hidden("TransferItem_FundCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 160px;">Select fund type</div>
-                                <div class="menu">                                    
-                                    @foreach (var item in Model.Funds.Items)
-                                    {
-                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
-                                        <div class="item" data-value="@item.Value" @dataAttributes>
-                                            @item.Text
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </th>
+                    <tr>
+                        <td>
+                            <select id="TransferItem_FundCode" name="TransferItem_FundCode" aria-labelledby="TransferItemFundCode">
+                                <option value="">None</option>
+                                @foreach (var item in Model.Funds.Items)
+                                {
+                                    var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                    <th scope="col" colspan="3">
-                        <div class="ui fluid field">
-                            <div class="ui input">
-                                @Html.TextBoxFor(m => m.TransferItem.AccountReference, new {@placeholder = "Enter account reference", @maxlength = 32})
-                                @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
-                            </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui fluid search selection dropdown targetVat">
-                                @Html.Hidden("TransferItem_VatCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
-                                <div class="menu">
+                                    <option class="item" value="@item.Value" @(Model.TransferItem != null && !Model.TransferItem.FundCode.IsNullOrEmpty() && Model.TransferItem.FundCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                                }
+                            </select>
+                        </td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.TransferItem.AccountReference, new { @placeholder = "Enter account reference", @class = "form-control", @maxlength = 32 })
+                            @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
+                        </td>
+                        <td>
+                            <div class="targetVat">
+                                <select id="TransferItem_VatCode" name="TransferItem_VatCode" aria-labelledby="TransferItemVatCode">
+                                    <option value="">None</option>
                                     @foreach (var item in Model.VatCodes.Items)
                                     {
-                                        <div class="item" data-value="@item.Value">
-                                            @item.Text
-                                        </div>
+                                        <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.VatCode.IsNullOrEmpty() && Model.SourceItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                                     }
-                                </div>
+                                </select>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui labeled input">
-                                <label class="ui label" for="amount">£</label>
-                                @Html.TextBoxFor(m => m.TransferItem.Amount, null, new {@placeholder = "0.00", @class = "monetary-amount"})
-                                @Html.ValidationMessageFor(x => x.TransferItem.Amount)
-                            </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <div class="ui input">
-                                @Html.TextBoxFor(m => m.TransferItem.Narrative, null, new { @placeholder = "Enter narrative" })
-                                @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
-                            </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="ui fluid field">
-                            <button class="ui right blue button add-transfer">
-                                Add
-                            </button>
-                        </div>
-                    </th>
-                </tr>
-
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.TransferItem.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
+                            @Html.ValidationMessageFor(x => x.TransferItem.Amount)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m.TransferItem.Narrative, null, new { @placeholder = "Enter narrative", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.TransferItem.Narrative)
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-primary add-transfer">Add</button>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
     </div>
 
-
-    <div class="actions" style="text-align: center; margin-top: 1rem;">
-        <button type="submit" class="ui positive large labeled icon button submit-transfer">
-            Complete transfer
-            <i class="exchange icon"></i>
-        </button>
+    <div class="text-center">
+        <button type="submit" class="btn btn-success submit-transfer" disabled="true">Complete transfer</button>
     </div>
-</div>
 
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/transfer")
