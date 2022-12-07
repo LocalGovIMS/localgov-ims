@@ -1,46 +1,42 @@
 ﻿@model Admin.Models.Transaction.DetailsViewModel
-
-<h3>Payments</h3>
-
-<table class="ui celled table striped ui-payments-table">
-    <thead>
-        <tr>
-            <th scope="col" style="width: 20%;">Type</th>
-            <th scope="col" style="width: 20%;">Account</th>
-            <th scope="col">Narrative</th>
-            <th scope="col" style="width: 10%;">VAT (£)</th>
-            <th scope="col" style="width: 1%; white-space:nowrap;">Amount (£)</th>
-            <th scope="col" ></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var transactionLine in Model.Transaction.TransactionLines)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-bordered mt-2 ui-payments-table">
+        <thead>
             <tr>
-                <td>@(transactionLine.Fund != null ? string.Format("{0} ({1})", transactionLine.Fund.FundName, transactionLine.Fund.FundCode) : "")</td>
-                <td>@transactionLine.AccountReference</td>
-                <td>@transactionLine.Narrative @transactionLine.AppReference</td>
-                <td style="text-align: right">@Html.ToCurrency(transactionLine.VatAmount) (@transactionLine.VatCode)</td>
-                <td style="text-align: right" class="@if (transactionLine.Amount < 0)
-                                                 {
-                                                     @Html.Raw("td--negative")
-                                                 }">
-                    @Html.ToCurrency(transactionLine.Amount)
-                </td>
-                <td style="width: 1%; white-space:nowrap;">
-                    @if (User.IsInRole(Role.TransactionJournal)
-                        && Model.IsRefund == false
-                        && Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference) > 0)
-                    {
-                        <a href="#" class="ui button right floated transfer"
-                           data-id="@transactionLine.TransactionReference"
-                           data-amount="@transactionLine.Amount"
-                           data-amount-available-to-transfer="@Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference)">
-                            <i class="exchange icon"></i> Create journal
-                        </a>
-                    }
-                </td>
+                <th scope="col">Type</th>
+                <th scope="col">Account</th>
+                <th scope="col">Narrative</th>
+                <th scope="col">VAT (£)</th>
+                <th scope="col">Amount (£)</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var transactionLine in Model.Transaction.TransactionLines)
+            {
+                <tr>
+                    <td>@(transactionLine.Fund != null ? string.Format("{0} ({1})", transactionLine.Fund.FundName, transactionLine.Fund.FundCode) : "")</td>
+                    <td>@transactionLine.AccountReference</td>
+                    <td>@transactionLine.Narrative @transactionLine.AppReference</td>
+                    <td class="text-end">@Html.ToCurrency(transactionLine.VatAmount) (@transactionLine.VatCode)</td>
+                    <td class="text-end @if (transactionLine.Amount < 0) { @Html.Raw("td--negative") }">
+                        @Html.ToCurrency(transactionLine.Amount)
+                    </td>
+                    <td class="text-end">
+                        @if (User.IsInRole(Role.TransactionJournal)
+                            && Model.IsRefund == false
+                            && Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference) > 0)
+                        {
+                            <a href="#" class="btn btn-secondary transfer"
+                               data-id="@transactionLine.TransactionReference"
+                               data-amount="@transactionLine.Amount"
+                               data-amount-available-to-transfer="@Model.Transaction.AmountAvailableToTransferOrRefundForTransactionLine(transactionLine.TransactionReference)">
+                                <i class="exchange icon"></i> Create journal
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

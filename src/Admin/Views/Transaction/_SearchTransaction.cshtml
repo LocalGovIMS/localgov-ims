@@ -62,7 +62,7 @@
                         @Html.LabelFor(m => m.WildSearchAccountReference, new { @class = "form-check-label" })
                     </small>
                 </div>
-                
+
             </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
                 @Html.LabelFor(m => m.ReceiptNumber, new { @class = "form-label" })
@@ -94,10 +94,25 @@
                     @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Enter narrative", @class = "form-control" })
                 </div>
             }
-            <div class="col-12 col-md-4 col-lg-3 col-xxl-2 offset-md-8 offset-lg-9 offset-xxl-10 pt-3 float-end">
-                <button class="btn btn-primary search w-100" tabindex="0" type="submit">
+            <div class="col-12 pt-3 gap-2 d-flex align-self-end justify-content-end">
+                <button class="btn btn-primary search" tabindex="0" type="submit">
                     <i class="search icon"></i> Search
                 </button>
+
+                @if (!Model.IsForAnImport)
+                {
+                    <a href="@Url.Action("Search", "Transaction")" class="btn btn-secondary" id="reset">
+                        <i class="undo icon"></i> Reset search
+                    </a>
+                }
+
+                @if (Model.IsForAnImport)
+                {
+                    <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.ImportId })" class="btn btn-secondary" id="reset">
+                        <i class="undo icon"></i> Reset search
+                    </a>
+                }
+
             </div>
         </div>
     </div>

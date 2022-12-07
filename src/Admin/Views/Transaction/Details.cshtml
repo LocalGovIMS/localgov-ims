@@ -8,122 +8,104 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        <span class="ui-psp-reference">@Model.Transaction.PspReference</span>
-        @if (!string.IsNullOrEmpty(Model.Transaction.ParentPspReference))
-        {
-            @Html.ActionLink("Origin", "Origin", new { id = Model.Transaction.ParentPspReference }, new { @class = "ui button orange right floated" })
-        }
+@section Header { @Model.Transaction.PspReference }
 
-        @if (Model.Transaction.SuspenseId.HasValue)
-        {
-            @Html.ActionLink("View suspense", "Details", "Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "ui button orange right floated" })
-        }
+@section Subheader { Transaction details }
 
-        @if (User.IsInRole(Role.TransactionRefund) && Model.IsRefund == false)
+@section Actions {
+    @if (!string.IsNullOrEmpty(Model.Transaction.ParentPspReference))
+    {
+        @Html.ActionLink("Origin", "Origin", new { id = Model.Transaction.ParentPspReference }, new { @class = "btn btn-warning" })
+    }
+
+    @if (Model.Transaction.SuspenseId.HasValue)
+    {
+        @Html.ActionLink("View suspense", "Details", "Suspense", new { id = Model.Transaction.SuspenseId }, new { @class = "btn btn-warning" })
+    }
+
+    @if (User.IsInRole(Role.TransactionRefund) && Model.IsRefund == false)
+    {
+        if (Model.Transaction.RefundEnabled)
         {
-            if (Model.Transaction.RefundEnabled)
-            {
-                <a href="#" class="ui red button right floated refund" id="refund">
-                    <i class="reply icon"></i> Refund
-                </a>
-            }
-            else
-            {
-                <div class="ui disabled red button right floated" data-tooltip="A refund is already in progress" data-position="left center">
-                    <i class="reply icon"></i> Refund
-                </div>
-            }
+            <a href="#" class="btn btn-danger refund" id="refund">
+                <i class="reply icon"></i> Refund
+            </a>
         }
-        <a href="#" class="ui button blue right floated email-receipt" id="email-receipt">
-            <i class="mail outline icon"></i> Email receipt
-        </a>
-        <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="ui button purple right floated print-receipt" id="print-receipt">
-            <i class="print outline icon"></i> Print receipt
-        </a>
-        <div class="sub header">
-            Transaction details
-        </div>
-    </h1>
+        else
+        {
+            <div class="btn btn-danger" disabled="true" data-tooltip="A refund is already in progress" data-position="left center">
+                <i class="reply icon"></i> Refund
+            </div>
+        }
+    }
+
+    <a href="#" class="btn btn-primary email-receipt" id="email-receipt">
+        <i class="mail outline icon"></i> Email receipt
+    </a>
+
+    <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="btn btn-secondary print-receipt" id="print-receipt">
+        <i class="print outline icon"></i> Print receipt
+    </a>
 }
 
 @Html.HiddenFor(m => m.Transaction.PspReference)
 
-<div class="ui grid stackable">
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.EntryDate)
-            <br />
-            <span class="ui-date">@Model.Transaction.EntryDate</span>
-        </div>
-        <div class="ui vertical segment">
-            <strong>Created by</strong><br>@Model.Transaction.CreatedBy
-        </div>
-    </div>
+<div class="mb-3">
+    @Html.Partial("_Header", Model)
+</div>
 
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.Total)
-            <br />
-            <span class="ui-total-amount">&pound;@Model.Transaction.Total</span>
-        </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.AuthorisationCode)
-            <br />
-            <span class="ui-auth-code">@(Model.Transaction.AuthorisationCode ?? "Unknown")</span>
-        </div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.TotalVat)
-            <br />
-            <span class="ui-vat-amount">&pound;@Model.Transaction.TotalVat</span>
-        </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.MopName)
-            <br />
-            <span class="ui-mop">@Model.Transaction.MopName</span>
-        </div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.PspReference)
-            <br />
-            <span class="ui-psp-ref">@Model.Transaction.PspReference</span>
-        </div>
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.InternalReference)
-            <br />
-            <span class="ui-internal-ref">@Model.Transaction.InternalReference</span>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Transaction.FormattedAddress)
-            <br />
-            @if (!string.IsNullOrEmpty(Model.Transaction.PayeeName))
-            {
-                @Model.Transaction.PayeeName<br />
-            }
-            @if (Model.Transaction.AddressLine1.IsNullOrWhiteSpace())
-            {
-                <div>No address specified</div>
-            }
-            else
-            {
-                @Html.Raw(Model.Transaction.FormattedAddress.Replace(",", ",<br />"))
-            }
-        </div>
+<div class="d-flex flex-wrap mb-3">
+    <div class="me-auto p-0">
+        <h2>
+            Payments
+        </h2>
     </div>
 </div>
 
+<div class="mb-3">
+    @Html.Partial("_PaymentsList", Model)
+</div>
 
-@{ Html.RenderPartial("_PaymentsList", Model); }
+@if (Model.Transaction.CreditNotes.Any())
+{
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Credit Notes
+            </h2>
+        </div>
+    </div>
 
-@if (Model.Transaction.CreditNotes.Any()) { Html.RenderPartial("_CreditNoteList", Model); }
-@if (Model.Transaction.ProcessedRefunds.Any() || Model.Transaction.PendingRefunds.Any() || Model.Transaction.FailedRefunds.Any()) { Html.RenderPartial("_RefundList", Model); }
-@if (Model.Transaction.Transfers.Any()) { Html.RenderPartial("_TransferList", Model); }
+    @Html.Partial("_CreditNoteList", Model)
+}
+
+@if (Model.Transaction.ProcessedRefunds.Any() || Model.Transaction.PendingRefunds.Any() || Model.Transaction.FailedRefunds.Any())
+{
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Refunds
+            </h2>
+        </div>
+    </div>
+
+    @Html.Partial("_RefundList", Model)
+}
+
+@if (Model.Transaction.Transfers.Any())
+{
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Journals
+            </h2>
+        </div>
+    </div>
+
+    @Html.Partial("_TransferList", Model)
+
+}
+
 
 @{ Html.RenderPartial("_EmailReceipt", new Admin.Models.Transaction.EmailReceiptViewModel()); }
 
@@ -139,7 +121,7 @@
     </div>
 }
 
-@Html.ActionLink("Back", "Back", "Transaction", null, new { @class = "ui button" })
+@Html.ActionLink("Back", "Back", "Transaction", null, new { @class = "btn btn-secondary" })
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/transaction")
