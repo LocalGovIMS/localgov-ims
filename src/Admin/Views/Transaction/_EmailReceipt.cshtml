@@ -1,38 +1,39 @@
 ﻿@model Admin.Models.Transaction.EmailReceiptViewModel
 
-<div id="email-receipt-dialog" class="ui modal">
+<div class="modal fade modal-lg" id="emailReceiptModal" tabindex="-1" aria-labelledby="emailReceiptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="emailReceiptModalLabel">Email receipt</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-    <div class="header">
-        Email receipt
-    </div>
+            <div class="modal-body">
 
-    <div class="ui error message email-receipt-message" style="margin: 1rem; display:none;">
-        <div class="header email-receipt-message-header">Unable send the email</div>
-        <p class="header email-receipt-message-text"></p>
-    </div>
+                <div class="email-receipt-message" style="display:none;">
+                    <div class="alert alert-danger mb-0">
+                        <div class="header">
+                            Unable send the email
+                        </div>
+                        <p class="header email-receipt-message-text"></p>
+                    </div>
+                </div>
 
-    <div class="content ui">
-
-        <div class="ui form">
-            <div class="fields">
-                <div class="ui five wide field">
-                    @Html.LabelFor(m => m.EmailAddress)
-                    @Html.TextBoxFor(m => m.EmailAddress, new { @placeholder = "Enter email address", @maxlength = 250 })
-                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.LabelFor(m => m.EmailAddress, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Enter email address", @maxlength = 250 })
+                        <div class="form__element--error">
+                            @Html.ValidationMessageFor(m => m.EmailAddress)
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary send-email">Send</button>
+            </div>
         </div>
-
     </div>
-
-    <div class="actions">
-        <div class="ui black deny button cancel-email">
-            Cancel
-        </div>
-        <button class="ui right blue button send-email">
-            Send
-        </button>
-    </div>
-
 </div>
 

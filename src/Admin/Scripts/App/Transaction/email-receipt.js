@@ -1,10 +1,4 @@
-﻿$('.ui.dropdown').dropdown({});
-
-$(document).ready(function () {
-
-    $(".cancel-email").click(function (e) {
-        clearForm();
-    });
+﻿$(document).ready(function () {
 
     $(".send-email").click(function (e) {
 
@@ -20,14 +14,10 @@ $(document).ready(function () {
             datatype: "JSON",
             contentType: "application/json; charset=utf-8",
             success: function (returnData) {
-
-                console.log(returnData);
-
                 if (returnData.ok) {
-                    clearForm();
-                    $("#email-receipt-dialog").modal('hide');
+                    $("#emailReceiptModal").modal('hide');
                 }
-                else {   
+                else {
                     showSubmitError('An unknown error occured whilst sending the e-mail');
                 }
             },
@@ -42,19 +32,12 @@ $(document).ready(function () {
 
     });
 
-    function clearError() {
-        $(".email-receipt-error").empty();
-        $(".email-receipt-error").hide();
-    }
+    $("#emailReceiptModal").on("hidden.bs.modal", function () {
+        clearForm();
+    });
 
     function clearForm() {
-        Transfers = { items: [] };
-
-        $('#TransferItem_AccountReference').val('');
-        $('#TransferItem_Amount').val('');
-
-        //var text = $('.transfer-message-text');
-        //text.empty();
+        $('#EmailAddress').val('');
         $('.email-receipt-message').hide();
     }
 
@@ -74,5 +57,4 @@ $(document).ready(function () {
         $('.email-receipt-message').show();
         $("#email-receipt-dialog").modal('refresh');
     }
-
 });

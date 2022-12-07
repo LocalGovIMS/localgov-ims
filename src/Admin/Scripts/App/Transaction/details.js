@@ -38,13 +38,4 @@ $(".email-receipt").click(function () {
 
     transcationDetails.selectedTransactionReference = $(this).attr('data-id');
 
-    $('#email-receipt-dialog').modal({
-        onApprove: function () {
-            return false;
-        },
-        onShow: function () {
-            $.validator.unobtrusive.parse($("#email-receipt-dialog form"));
-        }
-    }).modal('show');
-
 });

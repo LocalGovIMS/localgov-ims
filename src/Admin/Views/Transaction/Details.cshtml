@@ -39,9 +39,13 @@
         }
     }
 
-    <a href="#" class="btn btn-primary email-receipt" id="email-receipt">
-        <i class="mail outline icon"></i> Email receipt
-    </a>
+    <button id="email-receipt" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emailReceiptModal">
+        Email receipt
+    </button>
+
+    @*<a href="#" class="btn btn-primary email-receipt" id="email-receipt">
+            <i class="mail outline icon"></i> Email receipt
+        </a>*@
 
     <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="btn btn-secondary print-receipt" id="print-receipt">
         <i class="print outline icon"></i> Print receipt
@@ -105,7 +109,6 @@
     @Html.Partial("_TransferList", Model)
 
 }
-
 
 @{ Html.RenderPartial("_EmailReceipt", new Admin.Models.Transaction.EmailReceiptViewModel()); }
 
