@@ -25,6 +25,9 @@
             <div class="col-12 col-sm-6 col-md-5 col-lg-4">
                 @Html.LabelFor(m => m.Name, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
             </div>
         </div>
 
