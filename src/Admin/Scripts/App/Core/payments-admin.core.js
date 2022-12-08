@@ -46,7 +46,9 @@
 
                 // This handler will re-wire the event when the form is invalid.
                 $theForm.submit(function (event) {
+                    console.log('handling submit click');
                     if (!$(this).valid()) {
+                        console.log('enabling button');
                         $theButton.prop('disabled', false);
                         event.preventDefault();
                         tieButtonToForm();

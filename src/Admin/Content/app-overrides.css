@@ -863,3 +863,7 @@ td a {
     color: #fff;
     text-decoration: none;
 }
+
+.modal-body .autocomplete__dropdown-arrow-down {
+    z-index: 0;
+}

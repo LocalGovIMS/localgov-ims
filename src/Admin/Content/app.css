@@ -470,3 +470,7 @@ a.nav-link:not(.active) {
     top: 15px;
     right: 0;
 }
+
+.modal-body .autocomplete__dropdown-arrow-down {
+    z-index: 0;
+}

@@ -1,97 +1,99 @@
-﻿$('.ui.dropdown').dropdown({});
+﻿$(document).ready(function () {
 
-$(document).ready(function () {
+    var transferFundCode;
+    var transferVatCode;
 
     var Transfers = { items: [] };
+
+    transferVatCode = accessibleAutocomplete.enhanceSelectElement({
+        displayMenu: 'overlay',
+        autoSelect: false,
+        confirmOnBlur: false,
+        showAllValues: true,
+        defaultValue: '',
+        preserveNullOptions: true,
+        placeholder: 'Select VAT code',
+        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+        selectElement: document.querySelector('#TransferItem_VatCode')
+    });
+
+    transferFundCode = accessibleAutocomplete.enhanceSelectElement({
+        displayMenu: 'overlay',
+        autoSelect: false,
+        confirmOnBlur: false,
+        showAllValues: true,
+        defaultValue: '',
+        preserveNullOptions: true,
+        placeholder: 'Select fund type',
+        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+        selectElement: document.querySelector('#TransferItem_FundCode'),
+        onConfirm: (val) => {
+            handleFundTypeChange('TransferItem', val, transferVatCode);
+        }
+    });
+
+    $('#TransferItem_FundCode').attr('aria-labelledby', 'TransferItemFundCode');
+    $('#TransferItem_VatCode').attr('aria-labelledby', 'TransferItemVatCode');
 
     $(".cancel-transfer").click(function (e) {
         clearForm();
     });
 
-    $('.js-fund').dropdown({
-        onChange: function (e) {
-            setTimeout(function () {
-                if ($('.js-fund .selected').data('vat-override') === "True") {
-                    $('.js-vat').removeClass('disabled');
-                    $('.js-vat').dropdown("clear");
-                    $('.js-vat .search').prop('disabled', false);
-                } else {
-                    $('.js-vat').removeClass('disabled');
-                    $('.js-vat').dropdown("set selected", $(".js-fund .selected").data("vat-default-code"));
-                    $('.js-vat').addClass('disabled');
-                    $('.js-vat .search').prop('disabled', true);
-                }
-            },
-                50
-            );
-        }
-    });
+    addTransaction = function (transactionRow, transactionArray, validator, messageContainerSelector, selectorPrefix) {
 
-    $(".add-transfer").click(function (e) {
+        clearError();
 
-        e.preventDefault();
-
-        var text = $('.transfer-message-text');
-        var message = validateInput();
+        var text = $(messageContainerSelector + '-text');
+        var message = validator(selectorPrefix);
 
         if (message.length === 0) {
 
             var id = parseInt(0);
 
-            if (Transfers.items.length > 0) {
-                id = parseInt(Transfers.items[Transfers.items.length - 1].id) + parseInt(1);
+            if (transactionArray.items.length > 0) {
+                id = parseInt(transactionArray.items[transactionArray.items.length - 1].id) + parseInt(1);
             }
 
-            var transferItem = {
-                id: id,
-                fundCode: $('.ui.dropdown.js-fund').dropdown('get value'),
-                fundName: $('.ui.dropdown.js-fund').dropdown('get text'),
-                vatCode: $(".js-vat").dropdown('get value'),
-                accountReference: $.trim($('#TransferItem_AccountReference').val()),
-                amount: parseFloat($('#TransferItem_Amount').val()).toFixed(2),
-                narrative: $('#TransferItem_Narrative').val(),
-            }
-
-            console.log(transferItem);
+            transactionRow.id = id;
 
             $.ajax({
                 type: "POST",
                 url: rootUrl + "/Validation/ValidateTransferItem",
-                data: JSON.stringify(transferItem),
+                data: JSON.stringify(transactionRow),
                 datatype: "JSON",
                 contentType: "application/json; charset=utf-8",
                 success: function (returnData) {
-                    if (returnData.ok) {
-                        paymentsAdmin.services.accountHolder.lookup(transferItem,
-                            function () {
-                                Transfers.items.push(transferItem);
 
-                                $('.ui.dropdown.js-fund').dropdown('clear');
-                                $(".js-vat").dropdown('clear');
+                    console.log(returnData);
+
+                    if (returnData.ok) {
+                        paymentsAdmin.services.accountHolder.lookup(transactionRow,
+                            function () {
+                                transactionArray.items.push(transactionRow);
+
+                                clearError();
+                                renderUI();
+
                                 $('#TransferItem_AccountReference').val("");
                                 $('#TransferItem_Amount').val("");
                                 $('#TransferItem_Narrative').val("");
 
-                                renderTransferItems();
-
-                                $('.transfer-message').hide();
-                                $("#transfer-dialog").modal('refresh');
                             });
                     }
                     else {
                         if (returnData.message.length > 0) {
-                            showSubmitError(returnData.message);
+                            showError(returnData.message, messageContainerSelector);
                         }
                         else {
-                            showSubmitError('An unknown error occured whilst saving the transfer');
+                            showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                         }
                     }
                 },
                 failure: function () {
-                    showSubmitError('An unknown error occured whilst saving the transfer');
+                    showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                 },
                 error: function () {
-                    showSubmitError('An unknown error occured whilst saving the transfer');
+                    showError('An unknown error occured whilst saving the transfer', messageContainerSelector);
                 }
 
             });
@@ -99,9 +101,26 @@ $(document).ready(function () {
         else {
             text.empty();
             text.append(message);
-            $('.transfer-message').show();
+            $(messageContainerSelector).show();
+        }
+    }
+
+    $(".add-transfer").click(function (e) {
+        e.preventDefault();
+
+        var fundCodeOption = paymentsAdmin.core.accessibleAutoComplete.getSelectedOptionByValue('#TransferItem_FundCode', $('#TransferItem_FundCode-select').val());
+        var vatCodeOption = paymentsAdmin.core.accessibleAutoComplete.getSelectedOptionByValue('#TransferItem_VatCode', $('#TransferItem_VatCode-select').val());
+
+        var transactionRow = {
+            fundCode: fundCodeOption.value,
+            fundName: fundCodeOption.text,
+            vatCode: vatCodeOption.value,
+            accountReference: $.trim($('#TransferItem_AccountReference').val()),
+            amount: parseFloat($('#TransferItem_Amount').val()).toFixed(2),
+            narrative: $('#TransferItem_Narrative').val()
         }
 
+        addTransaction(transactionRow, Transfers, validateInput, '.transfer-message', 'TransferItem');
     });
 
     $(".submit-transfer").click(function (e) {
@@ -125,8 +144,8 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (returnData) {
                 if (returnData.ok) {
-                    clearForm();
                     $("#transfer-dialog").modal('hide');
+                    clearForm();
                     location.reload();
                 }
                 else {
@@ -151,8 +170,10 @@ $(document).ready(function () {
     });
 
     function clearError() {
-        $(".transfer-error").empty();
-        $(".transfer-error").hide();
+        $(".transfer-message-header").empty();
+        $(".transfer-message-header").text('Unable to add the transfer transaction');
+        $(".transfer-message-text").empty();
+        $(".transfer-message").hide();
     }
 
     function clearForm() {
@@ -161,70 +182,68 @@ $(document).ready(function () {
         $('#TransferItem_AccountReference').val('');
         $('#TransferItem_Amount').val('');
 
-        //var text = $('.transfer-message-text');
-        //text.empty();
         $('.transfer-message').hide();
 
         renderTransferItems();
     }
 
-    function validateInput(message) {
+    function validateInput(selectorPrefix) {
         var result = true;
 
         var html = [];
 
         html.push('<ul>');
 
-        if (!$('#TransferItem_FundCode').val()) {
+        if (!$('#' + selectorPrefix + '_FundCode-select').val()) {
             html.push('<li>You must select a fund type</li>');
             result = false;
         }
 
-        if (!$('#TransferItem_AccountReference').val()) {
+        if (!$('#' + selectorPrefix + '_AccountReference').val()) {
             html.push('<li>You must supply an account reference</li>');
             result = false;
         }
 
-        if (!$('#TransferItem_VatCode').val()) {
+        if (!$('#' + selectorPrefix + '_VatCode').val()) {
             html.push('<li>You must select a VAT code</li>');
             result = false;
         }
 
-        if (!$('#TransferItem_Amount').val()) {
+        if (!$('#' + selectorPrefix + '_Amount').val()) {
             html.push('<li>You must supply an amount</li>');
             result = false;
         }
 
         if (result) {
-            if (!$.isNumeric($('#TransferItem_Amount').val())) {
+            if (!$.isNumeric($('#' + selectorPrefix + '_Amount').val())) {
                 html.push('<li>The amount supplied is not valid</li>');
                 result = false;
             }
         }
 
         if (result) {
-            if (parseFloat($('#TransferItem_Amount').val()) <= 0) {
+            if (parseFloat($('#' + selectorPrefix + '_Amount').val()) <= 0) {
                 html.push('<li>The amount to journal must be a positive number</li>');
                 result = false;
             }
         }
 
         if (result) {
-            if (parseFloat($('#TransferItem_Amount').val()) > totalAvailableToTransfer()) {
+            if (parseFloat($('#' + selectorPrefix + '_Amount').val()) > totalAvailableToTransfer()) {
                 html.push('<li>The amount entered exceeds the amount available to journal</li>');
                 result = false;
             }
         }
 
         if (result) {
-            if (parseFloat($('#TransferItem_AccountReference').val().length) > 30) {
+            if (parseFloat($('#' + selectorPrefix + '_AccountReference').val().length) > 30) {
                 html.push('<li>The account reference is too long, it can be a maximum of 30 characters</li>');
                 result = false;
             }
         }
 
         if (result) {
-            if (parseFloat($('#TransferItem_Narrative').val().length) > 50) {
+            if (parseFloat($('#' + selectorPrefix + '_Narrative').val().length) > 50) {
                 html.push('<li>The narrative is too long, it can be a maximum of 50 characters</li>');
                 result = false;
             }
@@ -247,27 +266,52 @@ $(document).ready(function () {
 
         var html = [];
 
-        html.push('<ul>');
+        html.push('<ul class=\"mb-0\">');
         html.push('<li>' + message + '</li>');
         html.push('</ul>');
 
         text.empty();
         text.append(html.join(''));
 
+        $('.submit-transfer').removeAttr('disabled');
+
         $('.transfer-message').show();
         $("#transfer-dialog").modal('refresh');
     }
 
-    function unBindClickEvent() {
-        $("#transfer-table tbody tr td").unbind()
+    function showError(message, selector) {
+
+        var text = $(selector + '-text');
+
+        var html = [];
+
+        html.push('<ul class=\"mb-0\">');
+        html.push('<li>' + message + '</li>');
+        html.push('</ul>');
+
+        text.empty();
+        text.append(html.join(''));
+
+        $(selector).show();
+        $("#transfer-dialog").modal('refresh');
     }
 
-    function bindClickEvent() {
-        $("#transfer-table tbody tr td").on("click", ".remove-transfer", function (event) {
+    $("#transfer-table").on("click", ".remove-transfer",
+        function (event) {
             clearError();
-            removeTransfer($(this).attr('data-id'))
+            removeTransfer($(this).attr('data-id'));
         });
-    }
+
+    //function unBindClickEvent() {
+    //    $("#transfer-table tbody tr td").unbind()
+    //}
+
+    //function bindClickEvent() {
+    //    $("#transfer-table tbody tr td").on("click", ".remove-transfer", function (event) {
+    //        clearError();
+    //        removeTransfer($(this).attr('data-id'))
+    //    });
+    //}
 
     function removeTransfer(id) {
 
@@ -278,15 +322,19 @@ $(document).ready(function () {
         renderTransferItems();
     }
 
+    function renderUI() {
+        renderTransferItems();
+    }
+
     function renderTransferItems() {
-        unBindClickEvent();
+        //unBindClickEvent();
 
         $('#transfer-table-body').empty();
 
         if (Transfers.items.length > 0) {
             $(Transfers.items).each(function (index) {
-                $('#transfer-table-body').append('<tr><td>' + this.fundName + '</td><td>' + this.accountReference + '</td><td>' + (this.name ? this.name : "") + '</td><td>' +
-                    (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : "") + '</td><td>' + this.vatCode + '</td><td>' + this.amount + '</td><td>' + this.narrative + '</td><td><a href=\'#\' class=\'ui red button right floated remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
+                $('#transfer-table-body').append('<tr><td>' + this.fundName + '</td><td>' + this.accountReference + '</td><td>' + (this.name ? this.name : "") + '</td><td class=\"text-end\">' +
+                    (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : "") + '</td><td>' + this.vatCode + '</td><td class=\"text-end\">' + this.amount + '</td><td>' + this.narrative + '</td><td><a href=\'#\' class=\'btn btn-danger remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
             });
 
             $('#transfer-table').show();
@@ -294,7 +342,7 @@ $(document).ready(function () {
 
         $('#amount-available-to-transfer').text(totalAvailableToTransfer());
 
-        bindClickEvent();
+        //bindClickEvent();
     }
 
     function totalAvailableToTransfer() {
@@ -305,6 +353,40 @@ $(document).ready(function () {
         }
 
         return (transcationDetails.amountAvailableToTransfer - total).toFixed(2);
+    }
+
+    function handleFundTypeChange(querySelectorPrefix, val, vatCodeDropdown) {
+
+        var option = paymentsAdmin.core.accessibleAutoComplete.getSelectedOption('#' + querySelectorPrefix + '_FundCode', val);
+
+        if (option.dataset.vatDefaultCode) {
+            showHideVatOptions(querySelectorPrefix, option.dataset.vatOverride === "True", option.dataset.vatDefaultCode, vatCodeDropdown);
+        }
+        else {
+            showHideVatOptions(querySelectorPrefix, option.dataset.vatOverride === "True", '', vatCodeDropdown);
+        }
+
+        $('#' + querySelectorPrefix + '_FundCode-select').val(option.value);
+    }
+
+    function showHideVatOptions(querySelectorPrefix, allowVatOverride, defaultVatCode, vatCodeDropdown) {
+
+        document.getElementById(querySelectorPrefix + '_VatCode').disabled = false;
+        document.getElementById(querySelectorPrefix + '_VatCode').removeAttribute("aria-disabled");
+
+        paymentsAdmin.core.accessibleAutoComplete.setSelectedOption('#' + querySelectorPrefix + '_VatCode', defaultVatCode, vatCodeDropdown);
+
+        setTimeout(function () {
+
+            if (allowVatOverride == false) {
+                document.getElementById(querySelectorPrefix + '_VatCode').disabled = true;
+                document.getElementById(querySelectorPrefix + '_VatCode').setAttribute("aria-disabled", true);
+            }
+
+            $('#' + querySelectorPrefix + '_FundCode').focus();
+
+        }, 5);
+
     }
 
 });

@@ -1,47 +1,4 @@
-﻿$('.ui.accordion').accordion();
-
-accessibleAutocomplete.enhanceSelectElement({
-    displayMenu: 'overlay',
-    autoSelect: false,
-    confirmOnBlur: false,
-    showAllValues: true,
-    defaultValue: '',
-    preserveNullOptions: true,
-    placeholder: 'Select fund type',
-    dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-    selectElement: document.querySelector('#FundCode')
-});
-
-accessibleAutocomplete.enhanceSelectElement({
-    displayMenu: 'overlay',
-    autoSelect: false,
-    confirmOnBlur: false,
-    showAllValues: true,
-    defaultValue: '',
-    preserveNullOptions: true,
-    placeholder: 'Select mop type',
-    dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-    selectElement: document.querySelector('#MopCode')
-});
-
-accessibleAutocomplete.enhanceSelectElement({
-    displayMenu: 'overlay',
-    autoSelect: false,
-    confirmOnBlur: false,
-    showAllValues: true,
-    defaultValue: '',
-    preserveNullOptions: true,
-    placeholder: 'Select user',
-    dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-    selectElement: document.querySelector('#UserId')
-});
-
-validateSearch = function (validator, messageContainerSelector) {
-
-
-};
-
-$(".search").click(function (e) {
+﻿$(".search").click(function (e) {
 
     if ($('#WildSearchAccountReference').is(':checked')) {
 
@@ -58,7 +15,7 @@ $(".search").click(function (e) {
     }
 });
 
-function validateSearchInput(message) {
+function validateSearchInput() {
     var result = true;
 
     var html = [];

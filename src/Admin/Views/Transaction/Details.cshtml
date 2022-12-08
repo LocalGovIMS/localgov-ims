@@ -27,14 +27,14 @@
     {
         if (Model.Transaction.RefundEnabled)
         {
-            <a href="#" class="btn btn-danger refund" id="refund">
-                <i class="reply icon"></i> Refund
-            </a>
+            <button id="refund" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#refundModal">
+                Refund
+            </button>
         }
         else
         {
-            <div class="btn btn-danger" disabled="true" data-tooltip="A refund is already in progress" data-position="left center">
-                <i class="reply icon"></i> Refund
+            <div class="btn btn-danger" disabled="disabled" data-tooltip="A refund is already in progress" data-position="left center">
+                Refund
             </div>
         }
     }
@@ -42,10 +42,6 @@
     <button id="email-receipt" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#emailReceiptModal">
         Email receipt
     </button>
-
-    @*<a href="#" class="btn btn-primary email-receipt" id="email-receipt">
-            <i class="mail outline icon"></i> Email receipt
-        </a>*@
 
     <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="btn btn-secondary print-receipt" id="print-receipt">
         <i class="print outline icon"></i> Print receipt

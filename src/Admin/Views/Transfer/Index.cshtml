@@ -51,15 +51,13 @@
                             @Html.ValidationMessageFor(x => x.SourceItem.AccountReference)
                         </td>
                         <td>
-                            <div class="vat-option">
-                                <select id="SourceItem_VatCode" name="SourceItem_VatCode" aria-labelledby="SourceVatCode">
-                                    <option value="">None</option>
-                                    @foreach (var item in Model.VatCodes.Items)
-                                    {
-                                        <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.VatCode.IsNullOrEmpty() && Model.SourceItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
-                                    }
-                                </select>
-                            </div>
+                            <select id="SourceItem_VatCode" name="SourceItem_VatCode" aria-labelledby="SourceVatCode">
+                                <option value="">None</option>
+                                @foreach (var item in Model.VatCodes.Items)
+                                {
+                                    <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.VatCode.IsNullOrEmpty() && Model.SourceItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             @Html.TextBoxFor(m => m.SourceItem.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
@@ -127,15 +125,13 @@
                             @Html.ValidationMessageFor(x => x.TransferItem.AccountReference)
                         </td>
                         <td>
-                            <div class="targetVat">
-                                <select id="TransferItem_VatCode" name="TransferItem_VatCode" aria-labelledby="TransferItemVatCode">
-                                    <option value="">None</option>
-                                    @foreach (var item in Model.VatCodes.Items)
-                                    {
-                                        <option class="item" value="@item.Value" @(Model.SourceItem != null && !Model.SourceItem.VatCode.IsNullOrEmpty() && Model.SourceItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
-                                    }
-                                </select>
-                            </div>
+                            <select id="TransferItem_VatCode" name="TransferItem_VatCode" aria-labelledby="TransferItemVatCode">
+                                <option value="">None</option>
+                                @foreach (var item in Model.VatCodes.Items)
+                                {
+                                    <option class="item" value="@item.Value" @(Model.TransferItem != null && !Model.TransferItem.VatCode.IsNullOrEmpty() && Model.TransferItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             @Html.TextBoxFor(m => m.TransferItem.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
