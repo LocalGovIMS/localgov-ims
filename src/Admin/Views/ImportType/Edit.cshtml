@@ -21,7 +21,7 @@
     <div class="row mb-3">
         <div class="col-12 col-sm-6 col-md-5 col-lg-4">
             @Html.LabelFor(m => m.DataType, new { @class = "form-label" })
-            <select id="ImportType" name="ImportType">
+            <select id="DataType" name="DataType">
                 @foreach (var item in Model.ImportTypes.Items)
                 {
                     <option class="item" value="@item.Value" @(Model.DataType.Equals((ImportDataTypeEnum)(Convert.ToInt32(item.Value))) ? "selected" : String.Empty)>@item.Text</option>
@@ -104,9 +104,9 @@
                 showAllValues: true,
                 defaultValue: '',
                 preserveNullOptions: true,
-                placeholder: 'Select import type',
+                placeholder: 'Select data type',
                 dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-                selectElement: document.querySelector('#ImportType')
+                selectElement: document.querySelector('#DataType')
             });
 
         });
