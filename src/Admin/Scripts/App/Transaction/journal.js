@@ -35,7 +35,7 @@
     $('#TransferItem_FundCode').attr('aria-labelledby', 'TransferItemFundCode');
     $('#TransferItem_VatCode').attr('aria-labelledby', 'TransferItemVatCode');
 
-    $(".cancel-transfer").click(function (e) {
+    $("#transferModal").on("hidden.bs.modal", function () {
         clearForm();
     });
 
@@ -181,6 +181,7 @@
 
         $('#TransferItem_AccountReference').val('');
         $('#TransferItem_Amount').val('');
+        $('#TransferItem_Narrative').val('');
 
         $('.transfer-message').hide();
 
@@ -302,17 +303,6 @@
             removeTransfer($(this).attr('data-id'));
         });
 
-    //function unBindClickEvent() {
-    //    $("#transfer-table tbody tr td").unbind()
-    //}
-
-    //function bindClickEvent() {
-    //    $("#transfer-table tbody tr td").on("click", ".remove-transfer", function (event) {
-    //        clearError();
-    //        removeTransfer($(this).attr('data-id'))
-    //    });
-    //}
-
     function removeTransfer(id) {
 
         Transfers.items = Transfers.items.filter(function (el) {
@@ -327,7 +317,6 @@
     }
 
     function renderTransferItems() {
-        //unBindClickEvent();
 
         $('#transfer-table-body').empty();
 
@@ -341,8 +330,6 @@
         }
 
         $('#amount-available-to-transfer').text(totalAvailableToTransfer());
-
-        //bindClickEvent();
     }
 
     function totalAvailableToTransfer() {

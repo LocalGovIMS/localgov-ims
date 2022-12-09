@@ -69,10 +69,6 @@
     $('#TransferItem_FundCode').attr('aria-labelledby', 'TransferItemFundCode');
     $('#TransferItem_VatCode').attr('aria-labelledby', 'TransferItemVatCode');
 
-    $(".cancel-transfer").click(function (e) {
-        clearForm();
-    });
-
     $("#SourceItem_Amount").on("keyup change blur",
         function () {
             renderUI();

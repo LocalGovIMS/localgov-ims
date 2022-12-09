@@ -21,7 +21,7 @@ function validateSearchInput() {
     var html = [];
     var startdate = undefined;
     var enddate = undefined;
-    html.push('<ul>');
+    html.push('<ul class=\"mb-3\">');
 
     if (!$('#StartDate').val()) {
         html.push('<li>You must select a start date</li>');

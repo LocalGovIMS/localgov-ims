@@ -47,7 +47,7 @@
 
         var html = [];
 
-        html.push('<ul>');
+        html.push('<ul class=\"mb-3\">');
         html.push('<li>' + message + '</li>');
         html.push('</ul>');
 

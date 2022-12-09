@@ -794,7 +794,6 @@
     <Content Include="Scripts\App\Transaction\email-receipt.js" />
     <Content Include="Scripts\App\Transaction\journal.js" />
     <Content Include="Scripts\App\Transaction\details.js" />
-    <Content Include="Scripts\App\Transaction\refund.js" />
     <Content Include="Scripts\App\Transaction\search.js" />
     <Content Include="Scripts\App\Transfer\transfer.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />

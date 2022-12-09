@@ -43,9 +43,12 @@
         Email receipt
     </button>
 
-    <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" class="btn btn-secondary print-receipt" id="print-receipt">
+    <a href="@Url.Action("Receipt", new {id = Model.Transaction.PspReference })" 
+       onclick="window.open(this.href).print(); return false"
+       class="btn btn-secondary">
         <i class="print outline icon"></i> Print receipt
     </a>
+
 }
 
 @Html.HiddenFor(m => m.Transaction.PspReference)
