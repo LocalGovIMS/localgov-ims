@@ -114,16 +114,8 @@
 }
 else
 {
-    <div class="ui info message">
-        <div class="header">
-            We couldn't find any matching suspense items
-        </div>
-        <p>
-            Please try again with different search criteria
-        </p>
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "suspense items");
 }
-
 
 @if (User.IsInRole(Role.Finance))
 {
