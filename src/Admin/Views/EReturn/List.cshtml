@@ -96,9 +96,9 @@
                             <td></td>
                         }
 
-                        <td class="text-end">
-                            @Model.EReturns[i].Amount.ToTwoDecimalPlaces()
-                        </td>
+                    <td class="text-end">
+                        @Html.ToCurrency(Model.EReturns[i].Amount)
+                    </td>
 
                         <td class="text-end" style="min-width:200px;">
                             @if (Model.EReturns[i].EReturn.EReturnStatus.Id < 3)
