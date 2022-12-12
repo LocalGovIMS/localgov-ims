@@ -22,12 +22,12 @@
                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", placeholder = "Enter amount" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3">
                 @Html.LabelFor(m => m.Narrative, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.Narrative, new { @class = "form-control", placeholder = "Enter narrative" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3">
                 @Html.LabelFor(m => m.Status, new { @class = "form-label" })
                 <select id="Status" name="Status">
                     @foreach (var item in Model.Statuses.Items)
@@ -37,7 +37,7 @@
                 </select>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-3 offset-lg-6 offset-xxl-0 gap-2 d-flex align-self-end justify-content-end">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-9 col-xxl-12 pt-3 gap-2 d-flex align-self-end justify-content-end">
                 <button class="btn btn-primary search" tabindex="0" type="submit">
                     <i class="search icon"></i> Search
                 </button>

@@ -25,9 +25,6 @@
                             <option class="item" value="@item.Value" @(Model.TemplateId.HasValue && Model.TemplateId.Value.ToString().Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
                         }
                     </select>
-                    <div class="form__element--error">
-                        @Html.ValidationMessageFor(m => m.TemplateId)
-                    </div>
                 }
                 else
                 {

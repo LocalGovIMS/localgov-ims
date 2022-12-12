@@ -193,7 +193,7 @@
 
         var html = [];
 
-        html.push('<ul>');
+        html.push('<ul class=\"mb-0\">');
 
         if (!$('#' + selectorPrefix + '_FundCode-select').val()) {
             html.push('<li>You must select a fund type</li>');

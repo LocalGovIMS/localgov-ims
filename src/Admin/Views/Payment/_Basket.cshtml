@@ -27,7 +27,7 @@
                 {
                     <div>
                         @Html.LabelFor(m => m.Items[@i].MopName, new { @class = "form-label visually-hidden" })
-                        @Html.DisplayWithIdFor(m => m.Items[@i].MopName, new { @class = "form-label mb-0 basket__mop", data_mop=Model.Items[@i].MopCode })
+                        @Html.DisplayWithIdFor(m => m.Items[@i].MopName, new { @class = "form-label mb-0 basket__mop", data_mop = Model.Items[@i].MopCode })
                     </div>
                 }
                 <div class="d-flex w-100 justify-content-between">
@@ -49,5 +49,9 @@
 }
 else
 {
-    <div class="alert alert-info">Your basket is empty</div>
+    <div class="alert alert-info">
+        <div class="fw-bold pb-1">
+            Your basket is empty
+        </div>
+    </div>
 }

@@ -8,23 +8,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <div class="alert alert-info mb-0">
-                            <p>You are approving <strong>£<span id="amount-to-approve">0</span></strong> worth of eReturns</p>
-                        </div>
+                    <div class="alert alert-info mb-3">
+                        <p class="mb-0">You are approving <strong>£<span id="amount-to-approve">0</span></strong> worth of eReturns</p>
                     </div>
 
-                    <div class="approve-message" style="display:none;">
-                        <div class="alert alert-danger mb-0">
-                            <div class="header">
+                    <div class="approve-message mb-3 mt-0" style="display:none;">
+                        <div class="alert alert-danger">
+                            <div class="fw-bold pb-1">
                                 Unable to approve the selected eReturn(s)
                             </div>
-                            <p class="header approve-message-text"></p>
+                            <p class="mb-0 approve-message-text"></p>
                         </div>
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover mt-2" id="approve-table">
+                        <table class="table table-striped table-bordered table-hover mb-0" id="approve-table">
                             <thead>
                                 <tr>
                                     <th scope="col" style="width: 10%;">eReturn number</th>

@@ -3,9 +3,15 @@
 @if (Model != null)
 {
     <div class="alert alert-@Model.Type mb-3">
-        <div class="fw-bold pb-1">
-            @Model.Title
-        </div>
-        <p class="mb-0">@Model.Text</p>
+        @if (!Model.Title.IsNumericWhiteSpace())
+        {
+            <div class="fw-bold pb-1">
+                @Model.Title
+            </div>
+        }
+        @if (!Model.Text.IsNumericWhiteSpace())
+        {
+            <p class="mb-0">@Model.Text</p>
+        }
     </div>
 }
