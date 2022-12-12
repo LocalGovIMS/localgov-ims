@@ -38,7 +38,7 @@
                             @Html.HiddenFor(x => fundGroups[i].Text)
                             <div class="form-check form-switch">
                                 @Html.CheckBoxFor(x => fundGroups[i].IsChecked, new { @class = "form-check-input", role = "switch" })
-                                @Html.Label(fundGroups[i].Text, new { @for = "fundsGroups_" + i + "__IsChecked", @class = "form-check-label" })
+                                @Html.Label(fundGroups[i].Text, new { @for = "fundGroups_" + i + "__IsChecked", @class = "form-check-label" })
                             </div>
                         </td>
                     </tr>

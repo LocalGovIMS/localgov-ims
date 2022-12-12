@@ -40,7 +40,6 @@
         <div class="row mb-3 type-selector" style="display:none;">
             <div class="col col-sm-6 col-md-5 col-lg-4">
                 @Html.LabelFor(m => m.TypeId, new { @class = "form-label" })
-                @Html.HiddenFor(m => m.TypeId)
                 <div id="TypeIdAccessibleAutocompleteWrapper"></div>
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.TypeId)

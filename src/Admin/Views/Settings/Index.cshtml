@@ -39,7 +39,7 @@
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <a href="@Url.Action("List", "ImportProcessingRule")" class="list-group-item list-group-item-action">Import processing rules</a>
+        <a href="@Url.Action("ListMaintainingNavigation", "ImportProcessingRule")" class="list-group-item list-group-item-action">Import processing rules</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
