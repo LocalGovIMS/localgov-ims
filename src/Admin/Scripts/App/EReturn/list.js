@@ -9,7 +9,6 @@ function highlightActiveRows() {
             $(item).removeClass("table-primary");
 
             $(item).find(".form-check-input").each(function () {
-                console.log('setting checkbox to uncheced');
                 $(this).prop('checked', false);
             });
         });
@@ -60,7 +59,3 @@ $('tr .form-check-input').on("click", function (e) {
         saveModel();
     }
 });
-
-//$('.selectable tr .ui.button').click(function (event) {
-//    event.stopPropagation();
-//});

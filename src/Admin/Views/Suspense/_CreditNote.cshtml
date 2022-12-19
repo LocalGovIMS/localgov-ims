@@ -2,114 +2,86 @@
 
 @if (User.IsInRole(Role.Finance))
 {
-    <div id="credit-dialog" class="ui modal">
+    <div class="modal fade modal-lg" id="creditNoteModal" tabindex="-1" aria-labelledby="creditNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="creditNoteModalLabel">Credit notes</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info mb-3">
+                        <p class="mb-0">You have <strong>£<span id="amount-available-to-credit">0</span></strong> worth of credit notes added</p>
+                    </div>
 
-        <div class="header">
-            Credit notes
-        </div>
-
-            <div class="ui info message" style="margin: 1rem;">
-                <p>You have <strong>£<span id="amount-credit">0</span></strong> worth of credit notes added</p>
-            </div>
-
-            <div class="ui error message credit-message" style="margin: 1rem; display:none;">
-                <div class="header credit-message-header">Unable to add the credit</div>
-                <p class="header credit-message-text"></p>
-            </div>
-
-            <div class="content ui">
-
-                <div class="ui form">
-                    <div class="fields">
-
-                        <div class="ui six wide field">
-                            <label for="CreditNote_FundCode">Fund type</label>
-                            <div class="ui fluid search selection dropdown js-credit-fund">
-                                @Html.Hidden("CreditNote_FundCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 200px;">Select fund type</div>
-                                <div class="menu">
-                                    <div class="item" data-value="">
-                                        Fund
-                                    </div>
-                                    @foreach (var item in Model.CreditNoteFunds.Items)
-                                    {
-                                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
-                                        <div class="item" data-value="@item.Value" @dataAttributes>
-                                            @item.Text
-                                        </div>
-                                    }
-                                </div>
+                    <div class="credit-message mb-3 mt-0" style="display:none;">
+                        <div class="alert alert-danger">
+                            <div class="fw-bold pb-1">
+                                Unable to add the credit
                             </div>
-                        </div>
-
-                        <div class="ui six wide field">
-                            <label for="CreditNote_AccountReference">Account reference</label>
-                            @Html.TextBoxFor(m => m.CreditNote.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 16 })
-                            @Html.ValidationMessageFor(x => x.CreditNote.AccountReference)
-                        </div>
-
-                        <div class="ui four wide field">
-                            <label for="CreditNote_VatCode">VAT code</label>
-                            <div class="ui fluid search selection dropdown js-credit-vat">
-                                @Html.Hidden("CreditNote_VatCode")
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
-                                <div class="menu">
-                                    <div class="item" data-value="">
-                                        VAT code
-                                    </div>
-                                    @foreach (var item in Model.VatCodes.Items)
-                                    {
-                                        <div class="item" data-value="@item.Value">
-                                            @item.Text
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui four wide field">
-                            <label for="CreditNote_Amount">Amount</label>
-                            <div class="ui labeled input">
-                                <label class="ui label" for="amount">£</label>
-                                @Html.TextBoxFor(m => m.CreditNote.Amount, null, new { @placeholder = "0.00", @class = "monetary-amount" })
-                                @Html.ValidationMessageFor(x => x.CreditNote.Amount)
-                            </div>
-                        </div>
-
-                        <div class="ui two wide field">
-                            <label>&nbsp;</label>
-                            <button class="ui right blue button add-credit">
-                                Add
-                            </button>
+                            <p class="mb-0 credit-message-text"></p>
                         </div>
                     </div>
+
+                    <div class="table-responsive-xl">
+                        <table id="credit-table" class="table table-striped table-bordered mt-2">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="CreditNoteFundCode" style="min-width:150px;">Fund type</th>
+                                    <th scope="col">Account</th>
+                                    <th scope="col" id="CreditNoteVatCode" style="min-width:150px;">VAT code</th>
+                                    <th scope="col">Amount (£)</th>
+                                    <th scope="col"><span class="visually-hidden">Actions</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="credit-table-body"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <select id="CreditNote_FundCode" name="CreditNote_FundCode" aria-labelledby="CreditNoteFundCode">
+                                            <option value="">None</option>
+                                            @foreach (var item in Model.Funds.Items)
+                                            {
+                                                var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                                                <option class="item" value="@item.Value" @(Model.CreditNote != null && !Model.CreditNote.FundCode.IsNullOrEmpty() && Model.CreditNote.FundCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.CreditNote.AccountReference, new { @placeholder = "Enter account reference", @class = "form-control", @maxlength = 32 })
+                                        @Html.ValidationMessageFor(x => x.CreditNote.AccountReference)
+                                    </td>
+                                    <td>
+                                        <select id="CreditNote_VatCode" name="CreditNote_VatCode" aria-labelledby="CreditNoteVatCode">
+                                            <option value="">None</option>
+                                            @foreach (var item in Model.VatCodes.Items)
+                                            {
+                                                <option class="item" value="@item.Value" @(Model.CreditNote != null && Model.CreditNote.VatCode != null && !Model.CreditNote.VatCode.IsNullOrEmpty() && Model.CreditNote.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.CreditNote.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
+                                        @Html.ValidationMessageFor(x => x.CreditNote.Amount)
+                                    </td>
+                                    <td class="text-end">
+                                        <button class="btn btn-primary add-credit">Add</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer pb-0 pe-0">
+                        <button type="button" class="btn btn-secondary" id="clearAllCreditNotes">Clear all</button>
+                        <button type="button" class="btn btn-secondary me-0" data-bs-dismiss="modal">Close</button>
+                        @*<button type="button" class="btn btn-primary submit-credit" id="submit-credit">Save credit notes</button>*@
+                    </div>
+
                 </div>
-                <table id="credit-table" class="ui celled table striped">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 15%;">Fund</th>                            
-                            <th scope="col">Account</th>
-                            <th scope="col" style="width: 10%;">VAT</th>
-                            <th scope="col" style="width: 15%;">Amount (£)</th>
-                            <th scope="col" style="width: 10%;"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="credit-table-body"></tbody>
-                </table>
-
             </div>
-
-            <div class="actions">
-                <div class="ui black deny button cancel-credit">
-                    Cancel
-                </div>
-
-                <button type="submit" class="ui positive right labeled icon button submit-credit">
-                    Save credit notes
-                    <i class="checkmark icon"></i>
-                </button>
-            </div>
+        </div>
     </div>
+
 }

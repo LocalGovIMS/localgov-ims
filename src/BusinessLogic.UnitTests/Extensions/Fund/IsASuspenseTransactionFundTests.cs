@@ -7,12 +7,12 @@ using System.Collections.Generic;
 namespace BusinessLogic.UnitTests.Extensions.Fund
 {
     [TestClass]
-    public class IsASuspenseJournalFundTests
+    public class IsASuspenseTransactionFundTests
     {
         [TestMethod]
         [DataRow(true, true)]
         [DataRow(false, false)]
-        public void IsASuspenseJournalFund_returns_the_expected_result(bool value, bool expectedResult)
+        public void IsASuspenseTransactionFund_returns_the_expected_result(bool value, bool expectedResult)
         {
             // Arrange
             var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
@@ -20,39 +20,39 @@ namespace BusinessLogic.UnitTests.Extensions.Fund
             {
                 MetadataKey = new Entities.MetadataKey()
                 {
-                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                    Name = FundMetadataKeys.IsASuspenseTransactionFund
                 },
                 Value = value.ToString()
             });
 
             // Act
-            var result = fund.IsASuspenseJournalFund();
+            var result = fund.IsASuspenseTransactionFund();
 
             // Assert
             result.Should().Be(expectedResult);
         }
 
         [TestMethod]
-        public void IsASuspenseJournalFund_returns_false_when_metadata_is_null()
+        public void IsASuspenseTransactionFund_returns_false_when_metadata_is_null()
         {
             // Arrange
             var fund = new Entities.Fund() { Metadata = null };
 
             // Act
-            var result = fund.IsASuspenseJournalFund();
+            var result = fund.IsASuspenseTransactionFund();
 
             // Assert
             result.Should().BeFalse();
         }
 
         [TestMethod]
-        public void IsASuspenseJournalFund_returns_false_when_metadata_is_empty()
+        public void IsASuspenseTransactionFund_returns_false_when_metadata_is_empty()
         {
             // Arrange
             var fund = new Entities.Fund() { Metadata = new List<Entities.FundMetadata>() };
 
             // Act
-            var result = fund.IsASuspenseJournalFund();
+            var result = fund.IsASuspenseTransactionFund();
 
             // Assert
             result.Should().BeFalse();

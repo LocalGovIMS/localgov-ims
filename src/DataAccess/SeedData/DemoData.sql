@@ -259,12 +259,12 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT ([VatCode], [Percentage], [Disabled])
 VALUES ([VatCode], [Percentage], [Disabled]);
 
-DECLARE @IsASuspenseJournalVatCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseJournalVatCode' AND [EntityType] = 4);
+DECLARE @IsASuspenseTransactionVatCode_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseTransactionVatCode' AND [EntityType] = 4);
 
 MERGE INTO VatMetadata AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			(@IsASuspenseJournalVatCode_MetadataKeyId, 'True', 'M0')) 
+			(@IsASuspenseTransactionVatCode_MetadataKeyId, 'True', 'M0')) 
 	AS S ([MetadataKeyId], [Value], [VatCode])) AS [Source]
 ON [Target].[VatCode] = [Source].[VatCode] 
 	AND [Target].[MetadataKeyId] = [Source].[MetadataKeyId] 
@@ -322,7 +322,7 @@ VALUES ([FundCode], [FundName], [VatCode], [MaximumAmount], [OverPayAccount], [A
 
 DECLARE @IsACreditNoteEnabledFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsACreditNoteEnabledFund' AND [EntityType] = 2);
 DECLARE @IsAnEReturnDefaultFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsAnEReturnDefaultFund' AND [EntityType] = 2);
-DECLARE @IsASuspenseJournalFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseJournalFund' AND [EntityType] = 2);
+DECLARE @IsASuspenseTransactionFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsASuspenseTransactionFund' AND [EntityType] = 2);
 DECLARE @IsABasketFund_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'IsABasketFund' AND [EntityType] = 2);
 DECLARE @BasketReferenceFieldLabel_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'Basket.ReferenceFieldLabel' AND [EntityType] = 2);
 DECLARE @BasketReferenceFieldMessage_MetadataKeyId INT = (SELECT Id FROM MetadataKeys WHERE [Name] = 'Basket.ReferenceFieldMessage' AND [EntityType] = 2);
@@ -343,7 +343,7 @@ USING (SELECT *
 			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '13'),
 			(@IsACreditNoteEnabledFund_MetadataKeyId, 'True', '11'),
 			(@IsAnEReturnDefaultFund_MetadataKeyId, 'True', '13'),
-			(@IsASuspenseJournalFund_MetadataKeyId, 'True', '1'),
+			(@IsASuspenseTransactionFund_MetadataKeyId, 'True', '1'),
 			(@IsABasketFund_MetadataKeyId, 'True', '25'),
 			(@BasketReferenceFieldLabel_MetadataKeyId, 'Benefit overpayment reference', '25'),
 			(@IsABasketFund_MetadataKeyId, 'True', '19'),

@@ -146,7 +146,7 @@ USING (SELECT *
 			-- Fund
 			('IsACreditNoteEnabledFund', 'Is a credit note enabled fund', 1, 2),
 			('IsAnEReturnDefaultFund', 'Is an eReturn default fund', 1, 2),
-			('IsASuspenseJournalFund', 'Is a suspense journal fund', 1, 2),
+			('IsASuspenseTransactionFund', 'Is a suspense transaction fund', 1, 2),
 			('IsABasketFund', 'Is a basket fund', 1, 2),
 			('Basket.ReferenceFieldLabel', 'Basket reference field label', 1, 2),
 			('Basket.ReferenceFieldMessage', 'Basket reference field message', 1, 2),
@@ -157,7 +157,7 @@ USING (SELECT *
 			('ExternalCode', 'External code', 1, 3),
 
 			-- VAT
-			('IsASuspenseJournalVatCode', 'Is a suspense journal VAT code', 1, 4),
+			('IsASuspenseTransactionVatCode', 'Is a suspense transaction VAT code', 1, 4),
 			
 			-- Import
 			('TotalImportValue', 'Total import value', 1, 5)

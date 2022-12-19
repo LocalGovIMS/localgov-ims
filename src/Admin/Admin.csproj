@@ -787,7 +787,9 @@
     <Content Include="Scripts\App\Payment\index.js" />
     <Content Include="Scripts\App\Shared\input-cleanse.js" />
     <Content Include="Scripts\App\Shared\input-validation.js" />
+    <Content Include="Scripts\App\Suspense\credit.validation.js" />
     <Content Include="Scripts\App\Suspense\credit.js" />
+    <Content Include="Scripts\App\Suspense\journal.validation.js" />
     <Content Include="Scripts\App\Suspense\journal.js" />
     <Content Include="Scripts\App\Suspense\list.js" />
     <Content Include="Scripts\App\Suspense\0_shared.js" />
@@ -1079,6 +1081,7 @@
     <Content Include="Views\Payment\_Basket.cshtml" />
     <Content Include="Views\Transaction\_Header.cshtml" />
     <Content Include="Views\Suspense\_Header.cshtml" />
+    <Content Include="Views\Suspense\_Journal.Old.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

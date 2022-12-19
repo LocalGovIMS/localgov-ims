@@ -651,7 +651,7 @@
     <Compile Include="Controllers\Suspense\Journal\Get.cs" />
     <Compile Include="Controllers\Suspense\List\Get.cs" />
     <Compile Include="Controllers\Suspense\Search\Get.cs" />
-    <Compile Include="Controllers\Suspense\SubmitTransfers\Post.cs" />
+    <Compile Include="Controllers\Suspense\SubmitJournals\Post.cs" />
     <Compile Include="Controllers\Transaction\Activity\Get.cs" />
     <Compile Include="Controllers\Transaction\ConstructorTests.cs" />
     <Compile Include="Controllers\Transaction\EmailReceipt\Post.cs" />

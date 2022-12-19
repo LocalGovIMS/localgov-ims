@@ -25,8 +25,8 @@ namespace BusinessLogic.Suspense.JournalAllocation
         private readonly Guid _processId;
 
         private readonly string _creditMopCode;
-        private readonly string _journalVatCode;
-        private readonly string _journalFundCode;
+        private readonly string _suspenseTransactionVatCode;
+        private readonly string _suspenseTransactionFundCode;
 
         public DistinctTransactionJournalAllocationStrategy(
             ILog logger
@@ -42,8 +42,8 @@ namespace BusinessLogic.Suspense.JournalAllocation
             _journalAllocationStrategyValidator = journalAllocationStrategyValidator;
 
             _creditMopCode = GetCreditNoteMopCode();
-            _journalVatCode = GetJournalVatCode();
-            _journalFundCode = GetJournalFundCode();
+            _suspenseTransactionVatCode = GetSuspenseTransactionVatCode();
+            _suspenseTransactionFundCode = GetSuspenseTransactionFundCode();
 
             _processId = Guid.NewGuid();
         }
@@ -53,14 +53,14 @@ namespace BusinessLogic.Suspense.JournalAllocation
             return _unitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsAJournalReallocation()).MopCode;
         }
 
-        private string GetJournalVatCode()
+        private string GetSuspenseTransactionVatCode()
         {
-            return _unitOfWork.Vats.GetAll(true).FirstOrDefault(x => x.IsASuspenseJournalVatCode()).VatCode;
+            return _unitOfWork.Vats.GetAll(true).FirstOrDefault(x => x.IsASuspenseTransactionVatCode()).VatCode;
         }
 
-        private string GetJournalFundCode()
+        private string GetSuspenseTransactionFundCode()
         {
-            return _unitOfWork.Funds.GetAll(true).FirstOrDefault(x => x.IsASuspenseJournalFund()).FundCode;
+            return _unitOfWork.Funds.GetAll(true).FirstOrDefault(x => x.IsASuspenseTransactionFund()).FundCode;
         }
 
         public IResult Execute(List<int> suspenseItems
@@ -166,10 +166,10 @@ namespace BusinessLogic.Suspense.JournalAllocation
                     {
                         AccountReference = journal.AccountReference,
                         Amount = -(journal.Amount - creditNotesToJournal.Sum(x => x.Amount)),
-                        FundCode = _journalFundCode,
+                        FundCode = _suspenseTransactionFundCode,
                         Narrative = suspenses.FirstOrDefault(x => x.Item.Narrative != string.Empty).Item.Narrative,
                         ImportId = importId,
-                        VatCode = _journalVatCode,
+                        VatCode = _suspenseTransactionVatCode,
                     },
                     creditNotesToJournal,
                     _processId.ToString(),

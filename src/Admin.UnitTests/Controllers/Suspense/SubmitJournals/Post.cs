@@ -12,7 +12,7 @@ using System.Web.Mvc;
 using Controller = Admin.Controllers.SuspenseController;
 using Dependencies = Admin.Controllers.SuspenseControllerDependencies;
 
-namespace Admin.UnitTests.Controllers.Suspense.SubmitTransfers
+namespace Admin.UnitTests.Controllers.Suspense.SubmitJournals
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -29,7 +29,7 @@ namespace Admin.UnitTests.Controllers.Suspense.SubmitTransfers
         private MethodInfo GetMethod()
         {
             return _controller.GetMethods()
-                .Where(x => x.Name == "SubmitTransfers")
+                .Where(x => x.Name == "SubmitJournals")
                 .FirstOrDefault();
         }
 
@@ -52,7 +52,7 @@ namespace Admin.UnitTests.Controllers.Suspense.SubmitTransfers
 
             var controller = new Controller(dependencies);
 
-            return controller.SubmitTransfers(model);
+            return controller.SubmitJournals(model);
         }
 
         [TestMethod]

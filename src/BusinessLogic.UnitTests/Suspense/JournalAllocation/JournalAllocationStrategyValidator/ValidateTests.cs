@@ -35,7 +35,7 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation.JournalAllocationSt
                             {
                                 MetadataKey = new Entities.MetadataKey()
                                 {
-                                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                                    Name = FundMetadataKeys.IsASuspenseTransactionFund
                                 },
                                 Value = "True",
                                 FundCode = SuspenseJournalFundCode

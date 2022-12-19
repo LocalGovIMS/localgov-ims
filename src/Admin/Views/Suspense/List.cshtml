@@ -12,11 +12,11 @@
 @section Actions {
     @if (User.IsInRole(Role.Finance))
     {
-        <a class="btn btn-primary journal" id="journal">
-            <i class="exchange outline icon"></i> Create journal <span class="journal-button-value"></span>
+        <a class="btn btn-success credit-notes" id="credit-notes" data-bs-toggle="modal" data-bs-target="#creditNoteModal">
+            Add credit notes <span class="credit-button-value"></span>
         </a>
-        <a class="btn btn-primary credit-notes" id="credit-notes">
-            <i class="add outline icon"></i> Add credit notes <span class="credit-button-value"></span>
+        <a class="btn btn-primary journal" id="journal" data-bs-toggle="modal" data-bs-target="#journalModal">
+            Create journal <span class="journal-button-value"></span>
         </a>
     }
 }
@@ -129,6 +129,9 @@ else
 }
 
 @section Scripts {
+
+    @Scripts.Render("~/bundles/app/suspense")
+
     <script type="text/javascript">
         $(document).ready(function () {
             accessibleAutocomplete.enhanceSelectElement({

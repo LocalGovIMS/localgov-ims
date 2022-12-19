@@ -56,16 +56,16 @@
 
             transactionRow.id = id;
 
+            console.log('rootUrl: ', rootUrl);
+
             $.ajax({
                 type: "POST",
                 url: rootUrl + "/Validation/ValidateTransferItem",
                 data: JSON.stringify(transactionRow),
                 datatype: "JSON",
                 contentType: "application/json; charset=utf-8",
-                success: function (returnData) {
-
-                    console.log(returnData);
-
+                success: function (returnData)
+                {
                     if (returnData.ok) {
                         paymentsAdmin.services.accountHolder.lookup(transactionRow,
                             function () {
@@ -74,9 +74,9 @@
                                 clearError();
                                 renderUI();
 
-                                $('#TransferItem_AccountReference').val("");
-                                $('#TransferItem_Amount').val("");
-                                $('#TransferItem_Narrative').val("");
+                                $('#JournalItem_AccountReference').val("");
+                                $('#JournalItem_Amount').val("");
+                                $('#JournalItem_Narrative').val("");
 
                             });
                     }
@@ -116,7 +116,7 @@
             fundName: fundCodeOption.text,
             vatCode: vatCodeOption.value,
             accountReference: $.trim($('#TransferItem_AccountReference').val()),
-            amount: parseFloat($('#TransferItem_Amount').val()).toFixed(2),
+            amount: parseFloat($('#TransferItem_Amount').val()),
             narrative: $('#TransferItem_Narrative').val()
         }
 
@@ -323,7 +323,7 @@
         if (Transfers.items.length > 0) {
             $(Transfers.items).each(function (index) {
                 $('#transfer-table-body').append('<tr><td>' + this.fundName + '</td><td>' + this.accountReference + '</td><td>' + (this.name ? this.name : "") + '</td><td class=\"text-end\">' +
-                    (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : "") + '</td><td>' + this.vatCode + '</td><td class=\"text-end\">' + this.amount + '</td><td>' + this.narrative + '</td><td><a href=\'#\' class=\'btn btn-danger remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
+                    (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : "") + '</td><td>' + this.vatCode + '</td><td class=\"text-end\">' + this.amount.toFixed(2) + '</td><td>' + this.narrative + '</td><td><a href=\'#\' class=\'btn btn-danger remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
             });
 
             $('#transfer-table').show();

@@ -26,8 +26,8 @@ namespace BusinessLogic.Suspense.JournalAllocation
         private readonly Guid _processId;
 
         private string _debitMopCode;
-        private string _journalVatCode;
-        private string _journalFundCode;
+        private string _suspenseTransactionVatCode;
+        private string _suspenseTransactionFundCode;
 
         public CombinedTransactionJournalAllocationStrategy(
             ILog logger
@@ -55,14 +55,14 @@ namespace BusinessLogic.Suspense.JournalAllocation
             return _unitOfWork.Mops.GetAll(true).FirstOrDefault(x => x.IsAJournal()).MopCode;
         }
 
-        private string GetJournalVatCode()
+        private string GetSuspenseTransactionVatCode()
         {
-            return _unitOfWork.Vats.GetAll(true).FirstOrDefault(x => x.IsASuspenseJournalVatCode()).VatCode;
+            return _unitOfWork.Vats.GetAll(true).FirstOrDefault(x => x.IsASuspenseTransactionVatCode()).VatCode;
         }
 
-        private string GetJournalFundCode()
+        private string GetSuspenseTransactionFundCode()
         {
-            return _unitOfWork.Funds.GetAll(true).FirstOrDefault(x => x.IsASuspenseJournalFund()).FundCode;
+            return _unitOfWork.Funds.GetAll(true).FirstOrDefault(x => x.IsASuspenseTransactionFund()).FundCode;
         }
 
         public IResult Execute(
@@ -151,9 +151,9 @@ namespace BusinessLogic.Suspense.JournalAllocation
             _pspReference = _suspenseJournalService.GetPspReference();
             _suspenseTransactionDate = suspense.Item.CreatedAt;
 
-            _debitMopCode = GetCreditNoteMopCode();
-            _journalVatCode = GetJournalVatCode();
-            _journalFundCode = GetJournalFundCode();
+            _debitMopCode = GetDebitMopCode();
+            _suspenseTransactionVatCode = GetSuspenseTransactionVatCode();
+            _suspenseTransactionFundCode = GetSuspenseTransactionFundCode();
 
             var suspenseTransaction = CreateSuspenseTransaction(suspense);
 
@@ -172,11 +172,11 @@ namespace BusinessLogic.Suspense.JournalAllocation
             {
                 AccountReference = suspense.Item.AccountNumber,
                 Amount = -suspense.Item.Amount,
-                FundCode = _journalFundCode,
+                FundCode = _suspenseTransactionFundCode,
                 MopCode = _debitMopCode,
                 Narrative = suspense.Item.Narrative,
                 ImportId = suspense.Item.ImportId.Value,
-                VatCode = _journalVatCode
+                VatCode = _suspenseTransactionVatCode
             };
 
             return (ProcessedTransaction)_suspenseJournalService.CreateJournal(

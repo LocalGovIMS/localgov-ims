@@ -55,7 +55,7 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                             {
                                 MetadataKey = new MetadataKey()
                                 {
-                                    Name = VatMetadataKeys.IsASuspenseJournalVatCode
+                                    Name = VatMetadataKeys.IsASuspenseTransactionVatCode
                                 },
                                 Value = "True"
                             }
@@ -74,7 +74,7 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                             {
                                 MetadataKey = new MetadataKey()
                                 {
-                                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                                    Name = FundMetadataKeys.IsASuspenseTransactionFund
                                 },
                                 Value = "True"
                             }

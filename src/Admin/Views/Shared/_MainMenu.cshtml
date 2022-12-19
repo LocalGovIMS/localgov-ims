@@ -58,7 +58,7 @@
                 @if (User.IsInRole(Role.Finance))
                 {
                     <li class="nav-item">
-                        <a id="menu__import_rules" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "ImportProcessingRules" ? "active" : "")" href="@Url.Action("List", "ImportProcessingRule")">Rules<i class="icon fa fa-fw fa-forward pt-1"></i></a>
+                        <a id="menu__import_rules" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "ImportProcessingRule" ? "active" : "")" href="@Url.Action("List", "ImportProcessingRule")">Rules<i class="icon fa fa-fw fa-forward pt-1"></i></a>
                     </li>
                 }
                 @if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ServiceDesk))
@@ -74,7 +74,7 @@
                     </li>
                 }
                 <li class="nav-item">
-                    <a id="menu__help" class="px-2 nav-link link-light @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")">Help<i class="icon fa fa-fw fa-question pt-1"></i></a>
+                    <a id="menu__help" class="px-2 nav-link link-light last @(ViewContext.RouteData.Values["Controller"].ToString() == "Help" ? "active" : "")" href="@Url.Action("Index", "Help")">Help<i class="icon fa fa-fw fa-question pt-1"></i></a>
                 </li>
             </ul>
         }

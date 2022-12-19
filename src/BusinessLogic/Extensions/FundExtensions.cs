@@ -17,9 +17,9 @@ namespace BusinessLogic.Extensions
             return item.IsA(FundMetadataKeys.IsAnEReturnDefaultFund);
         }
 
-        public static bool IsASuspenseJournalFund(this Fund item)
+        public static bool IsASuspenseTransactionFund(this Fund item)
         {
-            return item.IsA(FundMetadataKeys.IsASuspenseJournalFund);
+            return item.IsA(FundMetadataKeys.IsASuspenseTransactionFund);
         }
 
         public static bool IsABasketFund(this Fund item)

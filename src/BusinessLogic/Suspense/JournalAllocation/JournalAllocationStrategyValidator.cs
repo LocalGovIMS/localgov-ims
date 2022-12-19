@@ -11,7 +11,7 @@ namespace BusinessLogic.Suspense.JournalAllocation
     {
         private readonly IFundService _fundService;
         
-        private string _suspenseFundCode;
+        private string _suspenseTransactionFundCode;
         private List<string> _creditNoteFundCodes;
 
         public JournalAllocationStrategyValidator(IFundService fundService)
@@ -20,8 +20,8 @@ namespace BusinessLogic.Suspense.JournalAllocation
 
             var funds = _fundService.GetAllFunds();
 
-            _suspenseFundCode = funds
-                .FirstOrDefault(y => y.IsASuspenseJournalFund())
+            _suspenseTransactionFundCode = funds
+                .FirstOrDefault(y => y.IsASuspenseTransactionFund())
                 .FundCode;
             
             _creditNoteFundCodes = funds
@@ -45,7 +45,7 @@ namespace BusinessLogic.Suspense.JournalAllocation
             if (args.JournalItems.Sum(x => x.Amount) != (args.Suspenses.Sum(x => x.AmountRemaining) + creditNoteTotal))
                 throw new SuspenseJournalAllocationException("Value of chosen suspense items and credit notes must match amount to be journalled");
 
-            if (args.JournalItems.Any(x => x.FundCode == _suspenseFundCode))
+            if (args.JournalItems.Any(x => x.FundCode == _suspenseTransactionFundCode))
                 throw new SuspenseJournalAllocationException("You cannot journal a suspense item back to suspense");
 
             if (args.CreditNotes != null)

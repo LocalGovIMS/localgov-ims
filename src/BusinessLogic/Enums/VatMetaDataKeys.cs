@@ -2,6 +2,6 @@
 {
     public static class VatMetadataKeys
     {
-        public const string IsASuspenseJournalVatCode = "IsASuspenseJournalVatCode";
+        public const string IsASuspenseTransactionVatCode = "IsASuspenseTransactionVatCode";
     }
 }

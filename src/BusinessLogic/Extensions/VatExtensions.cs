@@ -7,9 +7,9 @@ namespace BusinessLogic.Extensions
 {
     public static class VatExtensions
     {
-        public static bool IsASuspenseJournalVatCode(this Vat item)
+        public static bool IsASuspenseTransactionVatCode(this Vat item)
         {
-            return item.IsA(VatMetadataKeys.IsASuspenseJournalVatCode);
+            return item.IsA(VatMetadataKeys.IsASuspenseTransactionVatCode);
         }
 
         private static bool IsA(this Vat item, string key)

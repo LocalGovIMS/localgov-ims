@@ -195,7 +195,7 @@
     <Compile Include="Extensions\CheckDigitConfiguration\WeightingsArrayTests.cs" />
     <Compile Include="Extensions\DateTime\ToEndOfDayTests.cs" />
     <Compile Include="Extensions\Fund\IsAnEReturnDefaultFundTests.cs" />
-    <Compile Include="Extensions\Fund\IsASuspenseJournalFundTests.cs" />
+    <Compile Include="Extensions\Fund\IsASuspenseTransactionFundTests.cs" />
     <Compile Include="Extensions\Fund\IsACreditNoteEnabledFundTests.cs" />
     <Compile Include="Extensions\ImportProcessingRuleCondition\DisplaySummaryTests.cs" />
     <Compile Include="Extensions\ImportProcessingRuleAction\DisplaySummaryTests.cs" />
@@ -240,7 +240,7 @@
     <Compile Include="Extensions\Import\StartTests.cs" />
     <Compile Include="Extensions\Import\TestBase.cs" />
     <Compile Include="Extensions\Import\InitialiseTests.cs" />
-    <Compile Include="Extensions\Vat\IsASuspenseJournalVatCodeTests.cs" />
+    <Compile Include="Extensions\Vat\IsASuspenseTransactionVatCodeTests.cs" />
     <Compile Include="Helpers\PermissionTestHelper.cs" />
     <Compile Include="Classes\Smtp\VatReceiptEmailTests.cs" />
     <Compile Include="ImportProcessing\AccountHolder\ImportProcessingStrategyValidator\ValidateTests.cs" />
