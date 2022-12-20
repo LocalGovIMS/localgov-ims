@@ -42,8 +42,6 @@
 
             transactionRow.id = id;
 
-            console.log('In addTransaction - Posting');
-
             $.ajax({
                 type: 'POST',
                 url: rootUrl + '/Validation/ValidateTransferItem',

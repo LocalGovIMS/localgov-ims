@@ -8,7 +8,13 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header { @Model.AccountNumber }
+@section Header { 
+    @(string.IsNullOrEmpty(Model.AccountNumber) 
+        ? string.IsNullOrEmpty(Model.Narrative)
+            ? "Unknown"
+            : Model.Narrative
+        : Model.AccountNumber)
+}
 
 @section Subheader { Suspense details }
 

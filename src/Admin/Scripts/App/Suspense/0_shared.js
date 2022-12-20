@@ -63,8 +63,6 @@ function journalAmountMatchesTotalAvailable() {
 
 function handleFundTypeChange(querySelectorPrefix, val, vatCodeDropdown) {
 
-    console.log('In shared.handleFundTypeChange()');
-
     var option = paymentsAdmin.core.accessibleAutoComplete.getSelectedOption('#' + querySelectorPrefix + '_FundCode', val);
 
     if (option.dataset.vatDefaultCode) {
@@ -78,8 +76,6 @@ function handleFundTypeChange(querySelectorPrefix, val, vatCodeDropdown) {
 }
 
 function showHideVatOptions(querySelectorPrefix, allowVatOverride, defaultVatCode, vatCodeDropdown) {
-
-    console.log('In shared.showHideVatOptions()');
 
     document.getElementById(querySelectorPrefix + '_VatCode').disabled = false;
     document.getElementById(querySelectorPrefix + '_VatCode').removeAttribute("aria-disabled");
@@ -101,8 +97,6 @@ function showHideVatOptions(querySelectorPrefix, allowVatOverride, defaultVatCod
 
 function showModalError(querySelectorPrefix, message) {
 
-    console.log('In shared.showModalError();')
-
     var text = $(querySelectorPrefix + '-text');
 
     var html = [];
@@ -118,9 +112,6 @@ function showModalError(querySelectorPrefix, message) {
 }
 
 function clearModalError(querySelectorPrefix, header) {
-
-    console.log('In shared.clearModalError();')
-
     $(querySelectorPrefix + '-header').empty();
     $(querySelectorPrefix + '-header').text(header);
     $(querySelectorPrefix + '-text').empty();

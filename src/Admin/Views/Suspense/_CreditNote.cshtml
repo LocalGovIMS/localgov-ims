@@ -38,6 +38,7 @@
                             <tfoot>
                                 <tr>
                                     <td>
+                                        @Html.Label("CreditNote_FundCode", "Fund type", new { @class = "form-label visually-hidden" })
                                         <select id="CreditNote_FundCode" name="CreditNote_FundCode" aria-labelledby="CreditNoteFundCode">
                                             <option value="">None</option>
                                             @foreach (var item in Model.Funds.Items)
@@ -53,6 +54,7 @@
                                         @Html.ValidationMessageFor(x => x.CreditNote.AccountReference)
                                     </td>
                                     <td>
+                                        @Html.Label("CreditNote_VatCode", "VAT code", new { @class = "form-label visually-hidden" })
                                         <select id="CreditNote_VatCode" name="CreditNote_VatCode" aria-labelledby="CreditNoteVatCode">
                                             <option value="">None</option>
                                             @foreach (var item in Model.VatCodes.Items)

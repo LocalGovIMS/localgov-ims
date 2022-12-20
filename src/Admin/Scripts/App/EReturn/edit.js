@@ -201,9 +201,9 @@ function allowSubmit() {
         && validateWildcardValues()
         //&& bagNumberPresentIfRequired() // TODO: I've left this in for now, and the method it calls, incase we wish to reintroduce it
     ) {
-        $(".submit-button").removeClass("disabled");
+        $(".submit-button").removeAttr("disabled");
     } else {
-        $(".submit-button").addClass("disabled");
+        $(".submit-button").attr("disabled", "disabled");
     }
 }
 

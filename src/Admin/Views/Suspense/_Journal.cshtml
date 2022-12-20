@@ -44,6 +44,7 @@
                             <tfoot>
                                 <tr>
                                     <td>
+                                        @Html.Label("JournalItem_FundCode", "Fund type", new { @class = "form-label visually-hidden" })
                                         <select id="JournalItem_FundCode" name="JournalItem_FundCode" aria-labelledby="JournalItemFundCode">
                                             <option value="">None</option>
                                             @foreach (var item in Model.Funds.Items)
@@ -55,6 +56,7 @@
                                         </select>
                                     </td>
                                     <td>
+                                        @Html.Label("JournalItem_MopCode", "MOP", new { @class = "form-label visually-hidden" })
                                         <select id="JournalItem_MopCode" name="JournalItem_MopCode" aria-labelledby="JournalItemMopCode">
                                             <option value="">None</option>
                                             @foreach (var item in Model.MopCodes.Items)
@@ -68,6 +70,7 @@
                                         @Html.ValidationMessageFor(x => x.JournalItem.AccountReference)
                                     </td>
                                     <td>
+                                        @Html.Label("JournalItem_VatCode", "VAT code", new { @class = "form-label visually-hidden" })
                                         <select id="JournalItem_VatCode" name="JournalItem_VatCode" aria-labelledby="JournalItemVatCode">
                                             <option value="">None</option>
                                             @foreach (var item in Model.VatCodes.Items)

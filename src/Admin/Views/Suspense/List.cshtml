@@ -61,18 +61,11 @@
                         <td class="text-truncate" style="max-width:350px">
                             @if (item.LatestNote != null)
                             {
-                                <div class="ui feed">
-                                    <div class="event">
-                                        <div class="content">
-                                            <div class="summary">
-                                                @item.LatestNote.CreatedByUser.DisplayName added a note on <div class="date list-date">@item.LatestNote.CreatedAt</div>
-                                            </div>
-                                            <div class="extra text">
-                                                @item.LatestNote.Note
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="w-100 mb-2">
+                                    <span class="me-2 fw-bold">@item.LatestNote.CreatedByUser.DisplayName</span>
+                                    <small>@item.LatestNote.CreatedAt</small>
                                 </div>
+                                <p class="mb-1">@item.LatestNote.Note</p>
                             }
                         </td>
                         <td>@item.Item.AccountNumber</td>

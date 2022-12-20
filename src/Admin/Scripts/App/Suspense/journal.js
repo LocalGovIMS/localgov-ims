@@ -49,6 +49,8 @@
     $('#JournalItem_FundCode').attr('aria-labelledby', 'JournalItemFundCode');
     $('#JournalItem_VatCode').attr('aria-labelledby', 'JournalItemVatCode');
 
+    //paymentsAdmin.core.accessibleAutoComplete.setSelectedOption('#JournalItem_MopCode', 'JR', journalMopCode);
+    
     addTransaction = function (transactionRow, transactionArray, validator, messageContainerSelector, selectorPrefix) {
 
         var text = $(messageContainerSelector + '-text');
@@ -256,8 +258,8 @@ function renderJournals() {
     $('#amount-available-to-journal').text(remainingAvailableToJournal().toFixed(2));
 
     if (journalAmountMatchesTotalAvailable() && totalAvailableToJournal() > totalCreditNotes()) {
-        $('.submit-journal').removeClass('disabled');
+        $('.submit-journal').removeAttr('disabled');
     } else {
-        $('.submit-journal').addClass('disabled');
+        $('.submit-journal').attr('disabled', 'disabled');
     }
 }

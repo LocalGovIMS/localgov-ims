@@ -88,7 +88,6 @@
             },
 
             setSelectedOption: function (querySelector, defaultValue, dropdown) {
-
                 var option = paymentsAdmin.core.accessibleAutoComplete.getSelectedOptionByValue(querySelector, defaultValue);
                 $(querySelector + '-select').val(defaultValue);
 
