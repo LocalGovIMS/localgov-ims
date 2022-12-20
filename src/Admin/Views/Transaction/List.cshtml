@@ -55,7 +55,7 @@
                     {
                         <tr>
                             <td>@transaction.EntryDate</td>
-                            <td style="text-align: center;">
+                            <td class="text-center">
                                 <div class="px-2 py-1 rounded-1 d-inline-flex"
                                      title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
                                      style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">@(transaction.Mop != null ? transaction.Mop.MopCode : "")</div>
@@ -71,7 +71,7 @@
                                 }
                                 @if (transaction.PspReference != transaction.InternalReference)
                                 {
-                                    <div class="sub">@transaction.InternalReference</div>
+                                    <div>@transaction.InternalReference</div>
                                 }
                             </td>
                             <td>
@@ -81,10 +81,7 @@
                             <td>@transaction.AccountReference</td>
 
                             <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
-                            <td style="text-align: right" class="@if (transaction.Amount < 0)
-                                            {
-                                                @Html.Raw("td--negative")
-                                            }">
+                            <td class="text-end @if (transaction.Amount < 0) { @Html.Raw("td--negative") }">
                                 @Html.ToCurrency(transaction.Amount)
                             </td>
                         </tr>
@@ -94,28 +91,24 @@
                 <tfoot>
                     <tr>
                         <td colspan="7">
-
-
-                            <div class="ui pagination menu">
-                                @if (Model.Pages > 1)
+                            @if (Model.Pages > 1)
+                            {
+                                @Html.PagedListPager(Model.Transactions, page => Url.Action(Model.SearchCriteria.SearchAction, new
                                 {
-                                    @Html.PagedListPager(Model.Transactions, page => Url.Action(Model.SearchCriteria.SearchAction, new
-                                    {
-                                        page = page,
-                                        amount = Model.SearchCriteria.Amount,
-                                        fundCode = Model.SearchCriteria.FundCode,
-                                        receiptNumber = Model.SearchCriteria.ReceiptNumber,
-                                        startDate = Model.SearchCriteria.StartDate,
-                                        endDate = Model.SearchCriteria.EndDate,
-                                        accountReference = Model.SearchCriteria.AccountReference,
-                                        userId = Model.SearchCriteria.UserId,
-                                        mopCode = Model.SearchCriteria.MopCode,
-                                        narrative = Model.SearchCriteria.Narrative,
-                                        WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
-                                        ImportId = Model.SearchCriteria.ImportId
-                                    }))
-                                }
-                            </div>
+                                    page = page,
+                                    amount = Model.SearchCriteria.Amount,
+                                    fundCode = Model.SearchCriteria.FundCode,
+                                    receiptNumber = Model.SearchCriteria.ReceiptNumber,
+                                    startDate = Model.SearchCriteria.StartDate,
+                                    endDate = Model.SearchCriteria.EndDate,
+                                    accountReference = Model.SearchCriteria.AccountReference,
+                                    userId = Model.SearchCriteria.UserId,
+                                    mopCode = Model.SearchCriteria.MopCode,
+                                    narrative = Model.SearchCriteria.Narrative,
+                                    WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
+                                    ImportId = Model.SearchCriteria.ImportId
+                                }))
+                            }
                         </td>
                     </tr>
                 </tfoot>

@@ -84,21 +84,19 @@
             <tfoot>
                 <tr>
                     <td colspan="7">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
                             {
-                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                                {
-                                    page = page,
-                                    amount = Model.SearchCriteria.Amount,
-                                    transactionDateFrom = Model.SearchCriteria.TransactionDateFrom,
-                                    transactionDateTo = Model.SearchCriteria.TransactionDateTo,
-                                    accountNumber = Model.SearchCriteria.AccountNumber,
-                                    narrative = Model.SearchCriteria.Narrative,
-                                    status = Model.SearchCriteria.Status
-                                }))
-                            }
-                        </div>
+                                page = page,
+                                amount = Model.SearchCriteria.Amount,
+                                transactionDateFrom = Model.SearchCriteria.TransactionDateFrom,
+                                transactionDateTo = Model.SearchCriteria.TransactionDateTo,
+                                accountNumber = Model.SearchCriteria.AccountNumber,
+                                narrative = Model.SearchCriteria.Narrative,
+                                status = Model.SearchCriteria.Status
+                            }))
+                        }
                     </td>
                 </tr>
             </tfoot>

@@ -47,16 +47,14 @@
             <tfoot>
                 <tr>
                     <td colspan="2">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
                             {
-                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                                {
-                                    page = page,
-                                    name = Model.SearchCriteria.Name
-                                }))
-                            }
-                        </div>
+                                page = page,
+                                name = Model.SearchCriteria.Name
+                            }))
+                        }
                     </td>
                 </tr>
             </tfoot>

@@ -96,9 +96,9 @@
                             <td></td>
                         }
 
-                    <td class="text-end">
-                        @Html.ToCurrency(Model.EReturns[i].Amount)
-                    </td>
+                        <td class="text-end">
+                            @Html.ToCurrency(Model.EReturns[i].Amount)
+                        </td>
 
                         <td class="text-end" style="min-width:200px;">
                             @if (Model.EReturns[i].EReturn.EReturnStatus.Id < 3)
@@ -122,22 +122,20 @@
             <tfoot>
                 <tr>
                     <td colspan="10">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.EReturns, page => Url.Action("Search", new
                             {
-                                @Html.PagedListPager(Model.EReturns, page => Url.Action("Search", new
-                                {
-                                    page = page,
-                                    amount = Model.SearchCriteria.Amount,
-                                    templateId = Model.SearchCriteria.TemplateId,
-                                    reference = Model.SearchCriteria.Reference,
-                                    startDate = Model.SearchCriteria.StartDate,
-                                    endDate = Model.SearchCriteria.EndDate,
-                                    statusId = Model.SearchCriteria.StatusId,
-                                    EReturnType = string.IsNullOrEmpty(Model.SearchCriteria.EReturnType.ToString()) ? Model.SearchCriteria.EReturnType.ToString() : ((int)Model.SearchCriteria.EReturnType).ToString()
-                                }))
-                            }
-                        </div>
+                                page = page,
+                                amount = Model.SearchCriteria.Amount,
+                                templateId = Model.SearchCriteria.TemplateId,
+                                reference = Model.SearchCriteria.Reference,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                                statusId = Model.SearchCriteria.StatusId,
+                                EReturnType = string.IsNullOrEmpty(Model.SearchCriteria.EReturnType.ToString()) ? Model.SearchCriteria.EReturnType.ToString() : ((int)Model.SearchCriteria.EReturnType).ToString()
+                            }))
+                        }
                     </td>
                 </tr>
             </tfoot>

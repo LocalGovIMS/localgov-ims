@@ -53,17 +53,15 @@
             <tfoot>
                 <tr>
                     <td colspan="3">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
-                            {
-                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                            {
-                                page = page,
-                                amount = Model.SearchCriteria.FundCode,
-                                fundCode = Model.SearchCriteria.Message,
-                            }))
-                            }
-                        </div>
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
+                        {
+                            page = page,
+                            amount = Model.SearchCriteria.FundCode,
+                            fundCode = Model.SearchCriteria.Message,
+                        }))
+                        }
                     </td>
                 </tr>
             </tfoot>

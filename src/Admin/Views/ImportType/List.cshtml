@@ -73,18 +73,16 @@
             <tfoot>
                 <tr>
                     <td colspan="6">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
                             {
-                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                                {
-                                    Page = page,
-                                    Name = Model.SearchCriteria.Name,
-                                    ExternalReference = Model.SearchCriteria.ExternalReference,
-                                    DataType = Model.SearchCriteria.DataType,
-                                }))
-                            }
-                        </div>
+                                Page = page,
+                                Name = Model.SearchCriteria.Name,
+                                ExternalReference = Model.SearchCriteria.ExternalReference,
+                                DataType = Model.SearchCriteria.DataType,
+                            }))
+                        }
                     </td>
                 </tr>
             </tfoot>
@@ -97,18 +95,19 @@ else
 }
 
 @section Scripts {
-    <script type="text/javascript">$(document).ready(function () {
-        accessibleAutocomplete.enhanceSelectElement({
-            displayMenu: 'overlay',
-            autoSelect: false,
-            confirmOnBlur: false,
-            showAllValues: true,
-            defaultValue: '',
-            preserveNullOptions: true,
-            placeholder: 'Select data type',
-            dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
-            selectElement: document.querySelector('#DataType')
-        });
+    <script type="text/javascript">
+    $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select data type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#DataType')
+            });
 
-    });</script>
+        });</script>
 }

@@ -65,19 +65,17 @@
             <tfoot>
                 <tr>
                     <td colspan="5">
-                        <div class="ui pagination menu">
-                            @if (Model.Pages > 1)
+                        @if (Model.Pages > 1)
+                        {
+                            @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
                             {
-                                @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
-                                {
-                                    page = page,
-                                    importTypeId = Model.SearchCriteria.ImportTypeId,
-                                    statusId = Model.SearchCriteria.StatusId,
-                                    startDate = Model.SearchCriteria.StartDate,
-                                    endDate = Model.SearchCriteria.EndDate,
-                                }))
-                            }
-                        </div>
+                                page = page,
+                                importTypeId = Model.SearchCriteria.ImportTypeId,
+                                statusId = Model.SearchCriteria.StatusId,
+                                startDate = Model.SearchCriteria.StartDate,
+                                endDate = Model.SearchCriteria.EndDate,
+                            }))
+                        }
                     </td>
                 </tr>
             </tfoot>
@@ -115,7 +113,7 @@ else
                 placeholder: 'Select import type',
                 dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
                 selectElement: document.querySelector('#ImportTypeId')
-            });            
+            });
 
             accessibleAutocomplete.enhanceSelectElement({
                 displayMenu: 'overlay',
