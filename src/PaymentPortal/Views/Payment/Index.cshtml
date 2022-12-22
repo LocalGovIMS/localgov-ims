@@ -204,152 +204,6 @@
         </div>
     </div>
 }
-<div class="panels">
-    <div class="grid grid--gutters">
-        <div class="container container--page">
-
-
-
-            @using (Html.BeginForm("", "", FormMethod.Post))
-            {
-                <div class="flex__container">
-                    @*<div class="panel panel--details">
-                        <fieldset>*@
-                    @*@if (Model.BasketItems.Count <= 0)
-                        {
-                            <legend>Payment details</legend>
-                            <div class="message message--info message--flash">
-                                Please tell us what you’d like to pay, your payment reference and how much you’re paying.
-                                <br />
-                                <br />
-                                You can pay by:
-                                <ul>
-                                    <li>
-                                        Debit or credit card for one or more items by adding them to your basket
-                                    </li>
-                                </ul>
-                            </div>
-                        }
-                        else
-                        {
-                            <legend>Add another payment</legend>
-                        }*@
-
-                    @*@if (ViewBag.Message != null)
-                        {
-                            <div class="message message--warn">
-                                @ViewBag.Message
-                            </div>
-                        }*@
-
-                    @*<div class="form__element form__element--inline">
-                            @Html.LabelFor(m => m.PaymentType)
-                            @if (ViewBag.PaymentTypes != null)
-                            {
-                                <div class="select__wrapper">
-                                    <select name="@Html.NameFor(m => m.PaymentType)" id="PaymentType" class="select">
-                                        <option></option>
-                                        @foreach (var type in (List<PaymentTypeListItem>)ViewBag.PaymentTypes)
-                                        {
-                                            <option value="@type.Value" @(type.Value == Model.PaymentType ? "selected" : "")
-                                                    data-referenceFieldLabel="@type.ReferenceFieldLabel"
-                                                    data-ReferenceFieldMessage="@type.ReferenceFieldMessage">
-                                                @type.Text
-                                            </option>
-                                        }
-                                    </select>
-                                </div>
-                            }
-                        </div>
-                        <div class="form__element--error">
-                            @Html.ValidationMessageFor(m => m.PaymentType)
-                        </div>
-                        <div>
-                            @Html.LabelFor(m => m.PaymentReference)
-                            <div class="form__element form__element--paymentmessage">
-                                <span for="paymentmessage"></span>
-                            </div>
-                            @Html.TextBoxFor(m => m.PaymentReference, new { @style = "text-transform:uppercase", @maxlength = "30" })
-                        </div>
-                        <div class="form__element--error">
-                            @Html.ValidationMessageFor(m => m.PaymentReference)
-                        </div>
-                        <div>
-                            @Html.LabelFor(m => m.Amount)
-                            @Html.TextBoxFor(m => m.Amount, new { @type = "number", @step = "0.01" })
-                        </div>
-                        <div class="form__element--error">
-                            @Html.ValidationMessageFor(m => m.Amount)
-                        </div>
-                        <div>
-                            <button value="Card" name="action" type="submit" class="button button--default button--primary">Pay with Card (add to basket)</button>
-                        </div>*@
-                    @*<div class="form__element--error" style="margin-top:1em">
-                            @Html.ValidationMessageFor(m => m.BasketItems)
-                        </div>*@
-                    @*</fieldset>
-                            @if (Model.BasketItems.Count > 0)
-                            {
-                                for (int i = 0; i < Model.BasketItems.Count; i++)
-                                {
-                                    @Html.Hidden("BasketItems[" + @i + "].Description", Model.BasketItems[@i].Description)
-                                    @Html.Hidden("BasketItems[" + @i + "].Code", Model.BasketItems[@i].Code)
-                                    @Html.Hidden("BasketItems[" + @i + "].Reference", Model.BasketItems[@i].Reference)
-                                    @Html.Hidden("BasketItems[" + @i + "].Amount", Model.BasketItems[@i].Amount)
-                                }
-                            }
-                        </div>*@
-
-                    @*<div class="panel panel--basket @if (Model.BasketItems.Count <= 0)
-                                                        {
-                                                            @Html.Raw("panel--basket--empty")
-                                                        }">
-                            <h1 class="panel__heading">Basket </h1>
-
-                            <div>
-                                @if (Model.BasketItems.Count <= 0)
-                                {
-                                    <div class="message message--info">Your basket is empty</div>
-                                }
-                                else
-                                {
-                                    <table style="margin-bottom: 1rem;">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Reference</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Remove</th>
-                                            </tr>
-                                        </thead>
-                                        @for (int i = 0; i < Model.BasketItems.Count; i++)
-                                        {
-                                            <tr>
-                                                <td>@Model.BasketItems[@i].Description</td>
-                                                <td>@Model.BasketItems[@i].Reference</td>
-                                                <td>
-                                                    <div>@Model.BasketItems[@i].Amount.ToString("c")</div>
-                                                </td>
-
-                                                <td>
-                                                    @Html.ActionLink("Delete", "RemoveItem", new { reference = Model.BasketItems[@i].Reference })
-                                                </td>
-                                            </tr>
-                                        }
-                                    </table>
-
-                                    <div style="margin-top: 0.5rem;">
-                                        <button type="submit" value="Pay" name="action" class="button button--default button--main button--primary">Pay @Model.BasketTotal.ToString("c")</button> @Html.ActionLink("Empty Basket", "EmptyBasket", null, new { @class = "button button--default button--link" })
-                                    </div>
-                                }
-                            </div>
-                        </div>*@
-
-                </div>
-            }
-        </div>
-    </div>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/payment")
@@ -374,19 +228,12 @@
 
             function handleFundTypeChange(val) {
 
-                console.log('handleFundTypeChange: ', val);
-
                 setTimeout(function () {
 
                     var option = getSelectedAccessibleAutocompleteOption('#PaymentType', val);
 
-                    console.log('option: ', option);
-
                     var referenceFieldLabel = option.dataset.referencefieldlabel;
                     var referenceFieldMessage = option.dataset.referencefieldmessage;
-
-                    console.log('referenceFieldLabel: ', referenceFieldLabel);
-                    console.log('referenceFieldMessage: ', referenceFieldMessage);
 
                     $('label[for="PaymentReference"]').text(referenceFieldLabel);
                     $('#payment-reference-message').text(referenceFieldMessage);

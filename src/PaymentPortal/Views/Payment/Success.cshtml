@@ -19,7 +19,7 @@
                 <div class="card-text text-center">
                     <i class="fa fa-check-circle-o mt-1" style="color: #008080; font-size: 10rem;" aria-hidden="true"></i>
 
-                    <p style="font-size: 2rem; color: #444;">Thank you, your payment was successful.</p>
+                    <p class="fs-3">Thank you, your payment was successful.</p>
 
                     <p>Your payment reference is <strong class="p-2" style="background-color: #f0f0f0;">@TempData["Receipt"]</strong><p>
 
@@ -62,64 +62,6 @@
 
     </div>
 </div>
-
-@*<div class="panels">
-    <div class="grid grid--gutters">
-        <div class="container container--page">
-            <div class="grid__section">
-                <div class="grid__row">
-                    <div class="grid__column grid__column--12">
-                        <div class="panel">
-                            <fieldset>
-                                <legend>Successful payment</legend>
-
-                                <div style="text-align: center;">
-                                    <i class="fa fa-check-circle-o" style="color: #008080; font-size: 10rem; margin-top: 2rem;" aria-hidden="true"></i>
-
-                                    <p style="font-size: 2rem; color: #444;">Thank you, your payment was successful.</p>
-
-                                    <p>Your payment reference is <strong style="background-color: #f0f0f0; padding: 0.5rem;">@TempData["Receipt"]</strong><p>
-
-                                        @{
-                                            TempData.Remove("Receipt");
-                                        }
-
-                                    <p>Please make a copy of this reference number for your records.</p>
-
-                                    <div style="background-color: #f4f1e8;  padding: 1rem; max-width: 640px; margin: 2rem auto;">
-
-                                        <p>If you'd like an email receipt please enter your email address below</p>
-
-                                        <label for="EmailAddress" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;}">Email address</label>
-                                        @Html.TextBox("EmailAddress", "", new { placeholder = "Email address", size = "40", type = "email" })
-
-                                        <a class="button button--default button--primary ui-send-email" href="#" style="padding: 0.5rem 1rem; background-color: #008080; border-color:#008080">Send email receipt</a>
-
-                                        <div class=" email-receipt-message" style="display:none;">
-                                            <div style="color:#833054">Sorry there was a problem sending your receipt, please check your email and try again</div>
-                                        </div>
-
-                                        <div class="email-receipt-message-success" style="display: none;">
-                                            <div style="color:#008080">No problem! Your receipt has been sent to the email address specified</div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div style="text-align: center; border-top: 2px solid #eee; padding-top: 2rem; margin-top: 2rem;">
-                                    <a class="button button--default button--primary ui-return" href="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Website"])">Continue to the main @(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) website</a>
-                                    <a class="button button--default ui-another-payment" href="@(System.Configuration.ConfigurationManager.AppSettings["PortalPaymentsURL"])">Make another payment</a>
-                                </div>
-
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/payment")
