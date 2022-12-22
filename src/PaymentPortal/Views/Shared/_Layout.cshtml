@@ -13,46 +13,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
     <title>@(ViewBag.Title ?? ViewBag.FormTitle) - @(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])</title>
-    @Styles.Render("~/Content/css")
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css" media="only screen">
 
+    @Styles.Render("~/Content/css")
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css" media="only screen">
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
 
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/GoogleAnalytics")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/accessible-autocomplete")
+
     <script type="text/javascript" language="javascript">
         rootUrl = "@Context.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~")";
     </script>
 </head>
 
-<body class="body--transactional" cz-shortcut-listen="true">
-    <header role="banner">
-        <div class="container container--screen ">
-            <div class="masthead container--float">
-                <div class="logo masthead__logo">
-                    <h1 class="logo__heading">
-                        <a class="logo__link">
-                            @(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])
-                        </a>
-                    </h1>
-                </div>
-                <p class="masthead__strapline">
-                    @(System.Configuration.ConfigurationManager.AppSettings["Layout.Strapline"])
-                </p>
+<body>
+    <div class="container-fluid min-vh-100 p-0">
+        <header role="banner" class="bg-black">
+            <div class="d-flex" style="height:100px;">
+                <div class="p-2 ps-4 text-light align-self-center flex-grow-1">@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"])</div>
+                <div class="p-2 pe-4 text-light align-self-center">@(System.Configuration.ConfigurationManager.AppSettings["Layout.Strapline"])</div>
             </div>
-        </div>
-    </header>
-    <div class="">
-        <main class="container container--application container--application--primary">
-            <div class="container container--page">
-                <div class="container container--float">
-                    <div class="container--title">
-                        <h1>@ViewBag.FormTitle</h1>
-                    </div>
-                </div>
+        </header>
+        <main>
+            <div class="container pt-4">
+                <h1 class="mb-4">@ViewBag.FormTitle</h1>
+                @RenderBody()
             </div>
-            @RenderBody()
         </main>
     </div>
     @RenderSection("scripts", required: false)

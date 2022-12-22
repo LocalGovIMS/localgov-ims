@@ -3,6 +3,8 @@ using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using log4net;
 using System;
+using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.ImportType
 {
@@ -40,6 +42,19 @@ namespace Admin.Classes.ViewModelBuilders.ImportType
             model.IsReversible = data.IsReversible;
             model.ImportProcessingRulesAreAvailableToAdd = ImportProcessingRulesAreAvailableToAdd(data);
 
+            model.ImportTypes = GetImportTypes();
+
+            return model;
+        }
+
+        private SelectList GetImportTypes()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.ImportDataTypeEnum)), false);
+        }
+
+        protected override EditViewModel OnRebuild(EditViewModel model)
+        {
+            model.ImportTypes = GetImportTypes();
             return model;
         }
 

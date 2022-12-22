@@ -3,57 +3,67 @@
     ViewBag.Title = "Import type";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Import type details
-        </div>
-    </h1>
+
+@section Header { @Model.Name }
+
+@section Subheader { Import type details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Id)
-        @Html.DisplayFor(m => m.Id)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Id, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Id)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.DataType)
-        @Html.DisplayFor(m => m.DataType)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.DataType, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.DataType)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Name)
-        @Html.DisplayFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Name)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Description)
-        @Html.DisplayFor(m => m.Description)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Description, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Description)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.ExternalReference)
-        @Html.DisplayFor(m => m.ExternalReference)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.ExternalReference, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.ExternalReference)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.IsReversible)
-        @Model.IsReversible.ToYesNoString()
+    <div class="mb-3">
+        @Html.LabelFor(m => m.IsReversible, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Model.IsReversible.ToYesNoString()
+        </div>
     </div>
 
-    <div class="ui vertical segment">
+    <div class="mb-3">
         <h2>
             Import processing rules
         </h2>
         @Html.Action("_List", "ImportTypeImportProcessingRule", new { id = Model.Id })
     </div>
 
-    <br />
 
-    @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "ImportType", null, new { @class = "btn btn-secondary" })
 
 </div>

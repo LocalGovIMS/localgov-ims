@@ -1,0 +1,14 @@
+﻿<div class="float-start me-1">
+    @if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//localhost"))
+    {
+        <div class="environment environment--local">LOCAL</div>
+    }
+    else if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//intranetdev"))
+    {
+        <div class="environment environment--dev">DEV</div>
+    }
+    else if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("//intranettest"))
+    {
+        <div class="environment environment--test">TEST</div>
+    }
+</div>

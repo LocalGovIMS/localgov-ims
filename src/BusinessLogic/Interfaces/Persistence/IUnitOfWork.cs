@@ -13,6 +13,8 @@ namespace BusinessLogic.Interfaces.Persistence
         IEReturnCashRepository EReturnCashes { get; }
         IEReturnChequeRepository EReturnCheques { get; }
         IEReturnStatusRepository EReturnStatuses { get; }
+        IEReturnTemplateRepository EReturnTemplates { get; }
+        IEReturnTemplateRowRepository EReturnTemplateRows { get; }
         IEReturnTypeRepository EReturnTypes { get; }
         IRepository<EReturnNote> EReturnNotes { get; }
         IFundRepository Funds { get; }

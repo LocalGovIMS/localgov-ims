@@ -15,9 +15,18 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "Import Rules")]
+        [NavigatablePageActionFilter(ClearNavigation = true, DisplayText = "Import Rules")]
         [HttpGet]
         public ActionResult List()
+        {
+            var model = Dependencies.ListViewModelBuilder.Build();
+
+            return View("List", model);
+        }
+
+        [NavigatablePageActionFilter(OnlyComparePath = true, DisplayText = "Import Rules")]
+        [HttpGet]
+        public ActionResult ListMaintainingNavigation()
         {
             var model = Dependencies.ListViewModelBuilder.Build();
 

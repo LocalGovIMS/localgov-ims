@@ -2,112 +2,74 @@
 
 @using (Html.BeginForm("Search", "EReturn", FormMethod.Get))
 {
-    <div class="ui segment">
-        <div class="ui form">
-            <div class="four fields">
-                <div class="field">
-                    <label class="">Reference</label>
-                    @Html.TextBoxFor(m => m.Reference, new { size = 10, placeholder = "Enter reference" })
-                </div>
-                <div class="field">
-                    <label class="">Start date</label>
-                    <div class="ui input left icon">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "width:145px;" })
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="">End date</label>
-                    <div class="ui input left icon">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "width:145px;" })
-                    </div>
-                </div>
+    <div>
 
-                <div class="field">
-                    <label>Template</label>
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.TemplateId)
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select template</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Templates.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
 
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.Reference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Reference, new { @class = "form-control", size = 10, placeholder = "Enter reference" })
             </div>
-            <div class="four fields">
 
-                <div class="field">
-                    <label>Status</label>
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.StatusId)
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select status</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Statuses.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>Type</label>
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.EReturnType)
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select type</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Types.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="">Amount (£)</label>
-                    @Html.TextBoxFor(m => m.Amount, new { size = 6, type = "text", placeholder = "Enter amount", @class = "monetary-amount", @maxlength = "18" })
-                </div>
-
-                <div class="field">
-                    <label>&nbsp;</label>
-                    <button class="ui icon blue floated right button" tabindex="0" type="submit" id="SearchButton">
-                        <i class="search icon"></i> Search
-                    </button>
-                </div>
-
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", placeholder = "Start date", type = "date" })
             </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", placeholder = "End date", type = "date" })
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.TemplateId, new { @class = "form-label" })
+                <select id="TemplateId" name="TemplateId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Templates.Items)
+                    {
+                        <option class="item" value="@item.Value" @(Model.TemplateId.HasValue && Model.TemplateId.Value.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.StatusId, new { @class = "form-label" })
+                <select id="StatusId" name="StatusId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Statuses.Items)
+                    {
+                        <option class="item" value="@item.Value" @(Model.StatusId.HasValue && Model.StatusId.Value.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.EReturnType, new { @class = "form-label" })
+                <select id="EReturnType" name="EReturnType">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Types.Items)
+                    {
+                        <option class="item" value="@item.Value" @(Model.EReturnType.HasValue && Model.EReturnType.Value.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.Amount, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control monetary-amount", placeholder = "Enter amount", @maxlength = "18" })
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-8 col-lg-3 col-xxl-10 pt-3 gap-2 d-flex align-self-end justify-content-end">
+                <button class="btn btn-primary search" tabindex="0" type="submit">
+                    <i class="search icon"></i> Search
+                </button>
+                <a href="@Url.Action("Search", "EReturn")" class="btn btn-secondary" id="reset">
+                    <i class="undo icon"></i> Reset search
+                </a>
+            </div>
+
         </div>
+
     </div>
-    
+
 }
-
-<script>
-    $('.ui.dropdown').dropdown({
-        match: 'both'
-    });
-
-</script>

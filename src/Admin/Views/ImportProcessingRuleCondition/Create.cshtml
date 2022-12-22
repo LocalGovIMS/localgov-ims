@@ -7,101 +7,88 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create import processing rule condition
-        <div class="sub header">
-            Import processing rule condition details
-        </div>
-    </h1>
-}
+@section Header { Create import processing rule condition }
+
+@section Subheader { Import processing rule condition details }
 
 @using (Html.BeginForm("Create", "ImportProcessingRuleCondition", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.ImportProcessingRuleId)
     @Html.HiddenFor(m => m.Group)
 
-    <div class="ui form">
-        <div class="fields">
+    <div>
 
-            @if (!Model.IsFirstItemInTheGroup)
-            {
-                <div class="inline field">
-                    <div class="ui search selection dropdown fields-dropdown">
-                        @Html.HiddenFor(x => x.LogicalOperator, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow">Select logical operator</div>
-                        <div class="menu">
-                            @foreach (var item in Model.LogicalOperators.Items)
-                            {
-                                var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+        @if (!Model.IsFirstItemInTheGroup)
+        {
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.LogicalOperator, new { @class = "form-label" })
+                    <select id="LogicalOperator" name="LogicalOperator">
+                        <option value="">None</option>
+                        @foreach (var item in Model.LogicalOperators.Items)
+                        {
+                            var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                                <div class="item" data-value="@item.Value" @dataAttributes>
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
+                            <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.LogicalOperator) && Model.LogicalOperator.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                        }
+                    </select>
                     <div class="form__element--error">
                         @Html.ValidationMessageFor(m => m.LogicalOperator)
                     </div>
                 </div>
-            }
+            </div>
+        }
 
-            <div class="inline field">
-                @Html.LabelFor(m => m.ImportProcessingRuleFieldId)
-                <div class="ui search selection dropdown fields-dropdown">
-                    @Html.HiddenFor(x => x.ImportProcessingRuleFieldId, new { size = 4 })
-                    <i class="dropdown icon"></i>
-                    <div class="default text no-overflow">Select field</div>
-                    <div class="menu">
-                        @foreach (var item in Model.Fields.Items)
-                        {
-                            var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ImportProcessingRuleFieldId, new { @class = "form-label" })
+                <select id="ImportProcessingRuleFieldId" name="ImportProcessingRuleFieldId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Fields.Items)
+                    {
+                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                            <div class="item" data-value="@item.Value" @dataAttributes>
-                                @item.Text
-                            </div>
-                        }
-                    </div>
-                </div>
+                        <option class="item" value="@item.Value" @(Model.ImportProcessingRuleFieldId.ToString().Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                    }
+                </select>
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.ImportProcessingRuleFieldId)
                 </div>
             </div>
+        </div>
 
-            <div class="inline field">
-                <label for="ImportProcessingRuleOperatorId">must</label>
-                <div class="ui search selection dropdown fields-dropdown">
-                    @Html.HiddenFor(x => x.ImportProcessingRuleOperatorId)
-                    <i class="dropdown icon"></i>
-                    <div class="default text no-overflow">Select operator</div>
-                    <div class="menu">
-                        @foreach (var item in Model.Operators.Items)
-                        {
-                            var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ImportProcessingRuleOperatorId, new { @class = "form-label" })
+                <select id="ImportProcessingRuleOperatorId" name="ImportProcessingRuleOperatorId">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Operators.Items)
+                    {
+                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                            <div class="item" data-value="@item.Value" @dataAttributes>
-                                @item.Text
-                            </div>
-                        }
-                    </div>
-                </div>
+                        <option class="item" value="@item.Value" @(Model.ImportProcessingRuleOperatorId.ToString().Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                    }
+                </select>
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.ImportProcessingRuleOperatorId)
                 </div>
             </div>
+        </div>
 
-            <div class="inline field">
-                <label for="Value">value</label>
-                @Html.EditorFor(m => m.Value)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Value, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Value, new { @class = "form-control" })
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.Value)
                 </div>
             </div>
         </div>
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "btn btn-secondary" })
+        </div>
 
     </div>
 
@@ -109,10 +96,53 @@
 
 @section Scripts {
 
+    @if (!Model.IsFirstItemInTheGroup)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                accessibleAutocomplete.enhanceSelectElement({
+                    displayMenu: 'overlay',
+                    autoSelect: false,
+                    confirmOnBlur: false,
+                    showAllValues: true,
+                    defaultValue: '',
+                    preserveNullOptions: true,
+                    placeholder: 'Select logical operator',
+                    dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                    selectElement: document.querySelector('#LogicalOperator')
+                });
+            });
+        </script>
+    }
+
     <script type="text/javascript">
+
         $(document).ready(function () {
 
-            $('.fields-dropdown').dropdown();
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select field',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#ImportProcessingRuleFieldId')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select operator',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#ImportProcessingRuleOperatorId')
+            });
 
         });
     </script>

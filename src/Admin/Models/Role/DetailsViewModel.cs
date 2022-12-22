@@ -8,7 +8,7 @@ namespace Admin.Models.Role
 
         public string Name { get; set; }
 
-        [DisplayName("Display Name")]
+        [DisplayName("Display name")]
         public string DisplayName { get; set; }
     }
 }

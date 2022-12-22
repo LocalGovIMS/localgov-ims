@@ -7,191 +7,208 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create account holder
-        <div class="sub header">
-            Account holder details
-        </div>
-    </h1>
-}
+@section Header { Create account holder }
+
+@section Subheader { Account holder details }
 
 @using (Html.BeginForm("Create", "AccountHolder", FormMethod.Post))
 {
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AccountReference)
-            @Html.EditorFor(m => m.AccountReference)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AccountReference)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AccountReference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AccountReference, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AccountReference)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Title)
-            @Html.EditorFor(m => m.Title)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Title)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Title, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Forename)
-            @Html.EditorFor(m => m.Forename)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Forename)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Forename, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Forename, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Forename)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Surname)
-            @Html.EditorFor(m => m.Surname)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Surname)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Surname, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Surname)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AddressLine1)
-            @Html.EditorFor(m => m.AddressLine1)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine1)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AddressLine1, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine1)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AddressLine2)
-            @Html.EditorFor(m => m.AddressLine2)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine2)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AddressLine2, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine2)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AddressLine3)
-            @Html.EditorFor(m => m.AddressLine3)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine3)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AddressLine3, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine3, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine3)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AddressLine4)
-            @Html.EditorFor(m => m.AddressLine4)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine4)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AddressLine4, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine4, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine4)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Postcode)
-            @Html.EditorFor(m => m.Postcode)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Postcode)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Postcode, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Postcode)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.FundCode)
-            <div class="ui selection dropdown fund-dropdown">
-                @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select fund type</div>
-                <div class="menu">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                <select id="FundCode" name="FundCode">
+                    <option value="">None</option>
                     @foreach (var item in Model.Funds.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(!Model.FundCode.IsNullOrEmpty() && Model.FundCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundCode)
                 </div>
             </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundCode)
-            </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.FundMessageId)
-            <div class="ui selection dropdown fund-message-dropdown">
-                @Html.HiddenFor(x => x.FundMessageId, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select message type</div>
-                <div class="menu">
-                    <div class="item" data-value="">
-                        None
-                    </div>
-                    @foreach (var item in Model.FundMessages.Items)
-                    {
-                        <div class="item" data-value="@item.Value"
-                             data-fund-code="@item.DataAttributes.First(x => x.Key == "fundCode").Value">
-                            @item.Text
-                        </div>
-                    }
+        <div class="row mb-3 fund-message-selector">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundMessageId, new { @class = "form-label" })
+                @Html.HiddenFor(m => m.FundMessageId)
+                <div id="FundMessageIdAccessibleAutocompleteWrapper"></div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundMessageId)
                 </div>
             </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundMessageId)
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.PeriodDebit, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PeriodDebit, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.PeriodDebit)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.PeriodDebit)
-            @Html.EditorFor(m => m.PeriodDebit)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.PeriodDebit)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.PeriodCredit, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PeriodCredit, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.PeriodCredit)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.PeriodCredit)
-            @Html.EditorFor(m => m.PeriodCredit)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.PeriodCredit)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.CurrentBalance, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.CurrentBalance, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.CurrentBalance)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.CurrentBalance)
-            @Html.EditorFor(m => m.CurrentBalance)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.CurrentBalance)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.UserField1, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserField1, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.UserField1)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UserField1)
-            @Html.EditorFor(m => m.UserField1)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.UserField1)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.UserField2, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserField2, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.UserField2)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UserField2)
-            @Html.EditorFor(m => m.UserField2)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.UserField2)
-            </div>
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UserField3)
-            @Html.EditorFor(m => m.UserField3)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.UserField3)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.UserField3, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserField3, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.UserField3)
+                </div>
             </div>
         </div>
 
         <div>
-            <input type="submit" value="Save" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "AccountHolder", null, new { @class = "ui button" })
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "AccountHolder", null, new { @class = "btn btn-secondary" })
         </div>
 
     </div>
 }
 
 @section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            paymentsAdmin.pages.accountHolder.fundMessageOptions = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.FundMessages.Items.Select(x => new { id = x.Value, text = x.Text, data = x.DataAttributes })))');
+
+        });
+    </script>
+
     @Scripts.Render("~/bundles/app/account-holders")
 }

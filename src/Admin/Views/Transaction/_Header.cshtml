@@ -1,0 +1,89 @@
+﻿@model Admin.Models.Transaction.DetailsViewModel
+
+<div class="row">
+    <div class="col col-12 col-sm-6 col-md-3 col-xl-2">
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.EntryDate, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.EntryDate, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.CreatedBy, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.CreatedBy, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3 col-xl-2">
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.Total, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.Total, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.AuthorisationCode, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @if (string.IsNullOrEmpty(Model.Transaction.AuthorisationCode))
+                {
+                    <span>Unknown</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.Transaction.CreatedBy, new { @class = "form-label mb-0" })
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3 col-xl-2">
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.TotalVat, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.TotalVat, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.MopName, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.MopName, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3 col-xl-2">
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.PspReference, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.PspReference, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Transaction.InternalReference, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Transaction.InternalReference, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-4 col-xl-4">
+        @Html.LabelFor(m => m.Transaction.FormattedAddress, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @if (!string.IsNullOrEmpty(Model.Transaction.PayeeName))
+            {
+                @Model.Transaction.PayeeName<br />
+            }
+            @if (string.IsNullOrWhiteSpace(Model.Transaction.AddressLine1))
+            {
+                <span>No address specified</span>
+            }
+            else
+            {
+                @Html.Raw(Model.Transaction.FormattedAddress.Replace(",", ",<br />"))
+            }
+        </div>
+    </div>
+
+</div>

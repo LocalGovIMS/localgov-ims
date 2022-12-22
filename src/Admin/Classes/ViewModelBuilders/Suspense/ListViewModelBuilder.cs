@@ -4,6 +4,8 @@ using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
+using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.Suspense
 {
@@ -19,12 +21,17 @@ namespace Admin.Classes.ViewModelBuilders.Suspense
         }
 
         protected override ListViewModel OnBuild()
-        {
-            var searchCriteria = new SearchCriteria()
-                { Status = BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated };
+        {            
             var criteria = new BusinessLogic.Models.Suspense.SearchCriteria()
                 { Status = BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated };
             var searchResult = _suspenseService.Search(criteria);
+
+            var searchCriteria = new SearchCriteria()
+            { 
+                Status = BusinessLogic.Enums.SuspenseAllocationStatusEnum.Unallocated,
+                Statuses = GetStatuses()
+            };
+
 
             return new ListViewModel()
             {
@@ -36,30 +43,37 @@ namespace Admin.Classes.ViewModelBuilders.Suspense
             };
         }
 
-        protected override ListViewModel OnBuild(SearchCriteria searchCriteria)
+        protected override ListViewModel OnBuild(SearchCriteria criteria)
         {
-            var criteria = new BusinessLogic.Models.Suspense.SearchCriteria()
+            var searchCriteria = new BusinessLogic.Models.Suspense.SearchCriteria()
             {
-                CreatedAtDateFrom = searchCriteria.TransactionDateFrom,
-                CreatedAtDateTo = searchCriteria.TransactionDateTo,
-                AccountNumber = searchCriteria.AccountNumber,
-                Amount = searchCriteria.Amount,
-                Narrative = searchCriteria.Narrative,
-                Status = searchCriteria.Status,
-                Page = searchCriteria.Page,
+                CreatedAtDateFrom = criteria.TransactionDateFrom,
+                CreatedAtDateTo = criteria.TransactionDateTo,
+                AccountNumber = criteria.AccountNumber,
+                Amount = criteria.Amount,
+                Narrative = criteria.Narrative,
+                Status = criteria.Status,
+                Page = criteria.Page,
                 PageSize = 6
             };
 
-            var searchResult = _suspenseService.Search(criteria);
+            var searchResult = _suspenseService.Search(searchCriteria);
+
+            criteria.Statuses = GetStatuses();
 
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = searchCriteria,
+                SearchCriteria = criteria,
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
             };
+        }
+
+        private SelectList GetStatuses()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.SuspenseAllocationStatusEnum)), false);
         }
 
         private StaticPagedList<BusinessLogic.Models.Suspense.SuspenseWrapper> GetSearchResultAsPagedList(

@@ -59,54 +59,5 @@ namespace BusinessLogic.Services
                 return null;
             }
         }
-
-        public IResult Create(Template item)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.SystemAdmin))
-                return new Result("You do not have permission to perform the requested action");
-            try
-            {
-                UnitOfWork.Templates.Add(item);
-
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new Result("Unable to create a Template");
-            }
-        }
-
-        public IResult Update(Template item)
-        {
-            if (!SecurityContext.IsInRole(Security.Role.SystemAdmin))
-                return new Result("You do not have permission to perform the requested action");
-
-            try
-            {
-                if (item.TemplateRows != null)
-                {
-                    foreach (var templateRow in item.TemplateRows)
-                    {
-                        var result = _templateRowValidator.Validate(templateRow);
-                        if (!result.Success) return result;
-                    }
-                }
-
-                UnitOfWork.TemplateRows.Update(item);
-                UnitOfWork.Templates.Update(item);
-
-                UnitOfWork.Complete(SecurityContext.UserId);
-
-                return new Result();
-            }
-            catch (Exception e)
-            {
-                Logger.Error(null, e);
-                return new Result("Unable to update a Template");
-            }
-        }
     }
 }

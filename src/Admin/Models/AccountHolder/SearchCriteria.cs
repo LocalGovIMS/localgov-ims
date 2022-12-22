@@ -8,11 +8,10 @@ namespace Admin.Models.AccountHolder
         [Display(Name = "Account reference")]
         public string AccountReference { get; set; }
 
-        [Display(Name = "House number/name")]
-        public string HouseNumberName { get; set; }
+        [Display(Name = "Address")]
+        public string Address { get; set; }
 
-        public string Street { get; set; }
-
+        
         [Display(Name = "Postcode")]
         public string PostCode { get; set; }
 

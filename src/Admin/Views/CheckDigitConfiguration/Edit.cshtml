@@ -7,81 +7,117 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        <div class="sub header">
-            Check digit configuration details
-        </div>
-    </h1>
-}
+@section Header { @Model.Name }
+
+@section Subheader { Check digit configuration details }
 
 @using (Html.BeginForm("Edit", "CheckDigitConfiguration", FormMethod.Post))
 {
-
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Name)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Type)
-            @Html.EnumDropDownListFor(m => m.Type)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Type)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Type, new { @class = "form-label" })
+                <select id="Type" name="Type">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Types.Items)
+                    {
+                        <option class="item" value="@item.Value" @(Model.Type.Equals((CheckDigitType)(Convert.ToInt32(item.Value))) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Type)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Modulus)
-            @Html.EditorFor(m => m.Modulus)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Modulus)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Modulus, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Modulus, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Modulus)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.SourceSubstitutions)
-            @Html.EditorFor(m => m.SourceSubstitutions)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.SourceSubstitutions)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.SourceSubstitutions, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.SourceSubstitutions, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.SourceSubstitutions)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.ResultSubstitutions)
-            @Html.EditorFor(m => m.ResultSubstitutions)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.ResultSubstitutions)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ResultSubstitutions, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ResultSubstitutions, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ResultSubstitutions)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Weightings)
-            @Html.EditorFor(m => m.Weightings)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Weightings)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Weightings, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Weightings, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Weightings)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.ApplySubtraction)
-            @Html.EditorFor(m => m.ApplySubtraction)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.ApplySubtraction)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ApplySubtraction, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.ApplySubtraction, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ApplySubtraction)
+                </div>
             </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "CheckDigitConfiguration", null, new { @class = "btn btn-secondary" })
         </div>
 
     </div>
+}
 
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "CheckDigitConfiguration", null, new { @class = "ui button" })
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#Type')
+            });
 
+        });
+    </script>
 }

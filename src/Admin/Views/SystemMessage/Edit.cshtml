@@ -3,81 +3,91 @@
     ViewBag.Title = "Edit system message";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Edit system message
-        <div class="sub header">
-            System message details
-        </div>
-    </h1>
-}
+@section Header { Edit system message }
+
+@section Subheader { System message details }
 
 @using (Html.BeginForm("Edit", "SystemMessage", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.Id)
-    <div class="ui form">
+        @Html.HiddenFor(m => m.Id)
 
-        <div class="six wide field">
-            @Html.LabelFor(m => m.Message)
-            @Html.TextAreaFor(m => m.Message)
+<div>
+
+    <div class="row mb-3">
+        <div class="col-12 col-sm-9 col-md-7 col-lg-6">
+            @Html.LabelFor(m => m.Message, new { @class = "form-label" })
+            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Message)
             </div>
         </div>
-
-        <div class="six wide field">
-            @Html.LabelFor(m => m.Severity)
-            <div class="ui search selection dropdown funds-dropdown">
-                @Html.HiddenFor(x => x.Severity, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select severity</div>
-                <div class="menu">
-                    @foreach (var item in Model.SeverityList.Items)
-                    {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
-                    }
-                </div>
-            </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Severity, new { @class = "form-label" })
+            <select id="Severity" name="Severity">
+                @foreach (var item in Model.SeverityList.Items)
+                {
+                    <option class="item" value="@item.Value" @(Model.Severity.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                }
+            </select>
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Severity)
             </div>
         </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.StartDate)
-            @Html.TextBoxFor(m => m.StartDate)
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.StartDate)
             </div>
         </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.EndDate)
-            @Html.TextBoxFor(m => m.EndDate)
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", type = "datetime-local" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.EndDate)
             </div>
         </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "SystemMessage", null, new { @class = "ui button" })
     </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    @Html.ActionLink("Back", "Back", "SystemMessage", null, new { @class = "btn btn-secondary" })
+
+</div>
 }
 
-<script>
-    $('.ui.dropdown').dropdown();
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select severity',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#Severity')
+            });
 
-    $(document).ready(function () {
-        $.culture = Globalize.culture("en-GB");
-        $.validator.methods.date = function (value, element) {
-            //This is not ideal but Chrome passes dates through in ISO1901 format regardless of locale 
-            //and despite displaying in the specified format.
+        });
 
-            return this.optional(element)
-                || Globalize.parseDate(value, "dd/mm/yyyy", "en-GB")
-                || Globalize.parseDate(value, "yyyy-mm-dd");
-        }
-    });
-</script>
+        $(document).ready(function () {
+            $.culture = Globalize.culture("en-GB");
+            $.validator.methods.date = function (value, element) {
+                //This is not ideal but Chrome passes dates through in ISO1901 format regardless of locale
+                //and despite displaying in the specified format.
+
+                return this.optional(element)
+                    || Globalize.parseDate(value, "dd/mm/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+            }
+        });
+    </script>
+}

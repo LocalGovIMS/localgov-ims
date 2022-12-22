@@ -240,10 +240,12 @@
     <Compile Include="Repositories\EReturnChequeRepository.cs" />
     <Compile Include="Repositories\EReturnStatusRepository.cs" />
     <Compile Include="Repositories\CheckDigitConfigurationRepository.cs" />
+    <Compile Include="Repositories\EReturnTemplateRowRepository.cs" />
     <Compile Include="Repositories\ImportRepository.cs" />
     <Compile Include="Repositories\FileImportRepository.cs" />
     <Compile Include="Repositories\FundMessageMetadataRepository.cs" />
     <Compile Include="Repositories\ImportTypeImportProcessingRuleRepository.cs" />
+    <Compile Include="Repositories\EReturnTemplateRepository.cs" />
     <Compile Include="Repositories\MetadataKeyRepository.cs" />
     <Compile Include="Repositories\VatMetadataRepository.cs" />
     <Compile Include="Repositories\FundMetadataRepository.cs" />

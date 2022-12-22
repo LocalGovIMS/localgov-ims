@@ -3,84 +3,117 @@
     ViewBag.Title = "Fund";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName )
-        @Html.ActionLink("Edit", "Edit", new { id = Model.FundCode }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Fund details
-        </div>
-    </h1>
+@section Header { @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName ) }
+
+@section Subheader { Fund details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FundCode }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
     @Html.HiddenFor(m => m.FundCode)
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.FundCode)
-        @Html.DisplayFor(m => m.FundCode)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.FundCode, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.FundCode)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.FundName)
-        @Html.DisplayFor(m => m.FundName)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.FundName, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.FundName)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.DisplayName)
-        @Html.DisplayFor(m => m.DisplayName)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.DisplayName, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.DisplayName)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.AccountReferenceValidatorName)
-        @Html.DisplayFor(m => m.AccountReferenceValidatorName)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AccountReferenceValidatorName, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.AccountReferenceValidatorName)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.VatCode)
-        @Html.DisplayFor(m => m.VatCode)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.VatCode, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.VatCode)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.MaximumAmount)
-        @Html.DisplayFor(m => m.MaximumAmount)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.MaximumAmount)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.OverPayAccount)
-        @Html.DisplayFor(m => m.OverPayAccount)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.OverPayAccount, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.OverPayAccount, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.AccountExist)
-        @Html.DisplayFor(m => m.AccountExist)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AccountExist, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.AccountExist, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.AquireAddress)
-        @Html.DisplayFor(m => m.AquireAddress)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AquireAddress, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.AquireAddress, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.VatOverride)
-        @Html.DisplayFor(m => m.VatOverride)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.VatOverride, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.VatOverride, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.IsDisabled)
-        @Html.DisplayFor(m => m.Status)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Metadata
-        </h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Metadata
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForFund", "FundMetadata", new { fundCode = Model.FundCode })
     </div>
 
-    <br />
-
-    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
 
 </div>

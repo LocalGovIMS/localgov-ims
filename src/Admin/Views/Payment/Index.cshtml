@@ -3,222 +3,191 @@
     ViewBag.Title = "Payment";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Payment
-        <div class="sub header">
-            Create a payment
-        </div>
-    </h1>
+@section Messages {
+    @if (Model.Message != null) { Html.RenderPartial("_Message", Model.Message); }
 }
 
-<div>
-    @if (Model.Message != null)
-    {
-        <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
-            <div class="header">
-                @Model.Message.Title
-            </div>
-            <p>@Model.Message.Text</p>
-        </div>
-    }
-</div>
+@section Header { Payment }
 
-@using (Html.BeginForm("Create", "Payment", FormMethod.Post))
+@section Subheader { Create a payment }
+
+@section Actions {
+
+    @if (Model.Basket.Count > 0)
+    {
+        if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Payments))
+        {
+            @Html.ActionLink(string.Format("Pay {0}", Model.Basket.TotalAmount.ToString("c")), "Pay", null, new { @class = "btn btn-primary mb-1" })
+        }
+    }
+    @if (Model.Basket.Count > 0)
+    {
+        if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ChequeProcess))
+        {
+            @Html.ActionLink(string.Format("Cheque {0}", Model.Basket.TotalAmount.ToString("c")), "Cheque", null, new { @class = "btn btn-primary mb-1" })
+        }
+    }
+    @if (Model.Basket.Count > 0)
+    {
+        if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.PostPayment))
+        {
+            @Html.ActionLink(string.Format("Post {0}", Model.Basket.TotalAmount.ToString("c")), "PostPayment", null, new { @class = "btn btn-primary mb-1 post-payment" })
+        }
+    }
+    @if (Model.Basket.Count > 0)
+    {
+        @Html.ActionLink("Empty basket", "EmptyBasket", null, new { @class = "btn btn-danger mb-1" })
+    }
+}
+
+@using (Html.BeginForm("Create", "Payment", FormMethod.Post, new { id = "PaymentForm" }))
 {
-    <div class="ui grid">
-        <div class="ten wide column">
-            <div class="ui form">
-                <h2 class="ui header">Payment details</h2>
-                <div class="eight wide field">
-                    @Html.LabelFor(m => m.FundCode)
-                    <div class="ui search selection dropdown funds-dropdown">
-                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow">Select fund type</div>
-                        <div class="menu">
+    <div>
+
+        <div class="row">
+
+            <div class="col-12 col-lg-5 mb-3 mb-lg-0">
+
+                <h3>
+                    Payment details
+                </h3>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                        <select id="FundCode" name="FundCode">
+                            <option value="">None</option>
                             @foreach (var item in Model.Funds.Items)
                             {
                                 var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                                <div class="item" data-value="@item.Value" @dataAttributes>
-                                    @item.Text
-                                </div>
+                                <option class="item" value="@item.Value" @(!Model.FundCode.IsNullOrEmpty() && Model.FundCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
                             }
+                        </select>
+                        <div class="form__element--error">
+                            @Html.ValidationMessageFor(m => m.FundCode)
                         </div>
-                    </div>
-                    <div class="form__element--error">
-                        @Html.ValidationMessageFor(m => m.FundCode)
                     </div>
                 </div>
 
-                @if (User.IsInRole(Role.PostPayment))
-                {
-                    if (Model.MopCodes.Items != null && Model.MopCodes.Items.Count > 1)
+                <div class="row mb-3">
+                    @if (User.IsInRole(Role.PostPayment))
                     {
-                        <div class="eight wide field">
-                            @Html.LabelFor(m => m.MopCode)
-                            <div class="ui search selection dropdown mop-dropdown">
-                                @Html.HiddenFor(x => x.MopCode, new { size = 4 })
-                                <i class="dropdown icon"></i>
-                                <div class="default text no-overflow">Select MOP code</div>
-                                <div class="menu">
+                        if (Model.MopCodes.Items != null && Model.MopCodes.Items.Count > 1)
+                        {
+                            <div class="col">
+                                @Html.LabelFor(m => m.MopCode, new { @class = "form-label" })
+                                <select id="MopCode" name="MopCode">
+                                    <option value="">None</option>
                                     @foreach (var item in Model.MopCodes.Items)
                                     {
                                         var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                                        <div class="item" data-value="@item.Value" @dataAttributes>
-                                            @item.Text
-                                        </div>
+                                        <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.MopCode) && Model.MopCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
                                     }
+                                </select>
+                                <div class="form__element--error">
+                                    @Html.ValidationMessageFor(m => m.MopCode)
                                 </div>
                             </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.MopCode)
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="eight wide field">
-                            @Html.LabelFor(m => m.MopCode)
-                            <div class="ui input ">
-                                @Html.Label(Model.MopCodes.Items.FirstOrDefault().Text)
+                        }
+                        else
+                        {
+                            <div class="col">
+                                @Html.LabelFor(m => m.MopCode, new { @class = "form-label" })
+                                @Html.Display(Model.MopCodes.Items.FirstOrDefault().Text, new { @class = "form-control" })
                                 @{
                                     var dataAttributes = Model.MopCodes.Items.FirstOrDefault().DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
                                 }
                                 <input type="hidden" id="MopCode" name="MopCode" value="@Model.MopCodes.Items.FirstOrDefault().Value" @dataAttributes />
                             </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col">
+                            @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
+                            <div class="form__element--error">
+                                @Html.ValidationMessageFor(m => m.MopCode)
+                            </div>
                         </div>
                     }
-                }
-                else
-                {
-                    <div class="eight wide field">
-                        @Html.Hidden("MopCode", Model.MopCodes.Items.FirstOrDefault().Value)
-                        <div class="form__element--error">
-                            @Html.ValidationMessageFor(m => m.MopCode)
-                        </div>
-                    </div>
-                }
+                </div>
 
-                <div class="eight wide field">
-                    @Html.LabelFor(m => m.AccountReference)
-                    <div class="ui input account-reference-wrapper">
-                        @Html.TextBoxFor(m => m.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 30 })
-                        @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "ui blue right button account-reference-search", @style = "display:none;" })
-                    </div>
-                    <div id="AccountName"></div>
-                    <div id="AccountBalance"></div>
-                    <div class="form__element--error">
-                        <div class="account-reference-validator"></div>
-                        @Html.ValidationMessageFor(m => m.AccountReference)
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.LabelFor(m => m.AccountReference, new { @class = "form-label" })
+                        <div class="account-reference-wrapper">
+                            @Html.TextBoxFor(m => m.AccountReference, new { @class = "form-control " })
+                            @Html.ActionLink("Search", "AccountHolderSearch", "Payment", new { id = Model.FundCode }, new { @class = "btn btn-primary account-reference-search", @style = "display:none;" })
+                        </div>
+                        <div id="AccountNameWrapper"></div>
+                        <div id="AccountBalanceWrapper"></div>
+                        <div class="form__element--error">
+                            <div class="account-reference-validator"></div>
+                            @Html.ValidationMessageFor(m => m.AccountReference)
+                        </div>
                     </div>
                 </div>
 
-                <div class="eight wide field vat-option">
-                    @Html.LabelFor(m => m.VatCode)
-                    <div class="ui search selection dropdown vat-dropdown">
-                        @Html.HiddenFor(x => x.VatCode, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow">Select VAT code</div>
-                        <div class="menu">
+                <div class="row mb-3 vat-option">
+                    <div class="col">
+                        @Html.LabelFor(m => m.VatCode, new { @class = "form-label" })
+                        <select id="VatCode" name="VatCode">
+                            <option value="">None</option>
                             @foreach (var item in Model.VatCodes.Items)
                             {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
+                                <option class="item" value="@item.Value" @(!Model.VatCode.IsNullOrEmpty() && Model.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                             }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.LabelFor(m => m.Narrative, new { @class = "form-label" })<small><span class="fw-lighter"> (optional)</span></small>
+                        @Html.TextAreaFor(m => m.Narrative, new { @class = "form-control" })
+                        <div class="form__element--error">
+                            @Html.ValidationMessageFor(m => m.Narrative)
                         </div>
                     </div>
-                    <div class="form__element--error">
-                        @Html.ValidationMessageFor(m => m.VatCode)
-                    </div>
                 </div>
-                <div class="eight wide field">
-                    @Html.LabelFor(m => m.Narrative, new { @class = "optional" })
-                    <div class="ui input">
-                        @Html.TextAreaFor(m => m.Narrative, new { @placeholder = "", @rows = "3", @cols = "60", @maxlength = 100 })
-                    </div>
-                </div>
-                <div class="eight wide field">
-                    <div class="ui icon large info message payment-reversal-warning" style="display:none;">
-                        <i class="info icon"></i>
-                        <div class="content">
-                            <div class="header">
+
+                <div class="row mb-3 payment-reversal-warning" style="display:none;">
+                    <div class="col">
+                        <div class="alert alert-warning mb-0">
+                            <div class="fw-bold pb-1">
                                 Check amount
                             </div>
-                            <p>A negative amount is expected for a write back MOP.</p>
-                            <p>Please check your input before continuing.</p>
+                            <p class="mb-1">A negative amount is expected for a write-back MOP.</p>
+                            <p class="mb-0">Please check your input before continuing.</p>
                         </div>
                     </div>
                 </div>
-                <div class="eight wide field">
-                    @Html.LabelFor(m => m.Amount)
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            £
+
+                <div class="row mb-3">
+                    <div class="col">
+                        @Html.LabelFor(m => m.Amount, new { @class = "form-label" })
+                        <div class="input-group w-50">
+                            <span class="input-group-text">£</span>
+                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control w-50" })
                         </div>
-                        @Html.TextBoxFor(m => m.Amount, new { @placeholder = "0.00", @class = "monetary-amount" })
-                    </div>
-                    <div class="form__element--error">
-                        <span class="field-validation-error amount-validator"></span>
-                        @Html.ValidationMessageFor(m => m.Amount)
+                        <div class="form__element--error">
+                            <span class="field-validation-error amount-validator"></span>
+                            @Html.ValidationMessageFor(m => m.Amount)
+                        </div>
                     </div>
                 </div>
-                <div class="six wide field">
-                    <button value="Card" name="action" type="submit" class="ui green button add-to-basket">Add to basket</button>
+
+                <div>
+                    <input type="submit" value="Add to basket" class="btn btn-primary add-to-basket one-click-submit-button" />
                 </div>
+
             </div>
-
+            <div class="col-12 col-lg-6 offset-lg-1">
+                @{ Html.RenderPartial("_Basket", Model.Basket); }
+            </div>
         </div>
-
-        <div class="six wide column">
-            <h4 class="ui header">Basket</h4>
-
-            @if (Model.Basket.Count <= 0)
-            {
-                <div class="message message--info">Your basket is empty</div>
-            }
-            else
-            {
-                for (int i = Model.Basket.Count - 1; i >= 0; i--) // show items in reverse order
-                {
-                    <div class="basket__item">
-                        <div class="basket__action">@Html.ActionLink("Delete", "RemoveItem", new { accountReference = Model.Basket.Items[@i].AccountReference }, new { @class = "ui red button" })</div>
-                        <div class="basket__amount">
-                            @Model.Basket.Items[@i].Amount.ToString("c")
-                        </div>
-                        <div class="basket__fund">@Model.Basket.Items[@i].FundName</div>
-                        @if (User.IsInRole(Role.PostPayment))
-                        {
-                            <div class="basket__mop" data-mop="@Model.Basket.Items[@i].MopCode">@Model.Basket.Items[@i].MopName</div>
-                        }
-                        <div class="basket__account">@Model.Basket.Items[@i].AccountReference</div>
-                        <div class="basket__narrative">@Model.Basket.Items[@i].Narrative</div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-
-    <div class="page-actions page-actions--fix">
-        @if (Model.Basket.Count > 0)
-        {
-            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.Payments))
-            {
-                @Html.ActionLink(string.Format("Pay {0}", Model.Basket.TotalAmount.ToString("c")), "Pay", null, new { @class = "ui primary button" })
-            }
-            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.ChequeProcess))
-            {
-                @Html.ActionLink(string.Format("Cheque {0}", Model.Basket.TotalAmount.ToString("c")), "Cheque", null, new { @class = "ui primary button" })
-            }
-            if (User.IsInRole(Role.SystemAdmin) || User.IsInRole(Role.PostPayment))
-            {
-                @Html.ActionLink(string.Format("Post {0}", Model.Basket.TotalAmount.ToString("c")), "PostPayment", null, new { @class = "post-payment ui primary button" })
-            }
-            @Html.ActionLink("Empty basket", "EmptyBasket", null, new { @class = "ui red button" })
-        }
     </div>
 }
 
@@ -231,8 +200,15 @@
             paymentsAdmin.pages.payment.index.searchAction = '@Url.Action("AccountHolderSearch")';
             paymentsAdmin.pages.payment.index.searchEnabledFundCodes = JSON.parse('@Html.Raw(Model.SearchEnabledFundCodes)');
 
-            showHideSearchButton($('#FundCode').val());
+            var selectedFundCode = getSelectedAccessibleAutocompleteOptionValue('#FundCode', $('#FundCode').val());
+            showHideSearchButton(selectedFundCode);
             showHideVatOptions();
+            loadAccountDetails();
+
+            if ($(".basket__mop").first().data("mop")) {
+                var option = getAccessibleAutocompleteOptionByValue('#MopCode', $(".basket__mop").first().data("mop"));
+                handleMopCodeChange(option.text);
+            }
 
         });
     </script>

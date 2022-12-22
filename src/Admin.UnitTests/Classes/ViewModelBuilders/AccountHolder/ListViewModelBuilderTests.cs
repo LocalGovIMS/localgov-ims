@@ -123,10 +123,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.AccountHolder
             {
                 AccountReference = "775326912",
                 FundCode = "23",
-                HouseNumberName = "1",
+                Address = "1 Test Street",
                 Page = 1,
                 PostCode = "S73 0PS",
-                Street = "SCHOOL STREET",
                 Surname = "HARTLEY"
             };
         }

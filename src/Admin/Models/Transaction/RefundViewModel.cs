@@ -9,6 +9,7 @@ namespace Admin.Models.Transaction
 
         public List<RefundItem> RefundItems { get; set; }
 
+        [Display(Name = "Refund reason")]
         [Required(ErrorMessage = "A reason for the refund is required")]
         [MaxLength(100, ErrorMessage = "The reason for the refund must be less than 100 characters")]
         public string RefundReason { get; set; }

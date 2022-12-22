@@ -3,65 +3,64 @@
     ViewBag.Title = "Users";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Users
-        @Html.ActionLink("Create user", "Create", new { }, new { @class = "ui blue button right floated" })
+@section Header { Users }
 
-        <div class="sub header">
-            User management
-        </div>
-    </h1>
+@section Subheader { User management }
+
+@section Actions {
+    @Html.ActionLink("Create user", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
-@Html.Partial("_SearchUser", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    User name
-                </th>
-                <th scope="col">
-                    Display name
-                </th>
-                <th scope="col">
-                    Account status
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.DisplayName)
-                </td>
-                <td>
-                    @Html.Label(item.Disabled ? "Disabled" : "Active")
-                </td>
-                <td>
-                    @Html.ActionLink("View", "Details", new { id = item.UserId }, new { @class = "ui button" })
-                    @if (@User.Identity.Name != @item.UserName || User.IsInRole(Role.SystemAdmin))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "ui button" })
-                    }
-                </td>
-            </tr>
-        }
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Username
+                    </th>
+                    <th scope="col">
+                        Display name
+                    </th>
+                    <th scope="col">
+                        Status
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.DisplayName)
+                    </td>
+                    <td>
+                        @Html.Label(item.Disabled ? "Disabled" : "Active")
+                    </td>
+                    <td class="text-end">
+                        @Html.ActionLink("View", "Details", new { id = item.UserId }, new { @class = "btn btn-secondary" })
+                        @if (@User.Identity.Name != @item.UserName || User.IsInRole(Role.SystemAdmin))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "btn btn-secondary" })
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There are no users in the system
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "users");
 }
 

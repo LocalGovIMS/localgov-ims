@@ -6,6 +6,9 @@ if (!String.prototype.startsWith) {
     };
 }
 
+
+var downarrow = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="autocomplete__dropdown-arrow-down" focusable="false"><g stroke="none" fill="outline" fill-rule="evenodd"><polygon fill="#000000" points="0 0 10 0 5 8"></polygon></g></svg>';
+
 function paymentTypeChange() {
 
     var referenceFieldLabel = $("#PaymentType  option:selected").data("referencefieldlabel");
@@ -74,7 +77,7 @@ $(document).ready(function () {
 
         var html = [];
 
-        html.push('<ul>');
+        html.push('<ul class="mb-3">');
         html.push('<li>' + message + '</li>');
         html.push('</ul>');
 

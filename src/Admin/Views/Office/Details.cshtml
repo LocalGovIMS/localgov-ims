@@ -3,28 +3,30 @@
     ViewBag.Title = "Office";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Code
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Office details
-        </div>
-    </h1>
+@section Header { @Model.Name }
+
+@section Subheader { Office details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Code)
-        @Html.DisplayFor(m => m.Code)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Code, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Code)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Name)
-        @Html.DisplayFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Name)
+        </div>
     </div>
 
-    @Html.ActionLink("Back", "Back", "Office", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "Office", null, new { @class = "btn btn-secondary" })
 
 </div>

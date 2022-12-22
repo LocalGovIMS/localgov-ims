@@ -7,45 +7,39 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        <div class="sub header">
-            Payment integration details
-        </div>
-    </h1>
-}
+@section Header { @Model.Name }
+
+@section Subheader { Payment integration details }
+
 
 @using (Html.BeginForm("Edit", "PaymentIntegration", FormMethod.Post))
 {
-    @Html.HiddenFor(m => m.Id)
+    <div>
 
-    <div class="ui form">
+        @Html.HiddenFor(m => m.Id)
 
-        <div class="ui vertical segment">
-
-            <div class="four wide field">
-                @Html.LabelFor(m => m.Name)
-                @Html.EditorFor(m => m.Name)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
+        </div>
 
-            <div class="eight wide field">
-                @Html.LabelFor(m => m.BaseUri)
-                @Html.EditorFor(m => m.BaseUri)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-9 col-md-7 col-lg-6">
+                @Html.LabelFor(m => m.BaseUri, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.BaseUri, new { @class = "form-control" })
                 <div class="form__element--error">
                     @Html.ValidationMessageFor(m => m.BaseUri)
                 </div>
             </div>
-
         </div>
 
-        <br />
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "ui button" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "PaymentIntegration", null, new { @class = "btn btn-secondary" })
 
     </div>
 }

@@ -1,65 +1,64 @@
 ﻿@using PagedList.Mvc
-
 @model Admin.Models.Fund.ListViewModel
 @{
     ViewBag.Title = "Funds";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Funds
-        @Html.ActionLink("Create fund", "Create", new { }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Fund management
-        </div>
-    </h1>
+@section Header { Funds }
+
+@section Subheader { Fund management }
+
+@section Actions {
+    @Html.ActionLink("Create fund", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
-@Html.Partial("_Search", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Fund code
-                </th>
-                <th scope="col">
-                    Fund name
-                </th>
-                <th scope="col">
-                    Status
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.FundCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.FundName)
-                    </td>
-                    <td>
-                        @Html.Label(item.Disabled ? "Disabled" : "Active")
-                    </td>
-                    <td>
-                        @Html.ActionLink("View", "Details", new { id = item.FundCode }, new { @class = "ui button" })
-                        @Html.ActionLink("Edit", "Edit", new { id = item.FundCode }, new { @class = "ui button" })
-                    </td>
+                    <th scope="col">
+                        Code
+                    </th>
+                    <th scope="col">
+                        Name
+                    </th>
+                    <th scope="col">
+                        Status
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4">
-                    <div class="ui pagination menu">
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.FundCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.FundName)
+                        </td>
+                        <td>
+                            @Html.Label(item.Disabled ? "Disabled" : "Active")
+                        </td>
+                        <td class="text-end">
+                            @Html.ActionLink("View", "Details", new { id = item.FundCode }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.FundCode }, new { @class = "btn btn-secondary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
                         @if (Model.Pages > 1)
                         {
                             @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
@@ -69,16 +68,14 @@
                             fundCode = Model.SearchCriteria.FundName,
                         }))
                         }
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There are no funds in the system
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "funds");
 }
 

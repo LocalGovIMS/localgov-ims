@@ -7,46 +7,46 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create VAT code
-        <div class="sub header">
-            VAT code details
-        </div>
-    </h1>
-}
+@section Header { Create VAT code }
+
+@section Subheader { VAT code details }
 
 @using (Html.BeginForm("Create", "Vat", FormMethod.Post))
 {
+    <div>
 
-    <div class="ui form">
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Code)
-            @Html.EditorFor(m => m.Code)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Code)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Code, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Code)
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Percentage, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Percentage, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Percentage)
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsDisabled)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Percentage)
-            @Html.EditorFor(m => m.Percentage)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Percentage)
-            </div>
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsDisabled)
-            @Html.EditorFor(m => m.IsDisabled)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
-            </div>
-        </div>
-
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "btn btn-secondary" })
 
     </div>
 

@@ -3,37 +3,44 @@
     ViewBag.Title = "Fund message";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.FundName - (@Model.FundCode)
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Fund message details
-        </div>
-    </h1>
+@section Header { @Model.FundName - (@Model.FundCode) }
+
+@section Subheader { Fund message details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.FundName)
-        @Html.DisplayFor(m => m.FundName)
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.FundName, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.FundName)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Message)
-        @Html.DisplayFor(m => m.Message)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Message, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Message)
+        </div>
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Metadata
-        </h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Metadata
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForFundMessage", "FundMessageMetadata", new { id = Model.Id })
     </div>
 
-    <br />
-
-    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "btn btn-secondary" })
 
 </div>

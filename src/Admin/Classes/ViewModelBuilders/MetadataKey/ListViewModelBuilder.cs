@@ -4,6 +4,8 @@ using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
+using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.MetadataKey
 {
@@ -23,11 +25,15 @@ namespace Admin.Classes.ViewModelBuilders.MetadataKey
             var criteria = new BusinessLogic.Models.MetadataKey.SearchCriteria();
 
             var searchResult = _metadataKeyService.Search(criteria);
+            var searchCriteria = new SearchCriteria()
+            {
+                EntityTypes = GetEntityTypes()
+            };
 
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = new SearchCriteria(),
+                SearchCriteria = searchCriteria,
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
@@ -46,6 +52,8 @@ namespace Admin.Classes.ViewModelBuilders.MetadataKey
 
             var searchResult = _metadataKeyService.Search(searchCriteria);
 
+            criteria.EntityTypes = GetEntityTypes();
+
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
@@ -54,6 +62,11 @@ namespace Admin.Classes.ViewModelBuilders.MetadataKey
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
             };
+        }
+
+        private SelectList GetEntityTypes()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.MetadataKeyEntityType)), false);
         }
 
         private StaticPagedList<BusinessLogic.Entities.MetadataKey> GetSearchResultAsPagedList(

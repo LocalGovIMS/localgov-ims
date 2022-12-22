@@ -2,36 +2,36 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped teal">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Name
-                </th>
-                <th scope="col">
-                    Description
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @item.ImportProcessingRule.Name
-                    </td>
-                    <td>
-                        @item.ImportProcessingRule.Description
-                    </td>
+                    <th scope="col">
+                        Name
+                    </th>
+                    <th scope="col">
+                        Description
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.ImportProcessingRule.Name
+                        </td>
+                        <td>
+                            @item.ImportProcessingRule.Description
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There are no linked import processing rules
-    </div>
+    Html.RenderPartial("_NothingSpecified", "linked import processing rules");
 }
 

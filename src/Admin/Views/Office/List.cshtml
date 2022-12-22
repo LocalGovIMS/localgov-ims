@@ -3,19 +3,18 @@
     ViewBag.Title = "Office";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Offices
-        @Html.ActionLink("Create office", "Create", new { }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Offices within the system
-        </div>
-    </h1>
+@section Header { Offices }
+
+@section Subheader { Offices within the system }
+
+@section Actions {
+    @Html.ActionLink("Create office", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
 @if (Model != null)
 {
-    <table class="ui celled table striped">
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover mt-2">
         <thead>
             <tr>
                 <th scope="col">
@@ -25,7 +24,7 @@
                     @Html.LabelFor(m => Model.FirstOrDefault().Name)
                 </th>
                 <th scope="col">
-                    
+                    <span class="visually-hidden">Actions</span>
                 </th>
             </tr>
         </thead>
@@ -38,17 +37,16 @@
                 <td>
                     @Html.DisplayFor(m => item.Name)
                 </td>
-                <td>
-                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "ui button" })
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "ui button" })
+                <td class="text-end">
+                    @Html.ActionLink("View", "Details", new { id = item.Code }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "btn btn-secondary" })
                 </td>
             </tr>
         }
     </table>
+</div>
 }
 else
 {
-    <div class="panels">
-        There are no offices in the system!
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "offices");
 }

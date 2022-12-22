@@ -4,7 +4,7 @@
     {
         public const string IsACreditNoteEnabledFund = "IsACreditNoteEnabledFund";
         public const string IsAnEReturnDefaultFund = "IsAnEReturnDefaultFund";
-        public const string IsASuspenseJournalFund = "IsASuspenseJournalFund";
+        public const string IsASuspenseTransactionFund = "IsASuspenseTransactionFund";
         public const string IsABasketFund = "IsABasketFund";
 
         public static class Basket

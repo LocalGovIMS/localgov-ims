@@ -3,69 +3,76 @@
     ViewBag.Title = "Account reference validator";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Account reference validator details
-        </div>
-    </h1>
+@section Header { @Model.Name }
+
+@section Subheader { Account reference validator details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
     @Html.HiddenFor(m => m.Id)
 
-    <div class="ui vertical segment">
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Name)
         </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MinLength)
-            @Html.DisplayFor(m => m.MinLength)
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaxLength)
-            @Html.DisplayFor(m => m.MaxLength)
-        </div>
-
-        @if (!string.IsNullOrWhiteSpace(Model.Regex))
-        {
-            <div class="four wide field">
-                @Html.LabelFor(m => m.Regex)
-                @Html.DisplayFor(m => m.Regex)
-            </div>
-        }
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.InputMask)
-            @Html.DisplayFor(m => m.InputMask)
-        </div>
-
-        @if (Model.CharacterType.HasValue)
-        {
-            <div class="four wide field">
-                @Html.LabelFor(m => m.CharacterType)
-                @Html.DisplayFor(m => m.CharacterType)
-            </div>
-        }
-
-        @if (!string.IsNullOrWhiteSpace(Model.CheckDigitConfigurationName))
-        {
-            <div class="four wide field">
-                @Html.LabelFor(m => m.CheckDigitConfigurationName)
-                @Html.DisplayFor(m => m.CheckDigitConfigurationName)
-            </div>
-        }
-
     </div>
 
-    <br />
-    @Html.ActionLink("Back", "Back", "AccountReferenceValidator", null, new { @class = "ui button" })
+    <div class="mb-3">
+        @Html.LabelFor(m => m.MinLength, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.MinLength)
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.MaxLength, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.MaxLength)
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Regex))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Regex, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Regex)
+            </div>
+        </div>
+    }
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.InputMask, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.InputMask)
+        </div>
+    </div>
+
+    @if (Model.CharacterType.HasValue)
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.CharacterType, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CharacterType)
+            </div>
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.CheckDigitConfigurationName))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.CheckDigitConfigurationName, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CheckDigitConfigurationName)
+            </div>
+        </div>
+    }
+
+    @Html.ActionLink("Back", "Back", "AccountReferenceValidator", null, new { @class = "btn btn-secondary" })
 
 </div>

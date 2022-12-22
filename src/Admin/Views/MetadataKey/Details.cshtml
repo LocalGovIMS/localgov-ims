@@ -3,40 +3,45 @@
     ViewBag.Title = "Metadata key";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Metadata key details
-        </div>
-    </h1>
+
+@section Header { @Model.Name }
+
+@section Subheader { Metadata key details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Name)
-        @Html.DisplayFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Name)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Description)
-        @Html.DisplayFor(m => m.Description)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Description, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Description)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.IsASystemType)
-        @Model.IsASystemType.ToYesNoString()
+    <div class="mb-3">
+        @Html.LabelFor(m => m.IsASystemType, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Model.IsASystemType.ToYesNoString()
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.EntityType)
-        @Html.DisplayFor(m => m.EntityType)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.EntityType, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.EntityType)
+        </div>
     </div>
 
-    <br />
-
-    @Html.ActionLink("Back", "Back", "FundMessage", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "MetadataKey", null, new { @class = "btn btn-secondary" })
 
 </div>

@@ -49,10 +49,9 @@ namespace Admin.Classes.ViewModelBuilders.AccountHolder
             var searchCriteria = new BusinessLogic.Models.AccountHolder.SearchCriteria()
             {
                 AccountReference = criteria.AccountReference,
-                HouseNumberName = criteria.HouseNumberName,
+                Address = criteria.Address,
                 FundCode = criteria.FundCode,
                 PostCode = criteria.PostCode,
-                Street = criteria.Street,
                 Surname = criteria.Surname,
                 Page = criteria.Page == 0 ? 1 : criteria.Page,
                 PageSize = 20,

@@ -33,7 +33,7 @@
             $('.one-click-submit-button').each(function () {
                 var $theButton = $(this);
                 var $theForm = $theButton.closest('form');
-                
+
                 // Hide the button and submit the form
                 function tieButtonToForm() {
                     $theButton.one('click', function () {
@@ -46,13 +46,61 @@
 
                 // This handler will re-wire the event when the form is invalid.
                 $theForm.submit(function (event) {
+                    console.log('handling submit click');
                     if (!$(this).valid()) {
+                        console.log('enabling button');
                         $theButton.prop('disabled', false);
                         event.preventDefault();
                         tieButtonToForm();
                     }
                 });
             });
+        },
+
+        accessibleAutoComplete: {
+            getSelectedOption: function (querySelector, selectedText) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.innerText === selectedText
+                );
+
+                return option;
+            },
+
+            getSelectedOptionValue: function (querySelector, selectedText) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.innerText === selectedText
+                );
+
+                if (option) {
+                    return option.value;
+                }
+                else {
+                    return '';
+                }
+            },
+
+            getSelectedOptionByValue: function (querySelector, value) {
+                const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(
+                    (o) => o.value === value.toString()
+                );
+
+                return option;
+            },
+
+            setSelectedOption: function (querySelector, defaultValue, dropdown) {
+                var option = paymentsAdmin.core.accessibleAutoComplete.getSelectedOptionByValue(querySelector, defaultValue);
+                $(querySelector + '-select').val(defaultValue);
+
+                dropdown.props.onConfirm(option)
+                dropdown.setState({
+                    focused: -1,
+                    hovered: null,
+                    menuOpen: false,
+                    query: dropdown.templateInputValue(option.text),
+                    selected: -1,
+                    validChoiceMade: true
+                });
+            }
         }
     },
 
@@ -62,12 +110,26 @@
                 searchAction: null,
                 searchEnabledFundCodes: []
             }
+        },
+        accountHolder: {
+            fundMessageOptions: []
+        },
+        eReturn: {
+            create: {
+                types: []
+            }
+        }
+    },
+
+    controls: {
+        autocomplete: {
+            downarrow: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="autocomplete__dropdown-arrow-down" focusable="false"><g stroke="none" fill="outline" fill-rule="evenodd"><polygon fill="#000000" points="0 0 10 0 5 8"></polygon></g></svg>'
         }
     },
 
     services: {
         accountHolder: {
-            lookup: function(transferItem, onCompleteCallback) {
+            lookup: function (transferItem, onCompleteCallback) {
                 $.ajax({
                     type: "POST",
                     url: rootUrl + "/AccountHolder/Lookup",

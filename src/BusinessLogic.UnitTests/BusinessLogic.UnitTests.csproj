@@ -162,6 +162,18 @@
     <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\InitialisationTests.cs" />
     <Compile Include="ImportProcessing\Transaction\ImportInitialisationStrategy\TestBase.cs" />
     <Compile Include="Models\Transaction\AddressLine4Tests.cs" />
+    <Compile Include="Services\EReturnTemplate\BaseTest.cs" />
+    <Compile Include="Services\EReturnTemplate\CreateTests.cs" />
+    <Compile Include="Services\EReturnTemplate\GetAllTests.cs" />
+    <Compile Include="Services\EReturnTemplate\GetTests.cs" />
+    <Compile Include="Services\EReturnTemplate\SearchTests.cs" />
+    <Compile Include="Services\EReturnTemplate\UpdateTests.cs" />
+    <Compile Include="Services\EReturnTemplateRow\BaseTest.cs" />
+    <Compile Include="Services\EReturnTemplateRow\CreateTests.cs" />
+    <Compile Include="Services\EReturnTemplateRow\DeleteTests.cs" />
+    <Compile Include="Services\EReturnTemplateRow\GetTests.cs" />
+    <Compile Include="Services\EReturnTemplateRow\SearchTests.cs" />
+    <Compile Include="Services\EReturnTemplateRow\UpdateTests.cs" />
     <Compile Include="Services\MetadataKey\BaseMetadataKeyTest.cs" />
     <Compile Include="Services\MetadataKey\CreateTests.cs" />
     <Compile Include="Services\MetadataKey\DeleteTests.cs" />
@@ -183,7 +195,7 @@
     <Compile Include="Extensions\CheckDigitConfiguration\WeightingsArrayTests.cs" />
     <Compile Include="Extensions\DateTime\ToEndOfDayTests.cs" />
     <Compile Include="Extensions\Fund\IsAnEReturnDefaultFundTests.cs" />
-    <Compile Include="Extensions\Fund\IsASuspenseJournalFundTests.cs" />
+    <Compile Include="Extensions\Fund\IsASuspenseTransactionFundTests.cs" />
     <Compile Include="Extensions\Fund\IsACreditNoteEnabledFundTests.cs" />
     <Compile Include="Extensions\ImportProcessingRuleCondition\DisplaySummaryTests.cs" />
     <Compile Include="Extensions\ImportProcessingRuleAction\DisplaySummaryTests.cs" />
@@ -228,7 +240,7 @@
     <Compile Include="Extensions\Import\StartTests.cs" />
     <Compile Include="Extensions\Import\TestBase.cs" />
     <Compile Include="Extensions\Import\InitialiseTests.cs" />
-    <Compile Include="Extensions\Vat\IsASuspenseJournalVatCodeTests.cs" />
+    <Compile Include="Extensions\Vat\IsASuspenseTransactionVatCodeTests.cs" />
     <Compile Include="Helpers\PermissionTestHelper.cs" />
     <Compile Include="Classes\Smtp\VatReceiptEmailTests.cs" />
     <Compile Include="ImportProcessing\AccountHolder\ImportProcessingStrategyValidator\ValidateTests.cs" />
@@ -424,10 +436,8 @@
     <Compile Include="Services\Role\GetAllRolesTests.cs" />
     <Compile Include="Services\Role\UpdateTests.cs" />
     <Compile Include="Services\Template\BaseTest.cs" />
-    <Compile Include="Services\Template\CreateTests.cs" />
     <Compile Include="Services\Template\GetAllTemplatesTests.cs" />
     <Compile Include="Services\Template\GetTemplateTests.cs" />
-    <Compile Include="Services\Template\UpdateTests.cs" />
     <Compile Include="Services\TransactionJournal\BaseTransactionJournalTest.cs" />
     <Compile Include="Services\TransactionJournal\CreateJournalTests.cs" />
     <Compile Include="Services\TransactionJournal\TransferTests.cs" />

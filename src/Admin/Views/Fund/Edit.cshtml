@@ -7,149 +7,199 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName )
-        <div class="sub header">
-            Fund details
-        </div>
-    </h1>
-}
+@section Header { @( string.IsNullOrEmpty(Model.DisplayName) ? "Fund " + Model.FundCode : Model.DisplayName ) }
+
+@section Subheader { Fund details }
 
 @using (Html.BeginForm("Edit", "Fund", FormMethod.Post))
 {
-
     @Html.HiddenFor(m => m.FundCode)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.FundName)
-            @Html.EditorFor(m => m.FundName)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.FundName)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                <div class="form-label">
+                    @Html.DisplayFor(m => m.FundCode, new { @class = "form-control" })
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.DisplayName)
-            @Html.EditorFor(m => m.DisplayName)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.DisplayName)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.FundName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.FundName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.FundName)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AccountReferenceValidatorId)
-            <div class="ui selection dropdown account-reference-validator-dropdown">
-                @Html.HiddenFor(x => x.AccountReferenceValidatorId, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select account refernce validator code</div>
-                <div class="menu">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.DisplayName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AccountReferenceValidatorId, new { @class = "form-label" })
+                <select id="AccountReferenceValidatorId" name="AccountReferenceValidatorId">
+                    <option value="">None</option>
                     @foreach (var item in Model.AccountReferenceValidators.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(Model.AccountReferenceValidatorId.HasValue && Model.AccountReferenceValidatorId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AccountReferenceValidatorId)
                 </div>
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AccountReferenceValidators)
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.VatCode)
-            <div class="ui selection dropdown vat-dropdown">
-                @Html.HiddenFor(x => x.VatCode, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select VAT code</div>
-                <div class="menu">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatCode, new { @class = "form-label" })
+                <select id="VatCode" name="VatCode">
+                    <option value="">None</option>
                     @foreach (var item in Model.VatCodes.Items)
                     {
-                        <div class="item" data-value="@item.Value">
-                            @item.Text
-                        </div>
+                        <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.VatCode) && Model.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatCode)
                 </div>
             </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.VatCode)
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.MaximumAmount, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.MaximumAmount)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaximumAmount)
-            @Html.EditorFor(m => m.MaximumAmount)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.MaximumAmount)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.OverPayAccount, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.OverPayAccount, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.OverPayAccount)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.OverPayAccount)
-            @Html.EditorFor(m => m.OverPayAccount)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.OverPayAccount)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AccountExist, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AccountExist, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AccountExist)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AccountExist)
-            @Html.EditorFor(m => m.AccountExist)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AccountExist)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.AquireAddress, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.AquireAddress, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AquireAddress)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.AquireAddress)
-            @Html.EditorFor(m => m.AquireAddress)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AquireAddress)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatOverride, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.VatOverride, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatOverride)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.VatOverride)
-            @Html.EditorFor(m => m.VatOverride)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.VatOverride)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsDisabled)
+                </div>
             </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsDisabled)
-            @Html.CheckBoxFor(m => m.IsDisabled)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.IsDisabled)
+        <div class="d-flex flex-wrap mb-3">
+            <div class="me-auto p-0">
+                <h2>
+                    Metadata
+                </h2>
             </div>
+            <div class="order-lg-2 p-0">
+                @Html.ActionLink("Add metadata", "Create", "FundMetadata", new { fundCode = Model.FundCode }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            @Html.Action("_EditListForFund", "FundMetadata", new { fundCode = Model.FundCode })
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
         </div>
 
     </div>
-
-    <div class="ui vertical segment">
-        <h2 style="padding-bottom:10px;">
-            Metadata
-            @Html.ActionLink("Add metadata", "Create", "FundMetadata", new { fundCode = Model.FundCode }, new { @class = "ui blue button right floated" })
-        </h2>
-        @Html.Action("_EditListForFund", "FundMetadata", new { fundCode = Model.FundCode })
-
-    </div>
-
-    <br />
-
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
 
 }
 
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.account-reference-validator-dropdown').dropdown();
-            $('.vat-dropdown').dropdown();
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select account reference validator',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#AccountReferenceValidatorId')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select VAT code',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#VatCode')
+            });
+
         });
     </script>
 }

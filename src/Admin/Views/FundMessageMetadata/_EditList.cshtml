@@ -2,44 +2,44 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped teal">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Description
-                </th>
-                <th scope="col">
-                    Value
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items.OrderBy(x => x.Description))
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @item.Description
-                    </td>
-                    <td>
-                        @item.Value
-                    </td>
-                    <td style="width:20%;">
-                        @Html.ActionLink("Edit", "Edit", "FundMessageMetadata", new { id = item.Id }, new { @class = "ui button" })
-                        @Html.ActionLink("Delete", "Delete", "FundMessageMetadata", new { id = item.Id, fundMessageId = item.ParentCode }, new { @class = "ui button delete-action" })
-                    </td>
+                    <th scope="col">
+                        Description
+                    </th>
+                    <th scope="col">
+                        Value
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items.OrderBy(x => x.Description))
+                {
+                    <tr>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.Value
+                        </td>
+                        <td class="text-end">
+                            @Html.ActionLink("Edit", "Edit", "FundMessageMetadata", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Delete", "Delete", "FundMessageMetadata", new { id = item.Id, fundMessageId = item.ParentCode }, new { @class = "btn btn-secondary delete-action" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There is no metadata specified
-    </div>
+    Html.RenderPartial("_NothingSpecified", "metadata");
 }
 
 <script type="text/javascript">

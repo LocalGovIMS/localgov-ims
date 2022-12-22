@@ -2,12 +2,16 @@
 
 @if (Model != null)
 {
-    <div>
-        <div class="ui @Model.Type message" style="margin: -1rem 0 2rem">
-            <div class="header">
+    <div class="alert alert-@Model.Type mb-3">
+        @if (!Model.Title.IsNumericWhiteSpace())
+        {
+            <div class="fw-bold pb-1">
                 @Model.Title
             </div>
-            <p>@Model.Text</p>
-        </div>
+        }
+        @if (!Model.Text.IsNumericWhiteSpace())
+        {
+            <p class="mb-0">@Model.Text</p>
+        }
     </div>
 }

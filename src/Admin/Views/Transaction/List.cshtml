@@ -10,139 +10,116 @@
     ViewBag.Title = "Transactions";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Transactions
+@section Header { Transactions }
 
-        @if (!Model.SearchCriteria.IsForAnImport)
-        {
-            <a href="@Url.Action("Search", "Transaction")" class="ui button right floated" id="reset">
-                <i class="undo icon"></i> Reset search
-            </a>
-            <a href="@Url.Action("Import", "FileImport")" class="ui button right floated" id="upload">
-                <i class="upload icon"></i> File Import
-            </a>
-        }
+@section Subheader { Payments and refunds }
 
-        @if (Model.SearchCriteria.IsForAnImport)
-        {
-            <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.SearchCriteria.ImportId })" class="ui button right floated" id="reset">
-                <i class="undo icon"></i> Reset search
-            </a>
-        }
+@section Actions {
 
-        <a class="ui button right floated" id="export" onclick="SubmitMyForm()">
-            <i class="download icon"></i> Export
+    @if (!Model.SearchCriteria.IsForAnImport)
+    {
+        <a href="@Url.Action("Import", "FileImport")" class="btn btn-secondary" id="upload">
+            <i class="upload icon"></i> File import
         </a>
-        <div class="sub header">
-            Payments and refunds
-        </div>
+    }
 
-    </h1>
+    <a class="btn btn-secondary" id="export" onclick="SubmitMyForm()">
+        <i class="download icon"></i> Export
+    </a>
 }
 
-@Html.Partial("_SearchTransaction", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_SearchTransaction", Model.SearchCriteria)
+</div>
 
-@if (Model.Transactions != null && Model.Transactions.Any())
-{
-    <table class="ui celled table striped table-fixed clickable">
-        <thead>
-            <tr>
-                <th scope="col" style="width: 10%">Date and time</th>
-                <th scope="col" style="width: 5%">MOP</th>
-                <th scope="col" style="width: 10%">Receipt</th>
-                <th scope="col" style="width: 20%">Type</th>
-                <th scope="col" style="width: 15%">Account</th>
-                <th scope="col" style="width: 26%">Narrative</th>
-                <th scope="col" style="width: 7%">Reallocated</th>
-                <th scope="col" style="width: 7%">Amount (£)</th>
-            </tr>
-        </thead>
-        <tbody>
+<div>
 
-            @foreach (var transaction in Model.Transactions)
-            {
-                <tr>
-                    <td>@transaction.EntryDate</td>
-                    <td style="text-align: center;">
-                        <span class="ui tiny label mop"
-                              title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
-                              style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">
-                            @(transaction.Mop != null ? transaction.Mop.MopCode : "")
-                        </span>
-                    </td>
-                    <td>
-                        @if (User.IsInRole(Role.TransactionDetails))
-                        {
-                            <a href="@Url.Action("Details", new {id = transaction.PspReference})">@transaction.PspReference</a>
-                        }
-                        else
-                        {
-                            @transaction.PspReference
-                        }
-                        @if (transaction.PspReference != transaction.InternalReference)
-                        {
-                            <div class="sub">@transaction.InternalReference</div>
-                        }
-                    </td>
-                    <td>
-                        @(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")
-                        <div class="sub">@transaction.CardHolderAddressLine1 @transaction.CardHolderAddressLine2 @transaction.CardHolderAddressLine3 @transaction.CardHolderAddressLine4 @transaction.CardHolderPostCode</div>
-                    </td>
-                    <td>@transaction.AccountReference</td>
-                    <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
-                    <td><span class="ui tiny label mop" style="background-color:@(transaction.HasTransfers ? "#21ba45" : "#2185d0"); color: white">@transaction.HasTransfers.ToYesNoString()</span></td>
-                    <td style="text-align: right" class="@if (transaction.Amount < 0)
-                                            {
-                                                @Html.Raw("td--negative")
-                                            }">
-                        @Html.ToCurrency(transaction.Amount)
-                    </td>
-                </tr>
-            }
+    @if (Model.Transactions != null && Model.Transactions.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 10%">Date and time</th>
+                        <th scope="col" style="width: 5%">MOP</th>
+                        <th scope="col" style="width: 15%">Receipt</th>
+                        <th scope="col" style="width: 20%">Type</th>
+                        <th scope="col" style="width: 15%">Account</th>
+                        <th scope="col" style="width: 15%">Narrative</th>
+                        <th scope="col" style="width: 10%">Amount (£)</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="7">
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.EntryDate</td>
+                            <td class="text-center">
+                                <div class="px-2 py-1 rounded-1 d-inline-flex"
+                                     title="@(transaction.Mop != null ? transaction.Mop.MopName : "")"
+                                     style="color:@(transaction.Mop != null ? transaction.Mop.TextColour() : ""); background-color:@(transaction.Mop != null ? transaction.Mop.BackgroundColour() : "") ">@(transaction.Mop != null ? transaction.Mop.MopCode : "")</div>
+                            </td>
+                            <td>
+                                @if (User.IsInRole(Role.TransactionDetails))
+                                {
+                                    <a href="@Url.Action("Details", new {id = transaction.PspReference})">@transaction.PspReference</a>
+                                }
+                                else
+                                {
+                                    @transaction.PspReference
+                                }
+                                @if (transaction.PspReference != transaction.InternalReference)
+                                {
+                                    <div>@transaction.InternalReference</div>
+                                }
+                            </td>
+                            <td>
+                                @(transaction.Fund != null ? string.Format("{0} ({1})", transaction.Fund.FundName, transaction.Fund.FundCode) : "")
+                                <div class="sub">@transaction.CardHolderAddressLine1 @transaction.CardHolderAddressLine2 @transaction.CardHolderAddressLine3 @transaction.CardHolderAddressLine4 @transaction.CardHolderPostCode</div>
+                            </td>
+                            <td>@transaction.AccountReference</td>
 
+                            <td class="force-wrap">@transaction.Narrative @transaction.AppReference</td>
+                            <td class="text-end @if (transaction.Amount < 0) { @Html.Raw("td--negative") }">
+                                @Html.ToCurrency(transaction.Amount)
+                            </td>
+                        </tr>
+                    }
 
-                    <div class="ui pagination menu">
-                        @if (Model.Pages > 1)
-                        {
-                            @Html.PagedListPager(Model.Transactions, page => Url.Action(Model.SearchCriteria.SearchAction, new
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            @if (Model.Pages > 1)
                             {
-                                page = page,
-                                amount = Model.SearchCriteria.Amount,
-                                fundCode = Model.SearchCriteria.FundCode,
-                                receiptNumber = Model.SearchCriteria.ReceiptNumber,
-                                startDate = Model.SearchCriteria.StartDate,
-                                endDate = Model.SearchCriteria.EndDate,
-                                accountReference = Model.SearchCriteria.AccountReference,
-                                userId = Model.SearchCriteria.UserId,
-                                mopCode = Model.SearchCriteria.MopCode,
-                                narrative = Model.SearchCriteria.Narrative,
-                                WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
-                                ImportId = Model.SearchCriteria.ImportId
-                            }))
-                        }
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-}
-else
-{
-    <div class="ui info message">
-        <div class="header">
-            We couldn't find any matching transactions
+                                @Html.PagedListPager(Model.Transactions, page => Url.Action(Model.SearchCriteria.SearchAction, new
+                                {
+                                    page = page,
+                                    amount = Model.SearchCriteria.Amount,
+                                    fundCode = Model.SearchCriteria.FundCode,
+                                    receiptNumber = Model.SearchCriteria.ReceiptNumber,
+                                    startDate = Model.SearchCriteria.StartDate,
+                                    endDate = Model.SearchCriteria.EndDate,
+                                    accountReference = Model.SearchCriteria.AccountReference,
+                                    userId = Model.SearchCriteria.UserId,
+                                    mopCode = Model.SearchCriteria.MopCode,
+                                    narrative = Model.SearchCriteria.Narrative,
+                                    WildSearchAccountReference = Model.SearchCriteria.WildSearchAccountReference,
+                                    ImportId = Model.SearchCriteria.ImportId
+                                }))
+                            }
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-        <p>
-            Please try again with different search criteria
-        </p>
-    </div>
-}
+    }
+    else
+    {
+        Html.RenderPartial("_NoResultsMessage", "transactions");
+    }
+</div>
 
 <script>
     $(document).ready(function () {
@@ -169,4 +146,47 @@ else
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/transaction")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select fund type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#FundCode')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select mop type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#MopCode')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select user',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#UserId')
+            });
+
+        });
+    </script>
+
 }

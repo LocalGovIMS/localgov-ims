@@ -3,86 +3,97 @@
     ViewBag.Title = "Address";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Payment
-        <div class="sub header">
-            Add billing address
-        </div>
-    </h1>
+@section Messages {
+    @if (Model.Message != null) { Html.RenderPartial("_Message", Model.Message); }
 }
 
-<div>
-    @if (Model.Message != null)
-    {
-        <div class="ui @Model.Message.Type message" style="margin: -1rem 0 2rem">
-            <div class="header">
-                @Model.Message.Title
-            </div>
-            <p>@Model.Message.Text</p>
-        </div>
-    }
+@section Header { Payment }
 
-    @if (!string.IsNullOrWhiteSpace(ViewBag.CallRecordingMsg))
-    {
-        <div class="message message--warn message--flash">
-            <strong>@ViewBag.CallRecordingMsg</strong>
-        </div>
-    }
-</div>
+@section Subheader { Add billing address }
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.CallRecordingMsg))
+{
+    <div class="alert alert-warning mb-3">
+        <p class="mb-0">
+            @ViewBag.CallRecordingMsg
+        </p>
+    </div>
+}
+
 
 @using (Html.BeginForm("Address", "Payment", FormMethod.Post))
 {
-    <div class="ui form">
-        <div class="ten wide column">
-            <h2 class="ui header">Billing address</h2>
-            <div class="three wide field">
-                @Html.LabelFor(m => m.PayeeName)
-                @Html.TextBoxFor(m => m.PayeeName, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.PayeeName)
-            </div>
-            <div class="three wide field">
-                @Html.LabelFor(m => m.AddressLine1)
-                @Html.TextBoxFor(m => m.AddressLine1, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine1)
-            </div>
-            <div class="six wide field">
-                @Html.LabelFor(m => m.AddressLine2)
-                @Html.TextBoxFor(m => m.AddressLine2, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine2)
-            </div>
-            <div class=" four wide field">
-                @Html.LabelFor(m => m.AddressLine3)
-                @Html.TextBoxFor(m => m.AddressLine3, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine3)
-            </div>
-            <div class=" four wide field">
-                @Html.LabelFor(m => m.AddressLine4)
-                @Html.TextBoxFor(m => m.AddressLine4, new { maxlength = "50" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.AddressLine4)
-            </div>
-            <div class=" two wide field">
-                @Html.LabelFor(m => m.PostCode)
-                @Html.TextBoxFor(m => m.PostCode, new { maxlength = "10" })
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.PostCode)
-            </div>
-            <div style="margin-top: 0.5rem;">
-                @Html.ActionLink("Cancel", "Cancel", null, new { @class = "ui button" })
-                <button value="SaveAddress" name="action" type="submit" class="ui primary button">Next</button>
+    <div>
+
+        <h3>
+            Billing address
+        </h3>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.PayeeName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PayeeName, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.PayeeName)
+                </div>
             </div>
         </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.AddressLine1, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine1)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.AddressLine2, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine2)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.AddressLine3, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine3, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine3)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-7 col-lg-6 col-xl-5 col-xxl-4">
+                @Html.LabelFor(m => m.AddressLine4, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressLine4, new { @class = "form-control", maxlength = "50" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.AddressLine4)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-3 col-lg-2">
+                @Html.LabelFor(m => m.PostCode, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control", maxlength = "10" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.PostCode)
+                </div>
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Cancel", "Cancel", null, new { @class = "btn btn-secondary" })
+            <button value="SaveAddress" name="action" type="submit" class="btn btn-primary">Next</button>
+        </div>
+
     </div>
 }
 

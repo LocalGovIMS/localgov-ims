@@ -4,10 +4,10 @@ namespace Admin.Models.Fund
 {
     public class SearchCriteria
     {
-        [DisplayName("Fund code")]
+        [DisplayName("Code")]
         public string FundCode { get; set; }
 
-        [DisplayName("Fund name")]
+        [DisplayName("Name")]
         public string FundName { get; set; }
 
         public int Page { get; set; }

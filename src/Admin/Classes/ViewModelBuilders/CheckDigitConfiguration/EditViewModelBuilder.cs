@@ -2,6 +2,8 @@
 using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace Admin.Classes.ViewModelBuilders.CheckDigitConfiguration
 {
@@ -18,7 +20,11 @@ namespace Admin.Classes.ViewModelBuilders.CheckDigitConfiguration
 
         protected override EditViewModel OnBuild()
         {
-            return new EditViewModel();
+            var model = new EditViewModel();
+
+            model.Types = GetTypes();
+
+            return model;
         }
 
         protected override EditViewModel OnBuild(int id)
@@ -37,7 +43,20 @@ namespace Admin.Classes.ViewModelBuilders.CheckDigitConfiguration
             model.Type = (CheckDigitType)data.Type;
             model.Weightings = data.Weightings;
 
+            model.Types = GetTypes();
+
             return model;
+        }
+
+        protected override EditViewModel OnRebuild(EditViewModel model)
+        {
+            model.Types = GetTypes();
+            return model;
+        }
+
+        private SelectList GetTypes()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(CheckDigitType)), false);
         }
     }
 }

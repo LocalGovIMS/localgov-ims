@@ -3,42 +3,49 @@
     ViewBag.Title = "VAT";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Code
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            VAT details
-        </div>
-    </h1>
+@section Header { @Model.Code }
+
+@section Subheader { VAT details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Code)
-        @Html.DisplayFor(m => m.Code)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Code, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Code)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.Percentage)
-        @Html.DisplayFor(m => m.Percentage)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Percentage, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Percentage)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.IsDisabled)
-        @Html.DisplayFor(m => m.Status)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Status)
+        </div>
     </div>
 
-    <div class="ui vertical segment">
-        <h2>
-            Metadata
-        </h2>
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h1>
+                Metadata
+            </h1>
+        </div>
+    </div>
+
+    <div class="mb-3">
         @Html.Action("_ListForVat", "VatMetadata", new { vatCode = Model.Code })
     </div>
 
-    <br />
-
-    @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "Vat", null, new { @class = "btn btn-secondary" })
 
 </div>

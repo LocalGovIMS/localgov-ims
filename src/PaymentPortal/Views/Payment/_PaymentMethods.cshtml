@@ -1,0 +1,14 @@
+﻿<div class="card">
+    <div class="card-body">
+        <p class="card-text">You can pay using the following methods:</p>
+        <div class="payment-logos">
+            <img src="~/Content/images/logo-mastercard.png" alt="Mastercard" />
+            <img src="~/Content/images/logo-visa.gif" class="mx-2" alt="Visa" />
+            <img src="~/Content/images/logo-maestro.gif" class="ms-1" alt="Maestro" />
+            <img src="~/Content/images/logo-bank-giro.png" alt="Bank Giro" />
+        </div>
+        <p class="card-text">
+            If you prefer to pay by another method or are having difficulty in paying your bills please read about our <a href="@(System.Configuration.ConfigurationManager.AppSettings["OtherWaysToPayUrl"])">other ways to pay</a>
+        </p>
+    </div>
+</div>

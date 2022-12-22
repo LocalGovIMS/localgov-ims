@@ -1,130 +1,118 @@
 ﻿@model Admin.Models.Transaction.SearchCriteria
 
-@using (Html.BeginForm(Model.SearchAction, "Transaction", FormMethod.Get, new { id = "search-form" } ))
+@using (Html.BeginForm(Model.SearchAction, "Transaction", FormMethod.Get, new { id = "search-form" }))
 {
 
     @Html.HiddenFor(x => x.ImportId)
 
-    <div class="ui segment">
-        <div class="ui form">
-            <div class="ui error message source-message" style="margin: 1rem 0; display:none;">
-                <div class="header source-message-header">Search invalid</div>
-                <p class="header source-message-text"></p>
+    <div>
+        <div class="ui error message source-message" style="margin: 1rem 0; display:none;">
+            <div class="header source-message-header">Search invalid</div>
+            <p class="header source-message-text"></p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                @Html.LabelFor(m => m.FundCode, new { @class = "form-label" })
+                <select id="FundCode" name="FundCode">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Funds.Items)
+                    {
+                        <option class="item" value="@item.Value" @(!Model.FundCode.IsNullOrEmpty() && Model.FundCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
             </div>
-            <div class="six fields">
-                <div class="field">
-                    @Html.LabelFor(m => m.FundCode)
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.FundCode, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Funds.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.MopCode)
-                    <div class="ui fluid search selection dropdown">
-                        @Html.HiddenFor(x => x.MopCode, new { size = 4 })
-                        <i class="dropdown icon"></i>
-                        <div class="default text no-overflow" style="width: 100px;">Select MOP code</div>
-                        <div class="menu">
-                            <div class="item" data-value="">
-                                None
-                            </div>
-                            @foreach (var item in Model.Mops.Items)
-                            {
-                                <div class="item" data-value="@item.Value">
-                                    @item.Text
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.StartDate)
-                    <div class="ui input left icon" style="min-width: 160px;">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;" })
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.EndDate)
-                    <div class="ui input left icon" style="min-width: 160px;">
-                        <i class="calendar icon"></i>
-                        @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;" })
-                    </div>
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.CardPrefix)
-                    @Html.TextBoxFor(m => m.CardPrefix, new { size = 6, placeholder = "Enter card prefix" })
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.CardSuffix)
-                    @Html.TextBoxFor(m => m.CardSuffix, new { size = 4, placeholder = "Enter card suffix" })
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
+                @Html.LabelFor(m => m.MopCode, new { @class = "form-label" })
+                <select id="MopCode" name="MopCode">
+                    <option value="">None</option>
+                    @foreach (var item in Model.Mops.Items)
+                    {
+                        <option class="item" value="@item.Value" @(!Model.MopCode.IsNullOrEmpty() && Model.MopCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-md-0">
+                @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
+                <div class="ui input left icon" style="min-width: 160px;">
+                    <i class="calendar icon"></i>
+                    @Html.TextBoxFor(m => m.StartDate, new { size = 10, placeholder = "Start date", type = "date", style = "min-width:145px;", @class = "form-control" })
                 </div>
             </div>
-            <div class="six fields">
-                <div class="field">
-                    @Html.LabelFor(m => m.AccountReference)
-                    @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Enter account reference" })
-                    @Html.CheckBoxFor(m => m.WildSearchAccountReference)
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-lg-0">
+                @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
+                <div class="ui input left icon" style="min-width: 160px;">
+                    <i class="calendar icon"></i>
+                    @Html.TextBoxFor(m => m.EndDate, new { size = 10, placeholder = "End date", type = "date", style = "min-width:145px;", @class = "form-control" })
                 </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.ReceiptNumber)
-                    @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Enter receipt number" })
-                </div>
-                <div class="field">
-                    @Html.LabelFor(m => m.Amount)
-                    @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Enter amount", @class = "monetary-amount" })
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-xxl-0">
+                @Html.LabelFor(m => m.CardPrefix, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.CardPrefix, new { size = 6, placeholder = "Enter card prefix", @class = "form-control" })
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-xxl-0">
+                @Html.LabelFor(m => m.CardSuffix, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.CardSuffix, new { size = 4, placeholder = "Enter card suffix", @class = "form-control" })
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                @Html.LabelFor(m => m.AccountReference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AccountReference, new { size = 10, placeholder = "Enter account reference", @class = "form-control" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.WildSearchAccountReference, new { @class = "form-check-input", role = "switch" })
+                    <small>
+                        @Html.LabelFor(m => m.WildSearchAccountReference, new { @class = "form-check-label" })
+                    </small>
                 </div>
 
-                @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.SystemAdmin))
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                @Html.LabelFor(m => m.ReceiptNumber, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ReceiptNumber, new { size = 10, placeholder = "Enter receipt number", @class = "form-control" })
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                @Html.LabelFor(m => m.Amount, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Amount, new { size = 6, style = "min-width:80px;", placeholder = "Enter amount", @class = "form-control monetary-amount" })
+            </div>
+
+            @if (User.IsInRole(Role.Finance) || User.IsInRole(Role.SystemAdmin))
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                    @Html.LabelFor(m => m.InternalReference, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Enter internal reference", @class = "form-control" })
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                    @Html.LabelFor(m => m.UserId, new { @class = "form-label" })
+                    <select id="UserId" name="UserId">
+                        <option value="">None</option>
+                        @foreach (var item in Model.Users.Items)
+                        {
+                            <option class="item" value="@item.Value" @(!Model.UserId.ToString().IsNullOrEmpty() && Model.UserId.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2">
+                    @Html.LabelFor(m => m.Narrative, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Enter narrative", @class = "form-control" })
+                </div>
+            }
+            <div class="col-12 pt-3 gap-2 d-flex align-self-end justify-content-end">
+                <button class="btn btn-primary search" tabindex="0" type="submit">
+                    <i class="search icon"></i> Search
+                </button>
+
+                @if (!Model.IsForAnImport)
                 {
-                    <div class="field">
-                        @Html.LabelFor(m => m.InternalReference)
-                        @Html.TextBoxFor(m => m.InternalReference, new { size = 10, placeholder = "Enter internal reference" })
-                    </div>
-                    <div class="field">
-                        @Html.LabelFor(m => m.UserId)
-                        <div class="ui fluid search selection dropdown">
-
-                            @Html.HiddenFor(x => x.UserId, new { size = 4 })
-                            <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select user</div>
-                            <div class="menu">
-                                <div class="item" data-value="">
-                                    None
-                                </div>
-                                @foreach (var item in Model.Users.Items)
-                                {
-                                    <div class="item" data-value="@item.Value">
-                                        @item.Text
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        @Html.LabelFor(m => m.Narrative)
-                        @Html.TextBoxFor(m => m.Narrative, new { size = 20, placeholder = "Enter narrative" })
-                    </div>
+                    <a href="@Url.Action("Search", "Transaction")" class="btn btn-secondary" id="reset">
+                        <i class="undo icon"></i> Reset search
+                    </a>
                 }
-                <div class="field">
-                    <label>&nbsp;</label>
-                    <button class="ui icon blue button floated right search" tabindex="0" type="submit">
-                        <i class="search icon"></i> Search
-                    </button>
-                </div>
+
+                @if (Model.IsForAnImport)
+                {
+                    <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.ImportId })" class="btn btn-secondary" id="reset">
+                        <i class="undo icon"></i> Reset search
+                    </a>
+                }
+
             </div>
         </div>
     </div>

@@ -59,7 +59,7 @@ namespace PaymentPortal.Controllers
             catch (Exception e)
             {
                 Dependencies.Log.Error(e);
-                ViewBag.ExMessage = "Error : Unable to open the payment basket. ";
+                ViewBag.ExMessage = "Unable to open the payment basket.";
                 return View("Error");
             }
         }
@@ -120,7 +120,7 @@ namespace PaymentPortal.Controllers
             catch (Exception e)
             {
                 Dependencies.Log.Error(e);
-                ViewBag.ExMessage = "Error : Unable to process card payment. The card processing system is currently unavailable.";
+                ViewBag.ExMessage = "Unable to process card payment. The card processing system is currently unavailable.";
 
                 return View("Error");
             }
@@ -172,7 +172,7 @@ namespace PaymentPortal.Controllers
             {
                 Dependencies.Log.Error(e);
 
-                ViewBag.ExMessage = $"Error : Unable to process payment for reference : {legacyPaymentRequest.AccountReference}. The card processing system is currently unavailable";
+                ViewBag.ExMessage = $"Unable to process payment for reference : {legacyPaymentRequest.AccountReference}. The card processing system is currently unavailable";
 
                 return View("Error");
             }
@@ -224,7 +224,7 @@ namespace PaymentPortal.Controllers
             {
                 Dependencies.Log.Error(e);
 
-                ViewBag.ExMessage = $"Error : Unable to process payment for reference : {model.PaymentReference}. The card processing system is currently unavailable";
+                ViewBag.ExMessage = $"Unable to process payment for reference : {model.PaymentReference}. The card processing system is currently unavailable";
 
                 return View("Error");
             }
@@ -246,7 +246,7 @@ namespace PaymentPortal.Controllers
             }
             catch (Exception)
             {
-                ViewBag.ExMessage = "Error : Failed to clear items from basket";
+                ViewBag.ExMessage = "Failed to clear items from basket";
 
                 return View("Error");
             }

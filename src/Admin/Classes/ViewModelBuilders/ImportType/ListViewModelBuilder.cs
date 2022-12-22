@@ -4,6 +4,8 @@ using BusinessLogic.Models.Shared;
 using log4net;
 using PagedList;
 using System;
+using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.ImportType
 {
@@ -19,10 +21,13 @@ namespace Admin.Classes.ViewModelBuilders.ImportType
         }
 
         protected override ListViewModel OnBuild()
-        {
-            var searchCriteria = new SearchCriteria();
+        {            
             var criteria = new BusinessLogic.Models.ImportType.SearchCriteria();
             var searchResult = _importTypeService.Search(criteria);
+            var searchCriteria = new SearchCriteria()
+            {
+                ImportTypes = GetImportTypes()
+            };
 
             return new ListViewModel()
             {
@@ -34,27 +39,34 @@ namespace Admin.Classes.ViewModelBuilders.ImportType
             };
         }
 
-        protected override ListViewModel OnBuild(SearchCriteria searchCriteria)
+        protected override ListViewModel OnBuild(SearchCriteria criteria)
         {
-            var criteria = new BusinessLogic.Models.ImportType.SearchCriteria()
+            var searchCriteria = new BusinessLogic.Models.ImportType.SearchCriteria()
             {
-                DataType = searchCriteria.DataType,
-                Name = searchCriteria.Name,
-                ExternalReference = searchCriteria.ExternalReference,
-                Page = searchCriteria.Page,
+                DataType = criteria.DataType,
+                Name = criteria.Name,
+                ExternalReference = criteria.ExternalReference,
+                Page = criteria.Page,
                 PageSize = 20
             };
 
-            var searchResult = _importTypeService.Search(criteria);
+            var searchResult = _importTypeService.Search(searchCriteria);
+
+            criteria.ImportTypes = GetImportTypes();
 
             return new ListViewModel()
             {
                 Items = GetSearchResultAsPagedList(searchResult),
-                SearchCriteria = searchCriteria,
+                SearchCriteria = criteria,
                 Count = searchResult.Count,
                 Pages = (int)Math.Ceiling((double)searchResult.Count / searchResult.PageSize),
                 Page = searchResult.Page
             };
+        }
+
+        private SelectList GetImportTypes()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.ImportDataTypeEnum)), false);
         }
 
         private StaticPagedList<BusinessLogic.Entities.ImportType> GetSearchResultAsPagedList(

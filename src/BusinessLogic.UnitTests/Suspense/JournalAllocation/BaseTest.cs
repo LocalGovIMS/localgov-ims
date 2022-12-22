@@ -41,6 +41,21 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                                 Value = "True"
                             }
                         }
+                    },
+                    new Mop()
+                    {
+                        MopCode = "JN",
+                        Metadata = new List<MopMetadata>()
+                        {
+                            new MopMetadata()
+                            {
+                                MetadataKey = new MetadataKey()
+                                {
+                                    Name = MopMetadataKeys.IsAJournal
+                                },
+                                Value = "True"
+                            }
+                        }
                     }
                 });
 
@@ -55,7 +70,7 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                             {
                                 MetadataKey = new MetadataKey()
                                 {
-                                    Name = VatMetadataKeys.IsASuspenseJournalVatCode
+                                    Name = VatMetadataKeys.IsASuspenseTransactionVatCode
                                 },
                                 Value = "True"
                             }
@@ -74,7 +89,7 @@ namespace BusinessLogic.UnitTests.Suspense.JournalAllocation
                             {
                                 MetadataKey = new MetadataKey()
                                 {
-                                    Name = FundMetadataKeys.IsASuspenseJournalFund
+                                    Name = FundMetadataKeys.IsASuspenseTransactionFund
                                 },
                                 Value = "True"
                             }

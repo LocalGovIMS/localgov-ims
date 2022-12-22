@@ -1,19 +1,9 @@
 ﻿$(document).ready(function () {    
 
-    $(".approve").click(function () {        
-        $('#approve-dialog').modal({
-            onApprove: function () {
-                return false;
-            },
-            onShow: function () {                
-                $('#amount-to-approve').text(parseFloat(totalEReturns() || 0).toFixed(2));
-                clearError();
-                renderApproveItems();
-            }
-        }).modal('show');
-
-    });    
-   
+    $("#approve").click(function () {
+        console.log('Approve click');
+        renderApproveItems();    
+    });   
 
     $(".submit-approve").click(function (e) {
 
@@ -78,7 +68,7 @@
 
         var html = [];
 
-        html.push('<ul>');
+        html.push('<ul class=\"mb-0\">');
         html.push('<li>' + message + '</li>');
         html.push('</ul>');
 
@@ -95,7 +85,7 @@
 
         if (Model.eReturns.length > 0) {
             $(Model.eReturns).each(function (index) {
-                $('#approve-table-body').append('<tr><td>' + this.num + '</td><td>' + this.template + '</td><td>' + this.submittedBy + '</td><td>' + this.type + '</td><td style="text-align:right;">' + this.amount.toFixed(2) + '</td><td><a href=\'#\' class=\'ui red button right floated remove-ereturn\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
+                $('#approve-table-body').append('<tr><td>' + this.num + '</td><td>' + this.template + '</td><td>' + this.submittedBy + '</td><td>' + this.type + '</td><td style="text-align:right;">' + this.amount.toFixed(2) + '</td><td class=\'text-end\'><a href=\'#\' class=\'btn btn-danger remove-ereturn\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
             });
 
             $('#amount-to-approve').text(parseFloat(totalEReturns() || 0).toFixed(2));

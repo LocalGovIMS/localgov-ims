@@ -2,146 +2,108 @@
 
 @if (User.IsInRole(Role.Finance))
 {
-    <div id="transfer-dialog" class="ui modal">
+    <div class="modal fade modal-xl" id="journalModal" tabindex="-1" aria-labelledby="journalModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="journalModalLabel">Create journal</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-        <div class="header">
-            Create journal
-        </div>
+                <div class="modal-body">
 
-        <div class="ui info message" style="margin: 1rem;">
-            <p>There is <strong>£<span id="amount-available-to-transfer">0</span></strong> available to journal</p>
-        </div>
-
-        <div class="ui error message transfer-message" style="margin: 1rem; display:none;">
-            <div class="header transfer-message-header">Unable to add the journal</div>
-            <p class="header transfer-message-text"></p>
-        </div>
-
-        <div class="content ui">
-
-            <div class="ui form">
-                <div class="fields">
-
-                    <div class="ui four wide field">
-                        <label for="JournalItem_FundCode">Fund type</label>
-                        <div class="ui fluid search selection dropdown js-fund">
-                            @Html.Hidden("JournalItem_FundCode")
-                            <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select fund type</div>
-                            <div class="menu">
-                                <div class="item" data-value="">
-                                    Fund
-                                </div>
-                                @foreach (var item in Model.Funds.Items)
-                                {
-                                    var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
-                                    <div class="item" data-value="@item.Value" @dataAttributes>
-                                        @item.Text
-                                    </div>
-                                }
-                            </div>
+                    <div class="alert alert-info mb-3">
+                        <p class="mb-0">
+                            There is <strong>£<span id="amount-available-to-journal">0</span></strong> available to journal
+                        </p>
+                    </div>
+                    
+                    <div class="alert alert-danger mb-3 journal-message" style="display:none">
+                        <div class="fw-bold pb-1 journal-message-header">
+                            Unable to add the journal
                         </div>
+                        <p id="journal-message-text" class="mb-0 journal-message-text"></p>
                     </div>
 
-                    <div class="ui four wide field">
-                        <label for="JournalItem_MopCode">MOP code</label>
-                        <div class="ui fluid search selection dropdown js-mop">
-                            @Html.Hidden("JournalItem_MopCode", Model.DefaultJournalReallocationMopCode)
-                            <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select MOP code</div>
-                            <div class="menu">
-                                <div class="item" data-value="">
-                                    MOP code
-                                </div>
-                                @foreach (var item in Model.MopCodes.Items)
-                                {
-                                    <div class="item" data-value="@item.Value">
-                                        @item.Text
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                    <div class="table-responsive-xl">
+                        <table id="journal-table" class="table table-striped table-bordered mt-2">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="JournalItemFundCode" style="min-width:150px;">Fund type</th>
+                                    <th scope="col" id="JournalItemMopCode" style="min-width:150px;">MOP</th>
+                                    <th scope="col">Account</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Outstanding balance (£)</th>
+                                    <th scope="col" id="JournalItemVatCode" style="min-width:150px;">VAT code</th>
+                                    <th scope="col">Amount (£)</th>
+                                    <th scope="col" style="min-width:150px;">Narrative</th>
+                                    <th scope="col"><span class="visually-hidden">Actions</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="journal-table-body"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        @Html.Label("JournalItem_FundCode", "Fund type", new { @class = "form-label visually-hidden" })
+                                        <select id="JournalItem_FundCode" name="JournalItem_FundCode" aria-labelledby="JournalItemFundCode">
+                                            <option value="">None</option>
+                                            @foreach (var item in Model.Funds.Items)
+                                            {
+                                                var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
+
+                                                <option class="item" value="@item.Value" @(Model.JournalItem != null && !Model.JournalItem.FundCode.IsNullOrEmpty() && Model.JournalItem.FundCode.Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.Label("JournalItem_MopCode", "MOP", new { @class = "form-label visually-hidden" })
+                                        <select id="JournalItem_MopCode" name="JournalItem_MopCode" aria-labelledby="JournalItemMopCode">
+                                            <option value="">None</option>
+                                            @foreach (var item in Model.MopCodes.Items)
+                                            {
+                                                <option class="item" value="@item.Value" @(Model.JournalItem != null && !Model.JournalItem.FundCode.IsNullOrEmpty() && Model.JournalItem.FundCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td colspan="3">
+                                        @Html.TextBoxFor(m => m.JournalItem.AccountReference, new { @placeholder = "Enter account reference", @class = "form-control", @maxlength = 32 })
+                                        @Html.ValidationMessageFor(x => x.JournalItem.AccountReference)
+                                    </td>
+                                    <td>
+                                        @Html.Label("JournalItem_VatCode", "VAT code", new { @class = "form-label visually-hidden" })
+                                        <select id="JournalItem_VatCode" name="JournalItem_VatCode" aria-labelledby="JournalItemVatCode">
+                                            <option value="">None</option>
+                                            @foreach (var item in Model.VatCodes.Items)
+                                            {
+                                                <option class="item" value="@item.Value" @(Model.JournalItem != null && Model.JournalItem.VatCode != null && !Model.JournalItem.VatCode.IsNullOrEmpty() && Model.JournalItem.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.JournalItem.Amount, null, new { @placeholder = "0.00", @class = "form-control monetary-amount" })
+                                        @Html.ValidationMessageFor(x => x.JournalItem.Amount)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.JournalItem.Narrative, null, new { @placeholder = "Enter narrative", @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.JournalItem.Narrative)
+                                    </td>
+                                    <td class="text-end">
+                                        <button class="btn btn-primary add-journal">Add</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
 
-                    <div class="ui four wide field">
-                        <label for="JournalItem_AccountReference">Account reference</label>
-                        @Html.TextBoxFor(m => m.JournalItem.AccountReference, new { @placeholder = "Enter account reference", @maxlength = 16 })
-                        @Html.ValidationMessageFor(x => x.JournalItem.AccountReference)
+                    <div class="modal-footer pe-0 pb-0">
+                        <button type="button" class="btn btn-secondary" id="clearAllJournals">Clear all</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary submit-journal one-click-submit-button me-0" id="submit-journal">Submit journal</button>
                     </div>
 
-                    <div class="ui four wide field">
-                        <label for="JournalItem_VatCode">VAT code</label>
-                        <div class="ui fluid search selection dropdown js-vat">
-                            @Html.Hidden("JournalItem_VatCode")
-                            <i class="dropdown icon"></i>
-                            <div class="default text no-overflow" style="width: 100px;">Select VAT code</div>
-                            <div class="menu">
-                                <div class="item" data-value="">
-                                    VAT code
-                                </div>
-                                @foreach (var item in Model.VatCodes.Items)
-                                {
-                                    <div class="item" data-value="@item.Value">
-                                        @item.Text
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ui four wide field">
-                        <label for="JournalItem_Amount">Amount</label>
-                        <div class="ui labeled input">
-                            <label class="ui label" for="amount">£</label>
-                            @Html.TextBoxFor(m => m.JournalItem.Amount, null, new { @placeholder = "0.00", @class = "monetary-amount" })
-                            @Html.ValidationMessageFor(x => x.JournalItem.Amount)
-                        </div>
-                    </div>
-
-                    <div class="ui four wide field">
-                        <label for="JournalItem_NArrative">Narrative</label>
-                        <div class="ui input">
-                            @Html.TextBoxFor(m => m.JournalItem.Narrative, null, new { @placeholder = "Enter narrative" })
-                            @Html.ValidationMessageFor(x => x.JournalItem.Narrative)
-                        </div>
-                    </div>
-
-                    <div class="ui two wide field">
-                        <label>&nbsp;</label>
-                        <button class="ui right blue button add-transfer">
-                            Add
-                        </button>
-                    </div>
                 </div>
             </div>
-            <table id="transfer-table" class="ui celled table striped">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 10%;">Fund</th>
-                        <th scope="col" style="width: 20%;">MOP</th>
-                        <th scope="col" style="width: 10%;">Account</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Balance</th>
-                        <th scope="col" style="width: 10%;">VAT</th>
-                        <th scope="col" style="width: 15%;">Amount (£)</th>                        
-                        <th scope="col" style="width: 10%;">Narrative</th>
-                        <th scope="col" style="width: 8%;"></th>
-                    </tr>
-                </thead>
-                <tbody id="transfer-table-body"></tbody>
-            </table>
-
-        </div>
-
-        <div class="actions">
-            <div class="ui black deny button cancel-transfer">
-                Cancel
-            </div>
-
-            <button type="submit" class="ui positive right labeled icon button submit-transfer">
-                Submit journal
-                <i class="checkmark icon"></i>
-            </button>
         </div>
     </div>
+
 }

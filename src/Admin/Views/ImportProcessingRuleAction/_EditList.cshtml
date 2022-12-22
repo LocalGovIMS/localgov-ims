@@ -2,27 +2,42 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped teal">
-        @{ var actionCount = 0;}
-        @foreach (var action in Model.Items)
-        {
-            actionCount++;
-            <tr>
-                <td style="width:5%;">
-                    <span>@(actionCount == 1 ? "Set" : "And")</span>
-                </td>
-                <td>
-                    <div class="ui label teal">
-                        @action.DisplaySummary()
-                    </div>
-                </td>
-                <td style="width:35%;">
-                    @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleAction", new { id = action.Id }, new { @class = "ui button" })
-                    @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleAction", new { id = action.Id, importProcessingRuleId = action.ImportProcessingRuleId }, new { @class = "ui button delete-action" })
-                </td>
-            </tr>
-        }
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered mt-2">
+            <thead>
+                <tr class="visually-hidden">
+                    <th scope="col">
+                        Operation
+                    </th>
+                    <th scope="col">
+                        Action summary
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
+                </tr>
+            </thead>
+            @{ var actionCount = 0;}
+            @foreach (var action in Model.Items)
+            {
+                actionCount++;
+                <tr>
+                    <td style="width:5%;" class="align-middle">
+                        <span>@(actionCount == 1 ? "Set" : "And")</span>
+                    </td>
+                    <td class="align-middle">
+                        <span class="rounded-1 p-2 bg-success fw-normal mb-2 text-left text-white">
+                            @action.DisplaySummary()
+                        </span>
+                    </td>
+                    <td style="width:35%;" class="text-end">
+                        @Html.ActionLink("Edit", "Edit", "ImportProcessingRuleAction", new { id = action.Id }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Delete", "Delete", "ImportProcessingRuleAction", new { id = action.Id, importProcessingRuleId = action.ImportProcessingRuleId }, new { @class = "btn btn-secondary delete-action" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 else
 {

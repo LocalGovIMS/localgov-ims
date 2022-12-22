@@ -5,94 +5,80 @@
     Layout = "~/Views/Shared/_PrintLayout.cshtml";
 }
 
-<h1 class="ui vertical segment header">
-    <div style="float: right;">
-        <img style="max-height: 75px; max-width: 200px;" src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo.Printable"])" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) logo" />
-    </div>
-    @Model.Transaction.PspReference
-    <div class="sub header">
-        Payment receipt
-    </div>
-</h1>
+@section Header { @Model.Transaction.PspReference }
+
+@section Subheader { Payment receipt }
+
+@section Logo {
+    <img style="max-height: 75px; max-width: 200px;" src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo.Printable"])" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) logo" />
+}
 
 @Html.HiddenFor(m => m.Transaction.PspReference)
 
 <div>
-    @if (TempData.ContainsKey("Message"))
-    {
-        var message = (Message)TempData["Message"];
-        <div class="ui @message.Type message" style="margin: -1rem 0 2rem">
-            <div class="header">
-                @message.Title
+    
+    <div class="p-3">
+        
+        <div class="row">
+            <div class="col col-3 p-2">
+                @Html.Label("Date", new { @class = "form-label fw-bold" })
+                <div class="form-label">
+                    @Html.DisplayFor(m => m.Transaction.EntryDate, new { @class = "form-label mb-0" })
+                </div>
             </div>
-            <p>@message.Text</p>
-        </div>
-    }
-</div>
-
-<div class="ui grid stackable">
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            <strong>Date</strong><br>@Model.Transaction.EntryDate
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @if (!Model.Transaction.AddressLine1.IsNullOrWhiteSpace())
-            {
-                <strong>Address</strong><br />
-                @Html.Raw(Model.Transaction.FormattedAddress.Replace(",", ",<br />"))
-            }
-        </div>
-    </div>
-    <div class="sixteen wide column">
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th scope="col">Description</th>
-                    <th scope="col" style="width: 10%; white-space:nowrap;">VAT Rate</th>
-                    <th scope="col" style="width: 20%; white-space:nowrap;">Amount (£)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var vatTotals = new Dictionary<string, decimal>();
-                }
-                @foreach (var transactionLine in Model.Transaction.TransactionLines)
+            <div class="col col-4 offset-5 p-2">
+                @if (!Model.Transaction.AddressLine1.IsNullOrWhiteSpace())
                 {
-                    <tr>
-                        <td>@(transactionLine.Fund != null ? transactionLine.Fund.FundName : "") - @transactionLine.AccountReference</td>
-                        <td style="text-align: right">@(transactionLine.VatRate * 100)%</td>
-                        <td style="text-align: right" class="@if (transactionLine.Amount < 0)
-                                                         {
-                                                             @Html.Raw("td--negative")
-                                                         }">
-                            £@Html.ToCurrency(transactionLine.Amount - transactionLine.VatAmount)
-
-                            @{
-                                var vatKey = (transactionLine.VatRate * 100).ToString();
-                                if (!vatTotals.ContainsKey(vatKey))
-                                {
-                                    vatTotals.Add(vatKey, 0);
-                                }
-                                vatTotals[vatKey] = vatTotals[vatKey] + (transactionLine.VatAmount ?? 0);
-                            }
-                        </td>
-                    </tr>
+                    @Html.Label("Address", new { @class = "form-label fw-bold" })
+                    <br />
+                    @Html.Raw(Model.Transaction.FormattedAddress.Replace(",", ",<br />"))
                 }
-            </tbody>
-        </table>
-        <div style="float: left; width: 40%">
-            <div class="ui vertical segment">
-                <strong>VAT Registered Address:</strong>
+            </div>
+        </div>
+    
+        <div class="row border mt-3">
+            <div class="col col-8 p-2 fw-bold border-end">
+                Description
+            </div>
+            <div class="col col-2 p-2 fw-bold border-end">
+                VAT Rate
+            </div>
+            <div class="col col-2 p-2 fw-bold">
+                Amount (£)
+            </div>
+        </div>
+
+        @{
+            var vatTotals = new Dictionary<string, decimal>();
+        }
+
+        @foreach (var transactionLine in Model.Transaction.TransactionLines)
+        {
+            <div class="row border border-top-0">
+                <div class="col col-8 p-2 border-end">
+                    @(transactionLine.Fund != null ? transactionLine.Fund.FundName : "") - @transactionLine.AccountReference
+                </div>
+                <div class="col col-2 p-2 border-end text-end">
+                    @(transactionLine.VatRate * 100)%
+                </div>
+                <div class="col col-2 p-2 text-end">
+                    £@Html.ToCurrency(transactionLine.Amount - transactionLine.VatAmount)
+
+                    @{
+                        var vatKey = (transactionLine.VatRate * 100).ToString();
+                        if (!vatTotals.ContainsKey(vatKey))
+                        {
+                            vatTotals.Add(vatKey, 0);
+                        }
+                        vatTotals[vatKey] = vatTotals[vatKey] + (transactionLine.VatAmount ?? 0);
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="row mt-3">
+            <div class="col col-8 p-2">
+                @Html.Label("VAT Registered Address:", new { @class = "form-label fw-bold" })
                 <br />
                 @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.AddressLine1"])
                 <br />
@@ -102,26 +88,38 @@
                 <br />
                 @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatRegisteredAddress.PostCode"])
                 <br />
-                <strong>VAT Number:</strong>
+                @Html.Label("VAT Numbesr: ", new { @class = "form-label fw-bold mt-2" })
                 @(System.Configuration.ConfigurationManager.AppSettings["Organisation.VatNumber"])
             </div>
+            <div class="col col-4">
+                <div class="row border">
+                    <div class="col col-6 p-2 border-end fw-bold">
+                        Sub Total
+                    </div>
+                    <div class="col col-6 p-2 text-end">
+                        £@(Model.Transaction.Total - Model.Transaction.TotalVat)
+                    </div>
+                </div>
+                @foreach (var vatRow in vatTotals)
+                {
+                    <div class="row border border-top-0">
+                        <div class="col col-6 p-2 border-end fw-bold">
+                            VAT (@vatRow.Key%)
+                        </div>
+                        <div class="col col-6 p-2 text-end">
+                            £@Html.ToCurrency(vatRow.Value)
+                        </div>
+                    </div>
+                }
+                <div class="row border border-top-0">
+                    <div class="col col-6 p-2 border-end fw-bold">
+                        Total
+                    </div>
+                    <div class="col col-6 p-2 text-end">
+                        £@Model.Transaction.Total
+                    </div>
+                </div>
+            </div>
         </div>
-        <table class="ui celled table" style="width: 40%; float: right;">
-            <tr>
-                <td><strong>Sub Total</strong></td>
-                <td style="text-align: right;">£@(Model.Transaction.Total - Model.Transaction.TotalVat)</td>
-            </tr>
-            @foreach (var vatRow in vatTotals)
-            {
-                <tr>
-                    <td><strong>VAT (@vatRow.Key%)</strong></td>
-                    <td style="text-align: right;">£@Html.ToCurrency(vatRow.Value)</td>
-                </tr>
-            }
-            <tr>
-                <td style="width: 50%;"><strong>Total</strong></td>
-                <td style="text-align: right;">£@Model.Transaction.Total</td>
-            </tr>
-        </table>
     </div>
 </div>

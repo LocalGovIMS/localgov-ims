@@ -28,6 +28,9 @@ namespace Admin
             bundles.Add(new ScriptBundle("~/bundles/lodash").Include(
                 "~/Scripts/lodash.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/accessible-autocomplete")
+                .Include("~/Scripts/accessible-autocomplete.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/app/core")
                 .IncludeDirectory("~/Scripts/App/Core/", "*.js", true));
 
@@ -46,9 +49,6 @@ namespace Admin
             bundles.Add(new ScriptBundle("~/bundles/app/payment")
                 .IncludeDirectory("~/Scripts/App/Payment/", "*.js", true));
 
-            bundles.Add(new ScriptBundle("~/bundles/app/template")
-                .IncludeDirectory("~/Scripts/App/Template/", "*.js", true));
-
             bundles.Add(new ScriptBundle("~/bundles/app/suspense")
                 .IncludeDirectory("~/Scripts/App/Suspense/", "*.js", true));
 
@@ -60,14 +60,17 @@ namespace Admin
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+            bundles.Add(new Bundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstrap.js"
+                //"~/Scripts/respond.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/semantic.min.css",
+                "~/Content/font-awesome.min.css",
                 "~/Content/themes/base/jquery-ui.css",
                 "~/Content/themes/base/datepicker.css",
+                "~/Content/bootstrap.css",
+                "~/Content/accessible-autocomplete.min.css",
                 "~/Content/app.css"));
         }
     }

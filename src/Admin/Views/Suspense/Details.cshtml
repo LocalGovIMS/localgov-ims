@@ -4,74 +4,48 @@
     ViewBag.Title = "Suspense";
 }
 
-
 @section Messages {
-    <div>
-        @if (TempData.ContainsKey("Message"))
-        {
-            var message = (Message)TempData["Message"];
-            <div class="ui @message.Type message" style="margin: -1rem 0 2rem">
-                <div class="header">
-                    @message.Title
-                </div>
-                <p>@message.Text</p>
-            </div>
-        }
-    </div>
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
+@section Header { 
+    @(string.IsNullOrEmpty(Model.AccountNumber) 
+        ? string.IsNullOrEmpty(Model.Narrative)
+            ? "Unknown"
+            : Model.Narrative
+        : Model.AccountNumber)
+}
 
-@section Header {
-    <h1 class="ui header">
-        <span class="ui-psp-reference">@Model.AccountNumber</span>
-        @Html.ActionLink("Create note", "Create", "SuspenseNote", new { id = Model.SuspenseId }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Suspense  details
-        </div>
-    </h1>
+@section Subheader { Suspense details }
+
+@section Actions {
+    @Html.ActionLink("Create note", "Create", "SuspenseNote", new { id = Model.SuspenseId }, new { @class = "btn btn-primary" })
 }
 
 @Html.HiddenFor(m => m.AccountNumber)
 
-<div class="ui vertical segment grid stackable">
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.CreatedAt)
-            <br />
-            <span class="ui-date"> @Model.CreatedAt.ToShortDateString()</span>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Amount)
-            <br />
-            <span class="ui-total-amount">&pound;@Html.ToCurrency(Model.Amount)</span>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Narrative)
-            <br />
-            <span class="ui-vat-amount">@Model.Narrative</span>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui vertical segment">
-            @Html.LabelFor(m => m.Notes)
-            <br />
-            <pre class="ui-vat-amount">@Model.Notes</pre>
-        </div>
+<div class="mb-3">
+    @Html.Partial("_Header", Model)
+</div>
+
+<div class="d-flex flex-wrap mb-3">
+    <div class="me-auto p-0">
+        <h2>
+            Notes
+        </h2>
     </div>
 </div>
 
-<div class="ui vertical segment">
-    <h2>
-        Notes
-    </h2>
-    @Html.Action("_ListForSuspense", "SuspenseNote", new { id = Model.SuspenseId })
+@Html.Action("_ListForSuspense", "SuspenseNote", new { id = Model.SuspenseId })
+
+<div class="d-flex flex-wrap mb-3">
+    <div class="me-auto p-0">
+        <h2>
+            Journals
+        </h2>
+    </div>
 </div>
 
 @{ Html.RenderPartial("_AllocatedList", Model); }
 
-
-@Html.ActionLink("Back", "Back", "Suspense", null, new { @class = "ui button" })
+@Html.ActionLink("Back", "Back", "Suspense", null, new { @class = "btn btn-secondary" })

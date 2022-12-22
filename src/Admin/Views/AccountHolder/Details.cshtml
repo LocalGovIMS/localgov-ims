@@ -3,120 +3,162 @@
     ViewBag.Title = "Account holder details";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.AccountReference
-        @if (Model.ShowSelect)
-        {
-            @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = Model.AccountReference }, new { @class = "ui green button right floated" })
-        }
-        @Html.ActionLink("Edit", "Edit", new { id = Model.AccountReference }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Account holder details
-        </div>
-    </h1>
+@section Header { @Model.AccountReference }
+
+@section Subheader { Account holder details }
+
+@section Actions {
+    @if (Model.ShowSelect)
+    {
+        @Html.ActionLink("Select", "SelectAccountReference", "Payment", new { id = Model.AccountReference }, new { @class = "btn btn-secondary" })
+    }
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AccountReference }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
     @Html.HiddenFor(m => m.AccountReference)
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.Title)
-        @Html.DisplayFor(m => m.Title)
-    </div>
+    @if (!string.IsNullOrEmpty(Model.Title))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Title, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Title)
+            </div>
+        </div>
+    }
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.Forename)
-        @Html.DisplayFor(m => m.Forename)
-    </div>
+    @if (!string.IsNullOrEmpty(Model.Forename))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Forename, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Forename)
+            </div>
+        </div>
+    }
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.Surname)
-        @Html.DisplayFor(m => m.Surname)
-    </div>
+    @if (!string.IsNullOrEmpty(Model.Surname))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Surname, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Surname)
+            </div>
+        </div>
+    }
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.Address)
-        @Html.DisplayFor(m => m.Address)
-    </div>
+    @if (!string.IsNullOrEmpty(Model.Address))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Address, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Address)
+            </div>
+        </div>
+    }
 
-    <div class="five wide field">
-        @Html.LabelFor(m => m.Postcode)
-        @Html.DisplayFor(m => m.Postcode)
-    </div>
-
+    @if (!string.IsNullOrEmpty(Model.Postcode))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Postcode, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.Postcode)
+            </div>
+        </div>
+    }
     @if (!string.IsNullOrEmpty(Model.FundName))
     {
-        <div class="five wide field">
-            @Html.LabelFor(m => m.FundName)
-            @Html.DisplayFor(m => m.FundName)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.FundName, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.FundName)
+            </div>
         </div>
     }
 
     @if (Model.FundMessageId.HasValue)
     {
-        <div class="five wide field">
-            @Html.LabelFor(m => m.FundMessage)
-            @Html.DisplayFor(m => m.FundMessage)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.FundMessage, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.FundMessage)
+            </div>
         </div>
     }
 
     @if (Model.PeriodDebit.HasValue)
     {
-        <div class="four wide field">
-            @Html.LabelFor(m => m.PeriodDebit)
-            @Html.DisplayFor(m => m.PeriodDebit)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.PeriodDebit, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.PeriodDebit)
+            </div>
         </div>
     }
 
     @if (Model.PeriodCredit.HasValue)
     {
-        <div class="four wide field">
-            @Html.LabelFor(m => m.PeriodCredit)
-            @Html.DisplayFor(m => m.PeriodCredit)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.PeriodCredit, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.PeriodCredit)
+            </div>
         </div>
     }
 
     @if (Model.CurrentBalance.HasValue)
     {
-        <div class="four wide field">
-            @Html.LabelFor(m => m.CurrentBalance)
-            @Html.DisplayFor(m => m.CurrentBalance)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.CurrentBalance, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.CurrentBalance)
+            </div>
         </div>
     }
 
     @if (!string.IsNullOrEmpty(Model.UserFieldsFormatted))
     {
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UserFieldsFormatted)
-            @Html.DisplayFor(m => m.UserFieldsFormatted)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UserFieldsFormatted, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.UserFieldsFormatted)
+            </div>
         </div>
     }
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.CreatedAt)
-        @Html.DisplayFor(m => m.CreatedAt)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.CreatedAt, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.CreatedAt)
+        </div>
     </div>
 
-    <div class="four wide field">
-        @Html.LabelFor(m => m.CreatedByUsername)
-        @Html.DisplayFor(m => m.CreatedByUsername)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.CreatedByUsername, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.CreatedByUsername)
+        </div>
     </div>
 
     @if (Model.UpdatedAt.HasValue)
     {
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UpdatedAt)
-            @Html.DisplayFor(m => m.UpdatedAt)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UpdatedAt, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.UpdatedAt)
+            </div>
         </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.UpdatedByUsername)
-            @Html.DisplayFor(m => m.UpdatedByUsername)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UpdatedByUsername, new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.UpdatedByUsername)
+            </div>
         </div>
     }
 
-    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "Fund", null, new { @class = "btn btn-secondary" })
 
 </div>

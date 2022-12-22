@@ -3,103 +3,155 @@
     ViewBag.Title = "Create eReturn";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create eReturn
-        <div class="sub header">
-            New eReturn settings
-        </div>
-    </h1>
-}
+@section Header { Create eReturn }
+
+@section Subheader { eReturn details }
 
 @using (Html.BeginForm("Create", "EReturn", FormMethod.Post))
 {
-    <div class="ui form">
+    <div>
 
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.TemplateId)
-            @if (Model.Templates.Items.Count > 1)
-            {
-                <div class="ui search selection dropdown templates-dropdown">
-                    @Html.HiddenFor(x => x.TemplateId, new { size = 4 })
-                    <i class="dropdown icon"></i>
-                    <div class="default text no-overflow">Select template</div>
-                    <div class="menu">
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.TemplateId, new { @class = "form-label" })
+                @if (Model.Templates.Items.Count > 1)
+                {
+                    <select id="TemplateId" name="TemplateId">
+                        <option value="">None</option>
                         @foreach (var item in Model.Templates.Items)
                         {
                             var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
 
-                            <div class="item" data-value="@item.Value" @dataAttributes>
-                                @item.Text
-                            </div>
+                            <option class="item" value="@item.Value" @(Model.TemplateId.HasValue && Model.TemplateId.Value.ToString().Equals(item.Value) ? "selected" : String.Empty) @dataAttributes>@item.Text</option>
                         }
-                    </div>
-
+                    </select>
+                }
+                else
+                {
+                    <input type="hidden" name="@Html.NameFor(x => x.TemplateId)" id="@Html.IdFor(x => x.TemplateId)" value="@Model.Templates.Items.First().Value" />
+                    <div>@Model.Templates.Items.First().Text</div>
+                }
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.TemplateId)
                 </div>
-            }
-            else
-            {
-                <input type="hidden" name="@Html.NameFor(x => x.TemplateId)" id="@Html.IdFor(x => x.TemplateId)" value="@Model.Templates.Items.First().Value" />
-                <div>@Model.Templates.Items.First().Text</div>
-            }
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.TemplateId)
             </div>
         </div>
 
-        <div class="eight wide field">
-            @Html.LabelFor(m => m.TypeId)
-            <div class="ui search selection dropdown types-dropdown">
-                @Html.HiddenFor(x => x.TypeId, new { size = 4 })
-                <i class="dropdown icon"></i>
-                <div class="default text no-overflow">Select type</div>
-                <div class="menu">
-                    @foreach (var item in Model.Types.Items)
-                    {
-                        var dataAttributes = item.DataAttributes.Aggregate("", (current, attribute) => current + ("data-" + attribute.Key.ToLower() + "=" + attribute.Value + " "));
-
-                        <div class="item" data-value="@item.Value" @dataAttributes>
-                            @item.Text
-                        </div>
-                    }
+        <div class="row mb-3 type-selector" style="display:none;">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.TypeId, new { @class = "form-label" })
+                @Html.HiddenFor(m => m.TypeId)
+                <div id="TypeIdAccessibleAutocompleteWrapper"></div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.TypeId)
                 </div>
-
-            </div>
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.TypeId)
             </div>
         </div>
-
 
         <div class="field">
-            <input type="submit" value="Save" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "ui button" })
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "EReturn", null, new { @class = "btn btn-secondary" })
         </div>
     </div>
-
 
 }
 
 @section Scripts {
+
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $(".templates-dropdown").dropdown({
-                onChange: function (value, text, choice) {
-                    var allowCash = ($(choice).data("cash") === "True");
-                    var allowCheque = ($(choice).data("cheque") === "True");
-                    var allowPDQ = ($(choice).data("pdq") === "True");
+            paymentsAdmin.pages.eReturn.create.types = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Types.Items.Select(x => new { id = x.Value, text = x.Text, data = x.DataAttributes })))');
 
-                    $(".types-dropdown .item").addClass("disabled");
+            //var initialTemplateIdValue = $('#TemplateId').val();
+            var initialTypeIdValue = $('#TypeId').val();
 
-                    if (allowCash) $(".types-dropdown .item:contains('Cash')").removeClass("disabled");
-                    if (allowCheque) $(".types-dropdown .item:contains('Cheque')").removeClass("disabled");
-                    if (allowPDQ) $(".types-dropdown .item:contains('PDQ')").removeClass("disabled");
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select template',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#TemplateId'),
+                onConfirm: (val) => {
+                    const option = Array.from(document.querySelector('#TemplateId-select').querySelectorAll("option")).find(
+                        (o) => o.innerText === val
+                    );
 
+                    if (option) {
+                        configureType(option, initialTypeIdValue);
+                    }
+
+                    $('#TemplateId-select').val(option.value);
                 }
             });
 
-            $(".types-dropdown").dropdown();
+            function configureType(option, typeId) {
+
+                // 1. Clear the fund message dropdown - we've changed something, or are loading the page, so reset.
+                $('#TypeIdAccessibleAutocompleteWrapper').empty();
+
+                // 2. Set our FundMessageId - this may be null if we're rebuilding this due to a change to the Fund selection
+                $('#TypeId').val(typeId);
+
+                // 3. Get options for the specified fund code
+                var availableOptions = paymentsAdmin.pages.eReturn.create.types.filter(function (typeOption) {
+                    return (option.dataset.cash === "True" && typeOption.text.includes('Cash'))
+                        ||
+                        (option.dataset.cheque === "True" && typeOption.text.includes('Cheque'));
+                });
+
+                console.log('availableOptions: ', availableOptions);
+
+                var availableOptions = availableOptions.map(a => a.text);
+
+                let defaultValue = '';
+                if (typeId) {
+
+                    option = paymentsAdmin.pages.eReturn.create.types.find(function (typeOption) {
+                        return typeOption.id == typeId
+                    });
+
+                    defaultValue = option.text;
+                }
+
+                if (jQuery.isEmptyObject(availableOptions)) {
+                    $('.type-selector').hide();
+                }
+                else {
+
+                    $('.type-selector').show();
+
+                    accessibleAutocomplete({
+                        element: document.querySelector('#TypeIdAccessibleAutocompleteWrapper'),
+                        id: 'TypeId',
+                        source: availableOptions,
+                        displayMenu: 'overlay',
+                        autoSelect: false,
+                        confirmOnBlur: false,
+                        showAllValues: true,
+                        defaultValue: defaultValue,
+                        preserveNullOptions: true,
+                        placeholder: 'Select type',
+                        dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                        onConfirm: (val) => {
+                            const option = paymentsAdmin.pages.eReturn.create.types.find(
+                                (o) => o.text === val
+                            );
+
+                            if (option) {
+                                $('#TypeId').val(option.id);
+                            }
+                            else {
+                                $('#TypeId').val(null);
+                            }
+                        }
+                    });
+                }
+            }
 
         });
     </script>

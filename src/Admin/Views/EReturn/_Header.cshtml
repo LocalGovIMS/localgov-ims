@@ -1,33 +1,46 @@
-﻿<div class="ui grid stackable">
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            <strong>Date and time</strong><br><span class="ui-date">@Model.EReturn.EReturn.CreatedAt</span>
+﻿@model Admin.Models.EReturn.EditViewModel
+
+<div class="row">
+    <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+        @Html.Label("Date and time", new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.EReturn.EReturn.CreatedAt, new { @class = "form-label mb-0" })
         </div>
     </div>
     @if (!string.IsNullOrEmpty(@Model.PspReference))
     {
-        <div class="three wide column">
-            <div class="ui vertical segment">
-                <strong>PSP reference</strong><br><span class="ui-date">@Model.PspReference</span>
+        <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+            @Html.Label("PSP reference", new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.PspReference, new { @class = "form-label mb-0" })
             </div>
         </div>
     }
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            <strong>Template</strong><br><span class="ui-vat-amount">@Model.EReturn.EReturn.Template.Name</span>
+    <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+        @Html.Label("Template", new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.EReturn.EReturn.Template.Name, new { @class = "form-label mb-0" })
         </div>
     </div>
-    <div class="three wide column">
-        <div class="ui vertical segment"><strong>Status</strong><br><span>@Model.EReturn.EReturn.EReturnStatus.DisplayName</span></div>
-    </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            <strong>Created by</strong><br>@Model.EReturn.EReturn.CreatedByUser.DisplayName
+    <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+        @Html.Label("Status", new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.EReturn.EReturn.EReturnStatus.DisplayName, new { @class = "form-label mb-0" })
         </div>
     </div>
-    <div class="three wide column">
-        <div class="ui vertical segment">
-            <strong>Approved by</strong><br><span class="ui-auth-code">@(Model.EReturn.EReturn.ApprovedByUser != null ? Model.EReturn.EReturn.ApprovedByUser.DisplayName : "n/a")</span>
+    <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+        @Html.Label("Created by", new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.EReturn.EReturn.CreatedByUser.DisplayName, new { @class = "form-label mb-0" })
         </div>
     </div>
+    @if (Model.EReturn.EReturn.ApprovedByUserId.HasValue)
+    {
+        <div class="col col-12 col-sm-6 col-md-4 col-lg-3">
+            @Html.Label("Approved by", new { @class = "form-label fw-bold" })
+            <div class="form-label">
+                @Html.DisplayFor(m => m.EReturn.EReturn.ApprovedByUser.DisplayName, new { @class = "form-label mb-0" })
+            </div>
+        </div>
+    }
 </div>

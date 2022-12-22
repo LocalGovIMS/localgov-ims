@@ -3,54 +3,59 @@
     ViewBag.Title = "MOP";
 }
 
-@section Header {
-    <h1 class="ui header">
-        @Model.Name
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Method of Payment details
-        </div>
-    </h1>
+@section Header { @Model.Name }
+
+@section Subheader { Method of Payment details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code }, new { @class = "btn btn-secondary" })
 }
 
-<div class="ui form">
+<div>
 
-    <div class="ui vertical segment">
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Code)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Code, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Code)
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Name)
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MaximumAmount)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.MaximumAmount, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.MaximumAmount)
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.MinimumAmount)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.MinimumAmount, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.MinimumAmount)
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.IsDisabled)
+    <div class="mb-3">
+        @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label fw-bold" })
+        <div class="form-label">
             @Html.DisplayFor(m => m.Status)
         </div>
     </div>
 
-    <div class="ui vertical segment">
+    <div class="mb-3">
         <h2>
             Metadata
         </h2>
         @Html.Action("_ListForMethodOfPayment", "MethodOfPaymentMetadata", new { mopCode = Model.Code })
     </div>
 
-    <br />
 
-    @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "ui button" })
+    @Html.ActionLink("Back", "Back", "MethodOfPayment", null, new { @class = "btn btn-secondary" })
 
 </div>

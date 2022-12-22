@@ -2,9 +2,6 @@
 var totalTransactionValue = 0;
 var dirty = false;
 
-$('.ui.dropdown').dropdown({});
-$('.ui.fluid.two.item.menu .item').tab();
-
 calculateAnalysisValue();
 calculateTransactionValue();
 renderStatusColours();
@@ -42,14 +39,32 @@ $('.print').click(function () {
             printAnalysis();
         }
     }
+
+    $('form').append('<input type="hidden" name="action" value="Submit" /> ');
+    $('form').trigger('submit');
+
 });
 
-$('form').submit(function () {    
+$('.save-button').click(function () {
+    // We need this to postback in the correct mode: 'Edit'
+    $('form').append('<input type="hidden" name="action" value="Edit" /> ');
+
+    $('form').trigger('submit');
+});
+
+$('.approve-button').click(function () {
+    // We need this to postback in the correct mode: 'Edit'
+    $('form').append('<input type="hidden" name="action" value="Approve" /> ');
+
+    $('form').trigger('submit');
+});
+
+$('form').submit(function () {  
     window.onbeforeunload = null;
 });
 
 function printAnalysis() {
-    $.tab('change tab', 'analysis-tab');
+    $('#nav-analysis-tab').click();
     window.print();
 }
 
@@ -79,9 +94,9 @@ $(".delete-ereturn").on("click",
 $(".add-cheque").on("click",
     function () {
         var nextIndex = $("#cheque-rows tr").length;
-        $("#cheque-rows").append("<tr><td><input name=\"Cheques[" + nextIndex + "].Name\" type=\"text\" maxlength=\"100\" /></td>" +
-            "<td><input name=\"Cheques[" + nextIndex + "].Amount\" type=\"text\" class=\"analysis-value monetary-value\" /></td>" +
-            "<td><a class=\"ui red icon button remove-cheque\" data-remove=\"" + nextIndex + "\"><i class=\"ui trash icon\"></i></a></td>" +
+        $("#cheque-rows").append("<tr><td><input name=\"Cheques[" + nextIndex + "].Name\" type=\"text\" class=\"form-control\" maxlength=\"100\" /></td>" +
+            "<td><input name=\"Cheques[" + nextIndex + "].Amount\" type=\"text\" class=\"analysis-value monetary-value form-control\" /></td>" +
+            "<td class=\"text-end cheque-actions\" ><a class=\"btn btn-danger remove-cheque\" data-remove=\"" + nextIndex + "\">Remove<i class=\"ui trash icon\"></i></a></td>" +
             "</tr>");
         bindToChangeEvents();
         refreshEReturnUI();
@@ -156,6 +171,9 @@ function analysisValuesAreValid() {
             $(this).removeClass("error");
         }
     });
+
+    console.log('analysisValuesAreValid', isValid)
+
     return isValid;
 }
 
@@ -183,30 +201,34 @@ function allowSubmit() {
         && validateWildcardValues()
         //&& bagNumberPresentIfRequired() // TODO: I've left this in for now, and the method it calls, incase we wish to reintroduce it
     ) {
-        $(".submit-button").removeClass("disabled");
+        $(".submit-button").removeAttr("disabled");
     } else {
-        $(".submit-button").addClass("disabled");
+        $(".submit-button").attr("disabled", "disabled");
     }
 }
 
 function renderStatusColours() {
     if (transactionAndAnalysisValueMatch() && analysisValuesAreValid()) {
-        $('.transaction-total').addClass("teal");
-        $('.analysis-total').addClass("teal");
-        $('.transaction-total').removeClass("red");
-        $('.analysis-total').removeClass("orange");
-        $('.analysis-total').removeClass("red");
+        $('.transaction-total').addClass("text-bg-success");
+        $('.analysis-total').addClass("text-bg-success");
+        $('.transaction-total').removeClass("text-bg-warning");
+        $('.analysis-total').removeClass("text-bg-warning");
+        $('.transaction-total').removeClass("text-bg-danger");
+        $('.analysis-total').removeClass("text-bg-danger");
     } else if (transactionAndAnalysisValueMatch() && !analysisValuesAreValid()) {
-        $('.transaction-total').removeClass("teal");
-        $('.analysis-total').removeClass("teal");
-        $('.transaction-total').addClass("teal");
-        $('.analysis-total').addClass("orange");
+        $('.transaction-total').addClass("text-bg-success");
+        $('.analysis-total').removeClass("text-bg-success");
+        $('.transaction-total').removeClass("text-bg-warning");
+        $('.analysis-total').addClass("text-bg-warning");
+        $('.transaction-total').removeClass("text-bg-danger");
+        $('.analysis-total').removeClass("text-bg-danger");
     } else {
-        $('.transaction-total').removeClass("teal");
-        $('.analysis-total').removeClass("orange");
-        $('.analysis-total').removeClass("teal");
-        $('.transaction-total').addClass("red");
-        $('.analysis-total').addClass("red");
+        $('.transaction-total').removeClass("text-bg-success");
+        $('.analysis-total').removeClass("text-bg-success");
+        $('.transaction-total').removeClass("text-bg-warning");
+        $('.analysis-total').removeClass("text-bg-warning");
+        $('.transaction-total').addClass("text-bg-danger");
+        $('.analysis-total').addClass("text-bg-danger");
     }
 
 }

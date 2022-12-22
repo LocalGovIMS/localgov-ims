@@ -22,6 +22,7 @@ namespace Admin.Models.AccountHolder
         [DisplayName("Period credit")] // TODO: What does this really represent? Period Credit means nothing
         public decimal? PeriodCredit { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public string Forename { get; set; }

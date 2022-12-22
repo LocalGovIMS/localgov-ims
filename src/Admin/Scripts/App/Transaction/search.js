@@ -1,16 +1,4 @@
-﻿$('.ui.dropdown').dropdown({
-    match: 'both'
-});
-
-$('.ui.accordion').accordion();
-
-validateSearch = function (validator, messageContainerSelector) {
-
-
-};
-
-
-$(".search").click(function (e) {
+﻿$(".search").click(function (e) {
 
     if ($('#WildSearchAccountReference').is(':checked')) {
 
@@ -27,13 +15,13 @@ $(".search").click(function (e) {
     }
 });
 
-function validateSearchInput(message) {
+function validateSearchInput() {
     var result = true;
 
     var html = [];
     var startdate = undefined;
     var enddate = undefined;
-    html.push('<ul>');
+    html.push('<ul class=\"mb-3\">');
 
     if (!$('#StartDate').val()) {
         html.push('<li>You must select a start date</li>');

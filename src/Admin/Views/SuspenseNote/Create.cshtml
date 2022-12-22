@@ -7,32 +7,29 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create suspense note
-        <div class="sub header">
-            Suspense note details
-        </div>
-    </h1>
-}
+@section Header { Create suspense notes }
+
+@section Subheader { Suspense note details }
 
 @using (Html.BeginForm("Create", "SuspenseNote", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.SuspenseId)
 
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Note)
-            @Html.TextAreaFor(m => m.Note, new { @rows = 5 })
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Note)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-9 col-md-7 col-lg-6">
+                @Html.LabelFor(m => m.Note, new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.Note, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Note)
+                </div>
             </div>
         </div>
 
         <div>
-            <input type="submit" value="Save" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "ui button" })
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "SuspenseNote", null, new { @class = "btn btn-secondary" })
         </div>
 
     </div>

@@ -7,54 +7,54 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        User Methods of Payment
-        <div class="sub header">
-            Method of payment selection
-        </div>
-    </h1>
-}
+@section Header { User methods of payment }
+
+@section Subheader { Method of payment selection }
 
 @using (Html.BeginForm("Edit", "UserMethodOfPayment", FormMethod.Post))
 {
+
     @Html.HiddenFor(m => m.UserId)
 
     if (Model.MopCodes != null && Model.MopCodes.Any())
     {
-        <table class="ui celled table striped teal">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        MOP codes
-                    </th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            MOP codes
+                        </th>
+                    </tr>
+                </thead>
 
-            @{ var mopCodes = Model.MopCodes.ToList(); }
+                @{ var mopCodes = Model.MopCodes.ToList(); }
 
-            @for (var i = 0; i < mopCodes.Count(); i++)
-            {
-                <tr>
-                    <td>
-                        @Html.HiddenFor(x => mopCodes[i].Id)
-                        @Html.HiddenFor(x => mopCodes[i].Text)
-                        @Html.CheckBoxFor(x => mopCodes[i].IsChecked)
-                        @Html.DisplayFor(x => mopCodes[i].Text)
-                    </td>
-                </tr>
-            }
+                @for (var i = 0; i < mopCodes.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(x => mopCodes[i].Id)
+                            @Html.HiddenFor(x => mopCodes[i].Text)
+                            <div class="form-check form-switch">
+                                @Html.CheckBoxFor(x => mopCodes[i].IsChecked, new { @class = "form-check-input", role = "switch" })
+                                @Html.Label(mopCodes[i].Text, new { @for = "mopCodes_" + i + "__IsChecked", @class = "form-check-label" })
+                            </div>
+                        </td>
+                    </tr>
+                }
 
-        </table>
+            </table>
+        </div>
     }
     else
     {
-        <div class="ui info message">
-            No available MOP codes
-        </div>
+        Html.RenderPartial("_NothingSpecified", "methods of payment");
     }
 
-    <input type="submit" value="Save" class="ui primary button" />
-    @Html.ActionLink("Back", "Back", "UserMethodOfPayment", null, new { @class = "ui button" })
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "UserMethodOfPayment", null, new { @class = "btn btn-secondary" })
+    </div>
 
 }

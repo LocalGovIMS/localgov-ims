@@ -1,0 +1,32 @@
+﻿@model Admin.Models.Suspense.DetailsViewModel
+
+<div class="row">
+    <div class="col col-12 col-sm-6 col-md-3">
+        @Html.LabelFor(m => m.CreatedAt, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.CreatedAt, new { @class = "form-label mb-0" })
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3">
+        @Html.LabelFor(m => m.Amount, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Amount, new { @class = "form-label mb-0" })
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3">
+        @Html.LabelFor(m => m.Narrative, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Narrative, new { @class = "form-label mb-0" })
+        </div>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-3">
+        @Html.LabelFor(m => m.Notes, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Notes, new { @class = "form-label mb-0" })
+        </div>
+    </div>
+
+</div>

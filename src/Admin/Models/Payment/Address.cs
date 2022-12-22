@@ -9,9 +9,9 @@ namespace Admin.Models.Payment
     {
         private const string IsNotJustNumericExpression = @"(?!^[\d\W]+$)^.+$";
 
-        [Required(ErrorMessage = "Payee Name is required")]
-        [Display(Name = "Payee Name")]
-        [MaxLength(50, ErrorMessage = "Payee Name cannot be longer than 50 characters")]
+        [Required(ErrorMessage = "Payee name is required")]
+        [Display(Name = "Payee name")]
+        [MaxLength(50, ErrorMessage = "Payee name cannot be longer than 50 characters")]
         [RegularExpression(IsNotJustNumericExpression, ErrorMessage = "Payee name should contain letters and can include numbers")]
         public string PayeeName { get; set; }
 
@@ -26,9 +26,9 @@ namespace Admin.Models.Payment
         [RegularExpression(IsNotJustNumericExpression, ErrorMessage = "Address line 2 should contain letters and can include numbers")]
         public string AddressLine2 { get; set; }
 
-        [Required(ErrorMessage = "Town or City is required")]
-        [Display(Name = "Town or City")]
-        [MaxLength(50, ErrorMessage = "Town or City cannot be longer than 50 characters")]
+        [Required(ErrorMessage = "Town or city is required")]
+        [Display(Name = "Town or city")]
+        [MaxLength(50, ErrorMessage = "Town or city cannot be longer than 50 characters")]
         [RegularExpression(IsNotJustNumericExpression, ErrorMessage = "Town or city should contain letters and can include numbers")]
         public string AddressLine3 { get; set; }
 

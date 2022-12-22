@@ -1,0 +1,57 @@
+﻿@model BusinessLogic.Models.Payments.Basket
+@using Web.Mvc.ViewHelpers;
+
+<h3>
+    Basket
+</h3>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <ul class="list-group">
+        @for (int i = Model.Items.Count - 1; i >= 0; i--) // show items in reverse order
+        {
+            <li class="list-group-item">
+
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        @Html.LabelFor(m => m.Items[@i].FundName, new { @class = "form-label visually-hidden" })
+                        @Html.DisplayWithIdFor(m => m.Items[@i].FundName, new { @class = "form-label mb-0" })
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Items[@i].Amount, new { @class = "form-label visually-hidden" })
+                        @Html.DisplayWithIdFor(m => m.Items[@i].Amount, new { @class = "form-label mb-0" })
+                    </div>
+                </div>
+
+                @if (User.IsInRole(Role.PostPayment))
+                {
+                    <div>
+                        @Html.LabelFor(m => m.Items[@i].MopName, new { @class = "form-label visually-hidden" })
+                        @Html.DisplayWithIdFor(m => m.Items[@i].MopName, new { @class = "form-label mb-0 basket__mop", data_mop = Model.Items[@i].MopCode })
+                    </div>
+                }
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <div>
+                            @Html.LabelFor(m => m.Items[@i].AccountReference, new { @class = "form-label visually-hidden" })
+                            @Html.DisplayWithIdFor(m => m.Items[@i].AccountReference, new { @class = "form-label mb-0 fw-bold" })
+                        </div>
+                        <div>
+                            @Html.LabelFor(m => m.Items[@i].Narrative, new { @class = "form-label visually-hidden" })
+                            @Html.DisplayWithIdFor(m => m.Items[@i].Narrative, new { @class = "form-label mb-0" })
+                        </div>
+                    </div>
+                    <div>@Html.ActionLink("Delete", "RemoveItem", new { accountReference = Model.Items[@i].AccountReference }, new { @class = "btn btn-danger" })</div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-info">
+        <div class="fw-bold pb-1">
+            Your basket is empty
+        </div>
+    </div>
+}

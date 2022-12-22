@@ -1,6 +1,7 @@
 ﻿loadModel();
 highlightActiveRows();
-
+renderCreditNotes();
+renderJournals();
 
 $(".clear-selected").on("click",
     function() {
@@ -9,21 +10,27 @@ $(".clear-selected").on("click",
 
 function highlightActiveRows() {
     _.each($("tr"),
-        function(item) {
-            $("tr .ui.checkbox").checkbox("uncheck");
-            $(item).removeClass("selected");
+        function (item) {
+
+            $(item).removeClass("table-primary");
+
+            $(item).find(".form-check-input").each(function () {
+                $(this).prop('checked', false);
+            });
         });
+
     _.each(Model.suspenseItems,
-        function(item) {
-            var box = $(".ui.checkbox[data-id=" + item.id + "]");
-            $(box).checkbox("check");
-            $(box).parents("tr").addClass("selected");
+        function (item) {
+            var box = $(".form-check-input[data-id=" + item.id + "]");
+
+            $(box).prop('checked', true);
+            $(box).parents("tr").addClass("table-primary");
         });
 }
 
 function updateButtonValues() {
     $(".credit-button-value").text("(£" + totalCreditNotes().toFixed(2) + ")");
-    $(".journal-button-value").text("(£" + totalAvailableToTransfer().toFixed(2) + ")");
+    $(".journal-button-value").text("(£" + totalAvailableToJournal().toFixed(2) + ")");
 }
 
 function updateUI() {
@@ -31,57 +38,30 @@ function updateUI() {
     updateButtonValues();
 }
 
-$(function () {
-    if ($('input[type="date"]').prop("type") !== "date") {
-        $('input[type="date"]').datepicker({
-            dateFormat: "yy-mm-dd",
-            altFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true
-        });
-    }
-});
+$('tr .form-check-input').on("click", function (e) {
 
-
-
-$('tr .ui.checkbox').on("click", function (e) {
     var checkbox = $(this);
     if (!($(checkbox).data('value') > 0)) return;
 
-    if ($(checkbox).checkbox("is checked")) {
-        $(checkbox).parent("tr").addClass("selected");
-        /*
-         // Allow multi select
-         _.remove(Model.suspenseItems,
+    if (this.checked) {
+        _.remove(Model.suspenseItems,
             function (n) {
                 return n.id == $(checkbox).data('id');
             });
-        */
-        //  Reset selection
-        Model.suspenseItems = [];
         Model.suspenseItems.push({
             id: $(checkbox).data('id'),
             amount: parseFloat($(checkbox).data('value'))
-        });        
+        });
         saveModel();
     } else {
-        $(checkbox).parent("tr").removeClass("selected");
         _.remove(Model.suspenseItems,
-            function(n) {
+            function (n) {
                 return n.id == $(checkbox).data('id');
             });
         saveModel();
-    }    
-});
-
-$('tr .ui.button').click(function(event) {
-    event.stopPropagation();    
-});
-
-$(window).on('scroll', function() {
-    if ($(window).scrollTop() >= 70) {
-        $(".page-actions--fix").addClass("page-actions--fixed");
-    } else {
-        $(".page-actions--fix").removeClass("page-actions--fixed");
     }
-})
+});
+
+$("#journal").on("click", function () {
+    $('#amount-available-to-journal').text(remainingAvailableToJournal().toFixed(2));
+});

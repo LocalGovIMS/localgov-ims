@@ -7,55 +7,62 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Create import processing rule
-        <div class="sub header">
-            Import processing rule details
-        </div>
-    </h1>
-}
+@section Header { Create import processing rule }
+
+@section Subheader { Import processing rule details }
 
 @using (Html.BeginForm("Create", "ImportProcessingRule", FormMethod.Post))
 {
-    <div class="ui form">
+    <div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Name)
-            @Html.EditorFor(m => m.Name)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Name)
-            </div>
-        </div>
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Description)
-            @Html.EditorFor(m => m.Description)
-            <div class="form__element--error">
-                @Html.ValidationMessageFor(m => m.Description)
-            </div>
-        </div>
-
-        <div class="field">
-            @Html.LabelFor(m => m.IsGlobal)
-            <div class="ui segment compact">
-                <div class="ui fitted toggle checkbox">
-                    @Html.CheckBoxFor(m => m.IsGlobal)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
         </div>
 
-        <div class="field">
-            @Html.LabelFor(m => m.IsDisabled)
-            <div class="ui segment compact">
-                <div class="ui fitted toggle checkbox">
-                    @Html.CheckBoxFor(m => m.IsDisabled)
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Description)
                 </div>
             </div>
         </div>
 
-        <input type="submit" value="Save" class="ui primary button" />
-        @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "ui button" })
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsGlobal, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.IsGlobal, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsGlobal)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.IsDisabled, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.IsDisabled, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.IsDisabled)
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "ImportProcessingRule", null, new { @class = "btn btn-secondary" })
+        </div>
 
     </div>
 

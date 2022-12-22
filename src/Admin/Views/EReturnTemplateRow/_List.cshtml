@@ -1,0 +1,61 @@
+﻿@model Admin.Models.EReturnTemplateRow.ListViewModel
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Reference
+                    </th>
+                    <th scope="col">
+                        Reference override
+                    </th>
+                    <th scope="col">
+                        Description
+                    </th>
+                    <th scope="col">
+                        Description override
+                    </th>
+                    <th scope="col">
+                        VAT code
+                    </th>
+                    <th scope="col">
+                        VAT code override
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items.OrderBy(x => x.Reference))
+                {
+                    <tr>
+                        <td>
+                            @item.Reference
+                        </td>
+                        <td>
+                            @item.ReferenceOverride.ToYesNoString()
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.DescriptionOverride.ToYesNoString()
+                        </td>
+                        <td>
+                            @item.VatCode
+                        </td>
+                        <td>
+                            @item.VatOverride.ToYesNoString()
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    Html.RenderPartial("_NothingSpecified", "rows");
+}
+

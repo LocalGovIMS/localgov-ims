@@ -62,7 +62,7 @@ namespace Admin.Controllers
 
         [HttpPost]
         [Classes.Security.Attributes.Authorize(Roles = Role.Finance)]
-        public JsonResult SubmitTransfers(JournalViewModel model)
+        public JsonResult SubmitJournals(JournalViewModel model)
         {
             var result = Dependencies.JournalCommand.Execute(model);
             return Json(new { ok = result.Success, message = string.Join(", ", result.Messages) });

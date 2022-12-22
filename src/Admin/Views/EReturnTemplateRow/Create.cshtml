@@ -1,0 +1,121 @@
+﻿@model Admin.Models.EReturnTemplateRow.EditViewModel
+@{
+    ViewBag.Title = "Create eReturn template row";
+}
+
+@section Messages {
+    @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
+}
+
+@section Header { Create eReturn template row }
+
+@section Subheader { eReturn template row details }
+
+@using (Html.BeginForm("Create", "EReturnTemplateRow", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.EReturnTemplateId)
+
+    <div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Reference, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Reference, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Reference)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.ReferenceOverride, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.ReferenceOverride, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.ReferenceOverride)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.DescriptionOverride, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.DescriptionOverride, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.DescriptionOverride)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatCode, new { @class = "form-label" })
+                <select id="VatCode" name="VatCode">
+                    <option value="">None</option>
+                    @foreach (var item in Model.VatCodes.Items)
+                    {
+                        <option class="item" value="@item.Value" @(!string.IsNullOrWhiteSpace(Model.VatCode) && Model.VatCode.Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                    }
+                </select>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatCode)
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-sm-6 col-md-5 col-lg-4">
+                @Html.LabelFor(m => m.VatOverride, new { @class = "form-label" })
+                <div class="form-check form-switch">
+                    @Html.CheckBoxFor(m => m.VatOverride, new { @class = "form-check-input", role = "switch" })
+                </div>
+                <div class="form__element--error">
+                    @Html.ValidationMessageFor(m => m.VatOverride)
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back", "Back", "EReturnTemplateRow", null, new { @class = "btn btn-secondary" })
+        </div>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select VAT code',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#VatCode')
+            });
+
+        });
+    </script>
+
+}

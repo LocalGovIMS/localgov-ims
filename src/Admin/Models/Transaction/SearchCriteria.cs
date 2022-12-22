@@ -14,6 +14,7 @@ namespace Admin.Models.Transaction
 
         public decimal? Amount { get; set; }
 
+        [Display(Name = "End date")]
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "Fund type")]
@@ -38,10 +39,10 @@ namespace Admin.Models.Transaction
 
         public int? ImportId { get; set; }
 
-        [Display(Name = "Card Prefix")]
+        [Display(Name = "Card prefix")]
         public string CardPrefix { get; set; }
 
-        [Display(Name = "Card Suffix")]
+        [Display(Name = "Card suffix")]
         public string CardSuffix { get; set; }
 
         public int Page { get; set; }
@@ -50,6 +51,7 @@ namespace Admin.Models.Transaction
         public SelectList Mops { get; set; }
         public SelectList Users { get; set; }
 
+        [Display(Name = "Wildcard search")]
         public bool WildSearchAccountReference { get; set; }
 
         public int PageSize { get; set; } = 20;

@@ -2,21 +2,18 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <div class="ui tertiary inverted compact segment teal">
+    <div class="d-inline-flex flex-column rounded-1 px-2 pt-2 bg-success bg-opacity-75">
         @foreach (var action in Model.Items)
         {
-        <div class="field">
-            <div class="ui label teal">
+            <div class="rounded-1 p-2 bg-success fw-normal mb-2 text-left text-white">
                 @action.DisplaySummary()
             </div>
-        </div>
         }
     </div>
+
 }
 else
 {
-    <div class="ui info message">
-        There are no actions specified
-    </div>
+    Html.RenderPartial("_NothingSpecified", "actions");
 }
 

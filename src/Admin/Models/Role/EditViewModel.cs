@@ -9,8 +9,8 @@ namespace Admin.Models.Role
 
         public string Name { get; set; }
 
-        [DisplayName("Display Name")]
-        [Required(ErrorMessage = "Display Name is required")]
+        [DisplayName("Display name")]
+        [Required(ErrorMessage = "Display name is required")]
         public string DisplayName { get; set; }
     }
 }

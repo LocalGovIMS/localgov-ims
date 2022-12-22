@@ -5,69 +5,83 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panels">
-    <div class="grid grid--gutters">
-        <div class="container container--page">
-            @using (Html.BeginForm("Address", "Payment", FormMethod.Post))
-            {
-                <div class="flex__container">
-                    <div class="panel panel--details">
-                        <fieldset>
-                            <legend>Billing Address</legend>
-                            <div>
-                                @Html.LabelFor(m => m.PayeeName)
-                                @Html.TextBoxFor(m => m.PayeeName, new { maxlength = "50", size = "20" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.PayeeName)
-                            </div>
-                            <div>
-                                @Html.LabelFor(m => m.AddressLine1)
-                                @Html.TextBoxFor(m => m.AddressLine1, new { maxlength = "50", size = "20" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.AddressLine1)
-                            </div>
-                            <div>
-                                @Html.LabelFor(m => m.AddressLine2)
-                                @Html.TextBoxFor(m => m.AddressLine2, new { maxlength = "50", size = "40" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.AddressLine2)
-                            </div>
-                            <div>
-                                @Html.LabelFor(m => m.AddressLine3)
-                                @Html.TextBoxFor(m => m.AddressLine3, new { maxlength = "50", size = "25" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.AddressLine3)
-                            </div>
-                            <div>
-                                @Html.LabelFor(m => m.AddressLine4)
-                                @Html.TextBoxFor(m => m.AddressLine4, new { maxlength = "50", size = "25" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.AddressLine4)
-                            </div>
-                            <div>
-                                @Html.LabelFor(m => m.PostCode)
-                                @Html.TextBoxFor(m => m.PostCode, new { maxlength = "10", size = "8" })
-                            </div>
-                            <div class="form__element--error">
-                                @Html.ValidationMessageFor(m => m.PostCode)
-                            </div>
-                            <div>
-                                <button id="Cancel" value="Cancel" name="action" type="submit" class="button button--default">Cancel</button>
-                                <button id="Next" value="SaveAddress" name="action" type="submit" class="button button--default button--primary">Next</button>
-                            </div>
-                        </fieldset>
+@using (Html.BeginForm("Address", "Payment", FormMethod.Post))
+{
+
+    <div class="card">
+        <div class="card-body">
+
+            <h2>Billing Address</h2>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.PayeeName, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.PayeeName, new { @class = "form-control", maxlength = "50", size = "20" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.PayeeName)
                     </div>
-                    <div style="clear: both;"></div>
                 </div>
-            }
+            </div>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.AddressLine1, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control", maxlength = "50", size = "20" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.AddressLine1)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.AddressLine2, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control", maxlength = "50", size = "40" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.AddressLine2)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.AddressLine3, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.AddressLine3, new { @class = "form-control w-75", maxlength = "50", size = "25" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.AddressLine3)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.AddressLine4, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.AddressLine4, new { @class = "form-control w-75", maxlength = "50", size = "25" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.AddressLine4)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col col-sm-6 col-md-5 col-lg-4">
+                    @Html.LabelFor(m => m.PostCode, new { @class = "form-label fw-bold" })
+                    @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control w-50", maxlength = "10", size = "8" })
+                    <div class="form__element--error">
+                        @Html.ValidationMessageFor(m => m.PostCode)
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button id="Cancel" value="Cancel" name="action" type="submit" class="btn btn-secondary">Cancel</button>
+                <button id="Next" value="SaveAddress" name="action" type="submit" class="btn btn-primary">Next</button>
+            </div>
+
         </div>
     </div>
-</div>
+
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/app/payment")

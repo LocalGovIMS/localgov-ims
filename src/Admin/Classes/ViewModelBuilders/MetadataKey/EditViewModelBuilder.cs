@@ -3,6 +3,8 @@ using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using log4net;
 using System;
+using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.MetadataKey
 {
@@ -35,11 +37,19 @@ namespace Admin.Classes.ViewModelBuilders.MetadataKey
             model.IsASystemType = data.SystemType;
             model.EntityType = (MetadataKeyEntityType)data.EntityType;
 
+            model.EntityTypes = GetEntityTypes();
+
             return model;
+        }
+
+        private SelectList GetEntityTypes()
+        {
+            return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.MetadataKeyEntityType)), false);
         }
 
         protected override EditViewModel OnRebuild(EditViewModel model)
         {
+            model.EntityTypes = GetEntityTypes();
             return model;
         }
     }

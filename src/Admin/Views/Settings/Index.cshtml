@@ -2,225 +2,84 @@
     ViewBag.Title = "Settings";
 }
 
-@section Header {
-    <div class="ui header">
-        <h1>Settings</h1>
-        <div class="sub header">
-            Settings maintenance
-        </div>
-    </div>
-    
-}
+@section Header { Settings }
 
-<div class="ui grid stackable">
+@section Subheader { Settings maintenance }
 
+<div class="list-group">
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "MethodOfPayment")">
-                <div class="content">
-                    <div class="header">MOP Codes</div>
-                    <div class="description">
-                        <p>Manage MOP codes</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "AccountReferenceValidator")" class="list-group-item list-group-item-action">Account reference validators</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "FundGroup")">
-                <div class="content">
-                    <div class="header">Fund Groups</div>
-                    <div class="description">
-                        <p>Manage fund groups</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "CheckDigitConfiguration")" class="list-group-item list-group-item-action">Check digit configurations</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Role")">
-                <div class="content">
-                    <div class="header">Roles</div>
-                    <div class="description">
-                        <p>Manage system roles</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "EReturnTemplate")" class="list-group-item list-group-item-action">eReturn templates</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Template")">
-                <div class="content">
-                    <div class="header">Templates</div>
-                    <div class="description">
-                        <p>Manage eReturn templates</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "Fund")" class="list-group-item list-group-item-action">Funds</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Vat")">
-                <div class="content">
-                    <div class="header">Vat Codes</div>
-                    <div class="description">
-                        <p>Manage VAT codes</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "FundGroup")" class="list-group-item list-group-item-action">Fund groups</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Fund")">
-                <div class="content">
-                    <div class="header">Funds</div>
-                    <div class="description">
-                        <p>Manage funds</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "FundMessage")" class="list-group-item list-group-item-action">Fund messages</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "SystemMessage")">
-                <div class="content">
-                    <div class="header">System Messages</div>
-                    <div class="description">
-                        <p>Manage system messages</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("ListMaintainingNavigation", "ImportProcessingRule")" class="list-group-item list-group-item-action">Import processing rules</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "ImportProcessingRule")">
-                <div class="content">
-                    <div class="header">Import Processing Rules</div>
-                    <div class="description">
-                        <p>Manage import processing rules</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "ImportType")" class="list-group-item list-group-item-action">Import types</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "Office")">
-                <div class="content">
-                    <div class="header">Office Codes</div>
-                    <div class="description">
-                        <p>Manage office codes</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "MetadataKey")" class="list-group-item list-group-item-action">Metadata keys</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "PaymentIntegration")">
-                <div class="content">
-                    <div class="header">Payment Integrations</div>
-                    <div class="description">
-                        <p>Payment integrations</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "MethodOfPayment")" class="list-group-item list-group-item-action">MOP codes</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "AccountReferenceValidator")">
-                <div class="content">
-                    <div class="header">Account Reference Validators</div>
-                    <div class="description">
-                        <p>Account reference validators</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "Office")" class="list-group-item list-group-item-action">Office codes</a>
+    }
+
+
+    @if (User.IsInRole(Role.SystemAdmin))
+    {
+        <a href="@Url.Action("List", "PaymentIntegration")" class="list-group-item list-group-item-action">Payment integrations</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "CheckDigitConfiguration")">
-                <div class="content">
-                    <div class="header">Check Digit Configurations</div>
-                    <div class="description">
-                        <p>Check digit configurations</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "Role")" class="list-group-item list-group-item-action">Roles</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "FundMessage")">
-                <div class="content">
-                    <div class="header">Fund Messages</div>
-                    <div class="description">
-                        <p>Fund messages</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "SystemMessage")" class="list-group-item list-group-item-action">System messages</a>
     }
 
     @if (User.IsInRole(Role.SystemAdmin))
     {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "ImportType")">
-                <div class="content">
-                    <div class="header">Import Types</div>
-                    <div class="description">
-                        <p>Import types</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-
-    @if (User.IsInRole(Role.SystemAdmin))
-    {
-        <div class="four wide column">
-            <a class="ui card" href="@Url.Action("List", "MetadataKey")">
-                <div class="content">
-                    <div class="header">Metadata Keys</div>
-                    <div class="description">
-                        <p>Metadata Keys</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <a href="@Url.Action("List", "Vat")" class="list-group-item list-group-item-action">VAT codes</a>
     }
 </div>

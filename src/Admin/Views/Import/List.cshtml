@@ -5,69 +5,66 @@
     ViewBag.Title = "Imports";
 }
 
-@section Header {
-    <h1 class="ui header">
-        Imports
-        <div class="sub header">
-            Imports
-        </div>
-    </h1>
-}
+@section Header { Imports }
 
-@Html.Partial("_Search", Model.SearchCriteria)
+@section Subheader { Imports }
+
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Type
-                </th>
-                <th scope="col">
-                    Date
-                </th>
-                <th scope="col">
-                    Number of rows
-                </th>
-                <th scope="col">
-                    Status
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @item.ImportType.Name
-                    </td>
-                    <td>
-                        @item.CreatedDate
-                    </td>
-                    <td>
-                        @item.NumberOfRows
-                    </td>
-                    <td>
-                        @item.CurrentStatus().GetDisplayName()
-                        @if (item.HasErrors())
-                        {
-                            <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
-                    </td>
+                    <th scope="col">
+                        Type
+                    </th>
+                    <th scope="col">
+                        Date
+                    </th>
+                    <th scope="col">
+                        Number of rows
+                    </th>
+                    <th scope="col">
+                        Status
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5">
-                    <div class="ui pagination menu">
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.ImportType.Name
+                        </td>
+                        <td>
+                            @item.CreatedDate
+                        </td>
+                        <td>
+                            @item.NumberOfRows
+                        </td>
+                        <td>
+                            @item.CurrentStatus().GetDisplayName()
+                            @if (item.HasErrors())
+                            {
+                                <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
                         @if (Model.Pages > 1)
                         {
                             @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
@@ -79,24 +76,57 @@
                                 endDate = Model.SearchCriteria.EndDate,
                             }))
                         }
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There are no imports in the system
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "imports");
 }
-
 
 @section Scripts {
     <script type="text/javascript">
-        $('.ui.dropdown').dropdown({
-            match: 'both'
+        $(document).ready(function () {
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select data type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#DataType')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select import type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#ImportTypeId')
+            });
+
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select status',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#StatusId')
+            });
+
         });
     </script>
 }

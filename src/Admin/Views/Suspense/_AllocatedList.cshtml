@@ -1,31 +1,34 @@
 ﻿@model Admin.Models.Suspense.DetailsViewModel
 
-<h3>Journals </h3>
-
-<table class="ui celled table striped ui-payments-table">
-    <thead>
-        <tr>
-            <th scope="col" style="width: 20%;">Date and time</th>
-            <th scope="col">PSP reference</th>
-            <th scope="col" style="width: 1%; white-space:nowrap;">Amount (£)</th>
-            <th scope="col">Account reference</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var paymentLine in Model.AllocatedPayments)
-        {
-            <tr>
-                <td> @paymentLine.CreatedAt</td>
-                <td>@Html.ActionLink(paymentLine.TransactionIn.PspReference, "Details", "Transaction", new { id = paymentLine.TransactionIn.PspReference }, null)</td>
-                <td style="text-align: right" class="@if (paymentLine.Amount < 0)
-                                                     {
-                                                         @Html.Raw("td--negative")
-                                                     }">
-
-                    @Html.ToCurrency(paymentLine.Amount)
-                </td>
-                <td> @paymentLine.TransactionIn.AccountReference</td>
-            </tr>
-        }
-    </tbody>
-</table>
+@if (Model.AllocatedPayments != null && Model.AllocatedPayments.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2 ui-payments-table">
+            <thead>
+                <tr>
+                    <th scope="col">Date and time</th>
+                    <th scope="col">PSP reference</th>
+                    <th scope="col">Amount (£)</th>
+                    <th scope="col">Account reference</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var paymentLine in Model.AllocatedPayments)
+                {
+                    <tr>
+                        <td>@paymentLine.CreatedAt</td>
+                        <td>@Html.ActionLink(paymentLine.TransactionIn.PspReference, "Details", "Transaction", new { id = paymentLine.TransactionIn.PspReference }, null)</td>
+                        <td class="text-end @if (paymentLine.Amount < 0) { @Html.Raw("td--negative") }">
+                            @Html.ToCurrency(paymentLine.Amount)
+                        </td>
+                        <td>@paymentLine.TransactionIn.AccountReference</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    Html.RenderPartial("_NothingSpecified", "journals");
+}

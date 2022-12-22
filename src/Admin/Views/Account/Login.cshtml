@@ -4,62 +4,62 @@
     ViewBag.Title = "Log in";
 }
 
-@{
-    Layout = "~/Views/Account/_Layout.cshtml";
-}
-
 @section Messages {
-    @Html.ValidationSummary(true, "Unable to log you in:", new { @class = "ui error message" })
+    @Html.ValidationSummary(true, "Unable to log you in:", new { @class = "alert alert-danger mt-3" })
 }
 
-@section Header {
-    <h1 class="ui header">
-        @ViewBag.Title
-    </h1>
-}
+@section Header { @ViewBag.Title }
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="ui form">
-
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Email)
-            @Html.EditorFor(m => m.Email)
+    <div class="row mb-3">
+        <div class="col col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Email)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field">
-            @Html.LabelFor(m => m.Password)
-            @Html.EditorFor(m => m.Password)
+    <div class="row mb-3">
+        <div class="col col-sm-6 col-md-5 col-lg-4">
+            @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", })
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
         </div>
+    </div>
 
-        <div class="four wide field ui checkbox">
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe)
+    <div class="row mb-3">
+        <div class="col col-sm-6 col-md-5 col-lg-4">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input", role = "switch" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+            </div>
+
             <div class="form__element--error">
                 @Html.ValidationMessageFor(m => m.RememberMe)
             </div>
         </div>
-
-        <div class="four wide field">
-            <input type="submit" value="Log in" class="ui primary button" />
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <input type="submit" value="Log in" class="btn btn-primary" />
         </div>
-
-        <div class="four wide field">
+    </div>
+    <div class="row mb-3">
+        <div class="col">
             @Html.ActionLink("Register as a new user", "Register")
         </div>
-
-        <div class="four wide field">
+    </div>
+    <div class="row mb-3">
+        <div class="col">
             @Html.ActionLink("Forgot your password?", "ForgotPassword")
         </div>
-
     </div>
 }
 

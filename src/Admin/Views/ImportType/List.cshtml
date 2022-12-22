@@ -6,73 +6,73 @@
 }
 
 
-@section Header {
-    <h1 class="ui header">
-        Import types
-        @Html.ActionLink("Create type", "Create", new { }, new { @class = "ui blue button right floated" })
-        <div class="sub header">
-            Import type management
-        </div>
-    </h1>
+@section Header { Import types }
+
+@section Subheader { Import type management }
+
+@section Actions {
+    @Html.ActionLink("Create type", "Create", new { }, new { @class = "btn btn-secondary" })
 }
 
-@Html.Partial("_Search", Model.SearchCriteria)
+<div class="border border-1 rounded p-2">
+    @Html.Partial("_Search", Model.SearchCriteria)
+</div>
 
 @if (Model.Items != null && Model.Items.Any())
 {
-    <table class="ui celled table striped">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Data type
-                </th>
-                <th scope="col">
-                    Name
-                </th>
-                <th scope="col">
-                    Description
-                </th>
-                <th scope="col">
-                    External reference
-                </th>
-                <th scope="col">
-                    Is reversible
-                </th>
-                <th scope="col">
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover mt-2">
+            <thead>
                 <tr>
-                    <td>
-                        @(((ImportDataTypeEnum)item.DataType).GetDisplayName())
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.ExternalReference)
-                    </td>
-                    <td>
-                        @item.IsReversible.ToYesNoString()
-                    </td>
-                    <td>
-                        @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "ui button" })
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "ui button" })
-                    </td>
+                    <th scope="col">
+                        Data type
+                    </th>
+                    <th scope="col">
+                        Name
+                    </th>
+                    <th scope="col">
+                        Description
+                    </th>
+                    <th scope="col">
+                        External reference
+                    </th>
+                    <th scope="col">
+                        Is reversible
+                    </th>
+                    <th scope="col">
+                        <span class="visually-hidden">Actions</span>
+                    </th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6">
-                    <div class="ui pagination menu">
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            @(((ImportDataTypeEnum)item.DataType).GetDisplayName())
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.ExternalReference)
+                        </td>
+                        <td>
+                            @item.IsReversible.ToYesNoString()
+                        </td>
+                        <td class="text-end">
+                            @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
                         @if (Model.Pages > 1)
                         {
                             @Html.PagedListPager(Model.Items, page => Url.Action("Search", new
@@ -83,15 +83,31 @@
                                 DataType = Model.SearchCriteria.DataType,
                             }))
                         }
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 }
 else
 {
-    <div class="ui info message">
-        There are no import types in the system
-    </div>
+    Html.RenderPartial("_NoResultsMessage", "import types");
+}
+
+@section Scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+            accessibleAutocomplete.enhanceSelectElement({
+                displayMenu: 'overlay',
+                autoSelect: false,
+                confirmOnBlur: false,
+                showAllValues: true,
+                defaultValue: '',
+                preserveNullOptions: true,
+                placeholder: 'Select data type',
+                dropdownArrow: () => paymentsAdmin.controls.autocomplete.downarrow,
+                selectElement: document.querySelector('#DataType')
+            });
+
+        });</script>
 }

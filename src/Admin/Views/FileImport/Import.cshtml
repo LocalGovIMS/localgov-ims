@@ -6,27 +6,25 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        Import File
-        <div class="sub header">
-            File details
-        </div>
-    </h1>
-}
+@section Header { Import File }
+
+@section Subheader { File details }
+
 @using (Html.BeginForm("Import", "FileImport", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="ui form">
-        <div class="ui vertical segment">
+<div>
 
-            <div class="four wide field">
-                <input type="file" name="postedFile" />
-            </div>
-
-            <input type="submit" value="Upload" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "FileImport", null, new { @class = "ui button" })
-
+    <div class="row mb-3">
+        <div class="col col-sm-6 col-md-5 col-lg-4">
+            <label class="form-label" for="postedFile">Choose import file</label>
+            <input class="form-control" type="file" name="postedFile" id="postedFile" />
         </div>
     </div>
 
+    <div>
+        <input type="submit" value="Upload" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "FileImport", null, new { @class = "btn btn-secondary" })
+    </div>
+
+</div>
 }

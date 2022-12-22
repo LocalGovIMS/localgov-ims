@@ -8,29 +8,27 @@
     @if (TempData.ContainsKey("Message") && TempData["Message"] != null) { Html.RenderPartial("_Message", TempData["Message"]); }
 }
 
-@section Header {
-    <h1 class="ui header">
-        File Import Confirmation
-        <div class="sub header">
-            Import this file?
-        </div>
-    </h1>
-}
+@section Header { File Import Confirmation }
+
+@section Subheader { Import this file? }
+
 @using (Html.BeginForm("Confirm", "FileImport", FormMethod.Post))
 {
+<div>
+
     @Html.HiddenFor(m => m.ImportId)
     @Html.HiddenFor(m => m.RowCount)
 
-    <div class="ui form">
-        <div class="ui vertical segment">
-
-            <div class="four wide field">
-                Import file containing @Model.RowCount rows?
-            </div>
-
-            <input type="submit" value="Yes" class="ui primary button" />
-            @Html.ActionLink("Back", "Back", "FileImport", null, new { @class = "ui button" })
+    <div class="row mb-3">
+        <div class="col col-sm-6 col-md-5 col-lg-4">
+            Import file containing @Model.RowCount rows?
         </div>
     </div>
 
+    <div>
+        <input type="submit" value="Yes" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Back", "FileImport", null, new { @class = "btn btn-secondary" })
+    </div>
+
+</div>
 }

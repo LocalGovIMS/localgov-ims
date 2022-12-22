@@ -17,7 +17,7 @@ namespace Admin.Models.ImportProcessingRuleCondition
         [DisplayName("Field")]
         public int ImportProcessingRuleFieldId { get; set; }
 
-        [DisplayName("Operator")]
+        [DisplayName("Must")]
         public int ImportProcessingRuleOperatorId { get; set; }
 
         [DisplayName("Value")]

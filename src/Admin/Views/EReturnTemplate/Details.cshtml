@@ -1,0 +1,70 @@
+﻿@model Admin.Models.EReturnTemplate.DetailsViewModel
+@{
+    ViewBag.Title = "Fund";
+}
+
+@section Header { @Model.Name }
+
+@section Subheader { eReturn template details }
+
+@section Actions {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
+}
+
+<div>
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            @Html.DisplayFor(m => m.Name)
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AllowCash, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.AllowCash, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AllowCheque, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.AllowCheque, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.AllowPdq, new { @class = "form-label fw-bold" })
+        <div class="form-label">
+            <div class="form-check form-switch">
+                @Html.CheckBoxFor(m => m.AllowPdq, new { @class = "form-check-input", role = "switch", @disabled = true })
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-auto p-0">
+            <h2>
+                Rows
+            </h2>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @Html.Action("_ListForEReturnTemplate", "EReturnTemplateRow", new { id = Model.Id })
+    </div>
+
+    <div>
+        <div>
+            @Html.ActionLink("Back", "Back", "EReturnTemplate", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+
+</div>
