@@ -17,13 +17,16 @@ namespace PaymentPortal
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/accessible-autocomplete")
+                .Include("~/Scripts/accessible-autocomplete.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/app/payment").Include(
                 "~/Scripts/AppScripts/payments.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-               "~/Content/app.css",
-               "~/Content/app-overrides.css",
-               "~/Content/site.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/accessible-autocomplete.min.css",
+                "~/Content/app.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",
