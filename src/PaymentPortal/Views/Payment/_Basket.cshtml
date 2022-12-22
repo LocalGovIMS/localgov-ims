@@ -1,0 +1,50 @@
+﻿@using PaymentPortal.Classes;
+
+@model PaymentPortal.Models.PaymentModel
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title">Basket</h2>
+
+        @if (Model.BasketItems.Count <= 0)
+        {
+            <div class="alert alert-info mb-0">
+                Your basket is empty
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped mt-2 mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Reference</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.BasketItems.Count; i++)
+                    {
+                        <tr class="border-start border-end">
+                            <td>@Model.BasketItems[@i].Description</td>
+                            <td>@Model.BasketItems[@i].Reference</td>
+                            <td class="text-end">
+                                @Model.BasketItems[@i].Amount.ToString("c")
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "RemoveItem", new { reference = Model.BasketItems[@i].Reference })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" value="Pay" name="action" class="btn btn-primary float-start">Pay @Model.BasketTotal.ToString("c")</button>
+                @Html.ActionLink("Empty Basket", "EmptyBasket", null, new { @class = "btn btn-secondary float-end" })
+            </div>
+        }
+
+    </div>
+</div>

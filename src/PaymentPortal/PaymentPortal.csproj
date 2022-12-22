@@ -331,6 +331,8 @@
     <Content Include="Web.Base.config" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Payment\_Basket.cshtml" />
+    <Content Include="Views\Payment\_PaymentMethods.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

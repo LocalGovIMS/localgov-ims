@@ -23,7 +23,15 @@
 @using (Html.BeginForm("", "", FormMethod.Post))
 {
     <div class="row">
-        <div class="col-12 col-lg-7 mb-3">
+
+        @if (Model.BasketItems.Count > 0)
+        {
+            <div class="col-12 d-xl-none mb-3">
+                @Html.Partial("_Basket", Model)
+            </div>
+        }
+
+        <div class="col-12 col-xl-7 mb-3">
 
             <div class="card">
                 <div class="card-body">
@@ -81,7 +89,7 @@
                     <div class="row mt-3">
                         <div class="col">
                             @Html.LabelFor(m => m.PaymentReference, new { @class = "form-label fw-bold" })
-                          </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -140,67 +148,11 @@
             </div>
 
         </div>
-        <div class="col-12 col-lg-5">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">Basket</h2>
-
-                    @if (Model.BasketItems.Count <= 0)
-                    {
-                        <div class="alert alert-info mb-0">
-                            Your basket is empty
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="table-responsive">
-                            <table class="table table-striped mt-2 mb-0 border-start border-end">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Reference</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Remove</th>
-                                    </tr>
-                                </thead>
-                                @for (int i = 0; i < Model.BasketItems.Count; i++)
-                                {
-                                    <tr>
-                                        <td>@Model.BasketItems[@i].Description</td>
-                                        <td>@Model.BasketItems[@i].Reference</td>
-                                        <td class="text-end">
-                                            @Model.BasketItems[@i].Amount.ToString("c")
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Delete", "RemoveItem", new { reference = Model.BasketItems[@i].Reference })
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                        </div>
-
-                        <div class="mt-3">
-                            <button type="submit" value="Pay" name="action" class="btn btn-primary">Pay @Model.BasketTotal.ToString("c")</button>
-                            @Html.ActionLink("Empty Basket", "EmptyBasket", null, new { @class = "btn btn-secondary" })
-                        </div>
-                    }
-
-                </div>
+        <div class="col-12 col-xl-5">
+            <div class="d-none d-xl-block">
+                @Html.Partial("_Basket", Model)
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text">You can pay using the following methods:</p>
-                    <div class="payment-logos">
-                        <img src="~/Content/images/logo-mastercard.png" alt="Mastercard" />
-                        <img src="~/Content/images/logo-visa.gif" alt="Visa" />
-                        <img src="~/Content/images/logo-maestro.gif" alt="Maestro" />
-                        <img src="~/Content/images/logo-bank-giro.png" alt="Bank Giro" />
-                    </div>
-                    <p class="card-text">
-                        If you prefer to pay by another method or are having difficulty in paying your bills please read about our <a href="@(System.Configuration.ConfigurationManager.AppSettings["OtherWaysToPayUrl"])">other ways to pay</a>
-                    </p>
-                </div>
-            </div>
+            @Html.Partial("_PaymentMethods", Model)
         </div>
     </div>
 }
