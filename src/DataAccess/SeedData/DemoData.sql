@@ -501,14 +501,14 @@ UPDATE Funds SET AccountReferenceValidatorId = (SELECT Id FROM AccountReferenceV
 MERGE INTO Templates AS [Target]
 USING (SELECT * 
 		FROM (VALUES
-			('Brokerage and support', 0, 0, 0, 1, 1, 0),
-			('Car Parks', 0, 0, 0, 0, 1, 0),
-			('Great Hall Car Park', 0, 0, 0, 0, 1, 0)) 
-	AS S ([Name], [ModifyVat], [ModifyReference], [ModifyDescription], [Cheque], [Cash], [Pdq])) AS [Source]
+			('Brokerage and support', 1, 1, 0),
+			('Car Parks', 0, 1, 0),
+			('Great Hall Car Park', 0, 1, 0)) 
+	AS S ([Name], [Cheque], [Cash], [Pdq])) AS [Source]
 ON [Target].[Name] = [Source].[Name]
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([Name], [ModifyVat], [ModifyReference], [ModifyDescription], [Cheque], [Cash], [Pdq])
-VALUES ([Name], [ModifyVat], [ModifyReference], [ModifyDescription], [Cheque], [Cash], [Pdq]);
+INSERT ([Name], [Cheque], [Cash], [Pdq])
+VALUES ([Name], [Cheque], [Cash], [Pdq]);
 
 DECLARE @TemplateId1 INT = 0;
 SELECT @TemplateId1 = Id FROM Templates WHERE [Name] = 'Brokerage and support';

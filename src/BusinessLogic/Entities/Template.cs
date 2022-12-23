@@ -18,12 +18,6 @@ namespace BusinessLogic.Entities
         [StringLength(100)]
         public string Name { get; set; }
 
-        public bool ModifyVat { get; set; }
-
-        public bool ModifyReference { get; set; }
-
-        public bool ModifyDescription { get; set; }
-
         public bool Cheque { get; set; }
 
         public bool Cash { get; set; }
