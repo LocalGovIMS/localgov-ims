@@ -77,8 +77,6 @@ namespace BusinessLogic.Entities
         [StringLength(255)]
         public string FailUrl { get; set; }
 
-        public bool? Legacy { get; set; }
-
         [StringLength(36)]
         public string RefundReference { get; set; }
 

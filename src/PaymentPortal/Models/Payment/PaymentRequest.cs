@@ -41,7 +41,6 @@ namespace PaymentPortal.Models.Payment
                     ExpiryDate = SessionExpiry,
                     FailUrl = ReturnUrl,
                     SuccessUrl = ReturnUrl,
-                    IsLegacy = true,
                     PayeeName = FirstName + " " + LastName,
                     AddressLine1 = HouseNameOrNumber + " " + Street,
                     AddressLine3 = Town,

@@ -127,7 +127,6 @@ namespace PaymentPortal.Models.Payment
             paymentDetails.Source = CallingApplicationID;
             paymentDetails.MopCode = MopCode;
             paymentDetails.ExpiryDate = SessionExpiry;
-            paymentDetails.IsLegacy = true;
             paymentDetails.CallRecordingSource = CallRecordingSource;
             paymentDetails.CallRecordingUserName = CallRecordingUserName;
             PaymentDetails.Add(paymentDetails);

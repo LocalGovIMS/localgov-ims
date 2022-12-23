@@ -131,7 +131,6 @@ namespace Api.Controllers.PendingTransactions
                 SuccessUrl = SuccessUrl,
                 CancelUrl = CancelUrl,
                 FailUrl = FailUrl,
-                Legacy = false,
                 Processed = false,
                 ExpiryDate = ExpiryDate
             };

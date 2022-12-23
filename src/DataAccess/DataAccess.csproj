@@ -229,6 +229,10 @@
     <Compile Include="Migrations\202210241412074_Standardised_address_columns.designer.cs">
       <DependentUpon>202210241412074_Standardised_address_columns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212231004575_Remove-redundant-PendingTransaction-field.cs" />
+    <Compile Include="Migrations\202212231004575_Remove-redundant-PendingTransaction-field.designer.cs">
+      <DependentUpon>202212231004575_Remove-redundant-PendingTransaction-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -389,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210241412074_Standardised_address_columns.resx">
       <DependentUpon>202210241412074_Standardised_address_columns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212231004575_Remove-redundant-PendingTransaction-field.resx">
+      <DependentUpon>202212231004575_Remove-redundant-PendingTransaction-field.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>
