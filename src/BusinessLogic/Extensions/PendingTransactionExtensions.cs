@@ -68,10 +68,5 @@ namespace BusinessLogic.Extensions
         {
             return transactions.First().CancelUrl;
         }
-
-        public static bool? Legacy(this List<PendingTransaction> transactions)
-        {
-            return transactions.First().Legacy;
-        }
     }
 }

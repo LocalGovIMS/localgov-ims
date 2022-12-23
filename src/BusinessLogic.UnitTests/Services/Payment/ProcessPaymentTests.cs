@@ -260,28 +260,6 @@ namespace BusinessLogic.UnitTests.Services.Payment
         }
 
         [TestMethod]
-        public void TestLegacyFlagSetCorrectly()
-        {
-            // Arrange
-            SetupUnitOfWork();
-            SetupSecurityContext(true);
-            SetupTransactionService(new PendingTransaction()
-            {
-                CancelUrl = "http://www.test.com/cancel",
-                Legacy = true
-            });
-            var service = GetService();
-
-            // Act
-            var result = service.ProcessPayment(new PaymentResult() { AuthResult = ResponseCode.Cancelled });
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ProcessPaymentResponse));
-            Assert.AreEqual(true, result.IsLegacy);
-        }
-
-        [TestMethod]
         public void IncorrectSecurityReturnsNull()
         {
             // Arrange

@@ -91,7 +91,6 @@ namespace BusinessLogic.Services
             var response = new ProcessPaymentResponse() 
             { 
                 RedirectUrl = transactions.FailUrl(),
-                IsLegacy = transactions.Legacy() ?? false,
                 Success = false
             };
 
@@ -371,7 +370,6 @@ namespace BusinessLogic.Services
                     Narrative = paymentDetails.Narrative,
                     AccountReference = paymentDetails.AccountReference,
                     MopCode = paymentDetails.MopCode,
-                    Legacy = paymentDetails.IsLegacy,
                     CardHolderName = paymentDetails.PayeeName,
                     CardHolderAddressLine1 = paymentDetails.AddressLine1,
                     CardHolderAddressLine2 = paymentDetails.AddressLine2,
