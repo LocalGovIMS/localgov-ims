@@ -24,7 +24,7 @@
                     <option value="">None</option>
                     @foreach (var item in Model.ImportProcessingRules.Items)
                     {
-                        <option class="item" value="@item.Value" @(Model.ImportTypeId != null && Model.ImportProcessingRuleId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
+                        <option class="item" value="@item.Value" @(Model.ImportProcessingRuleId.ToString().Equals(item.Value) ? "selected" : String.Empty)>@item.Text</option>
                     }
                 </select>
                 <div class="form__element--error">
