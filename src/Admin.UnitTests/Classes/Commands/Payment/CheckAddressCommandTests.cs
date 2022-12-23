@@ -36,8 +36,6 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                 AccountReference = "Test2",
                 Address = new Admin.Models.Payment.Address()
                 {
-                    CallRecordingMsg = string.Empty,
-                    CallRecordingMsgShown = false,
                     AddressLine1 = string.Empty,
                     AddressLine2 = string.Empty,
                     AddressLine3 = string.Empty,

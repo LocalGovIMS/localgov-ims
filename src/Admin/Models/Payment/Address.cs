@@ -43,8 +43,5 @@ namespace Admin.Models.Payment
         public string PostCode { get; set; }
 
         public Message Message { get; set; }
-
-        public bool? CallRecordingMsgShown { get; set; }
-        public string CallRecordingMsg { get; set; }
     }
 }
