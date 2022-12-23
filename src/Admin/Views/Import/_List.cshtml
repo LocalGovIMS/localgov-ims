@@ -2,6 +2,14 @@
 
 @if (Model.Items != null && Model.Items.Any())
 {
+    var metadata = Model.Items
+        .SelectMany(x => x.Metadata);
+
+    var metadataKeys = metadata
+        .Select(x => x.MetadataKey)
+        .Distinct()
+        .OrderBy(x => x.Id);
+
     <div class="table-responsive">
         <table class="table table-striped table-bordered mt-2">
             <thead>
@@ -18,9 +26,10 @@
                     <th scope="col">
                         Status
                     </th>
-                    @foreach (var metadata in Model.Items.First().Metadata)
+
+                    @foreach (var key in metadataKeys)
                     {
-                        <th scope="col">@metadata.MetadataKey.Description</th>
+                        <th scope="col">@metadata.First(x => x.MetadataKeyId == key.Id).MetadataKey.Description</th>
                     }
                 </tr>
             </thead>
@@ -45,9 +54,14 @@
                                 <span>(@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
                             }
                         </td>
-                        @foreach (var metadata in item.Metadata)
+
+                        @foreach (var key in metadataKeys)
                         {
-                            <td>@metadata.Value</td>
+                            <td>
+                                @(item.Metadata.FirstOrDefault(x => x.MetadataKeyId == key.Id) == null
+                                    ? string.Empty
+                                    : item.Metadata.FirstOrDefault(x => x.MetadataKeyId == key.Id).Value)
+                            </td>
                         }
                     </tr>
                 }
