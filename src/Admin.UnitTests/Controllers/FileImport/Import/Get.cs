@@ -41,7 +41,7 @@ namespace Admin.UnitTests.Controllers.FileImport.FileImport
 
             var controller = new Controller(dependencies);
 
-            return controller.Index();
+            return controller.Import();
         }
 
         [TestMethod]

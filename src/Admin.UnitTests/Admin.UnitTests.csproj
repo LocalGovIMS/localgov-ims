@@ -511,7 +511,6 @@
     <Compile Include="Controllers\FileImport\Confirm\Get.cs" />
     <Compile Include="Controllers\FileImport\Confirm\Post.cs" />
     <Compile Include="Controllers\FileImport\Import\Get.cs" />
-    <Compile Include="Controllers\FileImport\Index\Get.cs" />
     <Compile Include="Controllers\ImportTypeImportProcessingRule\ConstructorTests.cs" />
     <Compile Include="Controllers\ImportTypeImportProcessingRule\Create\Get.cs" />
     <Compile Include="Controllers\ImportTypeImportProcessingRule\Create\Post.cs" />

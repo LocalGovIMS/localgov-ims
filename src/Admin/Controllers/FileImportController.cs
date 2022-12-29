@@ -18,13 +18,6 @@ namespace Admin.Controllers
         {
         }
 
-        [NavigatablePageActionFilter(DisplayText = "File Imports")]
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [NavigatablePageActionFilter(DisplayText = "File Import")]
         [HttpGet]
         public ActionResult Import()
