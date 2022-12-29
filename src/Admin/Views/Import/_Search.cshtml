@@ -17,7 +17,7 @@
                 }
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
             @Html.LabelFor(m => m.ImportTypeId, new { @class = "form-label" })
             <select id="ImportTypeId" name="ImportTypeId">
                 <option value="">None</option>
@@ -27,7 +27,7 @@
                 }
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-md-0">
             @Html.LabelFor(m => m.StatusId, new { @class = "form-label" })
             <select id="StatusId" name="StatusId">
                 <option value="">None</option>
@@ -37,11 +37,11 @@
                 }
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-lg-0">
             @Html.LabelFor(m => m.StartDate, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", size = 10, placeholder = "Start date", type = "date" })
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-xxl-0">
             @Html.LabelFor(m => m.EndDate, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", size = 10, placeholder = "End date", type = "date" })
         </div>
