@@ -12,22 +12,22 @@
                 @Html.TextBoxFor(m => m.TransactionDateFrom, new { @class = "form-control", placeholder = "Start date", type = "date" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-sm-0">
                 @Html.LabelFor(m => m.TransactionDateTo, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.TransactionDateTo, new { @class = "form-control", placeholder = "Start date", type = "date" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 pt-2 pt-md-0">
                 @Html.LabelFor(m => m.Amount, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", placeholder = "Enter amount" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3 pt-2 pt-lg-0">
                 @Html.LabelFor(m => m.Narrative, new { @class = "form-label" })
                 @Html.TextBoxFor(m => m.Narrative, new { @class = "form-control", placeholder = "Enter narrative" })
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3 pt-2 pt-xxl-0">
                 @Html.LabelFor(m => m.Status, new { @class = "form-label" })
                 <select id="Status" name="Status">
                     @foreach (var item in Model.Statuses.Items)

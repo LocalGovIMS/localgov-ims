@@ -881,7 +881,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Transaction\List.cshtml" />
     <Content Include="Views\Transaction\Details.cshtml" />
-    <Content Include="Views\Transaction\_SearchTransaction.cshtml" />
+    <Content Include="Views\Transaction\_Search.cshtml" />
     <Content Include="Views\Transaction\_Refund.cshtml" />
     <Content Include="Views\FundGroup\List.cshtml" />
     <Content Include="Views\Role\List.cshtml" />
@@ -918,7 +918,7 @@
     <Content Include="Views\EReturn\List.cshtml" />
     <Content Include="Views\EReturn\Create.cshtml" />
     <Content Include="Views\EReturn\Edit.cshtml" />
-    <Content Include="Views\EReturn\_SearchEReturns.cshtml" />
+    <Content Include="Views\EReturn\_Search.cshtml" />
     <Content Include="Views\MethodOfPayment\Create.cshtml" />
     <Content Include="Views\MethodOfPayment\Details.cshtml" />
     <Content Include="Views\MethodOfPayment\Edit.cshtml" />
