@@ -10,41 +10,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
-    <title>Error - Income Management</title>
-    <link rel="icon" href="~/content/favicon.ico" />
-    <link href="~/Content/semantic.min.css" rel="stylesheet" />
-    <link href="~/Content/app.css" rel="stylesheet" />
+    <title>Error - Income Management System</title>
+
+    <link rel="icon" href="@Url.Content("~/content/favicon.ico")" />
+
+    @Styles.Render("~/Content/css")
+
 </head>
 
-<body cz-shortcut-listen="true">
+<body>
 
-    <div class="menu">
-        <div class="ui left fixed inverted vertical menu">
-            <div class="item" style="min-height: 1px;">
-                <img src="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.Logo"])" style="min-height: 1px; height: 34px; width: 125px;" alt="@(System.Configuration.ConfigurationManager.AppSettings["Organisation.ShortName"]) logo">
-                <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #ccc; text-align: center;">
-                    Income Management
-                </div>
+    <div class="container-fluid min-vh-100">
+        <div class="row row-cols-1 row-cols-lg-2 min-vh-100">
+
+            <div class="col-12 col-lg-2 col-xxxl-1 gx-0 nav-bar-wrapper" style="background-color:black">
+                <nav class="navbar navbar-dark bg-black" aria-label="Main menu">
+                    <a class="navbar-brand ps-2" href="#">Local Gov IMS</a>
+                </nav>
             </div>
-        </div>
-    </div>
-    <div class="main" style="margin-left: 11rem;">
-        <div class="nav" style="background-color: #fff; color: #333; box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem; padding: 1rem;">
-            <div>Error</div>
-        </div>
-        <div class="ui vertical segment" style="padding: 0 2rem; padding-bottom: 0; margin:2rem 0">
-            <div>
+
+            <div class="col-12 col-lg-10 col-xxxl-11">
                 <main>
-                    <div>
-                        <h1>System error</h1>
-                        <div class="ui icon error message">
-                            <i class="frown icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    We're sorry - an error has occurred
-                                </div>
-                                Please retry the action you were trying to perform. If the error persists please contact your system administrator.
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="d-flex flex-wrap-reverse page-header">
+                            <div class="me-auto pt-2 pe-2 pb-2">
+
                             </div>
+                            <div class="order-lg-2 pt-2 pb-2">
+                                @{ Html.RenderPartial("_Login"); }
+                            </div>
+                        </div>
+                    }
+                    <h1>
+                        Error
+                    </h1>
+                    <div class="pt-2">
+                        <div class="alert alert-danger my-3">
+                            <div class="fw-bold mb-2">
+                                We're sorry - an error has occurred
+                            </div>
+                            <p class="mb-2">
+                                Please retry the action you were trying to perform.
+                            </p>
+                            <p class="mb-0">
+                                If the error persists please contact your system administrator.
+                            </p>
                         </div>
                     </div>
                 </main>

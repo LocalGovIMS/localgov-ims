@@ -913,7 +913,6 @@
     <Content Include="Views\Transaction\_EmailReceipt.cshtml" />
     <Content Include="Views\Transaction\Receipt.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
-    <Content Include="Views\Transaction\_PaymentsListPrint.cshtml" />
     <Content Include="Views\Transfer\Index.cshtml" />
     <Content Include="Views\Home\AccountDisabled.cshtml" />
     <Content Include="Views\EReturn\List.cshtml" />
@@ -1027,7 +1026,6 @@
     <Content Include="Views\AccountReferenceValidator\Edit.cshtml" />
     <Content Include="Views\AccountReferenceValidator\List.cshtml" />
     <Content Include="Views\UserMethodOfPayment\Edit.cshtml" />
-    <Content Include="Views\FileImport\Index.cshtml" />
     <Content Include="Views\FundMessageMetadata\_EditList.cshtml" />
     <Content Include="Views\FundMessageMetadata\_List.cshtml" />
     <Content Include="Views\FundMessageMetadata\Create.cshtml" />
@@ -1081,7 +1079,6 @@
     <Content Include="Views\Payment\_Basket.cshtml" />
     <Content Include="Views\Transaction\_Header.cshtml" />
     <Content Include="Views\Suspense\_Header.cshtml" />
-    <Content Include="Views\Suspense\_Journal.Old.cshtml" />
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
