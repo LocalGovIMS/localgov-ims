@@ -18,14 +18,10 @@
 
     @if (!Model.SearchCriteria.IsForAnImport)
     {
-        <a href="@Url.Action("Import", "FileImport")" class="btn btn-secondary" id="upload">
-            <i class="upload icon"></i> File import
-        </a>
+        <a href="@Url.Action("Import", "FileImport")" class="btn btn-secondary" id="upload">File import</a>
     }
 
-    <a class="btn btn-secondary" id="export" onclick="SubmitMyForm()">
-        <i class="download icon"></i> Export
-    </a>
+    <a class="btn btn-secondary" id="export" onclick="SubmitMyForm()">Export</a>
 }
 
 <div class="border border-1 rounded p-2">
