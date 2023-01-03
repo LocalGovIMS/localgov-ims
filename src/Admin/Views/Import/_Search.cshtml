@@ -46,12 +46,8 @@
             @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", size = 10, placeholder = "End date", type = "date" })
         </div>
         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-2 pt-3 offset-lg-5 offset-xxl-0 gap-2 d-flex align-self-end justify-content-end">
-            <button class="btn btn-primary search" tabindex="0" type="submit">
-                <i class="search icon"></i> Search
-            </button>
-            <a href="@Url.Action("Search", "Import")" class="btn btn-secondary" id="reset">
-                <i class="undo icon"></i> Reset search
-            </a>
+            <button class="btn btn-primary search" tabindex="0" type="submit">Search</button>
+            <a href="@Url.Action("Search", "Import")" class="btn btn-secondary" id="reset">Reset search</a>
         </div>
     </div>
 </div>

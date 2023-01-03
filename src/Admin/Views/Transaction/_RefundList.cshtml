@@ -44,7 +44,7 @@
                                 <td class="text-end @if (transaction.Amount < 0) { @Html.Raw("td--negative") }">
                                     @Html.ToCurrency(transaction.Amount)
                                 </td>
-                                <td><i class="checkmark icon"></i> Complete</td>
+                                <td><i class="icon fa fa-check"></i> Complete</td>
                             </tr>
                         }
                     }
@@ -62,7 +62,7 @@
                                 <td class="text-end @if (transaction.Amount < 0) { @Html.Raw("td--negative") }">
                                     @Html.ToCurrency(transaction.Amount)
                                 </td>
-                                <td><i class="exclamation icon"></i> Failed</td>
+                                <td><i class="icon fa fa-exclamation"></i> Failed</td>
                             </tr>
                         }
                     }
@@ -80,7 +80,7 @@
                                 <td class="text-end @if (transaction.Amount < 0) { @Html.Raw("td--negative") }">
                                     @Html.ToCurrency(transaction.Amount)
                                 </td>
-                                <td><i class="hourglass half icon"></i> Pending</td>
+                                <td><i class="icon fa fa-hourglass-half"></i> Pending</td>
                             </tr>
                         }
                     }

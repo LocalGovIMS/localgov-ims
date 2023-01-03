@@ -85,22 +85,16 @@
                 </div>
             }
             <div class="col-12 pt-3 gap-2 d-flex align-self-end justify-content-end">
-                <button class="btn btn-primary search" tabindex="0" type="submit">
-                    <i class="search icon"></i> Search
-                </button>
+                <button class="btn btn-primary search" tabindex="0" type="submit">Search</button>
 
                 @if (!Model.IsForAnImport)
                 {
-                    <a href="@Url.Action("Search", "Transaction")" class="btn btn-secondary" id="reset">
-                        <i class="undo icon"></i> Reset search
-                    </a>
+                    <a href="@Url.Action("Search", "Transaction")" class="btn btn-secondary" id="reset">Reset search</a>
                 }
 
                 @if (Model.IsForAnImport)
                 {
-                    <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.ImportId })" class="btn btn-secondary" id="reset">
-                        <i class="undo icon"></i> Reset search
-                    </a>
+                    <a href="@Url.Action("ListForTransactionImport", "Transaction", new { ImportId = Model.ImportId })" class="btn btn-secondary" id="reset">Reset search</a>
                 }
 
             </div>
