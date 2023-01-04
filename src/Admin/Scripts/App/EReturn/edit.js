@@ -126,7 +126,7 @@ function calculateTransactionValue() {
     $('.transaction-value').each(function () {
         totalTransactionValue += Number($(this).val());
     });
-    $('.transaction-total').text('£' + totalTransactionValue.toFixed(2));
+    $('.transaction-total').text(paymentsAdmin.core.toCurrency(totalTransactionValue));
 }
 
 function calculateAnalysisValue() {
@@ -134,7 +134,7 @@ function calculateAnalysisValue() {
     $('.analysis-value').each(function () {
         totalAnalysisValue += Number($(this).val());
     });
-    $('.analysis-total').text('£' + totalAnalysisValue.toFixed(2));
+    $('.analysis-total').text(paymentsAdmin.core.toCurrency(totalAnalysisValue));
 }
 
 function validateWildcardValues() {

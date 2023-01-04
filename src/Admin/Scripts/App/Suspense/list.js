@@ -29,8 +29,8 @@ function highlightActiveRows() {
 }
 
 function updateButtonValues() {
-    $(".credit-button-value").text("(£" + totalCreditNotes().toFixed(2) + ")");
-    $(".journal-button-value").text("(£" + totalAvailableToJournal().toFixed(2) + ")");
+    $(".credit-button-value").text("(" + paymentsAdmin.core.toCurrency(totalCreditNotes()) + ")");
+    $(".journal-button-value").text("(" + paymentsAdmin.core.toCurrency(totalAvailableToJournal()) + ")");
 }
 
 function updateUI() {
@@ -63,5 +63,5 @@ $('tr .form-check-input').on("click", function (e) {
 });
 
 $("#journal").on("click", function () {
-    $('#amount-available-to-journal').text(remainingAvailableToJournal().toFixed(2));
+    $('#amount-available-to-journal').text(paymentsAdmin.core.toCurrency(remainingAvailableToJournal()));
 });

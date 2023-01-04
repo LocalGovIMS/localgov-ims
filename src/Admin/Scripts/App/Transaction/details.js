@@ -11,7 +11,7 @@ $(".transfer").click(function () {
     transcationDetails.amount = parseFloat($(this).attr('data-amount'));
     transcationDetails.amountAvailableToTransfer = parseFloat($(this).attr('data-amount-available-to-transfer'));
 
-    $('#amount-available-to-transfer').text((transcationDetails.amountAvailableToTransfer).toFixed(2));
+    $('#amount-available-to-transfer').text(paymentsAdmin.core.toCurrency(transcationDetails.amountAvailableToTransfer));
 
 });
 

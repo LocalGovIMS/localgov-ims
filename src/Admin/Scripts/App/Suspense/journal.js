@@ -49,8 +49,6 @@
     $('#JournalItem_FundCode').attr('aria-labelledby', 'JournalItemFundCode');
     $('#JournalItem_VatCode').attr('aria-labelledby', 'JournalItemVatCode');
 
-    //paymentsAdmin.core.accessibleAutoComplete.setSelectedOption('#JournalItem_MopCode', 'JR', journalMopCode);
-    
     addTransaction = function (transactionRow, transactionArray, validator, messageContainerSelector, selectorPrefix) {
 
         var text = $(messageContainerSelector + '-text');
@@ -244,9 +242,9 @@ function renderJournals() {
                 + '<td>' + this.mopName + '</td>'
                 + '<td>' + this.accountReference + '</td>'
                 + '<td>' + this.name + '</td>'
-                + '<td class="text-end">' + (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : '') + '</td>'
+                + '<td class="text-end">' + (this.outstandingBalance ? this.outstandingBalance.toLocaleString({ minimumFractionDigits: 2 }) : '') + '</td>'
                 + '<td>' + this.vatCode + '</td>'
-                + '<td class="text-end">' + this.amount.toFixed(2) + '</td>'
+                + '<td class="text-end">' + this.amount.toLocaleString({ minimumFractionDigits: 2 }) + '</td>'
                 + '<td>' + this.narrative + '</td>'
                 + '<td><a href="#" class="btn btn-danger remove-journal" data-id="' + this.id + '">Remove</a></td>'
               + '</tr>');
@@ -255,7 +253,7 @@ function renderJournals() {
         $('#journal-table').show();
     }
 
-    $('#amount-available-to-journal').text(remainingAvailableToJournal().toFixed(2));
+    $('#amount-available-to-journal').text(paymentsAdmin.core.toCurrency(remainingAvailableToJournal()));
 
     if (journalAmountMatchesTotalAvailable() && totalAvailableToJournal() > totalCreditNotes()) {
         $('.submit-journal').removeAttr('disabled');

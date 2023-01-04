@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {    
 
     $("#approve").click(function () {
-        console.log('Approve click');
         renderApproveItems();    
     });   
 
@@ -88,7 +87,7 @@
                 $('#approve-table-body').append('<tr><td>' + this.num + '</td><td>' + this.template + '</td><td>' + this.submittedBy + '</td><td>' + this.type + '</td><td style="text-align:right;">' + this.amount.toFixed(2) + '</td><td class=\'text-end\'><a href=\'#\' class=\'btn btn-danger remove-ereturn\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
             });
 
-            $('#amount-to-approve').text(parseFloat(totalEReturns() || 0).toFixed(2));
+            $('#amount-to-approve').text(paymentsAdmin.core.toCurrency(parseFloat(totalEReturns() || 0)));
 
             $('#approve-table').show();
         }
