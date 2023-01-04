@@ -152,7 +152,7 @@ function renderCreditNotes() {
                 + '<td>' + this.fundName + '</td>'
                 + '<td>' + this.accountReference + '</td>'
                 + '<td>' + this.vatCode + '</td>'
-                + '<td class="text-end">' + this.amount.toFixed(2) + '</td>'
+                + '<td class="text-end">' + this.amount.toLocaleString({ minimumFractionDigits: 2 }) + '</td>'
                 + '<td><a href="#" class="btn btn-danger remove-credit" data-id="' + this.id + '">Remove</a></td>'
               + '</tr>');
         });
@@ -160,5 +160,5 @@ function renderCreditNotes() {
         $('#credit-table').show();
     }
 
-    $('#amount-available-to-credit').text(totalCreditNotes().toFixed(2));
+    $('#amount-available-to-credit').text(paymentsAdmin.core.toCurrency(totalCreditNotes()));
 }

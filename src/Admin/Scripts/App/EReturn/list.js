@@ -23,7 +23,7 @@ function highlightActiveRows() {
 }
 
 function updateButtonValues() {
-    $(".approve-button-value").text("(£" + totalEReturns().toFixed(2) + ")");
+    $(".approve-button-value").text("(" + paymentsAdmin.core.toCurrency(totalEReturns()) + ")");
 }
 
 function updateUI() {

@@ -57,6 +57,13 @@
             });
         },
 
+        toCurrency: function (value) {
+            return (value).toLocaleString('en-GB', {
+                style: 'currency',
+                currency: 'GBP'
+            });
+        },
+
         accessibleAutoComplete: {
             getSelectedOption: function (querySelector, selectedText) {
                 const option = Array.from(document.querySelector(querySelector + '-select').querySelectorAll("option")).find(

@@ -56,8 +56,6 @@
 
             transactionRow.id = id;
 
-            console.log('rootUrl: ', rootUrl);
-
             $.ajax({
                 type: "POST",
                 url: rootUrl + "/Validation/ValidateTransferItem",
@@ -322,14 +320,23 @@
 
         if (Transfers.items.length > 0) {
             $(Transfers.items).each(function (index) {
-                $('#transfer-table-body').append('<tr><td>' + this.fundName + '</td><td>' + this.accountReference + '</td><td>' + (this.name ? this.name : "") + '</td><td class=\"text-end\">' +
-                    (this.outstandingBalance ? this.outstandingBalance.toFixed(2) : "") + '</td><td>' + this.vatCode + '</td><td class=\"text-end\">' + this.amount.toFixed(2) + '</td><td>' + this.narrative + '</td><td><a href=\'#\' class=\'btn btn-danger remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td></tr>');
+                $('#transfer-table-body').append(
+                    '<tr>'
+                    + '<td>' + this.fundName + '</td>'
+                    + '<td>' + this.accountReference + '</td>'
+                    + '<td>' + (this.name ? this.name : "") + '</td>'
+                    + '<td class=\"text-end\">' + (this.outstandingBalance ? this.outstandingBalance.toLocaleString({ minimumFractionDigits: 2 }) : "") + '</td>'
+                    + '<td>' + this.vatCode + '</td>'
+                    + '<td class=\"text-end\">' + this.amount.toLocaleString({ minimumFractionDigits: 2 }) + '</td>'
+                    + '<td>' + this.narrative + '</td>'
+                    + '<td><a href=\'#\' class=\'btn btn-danger remove-transfer\' data-id=\'' + this.id + '\'>Remove</a></td>'
+                  + '</tr>');
             });
 
             $('#transfer-table').show();
         }
 
-        $('#amount-available-to-transfer').text(totalAvailableToTransfer());
+        $('#amount-available-to-transfer').text(paymentsAdmin.core.toCurrency(totalAvailableToTransfer()));
     }
 
     function totalAvailableToTransfer() {
@@ -339,7 +346,7 @@
             total += parseFloat(Transfers.items[i].amount);
         }
 
-        return (transcationDetails.amountAvailableToTransfer - total).toFixed(2);
+        return (transcationDetails.amountAvailableToTransfer - total);
     }
 
     function handleFundTypeChange(querySelectorPrefix, val, vatCodeDropdown) {
