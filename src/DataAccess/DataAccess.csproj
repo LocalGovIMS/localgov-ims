@@ -237,6 +237,10 @@
     <Compile Include="Migrations\202212231149126_Remove-redundant-eReturn-template-row-fields.designer.cs">
       <DependentUpon>202212231149126_Remove-redundant-eReturn-template-row-fields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301091426033_Rename_FileImportRow_RowData_column.cs" />
+    <Compile Include="Migrations\202301091426033_Rename_FileImportRow_RowData_column.designer.cs">
+      <DependentUpon>202301091426033_Rename_FileImportRow_RowData_column.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IncomeDbContext.cs" />
     <Compile Include="Persistence\TableMetadata.cs" />
@@ -403,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212231149126_Remove-redundant-eReturn-template-row-fields.resx">
       <DependentUpon>202212231149126_Remove-redundant-eReturn-template-row-fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301091426033_Rename_FileImportRow_RowData_column.resx">
+      <DependentUpon>202301091426033_Rename_FileImportRow_RowData_column.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\UITestData.sql">
       <CustomToolNamespace>DataAccess.SeedData</CustomToolNamespace>

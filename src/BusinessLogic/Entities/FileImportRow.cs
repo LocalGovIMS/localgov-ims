@@ -11,6 +11,6 @@ namespace BusinessLogic.Entities
         public FileImport FileImport { get; set; }
 
         [Required]
-        public string RowData { get; set; } // TODO: Rename to Data
+        public string Data { get; set; }
     }
 }
