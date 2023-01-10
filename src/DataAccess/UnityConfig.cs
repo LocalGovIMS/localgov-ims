@@ -40,8 +40,6 @@ namespace DataAccess
                 .RegisterType<IFundMessageMetadataRepository, FundMessageMetadataRepository>()
                 .RegisterType<ISuspenseRepository, SuspenseRepository>()
                 .RegisterType<ISystemMessageRepository, SystemMessageRepository>()
-                .RegisterType<ITemplateRepository, TemplateRepository>()
-                .RegisterType<ITemplateRowRepository, TemplateRowRepository>()
                 .RegisterType<ITransactionRepository, TransactionRepository>()
                 .RegisterType<IUserFundGroupRepository, UserFundGroupRepository>()
                 .RegisterType<IUserRepository, UserRepository>()

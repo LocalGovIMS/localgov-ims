@@ -17,7 +17,7 @@ namespace BusinessLogic.UnitTests.Services.EReturn
         {
             MockUnitOfWork.Setup(x => x.EReturns.Add(It.IsAny<Type>()));
 
-            MockUnitOfWork.Setup(x => x.Templates.GetTemplate(It.IsAny<int>()))
+            MockUnitOfWork.Setup(x => x.EReturnTemplates.Get(It.IsAny<int>()))
                 .Returns(new Entities.Template()
                 {
                     Id = 1,
