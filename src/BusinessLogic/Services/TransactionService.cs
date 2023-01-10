@@ -464,7 +464,8 @@ namespace BusinessLogic.Services
 
         public Transaction GetTransactionByPspReference(string pspReference)
         {
-            if (!SecurityContext.IsInRole(Security.Role.TransactionList)) return null;
+            if (!SecurityContext.IsInRole(Security.Role.TransactionList)
+                && !SecurityContext.IsInRole(Security.Role.Payments)) return null;
 
             try
             {
