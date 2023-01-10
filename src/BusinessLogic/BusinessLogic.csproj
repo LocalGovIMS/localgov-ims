@@ -324,8 +324,6 @@
     <Compile Include="Interfaces\Repositories\IFundMessageRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISuspenseRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISystemMessageRepository.cs" />
-    <Compile Include="Interfaces\Repositories\ITemplateRepository.cs" />
-    <Compile Include="Interfaces\Repositories\ITemplateRowRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITransactionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserFundGroupRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserMethodOfPaymentRepository.cs" />
@@ -434,7 +432,6 @@
     <Compile Include="Services\EReturnTypeService.cs" />
     <Compile Include="Services\FundMessageService.cs" />
     <Compile Include="Services\SystemMessageService.cs" />
-    <Compile Include="Services\TemplateRowService.cs" />
     <Compile Include="Services\TransferService.cs" />
     <Compile Include="Services\MethodOfPaymentService.cs" />
     <Compile Include="Services\UserMethodOfPaymentService.cs" />
@@ -497,7 +494,6 @@
     <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\RefundService.cs" />
     <Compile Include="Services\RoleService.cs" />
-    <Compile Include="Services\TemplateService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\TransactionJournalService.cs" />
     <Compile Include="Services\UserFundGroupService.cs" />

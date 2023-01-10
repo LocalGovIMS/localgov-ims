@@ -277,8 +277,6 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\FundMessageRepository.cs" />
-    <Compile Include="Repositories\TemplateRowRepository.cs" />
-    <Compile Include="Repositories\TemplateRepository.cs" />
     <Compile Include="Repositories\EReturnRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\UserFundGroupRepository.cs" />

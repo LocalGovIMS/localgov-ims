@@ -32,8 +32,6 @@ namespace BusinessLogic.Interfaces.Persistence
         ISystemMessageRepository SystemMessages { get; }
         ISuspenseRepository Suspenses { get; }
         IRepository<SuspenseNote> SuspenseNotes { get; }
-        ITemplateRepository Templates { get; }
-        ITemplateRowRepository TemplateRows { get; }
         ITransactionRepository Transactions { get; }
         IUserRepository Users { get; }
         IUserFundGroupRepository UserFundGroups { get; }

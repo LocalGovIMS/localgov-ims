@@ -47,8 +47,6 @@ namespace DataAccess.Persistence
         public ISystemMessageRepository SystemMessages { get; private set; }
         public ISuspenseRepository Suspenses { get; private set; }
         public IRepository<SuspenseNote> SuspenseNotes { get; private set; }
-        public ITemplateRepository Templates { get; private set; }
-        public ITemplateRowRepository TemplateRows { get; private set; }
         public ITransactionRepository Transactions { get; private set; }
         public IUserRepository Users { get; private set; }
         public IUserFundGroupRepository UserFundGroups { get; private set; }
@@ -100,8 +98,6 @@ namespace DataAccess.Persistence
             ISystemMessageRepository systemMessageRepository,
             ISuspenseRepository suspenseRepository,
             IRepository<SuspenseNote> suspenseNoteRepository,
-            ITemplateRepository templateRepository,
-            ITemplateRowRepository templateRowRepository,
             ITransactionRepository transactionRepository,
             IUserRepository userRepository,
             IUserFundGroupRepository userFundGroupRepository,
@@ -154,8 +150,6 @@ namespace DataAccess.Persistence
             Suspenses = suspenseRepository;
             SuspenseNotes = suspenseNoteRepository;
             SystemMessages = systemMessageRepository;
-            Templates = templateRepository;
-            TemplateRows = templateRowRepository;
             Transactions = transactionRepository;
             Users = userRepository;
             UserFundGroups = userFundGroupRepository;
@@ -264,7 +258,7 @@ namespace DataAccess.Persistence
             if (!_securityContext.IsInRole(BusinessLogic.Security.Role.Finance) &&
                 !_securityContext.IsInRole(BusinessLogic.Security.Role.ChequeProcess))
             {
-                Templates.AddFilter(x => userAccessibleTemplates.Contains(x.Id));
+                EReturnTemplates.AddFilter(x => userAccessibleTemplates.Contains(x.Id));
                 EReturns.AddFilter(x => userAccessibleTemplates.Contains(x.Template.Id));
             }
         }
