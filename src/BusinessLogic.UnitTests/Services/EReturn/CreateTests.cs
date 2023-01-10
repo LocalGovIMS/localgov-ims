@@ -108,7 +108,7 @@ namespace BusinessLogic.UnitTests.Services.EReturn
 
         private void SetupTemplateService()
         {
-            MockTemplateService.Setup(x => x.GetTemplate(It.IsAny<int>()))
+            MockEReturnTemplateService.Setup(x => x.Get(It.IsAny<int>()))
                 .Returns(new Entities.Template()
                 {
                     Id = 1,

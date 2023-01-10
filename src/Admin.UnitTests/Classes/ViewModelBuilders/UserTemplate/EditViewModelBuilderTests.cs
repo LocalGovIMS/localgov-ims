@@ -16,7 +16,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
-        private readonly Mock<ITemplateService> _mockTemplateService = new Mock<ITemplateService>();
+        private readonly Mock<IEReturnTemplateService> _mockEReturnTemplateService = new Mock<IEReturnTemplateService>();
         private readonly Mock<IUserTemplateService> _mockUserTemplateService = new Mock<IUserTemplateService>();
 
         private ViewModelBuilder _viewModelBuilder;
@@ -27,7 +27,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
                 _mockUserService.Object,
-                _mockTemplateService.Object,
+                _mockEReturnTemplateService.Object,
                 _mockUserTemplateService.Object);
         }
 
@@ -46,9 +46,9 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
             });
         }
 
-        private void SetupTemplateService(Mock<ITemplateService> service)
+        private void SetupTemplateService(Mock<IEReturnTemplateService> service)
         {
-            service.Setup(x => x.GetAllTemplates()).Returns(new List<BusinessLogic.Entities.Template>()
+            service.Setup(x => x.GetAll()).Returns(new List<BusinessLogic.Entities.Template>()
             {
                 {
                     new BusinessLogic.Entities.Template() {
@@ -101,7 +101,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         {
             // Arrange
             SetupUserService(_mockUserService);
-            SetupTemplateService(_mockTemplateService);
+            SetupTemplateService(_mockEReturnTemplateService);
             SetupUserTemplateService(_mockUserTemplateService);
 
             // Act
@@ -115,7 +115,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         public void OnBuildWithParamNullUserReturnsViewModel()
         {
             // Arrange
-            SetupTemplateService(_mockTemplateService);
+            SetupTemplateService(_mockEReturnTemplateService);
             SetupUserTemplateService(_mockUserTemplateService);
 
             // Act
@@ -130,7 +130,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.UserTemplate
         {
             // Arrange
             SetupUserService(_mockUserService);
-            SetupTemplateService(_mockTemplateService);
+            SetupTemplateService(_mockEReturnTemplateService);
 
             // Act
             var result = _viewModelBuilder.Build(1);

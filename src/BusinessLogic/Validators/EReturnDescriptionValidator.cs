@@ -7,22 +7,22 @@ namespace BusinessLogic.Validators
 {
     public class EReturnDescriptionValidator : IEReturnDescriptionValidator
     {
-        private ITemplateRowService _templateRowService;
+        private IEReturnTemplateRowService _eReturnTemplateRowService;
 
-        public EReturnDescriptionValidator(ITemplateRowService templateRowService)
+        public EReturnDescriptionValidator(IEReturnTemplateRowService eReturnTemplateRowService)
         {
-            _templateRowService = templateRowService;
+            _eReturnTemplateRowService = eReturnTemplateRowService;
         }
 
-        public IResult Validate(string description, int templateRowId)
+        public IResult Validate(string description, int eReturnTemplateRowId)
         {
             if (string.IsNullOrEmpty(description)) return new Result("Description is empty");
 
-            var templateRow = _templateRowService.GetTemplateRow(templateRowId);
+            var eReturnTemplateRow = _eReturnTemplateRowService.Get(eReturnTemplateRowId);
 
-            if (templateRow.DescriptionOverride == false
-                && !description.Equals(templateRow.Description))
-                return new Result(string.Format("Description '{0}' cannot be overridden, but is set to '{1}'", templateRow.Reference, description));
+            if (eReturnTemplateRow.DescriptionOverride == false
+                && !description.Equals(eReturnTemplateRow.Description))
+                return new Result(string.Format("Description '{0}' cannot be overridden, but is set to '{1}'", eReturnTemplateRow.Reference, description));
 
             // If we got this far, all is OK....
             return new Result();
