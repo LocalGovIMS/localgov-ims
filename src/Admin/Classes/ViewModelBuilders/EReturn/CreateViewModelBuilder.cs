@@ -9,15 +9,15 @@ namespace Admin.Classes.ViewModelBuilders.EReturn
 {
     public class CreateViewModelBuilder : BaseViewModelBuilder<CreateViewModel, int>
     {
-        private readonly ITemplateService _templateService;
+        private readonly IEReturnTemplateService _eReturnTemplateService;
         private readonly IEReturnTypeService _eReturnTypeService;
 
         public CreateViewModelBuilder(ILog log
-            , ITemplateService templateService
+            , IEReturnTemplateService eReturnTemplateService
             , IEReturnTypeService eReturnTypeService)
             : base(log)
         {
-            _templateService = templateService;
+            _eReturnTemplateService = eReturnTemplateService;
             _eReturnTypeService = eReturnTypeService;
         }
 
@@ -48,7 +48,7 @@ namespace Admin.Classes.ViewModelBuilders.EReturn
         private SelectList GetTemplatesList()
         {
             var templateSelectListItems = new List<SelectListItem>();
-            var templates = _templateService.GetAllTemplates();
+            var templates = _eReturnTemplateService.GetAll();
 
             foreach (var template in templates)
             {

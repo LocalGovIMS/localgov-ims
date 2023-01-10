@@ -8,26 +8,26 @@ namespace BusinessLogic.Validators
 {
     public class EReturnReferenceValidator : IEReturnReferenceValidator
     {
-        private ITemplateRowService _templateRowService;
+        private IEReturnTemplateRowService _eReturnTemplateRowService;
 
-        public EReturnReferenceValidator(ITemplateRowService templateRowService)
+        public EReturnReferenceValidator(IEReturnTemplateRowService eReturnTemplateRowService)
         {
-            _templateRowService = templateRowService;
+            _eReturnTemplateRowService = eReturnTemplateRowService;
         }
 
-        public IResult Validate(string reference, int templateRowId)
+        public IResult Validate(string reference, int eReturnTemplateRowId)
         {
             if (string.IsNullOrEmpty(reference)) return new Result("Reference is empty");
 
-            var templateRow = _templateRowService.GetTemplateRow(templateRowId);
+            var eReturnTemplateRow = _eReturnTemplateRowService.Get(eReturnTemplateRowId);
 
-            if (templateRow.ReferenceOverride == false
-                && !reference.Equals(templateRow.Reference))
-                return new Result(string.Format("Reference '{0}' cannot be overridden, but is set to '{1}'", templateRow.Reference, reference));
+            if (eReturnTemplateRow.ReferenceOverride == false
+                && !reference.Equals(eReturnTemplateRow.Reference))
+                return new Result(string.Format("Reference '{0}' cannot be overridden, but is set to '{1}'", eReturnTemplateRow.Reference, reference));
 
-            for (var i = 0; i <= templateRow.Reference.Length - 1; i++)
+            for (var i = 0; i <= eReturnTemplateRow.Reference.Length - 1; i++)
             {
-                var templateValue = templateRow.Reference[i];
+                var templateValue = eReturnTemplateRow.Reference[i];
                 var referenceValue = reference[i];
 
                 if (templateValue.Equals('*'))
@@ -46,7 +46,7 @@ namespace BusinessLogic.Validators
                     if (!templateValue.Equals(referenceValue))
                         return new Result(string.Format("Reference '{0}' is invalid for mask '{1}' at position {2}",
                             reference,
-                            templateRow.Reference,
+                            eReturnTemplateRow.Reference,
                             i + 1));
                 }
             }

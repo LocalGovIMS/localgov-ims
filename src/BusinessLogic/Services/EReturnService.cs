@@ -20,7 +20,7 @@ namespace BusinessLogic.Services
     public class EReturnService : BaseService, IEReturnService
     {
         private readonly IApproveEReturnsStrategy _approveEReturnsStrategy;
-        private readonly ITemplateService _templateService;
+        private readonly IEReturnTemplateService _eReturnTemplateService;
         private readonly IEReturnReferenceValidator _eReturnReferenceValidator;
         private readonly IEReturnDescriptionValidator _eReturnDescriptionValidator;
         private readonly IEmailService _emailService;
@@ -31,14 +31,14 @@ namespace BusinessLogic.Services
             , IUnitOfWork unitOfWork
             , ISecurityContext securityContext
             , IApproveEReturnsStrategy approveEReturnsStrategy
-            , ITemplateService templateService
+            , IEReturnTemplateService eReturnTemplateService
             , IEReturnReferenceValidator eReturnReferenceValidator
             , IEReturnDescriptionValidator eReturnDescriptionValidator
             , IEmailService emailService)
             : base(logger, unitOfWork, securityContext)
         {
             _approveEReturnsStrategy = approveEReturnsStrategy;
-            _templateService = templateService;
+            _eReturnTemplateService = eReturnTemplateService;
             _eReturnReferenceValidator = eReturnReferenceValidator;
             _eReturnDescriptionValidator = eReturnDescriptionValidator;
             _emailService = emailService;
@@ -111,7 +111,7 @@ namespace BusinessLogic.Services
                 UnitOfWork.Complete(SecurityContext.UserId);
 
                 // Now Create the pending transations
-                var template = _templateService.GetTemplate(item.TemplateId);
+                var template = _eReturnTemplateService.Get(item.TemplateId);
                 var internalReference = GetNextReferenceId();
                 foreach (var templateRow in template.TemplateRows)
                 {

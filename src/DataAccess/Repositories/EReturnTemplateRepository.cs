@@ -44,6 +44,7 @@ namespace DataAccess.Repositories
         {
             var item = IncomeDbContext.Templates
                 .Include(x => x.TemplateRows)
+                .Include(x => x.TemplateRows.Select(y => y.VAT))
                 .AsQueryable()
                 .Where(x => x.Id == id)
                 .ApplyFilters(Filters)
@@ -57,6 +58,7 @@ namespace DataAccess.Repositories
             var item = IncomeDbContext.Templates
                 .AsQueryable()
                 .Where(x => x.Id == entity.Id)
+                .Include(x => x.TemplateRows)
                 .ApplyFilters(Filters)
                 .FirstOrDefault();
 

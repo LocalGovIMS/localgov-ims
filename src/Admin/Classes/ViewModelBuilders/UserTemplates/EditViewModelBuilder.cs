@@ -11,17 +11,17 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
     public class EditViewModelBuilder : BaseViewModelBuilder<EditViewModel, int>
     {
         private readonly IUserService _userService;
-        private readonly ITemplateService _templateService;
+        private readonly IEReturnTemplateService _eReturnTemplateService;
         private readonly IUserTemplateService _userTemplateService;
 
         public EditViewModelBuilder(ILog log
             , IUserService userService
-            , ITemplateService templateService
+            , IEReturnTemplateService eReturnTemplateService
             , IUserTemplateService userTemplateService)
             : base(log)
         {
             _userService = userService;
-            _templateService = templateService;
+            _eReturnTemplateService = eReturnTemplateService;
             _userTemplateService = userTemplateService;
         }
 
@@ -49,7 +49,7 @@ namespace Admin.Classes.ViewModelBuilders.UserTemplate
 
         private ICollection<CheckBoxListItem> GetTemplates(List<BusinessLogic.Entities.UserTemplate> existingItems)
         {
-            var allItems = _templateService.GetAllTemplates().OrderBy(x => x.Name);
+            var allItems = _eReturnTemplateService.GetAll().OrderBy(x => x.Name);
 
             return allItems.Select(x => new CheckBoxListItem()
             {

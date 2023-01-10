@@ -20,7 +20,7 @@ namespace BusinessLogic.UnitTests.Services.EReturn
         protected readonly Mock<ISecurityContext> MockSecurityContext = new Mock<ISecurityContext>();
 
         protected readonly Mock<IApproveEReturnsStrategy> MockApproveEReturnsStrategy = new Mock<IApproveEReturnsStrategy>();
-        protected readonly Mock<ITemplateService> MockTemplateService = new Mock<ITemplateService>();
+        protected readonly Mock<IEReturnTemplateService> MockEReturnTemplateService = new Mock<IEReturnTemplateService>();
         protected readonly Mock<IEReturnReferenceValidator> MockEReturnReferenceValidator = new Mock<IEReturnReferenceValidator>();
         protected readonly Mock<IEReturnDescriptionValidator> MockEReturnDescriptionValidator = new Mock<IEReturnDescriptionValidator>();
         protected readonly Mock<IEmailService> MockEmailService = new Mock<IEmailService>();
@@ -32,7 +32,7 @@ namespace BusinessLogic.UnitTests.Services.EReturn
                 MockUnitOfWork.Object,
                 MockSecurityContext.Object,
                 MockApproveEReturnsStrategy.Object,
-                MockTemplateService.Object,
+                MockEReturnTemplateService.Object,
                 MockEReturnReferenceValidator.Object,
                 MockEReturnDescriptionValidator.Object,
                 MockEmailService.Object

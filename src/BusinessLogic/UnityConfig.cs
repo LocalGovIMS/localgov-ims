@@ -56,8 +56,6 @@ namespace BusinessLogic
                 .RegisterType<IFundMessageService, FundMessageService>()
                 .RegisterType<IFundMessageMetadataService, FundMessageMetadataService>()
                 .RegisterType<ISystemMessageService, SystemMessageService>()
-                .RegisterType<ITemplateService, TemplateService>()
-                .RegisterType<ITemplateRowService, TemplateRowService>()
                 .RegisterType<ITransactionService, TransactionService>()
                 .RegisterType<ITransactionJournalService, TransactionJournalService>()
                 .RegisterType<ITransferService, TransferService>()

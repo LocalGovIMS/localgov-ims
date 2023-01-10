@@ -17,19 +17,19 @@ namespace Admin.Classes.ViewModelBuilders.EReturn
         private readonly IEReturnService _eReturnService;
         private readonly IEReturnStatusService _eReturnStatusService;
         private readonly IEReturnTypeService _eReturnTypeService;
-        private readonly ITemplateService _templateService;
+        private readonly IEReturnTemplateService _eReturnTemplateService;
 
         public ListViewModelBuilder(ILog log
             , IEReturnService eReturnService
             , IEReturnStatusService eReturnStatusService
             , IEReturnTypeService eReturnTypeService
-            , ITemplateService templateService
+            , IEReturnTemplateService eReturnTemplateService
             ) : base(log)
         {
             _eReturnService = eReturnService;
             _eReturnStatusService = eReturnStatusService;
             _eReturnTypeService = eReturnTypeService;
-            _templateService = templateService;
+            _eReturnTemplateService = eReturnTemplateService;
         }
 
         protected override ListViewModel OnBuild()
@@ -133,7 +133,7 @@ namespace Admin.Classes.ViewModelBuilders.EReturn
         private SelectList GetTemplateList()
         {
             var selectListItems = new List<SelectListItem>();
-            var items = _templateService.GetAllTemplates().OrderBy(x => x.Name);
+            var items = _eReturnTemplateService.GetAll().OrderBy(x => x.Name);
 
             foreach (var item in items)
             {

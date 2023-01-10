@@ -12,7 +12,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
     public class CreateViewModelBuilderTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<ITemplateService> _mockTemplateService = new Mock<ITemplateService>();
+        private readonly Mock<IEReturnTemplateService> _mockEReturnTemplateService = new Mock<IEReturnTemplateService>();
         private readonly Mock<IEReturnTypeService> _mockEReturnTypeService = new Mock<IEReturnTypeService>();
 
         private ViewModelBuilder _viewModelBuilder;
@@ -22,13 +22,13 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         {
             _viewModelBuilder = new ViewModelBuilder(
                 _mockLogger.Object,
-                _mockTemplateService.Object,
+                _mockEReturnTemplateService.Object,
                 _mockEReturnTypeService.Object);
         }
 
-        private void SetupTemplateService(Mock<ITemplateService> service)
+        private void SetupTemplateService(Mock<IEReturnTemplateService> service)
         {
-            service.Setup(x => x.GetAllTemplates()).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Template>()
+            service.Setup(x => x.GetAll()).Returns(new System.Collections.Generic.List<BusinessLogic.Entities.Template>()
             {
                 new BusinessLogic.Entities.Template()
                 {
@@ -54,7 +54,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         public void OnBuildReturnsModel()
         {
             // Arrange
-            SetupTemplateService(_mockTemplateService);
+            SetupTemplateService(_mockEReturnTemplateService);
             SetupEReturnTypeService(_mockEReturnTypeService);
 
             // Act
@@ -92,7 +92,7 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.EReturn
         public void OnRebuildReturnsSameModel()
         {
             // Arrange
-            SetupTemplateService(_mockTemplateService);
+            SetupTemplateService(_mockEReturnTemplateService);
             SetupEReturnTypeService(_mockEReturnTypeService);
 
             var model = new ViewModel()
