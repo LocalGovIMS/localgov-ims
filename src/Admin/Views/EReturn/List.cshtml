@@ -29,9 +29,13 @@
     }
 }
 
+<h3 class="visually-hidden">Search criteria</h3>
+
 <div class="border border-1 rounded p-2">
     @Html.Partial("_Search", Model.SearchCriteria)
 </div>
+
+<h3 class="visually-hidden">Search results</h3>
 
 @if (Model.EReturns != null && Model.EReturns.Any())
 {
