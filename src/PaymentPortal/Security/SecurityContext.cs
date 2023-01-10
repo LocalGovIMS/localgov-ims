@@ -27,16 +27,7 @@ namespace PaymentPortal.Security
         {
             string[] roles = new string[]
             {
-                // TODO: Some of these are only needed until the SmartPay service is moved to the business logc
-                Role.TransactionList,
-                Role.TransactionDetails,
-                Role.TransactionCreate,
-                Role.TransactionEdit,
-
-                Role.RefundsList,
-                Role.RefundsAuthorise,
-
-                Role.Payments,
+                Role.Payments
             };
 
             return roles.Contains(role);
