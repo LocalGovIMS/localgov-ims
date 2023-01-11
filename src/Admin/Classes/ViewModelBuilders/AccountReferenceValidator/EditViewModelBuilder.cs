@@ -53,7 +53,6 @@ namespace Admin.Classes.ViewModelBuilders.AccountReferenceValidator
             return model;
         }
 
-        // TODO: What if we add a new option? We have to manually update this???
         private SelectList GetCharacterTypes()
         {
             return new SelectList(EnumHelper.GetSelectList(typeof(BusinessLogic.Enums.CharacterType)), false);
