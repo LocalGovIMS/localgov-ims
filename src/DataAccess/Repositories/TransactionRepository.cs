@@ -235,9 +235,6 @@ namespace DataAccess.Repositories
                     .Take(criteria.PageSize);
             }
 
-            // TODO: Is this needed? We load the funds separately below
-            transactions = transactions.Include(x => x.Fund);
-
             var returnVal = transactions.Select(x =>
                new
                {
