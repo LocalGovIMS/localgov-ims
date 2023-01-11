@@ -193,7 +193,6 @@ namespace BusinessLogic.Services
         {
             try
             {
-                // TODO: Validate the references on all lines
                 if (item.PendingTransactions == null || !item.PendingTransactions.Any()) return new Result(string.Format("Data for eReturn {0} is incomplete", item.EReturnNo));
 
                 foreach (var transaction in item.PendingTransactions)
