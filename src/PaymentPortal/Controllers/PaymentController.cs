@@ -38,14 +38,6 @@ namespace PaymentPortal.Controllers
                 if (TempData["PaymentModel"] != null)
                 {
                     model = (PaymentModel)TempData["PaymentModel"];
-
-                    // TODO: Pretty sure nothing sets any TempData with a key of "Response"
-                    if (TempData["Response"] != null)
-                    {
-                        var response = TempData["Response"];
-
-                        ViewBag.Message = response;
-                    }
                 }
                 else
                 {
