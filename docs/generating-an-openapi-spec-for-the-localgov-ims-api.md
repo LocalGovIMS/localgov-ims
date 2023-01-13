@@ -18,8 +18,8 @@ This guide explains how to setup a Windows PC ready for API client generation
     * Right click and choose 'Properties'
     * Select 'Advanced System Settings'
     * In the 'System Properties' dialog box select 'Environmental Variables' in the 'Advanced' tab
-    * In the 'System Variables' section edit the Path value, adding in an entry pointing to the bin folder of the Java runtime environment, such as 'C:\Program Files (x86)\Java\jre1.8.0_321\bin'
-    * In the 'System Variables' section add a new entry with a name of 'JAVA_HOME' and a value pointing to the bin folder of the Java runtime environment, such as 'C:\Program Files (x86)\Java\jre1.8.0_321\bin'
+    * In the 'System Variables' section edit the Path value, adding in an entry pointing to the bin folder of the Java runtime environment, such as 'C:\Program Files\Java\jre1.8.0_321\bin'
+    * In the 'System Variables' section add a new entry with a name of 'JAVA_HOME' and a value pointing to the bin folder of the Java runtime environment, such as 'C:\Program Files\Java\jre1.8.0_321\bin'
 3. Install [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)
 
 # Creating the OpanAPI Specification
