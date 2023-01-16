@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Classes.Dependencies
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IModelBuilder<IndexViewModel, IndexViewModel>> _mockIndexViewModelBuider = new Mock<IModelBuilder<IndexViewModel, IndexViewModel>>();
         private readonly Mock<IModelCommand<IndexViewModel>> _mockAddCommand = new Mock<IModelCommand<IndexViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockRemoveCommand = new Mock<IModelCommand<string>>();
+        private readonly Mock<IModelCommand<Guid>> _mockRemoveCommand = new Mock<IModelCommand<Guid>>();
         private readonly Mock<IModelCommand<string>> _mockEmptyBasketCommand = new Mock<IModelCommand<string>>();
         private readonly Mock<IModelCommand<IndexViewModel>> _mockCheckAddressCommand = new Mock<IModelCommand<IndexViewModel>>();
         private readonly Mock<IModelCommand<IndexViewModel>> _mockCreatePaymentsCommand = new Mock<IModelCommand<IndexViewModel>>();

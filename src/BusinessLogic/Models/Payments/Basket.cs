@@ -31,9 +31,9 @@ namespace BusinessLogic.Models.Payments
             }
         }
 
-        public void RemoveItem(string accountReference)
+        public void RemoveItem(Guid id)
         {
-            Items = Items.Where(x => x.AccountReference != accountReference).ToList();
+            Items = Items.Where(x => x.Id != id).ToList();
         }
     }
 }

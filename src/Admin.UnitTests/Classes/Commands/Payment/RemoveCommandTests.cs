@@ -2,6 +2,7 @@
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Web;
@@ -16,6 +17,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
     public class RemoveCommandTests
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        private readonly Guid Id = Guid.NewGuid();
 
         private ViewModel GenerateViewModel()
         {
@@ -40,6 +42,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
                         {
                             new BusinessLogic.Models.Payments.BasketItem()
                             {
+                                Id = Id,
                                 AccountReference = "Test1",
                                 Amount = 1,
                                 FundCode = "F1",
@@ -78,7 +81,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
             var command = new Command(_mockLogger.Object);
 
             // Act
-            var result = command.Execute("Test1");
+            var result = command.Execute(Id);
 
             // Assert
             Assert.IsNotNull(result);
@@ -97,7 +100,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
             var command = new Command(_mockLogger.Object);
 
             // Act
-            var result = command.Execute(string.Empty);
+            var result = command.Execute(Guid.NewGuid());
 
             // Assert
             Assert.IsNotNull(result);
@@ -117,7 +120,7 @@ namespace Admin.UnitTests.Classes.Commands.Payment
             var command = new Command(_mockLogger.Object);
 
             // Act
-            var result = command.Execute("Test1");
+            var result = command.Execute(Id);
 
             // Assert
             Assert.IsNotNull(result);

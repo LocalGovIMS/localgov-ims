@@ -180,7 +180,7 @@ namespace Admin
 
                 .RegisterType<IModelBuilder<ViewModels.Payment.IndexViewModel, ViewModels.Payment.IndexViewModel>, ViewModelBuilders.Payment.IndexViewModelBuilder>()
                 .RegisterType<IModelCommand<ViewModels.Payment.IndexViewModel>, Commands.Payment.AddCommand>("Add")
-                .RegisterType<IModelCommand<string>, Commands.Payment.RemoveCommand>("Remove")
+                .RegisterType<IModelCommand<Guid>, Commands.Payment.RemoveCommand>("Remove")
                 .RegisterType<IModelCommand<string>, Commands.Payment.EmptyBasketCommand>("EmptyBasket")
                 .RegisterType<IModelCommand<ViewModels.Payment.IndexViewModel>, Commands.Payment.CheckAddressCommand>("CheckAddress")
                 .RegisterType<IModelCommand<ViewModels.Payment.IndexViewModel>, Commands.Payment.CreatePaymentsCommand>("CreatePayments")
