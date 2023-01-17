@@ -90,6 +90,7 @@ namespace Admin.Classes.Commands.Payment
             {
                 Reference = model.AccountReference,
                 FundCode = model.FundCode,
+                MopCode = model.MopCode,
                 Amount = model.Amount
             });
 
