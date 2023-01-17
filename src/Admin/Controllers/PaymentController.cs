@@ -4,6 +4,7 @@ using Admin.Models.Shared;
 using BusinessLogic.Enums;
 using BusinessLogic.Models.Payments;
 using BusinessLogic.Security;
+using System;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 
@@ -83,9 +84,9 @@ namespace Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult RemoveItem(string accountReference)
+        public ActionResult RemoveItem(Guid id)
         {
-            var updatedModel = (IndexViewModel)_dependencies.RemoveCommand.Execute(accountReference).Data;
+            var updatedModel = (IndexViewModel)_dependencies.RemoveCommand.Execute(id).Data;
             updatedModel = (IndexViewModel)_dependencies.SetAddressCommand.Execute(updatedModel).Data;
 
             var model = _dependencies.IndexViewModelBuilder.Build(updatedModel);
@@ -94,7 +95,7 @@ namespace Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult EmptyBasket(string accountReference)
+        public ActionResult EmptyBasket()
         {
             var updatedModel = (IndexViewModel)_dependencies.EmptyBasketCommand.Execute(string.Empty).Data;
 

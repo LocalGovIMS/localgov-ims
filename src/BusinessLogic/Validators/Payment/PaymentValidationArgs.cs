@@ -7,6 +7,8 @@ namespace BusinessLogic.Validators.Payment
         public string Reference { get; set; }
         public string FundCode { get; set; }
         public Entities.Fund Fund { get; set; }
+        public string MopCode { get; set; }
+        public Entities.Mop Mop { get; set; }
         public decimal Amount { get; set; }
         public AccountReferenceValidationSource Source { get; set; }
         public Entities.AccountReferenceValidator AccountReferenceValidator { get; set; }

@@ -13,7 +13,7 @@ namespace Admin.Controllers
         public PaymentControllerDependencies(ILog log,
             IModelBuilder<IndexViewModel, IndexViewModel> indexViewModelBuilder,
             [Dependency("Add")] IModelCommand<IndexViewModel> addCommand,
-            [Dependency("Remove")] IModelCommand<string> removeCommand,
+            [Dependency("Remove")] IModelCommand<Guid> removeCommand,
             [Dependency("EmptyBasket")] IModelCommand<string> emptyBasketCommand,
             [Dependency("CheckAddress")] IModelCommand<IndexViewModel> checkAddressCommand,
             [Dependency("CreatePayments")] IModelCommand<IndexViewModel> createPaymentsCommand,
@@ -34,7 +34,7 @@ namespace Admin.Controllers
         public IModelBuilder<IndexViewModel, IndexViewModel> IndexViewModelBuilder { get; private set; }
 
         public IModelCommand<IndexViewModel> AddCommand { get; private set; }
-        public IModelCommand<string> RemoveCommand { get; private set; }
+        public IModelCommand<Guid> RemoveCommand { get; private set; }
         public IModelCommand<string> EmptyBasketCommand { get; private set; }
         public IModelCommand<IndexViewModel> CheckAddressCommand { get; private set; }
         public IModelCommand<IndexViewModel> CreatePaymentsCommand { get; private set; }

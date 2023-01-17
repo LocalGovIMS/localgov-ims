@@ -316,6 +316,7 @@ namespace PaymentPortal.Controllers
                 {
                     Reference = model.PaymentReference,
                     FundCode = model.PaymentType,
+                    MopCode = Dependencies.MethodOfPaymentService.GetAllMops(true).FirstOrDefault(x => x.IsACardSelfServicePayment()).MopCode,
                     Amount = model.Amount,
                     Source = AccountReferenceValidationSource.Payments
                 });

@@ -1,11 +1,5 @@
-﻿using Admin.Classes.Models;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -14,61 +8,31 @@ using Controller = Admin.Controllers.PaymentController;
 namespace Admin.UnitTests.Controllers.Payment.Pay
 {
     [TestClass]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockAddCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockRemoveCommand = new Mock<IModelCommand<string>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockSetAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<ProcessPaymentCommandAgrs>> _mockProcessPaymentCommand = new Mock<IModelCommand<ProcessPaymentCommandAgrs>>();
-
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Pay")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "Pay");
         }
-
+        
         private ActionResult GetResult(bool isSuccess, bool vaildSession)
         {
-            var indexViewModelBuilder = new Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>>();
-            indexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
-
-            var EmptyBasketCommand = new Mock<IModelCommand<string>>();
-            EmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess));
-
-            var CheckAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-            CheckAddressCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess)
-            { Data = isSuccess });
-
-            var CreatePaymentsCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-            CreatePaymentsCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess)
-            { Data = "MockTest" });
-
-            var dependencies = new PaymentControllerDependencies(
-                _mockLogger.Object,
-                indexViewModelBuilder.Object,
-                _mockAddCommand.Object,
-                _mockRemoveCommand.Object,
-                EmptyBasketCommand.Object,
-                CheckAddressCommand.Object,
-                CreatePaymentsCommand.Object,
-                _mockSetAddressCommand.Object,
-                _mockProcessPaymentCommand.Object);
-
-            var controller = new Controller(dependencies);
+            MockIndexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockEmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess));
+            MockCheckAddressCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess) { Data = isSuccess });
+            MockCreatePaymentsCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(isSuccess) { Data = "MockTest" });
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["PaymentModel"]).Returns(vaildSession ? new Models.Payment.IndexViewModel() : null);
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
-
-            return controller.Pay();
+            return Controller.Pay();
         }
 
         [TestMethod]

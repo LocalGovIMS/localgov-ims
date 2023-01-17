@@ -1,11 +1,5 @@
-﻿using Admin.Classes.Models;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -16,53 +10,24 @@ namespace Admin.UnitTests.Controllers.Payment.EmptyBasket
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockAddCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockRemoveCommand = new Mock<IModelCommand<string>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCheckAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCreatePaymentsCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockSetAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<ProcessPaymentCommandAgrs>> _mockProcessPaymentCommand = new Mock<IModelCommand<ProcessPaymentCommandAgrs>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "EmptyBasket")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "EmptyBasket");
         }
 
         private ActionResult GetResult()
         {
-            var indexViewModelBuilder = new Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>>();
-            indexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockIndexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockEmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
-            var EmptyBasketCommand = new Mock<IModelCommand<string>>();
-            EmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new PaymentControllerDependencies(
-                _mockLogger.Object,
-                indexViewModelBuilder.Object,
-                _mockAddCommand.Object,
-                _mockRemoveCommand.Object,
-                EmptyBasketCommand.Object,
-                _mockCheckAddressCommand.Object,
-                _mockCreatePaymentsCommand.Object,
-                _mockSetAddressCommand.Object,
-                _mockProcessPaymentCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            var controllerContext = new Mock<ControllerContext>();
-            controllerContext.SetupGet(p => p.HttpContext.Session["PaymentModel"]).Returns(null);
-
-            controller.ControllerContext = controllerContext.Object;
-
-            return controller.EmptyBasket("123");
+            return Controller.EmptyBasket();
         }
 
         [TestMethod]

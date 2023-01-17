@@ -8,6 +8,7 @@ namespace PaymentPortal.Controllers
     {
         IPaymentService PaymentService { get; }
         IFundService FundService { get; }
+        IMethodOfPaymentService MethodOfPaymentService { get; }
         IEmailService EmailService { get; }
         ITransactionService TransactionService { get; }
         ICryptographyService CryptographyService { get; }

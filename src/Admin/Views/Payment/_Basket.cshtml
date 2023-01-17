@@ -41,7 +41,7 @@
                             @Html.DisplayWithIdFor(m => m.Items[@i].Narrative, new { @class = "form-label mb-0" })
                         </div>
                     </div>
-                    <div>@Html.ActionLink("Delete", "RemoveItem", new { accountReference = Model.Items[@i].AccountReference }, new { @class = "btn btn-danger" })</div>
+                    <div>@Html.ActionLink("Delete", "RemoveItem", new { id = Model.Items[@i].Id }, new { @class = "btn btn-danger" })</div>
                 </div>
             </li>
         }

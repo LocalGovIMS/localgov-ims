@@ -11,6 +11,7 @@ namespace PaymentPortal.Controllers
         public PaymentControllerDependencies(ILog log
             , IPaymentService paymentService
             , IFundService fundService
+            , IMethodOfPaymentService methodOfPaymentService
             , IEmailService emailService
             , ITransactionService transactionService
             , ICryptographyService cryptographyService
@@ -19,6 +20,7 @@ namespace PaymentPortal.Controllers
         {
             PaymentService = paymentService ?? throw new ArgumentNullException("paymentService");
             FundService = fundService ?? throw new ArgumentNullException("fundService");
+            MethodOfPaymentService = methodOfPaymentService ?? throw new ArgumentNullException("methodOfPaymentService");
             EmailService = emailService ?? throw new ArgumentNullException("emailService");
             CryptographyService = cryptographyService ?? throw new ArgumentNullException("cryptographyService");
             TransactionService = transactionService ?? throw new ArgumentNullException("transactionService");
@@ -27,6 +29,7 @@ namespace PaymentPortal.Controllers
 
         public IPaymentService PaymentService { get; private set; }
         public IFundService FundService { get; private set; }
+        public IMethodOfPaymentService MethodOfPaymentService { get; private set; }
         public IEmailService EmailService { get; private set; }
         public ICryptographyService CryptographyService { get; private set; }
         public ITransactionService TransactionService { get; private set; }
