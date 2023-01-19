@@ -1,10 +1,5 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -15,45 +10,28 @@ namespace Admin.UnitTests.Controllers.EReturnTemplate.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(EReturnTemplateController);
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.ListViewModel, Models.EReturnTemplate.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.ListViewModel, Models.EReturnTemplate.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Details")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "Details");
         }
 
         private ActionResult GetResult()
         {
-            var detailsViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.DetailsViewModel, int>>();
-            detailsViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.EReturnTemplate.DetailsViewModel());
-
-            var dependencies = new EReturnTemplateControllerDependencies(
-                _mockLogger.Object,
-                detailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new EReturnTemplateController(dependencies);
+            MockDetailsViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.EReturnTemplate.DetailsViewModel());
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["EReturnTemplateController::IsAPaymentSearch"]).Returns(false);
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
-            return controller.Details(1);
+            return Controller.Details(1);
         }
 
         [TestMethod]
