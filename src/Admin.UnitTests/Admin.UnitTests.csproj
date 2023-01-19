@@ -350,6 +350,7 @@
     <Compile Include="Classes\ViewModelBuilders\Office\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\AccountHolder\TestBase.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateRowControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependenciesTests.cs" />

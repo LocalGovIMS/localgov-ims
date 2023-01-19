@@ -1,60 +1,33 @@
-﻿using Admin.Classes.ViewModelBuilders.AccountHolder;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.AccountHolderController;
 
 namespace Admin.UnitTests.Controllers.AccountHolder.Create
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.LookupViewModel>> _mockLookupAccountHolderCommand = new Mock<IModelCommand<Models.AccountHolder.LookupViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Create")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "Create");
         }
 
         private ActionResult GetResult()
         {
-            var editViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>>();
-            editViewModelBuilder.Setup(x => x.Rebuild(It.IsAny<Models.AccountHolder.EditViewModel>()))
+            MockEditViewModelBuilder.Setup(x => x.Rebuild(It.IsAny<Models.AccountHolder.EditViewModel>()))
                 .Returns(new Models.AccountHolder.EditViewModel());
 
-            var dependencies = new AccountHolderControllerDependencies(
-                _mockLogger.Object,
-                _mockListViewModelBuilder.Object,
-                _mockDetailsViewModelBuilder.Object,
-                editViewModelBuilder.Object,
-                _mockLookupAccountHolderCommand.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Create();
+            return Controller.Create();
         }
 
         [TestMethod]
