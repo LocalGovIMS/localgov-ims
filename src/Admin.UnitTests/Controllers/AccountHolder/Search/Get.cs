@@ -1,11 +1,5 @@
-﻿using Admin.Classes.ViewModelBuilders.AccountHolder;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -15,47 +9,28 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Search
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(AccountHolderController);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.LookupViewModel>> _mockLookupAccountHolderCommand = new Mock<IModelCommand<Models.AccountHolder.LookupViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(AcceptVerbsAttribute)))
-                .Where(x => x.Name == "Search")
-                .FirstOrDefault();
+            return GetMethod(typeof(AcceptVerbsAttribute), "Search");
         }
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.AccountHolder.SearchCriteria>())).Returns(new Models.AccountHolder.ListViewModel());
-
-            var dependencies = new AccountHolderControllerDependencies(
-                _mockLogger.Object,
-                listViewModelBuilder.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockLookupAccountHolderCommand.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new AccountHolderController(dependencies);
+            MockListViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.AccountHolder.SearchCriteria>())).Returns(new Models.AccountHolder.ListViewModel());
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["AccountHolderController::IsAPaymentSearch"]).Returns(false);
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
-            return controller.Search(new Models.AccountHolder.SearchCriteria());
+            return Controller.Search(new Models.AccountHolder.SearchCriteria());
         }
 
         [TestMethod]
