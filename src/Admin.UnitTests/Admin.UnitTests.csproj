@@ -352,6 +352,7 @@
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
     <Compile Include="Controllers\AccountHolder\TestBase.cs" />
     <Compile Include="Controllers\AccountReferenceValidator\TestBase.cs" />
+    <Compile Include="Controllers\CheckDigitConfiguration\TestBase.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateRowControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependenciesTests.cs" />
