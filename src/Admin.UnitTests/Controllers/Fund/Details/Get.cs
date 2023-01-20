@@ -1,55 +1,32 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.FundController;
 
 namespace Admin.UnitTests.Controllers.Fund.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.Fund.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.Fund.EditViewModel, string>>();
-        private readonly Mock<IModelBuilder<Models.Fund.ListViewModel, Models.Fund.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.Fund.ListViewModel, Models.Fund.SearchCriteria>>();
-        private readonly Mock<IModelCommand<Models.Fund.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.Fund.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Details")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "Details");
         }
 
         private ActionResult GetResult()
         {
-            var detailsViewModelBuilder = new Mock<IModelBuilder<Models.Fund.DetailsViewModel, string>>();
-            detailsViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new Models.Fund.DetailsViewModel());
+            MockDetailsViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new Models.Fund.DetailsViewModel());
 
-            var dependencies = new FundControllerDependencies(
-                _mockLogger.Object,
-                detailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Details("F1");
+            return Controller.Details("F1");
         }
 
         [TestMethod]
