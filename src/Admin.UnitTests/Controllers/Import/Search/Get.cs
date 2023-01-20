@@ -4,13 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportController;
 
 namespace Admin.UnitTests.Controllers.Import.Search
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
         public Get()
         {

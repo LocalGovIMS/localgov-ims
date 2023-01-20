@@ -4,13 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.ImportController;
 
 namespace Admin.UnitTests.Controllers.Import.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
         public Get()
         {

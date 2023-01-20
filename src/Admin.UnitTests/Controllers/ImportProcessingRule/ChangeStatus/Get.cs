@@ -1,62 +1,32 @@
 ﻿using Admin.Classes.Commands.ImportProcessingRule;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportProcessingRuleController;
-using ControllerDependencies = Admin.Controllers.ImportProcessingRuleControllerDependencies;
-using DetailsViewModel = Admin.Models.ImportProcessingRule.DetailsViewModel;
-using EditViewModel = Admin.Models.ImportProcessingRule.EditViewModel;
-using ListViewModel = Admin.Models.ImportProcessingRule.ListViewModel;
-using SearchCriteria = Admin.Models.ImportProcessingRule.SearchCriteria;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRule.ChangeStatus
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<ChangeStatusCommandArgs>> _mockChangeStatusCommand = new Mock<IModelCommand<ChangeStatusCommandArgs>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "ChangeStatus")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.ChangeStatus));
         }
 
         private ActionResult GetResult()
         {
-            var changeStatusCommand = new Mock<IModelCommand<ChangeStatusCommandArgs>>();
-            changeStatusCommand.Setup(x => x.Execute(It.IsAny<ChangeStatusCommandArgs>())).Returns(new Admin.Classes.Commands.CommandResult(true));
+            MockChangeStatusCommand.Setup(x => x.Execute(It.IsAny<ChangeStatusCommandArgs>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                changeStatusCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.ChangeStatus(1, false);
+            return Controller.ChangeStatus(1, false);
         }
 
         [TestMethod]

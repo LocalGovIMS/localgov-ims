@@ -10,7 +10,7 @@ using Dependencies = Admin.Controllers.ImportControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.Import
 {
-    public class BaseTest
+    public class TestBase
     {
         protected Controller Controller;
 
