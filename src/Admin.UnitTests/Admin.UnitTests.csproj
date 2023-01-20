@@ -385,6 +385,7 @@
     <Compile Include="Controllers\Fund\TestBase.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\TestBase.cs" />
     <Compile Include="Controllers\ImportProcessingRuleCondition\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleImportType\TestBase.cs" />
     <Compile Include="Controllers\ImportProcessingRule\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
