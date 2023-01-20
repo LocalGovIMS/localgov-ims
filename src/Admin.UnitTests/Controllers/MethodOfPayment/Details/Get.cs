@@ -1,56 +1,33 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
+﻿using Admin.Models.MethodOfPayment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.MethodOfPaymentController;
 
 namespace Admin.UnitTests.Controllers.MethodOfPayment.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.MethodOfPayment.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.MethodOfPayment.EditViewModel, string>>();
-        private readonly Mock<IModelBuilder<IList<Models.MethodOfPayment.DetailsViewModel>, string>> _mockListViewModelBuilder = new Mock<IModelBuilder<IList<Models.MethodOfPayment.DetailsViewModel>, string>>();
-        private readonly Mock<IModelCommand<Models.MethodOfPayment.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.MethodOfPayment.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.MethodOfPayment.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.MethodOfPayment.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Details")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Details));
         }
 
         private ActionResult GetResult()
         {
-            var detailsViewModelBuilder = new Mock<IModelBuilder<Models.MethodOfPayment.DetailsViewModel, string>>();
-            detailsViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new Models.MethodOfPayment.DetailsViewModel());
+            MockDetailsViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new DetailsViewModel());
 
-            var dependencies = new MethodOfPaymentControllerDependencies(
-                _mockLogger.Object,
-                detailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Details("F1");
+            return Controller.Details("F1");
         }
 
         [TestMethod]
@@ -114,7 +91,7 @@ namespace Admin.UnitTests.Controllers.MethodOfPayment.Details
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(Models.MethodOfPayment.DetailsViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(DetailsViewModel));
         }
     }
 }
