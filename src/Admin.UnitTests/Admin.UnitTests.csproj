@@ -378,6 +378,7 @@
     <Compile Include="Controllers\EReturnTemplateRow\ListForEReturnTemplate\Get.cs" />
     <Compile Include="Controllers\EReturnTemplate\TestBase.cs" />
     <Compile Include="Controllers\FileImport\TestBase.cs" />
+    <Compile Include="Controllers\Fund\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Get.cs" />
