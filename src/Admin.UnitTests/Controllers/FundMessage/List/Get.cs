@@ -15,39 +15,23 @@ namespace Admin.UnitTests.Controllers.FundMessage.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(FundMessageController);
-
-        private readonly Mock<IModelBuilder<Models.FundMessage.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.FundMessage.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.FundMessage.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.FundMessage.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.FundMessage.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.FundMessage.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.FundMessage.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.FundMessage.EditViewModel>>();
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "List")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "List");
         }
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.FundMessage.ListViewModel, Models.FundMessage.SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build()).Returns(new Models.FundMessage.ListViewModel());
+            MockListViewModelBuilder.Setup(x => x.Build()).Returns(new Models.FundMessage.ListViewModel());
 
-            var dependencies = new FundMessageControllerDependencies(
-                _mockLogger.Object
-                , _mockDetailsViewModelBuilder.Object
-                , _mockEditViewModelBuilder.Object
-                , listViewModelBuilder.Object
-                , _mockCreateCommand.Object
-                , _mockEditCommand.Object);
-
-            var controller = new FundMessageController(dependencies);
-
-            return controller.List();
+            return Controller.List();
         }
 
         [TestMethod]
