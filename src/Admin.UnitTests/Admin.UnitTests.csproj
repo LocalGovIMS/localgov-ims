@@ -381,6 +381,7 @@
     <Compile Include="Controllers\FundGroup\TestBase.cs" />
     <Compile Include="Controllers\FundMessageMetadata\TestBase.cs" />
     <Compile Include="Controllers\FundMessage\TestBase.cs" />
+    <Compile Include="Controllers\FundMetadata\TestBase.cs" />
     <Compile Include="Controllers\Fund\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
