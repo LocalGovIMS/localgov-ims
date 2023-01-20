@@ -383,6 +383,7 @@
     <Compile Include="Controllers\FundMessage\TestBase.cs" />
     <Compile Include="Controllers\FundMetadata\TestBase.cs" />
     <Compile Include="Controllers\Fund\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Get.cs" />
@@ -392,7 +393,7 @@
     <Compile Include="Controllers\MetadataKey\Edit\Get.cs" />
     <Compile Include="Controllers\MetadataKey\Edit\Post.cs" />
     <Compile Include="Controllers\MetadataKey\List\Get.cs" />
-    <Compile Include="Controllers\Import\BaseTest.cs" />
+    <Compile Include="Controllers\Import\TestBase.cs" />
     <Compile Include="Controllers\Import\ConstructorTests.cs" />
     <Compile Include="Controllers\Import\Details\Get.cs" />
     <Compile Include="Controllers\Import\List\Get.cs" />
