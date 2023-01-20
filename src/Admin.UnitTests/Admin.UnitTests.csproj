@@ -358,6 +358,7 @@
     <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportControllerDependenciesTests.cs" />
     <Compile Include="Controllers\EReturnNote\TestBase.cs" />
+    <Compile Include="Controllers\EReturnTemplateRow\TestBase.cs" />
     <Compile Include="Controllers\EReturnTemplate\ConstructorTests.cs" />
     <Compile Include="Controllers\EReturnTemplate\Create\Get.cs" />
     <Compile Include="Controllers\EReturnTemplate\Create\Post.cs" />
