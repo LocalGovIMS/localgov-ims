@@ -19,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Import.List
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == nameof(Controller.List))
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()
