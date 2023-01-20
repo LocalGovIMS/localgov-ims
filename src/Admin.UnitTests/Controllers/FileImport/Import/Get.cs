@@ -1,47 +1,29 @@
-﻿using Admin.Classes.Commands.FileImport;
-using Admin.Interfaces.Commands;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.FileImportController;
-using Dependencies = Admin.Controllers.FileImportControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.FileImport.FileImport
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<SaveCommandArgs>> _mockSaveCommand = new Mock<IModelCommand<SaveCommandArgs>>();
-        private readonly Mock<IModelCommand<int>> _mockProcessCommand = new Mock<IModelCommand<int>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Import")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), "Import");
         }
 
         private ActionResult GetResult()
         {
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                _mockSaveCommand.Object,
-                _mockProcessCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Import();
+            return Controller.Import();
         }
 
         [TestMethod]
