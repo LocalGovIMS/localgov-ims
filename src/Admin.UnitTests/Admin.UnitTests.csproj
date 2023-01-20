@@ -389,7 +389,7 @@
     <Compile Include="Controllers\ImportProcessingRule\TestBase.cs" />
     <Compile Include="Controllers\ImportTypeImportProcessingRule\TestBase.cs" />
     <Compile Include="Controllers\ImportType\TestBase.cs" />
-    <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
+    <Compile Include="Controllers\MetadataKey\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Get.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Post.cs" />

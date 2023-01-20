@@ -1,6 +1,4 @@
-﻿using Admin.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -11,21 +9,16 @@ namespace Admin.UnitTests.Controllers.MetadataKey.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(MetadataKeyController);
-
-        [TestInitialize]
-        public void Initialise()
+        public Get()
         {
             SetupController();
         }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "List")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()

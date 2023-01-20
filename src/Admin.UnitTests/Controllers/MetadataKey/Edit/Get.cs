@@ -1,33 +1,25 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.MetadataKeyController;
 
 namespace Admin.UnitTests.Controllers.MetadataKey.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        [TestInitialize]
-        public void Initialise()
+        public Get()
         {
             SetupController();
         }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult()
