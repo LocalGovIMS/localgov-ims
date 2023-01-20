@@ -19,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Import.Search
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(AcceptVerbsAttribute)))
-                .Where(x => x.Name == nameof(Controller.Search))
-                .FirstOrDefault();
+            return GetMethod(typeof(AcceptVerbsAttribute), nameof(Controller.Search));
         }
 
         private ActionResult GetResult()
