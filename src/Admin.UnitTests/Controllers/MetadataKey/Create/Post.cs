@@ -1,32 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.MetadataKeyController;
 
 namespace Admin.UnitTests.Controllers.MetadataKey.Create
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post: BaseTest
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        [TestInitialize]
-        public void Initialise()
+        public Post()
         {
             SetupController();
         }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.MetadataKey.EditViewModel model, bool isModelValid)

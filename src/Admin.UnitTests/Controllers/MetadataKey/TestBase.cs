@@ -1,15 +1,16 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
-using Admin.Models.Import;
 using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Linq;
+using System.Reflection;
+using System;
 using Controller = Admin.Controllers.MetadataKeyController;
 using Dependencies = Admin.Controllers.MetadataKeyControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.MetadataKey
 {
-    public class BaseTest
+    public class TestBase
     {
         protected Controller Controller;
 
@@ -33,6 +34,14 @@ namespace Admin.UnitTests.Controllers.MetadataKey
                     MockDeleteCommand.Object);
 
             Controller = new Controller(dependencies);
+        }
+
+        protected MethodInfo GetMethod(Type attributeType, string name)
+        {
+            return typeof(Controller).GetMethods()
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == attributeType))
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
         }
     }
 }
