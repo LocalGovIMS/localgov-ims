@@ -551,6 +551,7 @@
     <Compile Include="Controllers\ImportProcessingRuleImportType\Edit\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportType\Edit\Post.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportType\List\Get.cs" />
+    <Compile Include="Controllers\MethodOfPayment\TestBase.cs" />
     <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Post.cs" />
