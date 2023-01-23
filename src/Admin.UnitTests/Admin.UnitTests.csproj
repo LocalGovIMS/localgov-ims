@@ -736,6 +736,7 @@
     <Compile Include="Controllers\Vat\Edit\Get.cs" />
     <Compile Include="Controllers\Vat\Edit\Post.cs" />
     <Compile Include="Controllers\Vat\List\Get.cs" />
+    <Compile Include="Controllers\Vat\TestBase.cs" />
     <Compile Include="Helpers\MoqHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
