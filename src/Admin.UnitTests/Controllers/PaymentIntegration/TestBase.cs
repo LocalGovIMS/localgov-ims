@@ -1,5 +1,6 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
+using Admin.Models.PaymentIntegration;
 using log4net;
 using Moq;
 using System;
@@ -16,11 +17,11 @@ namespace Admin.UnitTests.Controllers.PaymentIntegration
         protected Controller Controller;
 
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
-        protected readonly Mock<IModelBuilder<Models.PaymentIntegration.DetailsViewModel, int>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.PaymentIntegration.DetailsViewModel, int>>();
-        protected readonly Mock<IModelBuilder<Models.PaymentIntegration.EditViewModel, int>> MockEditViewModelBuilder = new Mock<IModelBuilder<Models.PaymentIntegration.EditViewModel, int>>();
-        protected readonly Mock<IModelBuilder<IList<Models.PaymentIntegration.DetailsViewModel>, int>> MockListViewModelBuilder = new Mock<IModelBuilder<IList<Models.PaymentIntegration.DetailsViewModel>, int>>();
-        protected readonly Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>> MockCreateCommand = new Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>>();
-        protected readonly Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>> MockEditCommand = new Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>>();
+        protected readonly Mock<IModelBuilder<DetailsViewModel, int>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
+        protected readonly Mock<IModelBuilder<EditViewModel, int>> MockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
+        protected readonly Mock<IModelBuilder<IList<DetailsViewModel>, int>> MockListViewModelBuilder = new Mock<IModelBuilder<IList<DetailsViewModel>, int>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockEditCommand = new Mock<IModelCommand<EditViewModel>>();
 
         protected void SetupController()
         {

@@ -1,7 +1,7 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
-using Admin.Models.UserMethodOfPayment;
 using Admin.Models.Shared;
+using Admin.Models.UserMethodOfPayment;
 using log4net;
 using Moq;
 using System;

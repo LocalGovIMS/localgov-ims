@@ -1,7 +1,7 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
-using Admin.Models.UserTemplate;
 using Admin.Models.Shared;
+using Admin.Models.UserTemplate;
 using log4net;
 using Moq;
 using System;
