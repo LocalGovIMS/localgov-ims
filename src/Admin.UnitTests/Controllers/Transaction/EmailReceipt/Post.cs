@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.EmailReceipt
 {
@@ -20,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Transaction.EmailReceipt
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "EmailReceipt")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.EmailReceipt));
         }
 
         private ActionResult GetResult(EmailReceiptViewModel model, bool success)

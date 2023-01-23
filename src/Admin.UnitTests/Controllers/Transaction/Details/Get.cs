@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Details
 {
@@ -22,10 +21,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Details")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Details));
         }
 
         private ActionResult GetResult(bool includeTransaction)
@@ -131,7 +127,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
             var result = GetResult(true) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Details");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Details));
         }
 
         [TestMethod]
@@ -167,7 +163,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Details
             var result = GetResult(false);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("List", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual(nameof(Controller.List), ((RedirectToRouteResult)result).RouteValues["action"]);
         }
     }
 }

@@ -4,6 +4,9 @@ using Admin.Interfaces.ModelBuilders;
 using Admin.Models.Transaction;
 using log4net;
 using Moq;
+using System.Linq;
+using System.Reflection;
+using System;
 using Controller = Admin.Controllers.TransactionController;
 using Dependencies = Admin.Controllers.TransactionControllerDependencies;
 
@@ -39,6 +42,14 @@ namespace Admin.UnitTests.Controllers.Transaction
                     MockCreateCsvFileForExportCommand.Object);
 
             Controller = new Controller(dependencies);
+        }
+
+        protected MethodInfo GetMethod(Type attributeType, string name)
+        {
+            return typeof(Controller).GetMethods()
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == attributeType))
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
         }
     }
 }

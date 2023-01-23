@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Receipt
 {
@@ -21,10 +20,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Receipt
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Receipt")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Receipt));
         }
 
         private ActionResult GetResult(bool includeTransaction)
@@ -113,7 +109,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Receipt
             var result = GetResult(true) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Receipt");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Receipt));
         }
 
         [TestMethod]
@@ -149,7 +145,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Receipt
             var result = GetResult(false);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("List", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual(nameof(Controller.List), ((RedirectToRouteResult)result).RouteValues["action"]);
         }
     }
 }

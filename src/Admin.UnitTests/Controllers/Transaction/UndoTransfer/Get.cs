@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.UndoTransfer
 {
@@ -19,10 +18,7 @@ namespace Admin.UnitTests.Controllers.Transaction.UndoTransfer
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "UndoTransfer")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.UndoTransfer));
         }
 
         private ActionResult GetResult(bool success)
@@ -62,7 +58,7 @@ namespace Admin.UnitTests.Controllers.Transaction.UndoTransfer
             var result = GetResult(true);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Details", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual(nameof(Controller.Details), ((RedirectToRouteResult)result).RouteValues["action"]);
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.SubmitTransfers
 {
@@ -20,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Transaction.SubmitTransfers
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "SubmitTransfers")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.SubmitTransfers));
         }
 
         private ActionResult GetResult(TransferViewModel model)
