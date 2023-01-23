@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.PaymentIntegration.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.PaymentIntegration.EditViewModel model, bool isModelValid)
