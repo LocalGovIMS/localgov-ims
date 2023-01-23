@@ -587,11 +587,12 @@
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Post.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\List\Get.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\TestBase.cs" />
+    <Compile Include="Controllers\UserTemplate\ConstructorTests.cs" />
+    <Compile Include="Controllers\UserTemplate\Edit\Get.cs" />
+    <Compile Include="Controllers\UserTemplate\Edit\Post.cs" />
+    <Compile Include="Controllers\UserTemplate\List\Get.cs" />
+    <Compile Include="Controllers\UserTemplate\TestBase.cs" />
     <Compile Include="Controllers\UserRole\TestBase.cs" />
-    <Compile Include="Controllers\UserTemplates\ConstructorTests.cs" />
-    <Compile Include="Controllers\UserTemplates\Edit\Get.cs" />
-    <Compile Include="Controllers\UserTemplates\Edit\Post.cs" />
-    <Compile Include="Controllers\UserTemplates\List\Get.cs" />
     <Compile Include="Controllers\User\TestBase.cs" />
     <Compile Include="Controllers\Validation\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />

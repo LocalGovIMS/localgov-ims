@@ -1,55 +1,36 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.UserTemplateController;
-using Dependencies = Admin.Controllers.UserTemplateControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.UserTemplate.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.Shared.BasicListViewModel, int>> _mockBasicListViewModelBuilder = new Mock<IModelBuilder<Models.Shared.BasicListViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.UserTemplate.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.UserTemplate.EditViewModel, int>>();
+        public Post()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.UserTemplate.EditViewModel model, bool isModelValid)
         {
-            var editCommand = new Mock<IModelCommand<Models.UserTemplate.EditViewModel>>();
-            editCommand.Setup(x => x.Execute(It.IsAny<Models.UserTemplate.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                _mockBasicListViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                editCommand.Object);
-
-            var controller = new Controller(dependencies);
+            MockEditCommand.Setup(x => x.Execute(It.IsAny<Models.UserTemplate.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
             if (!isModelValid)
             {
-                controller.ModelState.AddModelError("userId", "error");
+                Controller.ModelState.AddModelError("userId", "error");
             }
 
-            return controller.Edit(model);
+            return Controller.Edit(model);
         }
 
         [TestMethod]
@@ -70,7 +51,7 @@ namespace Admin.UnitTests.Controllers.UserTemplate.Edit
             var result = GetResult(new Models.UserTemplate.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Edit");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Edit));
         }
 
         [TestMethod]
@@ -95,7 +76,7 @@ namespace Admin.UnitTests.Controllers.UserTemplate.Edit
         {
             var result = GetResult(new Models.UserTemplate.EditViewModel(), true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Back");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Back));
         }
 
         [TestMethod]
