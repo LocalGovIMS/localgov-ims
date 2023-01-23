@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using ListViewModel = Admin.Models.MethodOfPaymentMetadata.ListViewModel;
 using SearchCriteria = Admin.Models.MethodOfPaymentMetadata.SearchCriteria;
 
-namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.ListForImportProcessingRule
+namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.ListForMethodOfPayment
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.ListForImportProce
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._EditListForMethodOfPayment));
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._ListForMethodOfPayment));
         }
 
         [TestMethod]
