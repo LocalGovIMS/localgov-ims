@@ -580,6 +580,7 @@
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
     <Compile Include="Controllers\Transaction\ListForTransactionImport\Get.cs" />
     <Compile Include="Controllers\Transaction\TestBase.cs" />
+    <Compile Include="Controllers\Transfer\TestBase.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\ConstructorTests.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Get.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Post.cs" />
