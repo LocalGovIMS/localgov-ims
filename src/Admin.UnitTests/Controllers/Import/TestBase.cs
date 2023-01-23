@@ -2,9 +2,9 @@
 using Admin.Models.Import;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.ImportController;
 using Dependencies = Admin.Controllers.ImportControllerDependencies;
 
@@ -23,8 +23,7 @@ namespace Admin.UnitTests.Controllers.Import
             var dependencies = new Dependencies(
                     MockLogger.Object,
                     MockDetailsViewModelBuilder.Object,
-                    MockListViewModelBuilder.Object                    
-                    );
+                    MockListViewModelBuilder.Object);
 
             Controller = new Controller(dependencies);
         }

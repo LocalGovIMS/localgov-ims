@@ -1,7 +1,7 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
-using Admin.Models.UserRole;
 using Admin.Models.Shared;
+using Admin.Models.UserRole;
 using log4net;
 using Moq;
 using System;

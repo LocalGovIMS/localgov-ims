@@ -4,9 +4,9 @@ using Admin.Interfaces.ModelBuilders;
 using Admin.Models.Transaction;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.TransactionController;
 using Dependencies = Admin.Controllers.TransactionControllerDependencies;
 

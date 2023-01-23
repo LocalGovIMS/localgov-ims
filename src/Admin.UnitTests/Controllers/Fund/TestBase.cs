@@ -1,10 +1,11 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
+using Admin.Models.Fund;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.FundController;
 using Dependencies = Admin.Controllers.FundControllerDependencies;
 
@@ -15,11 +16,11 @@ namespace Admin.UnitTests.Controllers.Fund
         protected Controller Controller;
 
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
-        protected readonly Mock<IModelBuilder<Models.Fund.ListViewModel, Models.Fund.SearchCriteria>> MockListViewModelBuilder = new Mock<IModelBuilder<Models.Fund.ListViewModel, Models.Fund.SearchCriteria>>();
-        protected readonly Mock<IModelBuilder<Models.Fund.DetailsViewModel, string>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.Fund.DetailsViewModel, string>>();
-        protected readonly Mock<IModelBuilder<Models.Fund.EditViewModel, string>> MockEditViewModelBuilder = new Mock<IModelBuilder<Models.Fund.EditViewModel, string>>();
-        protected readonly Mock<IModelCommand<Models.Fund.EditViewModel>> MockCreateCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
-        protected readonly Mock<IModelCommand<Models.Fund.EditViewModel>> MockEditCommand = new Mock<IModelCommand<Models.Fund.EditViewModel>>();
+        protected readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> MockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
+        protected readonly Mock<IModelBuilder<DetailsViewModel, string>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, string>>();
+        protected readonly Mock<IModelBuilder<EditViewModel, string>> MockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, string>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockEditCommand = new Mock<IModelCommand<EditViewModel>>();
 
         protected void SetupController()
         {

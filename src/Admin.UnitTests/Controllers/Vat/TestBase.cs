@@ -1,5 +1,6 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
+using Admin.Models.Vat;
 using log4net;
 using Moq;
 using System;
@@ -16,11 +17,11 @@ namespace Admin.UnitTests.Controllers.Vat
         protected Controller Controller;
 
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
-        protected readonly Mock<IModelBuilder<Models.Vat.DetailsViewModel, string>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.Vat.DetailsViewModel, string>>();
-        protected readonly Mock<IModelBuilder<Models.Vat.EditViewModel, string>> MockEditViewModelBuilder = new Mock<IModelBuilder<Models.Vat.EditViewModel, string>>();
-        protected readonly Mock<IModelBuilder<IList<Models.Vat.DetailsViewModel>, string>> MockListViewModelBuilder = new Mock<IModelBuilder<IList<Models.Vat.DetailsViewModel>, string>>();
-        protected readonly Mock<IModelCommand<Models.Vat.EditViewModel>> MockCreateCommand = new Mock<IModelCommand<Models.Vat.EditViewModel>>();
-        protected readonly Mock<IModelCommand<Models.Vat.EditViewModel>> MockEditCommand = new Mock<IModelCommand<Models.Vat.EditViewModel>>();
+        protected readonly Mock<IModelBuilder<DetailsViewModel, string>> MockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, string>>();
+        protected readonly Mock<IModelBuilder<EditViewModel, string>> MockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, string>>();
+        protected readonly Mock<IModelBuilder<IList<DetailsViewModel>, string>> MockListViewModelBuilder = new Mock<IModelBuilder<IList<DetailsViewModel>, string>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
+        protected readonly Mock<IModelCommand<EditViewModel>> MockEditCommand = new Mock<IModelCommand<EditViewModel>>();
 
         protected void SetupController()
         {

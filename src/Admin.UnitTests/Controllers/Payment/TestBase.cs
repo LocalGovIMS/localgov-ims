@@ -1,6 +1,7 @@
 ﻿using Admin.Classes.Models;
 using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
+using Admin.Models.Payment;
 using log4net;
 using Moq;
 using System;
@@ -17,13 +18,13 @@ namespace Admin.UnitTests.Controllers.Payment
         protected Controller Controller;
 
         protected readonly Mock<ILog> MockLogger = new Mock<ILog>();
-        protected readonly Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>> MockIndexViewModelBuilder = new Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>>();
-        protected readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> MockAddCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
+        protected readonly Mock<IModelBuilder<IndexViewModel, IndexViewModel>> MockIndexViewModelBuilder = new Mock<IModelBuilder<IndexViewModel, IndexViewModel>>();
+        protected readonly Mock<IModelCommand<IndexViewModel>> MockAddCommand = new Mock<IModelCommand<IndexViewModel>>();
         protected readonly Mock<IModelCommand<Guid>> MockRemoveCommand = new Mock<IModelCommand<Guid>>();
         protected readonly Mock<IModelCommand<string>> MockEmptyBasketCommand = new Mock<IModelCommand<string>>();
-        protected readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> MockCheckAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        protected readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> MockCreatePaymentsCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        protected readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> MockSetAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
+        protected readonly Mock<IModelCommand<IndexViewModel>> MockCheckAddressCommand = new Mock<IModelCommand<IndexViewModel>>();
+        protected readonly Mock<IModelCommand<IndexViewModel>> MockCreatePaymentsCommand = new Mock<IModelCommand<IndexViewModel>>();
+        protected readonly Mock<IModelCommand<IndexViewModel>> MockSetAddressCommand = new Mock<IModelCommand<IndexViewModel>>();
         protected readonly Mock<IModelCommand<ProcessPaymentCommandAgrs>> MockProcessPaymentCommand = new Mock<IModelCommand<ProcessPaymentCommandAgrs>>();
 
         protected void SetupController()
@@ -42,7 +43,7 @@ namespace Admin.UnitTests.Controllers.Payment
             Controller = new Controller(dependencies);
 
             var controllerContext = new Mock<ControllerContext>();
-            controllerContext.SetupGet(p => p.HttpContext.Session["PaymentModel"]).Returns(new Models.Payment.IndexViewModel());
+            controllerContext.SetupGet(p => p.HttpContext.Session["PaymentModel"]).Returns(new IndexViewModel());
 
             Controller.ControllerContext = controllerContext.Object;
         }
