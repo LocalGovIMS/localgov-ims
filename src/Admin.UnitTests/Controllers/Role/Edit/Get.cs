@@ -1,55 +1,33 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using Admin.Models.Role;
-using log4net;
+﻿using Admin.Models.Role;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.RoleController;
 
 namespace Admin.UnitTests.Controllers.Role.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<IList<DetailsViewModel>, int>> _mockListViewModelBuilder = new Mock<IModelBuilder<IList<DetailsViewModel>, int>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult()
         {
-            var editViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-            editViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new EditViewModel());
+            MockEditViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new EditViewModel());
 
-            var dependencies = new RoleControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                editViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Edit(1);
+            return Controller.Edit(1);
         }
 
         [TestMethod]
@@ -95,7 +73,7 @@ namespace Admin.UnitTests.Controllers.Role.Edit
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Edit");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Edit));
         }
 
         [TestMethod]
