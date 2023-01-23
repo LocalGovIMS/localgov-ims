@@ -1,18 +1,9 @@
-﻿using Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.MethodOfPaymentMetadataController;
-using ControllerDependencies = Admin.Controllers.MethodOfPaymentMetadataControllerDependencies;
-using DetailsViewModel = Admin.Models.MethodOfPaymentMetadata.DetailsViewModel;
-using EditViewModel = Admin.Models.MethodOfPaymentMetadata.EditViewModel;
 using ListViewModel = Admin.Models.MethodOfPaymentMetadata.ListViewModel;
 using SearchCriteria = Admin.Models.MethodOfPaymentMetadata.SearchCriteria;
 
@@ -20,56 +11,35 @@ namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.ListForImportProce
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, CreateViewModelBuilderArgs>> _mockCreateViewModelBuilder = new Mock<IModelBuilder<EditViewModel, CreateViewModelBuilderArgs>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
-
-        private MethodInfo GetListMethod()
+        public Get()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "_ListForMethodOfPayment")
-                .FirstOrDefault();
+            SetupController();
+        }
+
+        private MethodInfo GetMethod()
+        {
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._EditListForMethodOfPayment));
         }
 
         [TestMethod]
         public void HasCorrectNumberOfCustomAttributes()
         {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Count());
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Count());
         }
 
         [TestMethod]
         public void HasASingleChildActionOnlyAttribute()
         {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
         }
 
         private ActionResult GetTestListResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<SearchCriteria>())).Returns(new ListViewModel());
+            MockListViewModelBuilder.Setup(x => x.Build(It.IsAny<SearchCriteria>())).Returns(new ListViewModel());
 
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockCreateViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                listViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller._ListForMethodOfPayment("1");
+            return Controller._ListForMethodOfPayment("1");
         }
 
         [TestMethod]
