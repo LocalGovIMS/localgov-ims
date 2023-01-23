@@ -1,56 +1,32 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.OfficeController;
-using Dependencies = Admin.Controllers.OfficeControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.Office.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.Office.DetailsViewModel, string>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.Office.DetailsViewModel, string>>();
-        private readonly Mock<IModelBuilder<IList<Models.Office.DetailsViewModel>, string>> _mockListViewModelBuilder = new Mock<IModelBuilder<IList<Models.Office.DetailsViewModel>, string>>();
-        private readonly Mock<IModelCommand<Models.Office.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.Office.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.Office.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.Office.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult()
         {
-            var editViewModelBuilder = new Mock<IModelBuilder<Models.Office.EditViewModel, string>>();
-            editViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new Models.Office.EditViewModel());
+            MockEditViewModelBuilder.Setup(x => x.Build(It.IsAny<string>())).Returns(new Models.Office.EditViewModel());
 
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                editViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Edit("F1");
+            return Controller.Edit("F1");
         }
 
         [TestMethod]
