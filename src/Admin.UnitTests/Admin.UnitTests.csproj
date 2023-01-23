@@ -592,6 +592,7 @@
     <Compile Include="Controllers\UserTemplate\Edit\Post.cs" />
     <Compile Include="Controllers\UserTemplate\List\Get.cs" />
     <Compile Include="Controllers\UserTemplate\TestBase.cs" />
+    <Compile Include="Controllers\UserRole\TestBase.cs" />
     <Compile Include="Controllers\User\TestBase.cs" />
     <Compile Include="Controllers\Validation\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />
