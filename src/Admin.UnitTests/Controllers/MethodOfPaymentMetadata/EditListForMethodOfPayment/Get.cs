@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using ListViewModel = Admin.Models.MethodOfPaymentMetadata.ListViewModel;
 using SearchCriteria = Admin.Models.MethodOfPaymentMetadata.SearchCriteria;
 
-namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.EditListForImportProcessingRule
+namespace Admin.UnitTests.Controllers.MethodOfPaymentMetadata.EditListForMethodOfPayment
 {
     [TestClass]
     [ExcludeFromCodeCoverage]

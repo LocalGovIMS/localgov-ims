@@ -600,10 +600,10 @@
     <Compile Include="Controllers\VatMetadata\Create\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Post.cs" />
     <Compile Include="Controllers\VatMetadata\Delete\Get.cs" />
-    <Compile Include="Controllers\VatMetadata\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\EditListForVat\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Edit\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Edit\Post.cs" />
-    <Compile Include="Controllers\VatMetadata\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\ListForVat\Get.cs" />
     <Compile Include="Controllers\Fund\ConstructorTests.cs" />
     <Compile Include="Controllers\Fund\Create\Get.cs" />
     <Compile Include="Controllers\Fund\Create\Post.cs" />
@@ -625,10 +625,10 @@
     <Compile Include="Controllers\MethodOfPaymentMetadata\Create\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Create\Post.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Delete\Get.cs" />
-    <Compile Include="Controllers\MethodOfPaymentMetadata\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadata\EditListForMethodOfPayment\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Edit\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Edit\Post.cs" />
-    <Compile Include="Controllers\MethodOfPaymentMetadata\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadata\ListForMethodOfPayment\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\ConstructorTests.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\Create\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\Create\Post.cs" />
@@ -729,6 +729,7 @@
     <Compile Include="Controllers\Office\Edit\Get.cs" />
     <Compile Include="Controllers\Office\Edit\Post.cs" />
     <Compile Include="Controllers\Office\List\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\TestBase.cs" />
     <Compile Include="Controllers\Vat\ConstructorTests.cs" />
     <Compile Include="Controllers\Vat\Create\Get.cs" />
     <Compile Include="Controllers\Vat\Create\Post.cs" />
