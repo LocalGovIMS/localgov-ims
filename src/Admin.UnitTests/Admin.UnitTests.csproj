@@ -574,6 +574,7 @@
     <Compile Include="Controllers\SuspenseNote\ListForSuspense\Get.cs" />
     <Compile Include="Controllers\Import\Search\Get.cs" />
     <Compile Include="Controllers\Import\_List\Get.cs" />
+    <Compile Include="Controllers\SuspenseNote\TestBase.cs" />
     <Compile Include="Controllers\Transaction\Origin\Get.cs" />
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
     <Compile Include="Controllers\Transaction\ListForTransactionImport\Get.cs" />
