@@ -1,14 +1,14 @@
-﻿using Admin.Interfaces.ModelBuilders;
+﻿using Admin.Classes.Commands.ImportProcessingRule;
+using Admin.Interfaces.Commands;
+using Admin.Interfaces.ModelBuilders;
+using Admin.Models.ImportProcessingRule;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.ImportProcessingRuleController;
 using Dependencies = Admin.Controllers.ImportProcessingRuleControllerDependencies;
-using Admin.Classes.Commands.ImportProcessingRule;
-using Admin.Interfaces.Commands;
-using Admin.Models.ImportProcessingRule;
 
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRule

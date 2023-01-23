@@ -1,12 +1,12 @@
-﻿using Admin.Interfaces.Commands;
+﻿using Admin.Classes.Commands.FileImport;
+using Admin.Interfaces.Commands;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.FileImportController;
 using Dependencies = Admin.Controllers.FileImportControllerDependencies;
-using Admin.Classes.Commands.FileImport;
 
 namespace Admin.UnitTests.Controllers.FileImport
 {

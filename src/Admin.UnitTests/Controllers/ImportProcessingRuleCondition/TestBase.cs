@@ -1,14 +1,14 @@
-﻿using Admin.Interfaces.ModelBuilders;
+﻿using Admin.Classes.ViewModelBuilders.ImportProcessingRuleCondition;
+using Admin.Interfaces.Commands;
+using Admin.Interfaces.ModelBuilders;
+using Admin.Models.ImportProcessingRuleCondition;
 using log4net;
 using Moq;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using Controller = Admin.Controllers.ImportProcessingRuleConditionController;
 using Dependencies = Admin.Controllers.ImportProcessingRuleConditionControllerDependencies;
-using Admin.Interfaces.Commands;
-using Admin.Models.ImportProcessingRuleCondition;
-using Admin.Classes.ViewModelBuilders.ImportProcessingRuleCondition;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRuleCondition
 {
