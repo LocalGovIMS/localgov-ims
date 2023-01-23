@@ -565,6 +565,7 @@
     <Compile Include="Controllers\EReturnNote\Create\Get.cs" />
     <Compile Include="Controllers\EReturnNote\Create\Post.cs" />
     <Compile Include="Controllers\EReturnNote\ListForEReturn\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\TestBase.cs" />
     <Compile Include="Controllers\Payment\TestBase.cs" />
     <Compile Include="Controllers\SuspenseNote\ConstructorTests.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />

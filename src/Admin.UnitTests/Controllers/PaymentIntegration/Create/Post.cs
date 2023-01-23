@@ -16,45 +16,28 @@ namespace Admin.UnitTests.Controllers.PaymentIntegration.Create
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.PaymentIntegration.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.PaymentIntegration.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.PaymentIntegration.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.PaymentIntegration.EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<IList<Models.PaymentIntegration.DetailsViewModel>, int>> _mockListViewModelBuilder = new Mock<IModelBuilder<IList<Models.PaymentIntegration.DetailsViewModel>, int>>();
-        private readonly Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>>();
+        public Post()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.PaymentIntegration.EditViewModel model, bool isModelValid)
         {
-            var createCommand = new Mock<IModelCommand<Models.PaymentIntegration.EditViewModel>>();
-            createCommand.Setup(x => x.Execute(It.IsAny<Models.PaymentIntegration.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new PaymentIntegrationControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                createCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
+            MockCreateCommand.Setup(x => x.Execute(It.IsAny<Models.PaymentIntegration.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
             if (!isModelValid)
             {
-                controller.ModelState.AddModelError("userId", "error");
+                Controller.ModelState.AddModelError("userId", "error");
             }
 
-            return controller.Create(model);
+            return Controller.Create(model);
         }
 
         [TestMethod]
@@ -75,7 +58,7 @@ namespace Admin.UnitTests.Controllers.PaymentIntegration.Create
             var result = GetResult(new Models.PaymentIntegration.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]
@@ -100,7 +83,7 @@ namespace Admin.UnitTests.Controllers.PaymentIntegration.Create
         {
             var result = GetResult(new Models.PaymentIntegration.EditViewModel(), true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Back");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Back));
         }
 
         [TestMethod]
