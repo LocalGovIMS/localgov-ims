@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cheques
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Cheque");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Cheque));
         }
 
         private ActionResult GetResult(Models.Payment.Cheques model, bool isModelValid)
@@ -60,7 +60,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cheques
             var result = GetResult(new Models.Payment.Cheques(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]

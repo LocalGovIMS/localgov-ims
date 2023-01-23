@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.Payment.Address
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Address");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Address));
         }
 
         private ActionResult GetResult(Models.Payment.Address model, bool isModelValid)
@@ -58,7 +58,7 @@ namespace Admin.UnitTests.Controllers.Payment.Address
             var result = GetResult(new Models.Payment.Address(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace Admin.UnitTests.Controllers.Payment.Address
         {
             var result = GetResult(new Models.Payment.Address(), true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Pay");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Pay));
         }
 
         [TestMethod]

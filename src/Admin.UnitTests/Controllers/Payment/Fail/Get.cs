@@ -38,7 +38,7 @@ namespace Admin.UnitTests.Controllers.Payment.Fail
         {
             var result = GetResult(true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Create");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Create));
         }
 
     }

@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.Payment.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Create");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.Payment.IndexViewModel model, bool success)
@@ -49,7 +49,7 @@ namespace Admin.UnitTests.Controllers.Payment.Create
             var result = GetResult(new Models.Payment.IndexViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace Admin.UnitTests.Controllers.Payment.Create
         {
             var result = GetResult(new Models.Payment.IndexViewModel(), true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Create");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Create));
         }
 
         [TestMethod]
