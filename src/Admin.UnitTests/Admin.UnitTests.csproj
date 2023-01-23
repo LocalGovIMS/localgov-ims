@@ -586,6 +586,7 @@
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Get.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Post.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\List\Get.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\TestBase.cs" />
     <Compile Include="Controllers\UserTemplates\ConstructorTests.cs" />
     <Compile Include="Controllers\UserTemplates\Edit\Get.cs" />
     <Compile Include="Controllers\UserTemplates\Edit\Post.cs" />
