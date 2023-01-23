@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.List
 {
@@ -19,9 +18,7 @@ namespace Admin.UnitTests.Controllers.Transaction.List
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.Name == "List")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()

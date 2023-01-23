@@ -1,6 +1,5 @@
 ﻿using Admin.Classes.Commands.Transaction;
 using Admin.Models.Transaction;
-using BusinessLogic.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PagedList;
@@ -10,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Export
 {
@@ -25,10 +23,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Export
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Export")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Export));
         }
 
         private ActionResult GetResult(bool success)
