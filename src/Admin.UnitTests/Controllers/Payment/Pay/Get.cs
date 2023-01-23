@@ -17,7 +17,7 @@ namespace Admin.UnitTests.Controllers.Payment.Pay
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Pay");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Pay));
         }
         
         private ActionResult GetResult(bool isSuccess, bool vaildSession)

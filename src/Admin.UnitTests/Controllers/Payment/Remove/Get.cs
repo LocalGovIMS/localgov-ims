@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.Payment.Remove
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "RemoveItem");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.RemoveItem));
         }
 
         private ActionResult GetResult()
@@ -59,7 +59,7 @@ namespace Admin.UnitTests.Controllers.Payment.Remove
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]

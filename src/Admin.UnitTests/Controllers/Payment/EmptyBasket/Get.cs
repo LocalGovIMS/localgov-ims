@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.Payment.EmptyBasket
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "EmptyBasket");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.EmptyBasket));
         }
 
         private ActionResult GetResult()
@@ -57,7 +57,7 @@ namespace Admin.UnitTests.Controllers.Payment.EmptyBasket
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]

@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cheques
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Cheque");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Cheque));
         }
 
         private ActionResult GetResult(bool useSession)
@@ -49,7 +49,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cheques
             var result = GetResult(true) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Cheque");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Cheque));
         }
 
         [TestMethod]

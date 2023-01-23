@@ -16,7 +16,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cancel
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Cancel");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Cancel));
         }
 
         private ActionResult GetResult()
@@ -53,7 +53,7 @@ namespace Admin.UnitTests.Controllers.Payment.Cancel
             Assert.IsNotNull(result);
 
             var s = result.RouteValues.Values.First();
-            Assert.IsTrue(s.ToString() == "Create");
+            Assert.IsTrue(s.ToString() == nameof(Controller.Create));
         }
     }
 }

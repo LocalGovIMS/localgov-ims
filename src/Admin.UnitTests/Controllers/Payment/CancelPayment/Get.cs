@@ -31,7 +31,7 @@ namespace Admin.UnitTests.Controllers.CancelPayment
         {
             var result = GetResult() as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Create");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Create));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.Payment.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Create");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(bool useSession)
@@ -82,7 +82,7 @@ namespace Admin.UnitTests.Controllers.Payment.Create
             var result = GetResult(false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]
