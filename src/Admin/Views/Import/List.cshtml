@@ -36,6 +36,9 @@
                         Status
                     </th>
                     <th scope="col">
+                        Other
+                    </th>
+                    <th scope="col">
                         <span class="visually-hidden">Actions</span>
                     </th>
                 </tr>
@@ -58,6 +61,14 @@
                             @if (item.HasErrors())
                             {
                                 <span> (@item.Errors().Count()  @(item.Errors().Count() == 1 ? "error" : "errors"))</span>
+                            }
+                        </td>
+                        <td>
+                            @foreach(var metadataItem in item.Metadata.OrderBy(x => x.MetadataKey.Name))
+                            {
+                                <span class="fw-bold">@metadataItem.MetadataKey.Description</span>
+                                <span> : @metadataItem.Value</span>
+                                <br />
                             }
                         </td>
                         <td class="text-end">
