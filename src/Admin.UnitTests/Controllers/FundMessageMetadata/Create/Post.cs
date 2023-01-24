@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundMessageMetadata.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Create");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.FundMessageMetadata.EditViewModel model, bool isModelValid)

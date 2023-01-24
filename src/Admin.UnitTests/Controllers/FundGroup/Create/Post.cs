@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundGroup.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Create");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.FundGroup.EditViewModel model, bool isModelValid)
