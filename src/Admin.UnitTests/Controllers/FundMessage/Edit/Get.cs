@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.FundMessage.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Edit");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult()
