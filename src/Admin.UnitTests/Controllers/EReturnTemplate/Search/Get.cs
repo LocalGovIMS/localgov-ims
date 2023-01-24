@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.EReturnTemplate.Search
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(AcceptVerbsAttribute), "Search");
+            return GetMethod(typeof(AcceptVerbsAttribute), nameof(Controller.Search));
         }
 
         private ActionResult GetResult()
