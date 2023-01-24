@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Details
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Details");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Details));
         }
 
         private ActionResult GetResult()
