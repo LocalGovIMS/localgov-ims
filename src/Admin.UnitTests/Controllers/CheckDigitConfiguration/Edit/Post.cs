@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.CheckDigitConfiguration.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Edit");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.CheckDigitConfiguration.EditViewModel model, bool isModelValid)

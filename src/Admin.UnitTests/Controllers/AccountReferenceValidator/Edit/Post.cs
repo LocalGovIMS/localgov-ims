@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.AccountReferenceValidator.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Edit");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.AccountReferenceValidator.EditViewModel model, bool isModelValid)
