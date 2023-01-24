@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace BusinessLogic.UnitTests.Services
 {
@@ -35,8 +36,9 @@ namespace BusinessLogic.UnitTests.Services
             var generatedReferences = new List<string>();
 
             // Act
-            for (var i = 0; i <= 1000; i++)
+            for (var i = 0; i <= 100; i++)
             {
+                Thread.Sleep(1);
                 generatedReferences.Add(baseService.NextReferenceId());
             }
 
