@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Create");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult()

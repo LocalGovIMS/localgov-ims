@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.Fund.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Edit");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.Fund.EditViewModel model, bool isModelValid)

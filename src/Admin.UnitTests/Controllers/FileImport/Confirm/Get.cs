@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FileImport.Confirm
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Confirm");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Confirm));
         }
 
         private ActionResult GetResult()

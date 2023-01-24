@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundMessageMetadata.Delete
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Delete");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Delete));
         }
 
         private ActionResult GetResult()

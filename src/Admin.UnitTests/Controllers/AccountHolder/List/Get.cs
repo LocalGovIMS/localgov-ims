@@ -17,7 +17,7 @@ namespace Admin.UnitTests.Controllers.AccountHolder.List
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "List");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()

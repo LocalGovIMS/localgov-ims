@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Edit
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Edit");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.AccountHolder.EditViewModel model, bool isModelValid)

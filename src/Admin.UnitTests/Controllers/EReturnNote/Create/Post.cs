@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.EReturnNote.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Create");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.EReturnNote.EditViewModel model, bool isModelValid)
@@ -51,7 +51,7 @@ namespace Admin.UnitTests.Controllers.EReturnNote.Create
             var result = GetResult(new Models.EReturnNote.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]

@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.Fund.Create
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "Create");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult(Models.Fund.EditViewModel model, bool isModelValid)
@@ -51,7 +51,7 @@ namespace Admin.UnitTests.Controllers.Fund.Create
             var result = GetResult(new Models.Fund.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]

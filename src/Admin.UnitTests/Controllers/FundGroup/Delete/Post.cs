@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundGroup.Delete
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpPostAttribute), "DeleteFundGroup");
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.DeleteFundGroup));
         }
 
         private ActionResult GetResult(int id, bool isModelValid)

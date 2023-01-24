@@ -20,7 +20,7 @@ namespace Admin.UnitTests.Controllers.FundGroup.List
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "List");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         [TestMethod]

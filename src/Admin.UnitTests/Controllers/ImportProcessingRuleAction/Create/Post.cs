@@ -51,7 +51,7 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRuleAction.Create
             var result = GetResult(new Models.ImportProcessingRuleAction.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]

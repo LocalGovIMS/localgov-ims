@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.EReturnTemplateRow.EditListForEReturnTempl
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), "_EditListForEReturnTemplate");
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._EditListForEReturnTemplate));
         }
 
         [TestMethod]

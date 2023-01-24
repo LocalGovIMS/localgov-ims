@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundMessageMetadata.ListForFundMessage
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), "_ListForFundMessage");
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._ListForFundMessage));
         }
 
         [TestMethod]
