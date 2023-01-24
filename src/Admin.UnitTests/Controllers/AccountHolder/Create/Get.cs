@@ -73,7 +73,7 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Create
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]

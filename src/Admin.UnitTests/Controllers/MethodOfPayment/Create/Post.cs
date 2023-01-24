@@ -52,7 +52,7 @@ namespace Admin.UnitTests.Controllers.MethodOfPayment.Create
             var result = GetResult(new EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]

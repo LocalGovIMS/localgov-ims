@@ -51,7 +51,7 @@ namespace Admin.UnitTests.Controllers.CheckDigitConfiguration.Create
             var result = GetResult(new Models.CheckDigitConfiguration.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]
