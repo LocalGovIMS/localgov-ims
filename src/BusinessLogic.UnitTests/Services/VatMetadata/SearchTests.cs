@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Models.VatMetadata;
-using BusinessLogic.Models.Shared;
+﻿using BusinessLogic.Models.Shared;
+using BusinessLogic.Models.VatMetadata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;

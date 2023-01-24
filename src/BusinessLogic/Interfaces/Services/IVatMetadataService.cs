@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Result;
-using BusinessLogic.Models.VatMetadata;
 using BusinessLogic.Models.Shared;
+using BusinessLogic.Models.VatMetadata;
 
 namespace BusinessLogic.Interfaces.Services
 {

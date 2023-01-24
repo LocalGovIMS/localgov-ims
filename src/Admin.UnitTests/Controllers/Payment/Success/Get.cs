@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System.Web.Mvc;
 using Controller = Admin.Controllers.PaymentController;
 

@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Entities;
-using BusinessLogic.Models.Shared;
 using BusinessLogic.Models.Import;
+using BusinessLogic.Models.Shared;
 
 namespace BusinessLogic.Interfaces.Services
 {

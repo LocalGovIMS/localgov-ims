@@ -1,8 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-
-namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImporter
+﻿namespace BusinessLogic.UnitTests.ImportProcessing.File.FileImporter
 {
     public class ImportFileTests : TestBase
     {

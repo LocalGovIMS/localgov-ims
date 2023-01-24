@@ -2,8 +2,8 @@
 using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Services;
 using log4net;
-using Web.Mvc;
 using System.Web.Mvc.Html;
+using Web.Mvc;
 
 namespace Admin.Classes.ViewModelBuilders.CheckDigitConfiguration
 {

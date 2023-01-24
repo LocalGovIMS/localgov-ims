@@ -1,15 +1,15 @@
-﻿using BusinessLogic.Entities;
+﻿using BusinessLogic.Classes.Result;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Persistence;
+using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Models.Shared;
 using BusinessLogic.Models.EReturnTemplate;
+using BusinessLogic.Models.Shared;
 using log4net;
 using System;
-using System.Linq;
-using BusinessLogic.Classes.Result;
-using BusinessLogic.Interfaces.Result;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.Services
 {

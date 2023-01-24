@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Entities;
-using PagedList;
+﻿using PagedList;
 
 namespace Admin.Models.Transaction
 {

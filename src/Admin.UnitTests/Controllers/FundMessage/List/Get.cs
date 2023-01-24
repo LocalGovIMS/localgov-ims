@@ -1,10 +1,4 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;

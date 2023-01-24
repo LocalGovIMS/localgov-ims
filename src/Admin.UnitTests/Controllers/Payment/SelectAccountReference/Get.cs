@@ -1,7 +1,4 @@
-﻿using Admin.Classes.Models;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using Controller = Admin.Controllers.PaymentController;
 

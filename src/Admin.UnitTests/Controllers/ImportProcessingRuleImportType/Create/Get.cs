@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Admin.Models.ImportProcessingRuleImportType;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Admin.Models.ImportProcessingRuleImportType;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRuleImportType.Create
 {

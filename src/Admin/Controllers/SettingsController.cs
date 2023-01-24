@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Security;
+﻿using BusinessLogic.Security;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
 
