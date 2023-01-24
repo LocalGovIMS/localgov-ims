@@ -1,7 +1,6 @@
 ﻿using BusinessLogic.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace BusinessLogic.UnitTests.Extensions.Import
 {

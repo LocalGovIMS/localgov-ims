@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Entities;
-using BusinessLogic.Enums;
 using BusinessLogic.Interfaces.Persistence;
 using BusinessLogic.Interfaces.Result;
 using BusinessLogic.Interfaces.Security;

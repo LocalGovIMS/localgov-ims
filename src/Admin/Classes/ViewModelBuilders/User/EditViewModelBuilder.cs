@@ -1,5 +1,4 @@
 ﻿using Admin.Models.User;
-using BusinessLogic.Entities;
 using BusinessLogic.Interfaces.Services;
 using log4net;
 using System.Collections.Generic;

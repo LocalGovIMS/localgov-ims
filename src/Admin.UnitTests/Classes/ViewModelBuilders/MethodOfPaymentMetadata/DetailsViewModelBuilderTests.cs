@@ -3,7 +3,6 @@ using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using ViewModel = Admin.Models.MethodOfPaymentMetadata.DetailsViewModel;
 using ViewModelBuilder = Admin.Classes.ViewModelBuilders.MethodOfPaymentMetadata.DetailsViewModelBuilder;
 

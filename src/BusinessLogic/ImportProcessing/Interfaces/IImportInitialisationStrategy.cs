@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Interfaces.Result;
-
-namespace BusinessLogic.ImportProcessing
+﻿namespace BusinessLogic.ImportProcessing
 {
     public interface IImportInitialisationStrategy
     {

@@ -1,5 +1,5 @@
-﻿using Admin.Models.VatMetadata;
-using Admin.Models.Shared;
+﻿using Admin.Models.Shared;
+using Admin.Models.VatMetadata;
 using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Models.Shared;
 using log4net;

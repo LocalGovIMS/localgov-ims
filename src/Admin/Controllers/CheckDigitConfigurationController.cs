@@ -1,6 +1,4 @@
-﻿using Admin.Classes.Commands.CheckDigitConfiguration;
-using Admin.Models.CheckDigitConfiguration;
-using Admin.Models.Shared;
+﻿using Admin.Models.CheckDigitConfiguration;
 using BusinessLogic.Security;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;

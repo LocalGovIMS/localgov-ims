@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Models.Shared;
-using BusinessLogic.Models.ImportType;
+﻿using BusinessLogic.Models.ImportType;
+using BusinessLogic.Models.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;

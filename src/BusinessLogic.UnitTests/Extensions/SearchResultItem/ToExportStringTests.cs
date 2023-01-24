@@ -1,9 +1,6 @@
-﻿using BusinessLogic.Enums;
-using BusinessLogic.Extensions;
+﻿using BusinessLogic.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
 
 namespace BusinessLogic.UnitTests.Extensions.SearchResultItem
 {
