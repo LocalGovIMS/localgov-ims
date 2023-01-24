@@ -17,7 +17,7 @@ namespace Admin.UnitTests.Controllers.EReturnTemplate.List
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "List");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()
