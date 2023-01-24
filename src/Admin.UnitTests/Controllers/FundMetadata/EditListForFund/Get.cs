@@ -19,7 +19,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.EditListForFund
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), "_EditListForFund");
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._EditListForFund));
         }
 
         [TestMethod]

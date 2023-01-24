@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.EReturnNote.ListForEReturn
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "_ListForEReturn");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller._ListForEReturn));
         }
 
         [TestMethod]

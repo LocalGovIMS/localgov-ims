@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FileImport.FileImport
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(HttpGetAttribute), "Import");
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Import));
         }
 
         private ActionResult GetResult()

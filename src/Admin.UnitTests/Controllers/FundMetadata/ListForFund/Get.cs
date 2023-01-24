@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.FundMetadata.ListForFund
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), "_ListForFund");
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._ListForFund));
         }
 
         [TestMethod]

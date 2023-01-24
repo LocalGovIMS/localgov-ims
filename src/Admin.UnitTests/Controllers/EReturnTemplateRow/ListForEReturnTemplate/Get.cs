@@ -18,7 +18,7 @@ namespace Admin.UnitTests.Controllers.EReturnTemplateRow.ListForEReturnTemplate
 
         private MethodInfo GetMethod()
         {
-            return GetMethod(typeof(ChildActionOnlyAttribute), "_ListForEReturnTemplate");
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._ListForEReturnTemplate));
         }
     
         [TestMethod]
