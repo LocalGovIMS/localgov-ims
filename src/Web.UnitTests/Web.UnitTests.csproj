@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MoqHelper.cs" />
+    <Compile Include="Mvc\Attributes\ModelClientValidationGreaterThanRuleTests.cs" />
     <Compile Include="Mvc\Attributes\GreaterThanAttributeTests.cs" />
     <Compile Include="Mvc\Attributes\MultipleButtonAttributeTests.cs" />
     <Compile Include="Mvc\DataAnnotations\GreaterThanAttributeTests.cs" />
