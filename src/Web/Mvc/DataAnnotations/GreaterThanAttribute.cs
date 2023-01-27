@@ -81,7 +81,7 @@ namespace Web.Mvc.DataAnnotations
                 return new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
             }
 
-            return null;
+            return ValidationResult.Success;
         }
 
         public static string FormatPropertyForClientValidation(string property)
