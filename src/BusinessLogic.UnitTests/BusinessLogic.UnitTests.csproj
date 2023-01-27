@@ -501,6 +501,8 @@
     <Compile Include="Validators\AccountReference\ValidateReferenceTest.cs" />
     <Compile Include="Validators\Basket\BaseBasket.cs" />
     <Compile Include="Validators\Basket\Validate.cs" />
+    <Compile Include="Validators\TransactionFee\BaseTransactionFeeTest.cs" />
+    <Compile Include="Validators\TransactionFee\ValidateTests.cs" />
     <Compile Include="Validators\EReturnReference\BaseEReturnReferenceTest.cs" />
     <Compile Include="Validators\EReturnReference\ValidateTests.cs" />
     <Compile Include="Validators\EReturnDescription\BaseEReturnDescriptionTest.cs" />
