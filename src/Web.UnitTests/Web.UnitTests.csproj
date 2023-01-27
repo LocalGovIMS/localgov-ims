@@ -152,6 +152,7 @@
     <Compile Include="Helpers\MoqHelper.cs" />
     <Compile Include="Mvc\Attributes\GreaterThanAttributeTests.cs" />
     <Compile Include="Mvc\Attributes\MultipleButtonAttributeTests.cs" />
+    <Compile Include="Mvc\DataAnnotations\GreaterThanAttributeTests.cs" />
     <Compile Include="Mvc\DataAnnotations\CheckDenominationValueAttributeTests.cs" />
     <Compile Include="Mvc\Extensions\TempDataDictionaryExtensionsTests.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinderTests.cs" />
