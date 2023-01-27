@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BusinessLogic.UnitTests.Validators.EReturnDescription
@@ -33,7 +32,7 @@ namespace BusinessLogic.UnitTests.Validators.EReturnDescription
         {
             // Arrange
             SetupService(false);
-            var validator = GetEReturnDescriptionValidator();
+            var validator = GetValidator();
             
             // Act
             var result = validator.Validate(description, 1);
@@ -49,7 +48,7 @@ namespace BusinessLogic.UnitTests.Validators.EReturnDescription
         {
             // Arrange
             SetupService(false);
-            var validator = GetEReturnDescriptionValidator();
+            var validator = GetValidator();
 
             // Act
             var result = validator.Validate(description, 1);
@@ -65,7 +64,7 @@ namespace BusinessLogic.UnitTests.Validators.EReturnDescription
         {
             // Arrange
             SetupService(false);
-            var validator = GetEReturnDescriptionValidator();
+            var validator = GetValidator();
 
             // Act
             var result = validator.Validate(description, 1);
@@ -82,7 +81,7 @@ namespace BusinessLogic.UnitTests.Validators.EReturnDescription
         {
             // Arrange
             SetupService(true);
-            var validator = GetEReturnDescriptionValidator();
+            var validator = GetValidator();
 
             // Act
             var result = validator.Validate(description, 1);
