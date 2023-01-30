@@ -12,22 +12,6 @@ namespace Web.UnitTests.Mvc.Attributes
     public class GreaterThanAttributeTests
     {
         [TestMethod]
-        public void Constructor_throws_an_exception_when_other_property_is_null()
-        {
-            // Arrange
-            var target = new NullOtherProperty() { Min = 10, Max = 20 };
-
-            var context = new ValidationContext(target);
-            var results = new List<ValidationResult>();
-
-            // Act
-            var isValid = Validator.TryValidateObject(target, context, results, true);
-
-            // Assert
-            isValid.Should().Be(false);
-        }
-
-        [TestMethod]
         [DataRow(9, false)]
         [DataRow(10, false)]
         [DataRow(11, true)]
@@ -143,14 +127,6 @@ namespace Web.UnitTests.Mvc.Attributes
             act.Should()
                 .Throw<ArgumentException>()
                 .WithMessage("Value cannot be null or empty.\r\nParameter name: property");
-        }
-
-        private class NullOtherProperty
-        {
-            public int Min { get; set; }
-
-            [GreaterThan(null, AllowEquality = true)]
-            public int Max { get; set; }
         }
 
         private class GreaterThanTarget
