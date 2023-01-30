@@ -35,7 +35,7 @@ namespace Web.Mvc.DataAnnotations
         public GreaterThanAttribute(string otherProperty)
             : base(greaterThanErrorMessage)
         {
-            this.OtherProperty = otherProperty ?? throw new ArgumentNullException("otherProperty");
+            this.OtherProperty = otherProperty;
         }
 
         public override string FormatErrorMessage(string name)
