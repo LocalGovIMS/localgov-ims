@@ -4,7 +4,6 @@ using BusinessLogic.Validators.Payment;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BusinessLogic.UnitTests.Validators.Payment.Validators.AccountExists

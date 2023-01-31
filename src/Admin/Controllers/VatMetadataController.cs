@@ -1,6 +1,6 @@
 ﻿using Admin.Classes.ViewModelBuilders.VatMetadata;
-using Admin.Models.VatMetadata;
 using Admin.Models.Shared;
+using Admin.Models.VatMetadata;
 using BusinessLogic.Security;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;

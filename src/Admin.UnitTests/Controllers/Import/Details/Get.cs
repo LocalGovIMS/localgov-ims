@@ -5,13 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.ImportController;
 
 namespace Admin.UnitTests.Controllers.Import.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
         public Get()
         {
@@ -20,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Import.Details
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == nameof(Controller.Details))
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Details));
         }
 
         private ActionResult GetResult()

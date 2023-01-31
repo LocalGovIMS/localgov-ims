@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Origin
 {
@@ -22,10 +21,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Origin
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Origin")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Origin));
         }
 
         private ActionResult GetResult(bool includeTransaction)
@@ -131,7 +127,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Origin
             var result = GetResult(true) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Details");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Details));
         }
 
         [TestMethod]

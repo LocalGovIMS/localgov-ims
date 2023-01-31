@@ -1,9 +1,4 @@
-﻿using Admin.Classes.Models;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -16,50 +11,25 @@ namespace Admin.UnitTests.Controllers.Payment.Remove
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockAddCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockEmptyBasketCommand = new Mock<IModelCommand<string>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCheckAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCreatePaymentsCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<ProcessPaymentCommandAgrs>> _mockProcessPaymentCommand = new Mock<IModelCommand<ProcessPaymentCommandAgrs>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "RemoveItem")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.RemoveItem));
         }
 
         private ActionResult GetResult()
         {
-            var indexViewModelBuilder = new Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>>();
-            indexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockIndexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockRemoveCommand.Setup(x => x.Execute(It.IsAny<Guid>())).Returns(new Admin.Classes.Commands.CommandResult(true));
+            MockSetAddressCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
-            var RemoveCommand = new Mock<IModelCommand<string>>();
-            RemoveCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var SetAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-            SetAddressCommand.Setup(x => x.Execute(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new PaymentControllerDependencies(
-                _mockLogger.Object,
-                indexViewModelBuilder.Object,
-                _mockAddCommand.Object,
-                RemoveCommand.Object,
-                _mockEmptyBasketCommand.Object,
-                _mockCheckAddressCommand.Object,
-                _mockCreatePaymentsCommand.Object,
-                SetAddressCommand.Object,
-                _mockProcessPaymentCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.RemoveItem("123");
+            return Controller.RemoveItem(Guid.NewGuid());
         }
 
         [TestMethod]
@@ -89,7 +59,7 @@ namespace Admin.UnitTests.Controllers.Payment.Remove
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]

@@ -1,48 +1,31 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.UserFundGroupController;
-using Dependencies = Admin.Controllers.UserFundGroupControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.UserFundGroup.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.UserFundGroup.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.UserFundGroup.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.UserFundGroup.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.UserFundGroup.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "_ListForUser")
-                .FirstOrDefault();
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._ListForUser));
         }
 
         private ActionResult GetResult()
         {
-            var basicListViewModelBuilder = new Mock<IModelBuilder<Models.Shared.BasicListViewModel, int>>();
-            basicListViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.Shared.BasicListViewModel());
+            MockBasicListViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new Models.Shared.BasicListViewModel());
 
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                basicListViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockEditCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller._ListForUser(1);
+            return Controller._ListForUser(1);
         }
 
         [TestMethod]

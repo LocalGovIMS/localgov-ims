@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.ListForTransactionImport
 {
@@ -20,9 +19,7 @@ namespace Admin.UnitTests.Controllers.Transaction.ListForTransactionImport
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.Name == nameof(Controller.ListForTransactionImport))
-                .FirstOrDefault();
+            return GetMethod(typeof(AcceptVerbsAttribute), nameof(Controller.ListForTransactionImport));
         }
 
         private ActionResult GetResult(SearchCriteria model)

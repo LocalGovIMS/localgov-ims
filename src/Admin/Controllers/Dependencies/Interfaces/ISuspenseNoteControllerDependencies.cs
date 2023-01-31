@@ -1,6 +1,6 @@
 ﻿using Admin.Interfaces.Commands;
 using Admin.Interfaces.ModelBuilders;
-using Admin.Models.SuspenseNote;    
+using Admin.Models.SuspenseNote;
 
 namespace Admin.Controllers
 {

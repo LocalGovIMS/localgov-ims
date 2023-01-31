@@ -6,6 +6,8 @@ namespace BusinessLogic.Models.Payments
     [Serializable]
     public class BasketItem
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "Fund")]
         public string FundCode { get; set; }
 

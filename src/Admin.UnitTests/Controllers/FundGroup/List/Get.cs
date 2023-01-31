@@ -1,39 +1,26 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.FundGroupController;
 
 namespace Admin.UnitTests.Controllers.FundGroup.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.FundGroup.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.FundGroup.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.FundGroup.EditViewModel, int>> _mockCreateViewModelBuilder = new Mock<IModelBuilder<Models.FundGroup.EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.FundGroup.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.FundGroup.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.FundGroup.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.FundGroup.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.FundGroup.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.FundGroup.EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "List")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         [TestMethod]
@@ -66,22 +53,9 @@ namespace Admin.UnitTests.Controllers.FundGroup.List
 
         private ActionResult GetTestListResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<IList<Models.FundGroup.DetailsViewModel>, int>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new List<Models.FundGroup.DetailsViewModel>());
+            MockListViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new List<Models.FundGroup.DetailsViewModel>());
 
-            var dependencies = new Mock<FundGroupControllerDependencies>(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockCreateViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                listViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
-
-            var controller = new Controller(dependencies.Object);
-
-            return controller.List();
+            return Controller.List();
         }
 
         [TestMethod]

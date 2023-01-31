@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Enums;
-using BusinessLogic.Interfaces.Services;
+﻿using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Validators.Payment;
 using log4net;

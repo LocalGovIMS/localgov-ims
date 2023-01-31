@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Transfer
 {
@@ -20,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Transfer
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "_Transfer")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller._Transfer));
         }
 
         private ActionResult GetResult()
@@ -76,7 +72,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Transfer
             var result = GetResult() as PartialViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "_Transfer");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller._Transfer));
         }
 
         [TestMethod]

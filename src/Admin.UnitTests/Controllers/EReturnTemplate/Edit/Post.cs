@@ -1,59 +1,36 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.EReturnTemplateController;
-using Dependencies = Admin.Controllers.EReturnTemplateControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.EReturnTemplate.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.ListViewModel, Models.EReturnTemplate.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.ListViewModel, Models.EReturnTemplate.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.EReturnTemplate.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.EReturnTemplate.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>>();
+        public Post()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult(Models.EReturnTemplate.EditViewModel model, bool isModelValid)
         {
-            var editCommand = new Mock<IModelCommand<Models.EReturnTemplate.EditViewModel>>();
-            editCommand.Setup(x => x.Execute(It.IsAny<Models.EReturnTemplate.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                editCommand.Object);
-
-            var controller = new Controller(dependencies);
+            MockEditCommand.Setup(x => x.Execute(It.IsAny<Models.EReturnTemplate.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
             if (!isModelValid)
             {
-                controller.ModelState.AddModelError("userId", "error");
+                Controller.ModelState.AddModelError("userId", "error");
             }
 
-            return controller.Edit(model);
+            return Controller.Edit(model);
         }
 
         [TestMethod]

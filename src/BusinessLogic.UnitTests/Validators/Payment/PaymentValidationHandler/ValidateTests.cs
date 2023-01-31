@@ -17,6 +17,7 @@ namespace BusinessLogic.UnitTests.Validators.Payment.PaymentValidationHandler
     {
         private Mock<ILog> _mockLogger = new Mock<ILog>();
         private Mock<IFundService> _mockFundService = new Mock<IFundService>();
+        private Mock<IMethodOfPaymentService> _mockMethodOfPaymentService = new Mock<IMethodOfPaymentService>();
         private Mock<IAccountReferenceValidatorService> _mockAccountReferenceValidatorService = new Mock<IAccountReferenceValidatorService>();
         private Mock<ISecurityContext> _mockSecurityContext = new Mock<ISecurityContext>();
         private Mock<Func<string, IValidator<PaymentValidationArgs>>> _mockValidatorFactory = new Mock<Func<string, IValidator<PaymentValidationArgs>>>();
@@ -27,6 +28,9 @@ namespace BusinessLogic.UnitTests.Validators.Payment.PaymentValidationHandler
         {
             _mockFundService.Setup(x => x.GetByFundCode(It.IsAny<string>()))
                 .Returns(new Entities.Fund());
+
+            _mockMethodOfPaymentService.Setup(x => x.GetMop(It.IsAny<string>()))
+                .Returns(new Entities.Mop() { MinimumAmount = -1000000, MaximumAmount = 1000000 });
 
             _mockAccountReferenceValidatorService.Setup(x => x.GetByFundCode(It.IsAny<string>()))
                 .Returns(new Entities.AccountReferenceValidator());
@@ -42,6 +46,7 @@ namespace BusinessLogic.UnitTests.Validators.Payment.PaymentValidationHandler
             _handler = new BusinessLogic.Validators.Payment.PaymentValidationHandler(
                 _mockLogger.Object,
                 _mockFundService.Object,
+                _mockMethodOfPaymentService.Object,
                 _mockAccountReferenceValidatorService.Object,
                 _mockSecurityContext.Object,
                 _mockValidatorFactory.Object);

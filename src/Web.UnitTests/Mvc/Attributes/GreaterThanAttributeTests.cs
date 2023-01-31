@@ -1,13 +1,8 @@
-﻿using Admin.Controllers;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
 using Web.Mvc;
 using Web.Mvc.DataAnnotations;
 
@@ -55,6 +50,28 @@ namespace Web.UnitTests.Mvc.Attributes
         }
 
         [TestMethod]
+        [DataRow("9", false)]
+        [DataRow("10", true)]
+        [DataRow("10.01", true)]
+        [DataRow("10X", false)]
+        [DataRow("Ten", false)]
+        [DataRow("%$£", false)]
+        public void IsValid_returns_the_expected_result_when_the_value_provided_is_not_a_decimal(string value, bool expectedResult)
+        {
+            // Arrange
+            var target = new InvalidDataTypeTarget() { Min = 10, Max = value };
+
+            var context = new ValidationContext(target);
+            var results = new List<ValidationResult>();
+
+            // Act
+            var isValid = Validator.TryValidateObject(target, context, results, true);
+
+            // Assert
+            isValid.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
         public void Attribute_can_only_be_applied_once()
         {
             var attributes = (IList<AttributeUsageAttribute>)typeof(MultipleButtonAttribute).GetCustomAttributes(typeof(AttributeUsageAttribute), false);
@@ -84,6 +101,34 @@ namespace Web.UnitTests.Mvc.Attributes
             Assert.AreEqual(attribute.ValidOn, AttributeTargets.Method);
         }
 
+        [DataRow("AProperty", "*.AProperty")]
+        [DataRow("AnotherProperty", "*.AnotherProperty")]
+        [TestMethod]
+        public void FormatPropertyForClientValidation_returns_a_correctly_formatted_value(string property, string expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = GreaterThanAttribute.FormatPropertyForClientValidation(property);
+
+            // Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void FormatPropertyForClientValidation_throws_an_ArgumentException_if_the_value_provided_is_null()
+        {
+            // Arrange
+
+            // Act
+            Action act = () => GreaterThanAttribute.FormatPropertyForClientValidation(null);
+
+            // Assert
+            act.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("Value cannot be null or empty.\r\nParameter name: property");
+        }
+
         private class GreaterThanTarget
         {
             public int Min { get; set; }
@@ -99,7 +144,13 @@ namespace Web.UnitTests.Mvc.Attributes
             [GreaterThan(nameof(Min), AllowEquality = true)]
             public int Max { get; set; }
         }
-    }
 
-    
+        private class InvalidDataTypeTarget
+        {
+            public int Min { get; set; }
+
+            [GreaterThan(nameof(Min), AllowEquality = true)]
+            public string Max { get; set; }
+        }
+    }
 }

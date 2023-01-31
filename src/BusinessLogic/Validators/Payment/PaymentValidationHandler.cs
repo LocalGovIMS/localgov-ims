@@ -12,11 +12,13 @@ namespace BusinessLogic.Validators.Payment
     {
         private readonly ILog _logger;
         private readonly IFundService _fundService;
+        private readonly IMethodOfPaymentService _methodOfPaymentService;
         private readonly IAccountReferenceValidatorService _accountReferenceValidatorService;
         private readonly ISecurityContext _securityContext;
         private readonly Func<string, IValidator<PaymentValidationArgs>> _validatorFactory;
 
         private Entities.Fund _fund;
+        private Entities.Mop _mop;
         private Entities.AccountReferenceValidator _accountReferenceValidator;
 
         private IValidator<PaymentValidationArgs> _validationChain;
@@ -24,6 +26,7 @@ namespace BusinessLogic.Validators.Payment
         public PaymentValidationHandler(
             ILog logger,
             IFundService fundService,
+            IMethodOfPaymentService methodOfPaymentService,
             IAccountReferenceValidatorService accountReferenceValidatorService,
             ISecurityContext securityContext,
             Func<string, IValidator<PaymentValidationArgs>> validatorFactory
@@ -31,6 +34,7 @@ namespace BusinessLogic.Validators.Payment
         {
             _logger = logger;
             _fundService = fundService;
+            _methodOfPaymentService = methodOfPaymentService;
             _accountReferenceValidatorService = accountReferenceValidatorService;
             _securityContext = securityContext;
             _validatorFactory = validatorFactory;
@@ -70,6 +74,7 @@ namespace BusinessLogic.Validators.Payment
         private void LoadData(PaymentValidationArgs args)
         {
             GetFund(args.FundCode);
+            GetMop(args.MopCode);
             GetAccountReferenceValidator(args.FundCode);
         }
 
@@ -81,6 +86,17 @@ namespace BusinessLogic.Validators.Payment
                 throw new PaymentValidationException(string.Format("Fund is null: {0}", fundCode));
         }
 
+        private void GetMop(string mopCode)
+        {
+            if (string.IsNullOrEmpty(mopCode))
+                return;
+
+            _mop = _methodOfPaymentService.GetMop(mopCode);
+
+            if (_mop == null)
+                throw new PaymentValidationException(string.Format("Mop is null: {0}", mopCode));
+        }
+
         private void GetAccountReferenceValidator(string fundCode)
         {
             _accountReferenceValidator = _accountReferenceValidatorService.GetByFundCode(fundCode);
@@ -89,6 +105,7 @@ namespace BusinessLogic.Validators.Payment
         private void UpdateArgs(PaymentValidationArgs args)
         {
             args.Fund = _fund;
+            args.Mop = _mop;
             args.AccountReferenceValidator = _accountReferenceValidator;
         }
 

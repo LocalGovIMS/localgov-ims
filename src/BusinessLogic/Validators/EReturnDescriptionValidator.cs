@@ -16,7 +16,7 @@ namespace BusinessLogic.Validators
 
         public IResult Validate(string description, int eReturnTemplateRowId)
         {
-            if (string.IsNullOrEmpty(description)) return new Result("Description is empty");
+            if (string.IsNullOrWhiteSpace(description)) return new Result("Description is empty");
 
             var eReturnTemplateRow = _eReturnTemplateRowService.Get(eReturnTemplateRowId);
 

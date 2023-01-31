@@ -1,10 +1,4 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -15,42 +9,23 @@ namespace Admin.UnitTests.Controllers.CheckDigitConfiguration.List
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(CheckDigitConfigurationController);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.CheckDigitConfiguration.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.CheckDigitConfiguration.EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "List")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.List));
         }
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.CheckDigitConfiguration.ListViewModel, Models.CheckDigitConfiguration.SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build()).Returns(new Models.CheckDigitConfiguration.ListViewModel());
+            MockListViewModelBuilder.Setup(x => x.Build()).Returns(new Models.CheckDigitConfiguration.ListViewModel());
 
-            var dependencies = new CheckDigitConfigurationControllerDependencies(
-                _mockLogger.Object
-                , _mockDetailsViewModelBuilder.Object
-                , _mockEditViewModelBuilder.Object
-                , listViewModelBuilder.Object
-                , _mockCreateCommand.Object
-                , _mockEditCommand.Object
-                , _mockDeleteCommand.Object);
-
-            var controller = new CheckDigitConfigurationController(dependencies);
-
-            return controller.List();
+            return Controller.List();
         }
 
         [TestMethod]

@@ -20,7 +20,7 @@ namespace Admin.Classes.ViewHelpers
 
             if (isOverMaxLength) length = maxLength;
 
-            return new MvcHtmlString(value.Substring(0, length) + (isOverMaxLength ? "..." : ""));
+            return new MvcHtmlString(value.Substring(0, length).Trim() + (isOverMaxLength ? "..." : ""));
         }
     }
 }

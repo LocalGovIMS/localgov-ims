@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Authentication.Identity;
 using BusinessLogic.Interfaces.Services;
-using BusinessLogic.Interfaces.Smtp;
 using DataAccess.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

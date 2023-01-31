@@ -1,5 +1,4 @@
-﻿using Admin.Models.Shared;
-using PagedList;
+﻿using PagedList;
 
 namespace Admin.Models.ImportTypeImportProcessingRule
 {

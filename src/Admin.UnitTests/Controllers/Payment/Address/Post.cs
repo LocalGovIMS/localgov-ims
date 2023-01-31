@@ -1,11 +1,5 @@
-﻿using Admin.Classes.Models;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -16,58 +10,34 @@ namespace Admin.UnitTests.Controllers.Payment.Address
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockAddCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<string>> _mockRemoveCommand = new Mock<IModelCommand<string>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCheckAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockCreatePaymentsCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<Models.Payment.IndexViewModel>> _mockSetAddressCommand = new Mock<IModelCommand<Models.Payment.IndexViewModel>>();
-        private readonly Mock<IModelCommand<ProcessPaymentCommandAgrs>> _mockProcessPaymentCommand = new Mock<IModelCommand<ProcessPaymentCommandAgrs>>();
+        public Post()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Address")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Address));
         }
 
         private ActionResult GetResult(Models.Payment.Address model, bool isModelValid)
         {
-            var indexViewModelBuilder = new Mock<IModelBuilder<Models.Payment.IndexViewModel, Models.Payment.IndexViewModel>>();
-            indexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
-
-            var EmptyBasketCommand = new Mock<IModelCommand<string>>();
-            EmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(true));
-
-            var dependencies = new PaymentControllerDependencies(
-                _mockLogger.Object,
-                indexViewModelBuilder.Object,
-                _mockAddCommand.Object,
-                _mockRemoveCommand.Object,
-                EmptyBasketCommand.Object,
-                _mockCheckAddressCommand.Object,
-                _mockCreatePaymentsCommand.Object,
-                _mockSetAddressCommand.Object,
-                _mockProcessPaymentCommand.Object);
-
-            var controller = new Controller(dependencies);
+            MockIndexViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.Payment.IndexViewModel>())).Returns(new Models.Payment.IndexViewModel());
+            MockEmptyBasketCommand.Setup(x => x.Execute(It.IsAny<string>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["PaymentModel"]).Returns(new Models.Payment.IndexViewModel());
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
             if (!isModelValid)
             {
-                controller.ModelState.AddModelError("userId", "error");
+                Controller.ModelState.AddModelError("userId", "error");
             }
 
-            return controller.Address(model);
+            return Controller.Address(model);
         }
 
         [TestMethod]
@@ -88,7 +58,7 @@ namespace Admin.UnitTests.Controllers.Payment.Address
             var result = GetResult(new Models.Payment.Address(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]
@@ -113,7 +83,7 @@ namespace Admin.UnitTests.Controllers.Payment.Address
         {
             var result = GetResult(new Models.Payment.Address(), true) as RedirectToRouteResult;
 
-            Assert.AreEqual(result.RouteValues["action"], "Pay");
+            Assert.AreEqual(result.RouteValues["action"], nameof(Controller.Pay));
         }
 
         [TestMethod]

@@ -1,65 +1,34 @@
 ﻿using Admin.Classes.ViewModelBuilders.FundMessageMetadata;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.FundMessageMetadataController;
-using ControllerDependencies = Admin.Controllers.FundMessageMetadataControllerDependencies;
-using DetailsViewModel = Admin.Models.FundMessageMetadata.DetailsViewModel;
-using EditViewModel = Admin.Models.FundMessageMetadata.EditViewModel;
-using ListViewModel = Admin.Models.FundMessageMetadata.ListViewModel;
-using SearchCriteria = Admin.Models.FundMessageMetadata.SearchCriteria;
 
 namespace Admin.UnitTests.Controllers.FundMessageMetadata.Create
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Create")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Create));
         }
 
         private ActionResult GetResult()
         {
-            var createViewModelBuilder = new Mock<IModelBuilder<EditViewModel, CreateViewModelBuilderArgs>>();
-            createViewModelBuilder.Setup(x => x.Build()).Returns(new EditViewModel());
-            createViewModelBuilder.Setup(x => x.Build(It.IsAny<CreateViewModelBuilderArgs>())).Returns(new EditViewModel());
+            MockCreateViewModelBuilder.Setup(x => x.Build()).Returns(new Models.FundMessageMetadata.EditViewModel());
+            MockCreateViewModelBuilder.Setup(x => x.Build(It.IsAny<CreateViewModelBuilderArgs>())).Returns(new Models.FundMessageMetadata.EditViewModel());
 
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                createViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Create(1);
+            return Controller.Create(1);
         }
 
         [TestMethod]
@@ -123,7 +92,7 @@ namespace Admin.UnitTests.Controllers.FundMessageMetadata.Create
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(EditViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(Models.FundMessageMetadata.EditViewModel));
         }
     }
 }

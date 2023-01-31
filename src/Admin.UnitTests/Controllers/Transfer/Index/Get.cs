@@ -1,54 +1,33 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using Admin.Models.Transfer;
-using BusinessLogic.Models;
-using log4net;
+﻿using Admin.Models.Transfer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.TransferController;
-using Dependencies = Admin.Controllers.TransferControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.Transfer.Index
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelCommand<TransferViewModel>> _mockTransferCommand = new Mock<IModelCommand<TransferViewModel>>();
-        private readonly Mock<IModelCommand<TransferItem>> _mockValidateTransferItemCommand = new Mock<IModelCommand<TransferItem>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Index")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Index));
         }
 
         private ActionResult GetResult()
         {
-            var transferViewModelBuilder = new Mock<IModelBuilder<TransferViewModel, string>>();
-            transferViewModelBuilder.Setup(x => x.Build())
+            MockTransferViewModelBuilder.Setup(x => x.Build())
                 .Returns(new TransferViewModel());
 
-            var dependencies = new Dependencies(
-                _mockLogger.Object,
-                transferViewModelBuilder.Object,
-                _mockTransferCommand.Object,
-                _mockValidateTransferItemCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Index();
+            return Controller.Index();
         }
 
         [TestMethod]
@@ -94,7 +73,7 @@ namespace Admin.UnitTests.Controllers.Transfer.Index
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Details");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Index));
         }
 
         [TestMethod]

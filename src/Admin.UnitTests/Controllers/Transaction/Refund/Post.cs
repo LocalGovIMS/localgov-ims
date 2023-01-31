@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.TransactionController;
 
 namespace Admin.UnitTests.Controllers.Transaction.Refund
 {
@@ -20,10 +19,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Refund
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Refund")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Refund));
         }
 
         private ActionResult GetResult(RefundViewModel model, bool success)
@@ -62,7 +58,7 @@ namespace Admin.UnitTests.Controllers.Transaction.Refund
             var result = GetResult(new RefundViewModel() { Reference = "Test" }, true);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("Details", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual(nameof(Controller.Details), ((RedirectToRouteResult)result).RouteValues["action"]);
         }
 
         [TestMethod]

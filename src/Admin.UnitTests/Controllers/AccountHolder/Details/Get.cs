@@ -1,11 +1,6 @@
 ﻿using Admin.Classes.ViewModelBuilders.AccountHolder;
-using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -16,46 +11,28 @@ namespace Admin.UnitTests.Controllers.AccountHolder.Details
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(AccountHolderController);
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.ListViewModel, Models.AccountHolder.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.EditViewModel, string>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.LookupViewModel>> _mockLookupAccountHolderCommand = new Mock<IModelCommand<Models.AccountHolder.LookupViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.AccountHolder.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.AccountHolder.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Details")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Details));
         }
 
         private ActionResult GetResult()
         {
-            var detailsViewModelBuilder = new Mock<IModelBuilder<Models.AccountHolder.DetailsViewModel, DetailsViewModelBuilderArgs>>();
-            detailsViewModelBuilder.Setup(x => x.Build(It.IsAny<DetailsViewModelBuilderArgs>())).Returns(new Models.AccountHolder.DetailsViewModel());
-
-            var dependencies = new AccountHolderControllerDependencies(
-                _mockLogger.Object,
-                _mockListViewModelBuilder.Object,
-                detailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                _mockLookupAccountHolderCommand.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new AccountHolderController(dependencies);
+            MockDetailsViewModelBuilder.Setup(x => x.Build(It.IsAny<DetailsViewModelBuilderArgs>())).Returns(new Models.AccountHolder.DetailsViewModel());
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["AccountHolderController::IsAPaymentSearch"]).Returns(false);
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
-            return controller.Details("1");
+            return Controller.Details("1");
         }
 
         [TestMethod]

@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Entities;
-using BusinessLogic.Extensions;
+﻿using BusinessLogic.Extensions;
 using log4net;
 using Newtonsoft.Json;
 using System.Collections.Generic;

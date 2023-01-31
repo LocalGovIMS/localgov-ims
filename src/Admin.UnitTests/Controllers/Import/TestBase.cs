@@ -2,12 +2,15 @@
 using Admin.Models.Import;
 using log4net;
 using Moq;
+using System;
+using System.Linq;
+using System.Reflection;
 using Controller = Admin.Controllers.ImportController;
 using Dependencies = Admin.Controllers.ImportControllerDependencies;
 
 namespace Admin.UnitTests.Controllers.Import
 {
-    public class BaseTest
+    public class TestBase
     {
         protected Controller Controller;
 
@@ -20,10 +23,17 @@ namespace Admin.UnitTests.Controllers.Import
             var dependencies = new Dependencies(
                     MockLogger.Object,
                     MockDetailsViewModelBuilder.Object,
-                    MockListViewModelBuilder.Object                    
-                    );
+                    MockListViewModelBuilder.Object);
 
             Controller = new Controller(dependencies);
+        }
+
+        protected MethodInfo GetMethod(Type attributeType, string name)
+        {
+            return typeof(Controller).GetMethods()
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == attributeType))
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
         }
     }
 }

@@ -11,6 +11,10 @@ namespace BusinessLogic.UnitTests.Validators.Payment.Validators.Amount
     {
         private AbstractValidator _validator;
 
+        private decimal FundMaxAmount = 99.99m;
+        private decimal MopMaxAmount = 98.99m;
+        private decimal MopMinAmount = 97.99m;
+
         public ValidateTests()
         {
             _validator = new AmountValidator();
@@ -18,40 +22,75 @@ namespace BusinessLogic.UnitTests.Validators.Payment.Validators.Amount
 
         [TestMethod]
         [ExpectedException(typeof(PaymentValidationException))]
-        [DataRow("99.99", "100")]
-        [DataRow("99.99", "100.00")]
-        [DataRow("99.99", "99.999")]
-        public void Validate_throws_exception_when_amount_is_greater_than_the_maximum_amount(string maximumAmount, string amount)
+        [DataRow("100")]
+        [DataRow("100.00")]
+        [DataRow("99.999")]
+        public void Validate_throws_exception_when_amount_is_greater_than_the_fund_maximum_amount(string amount)
         {
             // Arrange
 
             // Act
-            _validator.Validate(GetArgs(maximumAmount, amount));
+            _validator.Validate(GetArgs(amount));
 
             // Assert
         }
 
         [TestMethod]
-        [DataRow("100", "100.00")]
-        [DataRow("100", "99.99")]
-        [DataRow("100.00", "100")]
-        public void Validate_completes_when_amount_is_less_than_or_equal_to_the_maximum_amount(string maximumAmount, string amount)
+        [ExpectedException(typeof(PaymentValidationException))]
+        [DataRow("99.99")]
+        [DataRow("99")]
+        [DataRow("98.999")]
+        public void Validate_throws_exception_when_amount_is_greater_than_the_mop_maximum_amount(string amount)
         {
             // Arrange
 
             // Act
-            _validator.Validate(GetArgs(maximumAmount, amount));
+            _validator.Validate(GetArgs(amount));
 
             // Assert
         }
 
-        private PaymentValidationArgs GetArgs(string maximumAmount, string amount)
+        [TestMethod]
+        [ExpectedException(typeof(PaymentValidationException))]
+        [DataRow("97.98")]
+        [DataRow("97")]
+        [DataRow("97.989")]
+        public void Validate_throws_exception_when_amount_is_less_than_the_mop_minimum_amount(string amount)
+        { 
+            // Arrange
+
+            // Act
+            _validator.Validate(GetArgs(amount));
+
+            // Assert
+        }
+
+        [TestMethod]
+        [DataRow("98.98")]
+        [DataRow("97.999")]
+        [DataRow("98")]
+        public void Validate_completes_when_amount_within_an_acceptable_range(string amount)
+        {
+            // Arrange
+
+            // Act
+            _validator.Validate(GetArgs(amount));
+
+            // Assert
+        }
+
+        private PaymentValidationArgs GetArgs(string amount)
         {
             return new PaymentValidationArgs()
             {
                 Fund = new Entities.Fund()
                 {
-                    MaximumAmount = string.IsNullOrWhiteSpace(maximumAmount) ? (decimal?)null : Convert.ToDecimal(maximumAmount)
+                    MaximumAmount = FundMaxAmount
+                },
+                Mop = new Entities.Mop()
+                {
+                    MinimumAmount = MopMinAmount,
+                    MaximumAmount = MopMaxAmount
                 },
                 Amount = Convert.ToDecimal(amount)
             };

@@ -1,64 +1,33 @@
-﻿using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
+﻿using Admin.Models.ImportProcessingRuleImportType;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Web.Mvc.Navigation;
-using Controller = Admin.Controllers.ImportProcessingRuleImportTypeController;
-using ControllerDependencies = Admin.Controllers.ImportProcessingRuleImportTypeControllerDependencies;
-using DetailsViewModel = Admin.Models.ImportProcessingRuleImportType.DetailsViewModel;
-using EditViewModel = Admin.Models.ImportProcessingRuleImportType.EditViewModel;
-using ListViewModel = Admin.Models.ImportProcessingRuleImportType.ListViewModel;
-using SearchCriteria = Admin.Models.ImportProcessingRuleImportType.SearchCriteria;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRuleImportType.Edit
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockCreateViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Edit")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Edit));
         }
 
         private ActionResult GetResult()
         {
-            var editViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-            editViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new EditViewModel());
+            MockEditViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(new EditViewModel());
 
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockCreateViewModelBuilder.Object,
-                editViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller.Edit(1);
+            return Controller.Edit(1);
         }
 
         [TestMethod]

@@ -1,10 +1,6 @@
-﻿using Admin.Controllers;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
+﻿using Admin.Models.ImportType;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -14,45 +10,28 @@ namespace Admin.UnitTests.Controllers.ImportType.Search
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(ImportTypeController);
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<Models.ImportType.ListViewModel, Models.ImportType.SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<Models.ImportType.ListViewModel, Models.ImportType.SearchCriteria>>();
-        private readonly Mock<IModelBuilder<Models.ImportType.DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<Models.ImportType.DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<Models.ImportType.EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<Models.ImportType.EditViewModel, int>>();
-        private readonly Mock<IModelCommand<Models.ImportType.EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<Models.ImportType.EditViewModel>>();
-        private readonly Mock<IModelCommand<Models.ImportType.EditViewModel>> _mockEditCommand = new Mock<IModelCommand<Models.ImportType.EditViewModel>>();
+        public Get()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(AcceptVerbsAttribute)))
-                .Where(x => x.Name == "Search")
-                .FirstOrDefault();
+            return GetMethod(typeof(AcceptVerbsAttribute), nameof(Controller.Search));
         }
 
         private ActionResult GetResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<Models.ImportType.ListViewModel, Models.ImportType.SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.ImportType.SearchCriteria>())).Returns(new Models.ImportType.ListViewModel());
-
-            var dependencies = new ImportTypeControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                listViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object);
-
-            var controller = new ImportTypeController(dependencies);
+            MockListViewModelBuilder.Setup(x => x.Build(It.IsAny<SearchCriteria>())).Returns(new ListViewModel());
 
             var controllerContext = new Mock<ControllerContext>();
             controllerContext.SetupGet(p => p.HttpContext.Session["ImportTypeController::IsAPaymentSearch"]).Returns(false);
 
-            controller.ControllerContext = controllerContext.Object;
+            Controller.ControllerContext = controllerContext.Object;
 
-            return controller.Search(new Models.ImportType.SearchCriteria());
+            return Controller.Search(new SearchCriteria());
         }
 
         [TestMethod]
@@ -100,7 +79,7 @@ namespace Admin.UnitTests.Controllers.ImportType.Search
             var result = GetResult() as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(Models.ImportType.ListViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(ListViewModel));
         }
     }
 }

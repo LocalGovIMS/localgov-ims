@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.Classes.Result;
-using BusinessLogic.Enums;
 using BusinessLogic.Validators.Payment;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

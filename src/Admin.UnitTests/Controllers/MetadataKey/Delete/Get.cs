@@ -1,32 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportProcessingRuleActionController;
 
 namespace Admin.UnitTests.Controllers.MetadataKey.Delete
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        [TestInitialize]
-        public void Initialise()
+        public Get()
         {
             SetupController();
         }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpGetAttribute)))
-                .Where(x => x.Name == "Delete")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpGetAttribute), nameof(Controller.Delete));
         }
 
         private ActionResult GetResult()

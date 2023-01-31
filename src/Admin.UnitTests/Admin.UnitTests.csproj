@@ -94,8 +94,8 @@
     <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.5.1.1\lib\net462\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions, Version=6.8.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentAssertions.6.8.0\lib\net47\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=6.9.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.6.9.0\lib\net47\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
@@ -350,10 +350,15 @@
     <Compile Include="Classes\ViewModelBuilders\Office\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\EditViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\Office\ListViewModelBuilderTests.cs" />
+    <Compile Include="Controllers\AccountHolder\TestBase.cs" />
+    <Compile Include="Controllers\AccountReferenceValidator\TestBase.cs" />
+    <Compile Include="Controllers\CheckDigitConfiguration\TestBase.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\EReturnTemplateRowControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\MetadataKeyControllerDependenciesTests.cs" />
     <Compile Include="Controllers\Dependencies\ImportControllerDependenciesTests.cs" />
+    <Compile Include="Controllers\EReturnNote\TestBase.cs" />
+    <Compile Include="Controllers\EReturnTemplateRow\TestBase.cs" />
     <Compile Include="Controllers\EReturnTemplate\ConstructorTests.cs" />
     <Compile Include="Controllers\EReturnTemplate\Create\Get.cs" />
     <Compile Include="Controllers\EReturnTemplate\Create\Post.cs" />
@@ -371,7 +376,20 @@
     <Compile Include="Controllers\EReturnTemplateRow\Edit\Get.cs" />
     <Compile Include="Controllers\EReturnTemplateRow\Edit\Post.cs" />
     <Compile Include="Controllers\EReturnTemplateRow\ListForEReturnTemplate\Get.cs" />
-    <Compile Include="Controllers\MetadataKey\BaseTest.cs" />
+    <Compile Include="Controllers\EReturnTemplate\TestBase.cs" />
+    <Compile Include="Controllers\FileImport\TestBase.cs" />
+    <Compile Include="Controllers\FundGroup\TestBase.cs" />
+    <Compile Include="Controllers\FundMessageMetadata\TestBase.cs" />
+    <Compile Include="Controllers\FundMessage\TestBase.cs" />
+    <Compile Include="Controllers\FundMetadata\TestBase.cs" />
+    <Compile Include="Controllers\Fund\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleAction\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleCondition\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRuleImportType\TestBase.cs" />
+    <Compile Include="Controllers\ImportProcessingRule\TestBase.cs" />
+    <Compile Include="Controllers\ImportTypeImportProcessingRule\TestBase.cs" />
+    <Compile Include="Controllers\ImportType\TestBase.cs" />
+    <Compile Include="Controllers\MetadataKey\TestBase.cs" />
     <Compile Include="Controllers\MetadataKey\ConstructorTests.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Get.cs" />
     <Compile Include="Controllers\MetadataKey\Create\Post.cs" />
@@ -380,7 +398,7 @@
     <Compile Include="Controllers\MetadataKey\Edit\Get.cs" />
     <Compile Include="Controllers\MetadataKey\Edit\Post.cs" />
     <Compile Include="Controllers\MetadataKey\List\Get.cs" />
-    <Compile Include="Controllers\Import\BaseTest.cs" />
+    <Compile Include="Controllers\Import\TestBase.cs" />
     <Compile Include="Controllers\Import\ConstructorTests.cs" />
     <Compile Include="Controllers\Import\Details\Get.cs" />
     <Compile Include="Controllers\Import\List\Get.cs" />
@@ -533,6 +551,9 @@
     <Compile Include="Controllers\ImportProcessingRuleImportType\Edit\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportType\Edit\Post.cs" />
     <Compile Include="Controllers\ImportProcessingRuleImportType\List\Get.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadata\TestBase.cs" />
+    <Compile Include="Controllers\MethodOfPayment\TestBase.cs" />
+    <Compile Include="Controllers\Office\TestBase.cs" />
     <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Post.cs" />
@@ -544,33 +565,45 @@
     <Compile Include="Controllers\EReturnNote\Create\Get.cs" />
     <Compile Include="Controllers\EReturnNote\Create\Post.cs" />
     <Compile Include="Controllers\EReturnNote\ListForEReturn\Get.cs" />
+    <Compile Include="Controllers\PaymentIntegration\TestBase.cs" />
+    <Compile Include="Controllers\Payment\TestBase.cs" />
+    <Compile Include="Controllers\Role\TestBase.cs" />
     <Compile Include="Controllers\SuspenseNote\ConstructorTests.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Get.cs" />
     <Compile Include="Controllers\SuspenseNote\Create\Post.cs" />
     <Compile Include="Controllers\SuspenseNote\ListForSuspense\Get.cs" />
     <Compile Include="Controllers\Import\Search\Get.cs" />
     <Compile Include="Controllers\Import\_List\Get.cs" />
+    <Compile Include="Controllers\SuspenseNote\TestBase.cs" />
+    <Compile Include="Controllers\Suspense\TestBase.cs" />
     <Compile Include="Controllers\Transaction\Origin\Get.cs" />
     <Compile Include="Controllers\Transaction\Export\Get.cs" />
     <Compile Include="Controllers\Transaction\ListForTransactionImport\Get.cs" />
     <Compile Include="Controllers\Transaction\TestBase.cs" />
+    <Compile Include="Controllers\Transfer\TestBase.cs" />
+    <Compile Include="Controllers\UserFundGroup\TestBase.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\ConstructorTests.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Get.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\Edit\Post.cs" />
     <Compile Include="Controllers\UserMethodOfPayment\List\Get.cs" />
-    <Compile Include="Controllers\UserTemplates\ConstructorTests.cs" />
-    <Compile Include="Controllers\UserTemplates\Edit\Get.cs" />
-    <Compile Include="Controllers\UserTemplates\Edit\Post.cs" />
-    <Compile Include="Controllers\UserTemplates\List\Get.cs" />
+    <Compile Include="Controllers\UserMethodOfPayment\TestBase.cs" />
+    <Compile Include="Controllers\UserTemplate\ConstructorTests.cs" />
+    <Compile Include="Controllers\UserTemplate\Edit\Get.cs" />
+    <Compile Include="Controllers\UserTemplate\Edit\Post.cs" />
+    <Compile Include="Controllers\UserTemplate\List\Get.cs" />
+    <Compile Include="Controllers\UserTemplate\TestBase.cs" />
+    <Compile Include="Controllers\UserRole\TestBase.cs" />
+    <Compile Include="Controllers\User\TestBase.cs" />
     <Compile Include="Controllers\Validation\ConstructorTests.cs" />
+    <Compile Include="Controllers\Validation\TestBase.cs" />
     <Compile Include="Controllers\VatMetadata\ConstructorTests.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Create\Post.cs" />
     <Compile Include="Controllers\VatMetadata\Delete\Get.cs" />
-    <Compile Include="Controllers\VatMetadata\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\EditListForVat\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Edit\Get.cs" />
     <Compile Include="Controllers\VatMetadata\Edit\Post.cs" />
-    <Compile Include="Controllers\VatMetadata\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\ListForVat\Get.cs" />
     <Compile Include="Controllers\Fund\ConstructorTests.cs" />
     <Compile Include="Controllers\Fund\Create\Get.cs" />
     <Compile Include="Controllers\Fund\Create\Post.cs" />
@@ -592,10 +625,10 @@
     <Compile Include="Controllers\MethodOfPaymentMetadata\Create\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Create\Post.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Delete\Get.cs" />
-    <Compile Include="Controllers\MethodOfPaymentMetadata\EditListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadata\EditListForMethodOfPayment\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Edit\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\Edit\Post.cs" />
-    <Compile Include="Controllers\MethodOfPaymentMetadata\ListForImportProcessingRule\Get.cs" />
+    <Compile Include="Controllers\MethodOfPaymentMetadata\ListForMethodOfPayment\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\ConstructorTests.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\Create\Get.cs" />
     <Compile Include="Controllers\ImportProcessingRuleAction\Create\Post.cs" />
@@ -696,6 +729,7 @@
     <Compile Include="Controllers\Office\Edit\Get.cs" />
     <Compile Include="Controllers\Office\Edit\Post.cs" />
     <Compile Include="Controllers\Office\List\Get.cs" />
+    <Compile Include="Controllers\VatMetadata\TestBase.cs" />
     <Compile Include="Controllers\Vat\ConstructorTests.cs" />
     <Compile Include="Controllers\Vat\Create\Get.cs" />
     <Compile Include="Controllers\Vat\Create\Post.cs" />
@@ -703,6 +737,7 @@
     <Compile Include="Controllers\Vat\Edit\Get.cs" />
     <Compile Include="Controllers\Vat\Edit\Post.cs" />
     <Compile Include="Controllers\Vat\List\Get.cs" />
+    <Compile Include="Controllers\Vat\TestBase.cs" />
     <Compile Include="Helpers\MoqHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

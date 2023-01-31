@@ -5,6 +5,7 @@ using BusinessLogic.Interfaces.Services;
 using BusinessLogic.Interfaces.Validators;
 using BusinessLogic.Models.Payments;
 using log4net;
+using System;
 using System.Linq;
 
 namespace Admin.Classes.Commands.Payment
@@ -40,6 +41,7 @@ namespace Admin.Classes.Commands.Payment
 
             model.Basket.Items.Add(new BasketItem()
             {
+                Id = Guid.NewGuid(),
                 AccountReference = model.AccountReference,
                 Amount = model.Amount,
                 Narrative = model.Narrative,
@@ -88,6 +90,7 @@ namespace Admin.Classes.Commands.Payment
             {
                 Reference = model.AccountReference,
                 FundCode = model.FundCode,
+                MopCode = model.MopCode,
                 Amount = model.Amount
             });
 

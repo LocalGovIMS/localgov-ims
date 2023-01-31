@@ -57,7 +57,7 @@ namespace BusinessLogic.Validators
         private void ValidateMop()
         {
             if (!_args.Mop.IncursAFee())
-                throw new InvalidOperationException("The mop doesn't incur a fee"); // TODO: Should we notify someone this has happened, as fee data does exist, but the MOP is telling us not to store it
+                throw new InvalidOperationException("The method of payment doesn't incur a fee"); // TODO: Should we notify someone this has happened, as fee data does exist, but the MOP is telling us not to store it
 
         }
 

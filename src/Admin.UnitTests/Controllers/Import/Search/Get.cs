@@ -4,13 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportController;
 
 namespace Admin.UnitTests.Controllers.Import.Search
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get : BaseTest
+    public class Get : TestBase
     {
         public Get()
         {
@@ -19,10 +18,7 @@ namespace Admin.UnitTests.Controllers.Import.Search
 
         private MethodInfo GetMethod()
         {
-            return typeof(Controller).GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(AcceptVerbsAttribute)))
-                .Where(x => x.Name == nameof(Controller.Search))
-                .FirstOrDefault();
+            return GetMethod(typeof(AcceptVerbsAttribute), nameof(Controller.Search));
         }
 
         private ActionResult GetResult()

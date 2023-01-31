@@ -1,75 +1,43 @@
-﻿using Admin.Classes.ViewModelBuilders.ImportProcessingRuleAction;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportProcessingRuleActionController;
-using ControllerDependencies = Admin.Controllers.ImportProcessingRuleActionControllerDependencies;
-using DetailsViewModel = Admin.Models.ImportProcessingRuleAction.DetailsViewModel;
-using EditViewModel = Admin.Models.ImportProcessingRuleAction.EditViewModel;
-using ListViewModel = Admin.Models.ImportProcessingRuleAction.ListViewModel;
-using SearchCriteria = Admin.Models.ImportProcessingRuleAction.SearchCriteria;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRuleAction.EditListForImportProcessingRule
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Get
+    public class Get : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<EditViewModel, CreateViewModelBuilderArgs>> _mockCreateViewModelBuilder = new Mock<IModelBuilder<EditViewModel, CreateViewModelBuilderArgs>>();
-        private readonly Mock<IModelBuilder<EditViewModel, int>> _mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockCreateCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<int>> _mockDeleteCommand = new Mock<IModelCommand<int>>();
-
-        private MethodInfo GetListMethod()
+        public Get()
         {
-            return _controller.GetMethods()
-                .Where(x => x.Name == "_EditListForImportProcessingRule")
-                .FirstOrDefault();
+            SetupController();
         }
 
+        private MethodInfo GetMethod()
+        {
+            return GetMethod(typeof(ChildActionOnlyAttribute), nameof(Controller._EditListForImportProcessingRule));
+        }
+        
         [TestMethod]
         public void HasCorrectNumberOfCustomAttributes()
         {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Count());
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Count());
         }
 
         [TestMethod]
         public void HasASingleChildActionOnlyAttribute()
         {
-            Assert.AreEqual(1, GetListMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
+            Assert.AreEqual(1, GetMethod().CustomAttributes.Where(ca => ca.AttributeType == typeof(ChildActionOnlyAttribute)).Count());
         }
 
         private ActionResult GetTestListResult()
         {
-            var listViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-            listViewModelBuilder.Setup(x => x.Build(It.IsAny<SearchCriteria>())).Returns(new ListViewModel());
+            MockListViewModelBuilder.Setup(x => x.Build(It.IsAny<Models.ImportProcessingRuleAction.SearchCriteria>())).Returns(new Models.ImportProcessingRuleAction.ListViewModel());
 
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                _mockCreateViewModelBuilder.Object,
-                _mockEditViewModelBuilder.Object,
-                listViewModelBuilder.Object,
-                _mockCreateCommand.Object,
-                _mockEditCommand.Object,
-                _mockDeleteCommand.Object);
-
-            var controller = new Controller(dependencies);
-
-            return controller._EditListForImportProcessingRule(1);
+            return Controller._EditListForImportProcessingRule(1);
         }
 
         [TestMethod]

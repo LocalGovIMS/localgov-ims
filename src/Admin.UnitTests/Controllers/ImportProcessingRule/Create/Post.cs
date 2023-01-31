@@ -1,70 +1,39 @@
-﻿using Admin.Classes.Commands.ImportProcessingRule;
-using Admin.Interfaces.Commands;
-using Admin.Interfaces.ModelBuilders;
-using log4net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using Controller = Admin.Controllers.ImportProcessingRuleController;
-using ControllerDependencies = Admin.Controllers.ImportProcessingRuleControllerDependencies;
-using DetailsViewModel = Admin.Models.ImportProcessingRule.DetailsViewModel;
-using EditViewModel = Admin.Models.ImportProcessingRule.EditViewModel;
-using ListViewModel = Admin.Models.ImportProcessingRule.ListViewModel;
-using SearchCriteria = Admin.Models.ImportProcessingRule.SearchCriteria;
 
 namespace Admin.UnitTests.Controllers.ImportProcessingRule.Create
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class Post
+    public class Post : TestBase
     {
-        private readonly Type _controller = typeof(Controller);
-
-        private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
-        private readonly Mock<IModelBuilder<DetailsViewModel, int>> _mockDetailsViewModelBuilder = new Mock<IModelBuilder<DetailsViewModel, int>>();
-        private readonly Mock<IModelBuilder<ListViewModel, SearchCriteria>> _mockListViewModelBuilder = new Mock<IModelBuilder<ListViewModel, SearchCriteria>>();
-        private readonly Mock<IModelCommand<EditViewModel>> _mockEditCommand = new Mock<IModelCommand<EditViewModel>>();
-        private readonly Mock<IModelCommand<ChangeStatusCommandArgs>> _mockChangeStatusCommand = new Mock<IModelCommand<ChangeStatusCommandArgs>>();
+        public Post()
+        {
+            SetupController();
+        }
 
         private MethodInfo GetMethod()
         {
-            return _controller.GetMethods()
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HttpPostAttribute)))
-                .Where(x => x.Name == "Create")
-                .FirstOrDefault();
+            return GetMethod(typeof(HttpPostAttribute), nameof(Controller.Create));
         }
 
-        private ActionResult GetResult(EditViewModel model, bool isModelValid)
+        private ActionResult GetResult(Models.ImportProcessingRule.EditViewModel model, bool isModelValid)
         {
-            var createCommand = new Mock<IModelCommand<EditViewModel>>();
-            createCommand.Setup(x => x.Execute(It.IsAny<EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
+            MockCreateCommand.Setup(x => x.Execute(It.IsAny<Models.ImportProcessingRule.EditViewModel>())).Returns(new Admin.Classes.Commands.CommandResult(true));
 
-            var mockEditViewModelBuilder = new Mock<IModelBuilder<EditViewModel, int>>();
-            mockEditViewModelBuilder.Setup(x => x.Rebuild(It.IsAny<EditViewModel>())).Returns(model);
-            mockEditViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(model);
-            mockEditViewModelBuilder.Setup(x => x.Build()).Returns(model);
-
-            var dependencies = new ControllerDependencies(
-                _mockLogger.Object,
-                _mockDetailsViewModelBuilder.Object,
-                mockEditViewModelBuilder.Object,
-                _mockListViewModelBuilder.Object,
-                createCommand.Object,
-                _mockEditCommand.Object,
-                _mockChangeStatusCommand.Object);
-
-            var controller = new Controller(dependencies);
-
+            MockEditViewModelBuilder.Setup(x => x.Rebuild(It.IsAny<Models.ImportProcessingRule.EditViewModel>())).Returns(model);
+            MockEditViewModelBuilder.Setup(x => x.Build(It.IsAny<int>())).Returns(model);
+            
             if (!isModelValid)
             {
-                controller.ModelState.AddModelError("userId", "error");
+                Controller.ModelState.AddModelError("userId", "error");
             }
 
-            return controller.Create(model);
+            return Controller.Create(model);
         }
 
         [TestMethod]
@@ -82,25 +51,25 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRule.Create
         [TestMethod]
         public void ReturnsCorrectEditViewIfModelInvalid()
         {
-            var result = GetResult(new EditViewModel(), false) as ViewResult;
+            var result = GetResult(new Models.ImportProcessingRule.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Create");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName) || result.ViewName == nameof(Controller.Create));
         }
 
         [TestMethod]
         public void ReturnsCorrectViewModelTypeIfModelInvalid()
         {
-            var result = GetResult(new EditViewModel(), false) as ViewResult;
+            var result = GetResult(new Models.ImportProcessingRule.EditViewModel(), false) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Model, typeof(EditViewModel));
+            Assert.IsInstanceOfType(result.Model, typeof(Models.ImportProcessingRule.EditViewModel));
         }
 
         [TestMethod]
         public void ReturnsRedirectToRouteResultIfModelValid()
         {
-            var result = GetResult(new EditViewModel(), true);
+            var result = GetResult(new Models.ImportProcessingRule.EditViewModel(), true);
 
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
@@ -108,7 +77,7 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRule.Create
         [TestMethod]
         public void RedirectToBackIfModelValid()
         {
-            var result = GetResult(new EditViewModel(), true) as RedirectToRouteResult;
+            var result = GetResult(new Models.ImportProcessingRule.EditViewModel(), true) as RedirectToRouteResult;
 
             Assert.AreEqual(result.RouteValues["action"], "Back");
         }
@@ -116,7 +85,7 @@ namespace Admin.UnitTests.Controllers.ImportProcessingRule.Create
         [TestMethod]
         public void RedirectsToBackIfModelValid()
         {
-            var result = GetResult(new EditViewModel(), true) as RedirectToRouteResult;
+            var result = GetResult(new Models.ImportProcessingRule.EditViewModel(), true) as RedirectToRouteResult;
 
             Assert.IsNotNull(result);
         }
