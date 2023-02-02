@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces.Services;
+﻿using BusinessLogic.Enums;
+using BusinessLogic.Interfaces.Services;
 using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,6 +42,16 @@ namespace Admin.UnitTests.Classes.ViewModelBuilders.Transaction
                         {
                             MopCode = "90",
                             Metadata = new List<BusinessLogic.Entities.MopMetadata>()
+                            {
+                                new BusinessLogic.Entities.MopMetadata()
+                                {
+                                    Value = "True",
+                                    MetadataKey = new BusinessLogic.Entities.MetadataKey()
+                                    {
+                                        Name = MopMetadataKeys.IsARefundablePayment
+                                    }
+                                }
+                            }
                         }
                     }
                 }
