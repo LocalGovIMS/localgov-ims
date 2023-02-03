@@ -136,6 +136,7 @@ namespace Admin.Controllers
         }
 
         [Classes.Security.Attributes.Authorize(Roles = Role.EReturns)]
+        [HttpGet]
         public ActionResult Create()
         {
             var model = Dependencies.CreateViewModelBuilder.Build();
