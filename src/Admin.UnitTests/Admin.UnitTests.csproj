@@ -573,6 +573,13 @@
     <Compile Include="Controllers\ImportProcessingRuleImportType\List\Get.cs" />
     <Compile Include="Controllers\MethodOfPaymentMetadata\TestBase.cs" />
     <Compile Include="Controllers\MethodOfPayment\TestBase.cs" />
+    <Compile Include="Controllers\SystemMessage\ConstructorTests.cs" />
+    <Compile Include="Controllers\SystemMessage\Create\Get.cs" />
+    <Compile Include="Controllers\SystemMessage\Create\Post.cs" />
+    <Compile Include="Controllers\SystemMessage\Edit\Get.cs" />
+    <Compile Include="Controllers\SystemMessage\Edit\Post.cs" />
+    <Compile Include="Controllers\SystemMessage\List\Get.cs" />
+    <Compile Include="Controllers\SystemMessage\TestBase.cs" />
     <Compile Include="Controllers\Office\TestBase.cs" />
     <Compile Include="Controllers\PaymentIntegration\ConstructorTests.cs" />
     <Compile Include="Controllers\PaymentIntegration\Create\Get.cs" />
