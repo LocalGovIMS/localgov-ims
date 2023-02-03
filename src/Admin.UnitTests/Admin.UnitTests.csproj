@@ -322,8 +322,12 @@
     <Compile Include="Classes\ViewModelBuilders\PaymentIntegration\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\EReturnNote\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\SuspenseNote\ListViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMesssage\TestData.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\BasicListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\UserMethodOfPayment\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMesssage\DetailsViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMesssage\EditViewModelBuilderTests.cs" />
+    <Compile Include="Classes\ViewModelBuilders\SystemMesssage\ListViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\CreateViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\DetailsViewModelBuilderTests.cs" />
     <Compile Include="Classes\ViewModelBuilders\VatMetadata\EditViewModelBuilderTests.cs" />
