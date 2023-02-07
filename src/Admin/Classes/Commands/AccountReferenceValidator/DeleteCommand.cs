@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using log4net;
+using System;
 
 namespace Admin.Classes.Commands.AccountReferenceValidator
 {
@@ -8,10 +9,10 @@ namespace Admin.Classes.Commands.AccountReferenceValidator
         private readonly IAccountReferenceValidatorService _service;
 
         public DeleteCommand(ILog log
-            , IAccountReferenceValidatorService checkDigitConfigurationService)
+            , IAccountReferenceValidatorService accountReferenceValidatorService)
             : base(log)
         {
-            _service = checkDigitConfigurationService;
+            _service = accountReferenceValidatorService ?? throw new ArgumentNullException("accountReferenceValidatorService");
         }
 
         protected override CommandResult OnExecute(int id)
