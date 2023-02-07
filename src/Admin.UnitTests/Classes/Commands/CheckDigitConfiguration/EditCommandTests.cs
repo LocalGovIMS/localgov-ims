@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Classes.Result;
 using BusinessLogic.Interfaces.Services;
+using FluentAssertions;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Command = Admin.Classes.Commands.CheckDigitConfiguration.EditCommand;
 using CommandResult = Admin.Classes.Commands.CommandResult;
@@ -24,6 +26,36 @@ namespace Admin.UnitTests.Classes.Commands.CheckDigitConfiguration
                 Id = 0,
                 Name = "Check Digit Configuration"
             };
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionTypeWhenAccountHolderServiceIsNull()
+        {
+            try
+            {
+                var command = new Command(
+                    _mockLogger.Object,
+                    null);
+            }
+            catch (Exception e)
+            {
+                e.Should().BeOfType(typeof(ArgumentNullException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsCorrectExceptionParamNameIfDependenciesIsNull()
+        {
+            try
+            {
+                var command = new Command(
+                    _mockLogger.Object,
+                    null);
+            }
+            catch (ArgumentNullException e)
+            {
+                e.ParamName.Should().Be("checkDigitConfigurationService");
+            }
         }
 
         [TestMethod]

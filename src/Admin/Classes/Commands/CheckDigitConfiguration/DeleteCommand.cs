@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using log4net;
+using System;
 
 namespace Admin.Classes.Commands.CheckDigitConfiguration
 {
@@ -11,7 +12,7 @@ namespace Admin.Classes.Commands.CheckDigitConfiguration
             , ICheckDigitConfigurationService checkDigitConfigurationService)
             : base(log)
         {
-            _service = checkDigitConfigurationService;
+            _service = checkDigitConfigurationService ?? throw new ArgumentNullException("checkDigitConfigurationService");
         }
 
         protected override CommandResult OnExecute(int id)
