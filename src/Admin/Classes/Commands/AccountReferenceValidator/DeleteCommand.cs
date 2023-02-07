@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces.Services;
 using log4net;
+using System;
 
 namespace Admin.Classes.Commands.AccountReferenceValidator
 {
@@ -11,7 +12,7 @@ namespace Admin.Classes.Commands.AccountReferenceValidator
             , IAccountReferenceValidatorService accountReferenceValidatorService)
             : base(log)
         {
-            _service = accountReferenceValidatorService;
+            _service = accountReferenceValidatorService ?? throw new ArgumentNullException("accountReferenceValidatorService");
         }
 
         protected override CommandResult OnExecute(int id)
