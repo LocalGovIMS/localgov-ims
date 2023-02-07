@@ -53,6 +53,21 @@ namespace Admin.UnitTests.Classes.Commands.AccountHolder
         }
 
         [TestMethod]
+        public void ThrowsCorrectExceptionParamNameIfDependenciesIsNull()
+        {
+            try
+            {
+                var command = new Command(
+                    _mockLogger.Object,
+                    null);
+            }
+            catch (ArgumentNullException e)
+            {
+                e.ParamName.Should().Be("accountHolderService");
+            }
+        }
+
+        [TestMethod]
         public void ThrowsCorrectExceptionDescriptionTypeWhenListViewModelBuiderIsNull()
         {
             try
