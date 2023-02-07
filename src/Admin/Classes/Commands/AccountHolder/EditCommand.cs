@@ -1,6 +1,7 @@
 ﻿using Admin.Models.AccountHolder;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using System;
 
 namespace Admin.Classes.Commands.AccountHolder
 {
@@ -12,7 +13,7 @@ namespace Admin.Classes.Commands.AccountHolder
             , IAccountHolderService accountHolderService)
             : base(log)
         {
-            _accountHolderService = accountHolderService;
+            _accountHolderService = accountHolderService ?? throw new ArgumentNullException("accountHolderService");
         }
 
         protected override CommandResult OnExecute(EditViewModel model)
