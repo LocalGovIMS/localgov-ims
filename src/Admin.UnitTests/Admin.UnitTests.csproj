@@ -208,6 +208,12 @@
     <Compile Include="Classes\Commands\EReturnTemplateRow\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\EReturnTemplateRow\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\EReturnTemplateRow\EditCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\AuthoriseCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\SubmitCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\CreateCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\DeleteCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\ApproverEditCommandTests.cs" />
+    <Compile Include="Classes\Commands\EReturn\EditCommandTests.cs" />
     <Compile Include="Classes\Commands\MetadataKey\CreateCommandTests.cs" />
     <Compile Include="Classes\Commands\MetadataKey\DeleteCommandTests.cs" />
     <Compile Include="Classes\Commands\MetadataKey\EditCommandTests.cs" />
