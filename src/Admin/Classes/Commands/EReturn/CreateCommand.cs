@@ -13,7 +13,7 @@ namespace Admin.Classes.Commands.EReturn
             , IEReturnService eReturnService)
             : base(log)
         {
-            _eReturnService = eReturnService;
+            _eReturnService = eReturnService ?? throw new ArgumentNullException("eReturnService");
         }
 
         protected override CommandResult OnExecute(CreateViewModel model)

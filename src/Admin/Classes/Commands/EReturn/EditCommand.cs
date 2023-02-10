@@ -1,6 +1,7 @@
 ﻿using Admin.Models.EReturn;
 using BusinessLogic.Interfaces.Services;
 using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace Admin.Classes.Commands.EReturn
             , IEReturnService eReturnService)
             : base(log)
         {
-            _eReturnService = eReturnService;
+            _eReturnService = eReturnService ?? throw new ArgumentNullException("eReturnService");
         }
 
         protected override CommandResult OnExecute(EditViewModel model)
