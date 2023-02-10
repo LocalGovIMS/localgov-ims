@@ -8,7 +8,15 @@ namespace Web.UnitTests.Helpers
     {
         public static HttpContext FakeHttpContext()
         {
+            return FakeHttpContext("text/xml");
+        }
+
+        public static HttpContext FakeHttpContext(string contentType)
+        {
+
             var httpRequest = new HttpRequest("", "http://www.test.com", "");
+            httpRequest.ContentType = contentType;  
+
             var stringWriter = new StringWriter();
             var httpResponse = new HttpResponse(stringWriter);
             var httpContext = new HttpContext(httpRequest, httpResponse);
@@ -22,5 +30,6 @@ namespace Web.UnitTests.Helpers
 
             return httpContext;
         }
+
     }
 }

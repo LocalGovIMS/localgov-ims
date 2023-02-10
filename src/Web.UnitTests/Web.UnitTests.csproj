@@ -156,6 +156,7 @@
     <Compile Include="Mvc\DataAnnotations\GreaterThanAttributeTests.cs" />
     <Compile Include="Mvc\DataAnnotations\CheckDenominationValueAttributeTests.cs" />
     <Compile Include="Mvc\Extensions\TempDataDictionaryExtensionsTests.cs" />
+    <Compile Include="Mvc\ModelBinders\XmlModelBinderProviderTests.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinderTests.cs" />
     <Compile Include="Mvc\Navigation\NavigationItemTests.cs" />
     <Compile Include="Mvc\Navigation\NavigationManagerTests.cs" />
