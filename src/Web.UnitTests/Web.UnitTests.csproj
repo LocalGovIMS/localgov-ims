@@ -158,6 +158,7 @@
     <Compile Include="Mvc\Extensions\TempDataDictionaryExtensionsTests.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinderProviderTests.cs" />
     <Compile Include="Mvc\ModelBinders\XmlModelBinderTests.cs" />
+    <Compile Include="Mvc\Navigation\NavigatablePageActionFilterAttributeTests.cs" />
     <Compile Include="Mvc\Navigation\NavigationItemTests.cs" />
     <Compile Include="Mvc\Navigation\NavigationManagerTests.cs" />
     <Compile Include="Mvc\SelectListTests.cs" />
