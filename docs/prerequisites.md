@@ -3,7 +3,7 @@
 Before you can begin to develop the IMS it is recommended that the following are in place:
 
 1. You have somewhere to create a SQL database
-2. You have added the LocalGov IMS package feed as a package source
+2. You have added the LocalGov IMS package feed as a package source (see below for instructions on how to do this)
 
 # Accessing a SQL Instance
 
@@ -27,9 +27,9 @@ There are two options for this:
 
 ## Setup NuGet Package Sources via Command Line
 
-1. [Create a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) in Github
+1. [Create a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) in GitHub
 2. Open a command prompt
 2. Run the following command, replacing the placeholders with the appropriate details:
 ```
-   dotnet nuget add source "https://nuget.pkg.github.com/LocalGovIMS/index.json" --name "LocalGov IMS" --username [YOUR GIT USERNAME] --password [YOUR PAT]
+   dotnet nuget add source "https://nuget.pkg.github.com/LocalGovIMS/index.json" --name "LocalGov IMS" --username [YOUR GITHUB USERNAME] --password [YOUR PAT]
 ```
