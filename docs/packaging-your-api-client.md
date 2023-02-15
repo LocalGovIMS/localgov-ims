@@ -31,7 +31,7 @@ The package will be output to the bin folder. It should contain the version numb
 
 1. Open the Developer Powershell from Visual Studio (Tools > Command Line > Developer Powershell)
 2. Add the LocalGov IMS package source:
-    * Run: dotnet nuget add source "https://nuget.pkg.github.com/LocalGovIMS/index.json" --name "LocalGov IMS" --username [YOUR GIT USERNAME] --password [YOUR PAT]
+    * Run: dotnet nuget add source "https://nuget.pkg.github.com/LocalGovIMS/index.json" --name "LocalGov IMS" --username [YOUR GITHUB USERNAME] --password [YOUR PAT]
 3. Publish the package
     * Run: dotnet nuget push "[Location of your package]" --api-key [YOUR PAT] --source "https://nuget.pkg.github.com/LocalGovIMS/index.json"
 

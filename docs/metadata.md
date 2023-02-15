@@ -1,7 +1,7 @@
 # Metadata
 
 We use metadata to attach meaning and capabilities to our entities without bloating the entity itself.
-Metadata is stored using a key/value structure 
+Metadata is stored using a key/value structure .
 
 # Types of Metadata
 
@@ -24,5 +24,5 @@ Various entities have system metadata, such as:
 ## Custom Metadata
 
 This is metadata which can be created by the user to attach new meaning and capabilities.
-At present there is no UI for this.
 An example of this would be adding a new key/value to describe the export functionality of a Fund - such as the SAP general ledger code it relates to.
+This metadata can then be read in an export integration and utilised as required.

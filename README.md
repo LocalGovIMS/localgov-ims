@@ -1,9 +1,12 @@
 # Introduction 
-This solution contains the core applications for running the Income Management System (IMS):
+This repository contains a solution comprising the core applications for the Income Management System (IMS):
 
 1. PaymentPortal (MVC)
 2. Admin (MVC)
-3. Api (WebApi)
+3. Api (Web API)
+
+The projects target the .NET Framework version 4.8.1.
+The implementation stores data in a SQL database.
 
 ## Payment Portal
 A UI allowing a customer to pay for items via a payment basket.
@@ -28,14 +31,14 @@ An API allowing other services to integrate with the IMS
 After reading the documentaion and cloning the repository:
 
 1. Open the solution and switch the build configuration to 'Local'
-2. Add a Web.Local.config file for each of the web projects you plan to run. 
+2. Add a Web.Local.config file for each of the web projects you plan to run (typically all three). 
 3. Add transformations to the configs for AppSettings - see the relevant Web.Base.config files for lists of the settings.
 **Note**: Some settings are common across applications, such as ReferenceSalt, so ensure they are identical.</i>
 4. Ensure a transformation for the IncomeDb connection string is specified
 5. Ensure the database initialiser is specified.
 5. Right click on the solution and 'Restore NuGet packages'
 6. Build the solution 
-7. Set the project yo wish to run as the Start Project.
+7. Set the project you wish to run as the Start Project. If this is your first run it's recommended to set this to the PaymentPortal project.
 8. Press F5 to run. 
 
 # Unit Tests

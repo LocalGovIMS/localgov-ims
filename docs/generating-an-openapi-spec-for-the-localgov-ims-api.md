@@ -1,13 +1,13 @@
 # Introduction 
 The following document describes what is required to generate an [OpenApi specification](https://swagger.io/specification/) for the LocalGov IMS API
 
-The LocalGov IMS API is written in .NET Framework 4.8, and as such, the tooling that's available to create an OpenAPI specification is limited.
+The LocalGov IMS API is written in .NET Framework 4.8.1, and as such, the tooling that's available to create an OpenAPI specification is limited.
 
 # Tooling
 A number of technologies and tools are used in this process:
-1. [Swagger](https://swagger.io/): used to TODO: what
-2. [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.WebApi): used to TODO: what?
-3. [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio): used to generate an OpenAPI specification from an API. You can read more about this on [MSDN](https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-5.0&tabs=visual-studio)
+1. [Swagger](https://swagger.io/)
+2. [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.WebApi)
+3. [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) - used to generate an OpenAPI specification from an API. You can read more about this on [MSDN](https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-5.0&tabs=visual-studio)
 
 # Setting Up Your Machine
 This guide explains how to setup a Windows PC ready for API client generation

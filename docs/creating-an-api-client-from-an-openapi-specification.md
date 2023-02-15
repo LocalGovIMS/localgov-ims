@@ -1,8 +1,7 @@
 # Introduction 
-The following document describes how to setup your development environment so that you can auto-generate API client libraries.
+The following document describes how to setup your development environment so that you can generate API client libraries.
 
-## Why Auto-generate API Client Libraries
-There are many reasons to auto-generate API client libraries, such as:
+## Why generate API Client Libraries
 1. It reduces the amount of code developers have to write to integrate with an API
 2. It improves the developer experience
 3. Using the tooling available makes it easy to generate clients in multiple programming languages
@@ -10,7 +9,7 @@ There are many reasons to auto-generate API client libraries, such as:
 # Tooling
 A number of technologies and tools are used in this process:
 1. [Node.js](https://nodejs.org/en/): a javascript runtime
-2. [OpenApi Specification](https://swagger.io/specification/): used to describe a web service
+2. [OpenAPI Specification](https://swagger.io/specification/): used to describe a web service
 3. [OpenAPI Genearator](https://openapi-generator.tech/): used to auto-generate API client code from an OpenAPI specification
   
 # Setting Up Your Machine

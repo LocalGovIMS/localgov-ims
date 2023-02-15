@@ -8,4 +8,4 @@ The solution uses a code first approach to database management via Entity Framew
 
 # Tools 
 
-In future we will include some batch files within the repository to speed up performing common migration tasks such as adding, rolling back, updating the database.
+In future tooling in the for of batch files should be added to the repository to speed up performing common migration tasks such as adding, rolling back, updating the database.

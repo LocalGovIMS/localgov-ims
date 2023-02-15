@@ -65,7 +65,7 @@ The SeedData.sql and Indexes.sql are run regardless of environment.
 If the environment is set to "Demo" the following scripts will also be ran:
 * DemoData.sql
 
-If the environment is set to "Demo" the following scripts will also be ran:
+If the environment is set to "UITest" the following scripts will also be ran:
 * DemoData.sql
 * UITestData.sql
 
