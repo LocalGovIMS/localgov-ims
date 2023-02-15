@@ -25,6 +25,7 @@ An API allowing other services to integrate with the IMS
 [Database Migrations](/docs/database-migrations.md)  
 [Setting Up a User Account](/docs/setting-up-a-user-account.md)  
 [Adding a Payment Integration](/docs/adding-a-payment-integration.md)  
+[Accessible Autocomplete](/docs/accessible-autocomplete.md)  
 
 # Build and Run
 
