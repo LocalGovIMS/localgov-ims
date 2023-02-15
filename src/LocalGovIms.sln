@@ -52,6 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.UnitTests", "Admin.Un
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6CD1B341-B920-4DA9-8DCD-70DD88BD946C}"
 	ProjectSection(SolutionItems) = preProject
+		accessible-autocomplete.md = accessible-autocomplete.md
 		..\docs\adding-a-payment-integration.md = ..\docs\adding-a-payment-integration.md
 		..\docs\application-settings.md = ..\docs\application-settings.md
 		..\docs\creating-an-api-client-from-an-openapi-specification.md = ..\docs\creating-an-api-client-from-an-openapi-specification.md
